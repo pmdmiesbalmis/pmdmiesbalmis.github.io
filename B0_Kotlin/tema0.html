@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
       
       
       
@@ -272,8 +272,10 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%C3%ADndice">&#xCD;ndice</a></li>
 <li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
 <li><a href="#variables">Variables</a></li>
-<li><a href="#clases">Clases</a></li>
+<li><a href="#control-de-flujo">Control de flujo</a></li>
 <li><a href="#funciones">Funciones</a></li>
+<li><a href="#arrays-y-colecciones">Arrays y Colecciones</a></li>
+<li><a href="#clases">Clases</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
@@ -283,7 +285,7 @@ La mayor&#xED;a de desarrollos con Kotlin, tienen como destino Android o la m&#x
 A partir de la  actualizaci&#xF3;n Kotlin 1.3.30, se incluyeron las mejoras para Kotlin/Native  que permite compilar el c&#xF3;digo fuente de Kotlin en datos binarios independientes para diferentes sistemas operativos y arquitecturas de CPU, incluido IOS, Linux, Windows y Mac.</p>
 <h2 class="mume-header" id="variables">Variables</h2>
 
-<p>Igual que en todos los lenguajes de programaci&#xF3;n, en Kotlin tambi&#xE9;n tendremos el recurso de las <a href="https://kotlinlang.org/docs/reference/basic-syntax.html#defining-variables">variables</a> para almacenar valores. En Kotlin nos podemos encontrar con variables <strong>inmutables</strong> y variables <strong>mutables</strong>. En el caso de las primeras, una vez se le asigna un valor a la variable no podr&#xE1; ser modificado, es decir, se comporta como una constante (lo mismo que utilizar final en Java o const en C#). Mientras que con la mutables podremos modificar en cualquier momento el valor de la variable.<br>
+<p>Igual que en todos los lenguajes de programaci&#xF3;n, en Kotlin tambi&#xE9;n tendremos el recurso de las <a href="https://kotlinlang.org/docs/basic-syntax.html#variables">variables</a> para almacenar valores. En Kotlin nos podemos encontrar con variables <strong>inmutables</strong> y variables <strong>mutables</strong>. En el caso de las primeras, una vez se le asigna un valor a la variable no podr&#xE1; ser modificado, es decir, se comporta como una constante (lo mismo que utilizar final en Java o const en C#). Mientras que con la mutables podremos modificar en cualquier momento el valor de la variable.<br>
 Para declarar una variable como mutable, la tendremos que preceder de la palabra clave <strong>var</strong> mientras que para las inmutables usaremos <strong>val</strong>.<br>
 El concepto de inmutabilidad es muy interesante. Al no poder cambiar los objetos estos son m&#xE1;s robustos y eficientes. Siempre que podamos hemos de usar objetos inmutables.</p>
 <blockquote>
@@ -368,9 +370,86 @@ Los tipos b&#xE1;sicos de variables en Kotlin son:<p></p>
   <span class="token function">println</span><span class="token punctuation">(</span>cadena<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
-<h2 class="mume-header" id="clases">Clases</h2>
+<blockquote>
+<p>&#x270B; Como en otros lenguajes de programaci&#xF3;n, se debe controlar las operaciones con variables  de distintos tipos, para evitar resultados inesperados o incluso excepciones. Kotlin tiene varios m&#xE9;todos <strong>toX()</strong> para cambiar los valores al tipo que necesites:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span> <span class="token punctuation">(</span>args<span class="token operator">:</span> Array <span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   
+   <span class="token keyword">var</span> a<span class="token operator">:</span>Int
+   <span class="token keyword">var</span> b<span class="token operator">=</span><span class="token number">3.5f</span>
+   a<span class="token operator">=</span>b<span class="token operator">+</span><span class="token number">2</span>
+   <span class="token function">println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p>Producir&#xED;a el error <span style="color: DarkSlateBlue; font-weight: bold; font-style: italic;">error: type mismatch: inferred type is Float but Int was expected.</span><br>
+Mientras que: <strong><code>a=b.toInt()+2</code></strong> , evitar&#xED;a el error, aunque la funci&#xF3;n redondear&#xED;a a 3.</p>
+</blockquote>
+<h4 class="mume-header" id="string">String</h4>
 
-<p>Todos los elementos en Kotlin son p&#xFA;blicos por defecto, por lo que tambi&#xE9;n lo ser&#xE1;n las clases. Las clases nos sirven para referenciar objetos del mundo real, y mediante las propiedades podemos definir las distintas caracter&#xED;sticas que nos interese manipular con las cuales conste ese objeto; por ejemplo, para definir una clase Persona en Kotlin con algunas propiedades (s&#xED;, propiedades y no atributos) podemos hacer lo siguiente:</p>
+<p>El tipo <a href="https://kotlinlang.org/docs/basic-types.html#strings">String</a> representa el literal de cadena ya conocido, podemos ver un ejemplo  del uso de templates <strong><code>$</code></strong> para la salida por pantalla.</p>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span> <span class="token punctuation">(</span>args<span class="token operator">:</span> Array <span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   
+<span class="token keyword">val</span> cadena <span class="token operator">=</span> <span class="token string">&quot;El resultado de:&quot;</span>
+<span class="token keyword">val</span> a <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">val</span> b <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$cadena</span> <span class="token interpolation variable">$a</span> + <span class="token interpolation variable">$b</span> es: <span class="token interpolation"><span class="token delimiter variable">${</span>a <span class="token operator">+</span> b<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<blockquote>
+<pre data-role="codeBlock" data-info="bash" class="language-bash">El resultado de: <span class="token number">2</span> + <span class="token number">5</span> es: <span class="token number">7</span>
+</pre></blockquote>
+<h2 class="mume-header" id="control-de-flujo">Control de flujo</h2>
+
+<p>Las instrucciones <strong>if/else, for y while</strong> podemos considerar que tienen un uso similar al de otros lenguajes, as&#xED; que vamos a explicar solamente los elementos que lo diferencian:</p>
+<h4 class="mume-header" id="for-y-while">for y while</h4>
+
+<p>Se diferencia sobre todo en que se tienen que usar rangos en la sentencia for y se pueden usar en la while:</p>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">repeticionConFor</span><span class="token punctuation">(</span>v<span class="token operator">:</span>Int<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+   <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span>v<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reversed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$i</span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">repeticionConFor</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+</pre></blockquote>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">repeticionConFor</span><span class="token punctuation">(</span>tope<span class="token operator">:</span>Int<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+   <span class="token keyword">var</span> contador<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span>
+   <span class="token keyword">do</span><span class="token punctuation">{</span>
+         <span class="token keyword">var</span> numero<span class="token operator">=</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         contador<span class="token operator">++</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token keyword">while</span><span class="token punctuation">(</span>contador<span class="token operator">&lt;</span>tope <span class="token operator">&amp;&amp;</span> numero<span class="token operator">!</span><span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">100</span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">repeticionConFor</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+</pre></blockquote>
+<h4 class="mume-header" id="when">when</h4>
+
+<p>Sustituto de <strong>swich</strong>, y que tambi&#xE9;n lo podemos encontrar similar en C#. Con un ejemplo quedar&#xED;a explicado:</p>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">getEstacion</span><span class="token punctuation">(</span>entrada<span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span>String
+<span class="token punctuation">{</span>
+<span class="token keyword">return</span> <span class="token keyword">when</span><span class="token punctuation">(</span>entrada<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token number">1</span><span class="token operator">-&gt;</span> <span class="token string">&quot;primavera&quot;</span>
+    <span class="token number">2</span><span class="token operator">-&gt;</span> <span class="token string">&quot;verano&quot;</span>
+    <span class="token number">3</span><span class="token operator">-&gt;</span> <span class="token string">&quot;oto&#xF1;o&quot;</span>
+    <span class="token number">4</span><span class="token operator">-&gt;</span> <span class="token string">&quot;invierno&quot;</span>
+    <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token string">&quot;Estaci&#xF3;n incorrecta&quot;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">getEstacion</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+</pre></blockquote>
+<p>Otro ejemplo de la gran funcionalidad que nos permite la sentencia <strong>when</strong> podr&#xED;a ser el siguiente. Observa que en este caso el when es <strong>sin argumentos</strong>:</p>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">noHagoNada</span><span class="token punctuation">(</span>x<span class="token operator">:</span>Int<span class="token punctuation">,</span> s<span class="token operator">:</span>String<span class="token punctuation">,</span> v<span class="token operator">:</span>Float<span class="token punctuation">)</span><span class="token operator">:</span>String
+<span class="token punctuation">{</span>
+   <span class="token keyword">val</span> res <span class="token operator">=</span> <span class="token keyword">when</span> <span class="token punctuation">{</span>
+      x <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">10</span> <span class="token operator">-&gt;</span> <span class="token string">&quot;entero positivo menor de 10&quot;</span>
+       s<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token string">&quot;cadena&quot;</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token string">&quot;incluyo cadena&quot;</span>
+       v <span class="token keyword">is</span> Comparable<span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">-&gt;</span> <span class="token string">&quot;Soy Comparable&quot;</span>
+       <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token string">&quot;&quot;</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">return</span> res
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">noHagoNada</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">&quot;Hola&quot;</span><span class="token punctuation">,</span> <span class="token number">3.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+</pre></blockquote>
 <h2 class="mume-header" id="funciones">Funciones</h2>
 
 <p>Si queremos crear una funci&#xF3;n en kotlin tendremos que precederla de la palabra reservada <strong>fun</strong>. Por tanto, una funci&#xF3;n constar&#xE1; de la palabra fun seguida por el nombre de la funci&#xF3;n y entre par&#xE9;ntesis los par&#xE1;metros, siempre y cuando los tenga. Si la funci&#xF3;n retorna un valor se definir&#xE1; al final de la signatura (esto &#xFA;ltimo se puede omitir siempre que la funci&#xF3;n no devuelva nada).<br>
@@ -384,7 +463,7 @@ Los tipos b&#xE1;sicos de variables en Kotlin son:<p></p>
    <span class="token keyword">var</span> mutable<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
    mutable<span class="token operator">+=</span><span class="token number">7</span><span class="token punctuation">;</span>
    <span class="token keyword">var</span> numeroDecimales<span class="token operator">=</span><span class="token number">3.14F</span><span class="token punctuation">;</span>
-  numeroDecimales<span class="token operator">=</span><span class="token number">3.12F</span><span class="token punctuation">;</span>
+   numeroDecimales<span class="token operator">=</span><span class="token number">3.12F</span><span class="token punctuation">;</span>
    <span class="token keyword">val</span> inmutable<span class="token operator">:</span>Char<span class="token operator">=</span><span class="token string">&apos;C&apos;</span><span class="token punctuation">;</span>
    <span class="token function">sumaDatos</span><span class="token punctuation">(</span>mutable<span class="token punctuation">,</span>inmutable<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token punctuation">}</span>
@@ -397,10 +476,72 @@ Los tipos b&#xE1;sicos de variables en Kotlin son:<p></p>
 <span class="token punctuation">}</span>
 <span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">mayor</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
 </pre></blockquote>
-<p>Si la funci&#xF3;n es sencilla como el caso anterior. Kotlin pemite omitir las llaves.</p>
+<p>Si la funci&#xF3;n solo tiene una instrucci&#xF3;n, como en el caso anterior, Kotlin permite omitir las llaves.</p>
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">mayor</span><span class="token punctuation">(</span>numeroUno<span class="token operator">:</span>Int<span class="token punctuation">,</span> numeroDos<span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span>Int<span class="token operator">=</span> <span class="token keyword">if</span><span class="token punctuation">(</span>numeroUno<span class="token operator">&gt;</span>numeroDos<span class="token punctuation">)</span>  numeroUno <span class="token keyword">else</span> numeroDos
 </pre></blockquote>
+<h4 class="mume-header" id="funciones-de-extensi%C3%B3n">Funciones de Extensi&#xF3;n</h4>
+
+<p>Kotlin al igual que otros lenguajes, nos permite extender la funcionalidad de clases existentes, agregando funciones a estas. En el siguiente ejemplo, se ha a&#xF1;adido la funci&#xF3;n Escribe() a la clase String, por lo que se podr&#xE1; usar con objetos de este tipo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> String<span class="token punctuation">.</span><span class="token function">Escribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token string">&quot;Soy una cadena&quot;</span><span class="token punctuation">.</span><span class="token function">Escribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+</pre><h2 class="mume-header" id="arrays-y-colecciones">Arrays y Colecciones</h2>
+
+<p>En Kotlin hay diferentes formas de generar <strong>listas de objetos</strong>: arrays, listas inmutables, listas mutables, etc. Por un lado hay que distinguir la inmutabilidad de la colecci&#xF3;n de la inmutabilidad de la variable que la contiene.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>arrayOf</th>
+<th>listOf</th>
+<th>ARRAYLISTOF</th>
+<th>LINKEDLISTOF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Descripci&#xF3;n</strong></td>
+<td>Array de objetos tradicional</td>
+<td>Lista inmutable</td>
+<td>Lista mutable</td>
+<td>Lista enlazada mutable</td>
+</tr>
+<tr>
+<td><strong>Literales</strong></td>
+<td>arrayOf(1, 2, 3)</td>
+<td>listOf(1,2, 3)</td>
+<td>arrayListOf(1, 2, 3)</td>
+<td>linkedListOf(1, 2, 3)</td>
+</tr>
+<tr>
+<td><strong>Inmutabilidad</strong></td>
+<td>no</td>
+<td>s&#xED;</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><strong>Modificar longitud</strong></td>
+<td>no</td>
+<td>no</td>
+<td>s&#xED;</td>
+<td>s&#xED;</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>&#x270B; En Kotlin las declaraciones de arrays no llevan corchetes como en otros lenguajes, sino que se utilizan los m&#xE9;todos de la clase Array.<br>
+En los siguientes ejemplos podemos ver diferentes formas de recorrer el array mediante un bucle for.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">val</span> weekDays <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;primavera&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;verano&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;oto&#xF1;o&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;invierno&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>dato <span class="token keyword">in</span> weekDays<span class="token punctuation">)</span>  <span class="token function">println</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Adem&#xE1;s Kotlin distingue los arrays de primitivas usando clases propias: <strong><code>BooleanArray, ByteArray, CharArray, ShortArray, IntArray, FloatArray, DoubleArray</code></strong>, y la forma de construir literales es mediante: booleanArrayOf, byteArrayOf, charArrayOf, shortArrayOf, intArrayOf, floatArrayOf, doubleArrayOf.</p>
+<h2 class="mume-header" id="clases">Clases</h2>
+
+<p>Todos los elementos en Kotlin son p&#xFA;blicos por defecto, por lo que tambi&#xE9;n lo ser&#xE1;n las clases. Las clases nos sirven para referenciar objetos del mundo real, y mediante las propiedades podemos definir las distintas caracter&#xED;sticas que nos interese manipular con las cuales conste ese objeto; por ejemplo, para definir una clase Persona en Kotlin con algunas propiedades (s&#xED;, propiedades y no atributos) podemos hacer lo siguiente:</p>
 
       </div>
       
