@@ -344,24 +344,19 @@ justo después del front matter
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 <ol>
-<li><a href="#indroducci%C3%B3n">Indroducci&#xF3;n</a></li>
 <li><a href="#creando-el-primer-proyecto-de-android">Creando el primer proyecto de Android</a></li>
-<li><a href="#carpetas-de-un-proyecto-en-android-studio">Carpetas de un proyecto en Android Studio</a></li>
+<li><a href="#estructura-de-un-proyecto-en-android-studio">Estructura de un proyecto en Android Studio</a></li>
 <li><a href="#recursos-en-android">Recursos en Android</a>
 <ol>
 <li><a href="#la-carpeta-layout">La carpeta Layout</a></li>
 <li><a href="#las-carpetas-mipmap-y-drawable">Las carpetas Mipmap y Drawable</a></li>
 <li><a href="#la-carpeta-values">La carpeta values</a></li>
+<li><a href="#acceder-a-los-recursos-en-android">Acceder a los Recursos en Android</a></li>
 </ol>
 </li>
+<li><a href="#android-manifest">Android Manifest</a></li>
 </ol>
-<p>Conocimientos iniciales<br>
-Estructura de un proyecto Android Studio<br>
-&#xBF;Qu&#xE9; es el archivo androidmanifest.xml?<br>
-Uso recursos en Android FALTA</p>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="indroducci%C3%B3n">Indroducci&#xF3;n</h3>
-
 <h3 class="mume-header" id="creando-el-primer-proyecto-de-android">Creando el primer proyecto de Android</h3>
 
 <p>Vamos a realizar nuestro primer ejemplo en Android, nos servir&#xE1; b&#xE1;sicamente para conocer el entorno Android Studio y las carpetas de las que consta un proyecto Android creadas con este entorno. Una vez instalada la aplicaci&#xF3;n y si no se ha creado un proyecto con anterioridad, al abrir el entorno nos encontraremos con una ventana como la que sigue:</p>
@@ -382,7 +377,7 @@ Uso recursos en Android FALTA</p>
 </div>
 <p>La &#xFA;ltima opci&#xF3;n permitir&#xE1; seleccionar el <strong>SDK m&#xED;nimo</strong> con el que quer&#xE1;is que corra vuestra aplicaci&#xF3;n. El m&#xE1;ximo no hace falta seleccionarlo porque el proyecto coger&#xE1; el SDK m&#xE1;s actualizado que tengas instalado. Junto al selector del sdk, pod&#xE9;is ver una explicaci&#xF3;n y un enlace en el que se pueden ver las estad&#xED;sticas actualizadas del porcentaje de m&#xF3;viles que podr&#xE1;n correr vuestra aplicaci&#xF3;n, seg&#xFA;n el m&#xED;nimo SDK seleccionado.</p>
 <p>A partir de aqu&#xED; deberemos esperar un poco hasta que se genere nuestro proyecto y aparezca una ventana parecida a la siguiente:</p>
-<h3 class="mume-header" id="carpetas-de-un-proyecto-en-android-studio">Carpetas de un proyecto en Android Studio</h3>
+<h3 class="mume-header" id="estructura-de-un-proyecto-en-android-studio">Estructura de un proyecto en Android Studio</h3>
 
 <p>Una vez llegados aqu&#xED;, se habr&#xE1; abierto el &#xE1;rbol de carpetas de la aplicaci&#xF3;n a la izquierda (aunque esta ventana es movible. Por si os resulta m&#xE1;s &#xFA;til en otro lugar de la ventana de Android Studio, sabed que pod&#xE9;is moverla pulsando y arrastrando la pesta&#xF1;a con nombre  <strong>1: Project</strong> a cualquier parte. Tambi&#xE9;n pod&#xE9;is mover el resto de las ventanas que est&#xE1;n abiertas.<br>
 En el &#xE1;rbol de directorios ten&#xE9;is varias formas de listar las carpetas y archivos de la aplicaci&#xF3;n. Las dos principales son <strong>Android, Project, y Package</strong>, pero hay otras que pod&#xE9;is usar, por ejemplo: <strong>Problems</strong> mostrar&#xE1; s&#xF3;lo los archivos que tienen errores.</p>
@@ -484,12 +479,166 @@ La carpeta <strong>drawable</strong> sirve para colocar todas las im&#xE1;genes 
 <h4 class="mume-header" id="la-carpeta-values">La carpeta values</h4>
 
 <p>Dentro de la carpeta <strong>values</strong> se crean por defecto tres archivos <strong><code>colors, strings, themes</code></strong>, vamos a comentar los dos primeros y dejas el de themes para m&#xE1;s adelante, ya que necesita una explicaci&#xF3;n mas detallada.<br>
-Dentro de un archivo de colores <strong>(colors.xml)</strong> los elementos deben ser declarados con la etiqueta <strong><code>&lt;color&gt;</code></strong>. Se debe asignar un nombre &#xFA;nico con el atributo name y su contenido es un color en forma hexadecimal que empieza por el s&#xED;mbolo numeral &apos;#&apos;. Se puede acceder a la paleta de colores al pulsar sobre cualquiera de los cuadros de color de la izquierda.</p>
+Dentro del archivo de colores <strong>colors.xml</strong> los elementos deben ser declarados con la etiqueta <strong><code>&lt;color&gt;</code></strong>. Se debe asignar un nombre &#xFA;nico con el atributo name y su contenido es un color en forma hexadecimal que empieza por el s&#xED;mbolo numeral &apos;#&apos;. Se puede acceder a la paleta de colores al pulsar sobre cualquiera de los cuadros de color de la izquierda.</p>
 <div align="center">
     <img height="200" src="./imagenes/entorno13.png">
 </div>
-<p>Uno de los recursos m&#xE1;s relevantes es el archivo strings.xml que se encuentra dentro de la subcarpeta values. Este fichero almacena todas las cadenas que se muestran en los widgets (controles, formas, botones, vistas, etc.) de nuestras actividades.<br>
-Por ejemplo, si tuvieses un bot&#xF3;n cuyo t&#xED;tulo es &#x201C;Presiona aqu&#xED;&#x201D;, es recomendable incluir dicha cadena en tu archivo strings.xml.</p>
+<p>Uno de los recursos m&#xE1;s relevantes es el archivo <strong>strings.xml</strong>. Este fichero almacena todas las cadenas que se muestran en los widgets (controles, formas, botones, vistas, etc.) de nuestras actividades. Para declarar nuestro recurso de strings usaremos el nodo ra&#xED;z <strong><code>&lt;resources&gt;</code></strong>. Para declarar las cadenas usaremos la etiqueta <strong><code>&lt;string&gt;</code></strong> y estableceremos el atributo name como identificador. Dentro de esta etiqueta pondremos el texto que <strong>se visualizar&#xE1; en el componente de interfaz</strong>..</p>
+<div align="center">
+    <img height="50" src="./imagenes/entorno14.png">
+</div> 
+<p>Por ejemplo, <em>si tuvieses un bot&#xF3;n cuyo t&#xED;tulo es &quot;Presiona aqu&#xED;&quot;, es recomendable incluir dicha cadena en tu archivo strings.xml.</em><br>
+La etiqueta app_name contiene el nombre de la aplicaci&#xF3;n. En este caso es &quot;My Application&quot;.<br>
+El archivo strings.xml es muy &#xFA;til para los desarrolladores. Una de sus grandes utilidades es facilitar el uso de m&#xFA;ltiples idiomas en la aplicaci&#xF3;n. Esto se debe a que puedes externalizar las cadenas del c&#xF3;digo y el sistema se encargara de seleccionar la versi&#xF3;n del archivo strings.xml con el lenguaje necesitado, seg&#xFA;n la configuraci&#xF3;n del dispositivo.</p>
+<blockquote>
+<p>&#x1F393; Vamos a definir nuestra aplicaci&#xF3;n para poder configurarla en tres idiomas: espa&#xF1;ol, ingl&#xE9;s y franc&#xE9;s, para una aplicaci&#xF3;n multi-idioma ser&#xED;a necesario incluir recursos de tipo cadena para cada idioma que tenga la aplicaci&#xF3;n, para ello crear&#xED;amos tres versiones del fichero strings.xml y lo guardar&#xED;amos en los recursos adicionales de values seg&#xFA;n el idioma, para saber las extensiones de los <a href="https://www.loc.gov/standards/iso639-2/php/code_list.php">idiomas</a>, aunque Android Studio nos proporciona la opci&#xF3;n de crear recursos f&#xE1;cilmente. Por ejemplo, si dentro de la carpeta res, seleccionas <strong><code>new -&gt; Android Resources File</code></strong> y seleccionamos value, podremos crear los recursos adicionales por localidad:</p>
+<div align="center">
+   <img height="350" src="./imagenes/entorno15.png">
+</div> 
+Al a&#xF1;adir los tres recursos adicionales,  las carpetas quedar&#xED;an de la siguiente manera. La carpeta values sin calificador, ser&#xED;a para el idioma por defecto:
+<div align="center">
+   <img height="200" src="./imagenes/entorno16.png">
+</div> 
+<p>Si a cada uno de ellos le a&#xF1;adimos el siguiente contenido:</p>
+<div align="center">
+   <img height="250" src="./imagenes/entorno17.png">
+</div> 
+Nos quedar&#xED;a asociar esta cadena al TextView que hay en el layout principal. Par ello abrimos el archivo **`activity_main`** de la carpeta **`layout`** y en el atributo text seleccionamos el recurso string hola_mundo.
+<div align="center">
+   <img height="250" src="./imagenes/entorno18.png">
+</div> 
+Al ejecutar la aplicaci&#xF3;n y dependiendo de la configuraci&#xF3;n de idioma del dispositivo, el texto aparecer&#xE1; en un idioma u otro.
+</blockquote>
+<p>Personalmente te recomiendo que uses este archivo siempre, incluye todo tu texto y no dejes nada por fuera, tu aplicaci&#xF3;n te lo agradecer&#xE1; en el futuro.</p>
+<h4 class="mume-header" id="acceder-a-los-recursos-en-android">Acceder a los Recursos en Android</h4>
+
+<p>Ahora que e ha entendido que son los recursos, vamos a entender como pueden ser accedidos en el c&#xF3;digo Kotlin o en el c&#xF3;digo XML. Para obtener la referencia de un recurso es necesario que se le asigne un identificador que lo diferencie y le indique al programador donde se encuentra.</p>
+<p>Cada identificador se ubica en una clase llamada <strong>R</strong> a trav&#xE9;s de una constante entera. Esta clase es generada autom&#xE1;ticamente por una herramienta del SDK llamada appt, por lo que no es recomendable editarlo manualmente. Cada tipo de recurso existente dentro de la carpeta res es una clase anidada est&#xE1;tica del archivo R.class. Por ejemplo, el subdirectorio drawable puede ser accedido como R.drawable.</p>
+<h5 class="mume-header" id="acceder-desde-kotlin">Acceder desde Kotlin</h5>
+
+<p>Ahora, si deseas obtener el identificador de un recurso desde c&#xF3;digo Kotlin, entonces usas el operador punto para acceder a los miembros de cada clase interna <strong>Paquete.R.tipoRecurso.nombreRecurso</strong>.</p>
+<p>Por ejemplo, <em>si tienes una imagen cuyo identificador es ic_launcher_background. Para acceder a su contenido solo navegas de la siguiente forma R.drawable.ic_launcher_background</em>.</p>
+<div align="center">
+    <img height="200" src="./imagenes/entorno19.png">
+</div>
+<p>Si se quiere acceder a la clase Resources que incluye todos los recursos de android, podemos obtener una instancia <strong>dentro de una actividad</strong> con el m&#xE9;todo <strong><code>getResources()</code></strong>. A trav&#xE9;s de ella podemos acceder a los valores de cualquier tipo de recurso.</p>
+<div align="center">
+    <img height="20" src="./imagenes/entorno20.png">
+</div>
+<p>En este caso hemos accedido  a los recursos del sistema, para ello se ha accedido primero a <strong><code>android.R.tipoRecurso.nombreRecurso</code></strong></p>
+<h5 class="mume-header" id="acceder-desde-xml">Acceder desde XML</h5>
+
+<p>Esta forma de referencia se da cuando dentro de un recurso definido en un archivo XML  necesitamos usar el valor de otro recurso. Para ello usamos la sintaxis <strong>@[Paquete:]tipoRecurso/nombreRecurso</strong></p>
+<p>Por ejemplo, <em>cuando a un componente <strong><code>&lt;TextView&gt;</code></strong> dentro de un layout le asignamos el valor de un string definido en el archivo strings.xml</em>.</p>
+<div align="center">
+    <img height="20" src="./imagenes/entorno21.png">
+</div>
+<p>Para los recursos del sistema desde xml ser&#xED;a <strong><code>@android:tipoRecurso/nombreRecurso</code></strong></p>
+<h3 class="mume-header" id="android-manifest">Android Manifest</h3>
+
+<p>El <a href="https://developer.android.com/guide/topics/manifest/manifest-intro?hl=es">Manifest</a> se puede decir que es el archivo m&#xE1;s esencial de nuestra aplicaci&#xF3;n, si se produce un error en &#xE9;l lo m&#xE1;s probable es que la App no se pueda ejecutar. Es un archivo XML que contiene nodos descriptivos sobre las caracter&#xED;sticas de la App. Caracter&#xED;sticas como los building blocks existentes, la versi&#xF3;n de SDK usada, los permisos necesarios para ejecutar algunos servicios, activitys y sevicios de la aplicaci&#xF3;n y muchas m&#xE1;s.<br>
+En pocas palabras el Android Manifest muestra una descripci&#xF3;n de toda nuestra aplicaci&#xF3;n. Su configuraci&#xF3;n puede realizarse a trav&#xE9;s de una interfaz gr&#xE1;fica, pero es recomendable conocer la sintaxis ya que en muchas ocasiones ser&#xE1; m&#xE1;s f&#xE1;cil y r&#xE1;pido hacerlo desde el propio xml.<br>
+Si abres el archivo en el editor ver&#xE1;s un c&#xF3;digo similar a este:</p>
+<div align="center">
+    <img height="350" src="./imagenes/manifest.png">
+</div> 
+<p>El nombre debe permanecer intacto, ya que se usa como referencia para el parsing de nuestra aplicaci&#xF3;n. El nodo ra&#xED;z de este documento se representa con la etiqueta <strong><code>&lt;manifest&gt;</code></strong> y por obligaci&#xF3;n debe contener un hijo de tipo <strong><code>&lt;application&gt;</code></strong>.<br>
+En el c&#xF3;digo anterior podemos observar que manifest posee dos atributos, <strong>xmlsn:android y package</strong>. El primero no debemos cambiarlo nunca, ya que es el namespace del archivo.<br>
+El atributo package indica el nombre del paquete Java que soporta a nuestra aplicaci&#xF3;n. El nombre del paquete debe ser &#xFA;nico y un diferenciador a largo plazo.<br>
+La etiqueta <strong><code>&lt;application&gt;</code></strong> representa como estar&#xE1; construida nuestra aplicaci&#xF3;n. Dentro de ella definiremos nodos referentes a las actividades que contiene, las librer&#xED;as incluidas, los Intents, Providers, y dem&#xE1;s componentes.</p>
+<h5 class="mume-header" id="etiqueta-aplication">Etiqueta aplication</h5>
+
+<p>Algunos atributos de la etiqueta <strong><code>&lt;application&gt;</code></strong> son:</p>
+<ul>
+<li><strong>allowBackup:</strong> Este atributo puede tomar los valores de true o false. Indica si la aplicaci&#xF3;n ser&#xE1; persistente al cerrar nuestro AVD.</li>
+<li><strong>icon:</strong> Indica donde est&#xE1; ubicado el icono que se usar&#xE1; en la aplicaci&#xF3;n. Debemos indicar la ruta y el nombre del archivo que representa el icono. En este caso apuntamos a las carpetas mipmap donde se encuentra ic_launcher.png. Icono por defecto que nos proporciona Android Studio. Se mostrar&#xE1; en el Android Market y en el lanzador de la aplicaci&#xF3;n de nuestro dispositivo. Tambi&#xE9;n ser&#xE1; el icono por defecto para todas las activities que definamos dentro de la etiqueta.</li>
+<li><strong>label:</strong> Es el nombre de la aplicaci&#xF3;n que ver&#xE1; el usuario en su tel&#xE9;fono. Normalmente apunta a la cadena &quot;app_name&quot; que se encuentra en el recurso strings.xml. El contenido de este atributo aparecer&#xE1; en la barra de t&#xED;tulo de la actividad si la tuviera. Tambi&#xE9;n se usar&#xE1; en el lanzador de la aplicaci&#xF3;n si definimos esta actividad como el punto de entrada de nuestra aplicaci&#xF3;n. Si no lo definimos, se utilizar&#xE1; el label definido en la etiqueta <strong><code>&lt;application&gt;</code></strong>. Ser&#xE1; el t&#xED;tulo por defecto de las activities que definamos dentro de la etiqueta application.</li>
+<li><strong>theme:</strong> Este atributo apunta al archivo de recursos styles.xml, donde se define la personalizaci&#xF3;n del estilo visual de nuestra aplicaci&#xF3;n.</li>
+<li><strong>supportsRtl:</strong> Declara si la aplicaci&#xF3;n est&#xE1; dispuesta a admitir dise&#xF1;os de derecha a izquierda (RTL). Si se establece en true y la targetSdkVersion se establece en 17 o superior, en ese caso el sistema activar&#xE1; y utilizar&#xE1; varias API RTL para que la aplicaci&#xF3;n pueda mostrar dise&#xF1;os RTL. En otro caso se ignorar&#xE1; la configuraci&#xF3;n de regi&#xF3;n del usuario.</li>
+</ul>
+<p>Dentro de <strong><code>&lt;application&gt;</code></strong> encontraremos expresada la actividad principal que definimos al crear el proyecto. Usaremos <strong><code>&lt;activity&gt;</code></strong> para representar un nodo tipo actividad.</p>
+<h5 class="mume-header" id="etiqueta-activity">Etiqueta activity</h5>
+
+<p>Cada etiqueta <strong><code>&lt;activity&gt;</code></strong> representa una de las actividades de la aplicaci&#xF3;n. Algunos atributos son:</p>
+<ul>
+<li><strong>label:</strong> Hace referencia al texto que se mostrar&#xE1; en la cabecera de la actividad. Si no se indica ning&#xFA;n atributo label, la activity tendr&#xE1; el mismo nombre que la Aplicaci&#xF3;n.<br>
+Dentro de <strong><code>activity</code></strong> nos podemos encontrar:</li>
+<li><strong>android:name:</strong> Especifica el nombre de la actividad, en el ejemplo se ha puesto .MainActivity ya que tenemos el nombre del package definido como atributo del elemento manifest.</li>
+<li><strong>android:screenOrientation:</strong> (portrait o landscape)  Define la orientaci&#xF3;n de la aplicaci&#xF3;n vertical o apaisada. Si no definimos este atributo, se usar&#xE1; el que el dispositivo tenga predeterminado, incluido el variable en funci&#xF3;n del aceler&#xF3;metro. Cuando la pantalla cambia de orientaci&#xF3;n la actividad se destruye.</li>
+<li><strong>android:configChanges</strong>  En Android, el cambio de orientaci&#xF3;n o la aparici&#xF3;n del teclado se considera un cambio de configuraci&#xF3;n, lo que hace que la pantalla se redibugje para adaptarse a los cambios. En este atributo definimos los eventos que queremos manejar nosotros, con el fin de evitar que se destruya la actividad. Los diferentes efectos se separan con la barra vertical o pipe <strong><code>|</code></strong>, podr&#xED;amos poner <strong><code>keyboard|keyboardHydden|orientation</code></strong>, para la aparici&#xF3;n desaparici&#xF3;n de la pantalla y para el cambio de orientaci&#xF3;n del dispositivo.</li>
+</ul>
+<p>En Android no existe un &#xFA;nico punto de entrada para nuestra aplicaci&#xF3;n. Podemos iniciarla a trav&#xE9;s de m&#xFA;ltiples activities o services que pueden ser iniciados a partir de intents espec&#xED;ficos que puede enviar el sistema u otra aplicaci&#xF3;n. Para decir a Android ante qu&#xE9; intent debe reaccionar nuestra aplicaci&#xF3;n y c&#xF3;mo, existe el <strong><code>&lt;intent-filter&gt;</code></strong>.<br>
+Con la etiqueta <strong><code>intent-filter</code></strong> y su elemento <strong><code>&lt;action&gt;</code></strong> estamos indicando que esta activity va a ser un punto de entrada para nuestra aplicaci&#xF3;n. S&#xF3;lo puede haber una activity que reaccione a este intent. Con elemento <strong><code>&lt;category&gt;</code></strong> le decimos a Android que queremos que esta activity sea a&#xF1;adida al lanzador de la aplicaci&#xF3;n. Pueden haber varias activities que reaccionen a este intent.<br>
+De esta manera Android sabe que al ser pulsado el icono de la aplicaci&#xF3;n, debe iniciar esta activity. Si no hubi&#xE9;ramos establecido el <strong><code>&lt;intent-filter&gt;</code></strong>, esta activity s&#xF3;lo se podr&#xED;a llamar desde dentro de la aplicaci&#xF3;n. Fij&#xE9;monos que ambos elementos s&#xF3;lo tienen el atributo name siendo su valor el nombre del intent.</p>
+<div align="center">
+    <img height="120" src="./imagenes/manifest2.png">
+</div> 
+<h5 class="mume-header" id="etiqueta-uses-permissions">Etiqueta uses-permissions</h5>
+
+<p>Android cuenta con un modelo de seguridad muy elaborado. Cada aplicaci&#xF3;n se ejecuta en su propio proceso y m&#xE1;quina virtual. Android restringe el uso de los recursos del sistema: tarjeta SD, WIFI, HW de audio, etc. Mediante este Tag especificamos los permisos que va a necesitar nuestra aplicaci&#xF3;n para poder ejecutarse, adem&#xE1;s son los que deber&#xE1; aceptar el usuario antes de instalarla. Por ejemplo, si se desea utilizar funcionalidades con Internet o el vibrador del tel&#xE9;fono, hay que indicar que nuestra aplicaci&#xF3;n requiere esos permisos. Alguno de estos permisos son:</p>
+<ul>
+<li><strong><code>android.permisssion.RECORD_AUDIO</code></strong>, para el acceso al hw de audio y grabaci&#xF3;n.</li>
+<li><strong><code>android.permisssion.INTERNET</code></strong>, concede permiso a todas las API&#x2019;s de red.</li>
+<li><strong><code>android.permisssion.WRITE_EXTERNAL_STORAGE</code></strong>, para almacenamiento externo.</li>
+<li><strong><code>android.permisssion.WAKE_LOCK</code></strong>, nos permite antibloqueo (que si el terminal est&#xE1; inactivo &#xE9;ste no se bloquee).</li>
+</ul>
+<h5 class="mume-header" id="etiqueta-uses-features">Etiqueta uses-features</h5>
+
+<p>Permite especificar las caracter&#xED;sticas hardware que requiere nuestra aplicaci&#xF3;n pantalla multit&#xE1;ctil, soporte OpenGL, etc. para poder instalarse. Algunas restricciones hardware para nuestra aplicaci&#xF3;n podr&#xED;an ser:</p>
+<ul>
+<li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.microphone&quot; android:required=&quot;false&quot;/</code></strong>&gt;</li>
+<li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.camera&quot; android:required=&quot;false&quot;/&gt;</code></strong></li>
+<li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.camera.autofocus&quot; android:required=&quot;false&quot;/&gt;</code></strong></li>
+<li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.camera.flash&quot; android:required=&quot;false&quot;/&gt;</code></strong></li>
+<li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.touchscreen.multitouch&quot; android:required=&quot;true&quot;/&gt;</code></strong></li>
+</ul>
+<div style="page-break-after:always;"></div>
+<p>Manifiesto completo de ejemplo:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span> 
+          <span class="token attr-name">package</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.xusa.miaplicacion<span class="token punctuation">&quot;</span></span> 
+          <span class="token attr-name"><span class="token namespace">android:</span>versionCode</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>11<span class="token punctuation">&quot;</span></span> 
+          <span class="token attr-name"><span class="token namespace">android:</span>versionName</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1.5.1<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span> <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@drawable/icon<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> 
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activity</span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.UnActivity<span class="token punctuation">&quot;</span></span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>configChanges</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>orientation|keyboardHidden<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/app_name<span class="token punctuation">&quot;</span></span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>screenOrientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>portrait<span class="token punctuation">&quot;</span></span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Theme.NoBackground<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span> 
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.MAIN<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span> 
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.category.LAUNCHER<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span> 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span> 
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span> 
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activity</span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>OtroActivity<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>configChanges</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>orientation|keyboardHidden<span class="token punctuation">&quot;</span></span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/app_name<span class="token punctuation">&quot;</span></span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>screenOrientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>portrait<span class="token punctuation">&quot;</span></span> 
+    <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Theme.NoBackground<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span> 
+   <span class="token comment">&lt;!-- Elementos para la publicidad --&gt;</span> 
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.mobclix.APPLICATION_ID<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>insert-your-application-id<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span> 
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activity</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.mobclix.android.sdk.MobclixBrowserActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span> 
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>supports-screens</span> 
+     <span class="token attr-name"><span class="token namespace">android:</span>anyDensity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
+     <span class="token attr-name"><span class="token namespace">android:</span>largeScreens</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span> 
+     <span class="token attr-name"><span class="token namespace">android:</span>normalScreens</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> 
+     <span class="token attr-name"><span class="token namespace">android:</span>smallScreens</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>supports-screens</span><span class="token punctuation">&gt;</span></span> 
+  <span class="token comment">&lt;!-- Permisos que se exigen para mostrar la publicidad --&gt;</span> 
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.INTERNET<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.GET_TASKS<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.READ_PHONE_STATE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
+  <span class="token comment">&lt;!-- Permisos en General --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.VIBRATE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
+  <span class="token comment">&lt;!-- Version m&#xED;nima de androide soportada por la aplicacion --&gt;</span> 
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-sdk</span> <span class="token attr-name"><span class="token namespace">android:</span>minSdkVersion</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>3<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Analiza el archivo de manifiesto anterior, buscando en Internet la informaci&#xF3;n que no encuentres en el tema. Despu&#xE9;s  haz una descripci&#xF3;n de como crees que ser&#xE1; la aplicaci&#xF3;n que contiene ese manifiesto.</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Modifica el Manifest del ejercicio HolaMundo de modo que como requisitos del mismo queremos que se ejecute en modo apaisado y que no afecte el cambio de orientaci&#xF3;n del dispositivo. Cambia el icono y la etiqueta de la activity principal (probar que si no la tiene, pone por defecto la de la aplicaci&#xF3;n) y da permisos de internet. Adem&#xE1;s se deber&#xE1;n a&#xF1;adir dos lenguajes m&#xE1;s para el string Hola Mundo.</span></p>
 
       </div>
       
