@@ -1,0 +1,844 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM Tema 5</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header undefined" id="tema-5-interfaz-de-usuario-i">Tema 5. Interfaz de Usuario I</h1>
+
+<p><a href="./Tema5_Interfaz_Usuario_I.pdf">Descargar estos apuntes</a></p>
+<p>&#xCD;ndice</p>
+<ol>
+<li><a href="#viewbinding">ViewBinding</a></li>
+<li><a href="#botones">Botones</a>
+<ol>
+<li><a href="#raised-buttons">Raised Buttons</a></li>
+<li><a href="#flat-buttons">Flat Buttons</a></li>
+<li><a href="#floating-action-buttons">Floating Action Buttons</a></li>
+</ol>
+</li>
+<li><a href="#imageview">ImageView</a></li>
+<li><a href="#text-fields">Text Fields</a>
+<ol>
+<li><a href="#textview">TextView</a></li>
+<li><a href="#edittext">EditText</a></li>
+<li><a href="#floating-labels">Floating Labels</a></li>
+<li><a href="#autocomplete-textview">AutoComplete TextView</a></li>
+</ol>
+</li>
+<li><a href="#checkbox">CheckBox</a></li>
+<li><a href="#radiobutton">RadioButton</a></li>
+<li><a href="#switches">Switches</a></li>
+<li><a href="#sliders">Sliders</a></li>
+<li><a href="#chips">Chips</a></li>
+<li><a href="#toast">Toast</a></li>
+<li><a href="#snackbar">SnackBar</a>
+<ol>
+<li><a href="#snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</a></li>
+<li><a href="#descartar-snackbar">Descartar SnackBar</a></li>
+</ol>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="viewbinding">ViewBinding</h3>
+
+<p>Si ya eres conocedor de Android, conocer&#xE1;s findViewById, que permite vincular las vistas de la aplicaci&#xF3;n con las clases, y as&#xED; poder acceder a determinadas propiedades de los widgets de las vistas.</p>
+<p>Desde la versi&#xF3;n 3.6 de Android Studio, es posible utilizar View Binding para enlazar los elementos de los layouts con las clases.</p>
+<p>Si estamos trabajando con una versi&#xF3;n de Android Studio superior a la 4.0 la configuraci&#xF3;n del archico <strong><code>build.gradle</code></strong> a nivel de <strong><code>Module:app</code></strong> es la siguiente:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml">    android {
+        ...
+        viewBinding {
+            enabled = true
+        }
+    }
+    
+</pre><p>Una vez habilitada la vinculaci&#xF3;n de vista para un proyecto, por cada archivo xml se generar&#xE1; una clase de vinculaci&#xF3;n al mismo, que ser&#xE1; utilizado para hacer refrencias a las vistas del mismo.</p>
+<p>si nuestro archivo se llamma <strong><code>activity_secundaria.xml</code></strong> la clase de vinculaci&#xF3;n generada se llamar&#xE1; ActivitySecundariaBinding.</p>
+<p>Para poder utilizar la vinculaci&#xF3;n de vistas hay que hacer lo siguiente en el m&#xE9;todo <strong><code>onCreate()</code></strong> de la actividad:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivitySecundariaBinding
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        binding <span class="token operator">=</span> ActivitySecundariaBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><p>A partr de ahora podemos hacer referencia a las vistas de nuestro xml. Lo veremos a continuaci&#xF3;n tal y como vayamos viendo distintos componentes.</p>
+<h3 class="mume-header" id="botones">Botones</h3>
+
+<p>Los botones forman una parte funcional muy importante en cualquier aplicaci&#xF3;n. Existen tres tipos est&#xE1;ndar de botonaes:<strong><code>Floating Action Button</code></strong> (bot&#xF3;n circular con una acci&#xF3;n muy concreta en nuestra aplicaci&#xF3;n), <strong><code>Raised Button</code></strong> (bot&#xF3;n con relieve con efecto de pulsaci&#xF3;n) y <strong><code>Flat Button</code></strong> (bot&#xF3;n sin relieve ni efecto de pulsaci&#xF3;n).</p>
+<p>La elecci&#xF3;n de un bot&#xF3;n u otro va a depender de la importancia que se le quiera dar al mismo y de la disposici&#xF3;n del mismo.</p>
+<p>Se recomienda utilizar los <strong><code>Flat Button</code></strong> en los cuadros de di&#xE1;logo, en botones en l&#xED;nea al finalizar la pantalla o en botones que son persistentes o que estar&#xE1;n siempre disponibles en nuestra aplicaci&#xF3;n. Los <strong><code>Raise Buttob</code></strong> se utilizan m&#xE1;s cuando est&#xE1;n en medio de dos vistas de la interfaz.</p>
+<div align="center">
+    <img height="150" src="./imagenes/disposicionBotones.png">
+</div>
+<blockquote>
+<p>&#x1F4CC; <a href="https://material.io/components/buttons#hierarchy-and-placement">Aqu&#xED; tenemos un enlace donde se encuentra informaci&#xF3;n sobre este componente que ofrece Material Design</a></p>
+</blockquote>
+<h4 class="mume-header" id="raised-buttons">Raised Buttons</h4>
+
+<h4 class="mume-header" id="flat-buttons">Flat Buttons</h4>
+
+<h4 class="mume-header" id="floating-action-buttons">Floating Action Buttons</h4>
+
+<h3 class="mume-header" id="imageview">ImageView</h3>
+
+<p><a href="https://material.io/components?platform=android">Patrones MD</a></p>
+<h3 class="mume-header" id="text-fields">Text Fields</h3>
+
+<h4 class="mume-header" id="textview">TextView</h4>
+
+<h4 class="mume-header" id="edittext">EditText</h4>
+
+<h4 class="mume-header" id="floating-labels">Floating Labels</h4>
+
+<p>Filled text fields<br>
+Outlines text fields</p>
+<h4 class="mume-header" id="autocomplete-textview">AutoComplete TextView</h4>
+
+<div align="center">
+    <img height="50" src="./imagenes/actionbar.png">
+</div>
+<h3 class="mume-header" id="checkbox">CheckBox</h3>
+
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>purple_500<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FF6200EE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>purple_700<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FF3700B3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>teal_200<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FF03DAC5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>teal_700<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FF018786<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>black<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FF000000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>white<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FFFFFFFF<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+</pre><blockquote>
+<p>&#x1F4CC; <a href="https://material.io/design/color/the-color-system.html#tools-for-picking-colors">Aqu&#xED; tenemos un enlace donde se encuentra informaci&#xF3;n sobre la gesti&#xF3;n de colores que ofrece Material Design</a></p>
+</blockquote>
+<h3 class="mume-header" id="radiobutton">RadioButton</h3>
+
+<h3 class="mume-header" id="switches">Switches</h3>
+
+<h3 class="mume-header" id="sliders">Sliders</h3>
+
+<h3 class="mume-header" id="chips">Chips</h3>
+
+<h3 class="mume-header" id="toast">Toast</h3>
+
+<h3 class="mume-header" id="snackbar">SnackBar</h3>
+
+<h4 class="mume-header" id="snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</h4>
+
+<p>Para poder comprender como funciona este layout, primero debemos de conocer como se integran las vistas o componentes en los layouts. Veamos la siguiente imagen:</p>
+<div align="center">
+    <img height="100" src="./imagenes/lateralComponente.png">
+</div>
+<p>Cada lateral de un componente viene referenciado por un nombre espec&#xED;fico que permite hacer referencia al mismo. <strong><code>Top</code></strong> es la parte superior, <strong><code>Bottoom</code></strong> es la parte inferior, <strong><code>Start</code></strong> es la parte izquierda y <strong><code>End</code></strong> es la parte derecha.</p>
+<p>Para poder a&#xF1;adir componentes debemos restringir su posici&#xF3;n definiendo unos anclajes basados en los laterales de cada componente. Son necesarios al menos dos anclajes.</p>
+<p>Veamos un ejemplo pr&#xE1;ctico. Vamos a die&#xF1;ar la siguiente interfaz:</p>
+<div align="center">
+    <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
+</div>
+<p>Cremaos un proyecto con el nombre <strong>ejemploConstraintLayout</strong> e integraremos los siguientes componentes:</p>
+<div align="center">
+    <img height="100" src="./imagenes/componentesConstraintLayoutEjemplo.png">
+</div>
+<p>Como vemos insertamos en el contenedor una <strong><code>ImageView</code></strong>, dos <strong><code>TextView</code></strong> una <strong><code>RatingBar</code></strong> y dos <strong><code>Button</code></strong>. No os preocup&#xE9;is porque m&#xE1;s adelante explicaremos con m&#xE1;s detalle estos componentes, ahora solamene queremos utilizarlos para explicar <strong><code>ConstraintLayout</code></strong>.</p>
+<p>El archivo XML correspondiente es el siguiente:</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml" data-line="10-16,22-27,33,34,39,44-47,54-56,64-66"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>?xml</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1.0<span class="token punctuation">&quot;</span></span> <span class="token attr-name">encoding</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span><span class="token attr-name">?</span> <span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ImageView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/imagen<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>720px<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_marginTop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toTopOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>srcCompat</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@drawable/sanfrancisco<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/nombreCiudad<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/imagen<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/name_city<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textAlignment</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>15dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@color/black<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/valorar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/nombreCiudad<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/name_rate<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textAlignment</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>30dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@color/black<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_marginTop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>10dp<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RatingBar</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/valorar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintEnd_toEndOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>numStars</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>5<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/buttonVotar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/text_Votar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintBottom_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintEnd_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/buttonSalir<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_marginBottom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>45dp<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/buttonSalir<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/text_Salir<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintBottom_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintEnd_toEndOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toEndOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/buttonVotar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_marginBottom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>45dp<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10-16" data-start="10" data-end="16">
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="22-27" data-start="22" data-end="27">
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="33" data-start="33">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="34" data-start="34">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="39" data-start="39">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="44-47" data-start="44" data-end="47">
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="54-56" data-start="54" data-end="56">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="64-66" data-start="64" data-end="66">
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Aclaraciones:</p>
+<ul>
+<li><strong>ImageView</strong> l&#xED;neas 10..16:<br>
+L&#xED;nea 10 con la propiedad <strong><code>android:id=&#x201D;@+id/&#x2026;&#x201D;</code></strong> damos un nombre a la vista para posteriormente poder hacer referencia a ella.<br>
+L&#xED;nea 11 con la propiedad <strong><code>android:width</code></strong> indicamos el ancho de esta view, el valor <strong><code>match_parent</code></strong> ajusta el ancho al ancho disponible en el contenedor que recibe la view, el valor <strong><code>wrap_content</code></strong> ajusta el ancho al tama&#xF1;o de la imagen.<br>
+L&#xED;nea 12 con la propiedad <strong><code>android:height</code></strong> se define la altura de la view, la definimos en este caso indicando la altura en dp para que puedan reescalarse correctamente en diferentes dispositivos.<br>
+L&#xED;nea 13  la propiedad <strong><code>android:marginTop</code></strong> permite definir el margen superior respecto al contenedor principal, como queremos que est&#xE9; lo m&#xE1;s arriba posible, le quitamos el margen superior.<br>
+Ahora viene la parte que m&#xE1;s nos interesa, los anclajes de nuestra imagen.<br>
+L&#xED;nea 14 con la propiedad <strong><code>constraintStart_toStartOf:</code></strong> especificamos que el Start de nuestro componente estar&#xE1; anclado al comienzo de su padre, con eso conseguimos mantenerlo a la izquierda.<br>
+L&#xED;nea 15 con la propiedad <strong><code>constraintTop_toTopOf:</code></strong> especificamos que la parte superior de nuestro componente estar&#xE1; anclada a la parte superior del padre.<br>
+L&#xED;nea 16 por &#xFA;ltimo, necesitamos cargar la imagen en la view, utilizamos para ello la propiedad <strong><code>app:srcCompat:</code></strong>.</li>
+<li><strong>TextView</strong> l&#xED;neas 22..27<br>
+En la l&#xED;nea 22 y 23 se definen los anclajes, como se puede apreciar, el texto est&#xE1; de izquierda a derecha as&#xED; pues, anclaremos el Start al Start del padre, igual que se hizo en la imagen. La parte superior del texto, tendremos que anclarla a la parte inferior de la imagen para que nos quede justo debajo.<br>
+En la propiedad <strong><code>android:text:</code></strong> referenciamos un recurso string donde tenemos el texto que queremos que aparezaca en el <strong>TextView</strong>.<br>
+Con <strong><code>android:textAlignment:</code></strong> centramos el texto independientemente de lo grande o peque&#xF1;a que sea la pantalla del terminal.</li>
+<li>El siguiente <strong>TextView</strong> tiene que ir anclado a su izquierda con el padre y estar por debajo al texto que acabamos de colocar previamente, l&#xED;neas 33 y 34.<br>
+La &#xFA;nica propiedad que no hemos visto anteriormente es <strong><code>android:marginTop</code></strong> l&#xED;nea 39 y se utiliza para dejar un margen superior respecto a otros componentes, en este caso, 10dp.</li>
+<li>El siguiente componente es una <strong>RatingBar</strong> tiene que ir anclado a su izquierda con el padre y estar por debajo al <strong>TextView</strong> que tiene como id <strong>valorar</strong> l&#xED;neas 44..46.<br>
+Con la propiedad <strong><code>android:numStars:</code></strong> en la l&#xED;nea 47 elegimos el n&#xFA;mero de estrellas que deseamos que aparezcan en la <strong>RatingBar</strong>.<br>
+&#x270B; Con la propiedad <strong><code>android:stepSize: 0.5</code></strong> nos permitir&#xED;a seleccionar media estrella( probar vosotros)</li>
+<li>Veamos el c&#xF3;digo para incorporar los dos <strong>Button</strong> a la vista.<br>
+Buscaremos que ambos botones est&#xE9;n a la misma altura y lo conseguiremos dando un margen inferior. Adem&#xE1;s, los colocaremos anclados entre ellos en cuanto al eje horizontal se refiere y anclados a la vez al padre, en este caso cada uno en el lateral que corresponda y respecto a la parte inferior para poder ajustarlo m&#xE1;s c&#xF3;modamente.</li>
+</ul>
+</blockquote>
+<h4 class="mume-header" id="descartar-snackbar">Descartar SnackBar</h4>
+
+<blockquote>
+<p>&#x1F4CC; &#xFC;nicamente hemos modificado el <strong><code>androidx.core.widget.NestedScrollView</code></strong> a&#xF1;adiendo los elementos que se ven. El resto del dise&#xF1;o es id&#xE9;ntico al anterior.</p>
+</blockquote>
+<p><strong>``</strong></p>
+<blockquote>
+<p>&#x270B; EjercicioPropuestoCardView</p>
+</blockquote>
+<blockquote>
+<p>&#x1F4CC; Aclaraciones:</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml"></pre><p><img src="./imagenes/componentesConstraintLayoutEjemplo.png" alt></p>
+<div style="page-break-after:always;"></div>
+<div align="center">
+    <img height="100" src="./imagenes/listas.png">
+</div>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
