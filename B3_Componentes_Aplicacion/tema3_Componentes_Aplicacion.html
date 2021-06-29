@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3. Componentes fundamentales de una aplicaci&#xF3;n Android</title>
+      <title>PMDM 2&#xBA; DAM  Tema 3. Componentes y de una aplicaci&#xF3;n Android</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -339,7 +339,7 @@ justo después del front matter
 <h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
 <p><a href="./tema3_componentes_aplicacion.pdf">Descargar estos apuntes</a></p>
-<h1 class="mume-header undefined" id="tema-3-componentes-fundamentales-de-una-aplicaci%C3%B3n-android">Tema 3 . Componentes fundamentales de una aplicaci&#xF3;n Android</h1>
+<h1 class="mume-header undefined" id="tema-3-componentes-de-una-aplicaci%C3%B3n-android">Tema 3 . Componentes de una aplicaci&#xF3;n Android</h1>
 
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
@@ -350,18 +350,25 @@ justo después del front matter
 <ol>
 <li><a href="#activity">Activity</a></li>
 <li><a href="#services">Services</a></li>
-<li><a href="#intens">Intens</a></li>
+<li><a href="#view">View</a></li>
+<li><a href="#fragment">Fragment</a></li>
+<li><a href="#widget">Widget</a></li>
 <li><a href="#content-provider">Content provider</a></li>
 <li><a href="#broadcast-receiver">Broadcast receiver</a></li>
+<li><a href="#intens">Intens</a></li>
 </ol>
 </li>
-<li><a href="#ciclo-de-vida-de-un-activity">Ciclo de vida de un Activity</a></li>
-<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a></li>
+<li><a href="#ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</a></li>
+<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a>
+<ol>
+<li><a href="#intent-filter">Intent-filter</a></li>
+</ol>
+</li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="indroducci%C3%B3n">Indroducci&#xF3;n</h3>
 
-<p>En este tema estudiaremos los <a href="https://developer.android.com/guide/components/fundamentals?hl=es-419">componentes de una aplicaci&#xF3;n Android</a> y sus respectivas funciones.<br>
+<p>En este tema estudiaremos los <a href="https://developer.android.com/guide/components/fundamentals?hl=es-419">componentes de una aplicaci&#xF3;n Android</a> y sus respectivas funciones, adem&#xE1;s de la comunicaci&#xF3;n entre activitis.<br>
 Para cualquier aplicaci&#xF3;n Android, en general, ser&#xE1; necesario construir una ventana en la que se ir&#xE1;n a&#xF1;adiendo componentes, cada componente es un punto de entrada por el que el sistema o un usuario interact&#xFA;a con tu aplicaci&#xF3;n. Algunos componentes dependen de otros.<br>
 Lo primero que haremos ser&#xE1; comprender que es el contexto de una aplicaci&#xF3;n y como permite relacionar los componentes.<br>
 Luego veremos el concepto de <strong>Actividades, Intents, Servicios, BroadCast Receivers y Content Providers</strong>.</p>
@@ -387,12 +394,15 @@ Cada una de estas ventanas puede estar representada a trav&#xE9;s de un componen
 
 <p>Un servicio es una entidad que <strong>ejecuta instrucciones en segundo plano</strong> sin que el usuario lo note en la interfaz. Son muy utilizados para realizar acciones de larga duraci&#xF3;n mientras las actividades muestran otro tipo de informaci&#xF3;n. Por ejemplo guardar la informaci&#xF3;n en la base de datos, escuchar m&#xFA;sica mientras se ejecuta la aplicaci&#xF3;n, administrar conexiones de red, etc.<br>
 Los servicios tambi&#xE9;n tienen un ciclo de vida como las actividades, pero este es m&#xE1;s corto. Solo se comprende de los estados de Creaci&#xF3;n, Ejecuci&#xF3;n y Destrucci&#xF3;n.</p>
-<h4 class="mume-header" id="intens">Intens</h4>
+<h4 class="mume-header" id="view">View</h4>
 
-<p>Un Intent <strong>es un objeto de mensajer&#xED;a</strong> que puedes usar para solicitar una acci&#xF3;n de otro componente de una app. Los intents facilitan la comunicaci&#xF3;n entre componentes de varias formas, desde la comunicaci&#xF3;n entre actividades, entre fragments, servicios, etc.<br>
-Los Intents pueden ser <strong>impl&#xED;citos o expl&#xED;citos</strong>. Son expl&#xED;citos cuando ejecutamos un componente en espec&#xED;fico. Son impl&#xED;citos cuando se entrega una referencia gen&#xE9;rica sobre alguna condici&#xF3;n, y aquellas entidades que cumplan ese requisito ser&#xE1;n presentadas como candidatas para la tarea.<br>
-Un ejemplo de <strong>Intent impl&#xED;cito</strong>: <em>ser&#xED;a cuando deseas compartir un sitio web en alguna red social. Para ello Android nos ofrece en un peque&#xF1;o dialogo de lista para que elijamos entre cuales de todas las aplicaciones sociales deseamos elegir para compartir. No especificamos que aplicaci&#xF3;n quer&#xED;amos, simplemente se mostraron todas las aplicaciones que podr&#xED;an responder a ese tipo de acci&#xF3;n</em>.<br>
-Un I<strong>ntent explicito se</strong> da cuando invocamos una actividad con un tipo de clase especifico. Por ejemplo, <em>sup&#xF3;n que dentro de nuestra aplicaci&#xF3;n tenemos dos actividades llamadas A y B. Si decidimos iniciar la actividad B desde la actividad A usar&#xED;amos un Intent explicito debido a que &#x201C;B&#x201D; es un tipo definido</em>.</p>
+<p>Las vistas (view) son los componentes b&#xE1;sicos con los que se construye la interfaz gr&#xE1;fica de la aplicaci&#xF3;n, an&#xE1;logo por ejemplo a los controles de Java o .NET. De inicio, Android pone a nuestra disposici&#xF3;n una gran cantidad de controles b&#xE1;sicos, como cuadros de texto, botones, listas desplegables o im&#xE1;genes, aunque tambi&#xE9;n existe la posibilidad de extender la funcionalidad de estos controles b&#xE1;sicos o crear nuestros propios controles personalizados.</p>
+<h4 class="mume-header" id="fragment">Fragment</h4>
+
+<p>Los fragmentos (fragment) se pueden entender como secciones o partes (habitualmente reutilizables) de la interfaz de usuario de una aplicaci&#xF3;n. De esta forma, una actividad podr&#xED;a contener varios fragmentos para formar la interfaz completa de la aplicaci&#xF3;n, y adicionalmente estos fragmentos se podr&#xED;an reutilizar en distintas actividades o partes de la aplicaci&#xF3;n.</p>
+<h4 class="mume-header" id="widget">Widget</h4>
+
+<p>Los widgets son elementos visuales, normalmente interactivos, que pueden mostrarse en la pantalla principal del dispositivo Android y recibir actualizaciones peri&#xF3;dicas. Permiten mostrar informaci&#xF3;n de la aplicaci&#xF3;n al usuario directamente sobre la pantalla principal.</p>
 <h4 class="mume-header" id="content-provider">Content provider</h4>
 
 <p>Con el componente <strong>Content Provider</strong>, cualquier aplicaci&#xF3;n en Android puede almacenar datos en un fichero, en una base de datos SQLite o en cualquier otro formato que considere.<br>
@@ -401,7 +411,10 @@ Por defecto, el API de Android trae consigo Content Providers predefinidos para 
 <h4 class="mume-header" id="broadcast-receiver">Broadcast receiver</h4>
 
 <p>Finalmente, el &#xFA;ltimo componente clave son los <strong>Broadcast Receives</strong>, o receptores de emisi&#xF3;n, que <strong>reaccionan a intents espec&#xED;ficos pudiendo a su vez ejecutar una acci&#xF3;n</strong> o iniciando una activity o pueden devolver otro intent al sistema para que siga la ejecuci&#xF3;n. Realmente este tipo de componentes son capaces de procesar los mensajes del sistema operativo.</p>
-<h3 class="mume-header" id="ciclo-de-vida-de-un-activity">Ciclo de vida de un Activity</h3>
+<h4 class="mume-header" id="intens">Intens</h4>
+
+<p>Un Intent <strong>es un objeto de mensajer&#xED;a</strong> que puedes usar para solicitar una acci&#xF3;n de otro componente de una app. Los intents facilitan la comunicaci&#xF3;n entre componentes de varias formas, desde la comunicaci&#xF3;n entre actividades, entre fragments, servicios, etc. En un punto posterior de este tema se explicar&#xE1;n m&#xE1;s extensamente.</p>
+<h3 class="mume-header" id="ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</h3>
 
 <p>Como hemos comentado en el punto anterior. La activity es uno de los componentes esenciales de una aplicaci&#xF3;n Android, adem&#xE1;s que es el componente que tiene asociada la interfaz de usuario. Una misma aplicaci&#xF3;n puede tener una o varias actividades y Android permite controlar por completo el ciclo de vida de cada una de estas.<br>
 Los estados por los cuales puede pasar una Activity son los siguientes: <strong>Creaci&#xF3;n, Ejecuci&#xF3;n, Reanudaci&#xF3;n, Pausa, Parada y Destrucci&#xF3;n</strong>.</p>
@@ -421,6 +434,105 @@ Los estados por los cuales puede pasar una Activity son los siguientes: <strong>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Probar el c&#xF3;digo del ciclo de vida de una actividad. EjercicioResueltoCicloVida</span></p>
 <h3 class="mume-header" id="comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</h3>
 
+<p>Uno de los componentes que hemos comentado que forman parte de una aplicaci&#xF3;n android son los <a href="https://developer.android.com/guide/components/intents-filters?hl=es-419">intents</a>. Como dijimos, son los que permiten la comunicaci&#xF3;n con el resto de componentes, tambi&#xE9;n se pueden definir como la voluntad de realizar una acci&#xF3;n o una tarea determinada, estas tareas pueden ser una llamada de tel&#xE9;fono o visualizar una p&#xE1;gina web entre otras.</p>
+<p>Android soporta dos tipos de Intentos <strong>expl&#xED;citos e impl&#xED;citos</strong>.</p>
+<div align="center">
+    <img height="150" src="./imagenes/intents.png">
+</div>
+<p>Son expl&#xED;citos cuando ejecutamos un componente en espec&#xED;fico. Son impl&#xED;citos cuando se entrega una referencia gen&#xE9;rica sobre alguna condici&#xF3;n, y aquellas entidades que cumplan ese requisito ser&#xE1;n presentadas como candidatas para la tarea.</p>
+<h4>Intent expl&#xED;cito</h4>
+<p>Se especifica exactamente el componente a lanzar. Se suele utilizar cuando se quiere ejecutar los componentes internos de una aplicaci&#xF3;n.<br>
+Un ejemplo de <strong>Intent explicito</strong> se da cuando invocamos una actividad con un tipo de clase especifico. Por ejemplo, <em>sup&#xF3;n que dentro de nuestra aplicaci&#xF3;n tenemos dos actividades llamadas A y B. Si decidimos iniciar la actividad B desde la actividad A usar&#xED;amos un Intent explicito debido a que &#x201C;B&#x201D; es un tipo definido</em>.</p>
+<div align="center">
+    <img height="150" src="./imagenes/intents2.png">
+</div>
+<p>En el inicio de una nueva actividad se pueden dar varias circunstancias:</p>
+<ul>
+<li>
+<p>Inicio de una actividad sin argumentos ni devoluci&#xF3;n de resultados:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> intento<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+<span class="token comment">//var intento=Intent(applicationContext, Activity2::class.java)</span>
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Inicio de una actividad con argumentos y sin devoluci&#xF3;n de resultados. Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> intento<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span>
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+</pre><p>En la clase invocada obtendremos los datos recibidos de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> intento<span class="token operator">=</span>intent
+findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Inicio de una actividad con argumentos y devoluci&#xF3;n de resultados. Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra y obtener los resultados con el m&#xE9;todo onActivityResult:</p>
+</li>
+<li>
+<p>Intent intento = new Intent(this, clase.class); intento.putExtra(atributo, valor); startActivityForResult(intento,cod); &#x2026; public void onActivityResult (int codActividad, int codResultado, Intent datos) { if (codResultado == RESULT_OK) { &#x2026; } &#x2026; } En la clase invocada devolveremos los resultados de la siguiente manera: Intent datos = new Intent(); datos.putExtra(atributo,valor); setResult(RESULT_OK,datos); finish();</p>
+</li>
+</ul>
+<h4>Intent Impl&#xED;cito</h4>
+<p>Los Intent impl&#xED;citos son aquellos que le preguntan al sistema qu&#xE9; servicio o componente es el m&#xE1;s adecuado para realizar la petici&#xF3;n, es decir, no espec&#xED;fica un componente en especial, y solo se especifica la funcionalidad requerida a trav&#xE9;s de una acci&#xF3;n (ver, hacer b&#xFA;squeda, hacer foto, marcar n&#xFA;mero&#x2026;) y un dato (URL, n&#xFA;mero a marcar&#x2026;)En este caso el sistema determina el componente para su resoluci&#xF3;n, desencadenando un &#x201C;intent&#x201D; sin conocer exactamente cu&#xE1;l es la aplicaci&#xF3;n o componente que lo recibir&#xE1;, si no puede establecer exactamente el componente a utilizar porque hay m&#xE1;s de uno, muestra una ventana con las opciones a seleccionar.</p>
+ <div align="center">
+    <img height="200" src="./imagenes/intents3.png">
+</div>
+<p>Un ejemplo de <strong>Intent impl&#xED;cito</strong>: <em>ser&#xED;a cuando deseas compartir un sitio web en alguna red social. Para ello Android nos ofrece un dialogo listando las app sociales instaladas en el dispositivo en ese momento, para que elijamos la de nuestro inter&#xE9;s. No especificamos que aplicaci&#xF3;n quer&#xED;amos, simplemente se mostraron todas las aplicaciones que podr&#xED;an responder a ese tipo de acci&#xF3;n</em>.</p>
+<div align="center">
+    <img height="200" src="./imagenes/intents4.png">
+</div>
+<p>B&#xE1;sicamente los pasos para lanzar una actividad con un <strong>intent impl&#xED;cito</strong> ser&#xED;an los siguientes:</p>
+<ul>
+<li>Declaramos el intent con la acci&#xF3;n apropiada (ACTION_VIEW, ACTION_WEB_SEARCH, etc).</li>
+<li>Adjuntamos informaci&#xF3;n adicional necesaria dependiendo de la acci&#xF3;n del intent.</li>
+<li>Lanzamos el intent dejando que el sistema encuentre la actividad adecuada).</li>
+</ul>
+<p>Para iniciar la actividad utilizaremos igualmente startActivity. Algunos ejemplos de <a href="https://developer.android.com/guide/components/intents-common?hl=es-419">Intents Comunes</a>:</p>
+<ul>
+<li>
+<p>Para mostrar una web dentro de un navegador:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">Intent intento <span class="token operator">=</span> new <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.google.es&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</pre><p>Requiere los permisos: <strong><code>&lt;uses-permission android:name=&quot; android.permission.INTERNET &quot;/&gt;</code></strong></p>
+</li>
+<li>
+<p>Para utilizar la b&#xFA;squeda de google;</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> Intent intento <span class="token operator">=</span> new <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_WEB_SEARCH<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span>SearchManager<span class="token punctuation">.</span>QUERY<span class="token punctuation">,</span> <span class="token string">&quot;I.E.S. Doctor Balmis&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Requiere los permisos <strong><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;</code></strong></p>
+</li>
+<li>
+<p>Para mostrar los contactos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">Intent intento <span class="token operator">=</span> new <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</pre><p>Requiere los permisos: <strong><code>&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;</code></strong></p>
+</li>
+</ul>
+<div align="center">
+    <img height="180" src="./imagenes/intents5.png">
+</div>
+<h4 class="mume-header" id="intent-filter">Intent-filter</h4>
+
+<p>Las actividades y servicios pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar. De esta forma se informa al sistema del tipo de intenciones impl&#xED;citas que puede atender dicho componente. Los intent-filter se definen en el archivo de manifiesto de la aplicaci&#xF3;n dentro de la activity correspondiente.<br>
+Como se ha explicado en el punto anterior, cuando se crea un intent impl&#xED;cito el sistema Android busca el componente apropiado que pueda resolver la petici&#xF3;n dada en el intent.<br>
+La b&#xFA;squeda la realiza analizando los <strong>intent-filter</strong> definidos en los archivos de manifiesto de las aplicaciones instaladas en el dispositivo. Si existe coincidencia lanza dicha aplicaci&#xF3;n. Si la coincidencia es m&#xFA;ltiple (varias aplicaciones pueden dar respuesta a esa petici&#xF3;n), el sistema muestra un cuadro de di&#xE1;logo con el fin de que el usuario decida. A un Intent podemos asociarle una acci&#xF3;n, unos datos y una categor&#xED;a.<br>
+Las actividades pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar.</p>
+<ul>
+<li>Las acciones son cadenas de texto est&#xE1;ndar que describen lo que la actividad puede hacer. Por ejemplo <strong><code>android.intent.action.VIEW</code></strong>, es una acci&#xF3;n que indica que la actividad puede mostrar datos al usuario.</li>
+<li>La misma actividad puede declarar el tipo de datos del que se ocupa, por ejemplo <strong><code>vnd.android.cursor.dir/person, indica</code></strong> que la actividad manipula los datos de la agenda*.</li>
+<li>Tambi&#xE9;n pueden declarar una categor&#xED;a, que b&#xE1;sicamente indica si la actividad va a ser lanzada desde el lanzador de aplicaciones <strong><code>android.intent.category.DEFAULT</code></strong>, desde el men&#xFA; de otra aplicaci&#xF3;n o directamente desde otra actividad.<br>
+Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones:<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token operator">&lt;</span>intent<span class="token operator">-</span>filter<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>action android<span class="token operator">:</span>name<span class="token operator">=</span><span class="token string">&quot;android.intent.action.VIEW&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>category android<span class="token operator">:</span>name<span class="token operator">=</span><span class="token string">&quot;android.intent.category.DEFAULT&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token keyword">data</span> android<span class="token operator">:</span>mimeType<span class="token operator">=</span><span class="token string">&quot;vnd.android.cursor.dir/person&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span> 
+<span class="token operator">&lt;</span><span class="token operator">/</span>intent<span class="token operator">-</span>filter<span class="token operator">&gt;</span>
+</pre></li>
+</ul>
+<p>Una activity puede tener varios intent-filter definidos. Igualmente cada uno de esos intent-filter puede tener varias acciones definidas.</p>
+<p>Manifest ejemplo de varios intent-filter:</p>
+<div align="center">
+    <img height="350" src="./imagenes/intents6.png">
+</div>
+<p>El primer intent-filter define que esta activity es punto de entrada para la aplicaci&#xF3;n. La categor&#xED;a especifica que debe aparecer en el lanzador de aplicaciones. El segundo, permite a la activity visualizar y editar el directorio de datos (a trav&#xE9;s de las actions VIEW y EDIT), o recuperar una entrada particular y devolverla (a trav&#xE9;s de la action PICK). En data se especifica el tipo de datos que se manejan. Como est&#xE1; definido con la Categor&#xED;a DEFAULT, estamos indicando que atender&#xE1; a los intents impl&#xED;citos que soliciten otras aplicaciones.</p>
 
       </div>
       
