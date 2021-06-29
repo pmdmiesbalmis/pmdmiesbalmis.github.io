@@ -261,7 +261,7 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="tema-4-material-design-patrones-de-dise%C3%B1o-b%C3%A1sicos">Tema 4. Material design. Patrones de dise&#xF1;o b&#xE1;sicos.</h1>
+      <h1 class="mume-header undefined" id="tema-4-material-design-patrones-de-dise%C3%B1o-b%C3%A1sicos">Tema 4. Material Design. Patrones de dise&#xF1;o b&#xE1;sicos.</h1>
 
 <p><a href="./Tema4.pdf">Descargar estos apuntes</a></p>
 <p>&#xCD;ndice</p>
@@ -280,6 +280,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#paleta-de-colores">Paleta de colores</a></li>
 <li><a href="#layouts">Layouts</a>
 <ol>
+<li><a href="#linearlayout">LinearLayout</a></li>
 <li><a href="#cardview">CardView</a></li>
 <li><a href="#constraint-layout">Constraint Layout</a></li>
 </ol>
@@ -289,7 +290,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#aplicar-scrolling-a-la-toolbar">Aplicar Scrolling a la ToolBar</a></li>
 <li><a href="#apicar-collapsing-a-la-toolbar">Apicar Collapsing a la ToolBar</a></li>
 <li><a href="#a%C3%B1adir-toolbar-a-otras-partes-de-la-interfaz">A&#xF1;adir ToolBar a otras partes de la interfaz</a></li>
-<li><a href="#tablayout">Tablayout</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
@@ -302,32 +302,46 @@ Las caracter&#xED;sticas que definen Material Design son: dise&#xF1;o limpio, co
 <p><a href="https://material.io/components?platform=android">Patrones MD</a></p>
 <h4 class="mume-header" id="actionbar-y-toolbar">ActionBar y ToolBar</h4>
 
-<p>La ActionBar es un elemento visible en la parte superior de la pantalla de una aplicaci&#xF3;n Android. En ella se recoge entre otras cosas el nombre de la aplicaci&#xF3;n o de la activity en uso. Adem&#xE1;s puede incluir el icono de la aplicaci&#xF3;n, men&#xFA; overflow y botones de men&#xFA;.<br>
-<img src="./images/actionbar.png" alt><br>
-La ActionBar fue lanzada por Google en 2013 con el lanzamiento de Android 3.0 (API 11). Todas las aplicaciones que utilizan el tema predeterminado proporcionado por Android (Theme.AppCompat.Light.DarkActionBar), contienen una ActionBar de forma predeterminada. Sin embargo, los desarrolladores pueden personalizarlo de varias formas seg&#xFA;n sus necesidades.<br>
-La ToolBar es un elemento de vista que se integra en los dise&#xF1;os XML de una activity. Fue introducido por el equipod e Google con el lanzamiento de Android Lollipop (API 21). Es mucho m&#xE1;s flexible y personalizable, y a diferencia e la ActionBar no est&#xE1;  necesariamente fijada en la parte superios de la aplicaci&#xF3;n, es m&#xE1;s podemos colocar m&#xE1;s de una.<br>
-<img src="./images/toolbar.png" alt></p>
+<p>La ActionBar es un elemento visible en la parte superior de la pantalla de una aplicaci&#xF3;n Android. En ella se recoge entre otras cosas el nombre de la aplicaci&#xF3;n o de la activity en uso. Adem&#xE1;s puede incluir el icono de la aplicaci&#xF3;n, men&#xFA; overflow y botones de men&#xFA;.</p>
+<div align="center">
+    <img height="50" src="./imagenes/actionbar.png">
+</div>
+<p>La ActionBar fue lanzada por Google en 2013 con el lanzamiento de Android 3.0 (API 11). Todas las aplicaciones que utilizan el tema predeterminado proporcionado por Android (Theme.AppCompat.Light.DarkActionBar), contienen una ActionBar de forma predeterminada. Sin embargo, los desarrolladores pueden personalizarlo de varias formas seg&#xFA;n sus necesidades.<br>
+La ToolBar es un elemento de vista que se integra en los dise&#xF1;os XML de una activity. Fue introducido por el equipod e Google con el lanzamiento de Android Lollipop (API 21). Es mucho m&#xE1;s flexible y personalizable, y a diferencia e la ActionBar no est&#xE1;  necesariamente fijada en la parte superios de la aplicaci&#xF3;n, es m&#xE1;s podemos colocar m&#xE1;s de una.</p>
+<div align="center">
+    <img height="50" src="./imagenes/toolbar.png">
+</div>
 <h4 class="mume-header" id="tabs-o-pesta%C3%B1as">Tabs o pesta&#xF1;as</h4>
 
-<p>Permiten la navegaci&#xF3;n entre diferentes secciones de la aplicaci&#xF3;n. Se agrupan con AppBarLayout en la ToolBar. Se puede cambiar de una a otra pesta&#xF1;a a trav&#xE9;s de gestos o pulsando sobre cada uno de ellas.<br>
-<img src="./images/tabs.png" alt></p>
+<p>Permiten la navegaci&#xF3;n entre diferentes secciones de la aplicaci&#xF3;n. Se agrupan con AppBarLayout en la ToolBar. Se puede cambiar de una a otra pesta&#xF1;a a trav&#xE9;s de gestos o pulsando sobre cada uno de ellas.</p>
+<div align="center">
+    <img height="50" src="./imagenes/tabs.png">
+</div>
 <h4 class="mume-header" id="navigation-drawer">Navigation Drawer</h4>
 
-<p>Men&#xFA; que se desliza desde la parte izquierda de la pantalla y contiene el nivel m&#xE1;s alto de opciones de navegaci&#xF3;n.<br>
-<img src="..\images\navigation.png" alt></p>
+<p>Men&#xFA; que se desliza desde la parte izquierda de la pantalla y contiene el nivel m&#xE1;s alto de opciones de navegaci&#xF3;n.</p>
+<div align="center">
+    <img height="120" src="./imagenes/navigationdrawer.png">
+</div>
 <h4 class="mume-header" id="scrolling-y-paging">Scrolling y Paging</h4>
 
 <p>Un ScrollView permitir&#xE1; visualizar de forma c&#xF3;moda la informaci&#xF3;n cuando esta no cabe totalmente en la pantalla. Si la informaci&#xF3;n puede visualizarse de forma completa no aparece el scroll y sino aparecer&#xE1; de forma autom&#xE1;tica.<br>
-El ViewPager nos va a permitir disponer de varias p&#xE1;ginas qu ser&#xE1;n accesibles con gestos de izquierda y derecha o arriba y abajo.<br>
-<img src="./images/scroll.png" alt></p>
+El ViewPager nos va a permitir disponer de varias p&#xE1;ginas qu ser&#xE1;n accesibles con gestos de izquierda y derecha o arriba y abajo.</p>
+<div align="center">
+    <img height="100" src="./imagenes/scroll.png">
+</div>
 <h4 class="mume-header" id="listas">Listas</h4>
 
-<p>Es muy com&#xFA;n el uso de este patr&#xF3;n de dise&#xF1;o en las aplicaciones para m&#xF3;viles. Cuando mostramos una lista de elementos y pulsamos sobre uno de ellos, aparece una segunda ventana donde se detalla la informaci&#xF3;n del elemento pulsado.<br>
-<img src="./images/listas.png" alt></p>
+<p>Es muy com&#xFA;n el uso de este patr&#xF3;n de dise&#xF1;o en las aplicaciones para m&#xF3;viles. Cuando mostramos una lista de elementos y pulsamos sobre uno de ellos, aparece una segunda ventana donde se detalla la informaci&#xF3;n del elemento pulsado.</p>
+<div align="center">
+    <img height="100" src="./imagenes/listas.png">
+</div>
 <h4 class="mume-header" id="multipanel">Multipanel</h4>
 
 <p>Es una concreci&#xF3;n del patr&#xF3;n anterior, de forma que en dispositivos que dispongan de pantallas grandes o dependiendo de si la pantalla la colocamos horizontal, visualizaremos dos paneles o m&#xE1;s en la pantalla, obteniendo una visualizaci&#xF3;n optimizada de la vista y de su contenido.</p>
-<p><img src="./images/multipanel.png" alt></p>
+<div align="center">
+    <img height="100" src="./imagenes/multipanel.png">
+</div>
 <h3 class="mume-header" id="paleta-de-colores">Paleta de colores</h3>
 
 <p>El sistema de color de Material Design te ayuda a aplicar color a tu interfaz de usuario de una manera simplificada. Los temas de color est&#xE1;n dise&#xF1;ados para ser armoniosos, garantizar texto accesible y distinguir elementos y superficies de la interfaz de usuario f&#xE1;cilmente.</p>
@@ -356,6 +370,274 @@ Es necesario reasiganar los <strong><code>name</code></strong> a los colores par
 <blockquote>
 <p>&#x1F4CC; Existen distintos tipos de layouts: FrameLayout, LinearLayout, RelativeLayout, GridLayout, ConstraintLayouy y CardView.</p>
 </blockquote>
+<h4 class="mume-header" id="linearlayout">LinearLayout</h4>
+
+<p>Un <strong><code>LinearLayout</code></strong> es un view group que distribuye sus hijos en una sola dimensi&#xF3;n establecida. Es decir, o todos organizados en una sola columna (vertical) o en una sola fila (horizontal). La orientaci&#xF3;n puedes elegirla a trav&#xE9;s del atributo <strong><code>android:orientation</code></strong>.</p>
+<div align="center">
+    <img height="120" src="./imagenes/linearLayoutVertical.png">
+    <img height="120" src="./imagenes/linearLayoutHorizontal.png">
+</div>
+<p>Veamos un ejemplo, vamos a dise&#xF1;ar la vista que aparece en la siguiente imagen:</p>
+<div align="center">
+    <img height="200" src="./imagenes/linearLayoutEjemplo.png">
+</div>
+<p>Para ello creamos un nuevo proyecto, quwe llamaremos <strong>EjemploLinearLayout</strong>.</p>
+<p>Los componentes que vamos a colocar son los siguientes:</p>
+<div align="center">
+    <img height="100" src="./imagenes/componentesLinearLayoutEjemplo.png">
+</div>
+<p>El archivo XML correspondiente al dise&#xF1;o ser&#xED;a:</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[3,4,5,10-12,13,23,31,33,50]}" class="language-xml" data-line="3,4,5,10-12,13,23,31,33,50"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>padding</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>48dp<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/texto_conectar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center_horizontal<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Conectar<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textAppearance</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>?android:attr/textAppearanceLarge<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EditText</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/input_usuario<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center_horizontal<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>hint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Correo<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EditText</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/input_contrasena<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center_horizontal<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>ems</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>10<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>hint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Contrase&#xF1;a<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>inputType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>textPassword<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/boton_iniciar_sesion<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>?android:attr/buttonStyleSmall<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center_horizontal<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Iniciar Sesion<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/texto_olvidaste_contrasena<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center_horizontal<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center_vertical<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&#xBF;Olvidaste tu contrase&#xF1;a?<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textAppearance</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>?android:attr/textAppearanceMedium<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>#0E8AEE<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div><div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10-12" data-start="10" data-end="12">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="23" data-start="23">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="31" data-start="31">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="33" data-start="33">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="50" data-start="50">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Aclaraciones:</p>
+<ul>
+<li><strong>L&#xED;neas 3 y 4</strong>: Se utilizan las propiedades <strong><code>android:layout_width</code></strong> y <strong><code>android:layout_height</code></strong> para determinar las dimensiones del layout o de cualquier elemento de vista. Los valores que pueden tomar son <strong><code>match_parent</code></strong> y <strong><code>wrap_content</code></strong>, es decir se ajusta al tama&#xF1;o del contenedor ocupando todo su espacio, o se ajusta al contenido o tama&#xF1;o de la vista respectivamente. Tambi&#xE9;n se le puede asignar un valor concreto en unidades <strong><code>dps</code></strong></li>
+<li><strong>L&#xED;nea 5</strong> con la propiedad <strong><code>android:orientation</code></strong> especificamos como se van a distribuir los elementos dentro del contenedor, horizontalmente o verticalmente.</li>
+<li><strong>L&#xED;neas 10-12</strong> Para crear un dise&#xF1;o lineal en el que cada campo secundario use la misma cantidad de espacio en la pantalla, define el <strong><code>android:layout_height</code></strong> de cada vista en <strong><code>0dp</code></strong> (para un dise&#xF1;o vertical) o el <strong><code>android:layout_width</code></strong> de cada vista en <strong><code>0dp</code></strong> (para un dise&#xF1;o horizontal). Luego, fija el <strong><code>android:layout_weight</code></strong> de cada vista en 1. Si das valores distintos a 1 el tama&#xF1;o de layout se distribuir&#xE1; siguiendo esta distribuci&#xF3;n.</li>
+</ul>
+<div align="center">
+   <img height="130" src="./imagenes/layout_weight.png">
+</div>
+<ul>
+<li><strong>L&#xED;nea 13</strong> con la propiedad <strong><code>android:layout_gravity</code></strong> alineamos cada vista dentro del layout.</li>
+</ul>
+<div align="center">
+   <img height="130" src="./imagenes/layout_gravity.png">
+</div>
+<ul>
+<li><strong>L&#xED;nea 23</strong> con la propiedad <strong><code>android:hint</code></strong> visualiza un texto en el <strong><code>EditText</code></strong> y cuando pinchamos en &#xE9;l desaparece.</li>
+<li><strong>L&#xED;nea 31</strong> con la propiedad <strong><code>android:ems</code></strong> se usa para determinar el tama&#xF1;o de un car&#xE1;cter seg&#xFA;n la cantidad de puntos que use la fuente del texto.</li>
+<li><strong>L&#xED;nea 33</strong> con la propiedad <strong><code>android:inputType</code></strong> se usa para determinar el tipo de caracteres que se permiten como entrada en el <strong><code>EditText</code></strong>. Este atributo determina tambi&#xE9;n el tipo de teclado virtual que le aparecer&#xE1; al usuario para realizar la entrada de caracteres.</li>
+<li><strong>L&#xED;nea 50</strong> con la propiedad <strong><code>android:gravity</code></strong> se usa para determinar el tipo de alineamiento del texto dentro de una vista. Los valores son id&#xE9;nticos a los de la propiedad <strong><code>android:layout_gravity</code></strong></li>
+</ul>
+</blockquote>
 <h4 class="mume-header" id="cardview">CardView</h4>
 
 <blockquote>
@@ -368,10 +650,14 @@ Es necesario reasiganar los <strong><code>name</code></strong> a los colores par
 }
 
 </pre><p>Veamos un ejemplo, vamos a dise&#xF1;ar el cardView que aparece en la siguiente imagen:</p>
-<p><img src="./images/cardViewEjemplo.png" alt></p>
+<div align="center">
+    <img height="100" src="./imagenes/cardViewEjemplo.png">
+</div>
 <p>Para ello creamos un nuevo proyecto, quwe llamaremos <strong>EjemploCardView</strong>.</p>
 <p>Los componentes que vamos a colocar son los siguientes:</p>
-<p><img src="./images/componentesCardViewEjemplo.png" alt></p>
+<div align="center">
+    <img height="100" src="./imagenes/componentesCardViewEjemplo.png">
+</div>
 <p>El archivo XML correspondiente al dise&#xF1;o ser&#xED;a:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.card.MaterialCardView</span>
@@ -414,13 +700,19 @@ Es necesario reasiganar los <strong><code>name</code></strong> a los colores par
 <h4 class="mume-header" id="constraint-layout">Constraint Layout</h4>
 
 <p>Para poder comprender como funciona este layout, primero debemos de conocer como se integran las vistas o componentes en los layouts. Veamos la siguiente imagen:</p>
-<p><img src="./images/lateralComponente.png" alt></p>
+<div align="center">
+    <img height="100" src="./imagenes/lateralComponente.png">
+</div>
 <p>Cada lateral de un componente viene referenciado por un nombre espec&#xED;fico que permite hacer referencia al mismo. <strong><code>Top</code></strong> es la parte superior, <strong><code>Bottoom</code></strong> es la parte inferior, <strong><code>Start</code></strong> es la parte izquierda y <strong><code>End</code></strong> es la parte derecha.</p>
 <p>Para poder a&#xF1;adir componentes debemos restringir su posici&#xF3;n definiendo unos anclajes basados en los laterales de cada componente. Son necesarios al menos dos anclajes.</p>
 <p>Veamos un ejemplo pr&#xE1;ctico. Vamos a die&#xF1;ar la siguiente interfaz:</p>
-<p><img src="./images/constraintLayoutEjemplo.png" alt></p>
+<div align="center">
+    <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
+</div>
 <p>Cremaos un proyecto con el nombre <strong>ejemploConstraintLayout</strong> e integraremos los siguientes componentes:</p>
-<p><img src="./images/componentesConstraintLayoutEjemplo.png" alt></p>
+<div align="center">
+    <img height="100" src="./imagenes/componentesConstraintLayoutEjemplo.png">
+</div>
 <p>Como vemos insertamos en el contenedor una <strong><code>ImageView</code></strong>, dos <strong><code>TextView</code></strong> una <strong><code>RatingBar</code></strong> y dos <strong><code>Button</code></strong>. No os preocup&#xE9;is porque m&#xE1;s adelante explicaremos con m&#xE1;s detalle estos componentes, ahora solamene queremos utilizarlos para explicar <strong><code>ConstraintLayout</code></strong>.</p>
 <p>El archivo XML correspondiente es el siguiente:</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml" data-line="10-16,22-27,33,34,39,44-47,54-56,64-66"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>?xml</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1.0<span class="token punctuation">&quot;</span></span> <span class="token attr-name">encoding</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span><span class="token attr-name">?</span> <span class="token punctuation">&gt;</span></span>
@@ -836,7 +1128,121 @@ Buscaremos que ambos botones est&#xE9;n a la misma altura y lo conseguiremos dan
 </blockquote>
 <h3 class="mume-header" id="temas-y-estilos">Temas y estilos</h3>
 
-<h3 class="mume-header" id="a%C3%B1adir-toolbar-a-nuestra-aplicaci%C3%B3n">A&#xF1;adir ToolBar a nuestra aplicaci&#xF3;n</h3>
+<p>El dise&#xF1;o visual de una aplicaci&#xF3;n Android es representado a trav&#xE9;s de reglas contenidas en Estilos y Temas. Estas herramientas permiten que los programadores y dise&#xF1;adores generen una interfaz m&#xE1;s amigable y personalizada de sus apps, para establecer una identidad que impacte al usuario final.</p>
+<p>La forma m&#xE1;s sencilla de aplicar un tema es editar el fichero <strong><code>AndridmMnifest.xml</code></strong> y buscar la propiedad <strong><code>android:theme</code></strong> y asignar un estilo concreto. Si esta propiedad se aplica a la etiqueta <strong><code>application</code></strong> la aplicaci&#xF3;n entera adopta el tema seleccionado. Si se aplica a la etiqueta <strong><code>activity</code></strong> &#xFA;nicamente esa actividad aplicar&#xE1; el tema. De esto se deduce que se pueden aplicar diferentes temas a cada actividad.</p>
+<blockquote>
+<p>&#x1F4CC; <a href="https://developer.android.com/guide/topics/ui/look-and-feel/themes?hl=es-419">Aqu&#xED; tenemos un enlace donde se encuentra informaci&#xF3;n ofrecida sobre temas y estilos</a></p>
+</blockquote>
+<p>Vamos a utilizar el proyecto <strong>EjemploLinearLayout</strong> para trabajar con estilos y temas.</p>
+<p>Editaremos nuestro archivo <strong><code>themes.xml</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[17-29]}" class="language-xml" data-line="17-29"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!-- Base application theme. --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Theme.EjemploLinearLayout<span class="token punctuation">&quot;</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Theme.MaterialComponents.DayNight.DarkActionBar<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Primary brand color. --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorPrimary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/purple_500<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorPrimaryVariant<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/purple_700<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorOnPrimary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/white<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Secondary brand color. --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorSecondary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/teal_200<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorSecondaryVariant<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/teal_700<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorOnSecondary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/black<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Status bar color. --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android:statusBarColor<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">tools:</span>targetApi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>l<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>?attr/colorPrimaryVariant<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Customize your theme here. --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Theme.EjemploLinearLayoutPropio<span class="token punctuation">&quot;</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Theme.MaterialComponents.DayNight.DarkActionBar<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Primary brand color. --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorPrimary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#F44336<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorPrimaryVariant<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#D32F2F<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorOnPrimary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/black<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Secondary brand color. --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorSecondary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#F06292<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorSecondaryVariant<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#F48FB1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colorOnSecondary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>@color/black<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Status bar color. --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android:statusBarColor<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">tools:</span>targetApi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>l<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>?attr/colorPrimaryVariant<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Customize your theme here. --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="17-29" data-start="17" data-end="29">
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC; <strong>L&#xED;neas 17 a 29</strong> definimos un nuevo tema modificando los colores y d&#xE1;ndole el nombre <strong><code>Theme.EjemploLinearLayoutPropio</code></strong> y que hereda con el atributo <strong><code>parent</code></strong> del tema por defecto.</p>
+</blockquote>
+<p>Hay que ir ahora al archivo <strong><code>AndroidManifest.xml</code></strong> y modificarlo, asignando este nuevo tema a la aplicaci&#xF3;n (l&#xED;nea 11):</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[11]}" class="language-xml" data-line="11"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">package</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.example.ejemplolinearlayout<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@mipmap/ic_launcher<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/app_name<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>roundIcon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@mipmap/ic_launcher_round<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>supportsRtl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Theme.EjemploLinearLayoutPropio<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activity</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.MAIN<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.category.LAUNCHER<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div></pre><p>Aunque se definen ambos con la etiqueta <strong><code>styles</code></strong> hay que tener en cuenta que son dos cosas distintas. Los temas se aplican a una jerarqu&#xED;a de vistas, miesntras que los estilos se definen sobre una vista concreta.</p>
+<p>Podr&#xED;amos cambiar la apriencia de nuestros <strong><code>EditText</code></strong> a&#xF1;adiendo un estilo creado por nosotros. Para ello creamos un archivo llamado <strong><code>styles</code></strong> en la carpeta <strong><code>values</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>textViewStyle<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android:layout_width<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>match_parent<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android:layout_height<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>wrap_content<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android:textColor<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>#FFAB91<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Este estilo puede ser asignado a todos nuestros <strong><code>TextViews</code></strong> o solamente a los que nosotros queramos. Se lo asignaremos al que tiene identificador <strong><code>&#xEC;nput_usuario</code></strong> en el archivo xml de la actividad principal.</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EditText</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/input_usuario<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/textViewStyle<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>hint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Correo<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+</pre><h3 class="mume-header" id="a%C3%B1adir-toolbar-a-nuestra-aplicaci%C3%B3n">A&#xF1;adir ToolBar a nuestra aplicaci&#xF3;n</h3>
 
 <p><strong><code>Toolbar</code></strong> es el componente que usaremos como reemplazo del <strong><code>Action Bar</code></strong>. Este componente nos permitir&#xE1;:</p>
 <ul>
@@ -849,7 +1255,9 @@ Buscaremos que ambos botones est&#xE9;n a la misma altura y lo conseguiremos dan
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>windowActionBar<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
 </pre><p>Vamos a utilizar para los ejemplos un <strong><code>CoordinatorLayout</code></strong>, b&#xE1;sicamente nos permiti&#xE1; gestionar interacciones entre sus elementos  hijos.</p>
 <p>Dentro de este elemento incluiremos la <strong><code>ToolBar</code></strong>. Podemos ver en esta imagen los componentes utilizados y c&#xF3;mo quedar&#xE1; la vista:</p>
-<p><img src="./images/toolBarEjemplo.png" alt></p>
+<div align="center">
+    <img height="60" src="./imagenes/toolBarEjemplo.png">
+</div>
 <p>Veamos como queda el xml de la activity_main:</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[14]}" class="language-xml" data-line="14"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.coordinatorlayout.widget.CoordinatorLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
@@ -1257,7 +1665,9 @@ Buscaremos que ambos botones est&#xE9;n a la misma altura y lo conseguiremos dan
 
 <p>Otra ventaja que podemos aprovechar al disponer del control <strong><code>ToolBar</code></strong> como un componente independiente, es que podemos utilizarlos en otros lugares de nuestra interfaz, y no siempre como barra de acciones en la parte superior, y evidentemente, tener m&#xE1;s de una <strong><code>ToolBar</code></strong>.<br>
 Podr&#xED;amos colocar el componente <strong><code>ToolBar</code></strong> dentro de una tarjeta, tal y como se ve en la siguiente imagen:</p>
-<p><img src="./images/toolBarCardViewEjemplo.png" alt></p>
+<div align="center">
+    <img height="100" src="./imagenes/toolBarCardViewEjemplo.png">
+</div>
 <p>A&#xF1;adamos este efecto a nuestra <strong><code>ToolBar</code></strong>: (activity_toolbarcardview.xml):</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[20-25]}" class="language-xml" data-line="20-25"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.core.widget.NestedScrollView</span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
@@ -1315,8 +1725,6 @@ Podr&#xED;amos colocar el componente <strong><code>ToolBar</code></strong> dentr
 </div></div></pre><blockquote>
 <p>&#x1F4CC; &#xFC;nicamente hemos modificado el <strong><code>androidx.core.widget.NestedScrollView</code></strong> a&#xF1;adiendo los elementos que se ven. El resto del dise&#xF1;o es id&#xE9;ntico al anterior.</p>
 </blockquote>
-<h3 class="mume-header" id="tablayout">Tablayout</h3>
-
 <p><strong>``</strong></p>
 <blockquote>
 <p>&#x270B; EjercicioPropuestoCardView</p>
@@ -1324,8 +1732,11 @@ Podr&#xED;amos colocar el componente <strong><code>ToolBar</code></strong> dentr
 <blockquote>
 <p>&#x1F4CC; Aclaraciones:</p>
 </blockquote>
-<pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml"></pre><p><img src="./images/componentesConstraintLayoutEjemplo.png" alt></p>
+<pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml"></pre><p><img src="./imagenes/componentesConstraintLayoutEjemplo.png" alt></p>
 <div style="page-break-after:always;"></div>
+<div align="center">
+    <img height="100" src="./imagenes/listas.png">
+</div>
 
       </div>
       
