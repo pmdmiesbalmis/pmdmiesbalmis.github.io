@@ -275,7 +275,8 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#text-button">Text button</a></li>
 <li><a href="#icon-button">Icon button</a></li>
 <li><a href="#manejar-eventos-bot%C3%B3n">Manejar eventos bot&#xF3;n</a></li>
-<li><a href="#floating-action-buttons">Floating Action Buttons</a></li>
+<li><a href="#floating-action-button">Floating Action Button</a></li>
+<li><a href="#toggle-button">Toggle Button</a></li>
 </ol>
 </li>
 <li><a href="#imageview">ImageView</a></li>
@@ -457,8 +458,8 @@ pre[data-line] .line-highlight[data-end]:after {
 </blockquote>
 <h4 class="mume-header" id="manejar-eventos-bot%C3%B3n">Manejar eventos bot&#xF3;n</h4>
 
-<p>Para gestionar la pulsaci&#xF3;n realizada sobre un bot&#xF3;n tenemos varias posibilidades: usar atributo <strong><code>onClick</code></strong> del bpt&#xF3;n, un escuchador an&#xF3;nimo o implementar la interfaz <strong><code>View.OnClickListener</code></strong>. Lo m&#xE1;s eficiente es implementar la interfaz, aunque encontraremos mucha documentaci&#xF3;n quue implementa el listener an&#xF3;nimo.<br>
-Veamos el c&#xF3;digo de nuestraa actividad:</p>
+<p>Para gestionar la pulsaci&#xF3;n realizada sobre un bot&#xF3;n tenemos varias posibilidades: usar atributo <strong><code>onClick</code></strong> del bot&#xF3;n, un escuchador an&#xF3;nimo o implementar la interfaz <strong><code>View.OnClickListener</code></strong>. Lo m&#xE1;s eficiente es implementar la interfaz, aunque encontraremos mucha documentaci&#xF3;n que implementa el listener an&#xF3;nimo.</p>
+<p>Veamos el c&#xF3;digo de nuestraa actividad:</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[10,14-17,20-30,32,33,36]}" class="language-kotlin" data-line="10,14-17,20-30,32,33,36"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
 
@@ -659,12 +660,14 @@ Veamos el c&#xF3;digo de nuestraa actividad:</p>
 </div></div></pre><blockquote>
 <p>&#x1F4CC; <strong>Manejar eventos bot&#xF3;n</strong>:</p>
 <ul>
-<li><strong><code>android:onClick</code></strong>. Este atributo incorporado en la definici&#xF3;n de un bot&#xF3;n permite asignar un m&#xE9;todo p&#xFA;blico que se ejecutar&#xE1; cuando este se pulse (l&#xED;nea 32). Vamos a aplicarlo en nuestro primer bot&#xF3;n <strong><code>raised_button</code></strong> y visualizaremos un <strong><code>toast</code></strong> (l&#xED;nea 19) indicando la pulsaci&#xF3;n del mismo:</li>
+<li><strong><code>android:onClick</code></strong>. Este atributo incorporado en la definici&#xF3;n de un bot&#xF3;n permite asignar un m&#xE9;todo p&#xFA;blico que se ejecutar&#xE1; cuando este se pulse (l&#xED;nea 32). Vamos a aplicarlo en nuestro primer bot&#xF3;n <strong><code>raised_button</code></strong> y visualizaremos un <strong><code>toast</code></strong> (l&#xED;nea 33) indicando la pulsaci&#xF3;n del mismo:</li>
 <li><strong><code>listener an&#xF3;nimo</code></strong>. Programamos el escuchador an&#xF3;nimo directamente sobre la vista e implemantamos el m&#xE9;todo <strong><code>setOnClickListener()</code></strong> (l&#xED;nea 10). Incluimos este c&#xF3;digo en el <strong><code>onCreate()</code></strong> de la actividad:</li>
 <li>implementando intefaz <strong><code>setOnclickListener</code></strong> en la actividad (l&#xED;nea1), registrar las vistas que van a ser objeto de implementaci&#xF3;n a trav&#xE9;s de la interfaz (l&#xED;neas 14-17) y gestionar la pulsaci&#xF3;n (l&#xED;neas 20-30 para el resto de botones). La l&#xED;nea 36 es una funci&#xF3;n para visualizar un <strong><code>string</code></strong> en un <strong><code>toast</code></strong>, de forma que para cada bot&#xF3;n podamos sacar un taxto personalizado del bot&#xF3;n pulsado.</li>
 </ul>
 </blockquote>
-<h4 class="mume-header" id="floating-action-buttons">Floating Action Buttons</h4>
+<h4 class="mume-header" id="floating-action-button">Floating Action Button</h4>
+
+<h4 class="mume-header" id="toggle-button">Toggle Button</h4>
 
 <h3 class="mume-header" id="imageview">ImageView</h3>
 
