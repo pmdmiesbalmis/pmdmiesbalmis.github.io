@@ -582,6 +582,150 @@ De esta manera Android sabe que al ser pulsado el icono de la aplicaci&#xF3;n, d
 <li><strong><code>android.permisssion.WRITE_EXTERNAL_STORAGE</code></strong>, para almacenamiento externo.</li>
 <li><strong><code>android.permisssion.WAKE_LOCK</code></strong>, nos permite antibloqueo (que si el terminal est&#xE1; inactivo &#xE9;ste no se bloquee).</li>
 </ul>
+<h5 class="mume-header" id="permisos-en-momento-de-ejecuci%C3%B3n">Permisos en momento de ejecuci&#xF3;n</h5>
+
+<p>A partir de los dispositivos con instalaci&#xF3;n Android 6.0 (nivel de API 23) o superior, es necesario pedir los <a href="https://developer.android.com/training/permissions/requesting">permisos en el momento de ejecuci&#xF3;n</a> de la aplicaci&#xF3;n. Se debe tener en cuenta que los permisos se pedir&#xE1;n justo en el momento en el que el usuario comience a interactuar con la funci&#xF3;n que los requiere, si estos son rechazados por el usuario es importante que el flujo de la App pueda seguir funcionando.<br>
+Un modelo a seguir podr&#xED;a ser el siguiente:</p>
+<ol>
+<li>Declara los permisos necesarios en el Manifest.</li>
+<li>Esperar a que el usuario invoque la acci&#xF3;n que requiere los permisos.
+<ol>
+<li>Comprueba que los permisos todav&#xED;a no han sido otorgados. <strong>L&#xED;nea 5</strong></li>
+<li>Muestra justificaci&#xF3;n (Dialogo) por la que se requieren los permisos, en caso que se vea necesario.  <strong>L&#xED;nea 6 y 10</strong></li>
+<li>Solicita los permisos.  <strong>L&#xED;nea 14</strong></li>
+</ol>
+</li>
+<li>Verifica la respuesta del usuario. En caso afirmativo se acceder&#xE1; a los recursos, proporcionando una salida elegante en caso que el usuario se niegue a proporcionarlos.</li>
+</ol>
+<p>El siguiente c&#xF3;digo es la base funcional, a partir de la cual podemos a&#xF1;adir lo necesario para nuestras distintas aplicaciones. F&#xED;jate que en el ejemplo se piden dos permisos.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5,7,10,14]}" class="language-kotlin" data-line="5,7,10,14"> <span class="token keyword">val</span> RESPUESTA_PERMISOS<span class="token operator">=</span> <span class="token number">111</span>
+    <span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">solicitarPermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED
+            <span class="token operator">||</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">//Si se decide explicar los motivos de los permisos con algo similar a un dialogo</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">//Si se decide explicar los motivos de los permisos con algo similar a un dialogo</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos, en este caso dos</span>
+            <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span> RESPUESTA_PERMISOS<span class="token punctuation">)</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div></pre><pre data-role="codeBlock" data-info="kotlin {highlight=[9,10,11]}" class="language-kotlin" data-line="9,10,11"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>
+        requestCode<span class="token operator">:</span> Int<span class="token punctuation">,</span><span class="token comment">//codigo de identificaci&#xF3;n del resultado</span>
+        permissions<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token keyword">out</span> String<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token comment">//array con los nombres de los permisos</span>
+        grantResults<span class="token operator">:</span> IntArray<span class="token comment">//array de 0 y -1 (permitido, no permitido) en orden</span>
+    <span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> grantResults<span class="token punctuation">)</span>
+        <span class="token keyword">when</span> <span class="token punctuation">{</span>
+            RESPUESTA_PERMISOS <span class="token operator">==</span> requestCode <span class="token operator">&amp;&amp;</span> grantResults<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span>permissions<span class="token punctuation">.</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+                        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                            applicationContext<span class="token punctuation">,</span> <span class="token string">&quot;Permiso Concedido &quot;</span> <span class="token operator">+</span>
+                                    permissions<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT
+                        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div></pre><blockquote>
+<p>&#x1F4CC;  M&#xE9;todo que se ejecuta cuando el usuario responde a los permisos. Al m&#xE9;todo le llega el c&#xF3;digo de la petici&#xF3;n, el array con los nombres de los permisos, y el array de enteros indicando si el permiso ha sido denegado o concedido.<br>
+<strong>L&#xED;nea 9</strong> se comprueba si el c&#xF3;digo de entrada es el establecido y si hay resultados.<br>
+<strong>L&#xED;nea 10 y 11</strong> se recorren todos los permisos y se muestra con un toast los permisos concedidos.</p>
+</blockquote>
+<p>La salida por pantalla ser&#xED;a similar a la siguiente a la hora de pedir permisos al usuario:</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr>
+<td>
+<div align="center">
+    <img height="200" src="./imagenes/manifest3.png">
+</div>
+</td>
+<td>
+<div align="center">
+    <img height="150" src="./imagenes/manifest4.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>Adem&#xE1;s si entramos dentro de los permisos de la aplicaci&#xF3;n y el usuario los ha concedido, podremos verlos.</p>
+<div align="center">
+    <img height="150" src="./imagenes/manifest5.png">
+</div>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba el c&#xF3;digo anterior en una aplicaci&#xF3;n y comprueba su funcionamiento</span></p>
 <h5 class="mume-header" id="etiqueta-uses-features">Etiqueta uses-features</h5>
 
 <p>Permite especificar las caracter&#xED;sticas hardware que requiere nuestra aplicaci&#xF3;n pantalla multit&#xE1;ctil, soporte OpenGL, etc. para poder instalarse. Algunas restricciones hardware para nuestra aplicaci&#xF3;n podr&#xED;an ser:</p>

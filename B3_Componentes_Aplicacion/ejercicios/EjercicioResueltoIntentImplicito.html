@@ -339,13 +339,178 @@ justo después del front matter
 <h1 class="mume-header undefined" id="bloque-3-ejercicio-resuelto-intent-impl%C3%ADcito">Bloque 3. Ejercicio Resuelto Intent Impl&#xED;cito</h1>
 
 <p><a href="./ejercicios/EjercicioResueltoIntentImplicito.pdf">Descargar este ejercicio</a></p>
-<p>Realizar una aplicaci&#xF3;n que contenga tres botones. El primer bot&#xF3;n llamado Abrir tiene que lanzar una canci&#xF3;n mp3 que se encuentra en la tarjeta sd del dispositivo. El segundo bot&#xF3;n nos permitir&#xE1; ejecutar el navegador con la URL <a href="http://www.iesdoctorbalmis.com">www.iesdoctorbalmis.com</a> y el tercer bot&#xF3;n permitir&#xE1; abrir una aplicaci&#xF3;n externa.</p>
-<h4 class="mume-header" id="paso-i-acceso-a-la-tarjeta-sd">PASO I. Acceso a la tarjeta SD</h4>
+<h3 class="mume-header" id="almacenamiento-de-informaci%C3%B3n-en-android">Almacenamiento de informaci&#xF3;n en Android</h3>
 
-<p>Despu&#xE9;s de crear el proyecto debemos acceder al Device File Explorer, hay una pesta&#xF1;a en la parte inferior derecha del IDE.</p>
+<p>Android utiliza un <a href="https://developer.android.com/training/data-storage?hl=es-419">sistema de archivos</a> que es similar a los sistemas de archivos basados en discos de otras plataformas. El sistema proporciona varias opciones para que guardes los datos de tu app:</p>
+<ul>
+<li>
+<p><strong>Almacenamiento espec&#xED;fico de la app</strong>: Almacena archivos dise&#xF1;ados solo para tu app, ya sea en directorios dedicados dentro de un volumen de <strong>almacenamiento interno</strong> o en directorios dedicados diferentes dentro del <strong>almacenamiento externo</strong>. Usa los directorios del almacenamiento interno para guardar informaci&#xF3;n sensible a la que otras apps no deber&#xED;an acceder.</p>
+</li>
+<li>
+<p><strong>Almacenamiento compartido</strong>: Almacena archivos que tu app pretenda compartir con otras apps, incluidos archivos multimedia, documentos y otros.</p>
+</li>
+<li>
+<p><strong>Preferencias</strong>: Almacena datos primitivos y privados en pares clave-valor.</p>
+</li>
+<li>
+<p><strong>Bases de datos</strong>: Almacena datos estructurados en una base de datos privada mediante la biblioteca de persistencias Room.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; Para darles a los usuarios m&#xE1;s control sobre sus archivos y acotar el desorden, las aplicaciones orientadas a Android 10 (nivel de API 29) y versiones posteriores reciben acceso con alcance determinado al almacenamiento externo, o <strong>almacenamiento espec&#xED;fico</strong>, de forma predeterminada. Estas apps solo tienen acceso al directorio espec&#xED;fico de la aplicaci&#xF3;n en el almacenamiento externo, as&#xED; como a tipos espec&#xED;ficos de contenido multimedia que cre&#xF3; la app.</p>
+</blockquote>
+</li>
+</ul>
+<p align="center" style="zoom:0.8"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentscripttype="application/ecmascript" contentstyletype="text/css" height="301px" preserveAspectRatio="none" style="width:891px;height:301px;" version="1.1" viewBox="0 0 891 301" width="891px" zoomAndPan="magnify"><defs><filter height="300%" id="f1nqbxruc8jone" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[f869d1a782142076132b2f6a4b3d738e]
+cluster Contenido Multimedia--><polygon fill="#F5F5F5" filter="url(#f1nqbxruc8jone)" points="610,94,620,84,874,84,874,179,864,189,610,189,610,94" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="864" x2="874" y1="94" y2="84"/><line style="stroke:#000000;stroke-width:1.5;" x1="610" x2="864" y1="94" y2="94"/><line style="stroke:#000000;stroke-width:1.5;" x1="864" x2="864" y1="94" y2="189"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="154" x="661" y="111.5332">Contenido Multimedia</text><!--MD5=[6881e9449cec6680076ce0a9189c975d]
+cluster Archivos de la APP--><polygon fill="#F5F5F5" filter="url(#f1nqbxruc8jone)" points="16,94,26,84,586,84,586,179,576,189,16,189,16,94" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="576" x2="586" y1="94" y2="84"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="576" y1="94" y2="94"/><line style="stroke:#000000;stroke-width:1.5;" x1="576" x2="576" y1="94" y2="189"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="131" x="231.5" y="111.5332">Archivos de la APP</text><!--MD5=[25f28f3a3578565afc285982f89a73cc]
+entity Externos - Necesitan Permisos--><rect fill="#FEFECE" filter="url(#f1nqbxruc8jone)" height="47.6094" style="stroke:#A80036;stroke-width:1.5;" width="232" x="626" y="125"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="838" y="130"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="836" y="132"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="836" y="136"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="192" x="641" y="159.5332">Externos - Necesitan Permisos</text><!--MD5=[6490b1a48aac7e026fd27dc6e5b3b6bf]
+entity Internos - No Necesitan Permisos--><rect fill="#FEFECE" filter="url(#f1nqbxruc8jone)" height="47.6094" style="stroke:#A80036;stroke-width:1.5;" width="249" x="320.5" y="125"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="549.5" y="130"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="547.5" y="132"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="547.5" y="136"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="209" x="335.5" y="159.5332">Internos - No Necesitan Permisos</text><!--MD5=[10bd72f8487b1abb4db60333e700884f]
+entity Externos - No Necesitan Permisos--><rect fill="#FEFECE" filter="url(#f1nqbxruc8jone)" height="47.6094" style="stroke:#A80036;stroke-width:1.5;" width="253" x="32.5" y="125"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="265.5" y="130"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="263.5" y="132"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="263.5" y="136"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="213" x="47.5" y="159.5332">Externos - No Necesitan Permisos</text><path d="M85,6 L85,65.0547 A0,0 0 0 0 85,65.0547 L155,65.0547 L159,125 L163,65.0547 L233,65.0547 A0,0 0 0 0 233,65.0547 L233,16 L223,6 L85,6 A0,0 0 0 0 85,6 " fill="#FBFB77" filter="url(#f1nqbxruc8jone)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M223,6 L223,16 L233,16 L223,6 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="118" x="91" y="24.4951">getExternalFilesDir()</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="151" y="40.8467">o</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="127" x="91" y="57.1982">getExternalCacheDir()</text><path d="M395,6 L395,65.0547 A0,0 0 0 0 395,65.0547 L441,65.0547 L445,125 L449,65.0547 L495,65.0547 A0,0 0 0 0 495,65.0547 L495,16 L485,6 L395,6 A0,0 0 0 0 395,6 " fill="#FBFB77" filter="url(#f1nqbxruc8jone)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M485,6 L485,16 L495,16 L485,6 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="70" x="401" y="24.4951">getFilesDir()</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="437" y="40.8467">o</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="401" y="57.1982">getCacheDir()</text><path d="M677,22.5 L677,48.8516 A0,0 0 0 0 677,48.8516 L738,48.8516 L742,124.72 L746,48.8516 L807,48.8516 A0,0 0 0 0 807,48.8516 L807,32.5 L797,22.5 L677,22.5 A0,0 0 0 0 677,22.5 " fill="#FBFB77" filter="url(#f1nqbxruc8jone)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M797,22.5 L797,32.5 L807,32.5 L797,22.5 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="109" x="683" y="40.9951">API de MediaStore</text><path d="M639.5,233 L639.5,292.0547 A0,0 0 0 0 639.5,292.0547 L844.5,292.0547 A0,0 0 0 0 844.5,292.0547 L844.5,243 L834.5,233 L746,233 L742,173.1 L738,233 L639.5,233 A0,0 0 0 0 639.5,233 " fill="#FBFB77" filter="url(#f1nqbxruc8jone)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M834.5,233 L834.5,243 L844.5,243 L834.5,233 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="179" x="645.5" y="251.4951">READ_EXTERNAL_STORAGE</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="713.5" y="267.8467">o</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="184" x="645.5" y="284.1982">WRITE_EXTERNAL_STORAGE</text><!--MD5=[7d8bd42950d39310e8303ac91e3e9f92]
+@startuml
+skinparam classAttributeIconSize 0
+skinparam ArrowColor Black
+skinparam PackageBackgroundColor WhiteSmoke
+skinparam ClassBorderColor Black
+skinparam ClassBackgroundColor Snow
+
+node "Contenido Multimedia" {
+  [Externos - Necesitan Permisos]
+}
+node "Archivos de la APP" {
+  [Internos - No Necesitan Permisos]
+  [Externos - No Necesitan Permisos] 
+}
+
+
+note top of   [Externos - No Necesitan Permisos]
+  getExternalFilesDir() 
+                 o 
+  getExternalCacheDir()
+end note
+
+note top of [Internos - No Necesitan Permisos]
+ getFilesDir() 
+          o 
+ getCacheDir()
+end note
+
+note top of [Externos - Necesitan Permisos]
+  API de MediaStore
+end note
+
+note bottom of [Externos - Necesitan Permisos]
+  READ_EXTERNAL_STORAGE 
+                   o 
+  WRITE_EXTERNAL_STORAGE
+end note
+
+@enduml
+
+PlantUML version 1.2020.26(Mon Dec 21 18:45:07 CET 2020)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg></p><blockquote>
+<p>&#x1F4CC;Los almacenamientos externos, sean archivos pertenecientes a la App o contenido multimedia ser&#xE1;n accesibles por otras aplicaciones. Los archivos de la App se eliminar&#xE1;n cuando se borre esta, tanto los internos como los externos.<br>
+Los vol&#xFA;menes extra&#xED;bles, como las <strong>tarjetas SD</strong>, aparecen en el sistema de archivos como parte del almacenamiento externo. Android representa estos dispositivos mediante una ruta de acceso, como <strong>/sdcard</strong>.</p>
+</blockquote>
+<h3 class="mume-header" id="ejercicio">Ejercicio</h3>
+
+<p>Realizar una aplicaci&#xF3;n que contenga tres botones. El primer bot&#xF3;n tiene abrir el navegador con la siguiente b&#xFA;squeda <em>&quot;iesdoctorbalmis&quot;</em>. El segundo bot&#xF3;n nos permitir&#xE1; abrir una aplicaci&#xF3;n externa que hay&#xE1;is instalado previamente. Y el tercer bot&#xF3;n lanzar&#xE1; una canci&#xF3;n mp3 que se encuentre en la tarjeta sd del dispositivo.</p>
+<h4 class="mume-header" id="paso-i-preparar-la-vista-de-la-aplicaci%C3%B3n">PASO I. Preparar la vista de la aplicaci&#xF3;n</h4>
+
+<p>Para ello tendremos que modificar el archivo <strong>activity_main.xml</strong> con lo necesario para crear los tres botones que est&#xE9;n m&#xE1;s o menos centrados. Una posible soluci&#xF3;n podr&#xED;a ser la siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span> encoding<span class="token operator">=</span><span class="token string">&quot;utf-8&quot;</span><span class="token operator">?</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>LinearLayout xmlns<span class="token operator">:</span>android<span class="token operator">=</span><span class="token string">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    xmlns<span class="token operator">:</span>app<span class="token operator">=</span><span class="token string">&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    xmlns<span class="token operator">:</span>tools<span class="token operator">=</span><span class="token string">&quot;http://schemas.android.com/tools&quot;</span>
+    android<span class="token operator">:</span>orientation<span class="token operator">=</span><span class="token string">&quot;vertical&quot;</span>
+    android<span class="token operator">:</span>gravity<span class="token operator">=</span><span class="token string">&quot;center&quot;</span>
+    android<span class="token operator">:</span>layout_width<span class="token operator">=</span><span class="token string">&quot;match_parent&quot;</span>
+    android<span class="token operator">:</span>layout_height<span class="token operator">=</span><span class="token string">&quot;match_parent&quot;</span>
+    tools<span class="token operator">:</span>context<span class="token operator">=</span><span class="token string">&quot;.MainActivity&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>Button
+        android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/navegador&quot;</span>
+        android<span class="token operator">:</span>layout_width<span class="token operator">=</span><span class="token string">&quot;200dp&quot;</span>
+        android<span class="token operator">:</span>layout_height<span class="token operator">=</span><span class="token string">&quot;wrap_content&quot;</span>
+        android<span class="token operator">:</span>text<span class="token operator">=</span><span class="token string">&quot;@string/abrir_navegador&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>Button
+        android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/abrir&quot;</span>
+        android<span class="token operator">:</span>layout_width<span class="token operator">=</span><span class="token string">&quot;200dp&quot;</span>
+        android<span class="token operator">:</span>layout_height<span class="token operator">=</span><span class="token string">&quot;wrap_content&quot;</span>
+        android<span class="token operator">:</span>text<span class="token operator">=</span><span class="token string">&quot;@string/abrir_aplicaci_n&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>Button
+        android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/escuchar&quot;</span>
+        android<span class="token operator">:</span>layout_width<span class="token operator">=</span><span class="token string">&quot;200dp&quot;</span>
+        android<span class="token operator">:</span>layout_height<span class="token operator">=</span><span class="token string">&quot;wrap_content&quot;</span>
+        android<span class="token operator">:</span>text<span class="token operator">=</span><span class="token string">&quot;@string/escuchar_canci_n&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>LinearLayout<span class="token operator">&gt;</span>
+</pre><h4 class="mume-header" id="paso-ii-codificar-la-ejecuci%C3%B3n-del-primer-bot%C3%B3n">PASO II. Codificar la ejecuci&#xF3;n del primer bot&#xF3;n</h4>
+
+<p>El m&#xE9;todo siguiente es el que corresponde con la codificaci&#xF3;n del primer bot&#xF3;n. Tendremos que a&#xF1;adirlo dentro del m&#xE9;todo <strong><code>onCreate</code></strong> de la <strong><code>MainActivity.kt</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[3,4,[5-7],8]}" class="language-kotlin" data-line="3,4,5-7,8">    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>navegador<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
+            <span class="token keyword">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_WEB_SEARCH<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+                <span class="token function">putExtra</span><span class="token punctuation">(</span>SearchManager<span class="token punctuation">.</span>QUERY<span class="token punctuation">,</span> <span class="token string">&quot;iesdoctorbalmis&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>intent<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div><div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5-7" data-start="5" data-end="7">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div></pre><blockquote>
+<p>&#x1F4CC;la <strong>l&#xED;nea3</strong> lo que hace es cargar el layout que queremos asociar con la actividad principal y asignarlo al contexto de la aplicaci&#xF3;n, <strong>Linea4</strong> el m&#xE9;todo findViewById busca la vista en el layout del contexto y la hincha (crear el objeto del tipo correspondiente asociado a esa vist, en este caso Button). <strong>Linea 7 y 8</strong> crean el Inten de b&#xFA;squeda en la web e inicia la actividad que lo resuelva, siempre y cuando haya alguna actividad instalada en el dispositivo que lo pueda resolver.</p>
+</blockquote>
+<h4 class="mume-header" id="paso-iii-abrir-aplicaci%C3%B3n-externa">PASO III. Abrir aplicaci&#xF3;n externa</h4>
+
+<p>El c&#xF3;digo siguiente lanza el intent que permite abrir una app que est&#xE1; instalada en el dispositivo. Se tendr&#xE1; que tener conocimiento del dominio para indicarlo en el nombre del componente <strong>L&#xED;nea3</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[3]}" class="language-kotlin" data-line="3">    findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>abrir<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> intent<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        intent<span class="token punctuation">.</span><span class="token function">setComponent</span><span class="token punctuation">(</span><span class="token function">ComponentName</span><span class="token punctuation">(</span><span class="token string">&quot;com.ejemplos.myapplication&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;com.ejemplos.myapplication.MainActivity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>intent<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div></pre><h4 class="mume-header" id="paso-iv-acceso-a-la-tarjeta-sd">PASO IV. Acceso a la tarjeta SD</h4>
+
+<p>///////////////FALTA ACABAR ESTE PUNTO DE EJERCICIO<br>
+Despu&#xE9;s de crear el proyecto debemos acceder al Device File Explorer, hay una pesta&#xF1;a en la parte inferior derecha del IDE.</p>
 <div align="center">
     <img height="200" src="../imagenes/ejercicioResueltoIntentImplicito.png">
 </div>
+<p>Esto nos abrir&#xE1; un explorador que da acceso a las carpetas de los dispositivos/emuladores que est&#xE9;n arrancados en ese momento. Accederemos a la carpeta Music de sdcard y con el men&#xFA; contextual podremos subir o descargar elementos del dispositivo.</p>
+<div align="center">
+    <img height="400" src="../imagenes/ejercicioResueltoIntentImplicito1.png">
+</div>
+<p>PASO III. L&#xF3;gica Bot&#xF3;n Abrir<br>
+Veamos el c&#xF3;digo y pasemos a las explicaciones:<br>
+La</p>
 
       </div>
       
