@@ -350,6 +350,8 @@ justo después del front matter
 <li><a href="#control-de-flujo">Control de flujo</a></li>
 <li><a href="#funciones">Funciones</a></li>
 <li><a href="#clases-e-interfaces">Clases e Interfaces</a></li>
+<li><a href="#clases-enum-en-kotlin">Clases Enum en Kotlin</a></li>
+<li><a href="#clases-y-m%C3%A9todos-parametrizados">Clases y m&#xE9;todos parametrizados</a></li>
 <li><a href="#colecciones">Colecciones</a>
 <ol>
 <li><a href="#listas">Listas</a></li>
@@ -720,7 +722,7 @@ Mientras que: <strong><code>a=b.toInt()+2</code></strong> , evitar&#xED;a el err
 </pre></blockquote>
 <h4 class="mume-header" id="interfaces">Interfaces</h4>
 
-<p>En Kotlin podemos implementar clases abstractas, que son iguales a las que ya conocemos de otros lenguajes, por lo que no vamos a comentar nada sobre ellas. Adem&#xE1;s tambi&#xE9;n se pueden crear interfaces, que  permiten definir tipos cuyos comportamientos pueden ser compartidos por varias clases que no est&#xE1;n relacionadas. Usa la palabra reservada <strong><code>interface</code></strong> y su implementaci&#xF3;n es similar a los lenguajes que conocemos con algunas peque&#xF1;as diferencias. Como ya sabemos permiten la herencia m&#xFA;ltiple, y adem&#xE1;s:</p>
+<p>En Kotlin podemos implementar clases abstractas, que son iguales a las que ya conocemos de otros lenguajes, por lo que no vamos a comentar nada sobre ellas. Adem&#xE1;s tambi&#xE9;n se pueden crear <a href="https://kotlinlang.org/docs/interfaces.html">interfaces</a>, que  permiten definir tipos cuyos comportamientos pueden ser compartidos por varias clases que no est&#xE1;n relacionadas. Usa la palabra reservada <strong><code>interface</code></strong> y su implementaci&#xF3;n es similar a los lenguajes que conocemos con algunas peque&#xF1;as diferencias. Como ya sabemos permiten la herencia m&#xFA;ltiple, y adem&#xE1;s:</p>
 <ul>
 <li>Pueden contener m&#xE9;todos abstractos (sin implementaci&#xF3;n) y m&#xE9;todos regulares (con implementaci&#xF3;n)</li>
 <li>Puede contener propiedades abstractas y regulares</li>
@@ -750,7 +752,117 @@ Mientras que: <strong><code>a=b.toInt()+2</code></strong> , evitar&#xED;a el err
 <span class="token punctuation">}</span>
 </pre></blockquote>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="colecciones">Colecciones</h2>
+<h2 class="mume-header" id="clases-enum-en-kotlin">Clases Enum en Kotlin</h2>
+
+<p>Igual que en otros lenguajes, Kotlin nos permite crear tipos <a href="https://kotlinlang.org/docs/enum-classes.html">enumerados</a>, aunque en este caso se puede ver como un modificador de clase. Una enumeraci&#xF3;n es un conjunto de valores que usan como identificador un nombre. Dicho nombre se comporta como una constante en nuestro lenguaje. Al marcar una clase con el modificador <strong><code>enum</code></strong>, la declara como una de enumeraci&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">enum</span> <span class="token keyword">class</span> CiclosInformatica <span class="token punctuation">{</span>SMR<span class="token punctuation">,</span> ASIR<span class="token punctuation">,</span> DAM<span class="token punctuation">,</span> DAW<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">nivelCiclo</span><span class="token punctuation">(</span>ciclo<span class="token operator">:</span>CiclosInformatica  <span class="token punctuation">)</span><span class="token operator">:</span>String
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">when</span><span class="token punctuation">(</span>ciclo<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        CiclosInformatica<span class="token punctuation">.</span>SMR <span class="token operator">-&gt;</span> <span class="token string">&quot;Medio&quot;</span>
+        <span class="token keyword">else</span> <span class="token operator">-&gt;</span>  <span class="token string">&quot;Superior&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword">var</span> ciclo<span class="token operator">=</span>CiclosInformatica<span class="token punctuation">.</span>ASIR
+  <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">nivelCiclo</span><span class="token punctuation">(</span>ciclo<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//Superior</span>
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="valor-en-las-enumeraciones">Valor en las enumeraciones</h4>
+
+<p>Adem&#xE1;s a las enumeraciones en Kotlin tambi&#xE9;n podemos asignarles uno o m&#xE1;s  valores. Esto se har&#xE1; a trav&#xE9;s del constructor de la clase, lo podemos ver en el siguiente ejemplo, en el que al constructor se le ha a&#xF1;adido tanto un valor entero como un grado de tipo cadena.</p>
+<pre data-role="codeBlock" data-info="Kotlin {highlight=[10,11]}" class="language-kotlin" data-line="10,11"><span class="token keyword">enum</span> <span class="token keyword">class</span> <span class="token function">CiclosInformatica</span><span class="token punctuation">(</span> <span class="token keyword">val</span> valor<span class="token operator">:</span> Int<span class="token punctuation">,</span> <span class="token keyword">val</span> grado<span class="token operator">:</span> String<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token function">SMR</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Medio&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">ASIR</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Superior&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+  <span class="token function">DAM</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Superior&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+  <span class="token function">DAW</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Superior&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>v <span class="token keyword">in</span> CiclosInformatica<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token function">println</span><span class="token punctuation">(</span>v<span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">&quot; &quot;</span><span class="token operator">+</span> v<span class="token punctuation">.</span>ordinal<span class="token punctuation">)</span>
+  CiclosInformatica<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">{</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>it<span class="token punctuation">.</span>valor<span class="token delimiter variable">}</span></span> - <span class="token interpolation"><span class="token delimiter variable">${</span>it<span class="token punctuation">.</span>name<span class="token delimiter variable">}</span></span> - <span class="token interpolation"><span class="token delimiter variable">${</span>it<span class="token punctuation">.</span>grado<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div></pre><pre data-role="codeBlock" data-info="bash" class="language-bash">SMR <span class="token number">0</span>
+ASIR <span class="token number">1</span>
+DAM <span class="token number">2</span>
+DAW <span class="token number">3</span>
+<span class="token number">1</span> - SMR - Grado Medio
+<span class="token number">2</span> - ASIR - Grado Superior
+<span class="token number">3</span> - DAM - Grado Superior
+<span class="token number">4</span> - DAW - Grado Superior
+</pre><blockquote>
+<p>&#x1F4CC; La salida por pantalla mostrar&#xED;a primero los valores asignados a las propiedades por defecto <strong><code>name y ordinal</code></strong> <strong>L&#xED;nea 10</strong> y despu&#xE9;s una lista con las propiedades que se han creado en el constructor <strong><code>valor y estado</code></strong> <strong>L&#xED;nea 11</strong>.</p>
+</blockquote>
+<h4 class="mume-header" id="enumeraciones-con-comportamiento">Enumeraciones con comportamiento</h4>
+
+<p>Tambi&#xE9;n se les puede a&#xF1;adir un comportamiento a trav&#xE9;s de funciones abstractas o no, o incluso de interfaces. En el siguiente ejemplo podemos ver que al constructor se le ha a&#xF1;adido un elementos m&#xE1;s con el nombre completo del ciclo, y adem&#xE1;s tenemos el comportamiento a&#xF1;adido mediante el m&#xE9;todo <strong><code>informacionCompleta</code></strong>. De forma que la ejecuci&#xF3;n del programa nos sacar&#xE1; las siglas del ciclo, el nombre completo y el grado que le corresponde a cada uno de los elementos de la enumeraci&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">enum</span> <span class="token keyword">class</span> <span class="token function">CiclosInformatica</span><span class="token punctuation">(</span> <span class="token keyword">val</span> valor<span class="token operator">:</span> Int<span class="token punctuation">,</span> <span class="token keyword">val</span> grado<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword">val</span> nombre <span class="token operator">:</span> String<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token function">SMR</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Medio&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Sistemas Microinform&#xE1;ticos y Redes&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">ASIR</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Superior&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Administraci&#xF3;n de Sistemas Inform&#xE1;ticos en Red&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DAM</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Superior&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Desarrollo de Aplicaciones Multiplataforma&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">DAW</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">&quot;Grado Superior&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Desarrollo de Aplicaciones Web&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">fun</span> <span class="token function">informacionCompleta</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>name<span class="token delimiter variable">}</span></span> - <span class="token interpolation"><span class="token delimiter variable">${</span>nombre<span class="token delimiter variable">}</span></span> - <span class="token interpolation"><span class="token delimiter variable">${</span>grado<span class="token delimiter variable">}</span></span>&quot;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  CiclosInformatica<span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">{</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>it<span class="token punctuation">.</span><span class="token function">informacionCompleta</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h2 class="mume-header" id="clases-y-m%C3%A9todos-parametrizados">Clases y m&#xE9;todos parametrizados</h2>
+
+<p>Kotlin tambi&#xE9;n permite crear clases y m&#xE9;todos con alguno de sus miembros de tipo gen&#xE9;rico. La lista de par&#xE1;metros para tipos se incluyen en par&#xE9;ntesis angulares y se separan por coma si son varios <strong><code>&lt;T, U, V,..&gt;</code></strong></p>
+<h4 class="mume-header" id="clases-gen%C3%A9ricas">Clases Gen&#xE9;ricas</h4>
+
+<p>Para crear una clase con un tipo parametrizado de forma que una de sus propiedades sea de ese tipo, se har&#xE1; de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword">class</span> ClaseGenerica<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token punctuation">(</span>t<span class="token operator">:</span> T<span class="token punctuation">,</span> c<span class="token operator">:</span>String<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword">var</span> t<span class="token operator">:</span>T
+  <span class="token keyword">val</span> c<span class="token operator">:</span>String 
+  <span class="token keyword">init</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>t<span class="token operator">=</span>t
+    <span class="token keyword">this</span><span class="token punctuation">.</span>c<span class="token operator">=</span>c
+  <span class="token punctuation">}</span>
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>t<span class="token delimiter variable">}</span></span> <span class="token interpolation"><span class="token delimiter variable">${</span>c<span class="token delimiter variable">}</span></span>&quot;</span>
+  <span class="token keyword">fun</span> <span class="token function">metodo</span><span class="token punctuation">(</span>param<span class="token operator">:</span> T<span class="token punctuation">)</span> <span class="token punctuation">{</span>t<span class="token operator">=</span>param<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Y si quisi&#xE9;ramos crear un objeto de esa clase con la propiedad parametrizada a tipo entero, se podr&#xED;a hacer <strong><code>val objeto=ClaseGenerica(3, &quot;Hola&quot;)</code></strong></p>
+<p>Si quisi&#xE9;ramos realizar una restricci&#xF3;n del tipo parametrizado a la interfaz Comparable, se tendr&#xED;a que hacer de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword">class</span> ClaseGenerica<span class="token operator">&lt;</span>T<span class="token operator">:</span> Comparable<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>t<span class="token operator">:</span> T<span class="token punctuation">,</span> c<span class="token operator">:</span>String<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+ <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="funciones-gen%C3%A9ricas">Funciones Gen&#xE9;ricas</h4>
+
+<p>Para las funciones gen&#xE9;ricas el par&#xE1;metro de tipo se a&#xF1;adir&#xE1; justo despu&#xE9;s de la palabra fun y las restricciones se har&#xE1;n de la misma manera que en las clases.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token function">funcionGenerica</span><span class="token punctuation">(</span>param<span class="token operator">:</span> T<span class="token punctuation">)</span><span class="token operator">:</span> T <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> param
+<span class="token punctuation">}</span>
+</pre><h2 class="mume-header" id="colecciones">Colecciones</h2>
 
 <h3 class="mume-header" id="listas">Listas</h3>
 
