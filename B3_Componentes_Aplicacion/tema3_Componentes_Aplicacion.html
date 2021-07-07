@@ -359,11 +359,8 @@ justo después del front matter
 </ol>
 </li>
 <li><a href="#ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</a></li>
-<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a>
-<ol>
+<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a></li>
 <li><a href="#intent-filter">Intent-filter</a></li>
-</ol>
-</li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="indroducci%C3%B3n">Indroducci&#xF3;n</h3>
@@ -464,12 +461,14 @@ intento<span class="token punctuation">.</span><span class="token function">putE
 findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre></li>
 <li>
-<p>Inicio de una actividad con argumentos y devoluci&#xF3;n de resultados. Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra y obtener los resultados con el m&#xE9;todo onActivityResult:</p>
-</li>
-<li>
-<p>Intent intento = new Intent(this, clase.class); intento.putExtra(atributo, valor); startActivityForResult(intento,cod); &#x2026; public void onActivityResult (int codActividad, int codResultado, Intent datos) { if (codResultado == RESULT_OK) { &#x2026; } &#x2026; } En la clase invocada devolveremos los resultados de la siguiente manera: Intent datos = new Intent(); datos.putExtra(atributo,valor); setResult(RESULT_OK,datos); finish();</p>
+<p>Inicio de una actividad con argumentos y devoluci&#xF3;n de resultados. Cuando se inicia una actividad para obtener un resultado, es posible (y casi seguro en el caso de las operaciones que consumen mucha memoria, como el uso de la c&#xE1;mara) que se destruyan tu proceso y tu actividad debido a la poca memoria. Por lo que se debe separar la devoluci&#xF3;n de llamada del resto de c&#xF3;digo, la manera de hacerlo es siguiendo los siguientes pasos:<br>
+*</p>
 </li>
 </ul>
+<p>Por este<br>
+***************** Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra y obtener los resultados con el m&#xE9;todo onActivityResult:<br>
+Intent intento = new Intent(this, clase.class); intento.putExtra(atributo, valor); startActivityForResult(intento,cod); &#x2026; public void onActivityResult (int codActividad, int codResultado, Intent datos) { if (codResultado == RESULT_OK) { &#x2026; } &#x2026; } En la clase invocada devolveremos los resultados de la siguiente manera: Intent datos = new Intent(); datos.putExtra(atributo,valor); setResult(RESULT_OK,datos); finish();</p>
+<hr>
 <h4>Intent Impl&#xED;cito</h4>
 <p>Los Intent impl&#xED;citos son aquellos que le preguntan al sistema qu&#xE9; servicio o componente es el m&#xE1;s adecuado para realizar la petici&#xF3;n, es decir, no espec&#xED;fica un componente en especial, y solo se especifica la funcionalidad requerida a trav&#xE9;s de una acci&#xF3;n (ver, hacer b&#xFA;squeda, hacer foto, marcar n&#xFA;mero&#x2026;) y un dato (URL, n&#xFA;mero a marcar&#x2026;)En este caso el sistema determina el componente para su resoluci&#xF3;n, desencadenando un &#x201C;intent&#x201D; sin conocer exactamente cu&#xE1;l es la aplicaci&#xF3;n o componente que lo recibir&#xE1;, si no puede establecer exactamente el componente a utilizar porque hay m&#xE1;s de uno, muestra una ventana con las opciones a seleccionar.</p>
  <div align="center">
@@ -510,7 +509,11 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 <div align="center">
     <img height="180" src="./imagenes/intents5.png">
 </div>
-<h4 class="mume-header" id="intent-filter">Intent-filter</h4>
+<p>Es posible que en ocasiones no se pueda acceder a una aplicaci&#xF3;n debido a que no est&#xE1; instalada en el dispositivo, a restricciones de perfil o a la configuraci&#xF3;n de un administrador. En ese caso, no se produce la llamada y se bloquea la app. Para verificar que una actividad recibir&#xE1; la intent, es muy importante usar antes <strong><code>resolveActivity()</code></strong> en el objeto Intent. Si el resultado no es nulo, hay al menos una aplicaci&#xF3;n que puede administrar la intent y es seguro llamar a <strong><code>startActivity()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> Intent intento <span class="token operator">=</span> new <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</pre><h3 class="mume-header" id="intent-filter">Intent-filter</h3>
 
 <p>Las actividades y servicios pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar. De esta forma se informa al sistema del tipo de intenciones impl&#xED;citas que puede atender dicho componente. Los intent-filter se definen en el archivo de manifiesto de la aplicaci&#xF3;n dentro de la activity correspondiente.<br>
 Como se ha explicado en el punto anterior, cuando se crea un intent impl&#xED;cito el sistema Android busca el componente apropiado que pueda resolver la petici&#xF3;n dada en el intent.<br>
@@ -520,11 +523,11 @@ Las actividades pueden declarar el tipo de acciones que pueden llevar a cabo y l
 <li>Las acciones son cadenas de texto est&#xE1;ndar que describen lo que la actividad puede hacer. Por ejemplo <strong><code>android.intent.action.VIEW</code></strong>, es una acci&#xF3;n que indica que la actividad puede mostrar datos al usuario.</li>
 <li>La misma actividad puede declarar el tipo de datos del que se ocupa, por ejemplo <strong><code>vnd.android.cursor.dir/person, indica</code></strong> que la actividad manipula los datos de la agenda*.</li>
 <li>Tambi&#xE9;n pueden declarar una categor&#xED;a, que b&#xE1;sicamente indica si la actividad va a ser lanzada desde el lanzador de aplicaciones <strong><code>android.intent.category.DEFAULT</code></strong>, desde el men&#xFA; de otra aplicaci&#xF3;n o directamente desde otra actividad.<br>
-Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones:<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token operator">&lt;</span>intent<span class="token operator">-</span>filter<span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span>action android<span class="token operator">:</span>name<span class="token operator">=</span><span class="token string">&quot;android.intent.action.VIEW&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span>category android<span class="token operator">:</span>name<span class="token operator">=</span><span class="token string">&quot;android.intent.category.DEFAULT&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
-    <span class="token operator">&lt;</span><span class="token keyword">data</span> android<span class="token operator">:</span>mimeType<span class="token operator">=</span><span class="token string">&quot;vnd.android.cursor.dir/person&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span> 
-<span class="token operator">&lt;</span><span class="token operator">/</span>intent<span class="token operator">-</span>filter<span class="token operator">&gt;</span>
+Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones:<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.VIEW<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.category.DEFAULT<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vnd.android.cursor.dir/person<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
 </pre></li>
 </ul>
 <p>Una activity puede tener varios intent-filter definidos. Igualmente cada uno de esos intent-filter puede tener varias acciones definidas.</p>
