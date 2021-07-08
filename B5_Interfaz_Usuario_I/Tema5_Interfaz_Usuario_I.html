@@ -291,23 +291,12 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#switches">Switches</a></li>
 </ol>
 </li>
-<li><a href="#sliders">Sliders</a></li>
-<li><a href="#chips">Chips</a>
-<ol>
-<li><a href="#input-chips">Input chips</a></li>
-<li><a href="#choice-chip">Choice Chip</a></li>
-<li><a href="#filter-chips">Filter Chips</a></li>
-<li><a href="#action-chips">Action Chips</a></li>
-</ol>
-</li>
 <li><a href="#snackbar">SnackBar</a>
 <ol>
 <li><a href="#snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</a></li>
 <li><a href="#descartar-snackbar">Descartar SnackBar</a></li>
 </ol>
 </li>
-<li><a href="#progressbar">ProgressBar</a></li>
-<li><a href="#datapickerdialog">DataPickerDialog</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="viewbinding">ViewBinding</h3>
@@ -1185,7 +1174,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>&#x1F4CC; Es posible transformar un FAB en un men&#xFA; de acciones.</p>
 </blockquote>
 <blockquote>
-<p>&#x270B;<a href="./ejercicios/1-Fab_Menu/fab_Menu.pdf"> EjercicioResueltoFABExtended</a></p>
+<p>&#x270B;<a href="./ejercicios/1_Fab_Menu/fab_Menu.pdf"> EjercicioResueltoFABExtended</a></p>
 </blockquote>
 <p><a href="https://material.io/components/buttons-floating-action-button#types-of-transitions">Aqu&#xED; tenemos un enlace donde se encuentra informaci&#xF3;n sobre FAB y transiciones.</a></p>
 <h3 class="mume-header" id="textinputlayout-etiquetas-flotantes">TextInputLayout etiquetas flotantes</h3>
@@ -1704,247 +1693,13 @@ pre[data-line] .line-highlight[data-end]:after {
     <img height="140" src="./imagenes/estadoSwitch.png">
 </div>
 <blockquote>
-<p>&#x270B;<a href="./ejercicios/2-Controles_Seleccion/controles_Seleccion.pdf">EjercicioResueltoControlesSeleccion</a></p>
+<p>&#x270B;<a href="./ejercicios/2_Controles_Seleccion/controles_Seleccion.pdf">EjercicioResueltoControlesSeleccion</a></p>
 </blockquote>
-<h3 class="mume-header" id="sliders">Sliders</h3>
-
-<h3 class="mume-header" id="chips">Chips</h3>
-
-<p>Uno de los componentes m&#xE1;s atractivos de la librer&#xED;a <strong><code>Material Design</code></strong> es el <strong><code>Chip</code></strong>. Existen cuatro tipos: de entrada, de filtro, de elecci&#xF3;n y de acci&#xF3;n.</p>
-<p>Los <strong><code>Chips</code></strong> se utilzan habitualmente agrupados. Para poder hacerlo de forma eficiente se recomienda la utilizaci&#xF3;n del componente <strong><code>ChipGroup</code></strong> que permite patrones de comportamiento sobre la vista.</p>
-<p>Los cambios de un chip se pueden observar as&#xED;:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">chip<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
-   <span class="token comment">// Responds to chip click</span>
-<span class="token punctuation">}</span>
-
-chip<span class="token punctuation">.</span><span class="token function">setOnCloseIconClickListener</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Responds to chip&apos;s close icon click if one is present</span>
-<span class="token punctuation">}</span>
-
-chip<span class="token punctuation">.</span><span class="token function">setOnCheckedChangeListener</span> <span class="token punctuation">{</span> chip<span class="token punctuation">,</span> isChecked <span class="token operator">-&gt;</span>
-    <span class="token comment">// Responds to chip checked/unchecked</span>
-<span class="token punctuation">}</span>
-</pre><h4 class="mume-header" id="input-chips">Input chips</h4>
-
-<p>Como carater&#xED;sticas generales pueden contener un icono de chip opcional, un icono de cierre opcional y opcionalmente se pueden marcar.</p>
-<div align="center">
-    <img height="70" src="./imagenes/chipEntrada.png">
-</div>
-<h4 class="mume-header" id="choice-chip">Choice Chip</h4>
-
-<p>Permiten la selecci&#xF3;n de un &#xFA;nico elemento de las opcones de <strong><code>Chip</code></strong> existentes. Cuando seleccionamos un <strong><code>Chip</code></strong> autom&#xE1;ticamente se desmarca el que estubiera seleccionado.</p>
-<div align="center">
-    <img height="70" src="./imagenes/chipSeleccion.png">
-</div>
-<h4 class="mume-header" id="filter-chips">Filter Chips</h4>
-
-<p>Los chips de filtro utilizan etiquetas o palabras descriptivas para filtrar el contenido.</p>
-<p>Los chips de filtro delinean y muestran claramente las opciones en un &#xE1;rea compacta. Son una buena alternativa para alternar botones o casillas de verificaci&#xF3;n.</p>
-<div align="center">
-    <img height="100" src="./imagenes/chipFiltro.png">
-</div>
-<h4 class="mume-header" id="action-chips">Action Chips</h4>
-
-<p>Los chips de acci&#xF3;n ofrecen acciones relacionadas con el contenido principal. Deben aparecer de forma din&#xE1;mica y contextual en una interfaz de usuario.</p>
-<p>Una alternativa a los chips de acci&#xF3;n son los botones, que deben aparecer de manera persistente y consistente.</p>
-<div align="center">
-    <img height="100" src="./imagenes/chipAccion.png">
-</div>
-<p>Veamos un dise&#xF1;o donde implementar todas estas vistas:</p>
-<div align="center">
-    <img height="240" src="./imagenes/chipEjemplo.png">
-</div>
-<p>Colocaremos un control <strong><code>autoCompleteTextView</code></strong> que nos permitir&#xE1; ir seleccionando nombres de una lista y los a&#xF1;adiremos como <strong><code>InputChip</code></strong> dentro de un <strong><code>chipGroup</code></strong> de forma din&#xE1;mica(posteriormente modificaremos esta parte para incluir el chip seleccionado dentro del <strong><code>autoCompleteTextView</code></strong>).</p>
-<p>Tambi&#xE9;n tendremos otro <strong><code>chipGroup</code></strong> para agrupar los <strong><code>chipChoice</code></strong> y otro <strong><code>chipGroup</code></strong> para los <strong><code>chipFilter</code></strong>. Cada uno de esas vistas van separadas por un delimitador <strong><code>view</code></strong>.</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.textfield.TextInputLayout</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/textInputLayout<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>5dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>hint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>To<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toTopOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.textfield.MaterialAutoCompleteTextView</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/autoCompleteTextView<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>singleLine</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>completionThreshold</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>2<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.textfield.TextInputLayout</span><span class="token punctuation">&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.ChipGroup</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/chipGroup<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>singleLine</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.ChipGroup<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/textInputLayout<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.chip.ChipGroup</span><span class="token punctuation">&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/separador1<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@android:color/darker_gray<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintBottom_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/chipGroup<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/text2<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>10dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Ice Cream<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/separador1<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.ChipGroup</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/chipGroup2<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>singleSelection</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>singleLine</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/text2<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g2_c1<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Choice<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Chocolat<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g2_c2<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Choice<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Lemon<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g2_c3<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Choice<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Strawberry<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g2_c4<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Choice<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Coffee<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.chip.ChipGroup</span><span class="token punctuation">&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/separador2<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@android:color/darker_gray<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintBottom_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/chipGroup2<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/text3<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>10dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Your Topics<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/separador2<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.ChipGroup</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/chipGroup3<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/text3<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c1<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Hot Fudge<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c2<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Sprinkles<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c3<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Caramel<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c4<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Oreos<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c5<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Cookie Dough<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c6<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Sprinkles<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c7<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Cereal<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/g3_c8<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Filter<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Fruit<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.chip.ChipGroup</span><span class="token punctuation">&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>View</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/separador3<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@android:color/darker_gray<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/chipGroup3<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><h3 class="mume-header" id="snackbar">SnackBar</h3>
+<h3 class="mume-header" id="snackbar">SnackBar</h3>
 
 <h4 class="mume-header" id="snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</h4>
 
 <h4 class="mume-header" id="descartar-snackbar">Descartar SnackBar</h4>
-
-<h3 class="mume-header" id="progressbar">ProgressBar</h3>
-
-<h3 class="mume-header" id="datapickerdialog">DataPickerDialog</h3>
 
 <div align="center">
     <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
