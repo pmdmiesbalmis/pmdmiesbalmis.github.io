@@ -1697,9 +1697,23 @@ pre[data-line] .line-highlight[data-end]:after {
 </blockquote>
 <h3 class="mume-header" id="snackbar">SnackBar</h3>
 
-<h4 class="mume-header" id="snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</h4>
+<p>La <strong><code>snackBar</code></strong> informan a los usuarios sobre un proceso que una aplicaci&#xF3;n ha realizado o realizar&#xE1;. Aparecen temporalmente en la parte inferior de la pantalla. No deben interrumpir la experiencia del usuario y no requieren lacci&#xF3;n dek usuario para desaparecer. Son similates a un <strong><code>Toast</code></strong>. Solo se puede mostrar un <strong><code>snackbar</code></strong> a la vez.</p>
+<p>Los ajustes preestablecidos de duraci&#xF3;n disponibles son:</p>
+<ul>
+<li><strong><code>LENGTH_INDEFINITE</code></strong> (Muestra la <strong><code>snackbar</code></strong> hasta que se descarta o hasta que se muestra otra)</li>
+<li><strong><code>LENGTH_LONG</code></strong> (Muestra la <strong><code>snackbar</code></strong> durante un per&#xED;odo largo de tiempo)</li>
+<li><strong><code>LENGTH_SHORT</code></strong> (Muestre la <strong><code>snackbar</code></strong> por un per&#xED;odo de tiempo corto)</li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">Snackbar<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>constraintLayout<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;La acci&#xF3;n seleccionada se ha realizado corrctamente&quot;</span><span class="token punctuation">,</span>Snackbar<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
+</pre><h4 class="mume-header" id="snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</h4>
 
-<h4 class="mume-header" id="descartar-snackbar">Descartar SnackBar</h4>
+<p>Para agregar una acci&#xF3;n, use el m&#xE9;todo <strong><code>setAction</code></strong>. Las <strong><code>snackBar</code></strong>`** se descartan autom&#xE1;ticamente cuando se hace clic en la acci&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">Snackbar<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>constraintLayout<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;La acci&#xF3;n seleccionada se ha realizado corrctamente&quot;</span><span class="token punctuation">,</span>Snackbar<span class="token punctuation">.</span>LENGTH_INDEFINITE<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">setAction</span><span class="token punctuation">(</span><span class="token string">&quot;ACEPTAR&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Responds to click on the action</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><h4 class="mume-header" id="descartar-snackbar">Descartar SnackBar</h4>
 
 <div align="center">
     <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
