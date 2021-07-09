@@ -275,6 +275,14 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#action-chips">Action Chips</a></li>
 </ol>
 </li>
+<li><a href="#di%C3%A1logos">Di&#xE1;logos</a>
+<ol>
+<li><a href="#alert-dialog">Alert dialog</a></li>
+<li><a href="#simple-dialog">Simple dialog</a></li>
+<li><a href="#confirmation-dialog">Confirmation dialog</a></li>
+<li><a href="#full-screen-dialog">Full-screen dialog</a></li>
+</ol>
+</li>
 <li><a href="#datapickerdialog">DataPickerDialog</a></li>
 <li><a href="#progressbar">ProgressBar</a></li>
 </ol>
@@ -509,7 +517,86 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/chipGroup3<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><h3 class="mume-header" id="datapickerdialog">DataPickerDialog</h3>
+</pre><h3 class="mume-header" id="di%C3%A1logos">Di&#xE1;logos</h3>
+
+<p>Un cuadro de di&#xE1;logo es un tipo de ventana modal que aparece por encima del contenido de la aplicaci&#xF3;n para proporcionar informaci&#xF3;n cr&#xED;tica o solicitar una acci&#xF3;n. Los cuadros de di&#xE1;logo deshabilitan todas las funciones de la aplicaci&#xF3;n cuando aparecen y permanecen en la pantalla hasta que se confirman, se descartan o se toma una acci&#xF3;n requerida.</p>
+<h4 class="mume-header" id="alert-dialog">Alert dialog</h4>
+
+<p>El siguiente ejemplo muestra un cuadro de di&#xE1;logo de alerta.</p>
+<div align="center">
+    <img height="150" src="./imagenes/alertDialog.png">
+</div>
+<p>Para gestionar los eventos sobre el mismo:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>MaterialAlertDialogBuilder(context)
+        .setTitle(resources.getString(R.string.title))
+        .setMessage(resources.getString(R.string.supporting_text))
+        .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which -&gt;
+            // Respond to neutral button press
+        }
+        .setNegativeButton(resources.getString(R.string.decline)) { dialog, which -&gt;
+            // Respond to negative button press
+        }
+        .setPositiveButton(resources.getString(R.string.accept)) { dialog, which -&gt;
+            // Respond to positive button press
+        }
+        .show()kotlin
+</code></pre><h4 class="mume-header" id="simple-dialog">Simple dialog</h4>
+
+<p>Muestran los elementos de una lista, que son inmediatamente procesables cuando se seleccionan. No tienen botones de acci&#xF3;n.</p>
+<div align="center">
+    <img height="150" src="./imagenes/simpleDialog.png">
+</div>
+<p>Para gestionar los eventos sobre el mismo:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>val items = arrayOf(&quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;)
+
+MaterialAlertDialogBuilder(context)
+        .setTitle(resources.getString(R.string.title))
+        .setItems(items) { dialog, which -&gt;
+             // Respond to item chosen
+         }
+        .show()
+</code></pre><h4 class="mume-header" id="confirmation-dialog">Confirmation dialog</h4>
+
+<p>Los di&#xE1;logos de confirmaci&#xF3;n brindan a los usuarios la posibilidad de proporcionar una confirmaci&#xF3;n final de una elecci&#xF3;n antes de comprometerse con ella, para que tengan la oportunidad de cambiar de opini&#xF3;n si es necesario.</p>
+<div align="center">
+    <img height="150" src="./imagenes/confirmDialog.png">
+</div>
+<p>Para gestionar los eventos sobre el mismo:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>val singleItems = arrayOf(&quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;)
+val checkedItem = 1
+
+MaterialAlertDialogBuilder(context)
+        .setTitle(resources.getString(R.string.title))
+        .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which -&gt;
+            // Respond to neutral button press
+        }
+        .setPositiveButton(resources.getString(R.string.ok)) { dialog, which -&gt;
+            // Respond to positive button press
+        }
+        // Single-choice items (initialized with checked item)
+        .setSingleChoiceItems(singleItems, checkedItem) { dialog, which -&gt;
+             // Respond to item chosen
+         }
+        .show()
+</code></pre><p>Es posible tambi&#xE9;n seleccionar m&#xE1;s un elemento de ls presentados en el di&#xE1;logo. Para implementar este tipo de di&#xE1;logo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> multiItems <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> checkedItems <span class="token operator">=</span> <span class="token function">booleanArrayOf</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+
+<span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token comment">//Multi-choice items (initialized with checked items)</span>
+        <span class="token punctuation">.</span><span class="token function">setMultiChoiceItems</span><span class="token punctuation">(</span>multiItems<span class="token punctuation">,</span> checkedItems<span class="token punctuation">)</span> <span class="token punctuation">{</span> dialog<span class="token punctuation">,</span> which<span class="token punctuation">,</span> checked <span class="token operator">-&gt;</span>
+            <span class="token comment">// Respond to item chosen</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><h4 class="mume-header" id="full-screen-dialog">Full-screen dialog</h4>
+
+<p>Los cuadros de di&#xE1;logo de pantalla completa son los &#xFA;nicos cuadros de di&#xE1;logo sobre los que pueden aparecer otros cuadros de di&#xE1;logo.</p>
+<p>No existe una implementaci&#xF3;n de <strong><code>Material Design</code></strong> espec&#xED;fica de un di&#xE1;logo de pantalla completa. Podemos implementarlo usando un <strong><code>DialogFragment</code></strong>.</p>
+<blockquote>
+<p>&#x270B; <a href="./ejercicios/1_Dialogo_Personalizado/dialogo_Personalizado.pdf">Ejercicio resuelto Dialogo_Personalizado</a></p>
+</blockquote>
+<h3 class="mume-header" id="datapickerdialog">DataPickerDialog</h3>
 
 <h3 class="mume-header" id="progressbar">ProgressBar</h3>
 
