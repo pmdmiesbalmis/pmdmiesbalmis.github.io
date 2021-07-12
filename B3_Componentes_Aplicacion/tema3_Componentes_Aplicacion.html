@@ -361,6 +361,7 @@ justo después del front matter
 <li><a href="#ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</a></li>
 <li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a></li>
 <li><a href="#intent-filter">Intent-filter</a></li>
+<li><a href="#trabajando-con-parcelables">Trabajando con Parcelables</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="indroducci%C3%B3n">Indroducci&#xF3;n</h3>
@@ -380,6 +381,7 @@ En Android nos encontramos con los siguientes tipos de contextos:</p>
 Se puede acceder desde una <em><strong>Activity</strong></em> o un <em><strong>Service</strong></em> con <strong><code>getApplication()</code></strong> o desde cualquiera que herede de Context con <strong><code>getApplicationContext()</code></strong>.</li>
 <li><strong>Activity o Service</strong>. Como hemos dicho, un Context vive tanto como el elemento al que pertenece, por lo que depende del ciclo de vida. As&#xED;, un Context de una Activity vivir&#xE1; el mismo tiempo que vive esta la activity y siempre ser&#xE1; vivir&#xE1; menos que el de la Aplicaci&#xF3;n.</li>
 </ul>
+<div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="componentes-de-una-aplicaci%C3%B3n">Componentes de una aplicaci&#xF3;n</h3>
 
 <h4 class="mume-header" id="activity">Activity</h4>
@@ -397,6 +399,7 @@ Los servicios tambi&#xE9;n tienen un ciclo de vida como las actividades, pero es
 <h4 class="mume-header" id="fragment">Fragment</h4>
 
 <p>Los fragmentos (fragment) se pueden entender como secciones o partes (habitualmente reutilizables) de la interfaz de usuario de una aplicaci&#xF3;n. De esta forma, una actividad podr&#xED;a contener varios fragmentos para formar la interfaz completa de la aplicaci&#xF3;n, y adicionalmente estos fragmentos se podr&#xED;an reutilizar en distintas actividades o partes de la aplicaci&#xF3;n.</p>
+<div style="page-break-after:always;"></div>
 <h4 class="mume-header" id="widget">Widget</h4>
 
 <p>Los widgets son elementos visuales, normalmente interactivos, que pueden mostrarse en la pantalla principal del dispositivo Android y recibir actualizaciones peri&#xF3;dicas. Permiten mostrar informaci&#xF3;n de la aplicaci&#xF3;n al usuario directamente sobre la pantalla principal.</p>
@@ -461,16 +464,105 @@ intento<span class="token punctuation">.</span><span class="token function">putE
 findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre></li>
 <li>
-<p>Inicio de una actividad con argumentos y devoluci&#xF3;n de resultados. Cuando se inicia una actividad para obtener un resultado, es posible (y casi seguro en el caso de las operaciones que consumen mucha memoria, como el uso de la c&#xE1;mara) que se destruyan tu proceso y tu actividad debido a la poca memoria. Por lo que se debe separar la devoluci&#xF3;n de llamada del resto de c&#xF3;digo, la manera de hacerlo es siguiendo los siguientes pasos:<br>
-*</p>
+<p>Inicio de una actividad con argumentos y devoluci&#xF3;n de resultados. Cuando se inicia una actividad para obtener un resultado, es posible (y casi seguro en el caso de las operaciones que consumen mucha memoria, como el uso de la c&#xE1;mara) que se destruya tu proceso y tu actividad debido a la poca memoria. Por lo que se debe separar la devoluci&#xF3;n de llamada del resto de c&#xF3;digo, para ello la librer&#xED;a de Android nos proporciona distintos componentes:</p>
+<ul>
+<li>
+<p><strong><code>registerForActivityResult()</code></strong>. <strong>L&#xED;nea6</strong> Es el elemento principal y que se usa para registrar la devoluci&#xF3;n de resultados. Tiene varias sobrecargar, en un principio usaremos la que toma un objeto <em><code>ActivityResultContract</code></em>. Devuelve un elemento <em><code>ActivityResultLauncher</code></em> que se usar&#xE1; para iniciar la otra actividad.</p>
+</li>
+<li>
+<p><strong><code>ActivityResultContract</code></strong>. <strong>L&#xED;nea6</strong> y par&#xE1;metro del elemento anterior. Un contrato que especifica que una actividad se puede llamar con una entrada de tipo I y producir una salida de tipo O.  La API proporciona <a href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts?hl=es-419">contratos predeterminados</a> para acciones de intent b&#xE1;sicas, como tomar una foto, solicitar permisos, etc. Tambi&#xE9;n se pueden crear contratos personalizados.</p>
+</li>
+<li>
+<p><strong><code>ActivityResultCallback</code></strong>. <strong>L&#xED;nea12</strong> se usa este objeto, creado en la l&#xED;nea 6. Es una devoluci&#xF3;n de llamada con seguridad de tipos que se llamar&#xE1; cuando el resultado de una actividad est&#xE9; disponible. Es una interfaz de m&#xE9;todo &#xFA;nico con un m&#xE9;todo onActivityResult() que toma un objeto del tipo de salida definido en <em><code>ActivityResultContract</code></em></p>
+</li>
+<li>
+<p><strong><code>ActivityResultLauncher</code></strong>. <strong>L&#xED;nea12</strong> manda el intent que queremos usar. Es un lanzador para una llamada preparada previamente para iniciar el proceso de ejecuci&#xF3;n de un <em><code>ActivityResultContract</code></em>.</p>
 </li>
 </ul>
-<p>Por este<br>
-***************** Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra y obtener los resultados con el m&#xE9;todo onActivityResult:<br>
-Intent intento = new Intent(this, clase.class); intento.putExtra(atributo, valor); startActivityForResult(intento,cod); &#x2026; public void onActivityResult (int codActividad, int codResultado, Intent datos) { if (codResultado == RESULT_OK) { &#x2026; } &#x2026; } En la clase invocada devolveremos los resultados de la siguiente manera: Intent datos = new Intent(); datos.putExtra(atributo,valor); setResult(RESULT_OK,datos); finish();</p>
-<hr>
+</li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-10],12, [12,-14]]}" class="language-kotlin" data-line="6,6-10,12,12,-14"><span class="token keyword">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> openPostActivity <span class="token operator">=</span>
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> result <span class="token operator">-&gt;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
+            openPostActivity<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
+                <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span>
+                <span class="token punctuation">{</span>  <span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-10" data-start="6" data-end="10">
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12-14" data-start="12" data-end="14">
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 10</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 12 a 14</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
+</blockquote>
+<p>En la clase invocada devolveremos los datos de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5]}" class="language-kotlin" data-line="4,5">   textView<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+            <span class="token keyword">val</span> intentoResultado<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            intentoResultado<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Este es el dato&quot;</span><span class="token punctuation">)</span>
+            <span class="token function">setResult</span><span class="token punctuation">(</span>Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">,</span>intentoResultado<span class="token punctuation">)</span>
+            <span class="token function">finish</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; en la <strong>L&#xED;nea 4</strong> preparamos el resultado de la actividad indicando que ha sido correcto y a&#xF1;adiendo un intent con informaci&#xF3;n si lo creemos necesario. <strong>L&#xED;nea 5</strong> cerramos la activity.</p>
+</blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio Resuelto2Activitys</span><br>
 <span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio Propuesto3ActivitysRetornoDatos</span></p>
+<div style="page-break-after:always;"></div>
 <h4>Intent Impl&#xED;cito</h4>
 <p>Los Intent impl&#xED;citos son aquellos que le preguntan al sistema qu&#xE9; servicio o componente es el m&#xE1;s adecuado para realizar la petici&#xF3;n, es decir, no espec&#xED;fica un componente en especial, y solo se especifica la funcionalidad requerida a trav&#xE9;s de una acci&#xF3;n (ver, hacer b&#xFA;squeda, hacer foto, marcar n&#xFA;mero&#x2026;) y un dato (URL, n&#xFA;mero a marcar&#x2026;)En este caso el sistema determina el componente para su resoluci&#xF3;n, desencadenando un &#x201C;intent&#x201D; sin conocer exactamente cu&#xE1;l es la aplicaci&#xF3;n o componente que lo recibir&#xE1;, si no puede establecer exactamente el componente a utilizar porque hay m&#xE1;s de uno, muestra una ventana con las opciones a seleccionar.</p>
  <div align="center">
@@ -516,6 +608,8 @@ Intent intento = new Intent(this, clase.class); intento.putExtra(atributo, valor
 
  <span class="token keyword">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 </pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio ResueltoIntentImplicito</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio PropuestoIntentImplicito</span></p>
+<div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="intent-filter">Intent-filter</h3>
 
 <p>Las actividades y servicios pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar. De esta forma se informa al sistema del tipo de intenciones impl&#xED;citas que puede atender dicho componente. Los intent-filter se definen en el archivo de manifiesto de la aplicaci&#xF3;n dentro de la activity correspondiente.<br>
@@ -534,6 +628,7 @@ Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones
 </pre></li>
 </ul>
 <p>Una activity puede tener varios intent-filter definidos. Igualmente cada uno de esos intent-filter puede tener varias acciones definidas.</p>
+<div style="page-break-after:always;"></div>
 <p>Manifest ejemplo de varios intent-filter:</p>
 <div align="center">
     <img height="350" src="./imagenes/intents6.png">
@@ -541,7 +636,141 @@ Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones
 <blockquote>
 <p>&#x1F4CC;El primer intent-filter define que esta activity es punto de entrada para la aplicaci&#xF3;n. La categor&#xED;a especifica que debe aparecer en el lanzador de aplicaciones. El segundo, permite a la activity visualizar y editar el directorio de datos (a trav&#xE9;s de las actions VIEW y EDIT), o recuperar una entrada particular y devolverla (a trav&#xE9;s de la action PICK). En data se especifica el tipo de datos que se manejan. Como est&#xE1; definido con la Categor&#xED;a DEFAULT, estamos indicando que atender&#xE1; a los intents impl&#xED;citos que soliciten otras aplicaciones.</p>
 </blockquote>
+<h3 class="mume-header" id="trabajando-con-parcelables">Trabajando con Parcelables</h3>
 
+<p>Cuando estamos desarrollando en Android y necesitamos enviar datos a otra Activity lo podemos realizar mediante un <strong>Intent y Bundle</strong> pero qu&#xE9; sucede si deseamos enviar un objeto para economizar una llamada a la API. Android nos brinda las opciones de <strong>Serializable</strong> (propia de Java) y <strong>Parcelable</strong>, sin embargo esta &#xFA;ltima es hasta 10 veces m&#xE1;s r&#xE1;pida por lo que nos vamos a enfocar en ella.<br>
+Parcelable es una interfaz y podemos implementarla manual o mediante un plugin que, en las &#xFA;ltimas versiones de Android Studio, viene incluido por defecto.<br>
+Claramente tendremos que crear la clase POJO, como se hace siempre, pero est&#xE1; deber&#xE1; derivar de la <strong><code>Interfaz Parcelable</code></strong>. Como es de suponer esto nos obligar&#xE1; a implementar una serie de m&#xE9;todos y una variable CREATOR que hereda de Creator y que tendr&#xE1; todos sus miembros est&#xE1;ticos gracias el modificador <strong><code>companion</code></strong>.<br>
+Veamos un ejemplo con dos activitys, una en la que se pueden introducir los datos de un contacto y que al pulsar un bot&#xF3;n env&#xED;e los datos existentes en la pantalla a una segunda actividad que mostrar&#xE1; los datos de forma sencilla.</p>
+<p>Clase <strong>Contacto</strong> que hereda de la <strong><code>Interfaz Parcelable</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Contacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> Parcelable <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> nombre<span class="token operator">:</span> String<span class="token operator">?</span>
+    <span class="token keyword">var</span> telefono<span class="token operator">:</span> String<span class="token operator">?</span>
+    <span class="token keyword">var</span> email<span class="token operator">:</span> String<span class="token operator">?</span>
+    <span class="token keyword">var</span> foto<span class="token operator">:</span> Bitmap<span class="token operator">?</span>
+    <span class="token comment">//Constructor generado autom&#xE1;ticamente</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>parcel<span class="token operator">:</span> Parcel<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        nombre <span class="token operator">=</span> parcel<span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        telefono <span class="token operator">=</span> parcel<span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        email <span class="token operator">=</span> parcel<span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        foto <span class="token operator">=</span> parcel<span class="token punctuation">.</span><span class="token function">readParcelable</span><span class="token punctuation">(</span>Bitmap<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">.</span>classLoader<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">init</span><span class="token punctuation">{</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span>nombre<span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span>telefono<span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span>email<span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span>foto<span class="token operator">=</span><span class="token keyword">null</span>
+     <span class="token punctuation">}</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>nombre<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span> telefono<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+                email<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span> foto<span class="token operator">:</span> Bitmap<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token keyword">this</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>nombre <span class="token operator">=</span> nombre
+        <span class="token keyword">this</span><span class="token punctuation">.</span>telefono <span class="token operator">=</span> telefono
+        <span class="token keyword">this</span><span class="token punctuation">.</span>email <span class="token operator">=</span> email
+        <span class="token keyword">this</span><span class="token punctuation">.</span>foto <span class="token operator">=</span> foto
+    <span class="token punctuation">}</span>
+    <span class="token comment">//funciones generadas autom&#xE1;ticamente </span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">describeContents</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">writeToParcel</span><span class="token punctuation">(</span>parcel<span class="token operator">:</span> Parcel<span class="token punctuation">,</span> flags<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        parcel<span class="token punctuation">.</span><span class="token function">writeString</span><span class="token punctuation">(</span>nombre<span class="token punctuation">)</span>
+        parcel<span class="token punctuation">.</span><span class="token function">writeString</span><span class="token punctuation">(</span>telefono<span class="token punctuation">)</span>
+        parcel<span class="token punctuation">.</span><span class="token function">writeString</span><span class="token punctuation">(</span>email<span class="token punctuation">)</span>
+        parcel<span class="token punctuation">.</span><span class="token function">writeParcelable</span><span class="token punctuation">(</span>foto<span class="token punctuation">,</span> flags<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//Clase creada autom&#xE1;ticamente. Un companion object es la forma que tienen Kotlin </span>
+    <span class="token comment">//de definir miembros staticos dentro de una clase, todos los elementos </span>
+    <span class="token comment">//de este object ser&#xE1;n static</span>
+    <span class="token keyword">companion</span> <span class="token keyword">object</span> CREATOR <span class="token operator">:</span> Creator<span class="token operator">&lt;</span>Contacto<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">createFromParcel</span><span class="token punctuation">(</span>parcel<span class="token operator">:</span> Parcel<span class="token punctuation">)</span><span class="token operator">:</span> Contacto <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>parcel<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">newArray</span><span class="token punctuation">(</span>size<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Array<span class="token operator">&lt;</span>Contacto<span class="token operator">?</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">arrayOfNulls</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Clase <strong>MainActivity</strong> que inicia la actividad segunda mandando el objeto parcelado.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[15,16]}" class="language-kotlin" data-line="15,16"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> nombre <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>campo_nombre<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> tlf <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>campo_tlf<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> correo <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>campo_correo<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> img <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>ImageButton<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>placeImage<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> imagen <span class="token operator">=</span> BitmapFactory<span class="token punctuation">.</span><span class="token function">decodeResource</span><span class="token punctuation">(</span>resources<span class="token punctuation">,</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>noimagen<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> button<span class="token operator">:</span> Button <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>boton<span class="token punctuation">)</span>
+        button<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+                <span class="token keyword">val</span> c <span class="token operator">=</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>nombre<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tlf<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                                 correo<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> imagen<span class="token punctuation">)</span>
+                <span class="token keyword">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+                intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CONTACTO&quot;</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span>
+                <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; <strong>L&#xED;nea 15</strong> se crea el intent para la actividad 2 . <strong>L&#xED;nea 16</strong> como se puede ver, aunque el elemento que a&#xF1;adimos al intent es un objeto de tipo Contacto, se puede hacer con <strong><code>putExtra</code></strong> debido a que el contacto hereda de Parcelable.</p>
+</blockquote>
+<p>En la <strong>Activity2</strong> recuperaremos el objeto pasado, con la  <strong>l&#xED;nea 6</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=6}" class="language-kotlin" data-line="6"><span class="token keyword">class</span> Activity2<span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//recuperar datos y visualizar</span>
+        <span class="token keyword">val</span> c <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>intent<span class="token punctuation">.</span>getParcelableExtra<span class="token operator">&lt;</span>Contacto<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token string">&quot;CONTACTO&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">val</span> nombre <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>txt_nombre<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">val</span> tlf <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>txt_tlf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">val</span> correo <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>txt_correo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">val</span> img <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>ImageButton<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>placeImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            nombre<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
+            tlf<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>telefono<span class="token punctuation">)</span>
+            correo<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>email<span class="token punctuation">)</span>
+            img<span class="token punctuation">.</span><span class="token function">setImageBitmap</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>foto<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div></pre><blockquote>
+<p>&#x270B; <strong>Importante:</strong> No olvides declarar en el Manifest las dos actividades.</p>
+</blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio PropuestoParcelabe</span></p>
+<div style="page-break-after:always;"></div>
       </div>
       
       
