@@ -283,7 +283,8 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#full-screen-dialog">Full-screen dialog</a></li>
 </ol>
 </li>
-<li><a href="#datapickerdialog">DataPickerDialog</a></li>
+<li><a href="#datapicker">DataPicker</a></li>
+<li><a href="#progress-indicators">Progress indicators</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="sliders">Sliders</h3>
@@ -377,7 +378,13 @@ pre[data-line] .line-highlight[data-end]:after {
 slider<span class="token punctuation">.</span><span class="token function">addOnChangeListener</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> value<span class="token punctuation">,</span> fromUser <span class="token operator">-&gt;</span>
     <span class="token comment">// Responds to when slider&apos;s value is changed</span>
 <span class="token punctuation">}</span>
-</pre><h3 class="mume-header" id="chips">Chips</h3>
+</pre><blockquote>
+<p>&#x270B; EjercicioPropuesto:</p>
+<ul>
+<li>Realizar un nuevo proyecto que permita modificar el color de fondo de nuestro <strong><code>layout</code></strong> a trav&#xE9;s de tres <strong><code>slider</code></strong> que permitan variar el <strong>RGB</strong> del color del mismo.</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="chips">Chips</h3>
 
 <p>Uno de los componentes m&#xE1;s atractivos de la librer&#xED;a <strong><code>Material Design</code></strong> es el <strong><code>Chip</code></strong>. Existen cuatro tipos: de entrada, de filtro, de elecci&#xF3;n y de acci&#xF3;n.</p>
 <p>Los <strong><code>Chips</code></strong> se utilzan habitualmente agrupados. Para poder hacerlo de forma eficiente se recomienda la utilizaci&#xF3;n del componente <strong><code>ChipGroup</code></strong> que permite patrones de comportamiento sobre la vista.</p>
@@ -605,7 +612,13 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/chipGroup3<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><h3 class="mume-header" id="di%C3%A1logos">Di&#xE1;logos</h3>
+</pre><blockquote>
+<p>&#x270B; EjercicioPropuesto:</p>
+<ul>
+<li>Modificar el ejercicio anterior de forma que se incorporen los <strong><code>chip</code></strong> al campo <strong><code>AutoCompleteTextView</code></strong>. Hay que conseguir que el bot&#xF3;n de eliminaci&#xF3;n del <strong><code>chip</code></strong> est&#xE9; activo y utilizable.</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="di%C3%A1logos">Di&#xE1;logos</h3>
 
 <p>Un cuadro de di&#xE1;logo es un tipo de ventana modal que aparece por encima del contenido de la aplicaci&#xF3;n para proporcionar informaci&#xF3;n cr&#xED;tica o solicitar una acci&#xF3;n. Los cuadros de di&#xE1;logo deshabilitan todas las funciones de la aplicaci&#xF3;n cuando aparecen y permanecen en la pantalla hasta que se confirman, se descartan o se toma una acci&#xF3;n requerida.</p>
 <h4 class="mume-header" id="alert-dialog">Alert dialog</h4>
@@ -684,14 +697,51 @@ MaterialAlertDialogBuilder(context)
 <blockquote>
 <p>&#x270B; <a href="./ejercicios/1_Dialogo_Personalizado/dialogo_Personalizado.pdf">Ejercicio resuelto Dialogo_Personalizado</a></p>
 </blockquote>
-<h3 class="mume-header" id="datapickerdialog">DataPickerDialog</h3>
+<h3 class="mume-header" id="datapicker">DataPicker</h3>
 
 <p>Permiten a los usuarios seleccionar una fecha o un rango de fechas. Los <strong><code>dataPicker</code></strong> se adaptan a la orientaci&#xF3;n del dispositivo:</p>
 <div align="center">
     <img height="150" src="./imagenes/dataPicker.png">
 </div>
+<p>Lo m&#xE1;s frecuente es que estos controles no aparezcan directamente en la interfaz, sino que cuando pulsamos un campo de edici&#xF3;n asociado a una fecha, nos aparezca un di&#xE1;logo (o <strong><code>fragmentDialog</code></strong>) que incluye el <strong><code>dataPicker</code></strong>.</p>
+<p>Crearmos el proyecto <strong>EjemploDataPicker</strong> y colocamos en la actividad principal un <strong><code>TextInputEditText</code></strong> en el escuchador correspondiente al <strong><code>onClick</code></strong> activaremos el <strong><code>dataPicker</code></strong> y sobr &#xE9;l visualizaremos la entrada realizada en el <strong><code>dataPicker</code></strong> cuando este se cierre.</p>
 <div align="center">
-    <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
+    <img height="50" src="./imagenes/dataPickerEntrada.png">
+</div>
+<p>Es importante que nuestro <strong><code>TextInputEditText</code></strong> tenga las siguientes propiedades <strong><code>android:clickable=&quot;false&quot;</code></strong> y <strong><code>android:focusable=&quot;false&quot;</code></strong> que evitan que nuestro campo de edici&#xF3;n se pueda seleccionar o pulsar, evitando de esta manera que aparezca el teclado, solamente se mostrar&#xE1; el <strong><code>dataPicker</code></strong>.<br>
+Veamos el c&#xF3;digo:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
+
+        binding<span class="token punctuation">.</span>dateText<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+            <span class="token keyword">val</span> datePicker <span class="token operator">=</span> MaterialDatePicker<span class="token punctuation">.</span>Builder<span class="token punctuation">.</span><span class="token function">datePicker</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">setTitleText</span><span class="token punctuation">(</span><span class="token string">&quot;Fecha de nacimiento&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">setSelection</span><span class="token punctuation">(</span>MaterialDatePicker<span class="token punctuation">.</span><span class="token function">todayInUtcMilliseconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            datePicker<span class="token punctuation">.</span><span class="token function">addOnPositiveButtonClickListener</span> <span class="token punctuation">{</span>
+                binding<span class="token punctuation">.</span>dateText<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>datePicker<span class="token punctuation">.</span>headerText<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            <span class="token punctuation">}</span>
+            datePicker<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span>supportFragmentManager<span class="token punctuation">,</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; EjercicioPropuesto:</p>
+<ul>
+<li>Modificar el ejercicio anterior de forma que si el campo de edici&#xF3;n tiene una fecha, la muestra al abrir el <strong><code>dataPicker</code></strong>.</li>
+<li>A&#xF1;adir dos campos de fecha m&#xE1;s al dise&#xF1;o con esquema <strong>Fecha de Entrada</strong> y <strong>Fecha de salida</strong> similar a los utilizados en una reserva de hotel, usando un <strong><code>MaterialDatePicker.Builder.dateRangePicker</code></strong> para su implementaci&#xF3;n</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="progress-indicators">Progress indicators</h3>
+
+<div align="center">
+    <img height="100" src="./imagenes/constraintLayoutEjemplo.png">
 </div>
 <pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml"></pre><blockquote>
 <p>&#x1F4CC; Aclaraciones:</p>
