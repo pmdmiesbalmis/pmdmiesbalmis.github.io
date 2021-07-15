@@ -284,12 +284,100 @@ pre[data-line] .line-highlight[data-end]:after {
 </ol>
 </li>
 <li><a href="#datapickerdialog">DataPickerDialog</a></li>
-<li><a href="#progressbar">ProgressBar</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="sliders">Sliders</h3>
 
-<h3 class="mume-header" id="chips">Chips</h3>
+<p>Permiten a los usuarios ver y seleccionar un valor (o rango) del rango a lo largo de una barra. Son ideales para ajustar configuraciones como el volumen y el brillo, o para aplicar filtros de imagen. Al interactuar con un control deslizante, los cambios deben reflejarse inmediatamente al usuario.</p>
+<p>Los controles deslizantes pueden usar iconos en ambos extremos de la barra para representar una escala num&#xE9;rica o relativa. El rango de valores o la naturaleza de los valores, como el cambio de volumen, se pueden indicar con iconos.</p>
+<p>Pueden ser continuos (permiten seleccionar un valor aproximado subjetivo) o discretos (permiten seleccionar un valor exacto).</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[6,7,16,17]}" class="language-xml" data-line="6,7,16,17">    <span class="token comment">&lt;!-- Continue slider --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.slider.Slider</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/continueSlider<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>valueFrom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.0<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>valueTo</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>100.0<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    
+    <span class="token comment">&lt;!-- Discrete slider --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.slider.Slider</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/discrereeSlider<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>valueFrom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.0<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>valueTo</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>100.0<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>stepSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>5<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>30<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Aclaraciones:</p>
+<ul>
+<li><strong>L&#xED;nea 6</strong> con el atributo <strong><code>android:valueFrom</code></strong> establecemos el valor m&#xED;nimo del <strong><code>slider</code></strong></li>
+<li><strong>L&#xED;nea 7</strong> con el atributo <strong><code>android:valueTo</code></strong> establecemos el valor m&#xE1;ximo.</li>
+<li><strong>L&#xED;nea 16</strong> con el atributo <strong><code>android:stepSize</code></strong> establecemos el valor del inclemento del <strong><code>slider</code></strong> discreto.</li>
+<li><strong>L&#xED;nea 17</strong> con el atributo <strong><code>android:value</code></strong> podemos establecer un valor inicial al <strong><code>slider</code></strong> ya sea &#xE9;ste continuo o discreto.</li>
+</ul>
+</blockquote>
+<p>Podemos atender los cambios sobre el <strong><code>slider</code></strong> con los escuchadores:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">slider<span class="token punctuation">.</span><span class="token function">addOnSliderTouchListener</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> Slider<span class="token punctuation">.</span><span class="token function">OnSliderTouchListener</span> <span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onStartTrackingTouch</span><span class="token punctuation">(</span>slider<span class="token operator">:</span> Slider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Responds to when slider&apos;s touch event is being started</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onStopTrackingTouch</span><span class="token punctuation">(</span>slider<span class="token operator">:</span> Slider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Responds to when slider&apos;s touch event is being stopped</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+slider<span class="token punctuation">.</span><span class="token function">addOnChangeListener</span> <span class="token punctuation">{</span> slider<span class="token punctuation">,</span> value<span class="token punctuation">,</span> fromUser <span class="token operator">-&gt;</span>
+    <span class="token comment">// Responds to when slider&apos;s value is changed</span>
+<span class="token punctuation">}</span>
+</pre><h3 class="mume-header" id="chips">Chips</h3>
 
 <p>Uno de los componentes m&#xE1;s atractivos de la librer&#xED;a <strong><code>Material Design</code></strong> es el <strong><code>Chip</code></strong>. Existen cuatro tipos: de entrada, de filtro, de elecci&#xF3;n y de acci&#xF3;n.</p>
 <p>Los <strong><code>Chips</code></strong> se utilzan habitualmente agrupados. Para poder hacerlo de forma eficiente se recomienda la utilizaci&#xF3;n del componente <strong><code>ChipGroup</code></strong> que permite patrones de comportamiento sobre la vista.</p>
@@ -598,8 +686,10 @@ MaterialAlertDialogBuilder(context)
 </blockquote>
 <h3 class="mume-header" id="datapickerdialog">DataPickerDialog</h3>
 
-<h3 class="mume-header" id="progressbar">ProgressBar</h3>
-
+<p>Permiten a los usuarios seleccionar una fecha o un rango de fechas. Los <strong><code>dataPicker</code></strong> se adaptan a la orientaci&#xF3;n del dispositivo:</p>
+<div align="center">
+    <img height="150" src="./imagenes/dataPicker.png">
+</div>
 <div align="center">
     <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
 </div>
