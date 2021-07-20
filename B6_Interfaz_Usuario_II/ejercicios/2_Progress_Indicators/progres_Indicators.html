@@ -264,7 +264,7 @@ pre[data-line] .line-highlight[data-end]:after {
       <h1 class="mume-header undefined" id="ejercicio-resuelto-progress-indicators">Ejercicio resuelto Progress indicators</h1>
 
 <p><a href="./progress_Indicators.pdf">Descargar estos apuntes</a></p>
-<p>Vamos a desarrollar una aplicai&#xF3;n que simule la carga de un conjunto de archivos, simularemos la carga mediante un retardo y utilizaremos una <strong><code>LinearProgressIndicator</code></strong> para ver la evoluci&#xF3;n del estado de la carga. Todo el proceso comenzar&#xE1; cuando pulsemos el bot&#xF3;n de <strong><code>Load</code></strong> en la pantalla principal.</p>
+<p>Vamos a desarrollar una aplicai&#xF3;n que simule la carga de un conjunto de archivos, simularemos la carga mediante <strong><code>AsyncTask</code></strong> donde especificsremos un retardo por cada paso de la tarea, y utilizaremos una <strong><code>LinearProgressIndicator</code></strong> para ver la evoluci&#xF3;n del estado de la carga. Todo el proceso comenzar&#xE1; cuando pulsemos el bot&#xF3;n de <strong><code>Load</code></strong> en la pantalla principal.</p>
 <p>El dise&#xF1;o de nuestro <strong>LinearProgressIndicator`</strong> va a ser personalizado, incluyendo unos campos de texto tal y como se ve en la siguiente imagen:</p>
 <div align="center">
     <img height="120" src="./imagenes/progressIndicatorsEjemplo.png">
@@ -399,208 +399,54 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><strong>L&#xED;neas 30-37</strong>: aqu&#xED; definimos el texto asociado al progreso de la acci&#xF3;n (1/10, 2/10...)</li>
 </ul>
 </blockquote>
-<p>Solamente nos falta analizar el c&#xF3;digo de nuestra aplicaci&#xF3;n, donde iremos visualizando los elementos de la vista y las acciones de cada uno de los botones.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[2,10-15,16,18,20-41,43-45]}" class="language-kotlin" data-line="2,10-15,16,18,20-41,43-45"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> isAllFabsVisible<span class="token operator">:</span> Boolean<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+<h4 class="mume-header" id="tareas-as%C3%ADncronas">Tareas as&#xED;ncronas</h4>
 
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-        binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
-        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
-        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
-        binding<span class="token punctuation">.</span>imageFab<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-        binding<span class="token punctuation">.</span>photocameraFab<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-        binding<span class="token punctuation">.</span>videocameraFab<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-        binding<span class="token punctuation">.</span>imageText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-        binding<span class="token punctuation">.</span>photocameraText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-        binding<span class="token punctuation">.</span>videocameraText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-        isAllFabsVisible <span class="token operator">=</span> <span class="token boolean">false</span>
+<p>Un hilo es una unidad de ejecuci&#xF3;n asociada a una aplicaci&#xF3;n. Es la estructura de programaci&#xF3;n concurrente que tiene como objetivo dar la percepci&#xF3;n al usuario que el sistema ejecuta m&#xFA;ltiples tareas a la vez.</p>
+<p>Desde <strong>Androd</strong> podemos ejecutar tareas en segundo plano utilizando <strong><code>thread</code></strong> (hilos), con <strong><code>AsyncTask</code></strong> y con corrutinas <strong><code>Kotlin</code></strong>.</p>
+<p>El problema con los hilos  es que no podemos acceder a ning&#xFA;n elemento de la iterfaz fr&#xE1;fica desde dentro del mismo.</p>
+<p>La finalidad de <strong><code>AsyncTask</code></strong> es unificar la actualizaci&#xF3;n de la vista asociada a la tarea en segundo plano con la ejecuci&#xF3;n de la misma. Est&#xE1; marcada como <strong><code>deprecated</code></strong> desde la versi&#xF3;n 11 de <strong>Android (API 30)</strong>. A partir de esta versi&#xF3;n se recomienda el uso de corrutinas.</p>
+<p><strong><code>AsyncTask</code></strong> es una interfaz que nos va a permitir crear un hilo secundario en el que realizar tareas en background.</p>
+<p>La definici&#xF3;n gen&#xE9;rica de una tares as&#xED;ncrona sigue el siguiente esquema:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword">class</span> MiTarea<span class="token operator">:</span>AsyncTask<span class="token operator">&lt;</span>T1<span class="token punctuation">,</span>T2<span class="token punctuation">,</span>T3<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onPreExecute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+    <span class="token punctuation">}</span>
 
-        binding<span class="token punctuation">.</span>addFab<span class="token punctuation">.</span><span class="token function">shrink</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">doInBackground</span><span class="token punctuation">(</span><span class="token keyword">vararg</span> params<span class="token operator">:</span>T1<span class="token punctuation">)</span><span class="token operator">:</span>T3<span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+        <span class="token keyword">return</span> T3
+    <span class="token punctuation">}</span>
 
-        binding<span class="token punctuation">.</span>addFab<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>isAllFabsVisible<span class="token operator">==</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                isAllFabsVisible<span class="token operator">=</span><span class="token boolean">true</span>
-                binding<span class="token punctuation">.</span>imageFab<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                binding<span class="token punctuation">.</span>photocameraFab<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                binding<span class="token punctuation">.</span>videocameraFab<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                binding<span class="token punctuation">.</span>imageText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>VISIBLE
-                binding<span class="token punctuation">.</span>photocameraText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>VISIBLE
-                binding<span class="token punctuation">.</span>videocameraText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>VISIBLE
-                binding<span class="token punctuation">.</span>addFab<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">else</span><span class="token punctuation">{</span>
-                isAllFabsVisible<span class="token operator">=</span><span class="token boolean">false</span>
-                binding<span class="token punctuation">.</span>imageFab<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                binding<span class="token punctuation">.</span>photocameraFab<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                binding<span class="token punctuation">.</span>videocameraFab<span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                binding<span class="token punctuation">.</span>imageText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-                binding<span class="token punctuation">.</span>photocameraText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-                binding<span class="token punctuation">.</span>videocameraText<span class="token punctuation">.</span>visibility<span class="token operator">=</span> View<span class="token punctuation">.</span>GONE
-                binding<span class="token punctuation">.</span>addFab<span class="token punctuation">.</span><span class="token function">shrink</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onProgressUpdate</span><span class="token punctuation">(</span><span class="token keyword">vararg</span> params<span class="token operator">:</span>T2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+    <span class="token punctuation">}</span>
 
-        binding<span class="token punctuation">.</span>imageFab<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span><span class="token string">&quot;Pulsaste el bot&#xF3;n IMAGEN&quot;</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onPostExecute</span><span class="token punctuation">(</span>result<span class="token operator">:</span>T3<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
+    <span class="token punctuation">}</span>
 
-        binding<span class="token punctuation">.</span>photocameraFab<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span><span class="token string">&quot;Pulsaste el bot&#xF3;n CAMARA&quot;</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-
-        binding<span class="token punctuation">.</span>videocameraFab<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span><span class="token string">&quot;Pulsaste el bot&#xF3;n VIDEO&quot;</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCanceled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">//...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10-15" data-start="10" data-end="15">
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="18" data-start="18">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="20-41" data-start="20" data-end="41">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="43-45" data-start="43" data-end="45">
-
-
-</div></div></pre><blockquote>
+</pre><p>El m&#xE9;todo encargado de ejecutar el hilo secundario es <strong><code>doInBackground()</code></strong>, el resto se ejecutanmen el hilo principal.</p>
+<p>El m&#xE9;rodo <strong><code>onPreExcuted()</code></strong> se ejecuta antes de empezar la tarea en segundo plano.</p>
+<p>En la definici&#xF3;n se especifican tres tipos de datos:</p>
+<ul>
+<li>El primero es el que recibe el m&#xE9;todo <strong><code>doInBackGround()</code></strong>. La notaci&#xF3;n <strong><code>vararg params:T1</code></strong> indica que se pueden recibir un n&#xFA;mero indeterminado de par&#xE1;metros indeterminado del tipo <strong><code>T1</code></strong>.</li>
+<li>El segundo es que el que permite comunicar el avance de la tarea. La comunicaci&#xF3;n con el hilo principal se realizar&#xE1; a trav&#xE9;s de la invocaci&#xF3;n del m&#xE9;todo <strong><code>publicProgress()</code></strong> que har&#xE1; que se jecute el m&#xE9;todo <strong><code>onProgressUpdate()</code></strong> que se encargar&#xE1; de la actualizaci&#xF3;n de la interfaz.</li>
+<li>El tercero es el tipo de datos que se devolver&#xE1; al finalizar el hilo secundario <strong><code>doInBackground()</code></strong> y que ser&#xE1; recibido en <strong><code>onPostExecuted()</code></strong>.</li>
+</ul>
+<p>El m&#xE9;todo <strong><code>onCanceled()</code></strong> se ejecuta si la tarea es cancelada, y hace que no se ejecute el <strong><code>onPostExecuted()</code></strong>.</p>
+<p>Vamos a integrar una tarea as&#xED;ncrona para simular la descarga de archivos en nuestro ejemplo.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[12-18,20-28,30-37]}" class="language-kotlin"></pre><blockquote>
 <p>&#x1F4CC; Aclaraciones:</p>
 <ul>
-<li><strong>L&#xED;nea 2</strong>: utilizamos la variable <strong><code>isAllFabsVisible</code></strong> para saber si est&#xE1; extendido o mno el <strong><code>FAB</code></strong> principal, en principio (l&#xED;nea 16) se inicia a <strong><code>false</code></strong> indicando que est&#xE1; el men&#xFA; contra&#xED;do.</li>
-<li><strong>L&#xED;neas 10-15</strong>: las vistas asociadas al men&#xFA; de acciones est&#xE1;n no visibles, para ello utilizamos el atributo <strong><code>visibility</code></strong> de cada una de ellas y le asociamos el valor <strong><code>View.GONE</code></strong> que hace que la vista sea invisible sin que la vista ocupe espacio en el dise&#xF1;o. <strong><code>View.INVISIBLE</code></strong> hace que la vista sea invisible pero ocupando espacio.</li>
-<li><strong>L&#xED;neas 18</strong> con el m&#xE9;todo <strong><code>shrink()</code></strong> se desactiva el mode extendiso del <strong><code>FAB</code></strong> ocultando el texto que tiene asociado cuando se expanda.</li>
-<li><strong>L&#xED;neas 20-41</strong>: aqu&#xED; gestionamos el <strong><code>click</code></strong> sobre el bot&#xF3;n principal. Si el men&#xFA; de acciones estaba invisible, entonces hacemos visibles las vistas con <strong><code>View.VISIBLE</code></strong> y hacemos que aparezca el texto asociado al <strong><code>FAB</code></strong> inicial con el m&#xE9;todo <strong><code>extend()</code></strong>. Por el contrario si el <strong><code>FAB</code></strong> principal estaba pulsado, aplicamos la l&#xF3;gica inversa a lo explicado anteriormente. El m&#xE9;todo <strong><code>hide()</code></strong> oculta la vista con animaci&#xF3;n. Similar a <strong><code>show()</code></strong> que la muestra con animaci&#xF3;n.</li>
-<li><strong>L&#xED;neas 43-45</strong> y siguientes, donde se implementa el <strong><code>click</code></strong> de cada una de las acciones del men&#xFA;. Simplemente visualizamos un <strong><code>Toast</code></strong> indicando la acci&#xF3;n pulsada.</li>
+<li><strong>L&#xED;nea 2</strong>: utilizamos la variable <strong><code>isAllFabsVisible</code></strong> para saber si est&#xE1; extendido o no el <strong><code>FAB</code></strong> principal, en principio (l&#xED;nea 16) se inicia a <strong><code>false</code></strong> indicando que est&#xE1; el men&#xFA; contra&#xED;do.</li>
 </ul>
+</blockquote>
+<blockquote>
+<p>&#x270B;<strong>Ejercicio propuesto</strong>: Implementar este ejmplo con corrutinas <strong><code>Kotlin</code></strong>. Es un trabajo de investigaci&#xF3;n y desarrollo.</p>
 </blockquote>
 
       </div>
