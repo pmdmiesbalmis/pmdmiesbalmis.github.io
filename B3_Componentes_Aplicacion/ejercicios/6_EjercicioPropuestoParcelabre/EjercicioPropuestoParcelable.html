@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3Anexo. Como Crear/Importar librer&#xED;as</title>
+      <title>PMDM 2&#xBA; DAM  Bloque 3. Ejercicio Propuesto Parcelable</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -336,61 +336,23 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+<h1 class="mume-header undefined" id="bloque-3-ejercicio-propuesto-parcelable">Bloque 3. Ejercicio Propuesto Parcelable</h1>
 
-<p><a href="./tema3Anexo_como_crear_importar_librerias.pdf">Descargar estos apuntes</a></p>
-<h1 class="mume-header undefined" id="tema-3anexo-como-crearimportar-librer%C3%ADas">Tema 3Anexo. Como Crear/Importar librer&#xED;as</h1>
+<p><a href="./EjercicioPropuestoParcelable.pdf">Descargar este ejercicio</a></p>
+<h3 class="mume-header" id="almacenamiento-de-informaci%C3%B3n-en-android">Almacenamiento de informaci&#xF3;n en Android</h3>
 
-<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
-
-<ol>
-<li><a href="#como-crear-una-librer%C3%ADa-jar-o-kt-en-android-studio">COMO CREAR UNA LIBRER&#xCD;A .JAR o .KT EN ANDROID STUDIO</a></li>
-</ol>
-<div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="como-crear-una-librer%C3%ADa-jar-o-kt-en-android-studio">COMO CREAR UNA LIBRER&#xCD;A .JAR o .KT EN ANDROID STUDIO</h3>
-
-<p>Para crear una librer&#xED;a .jar o .kt en Android Studio, deberemos a&#xF1;adir un m&#xF3;dulo nuevo e indicar que debe ser una librer&#xED;a de Java o Kotlin. A ese m&#xF3;dulo podemos a&#xF1;adirle todas las clases que necesitemos (copi&#xE1;ndolas de otro proyecto o cre&#xE1;ndolas nuevas). Despu&#xE9;s le diremos al Gradle que compile y cree el .jar. Paso a paso lo de debemos hacer ser&#xE1; lo siguiente:</p>
-<ol>
-<li>
-<p>Puedes crear primero un proyecto Android de forma normal, pero sin activity principal.</p>
-<div align="center">
-    <img height="300" src="./imagenes/Libreria1.png">
-</div>
-</li>
-<li>
-<p>A&#xF1;adiremos el m&#xF3;dulo Kotlin, File -&gt; New Module -&gt; Java o Kotlin Library (seleccionando el lenguaje Kotlin). Indica el nombre del paquete y del m&#xF3;dulo. La clase se crear&#xE1; por defecto, pero posteriormente podr&#xE1;s eliminarla, si no la necesitas.</p>
- <div align="center">
-    <img height="300" src="./imagenes/Libreria2.png">
-</div>
-</li>
-<li>
-<p>Una vez hecho esto, se habr&#xE1; creado un nuevo m&#xF3;dulo con el nombre que le hayamos indicado. A ese m&#xF3;dulo le podemos a&#xF1;adir las clases que necesitemos para nuestra librer&#xED;a. Como ser&#xE1; un m&#xF3;dulo Kotlin no podremos a&#xF1;adir clases que tengan dependencias con librer&#xED;as de Android.</p>
- <div align="center">
-    <img height="200" src="./imagenes/Libreria3.png">
-</div>
-</li>
-<li>
-<p>El siguiente paso, ser&#xE1; crear una dependencia entre ambos m&#xF3;dulos. Esto lo haremos desde la ventana Proyect structure, en el m&#xF3;dulo java le a&#xF1;adiremos la dependencia del m&#xF3;dulo Android. Ver siguiente captura de pantalla.</p>
-</li>
-</ol>
-  <div align="center">
-       <img height="200" src="./imagenes/Libreria4.png">
-   </div>
-<p>Una vez hecho quedar&#xE1; as&#xED;:</p>
-  <div align="center">
-       <img height="150" src="./imagenes/Libreria5.png">
-   </div>
-<ol start="5">
-<li>
-<p>Despu&#xE9;s de esto quedar&#xE1;, solamente, crear el .jar. Para ello primero abriremos la ventana de Gradle Tasks:</p>
- <div align="center">
-    <img height="150" src="./imagenes/Libreria6.png">
-</div>
-</li>
-<li>
-<p>Sobre el modulo que hemos creado, desplegamos y seleccionamos el Jar:</p>
-</li>
-</ol>
+<p>Ejercicio que nos va a servir para practicar la parcelaci&#xF3;n de unos datos con un Intent, y tambi&#xE9;n la transmisi&#xF3;n de esos datos a una APP diferente en donde ser&#xE1;n recibidos y mostrados.<br>
+Crea una aplicaci&#xF3;n APP Parcelables, con el siguiente aspecto.</p>
+<p>Deber&#xE1; tener una clase Pojo llamada Telefono que extender&#xE1; de Parcelable, tendr&#xE1; dos tipo String: prefijo y n&#xFA;mero que nos servir&#xE1; para la transmisi&#xF3;n de datos entre las dos distintas aplicaciones.<br>
+Usaremos un Intent al que le a&#xF1;adiremos el Bundle con el objeto parcelado, y iniciaremos la App Parcelables2Activity<br>
+Cuando se pulse el bot&#xF3;n Abrir, se deber&#xE1; arrancar una aplicaci&#xF3;n diferente, App Parcelables2Activity, que mostrar&#xE1; los datos que habremos metido en prefijo y n&#xFA;mero al recuperarlos del inten.</p>
+<p>El &#xFA;nico problema que nos encontraremos en este ejercicio, es que no nos va a permitir recuperar el objeto parcelado si no pertenece exactamente a la misma clase del que lo hemos parcelado. Para ello deberemos crearnos un m&#xF3;dulo .arr de librer&#xED;a con la clase Telefono en la App Parcelables y tendremos que importar ese m&#xF3;dulo en la clase Parcelables2Activity. Para eso tenemos los apuntes de Como importar/crear librer&#xED;as en el Moodle.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong><br>
+gradlew builddependents</p>
+<p>gradlew assembleRelease personaLibrary</p>
+</blockquote>
+<blockquote></blockquote>
 
       </div>
       
