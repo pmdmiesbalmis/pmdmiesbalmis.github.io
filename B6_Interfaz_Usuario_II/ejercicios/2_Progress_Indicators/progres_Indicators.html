@@ -403,7 +403,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <p>Un hilo es una unidad de ejecuci&#xF3;n asociada a una aplicaci&#xF3;n. Es la estructura de programaci&#xF3;n concurrente que tiene como objetivo dar la percepci&#xF3;n al usuario que el sistema ejecuta m&#xFA;ltiples tareas a la vez.</p>
 <p>Desde <strong>Androd</strong> podemos ejecutar tareas en segundo plano utilizando <strong><code>thread</code></strong> (hilos), con <strong><code>AsyncTask</code></strong> y con corrutinas <strong><code>Kotlin</code></strong>.</p>
-<p>El problema con los hilos  es que no podemos acceder a ning&#xFA;n elemento de la iterfaz fr&#xE1;fica desde dentro del mismo.</p>
+<p>El problema con los hilos  es que no podemos acceder a ning&#xFA;n elemento de la interfaz gr&#xE1;fica desde dentro del mismo.</p>
 <p>La finalidad de <strong><code>AsyncTask</code></strong> es unificar la actualizaci&#xF3;n de la vista asociada a la tarea en segundo plano con la ejecuci&#xF3;n de la misma. Est&#xE1; marcada como <strong><code>deprecated</code></strong> desde la versi&#xF3;n 11 de <strong>Android (API 30)</strong>. A partir de esta versi&#xF3;n se recomienda el uso de corrutinas.</p>
 <p><strong><code>AsyncTask</code></strong> es una interfaz que nos va a permitir crear un hilo secundario en el que realizar tareas en background.</p>
 <p>La definici&#xF3;n gen&#xE9;rica de una tares as&#xED;ncrona sigue el siguiente esquema:</p>
@@ -438,15 +438,135 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>El tercero es el tipo de datos que se devolver&#xE1; al finalizar el hilo secundario <strong><code>doInBackground()</code></strong> y que ser&#xE1; recibido en <strong><code>onPostExecuted()</code></strong>.</li>
 </ul>
 <p>El m&#xE9;todo <strong><code>onCanceled()</code></strong> se ejecuta si la tarea es cancelada, y hace que no se ejecute el <strong><code>onPostExecuted()</code></strong>.</p>
-<p>Vamos a integrar una tarea as&#xED;ncrona para simular la descarga de archivos en nuestro ejemplo.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[12-18,20-28,30-37]}" class="language-kotlin"></pre><blockquote>
+<p>En general se recomienda trabajar con las corrutinas frente a <strong><code>AsyncTask</code></strong> y <strong><code>Thread</code></strong>, son m&#xE1;s sencillas de utilizar y generan un c&#xF3;digo m&#xE1;s claro al interactuar con la interfaz.</p>
+<p>Es importante, sin embargo, conocer como funcionan, sobre todo <strong><code>AsyncTask</code></strong>, ya que encontraremos multitud de ejemplos de c&#xF3;digo implementados con esta interfaz.</p>
+<h4 class="mume-header" id="corrutinas-kotlin">Corrutinas Kotlin</h4>
+
+<p>Para comenzar a utilizarlas lo primero es a&#xF1;adir en el fichero <strong><code>build:gradle</code></strong> perteneciente a <strong><code>Module:app</code></strong>, las siguientes referencias:</p>
+<pre data-role="codeBlock" data-info="gradle" class="language-gradle"><code> implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9&apos;
+ implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9&apos;
+</code></pre><p>Existen diferentes formas de trabajar con corrutinas. En este punto vamos a ver c&#xF3;no hacerlo con <strong><code>CorrutineScope</code></strong>. Para lanzar una tarea en segundo plano mediante esta clase usaremos su m&#xE9;todo <strong><code>launch</code></strong>. En este m&#xE9;todo se especifica el <strong><code>dispatcher</code></strong> (emisor o tipo de hilo) donde tiene que ejecutarse el c&#xF3;digo. Kotlin proporciona tres <strong><code>dispatcher</code></strong>:</p>
+<ul>
+<li><strong><code>Dispatcher.Default</code></strong> el emisor por defecto de las tareas en segundo plano.</li>
+<li><strong><code>Dispatcher.IO</code></strong>, hilo secundario para tareas de entrada/salida, permite paralelizar m&#xE1;s tareas concurrentes que el anterior.</li>
+<li><strong><code>Dispatcher.Main</code></strong>, donde se indica el c&#xF3;digo que se ejecuta en el hilo principal y permite, por tanto, interactuar con la interfaz de usuario.</li>
+</ul>
+<p>Veamos el c&#xF3;digo que permite visualizar una barra de progreso mientras se cargan unos archivos (de forma simulada &#x1F609;)</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8,9,10,11,12,17]}" class="language-kotlin" data-line="8,9,10,11,12,17"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
+
+        binding<span class="token punctuation">.</span>buttonProgress<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+            <span class="token function">setDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            GlobalScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+                    <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        progressBar<span class="token operator">!!</span><span class="token punctuation">.</span>progress<span class="token operator">=</span>i
+                        progressMessage<span class="token punctuation">.</span>text<span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">&quot;/100&quot;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token string">&quot;Tarea finalizada!&quot;</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    dialog<span class="token punctuation">.</span><span class="token function">dismiss</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">setDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> builder <span class="token operator">=</span> <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> inflater <span class="token operator">=</span> <span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">.</span>layoutInflater
+        <span class="token keyword">val</span> v <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>dialogo_progress<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        progressBar <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>loader<span class="token punctuation">)</span>
+        loadingMessage <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>loading_msg<span class="token punctuation">)</span>
+        progressMessage <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>progres_msg<span class="token punctuation">)</span>
+        builder<span class="token punctuation">.</span><span class="token function">setView</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+        dialog <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        dialog<span class="token punctuation">.</span><span class="token function">setCancelable</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+        dialog<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
+</div></div></pre><blockquote>
 <p>&#x1F4CC; Aclaraciones:</p>
 <ul>
-<li><strong>L&#xED;nea 2</strong>: utilizamos la variable <strong><code>isAllFabsVisible</code></strong> para saber si est&#xE1; extendido o no el <strong><code>FAB</code></strong> principal, en principio (l&#xED;nea 16) se inicia a <strong><code>false</code></strong> indicando que est&#xE1; el men&#xFA; contra&#xED;do.</li>
+<li><strong>L&#xED;nea 8</strong>, ejecutamos en hilo principal y tras la pulsaci&#xF3;n del bot&#xF3;n, el di&#xE1;logo correspondiente a nuestra <strong>bara de progreso</strong>.</li>
+<li><strong>L&#xED;nea 9</strong>, invocamos a <strong><code>GlobalScope.launch (Dispatchers.IO)</code></strong> el hilo secundario. Simularemos un proceso de carga de archivvos (<strong>l&#xED;nea 10</strong>) mediante un <strong><code>sleep</code></strong> (<strong>l&#xED;nea 11</strong>).</li>
+<li><strong>L&#xED;nea 12</strong>, ejecutamos c&#xF3;digo destinado a actualizar la interfaz del hilo principal con <strong><code>launch(Dispatchers.Main)</code></strong>, concretamente actualizamos la <strong><code>LinearProgressIndicatos</code></strong> y las vistas de texto.</li>
+<li><strong>L&#xED;nea 17</strong>, cuando terminamos la tarea secundaria de carga de archivos, cerramos el di&#xE1;logo, para ello volvemos a envolver el c&#xF3;digo correspondiente en un <strong><code>launch(Dispatchers.Main)</code></strong>.</li>
 </ul>
 </blockquote>
 <blockquote>
-<p>&#x270B;<strong>Ejercicio propuesto</strong>: Implementar este ejmplo con corrutinas <strong><code>Kotlin</code></strong>. Es un trabajo de investigaci&#xF3;n y desarrollo.</p>
+<p>&#x270B;<strong>Ejercicio propuesto</strong>: Si en el ejemplo desarrollado anteriormente giramos la pantalla &#xBF;qu&#xE9; sucede?. Plantear una soluci&#xF3;n a esta problem&#xE1;tica.</p>
 </blockquote>
 
       </div>
