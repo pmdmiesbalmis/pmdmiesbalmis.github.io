@@ -344,6 +344,8 @@ justo después del front matter
 <li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
 <li><a href="#definici%C3%B3n-de-un-men%C3%BA-como-recurso-xml">Definici&#xF3;n de un men&#xFA; como recurso XML</a></li>
 <li><a href="#overflow-menu">Overflow menu</a></li>
+<li><a href="#contextual-menu">Contextual menu</a></li>
+<li><a href="#popup-menu">Popup menu</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
@@ -474,18 +476,208 @@ justo después del front matter
 </div></div></pre><blockquote>
 <p>&#x1F4CC; Aclaraciones:</p>
 <ul>
-<li><strong>L&#xED;nea 7</strong>, con <strong><code>android:showAsAction=ifRoom|withText</code></strong> hacemos que este elemento del men&#xFA; aparezca siempre fuera del <strong><code>Overflow menu</code></strong> y que si hay espacio suficiete se muestre el texto y el icono.</li>
-<li><strong>L&#xED;nea 8</strong>, definimos un grupo con dos <strong><code>item</code></strong>.</li>
-<li><strong>L&#xED;nea 13</strong>, definimos dentro de la opci&#xF3;n <strong><code>Help</code></strong> un submen&#xFA; con dos opciones.</li>
+<li>L&#xED;nea 7, con <strong><code>android:showAsAction=ifRoom|withText</code></strong> hacemos que este elemento del men&#xFA; aparezca siempre fuera del <strong><code>Overflow menu</code></strong> y que si hay espacio suficiente se muestre el texto y el icono.</li>
+<li>L&#xED;nea 8, definimos un grupo con dos <strong><code>item</code></strong>.</li>
+<li>L&#xED;nea 13, definimos dentro de la opci&#xF3;n <strong><code>Help</code></strong> un submen&#xFA; con dos opciones.</li>
 </ul>
 </blockquote>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[7, 8,10,11]}" class="language-kotlin"></pre><blockquote>
-<p>&#x270B; Comentar que previamente se ha creado el layout para este fragmento y se corresponde con <strong><code>fragment_uno.xml</code></strong>.</p>
+<p>Para visualizar el <strong><code>Overflow menu</code></strong> sobreescribimos el m&#xE9;todo <strong><code>onCreateOptionsMenu</code></strong> en la actividad o frgamento correspondiente (recordad que se invoca autom&#xE1;ticamente o pulsando el men&#xFA; dependiendo de la versi&#xF3;n):</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateOptionsMenu</span><span class="token punctuation">(</span>menu<span class="token operator">:</span> Menu<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> inflater<span class="token operator">:</span> MenuInflater <span class="token operator">=</span> menuInflater
+        inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>menu<span class="token punctuation">.</span>menu_overflow<span class="token punctuation">,</span> menu<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+</pre><p>Para controlar las opciones de men&#xFA; que son pulsadas implementamos el m&#xE9;todo <strong><code>onOptionsItemsSelected()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onOptionsItemSelected</span><span class="token punctuation">(</span>item<span class="token operator">:</span> MenuItem<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> text<span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+        <span class="token keyword">when</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span>itemId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>opEdit<span class="token operator">-&gt;</span> text<span class="token operator">=</span><span class="token string">&quot;EDIT&quot;</span>
+            R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>opSetting<span class="token operator">-&gt;</span> text<span class="token operator">=</span><span class="token string">&quot;SETTING&quot;</span>
+            R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>opHelpApp<span class="token operator">-&gt;</span> text<span class="token operator">=</span><span class="token string">&quot;APP&quot;</span>
+            R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>opHelp<span class="token operator">-&gt;</span><span class="token keyword">return</span> <span class="token boolean">true</span>
+            R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>opHelpAndroid<span class="token operator">-&gt;</span> text<span class="token operator">=</span><span class="token string">&quot;ANDROID&quot;</span>
+            R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>opLogout<span class="token operator">-&gt;</span> text<span class="token operator">=</span><span class="token string">&quot;LOGOUT&quot;</span>
+            <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onOptionsItemSelected</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span><span class="token string">&quot;Pulsaste la opci&#xF3;n de men&#xFA; &quot;</span><span class="token operator">+</span>text<span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+</pre><p>Este m&#xE9;todo  se ejecuta cuando el usuario selecciona un elemento del <strong><code>Overflow menu</code></strong> (incluidos los externos al mismo). Nos proporciona un elemento de tipo <strong><code>MenuItem</code></strong> con informaci&#xF3;n del elemento de opci&#xF3;n pulsado, analizando su <strong><code>itemId</code></strong> concretaremos qu&#xE9; opci&#xF3;n ha sido pulsada.</p>
+<p>A diferencia de <strong><code>onCreateOptionsMenu()</code></strong>, que solo se llama la primera vez que se construye el men&#xFA;, el m&#xE9;todo <strong><code>onPrepareOptionsMenu()</code></strong> se llama cada vez que el men&#xFA; se  abre. Esto nos permite realizar operaciones como a&#xF1;adir o eliminar opciones de manera din&#xE1;mica, modificarmla visibilidad de los diferentes elementos o modificar su texto.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onPrepareOptionsMenu</span><span class="token punctuation">(</span>menu<span class="token operator">:</span> Menu<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+        <span class="token comment">//add item</span>
+        menu<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token operator">/</span>add menu
+        menu<span class="token punctuation">.</span><span class="token function">addSubMenu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onPrepareOptionsMenu</span><span class="token punctuation">(</span>menu<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><h3 class="mume-header" id="contextual-menu">Contextual menu</h3>
+
+<p>La idea es que al realizar una pulsaci&#xF3;n larga sobre un elemento de una vista (un <strong><code>TextView</code></strong>,<strong><code>Button</code></strong>, un elemento de un <strong><code>RecyclerView</code></strong>,...), se abra un men&#xFA; con unas opciones que afectan &#xFA;nicamenten a &#xE9;l.</p>
+<p>Es necesario registrar que dicho elemento tiene asociado un <strong><code>Contextual menu</code></strong>, para ello tenemos el m&#xE9;todo <strong><code>registerForContextMenu(vista)</code></strong>.</p>
+<p>Cuando se reliza la pulsaci&#xF3;n larga sobre un elemento que tiene asociado un men&#xFA; contextual se invoca al m&#xE9;todo <strong><code>onCreateContextMenu()</code></strong>.</p>
+<p>Vamos a crear un proyecto nuevo que llamaremos <strong>EjemploContextualMenu</strong> donde tendremos dos men&#xFA;s contextuales definidos, uno sobre un <strong><code>Button</code></strong> y el otro sobre un <strong><code>TextView</code></strong>. Al <strong><code>Button</code></strong> le podremos camiar el color de fondo y al <strong><code>TextView</code></strong> el tama&#xF1;o de la fuente a trav&#xE9;s de los men&#xFA;s contextuales.</p>
+<p>En primer lugar definiremos dos men&#xFA;s que recojan la vista de cada uno de los men&#xFA;s contextuales:</p>
+<p>Para <strong><code>res/menu/menu_contextual_textview</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/op12<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>12<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/op16<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>16<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/op20<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>20<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/op24<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>24<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Y para <strong><code>res/menu/menu_contextual_button</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/opRojo<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Rojo<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/opAzul<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Azul<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/opVerde<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Verde<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Veamos el c&#xF3;digo:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[9-10,13,16,19,23-34]}" class="language-kotlin" data-line="9-10,13,16,19,23-34"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
+
+        <span class="token function">registerForContextMenu</span><span class="token punctuation">(</span>binding<span class="token punctuation">.</span>button<span class="token punctuation">)</span>
+        <span class="token function">registerForContextMenu</span><span class="token punctuation">(</span>binding<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateContextMenu</span><span class="token punctuation">(</span>menu<span class="token operator">:</span> ContextMenu<span class="token operator">?</span><span class="token punctuation">,</span> v<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">,</span> menuInfo<span class="token operator">:</span> ContextMenu<span class="token punctuation">.</span>ContextMenuInfo<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreateContextMenu</span><span class="token punctuation">(</span>menu<span class="token punctuation">,</span> v<span class="token punctuation">,</span> menuInfo<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>v<span class="token operator">!!</span><span class="token punctuation">.</span>id<span class="token operator">==</span> id<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            menuInflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>menu<span class="token punctuation">.</span>menu_contextual_textview<span class="token punctuation">,</span>menu<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>v<span class="token operator">!!</span><span class="token punctuation">.</span>id<span class="token operator">==</span> id<span class="token punctuation">.</span>button<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            menuInflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>menu<span class="token punctuation">.</span>menu_contextual_button<span class="token punctuation">,</span>menu<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onContextItemSelected</span><span class="token punctuation">(</span>item<span class="token operator">:</span> MenuItem<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+        <span class="token keyword">when</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span>itemId<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            id<span class="token punctuation">.</span>op12<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>text<span class="token punctuation">.</span>textSize<span class="token operator">=</span> <span class="token number">12F</span>
+            id<span class="token punctuation">.</span>op16<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>text<span class="token punctuation">.</span>textSize<span class="token operator">=</span><span class="token number">16F</span>
+            id<span class="token punctuation">.</span>op20<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>text<span class="token punctuation">.</span>textSize<span class="token operator">=</span><span class="token number">20F</span>
+            id<span class="token punctuation">.</span>op24<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>text<span class="token punctuation">.</span>textSize<span class="token operator">=</span><span class="token number">24F</span>
+            id<span class="token punctuation">.</span>opAzul<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>button<span class="token punctuation">.</span><span class="token function">setBackgroundColor</span><span class="token punctuation">(</span>BLUE<span class="token punctuation">)</span>
+            id<span class="token punctuation">.</span>opRojo<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>button<span class="token punctuation">.</span><span class="token function">setBackgroundColor</span><span class="token punctuation">(</span>RED<span class="token punctuation">)</span>
+            id<span class="token punctuation">.</span>opVerde<span class="token operator">-&gt;</span>binding<span class="token punctuation">.</span>button<span class="token punctuation">.</span><span class="token function">setBackgroundColor</span><span class="token punctuation">(</span>GREEN<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onContextItemSelected</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9-10" data-start="9" data-end="10">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="19" data-start="19">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="23-34" data-start="23" data-end="34">
+
+
+
+
+
+
+
+
+
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Aclaraciones:</p>
+<ul>
+<li>L&#xED;neas 8 y 10, con registramos las vistas sobre las que vamos a tener el men&#xFA; contextual.</li>
+<li>L&#xED;neas 13, 16 y 19, una vez pulsada una vista debemos determinar cu&#xE1;l es para visualizar el men&#xFA; contextual correspondiente.</li>
+<li>L&#xED;neas-23-34, vemos que opci&#xF3;n del men&#xFA; se ha pulsado y actuamos en consecuencia.</li>
+</ul>
 </blockquote>
-<blockquote>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"></pre></blockquote>
-<blockquote>
-<pre data-role="codeBlock" data-info class="language-"><code></code></pre></blockquote>
+<h3 class="mume-header" id="popup-menu">Popup menu</h3>
+
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea una App fragmentV1, para probar el ejemplo anterior, el fragment1 ser&#xE1; est&#xE1;tico mientras que el fragment2 ser&#xE1; a&#xF1;adido de forma din&#xE1;mica desde el c&#xF3;digo</span></p>
 <p><a href="https://developer.android.com/guide/fragments/communicate?hl=es-419#viewmodel">ViewModel</a>.</p>
 <blockquote>
