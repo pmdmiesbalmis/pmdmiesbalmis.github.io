@@ -369,7 +369,12 @@ justo después del front matter
 </ol>
 </li>
 <li><a href="#dialogfragment">DialogFragment</a></li>
-<li><a href="#dialogfragment-1">DialogFragment</a></li>
+<li><a href="#vistas-deslizantes-y-tabs">Vistas Deslizantes y Tabs</a>
+<ol>
+<li><a href="#viewpager">ViewPager</a></li>
+<li><a href="#tabslayout">TabsLayout</a></li>
+</ol>
+</li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
@@ -563,6 +568,9 @@ Vamos a ver el ejemplo de la clase <strong>MainActivity</strong>:</p>
 
 <div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
 </div></div></pre><blockquote>
+<p>&#x270B; Si se quiere usar Binding con Fragments, informate de su uso en el siguiente enlace, <a href="https://developer.android.com/topic/libraries/view-binding?hl=es-419#fragments">vincular vistas</a></p>
+</blockquote>
+<blockquote>
 <p>&#x1F4CC;En este caso nuestra activity carga un layout con un View <strong><code>fragment</code></strong> para el  fragmento est&#xE1;tico  y un <strong><code>FragmeLayout</code></strong> que no muestra nada pero nos va a servir como contenedor para agregar el fragment din&#xE1;mico program&#xE1;ticamente.<br>
 Lo primero que hacemos es crear una instancia de <strong><code>FragmentManager</code></strong> a trav&#xE9;s de su m&#xE9;todo <strong><code>getSupportFragmentManaget()</code></strong>, <strong>L&#xED;nea 7</strong>. De esta manera estamos creando un objeto que nos servir&#xE1; para manejar los fragmentos.<br>
 A continuaci&#xF3;n creamos una instancia de <strong><code>FragmentTransaction</code></strong> para realizar la transacci&#xF3;n de fragmentos. A trav&#xE9;s del m&#xE9;todo <strong><code>beginTransaction()</code></strong> <strong>L&#xED;nea 8</strong>, indicamos que vamos a realizar una transacci&#xF3;n de fragmentos.<br>
@@ -570,6 +578,7 @@ Lo siguiente es crear una instancia de nuestro <strong><code>FragmentDos</code><
 Para terminar la transacci&#xF3;n siempre deberemos declarar el m&#xE9;todo <strong><code>commit()</code></strong> <strong>L&#xED;nea 11</strong>.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea una App fragmentV1, para probar el ejemplo anterior, el fragment1 ser&#xE1; est&#xE1;tico mientras que el fragment2 ser&#xE1; a&#xF1;adido de forma din&#xE1;mica desde el c&#xF3;digo</span></p>
+<div style="page-break-after:always;"></div>
 <h4 class="mume-header" id="gestionar-fragments">Gestionar Fragments.</h4>
 
 <p>En el punto anterior hemos hablado de transacciones, una transacci&#xF3;n simplemente es una acci&#xF3;n que nos permite agregar, reemplazar, eliminar o incluso realizar otras acciones cuando trabajamos con fragmentos. Estas transacciones pueden ser apiladas por la activity de acogida, permitiendo as&#xED; al usuario navegar entre fragmentos mientras la activity siga en ejecuci&#xF3;n.<br>
@@ -594,7 +603,8 @@ Para este caso se ha creado un ejemplo que muestra un layout con un ViewGroup pa
         <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_alignParentBottom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RelativeLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><p>Una vez creado el layout deberemos crear la siguiente activity:</p>
+</pre><div style="page-break-after:always;"></div>
+<p>Una vez creado el layout deberemos crear la siguiente activity:</p>
 <h5 class="mume-header" id="mainactivitykt">Mainactivity.kt</h5>
 
 <pre data-role="codeBlock" data-info="kotlin {highlight=[7, 8,10,16,18]}" class="language-kotlin" data-line="7,8,10,16,18"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -685,6 +695,7 @@ Cada vez que el usuario pulse el bot&#xF3;n se creara una transacci&#xF3;n a&#xF
 Se finaliza la transacci&#xF3;n con el m&#xE9;todo <strong><code>commit()</code></strong> y cambiamos el valor booleano.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Prueba el anterior ejemplo FragmentV2: bot&#xF3;n que te vaya cargando uno u otro fagment y al mismo tiempo que se acumulen en la pila. Probar que al pulsar el bot&#xF3;n de retroceso, se pasa por cada uno de los fragments que se han cargado anteriormente.</span></p>
+<div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="comunicar-fragments-y-activitys">Comunicar Fragments y Activitys</h3>
 
 <p>Cuando hablamos sobre <a href="https://developer.android.com/training/basics/fragments/communicating?hl=es">la comunicaci&#xF3;n de fragmentos</a>, debemos tener en cuenta las siguientes premisas:</p>
@@ -834,6 +845,7 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 </div></div></pre><p>&#x1F4CC;<strong>L&#xED;nea 1</strong> en este caso vemos que el fragment hereda de <strong><code>ListFragment</code></strong> en vez de <strong><code>Fragment</code></strong>, esto permite que el fragment est&#xE9; formado por una lista de elementos y que no se tenga que crear ninguna vista espec&#xED;fica para el. Para asociar los elementos a la lista, deberemos crear un <strong><code>ArrayAdapter</code></strong> indicando los valores y el layout de salida (predefinido en los recursos de Android) <strong>L&#xED;nea 8</strong> (Este elemento se ver&#xE1; m&#xE1;s extensamente en temas posteriores). <strong>L&#xED;nea de 11 a 15</strong>, esta sobrecarga del m&#xE9;todo <strong><code>onListItemClick</code></strong> est&#xE1; asociada a la pulsaci&#xF3;n de cualquier elemento de la lista, entrando como par&#xE1;metros la vista y la posici&#xF3;n del elemento pulsado.  <strong>L&#xED;nea 2</strong> se crea una propiedad del <strong><code>ViewModel</code></strong> creado con anterioridad, utilizando el delegado <strong><code>activityViewModels</code></strong> para obtener una referencia al ViewModel en el &#xE1;mbito de su actividad y que se pueda compartir entre las distintas vistas o fragments, mientras el ciclo de vida lo permita. Para poder incluir este delegado, se tiene que a&#xF1;adir la siguiente dependencia (a d&#xED;a de hoy):</p>
 <pre data-role="codeBlock" data-info="groovy" class="language-groovy">implementation <span class="token string">&apos;androidx.fragment:fragment-ktx:1.3.2&apos;</span>
 </pre><p><strong>L&#xED;nea 14</strong>, cuando se pulse un elemento de la lista se modificar&#xE1; el valor del LiveData con la informaci&#xF3;n de esa posici&#xF3;n del array (siempre que no sea nula <em>let{}</em>)</p>
+<div style="page-break-after:always;"></div>
 <p>El Fragment con el detalle, <strong>FragmentSecundario.kt</strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[2,9,11]}" class="language-kotlin" data-line="2,9,11"><span class="token keyword">class</span> FragmentSecundario<span class="token operator">:</span><span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
    <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1131,6 +1143,7 @@ Para obtener una instancia de FragmentTransaction utilizamos <strong><code>begin
 <blockquote>
 <p>&#x270B;Ser&#xE1; importante decidir como queremos pasar de unos fragments a otros, <strong>porque lo que no se debe hacer es mezclar el sistema de Navigation con el que usamos con FragmentManager</strong>.</p>
 </blockquote>
+<div style="page-break-after:always;"></div>
 <h5 class="mume-header" id="navhost">NavHost</h5>
 
 <p>Para comenzar lo primero que debemos hacer es crear el <strong><code>NavHost</code></strong>, para ello usaremos el contenedor donde vamos a insertar los fragments. Este elemento debe ser de tipo <strong><code>FragmentContainerView</code></strong> y habr&#xE1; que a&#xF1;adir los siguientes atributos:</p>
@@ -1227,10 +1240,18 @@ Para a&#xF1;adir <strong>elementos</strong> pulsaremos el s&#xED;mbolo de <stron
     <img height="100
     " src="./imagenes/navigation5.png">
 </div>
+<div style="page-break-after:always;"></div>
 <p>Hay un tipo de <strong>acciones globales</strong> que permiten llegar a un destino desde cualquier lugar. Se muestran como una <strong><code>-&gt;</code></strong> corta enlazada solamente por el destino, y que se crean mediante el men&#xFA; contextual del destino seleccionado.</p>
 <div align="center">
     <img height="200
     " src="./imagenes/navigation6.png">
+</div>
+<blockquote>
+<p>&#x270B; Cuando estamos creando el gr&#xE1;fico de navegaci&#xF3;n podemos optar por perfeccionar las acciones para que al ocurrir estas y saltar a un lugar concreto, se desapilen los elementos intermedios innecesarios. Esto evitar&#xE1; que al pulsar el <strong><code>backPressed</code></strong>, se pase por cada uno de los fragments apilados en las distintas acciones. Para ello solo tenemos que ir a la propiedad <strong>Pop Behavior</strong> de la acci&#xF3;n deseada, e indicar en <strong>popUpTo</strong> hasta que elemento se quiere desapilar, con <strong>popUpToInclusive</strong> a true, indicamos que tambi&#xE9;n se desapile ese elemento.</p>
+</blockquote>
+<div align="center">
+    <img height="80
+    " src="./imagenes/navigation7.png">
 </div>
 <h5 class="mume-header" id="navcontroller">NavController</h5>
 
@@ -1368,6 +1389,7 @@ C&#xF3;digo <strong>fragment1.xml</strong> con dos botones <em>cancelar y acepta
 <h3 class="mume-header" id="dialogfragment">DialogFragment</h3>
 
 <p>Como hemos visto al principio del tema, la clase Fragment tiene varias clases hijas que nos permiten realizar tareas concretas, una de ellas es la clase <a href="https://developer.android.com/guide/topics/ui/dialogs">DialogFragment</a>. Al heredar de ella podremos crear distintos tipos de di&#xE1;logos y es la manera aconsejada para hacerlo. Como hemos dicho, para utilizar este tipo de di&#xE1;logos deberemos crearnos una clase derivada de DialogFragment e implementar en ella el tipo de dialogo que queramos (como esta parte ya la conocemos de temas anteriores, solo vamos a comentar un par de AlertDialog diferentes). Como en este caso los di&#xE1;logos est&#xE1;n implementados con fragments para mostrarlos necesitaremos usar un <strong><code>FragmentManager</code></strong>, no la t&#xED;pica llamada al m&#xE9;todo show. Vamos a pasar a ver un ejemplo:</p>
+<div style="page-break-after:always;"></div>
 <h5 class="mume-header" id="di%C3%A1logo-de-alerta">Di&#xE1;logo de Alerta</h5>
 
 <p>Este tipo de di&#xE1;logo se limita a mostrar un mensaje sencillo al usuario, y un &#xFA;nico bot&#xF3;n de OK para confirmar su lectura. Veamos un ejemplo:</p>
@@ -1437,8 +1459,163 @@ C&#xF3;digo <strong>fragment1.xml</strong> con dos botones <em>cancelar y acepta
 <span class="token punctuation">}</span>
 </pre><p>Cada vez que se selecciona un elemento de la lista se ejecutar&#xE1; el escuchador <strong><code>OnMultiChoiceClickListener</code></strong>, llegando a este el item pulsado y si esta <em>checked</em> o <em>unchecked</em>.</p>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio PropuestoDialogoPersonalizado</span></p>
-<h3 class="mume-header" id="dialogfragment-1">DialogFragment</h3>
+<h3 class="mume-header" id="vistas-deslizantes-y-tabs">Vistas Deslizantes y Tabs</h3>
 
+<h4 class="mume-header" id="viewpager">ViewPager</h4>
+
+<p>Las <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2">vistas deslizantes o  paginaci&#xF3;n horizontal</a>, permiten navegar entre pantallas relacionadas. Por ejemplo, entre pesta&#xF1;as, con un gesto horizontal del dedo o un deslizamiento. Para crear, a d&#xED;a de hoy, vistas deslizantes se utiliza el elemento <strong><code>ViewPager2</code></strong>.<br>
+Vamos a retomar el ejemplo de <strong>FragmentV3ViewModel</strong> y a&#xF1;adir el c&#xF3;digo necesario para conseguir el efecto de desplazamiento entre fragments. Los pasos son los siguientes:</p>
+<ol>
+<li>
+<p>El layout de la actividad donde se van a a&#xF1;adir los fragments, deber&#xE1; de incluir un <strong><code>ViewPager2</code></strong>. Si la pantalla muestra los fragments completos, este elemento puede ser la ra&#xED;z. Por ejemplo, el <em>.xml</em> del <strong>MainActivity</strong> podr&#xED;a ser:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.viewpager2.widget.ViewPager2</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com
+/apk/res/android<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/ViewPager<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</pre></li>
+<li>
+<p>Se deber&#xE1; crear una clase que manejar&#xE1; la carga de los fragments con el desplazamiento. Esta clase deber&#xE1; heredar de la clase abstracta <strong><code>FragmentStateAdapter</code></strong>, por lo que obligar&#xE1; a implementar el m&#xE9;todo <strong><code>createFragment()</code></strong> a fin de aprovisionar instancias de Fragments a la paginaci&#xF3;n,  y el m&#xE9;todo <strong><code>getItemCount()</code></strong>, que debe devolver el n&#xFA;mero exacto de fragments que se paginar&#xE1;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">FragmentPageAdapter</span><span class="token punctuation">(</span>fragment<span class="token operator">:</span> FragmentActivity<span class="token punctuation">)</span><span class="token operator">:</span> 
+                        <span class="token function">FragmentStateAdapter</span><span class="token punctuation">(</span>fragment<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">3</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">createFragment</span><span class="token punctuation">(</span>position<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Fragment <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">when</span> <span class="token punctuation">(</span>position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token number">0</span> <span class="token operator">-&gt;</span> <span class="token function">MyListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token number">1</span> <span class="token operator">-&gt;</span> <span class="token function">FragmentSecundario</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token number">2</span> <span class="token operator">-&gt;</span> <span class="token function">FragmentTercero</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token function">MyListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; L&#xF3;gicamente las clases con los fragments y sus layouts relacionados deben existir, en este caso se ha duplicado FragmentSecundario del ejemplo anterior y se ha renombrado a FragmenTercero.</p>
+</blockquote>
+</li>
+<li>
+<p>Por &#xFA;ltimo se deber&#xE1; conectar el <strong><code>FragmentStateAdapter</code></strong> a los objetos <strong><code>ViewPager2</code></strong>.</p>
+</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[7,8,9,[11-13]]}" class="language-kotlin" data-line="7,8,9,11-13"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">FragmentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> viewPager<span class="token operator">:</span>ViewPager2
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        viewPager <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>ViewPager<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> pagerAdapter <span class="token operator">=</span> <span class="token function">FragmentPageAdapter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        viewPager<span class="token punctuation">.</span>adapter <span class="token operator">=</span> pagerAdapter
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBackPressed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>viewPager<span class="token punctuation">.</span>currentItem <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onBackPressed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span> viewPager<span class="token punctuation">.</span>currentItem <span class="token operator">=</span> viewPager<span class="token punctuation">.</span>currentItem <span class="token operator">-</span> <span class="token number">1</span>  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11-13" data-start="11" data-end="13">
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC; En este caso nos ha convenido que MainActivity herede de <strong><code>FragmentActivity</code></strong>, para que de esta forma no nos de problemas la llamada al constructor de <strong><code>FragmentStateAdapter</code></strong>. <strong>L&#xED;nea 7</strong> instanciamos el objeto <strong><code>ViewPager2</code></strong> de <em>activity_main.xml</em>. <strong>L&#xED;nea 8</strong> instanciamos un objeto de la clase que hereda de <strong><code>FragmentStateAdapter</code></strong>. <strong>L&#xED;nea 9</strong> relacionamos ambos objetos para hacer la conexi&#xF3;n. <strong>Bloque 11 a 13</strong>, anulamos el BackPressed para que realice el comportamiento correcto de cambio de fragments.Como se puede ver se hace mediante la propiedad <strong><code>currentItem</code></strong> decrement&#xE1;ndola en 1.</p>
+</blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Reconstruye el ejemplo explicado con anterioridad para probar el funcionamiento del ViewPager. Podr&#xE1;s comprobar que el paso de informaci&#xF3;n con ViewModel sigue funcionando correctamente<br>
+</span></p>
+<h4 class="mume-header" id="tabslayout">TabsLayout</h4>
+
+<p>Un objeto <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2#add_tabs_using_a_tablayout">TabLayout</a> proporciona una forma crear pesta&#xF1;as horizontales. Cuando se usa junto con un ViewPager2 nos permite el deslizamiento al mismo tiempo que se marca la pesta&#xF1;a activa.</p>
+<div align="center">
+    <img height="120" src="./imagenes/taps1.png">
+</div>
+<p>Las pesta&#xF1;as se pueden insertar en la ToolBar (la manera m&#xE1;s com&#xFA;n) o independientes a esta. Nosotros vamos a seguir un ejemplo que a&#xF1;ade las Tabs a la Toolbar y para ello retomaremos el anterior ejercicio, pero ahora a la <strong>activity_main.xml</strong> le a&#xF1;adiremos una <strong><code>MaterialToolBar</code></strong> como ya vimos en el Bloque 4 y dentro de esta meteremos el <strong><code>TabLayout</code></strong>.</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.appbar.AppBarLayout</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/ThemeOverlay.MaterialComponents.Dark.ActionBar<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.appbar.MaterialToolbar</span>
+            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/toolbar<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>?attr/actionBarSize<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.tabs.TabLayout</span>
+            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/tabs<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.TabLayout.PrimarySurface<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.appbar.AppBarLayout</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.viewpager2.widget.ViewPager2</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/viewpager<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Las nuevas l&#xED;neas a a&#xF1;adir en la actividad principal para referenciar al TabLayout creado y para crear un objeto de tipo <a href="https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator">TabLayoutMediator</a> encargado de relacionar el tabLayout con el ViewPager.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> tabLayout <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TabLayout<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>tabs<span class="token punctuation">)</span>
+<span class="token function">TabLayoutMediator</span><span class="token punctuation">(</span>tabLayout<span class="token punctuation">,</span> viewPager<span class="token punctuation">)</span> <span class="token punctuation">{</span> tab<span class="token punctuation">,</span> position <span class="token operator">-&gt;</span>
+             <span class="token keyword">when</span> <span class="token punctuation">(</span>position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token number">0</span> <span class="token operator">-&gt;</span> tab<span class="token punctuation">.</span><span class="token function">setIcon</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_emoticon<span class="token punctuation">)</span>
+                <span class="token number">1</span> <span class="token operator">-&gt;</span> tab<span class="token punctuation">.</span>text<span class="token operator">=</span><span class="token string">&quot;Tap 2&quot;</span>
+                <span class="token number">2</span> <span class="token operator">-&gt;</span> tab<span class="token punctuation">.</span><span class="token function">setIcon</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_place<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; Al crear una instancia de la clase <strong>TabLayoutMediator</strong> se tiene que implementar la interface <strong><code>TabLayoutMediator.TabConfigurationStrategy</code></strong> para configurar la pesta&#xF1;a de la p&#xE1;gina en la posici&#xF3;n especificada (en esta interface se establecer&#xE1; el texto de la pesta&#xF1;a y cualquier estilo de las pesta&#xF1;as que se necesite).<br>
+<strong><code>TabLayoutMediator</code></strong> sincronizar&#xE1; la posici&#xF3;n de ViewPager2 con la pesta&#xF1;a seleccionada cuando se seleccione una pesta&#xF1;a, y la posici&#xF3;n de desplazamiento de TabLayout cuando el usuario arrastre ViewPager2.</p>
+</blockquote>
+<p>Adem&#xE1;s <strong><code>TabLayoutMediator</code></strong> escucha diferentes elementos, para controlar las distintas situaciones:</p>
+<ul>
+<li><strong><code>OnPageChangeCallback</code></strong> de ViewPager2 para ajustar la pesta&#xF1;a cuando ViewPager2 se mueva.</li>
+<li><strong><code>OnTabSelectedListener</code></strong> de TabLayout para ajustar VP2 cuando se mueve la pesta&#xF1;a.</li>
+<li><strong><code>AdapterDataObserver</code></strong> de RecyclerView para recrear el contenido de la pesta&#xF1;a cuando cambia el conjunto de datos.</li>
+</ul>
+<p>Un ejemplo del escuchador del ViewPager2 ser&#xED;a:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">tabLayout<span class="token punctuation">.</span><span class="token function">addOnTabSelectedListener</span> <span class="token punctuation">(</span><span class="token keyword">object</span><span class="token operator">:</span>TabLayout<span class="token punctuation">.</span><span class="token function">OnTabSelectedListener</span><span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onTabSelected</span><span class="token punctuation">(</span>tab<span class="token operator">:</span> TabLayout<span class="token punctuation">.</span>Tab<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">TODO</span><span class="token punctuation">(</span><span class="token string">&quot;Not yet implemented&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onTabUnselected</span><span class="token punctuation">(</span>tab<span class="token operator">:</span> TabLayout<span class="token punctuation">.</span>Tab<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">TODO</span><span class="token punctuation">(</span><span class="token string">&quot;Not yet implemented&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onTabReselected</span><span class="token punctuation">(</span>tab<span class="token operator">:</span> TabLayout<span class="token punctuation">.</span>Tab<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">TODO</span><span class="token punctuation">(</span><span class="token string">&quot;Not yet implemented&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Construye el ejemplo y prueba su funcionamiento</span></p>
 
       </div>
       
