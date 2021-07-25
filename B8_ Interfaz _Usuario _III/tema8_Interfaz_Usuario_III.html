@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Bloque 3. Ejercicio Propuesto Intent Impl&#xED;cito</title>
+      <title>PMDM 2&#xBA; DAM  Tema 8. Interfaz de Usuario III</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -336,11 +336,122 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="bloque-3-ejercicio-propuesto-intent-impl%C3%ADcito">Bloque 3. Ejercicio Propuesto Intent Impl&#xED;cito</h1>
+<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
-<p><a href="./EjercicioPropuestoIntentImplicito.pdf">Descargar este ejercicio</a></p>
-<h3 class="mume-header" id="almacenamiento-de-informaci%C3%B3n-en-android">Almacenamiento de informaci&#xF3;n en Android</h3>
+<p><a href="./tema8_Interfaz_Usuario_III.pdf">Descargar estos apuntes</a></p>
+<h1 class="mume-header undefined" id="tema-8-interfaz-de-usuario-iii">Tema 8. Interfaz de Usuario III</h1>
 
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+<ol>
+<li><a href="#spinner">Spinner</a></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="spinner">Spinner</h3>
+
+<p>Las listas desplegables en Android se llaman <a href="https://developer.android.com/guide/topics/ui/controls/spinner">Spinners</a>  Spinner. El usuario selecciona de la lista emergente un elemento que es el seleccionado para el control. El c&#xF3;digo de la vista de un Spinner ser&#xE1; el siguiente:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Spinner</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/spinner<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</pre><p>Los elementos que mostrar&#xE1; nuestro Spinner no se pueden indicar directamente, sino que es necesario crear una estructura de elementos que podamos asociar a &#xE9;ste en nuestro c&#xF3;digo. Una de las maneras ser&#xED;a usando un Array de Strings para luego asignarlo al spinner:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> colores <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Rojo&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Verde&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Azul&quot;</span><span class="token punctuation">)</span>
+</pre><p>A continuaci&#xF3;n debemos definir el adaptador, en nuestro caso un objeto ArrayAdapter, que ser&#xE1; el objeto que lazaremos con nuestro Spinner.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword">val</span> adaptador <span class="token operator">=</span> <span class="token function">ArrayAdapter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_list_item_1<span class="token punctuation">,</span> colores<span class="token punctuation">)</span>
+</pre><p>Creamos el adaptador en s&#xED;, al que pasamos 3 par&#xE1;metros:</p>
+<ol>
+<li>El contexto, que normalmente ser&#xE1; simplemente una referencia a la actividad donde se crea el adaptador.</li>
+<li>El ID del layout sobre el que se mostrar&#xE1;n los datos del control. En este caso le pasamos el ID de un layout predefinido en Android (android.R.layout.simple_spinner_item), formado &#xFA;nicamente por un control textView, pero podr&#xED;amos pasar el ID de cualquier layout de nuestro proyecto con cualquier estructura y conjunto de controles.</li>
+<li>El elemento que contiene los datos a mostrar.</li>
+</ol>
+<p>Con estas simples l&#xED;neas tendremos un control similar al de la siguiente imagen:</p>
+   <span style="align: center;">
+   <table align="center">
+   <tbody><tr>
+   <td>
+   <div align="center">
+       <img height="60" src="./imagenes/spinner1.png">
+   </div>
+   </td>
+   <td>
+   <div align="center">
+       <img height="100" src="./imagenes/spinner2.png">
+   </div>
+   </td>
+   </tr>
+   </tbody></table>
+   </span>
+<blockquote>
+<p>&#x1F393; Vamos a crea un proyecto de ejemplo llamado Spinner al que a&#xF1;adiremos el siguiente c&#xF3;digo en la <strong>MainActivity.kt</strong>, y no olvides a&#xF1;adir un spinner con <em>id=spinner</em> en el layout <strong>activity_main.xml</strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[8,11,12]}" class="language-kotlin" data-line="8,11,12"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                    AdapterView<span class="token punctuation">.</span><span class="token function">OnItemSelectedListener</span> <span class="token punctuation">{</span>
+   <span class="token keyword">var</span> colores <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Rojo&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Verde&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Azul&quot;</span><span class="token punctuation">)</span>
+   <span class="token keyword">lateinit</span>  <span class="token keyword">var</span> listaColores<span class="token operator">:</span> Spinner
+   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+       <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+       <span class="token keyword">val</span> adaptador <span class="token operator">=</span> <span class="token function">ArrayAdapter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>
+                                   simple_list_item_1<span class="token punctuation">,</span> colores<span class="token punctuation">)</span>
+       listaColores <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>spinner<span class="token punctuation">)</span>
+       listaColores<span class="token punctuation">.</span>adapter<span class="token operator">=</span>adaptador
+       listaColores<span class="token punctuation">.</span><span class="token function">setOnItemSelectedListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div></pre><p>&#x1F4CC; <strong>L&#xED;nea 8</strong> creamos el adaptador, como hemos explicado anteriormente, para asignarlo al Spinner en la <strong>L&#xED;nea 11</strong>.</p>
+<p>En cuanto a los eventos lanzados por el control Spinner, el m&#xE1;s utilizado ser&#xE1; el generado al seleccionarse una opci&#xF3;n de la lista desplegable, onItemSelected. Para capturar este evento se proceder&#xE1; de forma similar a lo ya visto para otros controles anteriormente, asign&#xE1;ndole su controlador mediante el m&#xE9;todo <strong><code>setOnItemSelectedListener()</code></strong>, en este caso lo hacemos mediante el m&#xE9;todo de derivar de la interfaz,  <strong>L&#xED;nea 12</strong>.<br>
+En el c&#xF3;digo inferior vemos implementado el m&#xE9;todo, que muestra un Toast con el color elegido.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onItemSelected</span><span class="token punctuation">(</span>adapterView<span class="token operator">:</span> AdapterView<span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">,</span> 
+                               view<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">,</span> i<span class="token operator">:</span> Int<span class="token punctuation">,</span> l<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">val</span> x <span class="token operator">=</span> Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">&quot;El color elegido es: &quot;</span> <span class="token operator">+</span>
+                              colores<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span>
+       x<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<h5 class="mume-header" id="nota-ampliativa">Nota ampliativa</h5>
+
+<p>Una alternativa a tener en cuenta, si los datos a mostrar en el control son est&#xE1;ticos, ser&#xED;a definir la lista de posibles valores como un recurso de tipo string-array. Para ello, primero crear&#xED;amos un nuevo fichero XML en la carpeta <strong>res/values</strong> llamado por ejemplo spinner.xml e incluir&#xED;amos en &#xE9;l los valores seleccionables de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string-array</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>colores<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span><span class="token punctuation">&gt;</span></span>ROJO<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span><span class="token punctuation">&gt;</span></span>VERDE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span><span class="token punctuation">&gt;</span></span>AZUL<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string-array</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+</pre><p>En este caso, a la hora de crear el adaptador utilizar&#xED;amos el m&#xE9;todo <strong><code>createFromResource()</code></strong> para hacer referencia al array XML que acabamos de crear:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> adaptador<span class="token operator">=</span>ArrayAdapter<span class="token punctuation">.</span><span class="token function">createFromResource</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>R<span class="token punctuation">.</span>array<span class="token punctuation">.</span>colores<span class="token punctuation">,</span>
+                                              android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_list_item_1<span class="token punctuation">)</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio PropuestoSpinner</span></p>
 
       </div>
       
