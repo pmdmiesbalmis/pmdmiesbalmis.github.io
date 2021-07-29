@@ -692,7 +692,7 @@ Para <strong><code>res/menu/menu_contextual_textview</code></strong>:</p>
         <span class="token attr-name"><span class="token namespace">android:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/opMail<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>icon</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@drawable/outline_email_24<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu</span><span class="token punctuation">&gt;</span></span>
-</pre><p>La gesti&#xF3;n del men&#xFA; es diferente a lo vistao anteriormente. Cuando pulsamos el bot&#xF3;n asociado al <strong><code>Popup menu</code></strong> ejecutaremos una funci&#xF3;n que nos visualizar&#xE1; el <strong><code>Popup menu</code></strong>, inflando la vista (l&#xED;neas 16 y 17) y en ese momento definimos el <strong><code>Listener</code></strong>`** para gestionar las opciones del men&#xFA; (l&#xED;nea18), una vez todo definido mostramos el men&#xFA; (l&#xED;nea 30):</p>
+</pre><p>La gesti&#xF3;n del men&#xFA; es diferente a lo vistao anteriormente. Cuando pulsamos el bot&#xF3;n asociado al <strong><code>Popup menu</code></strong> ejecutaremos una funci&#xF3;n que nos visualizar&#xE1; el <strong><code>Popup menu</code></strong>, inflando la vista (l&#xED;neas 16 y 17) y en ese momento definimos el <strong><code>Listener</code></strong> para gestionar las opciones del men&#xFA; (l&#xED;nea18), una vez todo definido mostramos el men&#xFA; (l&#xED;nea 30):</p>
 <pre data-role="codeBlock" data-info="kotlin  {highlight=[10,16,17,18-28,30]}" class="language-kotlin" data-line="10,16,17,18-28,30"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
 
@@ -826,10 +826,279 @@ Para <strong><code>res/menu/menu_contextual_textview</code></strong>:</p>
 
 
 <div aria-hidden="true" class="line-highlight" data-range="30" data-start="30">
-</div></div></pre><h3 class="mume-header" id="exposed-dropdown-menu">Exposed dropdown menu</h3>
+</div></div></pre><p><a href="https://material.io/components/menus/android#dropdown-menus">Para visualizar los icono del men&#xFA; ir a la gu&#xED;a de Material de este mismo enlace.</a></p>
+<h3 class="mume-header" id="exposed-dropdown-menu">Exposed dropdown menu</h3>
 
-<h3 class="mume-header" id="navigation-drawer">Navigation Drawer</h3>
+<p>Los men&#xFA;s vistos hasta hora se engloban en las gu&#xED;as de <em>Android</em> como <strong><code>Dropdown menus</code></strong>. Se diferencian de <strong><code>Exposed dropdown menus</code></strong> porque estos &#xFA;ltimos muestran la &#xFA;ltima opci&#xF3;n seleccionada del mismo. Los vimos cuando explicamos <strong><code>AutoCompleteTextView</code></strong></p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.textfield.TextInputLayout</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/menu<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>hint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/label<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AutoCompleteTextView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>inputType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>none<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.textfield.TextInputLayout</span><span class="token punctuation">&gt;</span></span>
+</pre><h3 class="mume-header" id="navigation-drawer">Navigation Drawer</h3>
+
+<p><strong><code>Navigation Drawer</code></strong> es un elemento de interfaz definido por Material Design consistente en el t&#xED;pico men&#xFA; lateral deslizante desde la izquierda que suele encontrase en la pantalla principal de la app y puede contar con un bot&#xF3;n para desplegarlo.</p>
+<p>La idea es tener la siguiente interfaz gr&#xE1;fica sin y con el <strong><code>Drawer menu</code></strong> desplegado:</p>
+<div align="center">
+    <img height="200" src="./imagenes/ejemploNavigationDrawer.png">
+</div>
+<p>Veamos los archivos <em>XML</em> necesarios para implementar el ejemplo.</p>
+<p>En el dise&#xF1;o de la activity principal,  usaremos como contenedor principal, un <strong><code>DrawerLayout</code></strong> el cual contendr&#xE1;  la Toolbar y el componente <strong><code>NavigationView</code></strong> que es el men&#xFA; propiamente dicho (adem&#xE1;s de cualquier otro elemento <strong><code>View</code></strong> que queramos incorporar a la interfaz). Los componentes de la ventana principal menos el men&#xFA; ir&#xE1;n dentro de un <strong><code>CoordinatorLayout</code></strong>:</p>
+<div align="center">
+    <img height="150" src="./imagenes/componentesNavigationDrawer.png">
+</div>
+<pre data-role="codeBlock" data-info="xml {highlight=[34,38,39,40,41]}" class="language-xml" data-line="34,38,39,40,41"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.drawerlayout.widget.DrawerLayout</span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/drawer_layout<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.coordinatorlayout.widget.CoordinatorLayout</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.appbar.AppBarLayout</span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>theme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Toolbar.Primary<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>fitsSystemWindows</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.appbar.MaterialToolbar</span>
+                <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/topAppBar<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>?attr/actionBarSize<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name"><span class="token namespace">app:</span>title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/app_name<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Toolbar.Primary<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name"><span class="token namespace">app:</span>layout_collapseMode</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>pin<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.appbar.AppBarLayout</span><span class="token punctuation">&gt;</span></span>
+
+        <span class="token comment">&lt;!-- Screen content --&gt;</span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.coordinatorlayout.widget.CoordinatorLayout</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.navigation.NavigationView</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/navigation_view<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>start<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>headerLayout</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@layout/drawer_header<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">app:</span>menu</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@menu/drawer_menu<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>fitsSystemWindows</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.drawerlayout.widget.DrawerLayout</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="34" data-start="34">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="38" data-start="38">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="39" data-start="39">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="40" data-start="40">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="41" data-start="41">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Aclaraciones:</p>
+<ul>
+<li>L&#xED;neas 34, definimos el <strong><code>NavigationView</code></strong></li>
+<li>L&#xED;neas 38, <strong><code>android:layout_gravuty=&quot;start&quot;</code></strong> establece que el men&#xFA; salga de la izquierda de la pantalla.</li>
+<li>L&#xED;neas 39, <strong><code>app:headerLayout=&quot;@layout/drawer_header&quot;</code></strong> establece el archico <em>XML</em> que define la vista de la cabecera del men&#xFA;.</li>
+<li>L&#xED;neas 40, <strong><code>app:menu=&quot;@menu/drawer_menu&quot;</code></strong> establece el archico <em>XML</em> que define la vista de las opciones del men&#xFA;.</li>
+<li>L&#xED;nea 41, <strong><code>android:fitsSystemWindows=&quot;true&quot;</code></strong> esablece que el <strong><code>GrawerNavigation</code></strong> aparezva por debajo de la barra.</li>
+</ul>
+</blockquote>
 <h3 class="mume-header" id="contextual-action-mode">Contextual Action Mode</h3>
 
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea una App fragmentV1, para probar el ejemplo anterior, el fragment1 ser&#xE1; est&#xE1;tico mientras que el fragment2 ser&#xE1; a&#xF1;adido de forma din&#xE1;mica desde el c&#xF3;digo</span></p>
@@ -837,7 +1106,7 @@ Para <strong><code>res/menu/menu_contextual_textview</code></strong>:</p>
 <blockquote>
 <p>&#x1F393; Para ello vamos a volver a implementar el &#xFA;ltimo ejemplo.</p>
 </blockquote>
-
+<div style="page-break-after:always;"></div>
       </div>
       
       
