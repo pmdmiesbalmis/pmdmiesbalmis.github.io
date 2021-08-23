@@ -267,26 +267,55 @@ pre[data-line] .line-highlight[data-end]:after {
       <h1 class="mume-header undefined" id="ejercicio-propuesto-agenda">Ejercicio Propuesto Agenda</h1>
 
 <p><a href="./ejercicio_Propuesto_Agenda.pdf">Descargar estos apuntes</a></p>
-<p>A partir del ejercicio del bloque 5 <strong>Propuesto Agenda</strong>, vamos a a&#xF1;adir m&#xE1;s funcionalidad usando los nuevos conocimientos adquiridos en el bloque 7, sobre fragments.<br>
-Para ello crearemos dos nuevos fragments, uno para a&#xF1;adir contactos y otro para editar contactos. Por ahora crearemos un <strong><code>ViewPager</code></strong> para poder cambiar entre los dos fragments.</p>
-<p>Crearemos una clase <strong>Contacto</strong> para gestionar los datos que se recogen en la agenda.</p>
-<h4 class="mume-header" id="fragment-a%C3%B1adir-contacto">Fragment A&#xF1;adir Contacto</h4>
-
-<div align="center">
-    <img height="300" src="./imagenes/addContact.png">
+<p>A partir del ejercicio del bloque 7 <strong>Propuesto Agenda</strong>, vamos a a&#xF1;adir m&#xE1;s funcionalidad usando los nuevos conocimientos adquiridos en el bloque 8, Comenzaremos a&#xF1;adiendo un nuevo fragments que contendr&#xE1; un recyclerView. En un principio la agenda no estar&#xE1; ordenada y los datos se guardar&#xE1;n en un ArrayList, las inserciones en la misma ser&#xE1;n secuenciales (por el final).<br>
+El aspecto ser&#xE1; como el siguiente, y adem&#xE1;s podremos interactuar con los elementos del recycler (realizar llamada, eliminar, etc)</p>
+ <div align="center">
+    <img height="300" src="./imagenes/recycler.png">
 </div>
-<p>Este fragment permitir&#xE1; meter los datos del contacto. <em>Avisar&#xE1; con un SnackBar al pulsar sobre el FAB en el caso de  no etiquetarse con al menos un elemento o si no se ha rellenado como m&#xED;nimo nombre y tel&#xE9;fono.</em></p>
+<p>Es conveniente mantener la lista de datos en la actividad principal como elemento est&#xE1;tico, para no perder la informaci&#xF3;n al navegar entre los fragments.</p>
+<h4 class="mume-header" id="funcionalidad-del-click-en-el-bot%C3%B3n-flotante">Funcionalidad del Click en el Bot&#xF3;n flotante</h4>
+
+<p>Al pulsar sobre el <strong>FAB</strong> se cargar&#xE1; el FragmentNuevoContacto, que ya ten&#xED;amos construido en el bloque anterior. Ahora se quitar&#xE1; la funcionalidad de deslizamiento. Este fragment permitir&#xE1; meter los datos del usuario, avisar&#xE1; con un <strong><code>SnackBar</code></strong> al pulsar sobre el <strong>FAB</strong> en caso de que no se haya etiquetado con al menos un elemento o si no se ha rellenado como m&#xED;nimo nombre y tlf.</p>
 <div align="center">
     <img height="80" src="./imagenes/snackbar.png">
 </div>
-<p>Si se rellenan los datos m&#xED;nimos y pulsamos sobre FAB, se guardar&#xE1; el nuevo contacto en una variable de este tipo. <strong>Tendremos que aplicar <strong><code>ViewModel</code></strong> para que se reflejen los cambios realizados en el Fragmento Editar</strong>.</p>
-<div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="fragment-editar-contacto">Fragment Editar Contacto</h4>
+<p>Si se rellenan los datos m&#xED;nimos y pulsamos sobre FAB, se guardar&#xE1; el nuevo contacto en el array , se cerrar&#xE1; este Fragment volviendo al FragmentRecycler.</p>
+<h4 class="mume-header" id="funcionalidad-del-click-sobre-un-elemento-del-recycler">Funcionalidad del Click sobre un elemento del recycler</h4>
 
+<p>En caso de realizar una pulsaci&#xF3;n corta <strong>OnClick</strong>, se cargar&#xE1; el FragmentEditarContacto con los datos del contacto pulsado. Para ello podemos usar un <strong><code>ViewMode</code></strong>. Tambi&#xE9;n controlaremos si se deja algunos de los datos imprescindibles sin rellenar mediante Toast. Si es todo correcto al pulsar el <strong>FAB</strong> se modificar&#xE1; el contacto correspondiente.</p>
+<h4 class="mume-header" id="funcionalidad-del-long-click">Funcionalidad del Long Click</h4>
+
+<p>En caso que el usuario realice una <strong>pulsaci&#xF3;n larga</strong> sobre alg&#xFA;n elemento del recycler, se mostrar&#xE1; un dialogo preguntando si se quiere eliminar el contacto. Solo se eliminar&#xE1; si pulsamos a eliminar, en caso contrario se cerrar&#xE1; el dialogo. Eliminaremos el contacto del array y actualizaremos el adaptador.</p>
 <div align="center">
-    <img height="300" src="./imagenes/editContact.png">
+    <img height="80" src="./imagenes/dialogo1.png">
 </div>
-<p>Al deslizar se mostrar&#xE1; este fragment con los datos del contacto guardado, accediendo al <strong><code>ViewModel</code></strong> para recuperarlos.  La funcionalidad de este Fragment es muy parecida a la anterior, tambi&#xE9;n controlaremos si se deja alguno de los datos imprescindibles sin rellenar avisando con una SnackBar. Si es todo correcto al pulsar el FAB se modificar&#xE1; el contacto. Cuando volvamos al Fragment de nuevo contacto, mediante deslizamiento, se limpiaran los controles para permitir la introducci&#xF3;n de nuevos datos.</p>
+<h4 class="mume-header" id="funcionalidad-del-desplazamiento-izqderch-sobre-alg%C3%BAn-elemento-del-recycler">Funcionalidad del desplazamiento izq/derch sobre alg&#xFA;n elemento del recycler</h4>
+
+<p>Si en la ventana inicial hago un <strong>desplazamiento hacia la derecha</strong> encima de un contacto, entonces lanzo el intent del dial con el tel&#xE9;fono del contacto, mostrando un dialogo que permita aceptar o rechazar la llamada. Si no tiene tel&#xE9;fono se avisar&#xE1; con un mensaje.</p>
+<div align="center">
+    <img height="80" src="./imagenes/dialogo2.png">
+</div>
+<p>Si en la ventana principal hago un <strong>desplazamiento hacia la izquierda</strong>, se mandar&#xE1; un correo al contacto. Si no tiene direcci&#xF3;n de correo se presentar&#xE1; un mensaje indic&#xE1;ndolo.</p>
+<div align="center">
+    <img height="80" src="./imagenes/dialogo3.png">
+</div>
+<blockquote>
+<p>&#x1F4A1; Para ayudar a la funcionalidad de los movimientos derecha e izquierda, se adjunta la clase <strong>&apos;swipeDetector&apos;</strong> que gestionar&#xE1; el tipo de movimiento. Esta clase implementa un listener para detectar los movimientos sobre la pantalla. En el fragment del recycler definiremos, una variable de esta clase:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> swipeDetector<span class="token operator">:</span> SwipeDetector<span class="token operator">=</span> <span class="token function">SwipeDetector</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Y a continuaci&#xF3;n escribiremos el <strong><code>setOnItemClickListener()</code></strong> de nuestro adaptador usando los m&#xE9;todos de la clase para detectar los movimientos. Importante, tendremos que pasar el objeto <strong><code>swipeDetector</code></strong> al listener correspondiente de la clase adaptador.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">adaptador<span class="token punctuation">.</span><span class="token function">setOnTouchListener</span><span class="token punctuation">(</span>swipeDetector<span class="token punctuation">)</span>
+</pre></blockquote>
+<h4 class="mume-header" id="funcionalidad-del-click-sobre-la-imagen-del-contacto">Funcionalidad del Click sobre la imagen del contacto</h4>
+
+<p>En caso de pulsar sobre la imagen se mostrar&#xE1; un dialogo personalizado en el que la imagen se mostrar&#xE1; de un tama&#xF1;o mayor junto con el nombre del contacto, como podemos ver en la siguiente captura</p>
+<div align="center">
+    <img height="200" src="./imagenes/dialogo4.png">
+</div>
+<h4 class="mume-header" id="funcionalidad-del-deslizamiento-izqderch-sobre-el-fragmet-de-edici%C3%B3n">Funcionalidad del Deslizamiento Izq/derch sobre el Fragmet de edici&#xF3;n</h4>
+
+<p>En caso de realizar un deslizamiento sobre la pantalla edici&#xF3;n cargaremos el siguiente elemento de la lista, de forma que podremos recorrer todos los contactos desde esta pantalla.<br>
+L&#xF3;gicamente el deslizamiento a la derecha cargar&#xE1; el elemento siguiente al mostrado en ese momento , mientras que hacia la izquierda se cargar&#xE1; el anterior. Deberemos controlar que al llegar al primer o &#xFA;ltimo elemento, ya no ocurra nada para evitar desbordamientos del array.<br>
+Para controlar el deslizamiento utilizaremos la clase que ya conocemos <strong><code>SwipeDetector</code></strong>, crearemos un objeto de este tipo que ser&#xE1; lanzado con el m&#xE9;todo seOnTouchListener de la vista sobre la que queramos controlar el movimiento. Despu&#xE9;s tendremos que controlar el movimiento en el m&#xE9;todo <strong>OnClick</strong>.</p>
 
       </div>
       
