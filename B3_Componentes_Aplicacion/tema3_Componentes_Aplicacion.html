@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3. Componentes y de una aplicaci&#xF3;n Android</title>
+      <title>PMDM 2&#xBA; DAM  Tema 3. Componentes de una aplicaci&#xF3;n Android</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -344,7 +344,7 @@ justo después del front matter
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 <ol>
-<li><a href="#indroducci%C3%B3n">Indroducci&#xF3;n</a></li>
+<li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
 <li><a href="#contexto-de-una-aplicaci%C3%B3n">Contexto de una aplicaci&#xF3;n</a></li>
 <li><a href="#componentes-de-una-aplicaci%C3%B3n">Componentes de una aplicaci&#xF3;n</a>
 <ol>
@@ -359,12 +359,16 @@ justo después del front matter
 </ol>
 </li>
 <li><a href="#ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</a></li>
-<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a></li>
+<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a>
+<ol>
+<li><a href="#requerir-permisos-al-usuario">Requerir permisos al usuario</a></li>
+</ol>
+</li>
 <li><a href="#intent-filter">Intent-filter</a></li>
 <li><a href="#trabajando-con-parcelables">Trabajando con Parcelables</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="indroducci%C3%B3n">Indroducci&#xF3;n</h3>
+<h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
 
 <p>En este tema estudiaremos los <a href="https://developer.android.com/guide/components/fundamentals?hl=es-419">componentes de una aplicaci&#xF3;n Android</a> y sus respectivas funciones, adem&#xE1;s de la comunicaci&#xF3;n entre activitis.<br>
 Para cualquier aplicaci&#xF3;n Android, en general, ser&#xE1; necesario construir una ventana en la que se ir&#xE1;n a&#xF1;adiendo componentes, cada componente es un punto de entrada por el que el sistema o un usuario interact&#xFA;a con tu aplicaci&#xF3;n. Algunos componentes dependen de otros.<br>
@@ -481,20 +485,21 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-10],12, [12,-14]]}" class="language-kotlin" data-line="6,6-10,12,12,-14"><span class="token keyword">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-10],12, [12,-16]]}" class="language-kotlin" data-line="6,6-10,12,12,-16"><span class="token keyword">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         <span class="token keyword">val</span> openPostActivity <span class="token operator">=</span>
-            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> result <span class="token operator">-&gt;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+                result <span class="token operator">-&gt;</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span>
+                    <span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
-        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
+        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span><span class="token punctuation">{</span>
             openPostActivity<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
                 <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span>
-                <span class="token punctuation">{</span>  <span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <div class="line-highlight-wrapper">
@@ -536,11 +541,13 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="12-14" data-start="12" data-end="14">
+<div aria-hidden="true" class="line-highlight" data-range="12-16" data-start="12" data-end="16">
+
+
 
 
 </div></div></pre><blockquote>
-<p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 10</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 12 a 14</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
+<p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 10</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 12 a 16</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
 </blockquote>
 <p>En la clase invocada devolveremos los datos de la siguiente manera:</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[4,5]}" class="language-kotlin" data-line="4,5">   textView<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
@@ -609,6 +616,172 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
  <span class="token keyword">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 </pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio ResueltoIntentImplicito</span></p>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio PropuestoIntentImplicito</span></p>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="requerir-permisos-al-usuario">Requerir permisos al usuario</h4>
+
+<p>Android est&#xE1; apostando cada vez m&#xE1;s fuerte por la seguridad, por lo que en las versiones m&#xE1;s recientes del sistema operativo no basta con a&#xF1;adir la etiquete <strong><code>&lt;uses-permission ...&gt;</code></strong> en el Manifiesto. Si se quiere acceder a recursos ajenos a la aplicaci&#xF3;n en funcionamiento, se deber&#xE1; realizar una <a href="https://developer.android.com/training/permissions/requesting?hl=es-419">solicitud de permisos</a> de forma explicita al usuario.<br>
+Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limitado, si necesita usar recursos o informaci&#xF3;n ajenos a su propia zona de pruebas deber&#xE1;s seguir los siguientes pasos:</p>
+<ol>
+<li>
+<p>En el archivo de manifiesto de la app, declara los permisos que necesites.</p>
+</li>
+<li>
+<p>Esperar a que el usuario invoque la tarea o acci&#xF3;n de la app que requiere acceso a datos privados espec&#xED;ficos. En ese momento, la app puede solicitar el permiso de tiempo de ejecuci&#xF3;n necesario para acceder a esos datos. Para ello:</p>
+<ol>
+<li>Verifica si el usuario ya otorg&#xF3; el permiso de tiempo de ejecuci&#xF3;n que requiere la app. De ser as&#xED;, esta ya puede acceder a los recursos necesarios.</li>
+<li>En caso contrario, solicitar el permiso en tiempo de ejecuci&#xF3;n, en ese caso el sistema mostrar&#xE1; un dialogo solicitando el permiso y si es otorgado se pasar&#xE1; al acceso de los recursos. En este paso se puede optar por mostrar un dialogo explicando porque motivo son necesarios los recursos.</li>
+</ol>
+</li>
+<li>
+<p>Si el usuario rechaza la solicitud, la app deber&#xED;a proporcionar una opci&#xF3;n elegante al usuario.</p>
+</li>
+</ol>
+<p>Podemos crear un c&#xF3;digo parecido al siguiente, en el que se pide permiso para acceder a los contactos y a la memor&#xED;a externa del dispositivo:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0,[3-17],5,8,10,14,16}" class="language-kotlin" data-line="0,3-17,5,8,10,14,16"><span class="token keyword">val</span> RESPUESTA_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
+<span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
+<span class="token keyword">fun</span> <span class="token function">solicitarPermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED
+        <span class="token operator">||</span> <span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token comment">//Si se decide explicar los motivos de los permisos con  similar a un dialogo</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token comment">//Si se decide explicar los motivos de los permisos con  similar a un dialogo</span>
+        <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos, </span>
+        <span class="token comment">//en este caso dos</span>
+        <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> _CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span> RESPUESTA_PERMISOS<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> 
+    <span class="token keyword">else</span> <span class="token function">lanzarFuncionalidadQueRequierePermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div><div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-17" data-start="3" data-end="17">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div></pre><pre data-role="codeBlock" data-info="kotlin{highlight=[[0-22],7]}" class="language-kotlin" data-line="0-22,7"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>
+       requestCode<span class="token operator">:</span> Int<span class="token punctuation">,</span><span class="token comment">//c&#xF3;digo de identificaci&#xF3;n del resultado</span>
+       permissions<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token keyword">out</span> String<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token comment">//array con los nombres de los permisos</span>
+       grantResults<span class="token operator">:</span> IntArray<span class="token comment">//array de 0 y -1 (permitido, no permitido) en orden) </span>
+<span class="token punctuation">{</span>
+       <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> grantResults<span class="token punctuation">)</span>
+       <span class="token keyword">when</span> <span class="token punctuation">(</span>requestCode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           RESPUESTA_PERMISOS <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+                   Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                       applicationContext<span class="token punctuation">,</span>
+                       permissions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&quot; Permiso concedido&quot;</span><span class="token punctuation">,</span>
+                       Toast<span class="token punctuation">.</span>LENGTH_SHORT
+                   <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+               <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+                   Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                       applicationContext<span class="token punctuation">,</span>
+                       permissions<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&quot; Permiso concedido&quot;</span><span class="token punctuation">,</span>
+                       Toast<span class="token punctuation">.</span>LENGTH_SHORT
+                   <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0-22" data-start="0" data-end="22">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; <strong>L&#xED;nea 0</strong> creamos una constante identificativa de la petici&#xF3;n de permisos. Desde la <strong>L&#xED;nea 3 hasta la 17</strong> creamos el m&#xE9;todo encargado de lanzar los di&#xE1;logos con la petici&#xF3;n de los dos permisos (en este caso). <strong>L&#xED;nea 5</strong> se comprueba que todav&#xED;a no se han concedido, y en ese caso se lanza la petici&#xF3;n <strong>L&#xED;nea 16</strong>. Las <strong>l&#xED;neas 8 y 10</strong>, servir&#xED;an para a&#xF1;adir alguna forma de explicaci&#xF3;n al usuario. Si el permiso ha sido concedido con anterioridad se pasar&#xE1; a lanzar la funcionalidad que lo usa, <strong>L&#xED;nea 16</strong>.<br>
+El hilo que controla la respuesta del usuario, se recoge mediante el m&#xE9;todo sobreescrito <strong><code>onRequestPermissionsResult</code></strong>, a este m&#xE9;todo le llega la informaci&#xF3;n necesaria para poder saber a que petici&#xF3;n de permisos se refiere (usando la constante creada anteriormente <strong>L&#xED;nea 7</strong>), el array con los nombres de los permisos y el resultado de si han sido concedido o no. Con esta informaci&#xF3;n pasaremos a lanzar la funcionalidad que los requiere o a dar otras opciones al usuario.</p>
+</blockquote>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="intent-filter">Intent-filter</h3>
 
