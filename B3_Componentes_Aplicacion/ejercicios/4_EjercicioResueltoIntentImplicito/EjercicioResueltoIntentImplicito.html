@@ -414,7 +414,7 @@ Language: es
 Country: ES
 --></g></svg></p><blockquote>
 <p>&#x1F4CC;Los almacenamientos externos, sean archivos pertenecientes a la App o contenido multimedia ser&#xE1;n accesibles por otras aplicaciones. Los archivos de la App se eliminar&#xE1;n cuando se borre esta, tanto los internos como los externos.<br>
-Los vol&#xFA;menes extra&#xED;bles, como las <strong>tarjetas SD</strong>, aparecen en el sistema de archivos como parte del almacenamiento externo. Android representa estos dispositivos mediante una ruta de acceso, como <strong>/sdcard</strong>.</p>
+Los vol&#xFA;menes extraibles, como las <strong>tarjetas SD</strong>, aparecen en el sistema de archivos como parte del almacenamiento externo. Android representa estos dispositivos mediante una ruta de acceso, como <strong>/sdcard</strong>. Para acceder a este almacenamiento, adem&#xE1;s de pedir permiso se tendr&#xE1; que declarar un content provider en el manifest.</p>
 </blockquote>
 <h3 class="mume-header" id="ejercicio">Ejercicio</h3>
 
@@ -499,18 +499,186 @@ Los vol&#xFA;menes extra&#xED;bles, como las <strong>tarjetas SD</strong>, apare
 <div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
 </div></div></pre><h4 class="mume-header" id="paso-iv-acceso-a-la-tarjeta-sd">PASO IV. Acceso a la tarjeta SD</h4>
 
-<p>///////////////FALTA ACABAR ESTE PUNTO DE EJERCICIO<br>
-Despu&#xE9;s de crear el proyecto debemos acceder al Device File Explorer, hay una pesta&#xF1;a en la parte inferior derecha del IDE.</p>
+<p>Despu&#xE9;s de crear el proyecto debemos acceder al Device File Explorer, hay una pesta&#xF1;a en la parte inferior derecha del IDE.</p>
 <div align="center">
-    <img height="200" src="../imagenes/ejercicioResueltoIntentImplicito.png">
+    <img height="200" src="./imagenes/ejercicioResueltoIntentImplicito.png">
 </div>
-<p>Esto nos abrir&#xE1; un explorador que da acceso a las carpetas de los dispositivos/emuladores que est&#xE9;n arrancados en ese momento. Accederemos a la carpeta Music de sdcard y con el men&#xFA; contextual podremos subir o descargar elementos del dispositivo.</p>
+<p>Esto nos abrir&#xE1; un explorador que da acceso a las carpetas de los dispositivos/emuladores que est&#xE9;n arrancados en ese momento. Accederemos a la carpeta Music de sdcard y con el men&#xFA; contextual podremos subir o descargar elementos al/del dispositivo. Procede a a&#xF1;adir uno archivo .mp3 (se pasan dos como recursos del ejercicio).</p>
 <div align="center">
-    <img height="400" src="../imagenes/ejercicioResueltoIntentImplicito1.png">
+    <img height="400" src="./imagenes/ejercicioResueltoIntentImplicito1.png">
 </div>
-<p>PASO III. L&#xF3;gica Bot&#xF3;n Abrir<br>
-Veamos el c&#xF3;digo y pasemos a las explicaciones:<br>
-La</p>
+<h4 class="mume-header" id="paso-v-l%C3%B3gica-bot%C3%B3n-escuchar-canci%C3%B3n">PASO V. L&#xF3;gica Bot&#xF3;n Escuchar canci&#xF3;n</h4>
+
+<p>Teniendo en cuenta la teor&#xED;a sobre el almacenamiento que usan los dispositivos Android, que nos encontramos al principio del tema. En este caso se va a acceder al contenido multimedia, por lo que se va a tener que solicitar permiso de acceso a la tarjeta externa, adem&#xE1;s de declarar un content provide. Veamos el c&#xF3;digo y pasemos a las explicaciones:</p>
+<h5 class="mume-header" id="pedir-permisos">Pedir permisos</h5>
+
+<p>Este c&#xF3;digo es el encargado de mostrar los di&#xE1;logos que permiten al usuario otorgar el permiso solicitado. Se comenta en el tema, por lo que no se va a decir nada m&#xE1;s al respecto.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">RESPUESTA_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
+<span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
+<span class="token keyword">fun</span> <span class="token function">solicitarPermisosYEscucharCancion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> 
+    PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+             RESPUESTA_PERMISOS<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token function">escucharCancion</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>
+        requestCode<span class="token operator">:</span> Int<span class="token punctuation">,</span><span class="token comment">//codigo de identificaci&#xF3;n del resultado</span>
+        permissions<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token keyword">out</span> String<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token comment">//array con los nombres</span>
+        <span class="token comment">//de los permisos</span>
+        grantResults<span class="token operator">:</span> IntArray<span class="token comment">//array de 0 y -1 (permitido, </span>
+                              <span class="token comment">//no permitido) en orden) {</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> 
+        grantResults<span class="token punctuation">)</span>
+        <span class="token keyword">when</span> <span class="token punctuation">(</span>requestCode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            RESPUESTA_PERMISOS <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+                    Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                        applicationContext<span class="token punctuation">,</span>
+                        permissions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&quot; Permiso concedido&quot;</span><span class="token punctuation">,</span>
+                        Toast<span class="token punctuation">.</span>LENGTH_SHORT
+                    <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                  <span class="token function">escucharCancion</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="declarar-el-content-provide">Declarar el content provide</h5>
+
+<p>Para la versiones de SDK de Android mayores a la 24, no se puede acceder directamente a la memoria externa que no corresponda a la aplicaci&#xF3;n, por lo que ser&#xE1; necesario realizar los siguientes pasos:</p>
+<ol>
+<li>Crear una carpeta xml en los recursos, <strong><code>res\xml</code></strong> y dentro un fichero, por ejemplo <strong><code>provider_paths</code></strong>. Donde a&#xF1;adiremos el siguiente c&#xF3;digo para referenciar al directorio ra&#xED;z.</li>
+</ol>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>paths</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>external-path</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>external_files<span class="token punctuation">&quot;</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>paths</span><span class="token punctuation">&gt;</span></span>
+</pre><ol start="2">
+<li>A&#xF1;adir en el Manifest un provider que haga referencia al recurso creado. Dentro de la etiqueta aplicaci&#xF3;n y teniendo en cuenta no olvidar los permisos de <strong><code>READ_EXTERNAL_STORAGE</code></strong>.</li>
+</ol>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>provider</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>androidx.core.content.FileProvider<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>authorities</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>${applicationId}.provider<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>exported</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>grantUriPermissions</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.support.FILE_PROVIDER_PATHS<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>resource</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@xml/provider_paths<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>provider</span><span class="token punctuation">&gt;</span></span>
+
+</pre><h5 class="mume-header" id="codificar-el-intent">Codificar el intent</h5>
+
+<pre data-role="codeBlock" data-info="kotlin{highlight=[7,9,12-24,15,22]}" class="language-kotlin" data-line="7,9,12-24,15,22"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token operator">..</span><span class="token punctuation">.</span>
+
+       findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>escuchar<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span>
+       <span class="token punctuation">{</span>
+            <span class="token function">solicitarPermisosYEscucharCancion</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">escucharCancion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Ruta de la carpeta que usa android para guardar recursos </span>
+        <span class="token comment">//de la aplicaci&#xF3;n, consta del dominio y es privada a esta</span>
+        <span class="token keyword">var</span> directorio<span class="token operator">=</span><span class="token function">getExternalFilesDir</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>absolutePath
+        <span class="token comment">//Cogemos el inicio  de la ruta, que corresponde con </span>
+        <span class="token comment">//los archivos multimedia &apos;storage/emulated/0/&apos;</span>
+        directorio<span class="token operator">=</span>directorio<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>directorio<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot;Android&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> <span class="token keyword">data</span> <span class="token operator">=</span> <span class="token function">File</span><span class="token punctuation">(</span>directorio <span class="token operator">+</span> <span class="token string">&quot;music/minions.mp3&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> uri <span class="token operator">=</span> FileProvider<span class="token punctuation">.</span><span class="token function">getUriForFile</span><span class="token punctuation">(</span>
+            <span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span>
+            BuildConfig<span class="token punctuation">.</span>APPLICATION_ID <span class="token operator">+</span> <span class="token string">&quot;.provider&quot;</span><span class="token punctuation">,</span>
+            <span class="token keyword">data</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">)</span>
+        intent<span class="token punctuation">.</span><span class="token function">setDataAndType</span><span class="token punctuation">(</span>uri<span class="token punctuation">,</span> <span class="token string">&quot;audio/.mp3&quot;</span><span class="token punctuation">)</span>
+        intent<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_READ_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12-24" data-start="12" data-end="24">
+
+
+
+
+
+
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="22" data-start="22">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Al pulsar el bot&#xF3;n de escuchar canci&#xF3;n se llamar&#xE1; el m&#xE9;todo <strong><code>solicitarPermisosYEscucharCancion()</code></strong>, <strong><code>L&#xED;nea 9</code></strong> que a su vez llamar&#xE1; al m&#xE9;todo escucharCancion() cuando se hayan aceptado los permisos. En este &#xFA;ltimo m&#xE9;todo <strong>L&#xED;nea 12 a 24</strong>, se crea un objeto para crear la uri con la direcci&#xF3;n de acceso usando el provider declarado antes <strong>L&#xED;nea 15</strong>. No se debe olvidar a&#xF1;adir el Flags con los permisos de lectura de Uri, <strong>L&#xED;nea 22</strong>.</p>
+</blockquote>
 
       </div>
       
