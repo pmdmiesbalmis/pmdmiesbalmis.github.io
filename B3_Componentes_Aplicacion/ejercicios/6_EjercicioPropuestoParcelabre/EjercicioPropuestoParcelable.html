@@ -342,18 +342,57 @@ justo después del front matter
 <h3 class="mume-header" id="almacenamiento-de-informaci%C3%B3n-en-android">Almacenamiento de informaci&#xF3;n en Android</h3>
 
 <p>Ejercicio que nos va a servir para practicar la parcelaci&#xF3;n de unos datos con un Intent, y tambi&#xE9;n la transmisi&#xF3;n de esos datos a una APP diferente en donde ser&#xE1;n recibidos y mostrados.<br>
-Crea una aplicaci&#xF3;n APP Parcelables, con el siguiente aspecto.</p>
-<p>Deber&#xE1; tener una clase Pojo llamada Telefono que extender&#xE1; de Parcelable, tendr&#xE1; dos tipo String: prefijo y n&#xFA;mero que nos servir&#xE1; para la transmisi&#xF3;n de datos entre las dos distintas aplicaciones.<br>
-Usaremos un Intent al que le a&#xF1;adiremos el Bundle con el objeto parcelado, y iniciaremos la App Parcelables2Activity<br>
-Cuando se pulse el bot&#xF3;n Abrir, se deber&#xE1; arrancar una aplicaci&#xF3;n diferente, App Parcelables2Activity, que mostrar&#xE1; los datos que habremos metido en prefijo y n&#xFA;mero al recuperarlos del inten.</p>
-<p>El &#xFA;nico problema que nos encontraremos en este ejercicio, es que no nos va a permitir recuperar el objeto parcelado si no pertenece exactamente a la misma clase del que lo hemos parcelado. Para ello deberemos crearnos un m&#xF3;dulo .arr de librer&#xED;a con la clase Telefono en la App Parcelables y tendremos que importar ese m&#xF3;dulo en la clase Parcelables2Activity. Para eso tenemos los apuntes de Como importar/crear librer&#xED;as en el Moodle.</p>
+Crea una aplicaci&#xF3;n <strong>PropuestoParcelable</strong>, con el siguiente aspecto.</p>
+<div align="center">
+    <img height="200" src="./imagenes/parcelable1.png">
+</div>
+<p>Deber&#xE1; tener una clase Pojo llamada <strong>Persona</strong> que extender&#xE1; de Parcelable, tendr&#xE1; dos tipo String: dni y nombre y un entero edad.</p>
+<p>Usaremos un Intent al que le a&#xF1;adiremos el Bundle con el objeto parcelado. Al pulsar el bot&#xF3;n <strong>Mandar</strong>, se deber&#xE1; iniciar una aplicaci&#xF3;n diferente,  <strong>Parcelable2Activity</strong>, que mostrar&#xE1; los datos que habremos metido en la aplicaci&#xF3;n anterior (puedes anular el m&#xE9;todo ToString en la clase Persona y mostrar la informaci&#xF3;n con un TextView en la segunda actividad).</p>
 <blockquote>
-<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong><br>
-gradlew builddependents</p>
-<p>gradlew assembleRelease personaLibrary</p>
+<p>&#x26A0;&#xFE0F; El &#xFA;nico problema que nos encontraremos en este ejercicio, es que no nos va a permitir recuperar el objeto parcelado si no pertenece exactamente a la misma clase de donde lo hemos parcelado. Para ello deberemos crear un m&#xF3;dulo de librer&#xED;a <strong><code>.arr</code></strong>, con la clase Persona en la App PropuestoParcelable y tendremos que importar ese m&#xF3;dulo a la clase Parcelables2Activity. La informaci&#xF3;n con los pasos a seguir se puede ver en el siguiente <a href="https://developer.android.com/studio/projects/android-library?hl=es-419#CreateLibrary">enlace</a>, aunque se explica tambi&#xE9;n m&#xE1;s abajo.</p>
 </blockquote>
-<blockquote></blockquote>
+<h4 class="mume-header" id="como-crear-un-m%C3%B3dulo-de-biblioteca">Como crear un m&#xF3;dulo de biblioteca</h4>
 
+<p>Para crear las clases que queremos que se incluyan en una biblioteca, se debe de crear un nuevo m&#xF3;dulo y a&#xF1;adir todo el c&#xF3;digo en este. Para ello tendremos:</p>
+<div align="center">
+    <img height="80" src="./imagenes/biblioteca1.png">
+</div>
+<div align="center">
+    <img height="100" src="./imagenes/biblioteca2.png">
+</div>
+<p>El resultado desde la vista proyecto mostrar&#xE1; los dos m&#xF3;dulos, el del app y el de la biblioteca:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca3.png">
+</div>
+<p>Para que se cree el archivo que luego exportaremos <strong><code>.aar</code></strong>, habr&#xE1; que construir el m&#xF3;dulo de biblioteca:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca4.png">
+</div>
+<p>De esta forma se generar&#xE1; el archivo:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca5.png">
+</div>
+<p>Para poder usar la biblioteca dentro del mismo proyecto, solamente tendremos que agregar una dependencia del m&#xF3;dulo de la aplicaci&#xF3;n al m&#xF3;dulo de biblioteca:</p>
+<div align="center">
+    <img height="90" src="./imagenes/biblioteca6.png">
+</div>
+<div align="center">
+    <img height="120" src="./imagenes/biblioteca7.png">
+</div>
+<h4 class="mume-header" id="como-a%C3%B1adir-una-biblioteca-a-tu-proyecto">Como a&#xF1;adir una biblioteca a tu proyecto</h4>
+
+<p>Para a&#xF1;adir una biblioteca externa <strong>jar o aar</strong> a nuestro proyecto, tendremos que agregar la dependencia a esta como hacemos normalmente, pero esta vez seleccionando el tipo <strong><code>JAR/AAR Dependency</code></strong></p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca8.png">
+</div>
+<p>Indicaremos la ruta donde est&#xE1; guardado el archivo <strong><code>.aar</code></strong>, confirmaremos, y ya estar&#xE1; a&#xF1;adida.</p>
+<div align="center">
+    <img height="120" src="./imagenes/biblioteca9.png">
+</div>
+<p>Se podr&#xE1; usar normalmente teniendo en cuenta importar correctamente el dominio. Si queremos comprobar que se ha a&#xF1;adido correctamente, se puede ver en <strong><code>External Llibraries</code></strong>:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca10.png">
+</div>
       </div>
       
       
