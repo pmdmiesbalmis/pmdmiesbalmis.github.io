@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM Tema 5</title>
+      <title>PMDM 2&#xBA; DAM Tema 5  Interfaz de Usuario I</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -261,7 +261,81 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="tema-5-interfaz-de-usuario-i">Tema 5. Interfaz de Usuario I</h1>
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+
+<h1 class="mume-header undefined" id="tema-5-interfaz-de-usuario-i">Tema 5. Interfaz de Usuario I</h1>
 
 <p><a href="./Tema5_Interfaz_Usuario_I.pdf">Descargar estos apuntes</a></p>
 <p>&#xCD;ndice</p>
@@ -303,7 +377,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <p>Si ya eres conocedor de Android, conocer&#xE1;s findViewById, que permite vincular las vistas de la aplicaci&#xF3;n con las clases, y as&#xED; poder acceder a determinadas propiedades de los widgets de las vistas.</p>
 <p>Desde la versi&#xF3;n 3.6 de Android Studio, es posible utilizar View Binding para enlazar los elementos de los layouts con las clases.</p>
-<p>Si estamos trabajando con una versi&#xF3;n de Android Studio superior a la 4.0 la configuraci&#xF3;n del archico <strong><code>build.gradle</code></strong> a nivel de <strong><code>Module:app</code></strong> es la siguiente:</p>
+<p>Si estamos trabajando con una versi&#xF3;n de Android Studio superior a la 4.0 la configuraci&#xF3;n del archivo <strong><code>build.gradle</code></strong> a nivel de <strong><code>Module:app</code></strong> es la siguiente:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml">    android {
         ...
         viewBinding {
@@ -311,8 +385,8 @@ pre[data-line] .line-highlight[data-end]:after {
         }
     }
     
-</pre><p>Una vez habilitada la vinculaci&#xF3;n de vista para un proyecto, por cada archivo xml se generar&#xE1; una clase de vinculaci&#xF3;n al mismo, que ser&#xE1; utilizado para hacer refrencias a las vistas del mismo.</p>
-<p>si nuestro archivo se llamma <strong><code>activity_secundaria.xml</code></strong> la clase de vinculaci&#xF3;n generada se llamar&#xE1; ActivitySecundariaBinding.</p>
+</pre><p>Una vez habilitada la vinculaci&#xF3;n de vista para un proyecto, por cada archivo xml se generar&#xE1; una clase de vinculaci&#xF3;n al mismo, que ser&#xE1; utilizado para hacer referencias a las vistas del mismo.</p>
+<p>Si nuestro archivo se llama <strong><code>activity_secundaria.xml</code></strong> la clase de vinculaci&#xF3;n generada se llamar&#xE1; ActivitySecundariaBinding.</p>
 <p>Para poder utilizar la vinculaci&#xF3;n de vistas hay que hacer lo siguiente en el m&#xE9;todo <strong><code>onCreate()</code></strong> de la actividad:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivitySecundariaBinding
 
@@ -322,10 +396,10 @@ pre[data-line] .line-highlight[data-end]:after {
         <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
         <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-</pre><p>A partr de ahora podemos hacer referencia a las vistas de nuestro xml. Lo veremos a continuaci&#xF3;n tal y como vayamos viendo distintos componentes.</p>
+</pre><p>A partir de ahora podemos hacer referencia a las vistas de nuestro xml. Lo veremos a continuaci&#xF3;n tal y como vayamos viendo distintos componentes.</p>
 <h3 class="mume-header" id="botones">Botones</h3>
 
-<p>Los botones forman una parte funcional muy importante en cualquier aplicaci&#xF3;n. Existen varios tipos est&#xE1;ndar de botonaes:<strong><code>Floating Action Button</code></strong> (bot&#xF3;n circular con una acci&#xF3;n muy concreta en nuestra aplicaci&#xF3;n), <strong><code>Filled, elevated button</code></strong> (bot&#xF3;n con relieve con efecto de pulsaci&#xF3;n y fondo color), <strong><code>Filled, unelevated button</code></strong> (bot&#xF3;n con relieve sin efecto de pulsaci&#xF3;n y color fondo), <strong><code>Outlined button</code></strong> (bot&#xF3;n fondo transparente y borde), <strong><code>Text button</code></strong> (tiene un fondo transparente con texto en color) y <strong><code>Icon button</code></strong> (incorpora un icono al bot&#xF3;n, puede ser con teto y sin texto).</p>
+<p>Los botones forman una parte funcional muy importante en cualquier aplicaci&#xF3;n. Existen varios tipos est&#xE1;ndar de botones:<strong><code>Floating Action Button</code></strong> (bot&#xF3;n circular con una acci&#xF3;n muy concreta en nuestra aplicaci&#xF3;n), <strong><code>Filled, elevated button</code></strong> (bot&#xF3;n con relieve con efecto de pulsaci&#xF3;n y fondo color), <strong><code>Filled, unelevated button</code></strong> (bot&#xF3;n con relieve sin efecto de pulsaci&#xF3;n y color fondo), <strong><code>Outlined button</code></strong> (bot&#xF3;n fondo transparente y borde), <strong><code>Text button</code></strong> (tiene un fondo transparente con texto en color) y <strong><code>Icon button</code></strong> (incorpora un icono al bot&#xF3;n, puede ser con texto y sin texto).</p>
 <p>La elecci&#xF3;n de un bot&#xF3;n u otro va a depender de la importancia que se le quiera dar al mismo y de la disposici&#xF3;n del mismo.</p>
 <div align="center">
     <img height="150" src="./imagenes/disposicionBotones.png">
@@ -424,7 +498,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; Con el atributo <strong><code>app:icon</code></strong> (l&#xED;nea 6) indicamos el recurso que hay qye cargar en el bot&#xF3;n. Hay una serie de propiedades que podemos usar cuando usamos <strong><code>IconButton</code></strong>. El <strong><code>app:iconSize=&quot;15dp&quot;</code></strong> para ancho y alto del icono. Podemos agregar el espacio entre el icono y el texto con <strong><code>app:iconPadding=&quot;10dp&quot;</code></strong>. Tambi&#xE9;n hay una opci&#xF3;n para cambiar el color del icono con <strong><code>iconTintatributo</code></strong>. Para cambiar la posici&#xF3;n del icono, utilice el atributo <strong><code>iconGravity</code></strong>. Tambi&#xE9;n podemos aplicar un efecto de redondeo a los bordes del bot&#xF3;n (menos a <strong><code>TextButton</code></strong>) con la propiedad <strong><code>app:cornerRadius</code></strong>.</p>
+<p>&#x1F4CC; Con el atributo <strong><code>app:icon</code></strong> (l&#xED;nea 6) indicamos el recurso que hay que cargar en el bot&#xF3;n. Hay una serie de propiedades que podemos usar cuando usamos <strong><code>IconButton</code></strong>. El <strong><code>app:iconSize=&quot;15dp&quot;</code></strong> para ancho y alto del icono. Podemos agregar el espacio entre el icono y el texto con <strong><code>app:iconPadding=&quot;10dp&quot;</code></strong>. Tambi&#xE9;n hay una opci&#xF3;n para cambiar el color del icono con <strong><code>iconTintatributo</code></strong>. Para cambiar la posici&#xF3;n del icono, utilice el atributo <strong><code>iconGravity</code></strong>. Tambi&#xE9;n podemos aplicar un efecto de redondeo a los bordes del bot&#xF3;n (menos a <strong><code>TextButton</code></strong>) con la propiedad <strong><code>app:cornerRadius</code></strong>.</p>
 </blockquote>
 <p><a href="https://fonts.google.com/icons?icon.query=mail">Aqu&#xED; tenemos un enlace donde descargar iconos que ofrece Google.</a></p>
 <p>Para incorporar texto al bot&#xF3;n con icono:</p>
@@ -447,12 +521,12 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; Con el atributo <strong><code>app:iconGravity</code></strong> (l&#xED;nea 9) indicamos laposici&#xF3;n del icono respecto al texto.</p>
+<p>&#x1F4CC; Con el atributo <strong><code>app:iconGravity</code></strong> (l&#xED;nea 9) indicamos la posici&#xF3;n del icono respecto al texto.</p>
 </blockquote>
 <h4 class="mume-header" id="manejar-eventos-bot%C3%B3n">Manejar eventos bot&#xF3;n</h4>
 
 <p>Para gestionar la pulsaci&#xF3;n realizada sobre un bot&#xF3;n tenemos varias posibilidades: usar atributo <strong><code>onClick</code></strong> del bot&#xF3;n, un escuchador an&#xF3;nimo o implementar la interfaz <strong><code>View.OnClickListener</code></strong>. Lo m&#xE1;s eficiente es implementar la interfaz, aunque encontraremos mucha documentaci&#xF3;n que implementa el listener an&#xF3;nimo.</p>
-<p>Veamos el c&#xF3;digo de nuestraa actividad:</p>
+<p>Veamos el c&#xF3;digo de nuestra actividad:</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[10,14-17,20-30,32,33,36]}" class="language-kotlin" data-line="10,14-17,20-30,32,33,36"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
 
@@ -654,18 +728,18 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>&#x1F4CC; <strong>Manejar eventos bot&#xF3;n</strong>:</p>
 <ul>
 <li><strong><code>android:onClick</code></strong>. Este atributo incorporado en la definici&#xF3;n de un bot&#xF3;n permite asignar un m&#xE9;todo p&#xFA;blico que se ejecutar&#xE1; cuando este se pulse (l&#xED;nea 32). Vamos a aplicarlo en nuestro primer bot&#xF3;n <strong><code>raised_button</code></strong> y visualizaremos un <strong><code>toast</code></strong> (l&#xED;nea 33) indicando la pulsaci&#xF3;n del mismo:</li>
-<li><strong><code>listener an&#xF3;nimo</code></strong>. Programamos el escuchador an&#xF3;nimo directamente sobre la vista e implemantamos el m&#xE9;todo <strong><code>setOnClickListener()</code></strong> (l&#xED;nea 10). Incluimos este c&#xF3;digo en el <strong><code>onCreate()</code></strong> de la actividad:</li>
-<li>implementando intefaz <strong><code>setOnclickListener</code></strong> en la actividad (l&#xED;nea1), registrar las vistas que van a ser objeto de implementaci&#xF3;n a trav&#xE9;s de la interfaz (l&#xED;neas 14-17) y gestionar la pulsaci&#xF3;n (l&#xED;neas 20-30 para el resto de botones). La l&#xED;nea 36 es una funci&#xF3;n para visualizar un <strong><code>string</code></strong> en un <strong><code>toast</code></strong>, de forma que para cada bot&#xF3;n podamos sacar un taxto personalizado del bot&#xF3;n pulsado.</li>
+<li><strong><code>listener an&#xF3;nimo</code></strong>. Programamos el escuchador an&#xF3;nimo directamente sobre la vista e implementamos el m&#xE9;todo <strong><code>setOnClickListener()</code></strong> (l&#xED;nea 10). Incluimos este c&#xF3;digo en el <strong><code>onCreate()</code></strong> de la actividad:</li>
+<li>implementando interfaz <strong><code>setOnclickListener</code></strong> en la actividad (l&#xED;nea1), registrar las vistas que van a ser objeto de implementaci&#xF3;n a trav&#xE9;s de la interfaz (l&#xED;neas 14-17) y gestionar la pulsaci&#xF3;n (l&#xED;neas 20-30 para el resto de botones). La l&#xED;nea 36 es una funci&#xF3;n para visualizar un <strong><code>string</code></strong> en un <strong><code>toast</code></strong>, de forma que para cada bot&#xF3;n podamos sacar un texto personalizado del bot&#xF3;n pulsado.</li>
 </ul>
 </blockquote>
 <h4 class="mume-header" id="toggle-button">Toggle Button</h4>
 
-<p>No es m&#xE1;s que un conjunto de botones con un mismos estilo (<strong><code>MeterialComponents</code></strong>). En principio pueden sleecionarse m&#xE1;s de un bot&#xF3;n, pero podemos hacer que solamente haya uno seleccionado con la propiedad <strong><code>app:singleSelection</code></strong>.</p>
+<p>No es m&#xE1;s que un conjunto de botones con un mismos estilo (<strong><code>MaterialComponents</code></strong>). En principio pueden selecionarse m&#xE1;s de un bot&#xF3;n, pero podemos hacer que solamente haya uno seleccionado con la propiedad <strong><code>app:singleSelection</code></strong>.</p>
 <p>l El aspecto de un <strong><code>ToggleButton</code></strong> con dos botones es el siguiente:</p>
 <div align="center">
     <img height="100" src="./imagenes/toggleButtonEjemplo.png">
 </div>
-<p>Para implementar esta vista debemos incorporar los siguientes elemetos:</p>
+<p>Para implementar esta vista debemos incorporar los siguientes elementos:</p>
 <div align="center">
     <img height="120" src="./imagenes/componentesToggleButtonEjemplo.png">
 </div>
@@ -751,7 +825,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>&#x1F4CC; <strong>Aclaraciones</strong>:</p>
 <ul>
 <li><strong>L&#xED;nea 9</strong>. Definici&#xF3;n del <strong><code>MaterialButtonToggleGroup</code></strong></li>
-<li><strong>L&#xED;neas 14</strong>. Especificamos qu&#xE9; bot&#xF3;n de los que definen el <strong><code>ToggleButton</code></strong> va a resaltarse como macado.</li>
+<li><strong>L&#xED;neas 14</strong>. Especificamos qu&#xE9; bot&#xF3;n de los que definen el <strong><code>ToggleButton</code></strong> va a resaltarse como marcado.</li>
 <li><strong>L&#xED;nea 19</strong> con esta propiedad <strong><code>app:singleSelection</code></strong> con valor <strong><code>true</code></strong> indicamos que &#xFA;nicamente puede pulsarse un bot&#xF3;n simult&#xE1;neamente.</li>
 </ul>
 </blockquote>
@@ -1002,7 +1076,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <div align="center">
     <img height="150" src="./imagenes/fabDiferenciadorEjemplo.png">
 </div>
-<p>Para implementar esta vista debemos incorporar los siguientes elemetos:</p>
+<p>Para implementar esta vista debemos incorporar los siguientes elementos:</p>
 <div align="center">
     <img height="120" src="./imagenes/componentesFabDiferenciadorEjemplo.png">
 </div>
@@ -1179,8 +1253,8 @@ pre[data-line] .line-highlight[data-end]:after {
 <p><a href="https://material.io/components/buttons-floating-action-button#types-of-transitions">Aqu&#xED; tenemos un enlace donde se encuentra informaci&#xF3;n sobre FAB y transiciones.</a></p>
 <h3 class="mume-header" id="textinputlayout-etiquetas-flotantes">TextInputLayout etiquetas flotantes</h3>
 
-<p>La introducci&#xF3;n de texto se raliza con el control <strong><code>TextInputEditText</code></strong>, las propiedades b&#xE1;sicas son: <strong><code>hint</code></strong> que permite que aparezca un texto dentro del control que desaparecer&#xE1; cuando se pinche sobre el mismo y tambi&#xE9;n es posible incluir un icono en el control.</p>
-<p>Posteriormente se ha introducido otro control que permite interactuar con un <strong><code>TextInputEditText</code></strong> de forma que el <strong><code>hint</code></strong> del mismo en vez de desaparecer se desplaza autom&#xE1;ticamente a la parte superior de la vista. Este control se llama <strong><code>TextInputLayout</code></strong> y puede tener dos aspectos distintos que se definenvienen con un estilo <strong><code>FilledBox</code></strong>(1) y <strong><code>OutlinedBox</code></strong>(2).</p>
+<p>La introducci&#xF3;n de texto se realiza con el control <strong><code>TextInputEditText</code></strong>, las propiedades b&#xE1;sicas son: <strong><code>hint</code></strong> que permite que aparezca un texto dentro del control que desaparecer&#xE1; cuando se pinche sobre el mismo y tambi&#xE9;n es posible incluir un icono en el control.</p>
+<p>Posteriormente se ha introducido otro control que permite interactuar con un <strong><code>TextInputEditText</code></strong> de forma que el <strong><code>hint</code></strong> del mismo en vez de desaparecer se desplaza autom&#xE1;ticamente a la parte superior de la vista. Este control se llama <strong><code>TextInputLayout</code></strong> y puede tener dos aspectos distintos que se definen con un estilo <strong><code>FilledBox</code></strong>(1) y <strong><code>OutlinedBox</code></strong>(2).</p>
 <div align="center">
     <img height="150" src="./imagenes/tipoTextFields.png">
 </div>
@@ -1195,7 +1269,7 @@ pre[data-line] .line-highlight[data-end]:after {
     <img height="100" src="./imagenes/textFieldsEjemplo.png">
 </div>
 <p>Vamos a utilizar un <strong><code>LinearLayout</code></strong> que contendr&#xE1; el primer <strong><code>TextInputLatout</code></strong> con el primer <strong><code>TextInputEditText</code></strong> correspondiente al <strong><code>name</code></strong> y posteriormente incluiremos un <strong><code>CardView</code></strong> con los otros dos elementos de edici&#xF3;n (<strong><code>Mail</code></strong> y <strong><code>Phone</code></strong>) que est&#xE1;n dentro de otro <strong><code>LinearLayout</code></strong>.</p>
-<p>Veamos el archivo xml que define esta vista y comentamos los apectos m&#xE1;s relevantes:</p>
+<p>Veamos el archivo xml que define esta vista y comentamos los aspectos m&#xE1;s relevantes:</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[11, 15-18,19,20,21,23-24,26-32,50,58-59]}" class="language-xml" data-line="11,15-18,19,20,21,23-24,26-32,50,58-59"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
@@ -1584,21 +1658,21 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><strong>L&#xED;nea 11</strong> definimos el estilo de nuestro control como <strong><code>FilledBox</code></strong></li>
 <li><strong>L&#xED;neas 15-18</strong> establecemos los m&#xE1;rgenes para conseguir el efecto de separaci&#xF3;n deseado.</li>
-<li><strong>L&#xED;nea 19</strong> con la proiedad <strong><code>android:hint</code></strong> eztablecemos el texto que servir&#xE1; para definir el dato que se quiere introducir.</li>
+<li><strong>L&#xED;nea 19</strong> con la propiedad <strong><code>android:hint</code></strong> establecemos el texto que servir&#xE1; para definir el dato que se quiere introducir.</li>
 <li><strong>L&#xED;nea 20</strong> con la propiedad <strong><code>app:startIconDrawable</code></strong> definimos el icono que aparecer&#xE1; dentro de la vista y su posici&#xF3;n (<strong><code>app:endIconDrawable</code></strong> si lo queremos al final).</li>
 <li><strong>L&#xED;nea 21</strong> con <strong><code>app:helperText</code></strong> establecemos un texto aclaratorio debajo de la vista</li>
 <li><strong>L&#xED;neas 23-24</strong> con <strong><code>app:counterEnabled=&quot;true&quot;</code></strong> permitimos que aparezca un contador de caracteres asociado a la vista y con <strong><code>app:counterMaxLength=&quot;20&quot;</code></strong> definimos el m&#xE1;ximo de caracteres a introducir, una vez superados el control indica el error por superar este m&#xE1;ximo.</li>
 <li><strong>L&#xED;neas 28-32</strong> se define el <strong><code>TextInputEditText</code></strong></li>
 <li><strong>L&#xED;nea 50</strong> definimos el estilo del nuestro control como <strong><code>OutlinedBox</code></strong></li>
 <li><strong>L&#xED;neas 58-59</strong> con estas propiedades definimos los bordes del control <strong><code>app:boxCornerRadiusTopEnd</code>...</strong></li>
-<li>Esposible a&#xF1;adir un bot&#xF3;n de acci&#xF3;n a la vista <strong><code>app:endIconMode=&quot;clear_text&quot;</code></strong>, otro valor posible es <strong><code>password_toggle</code></strong> no permitiendo que se vea la entrada de texto.</li>
+<li>Es posible a&#xF1;adir un bot&#xF3;n de acci&#xF3;n a la vista <strong><code>app:endIconMode=&quot;clear_text&quot;</code></strong>, otro valor posible es <strong><code>password_toggle</code></strong> no permitiendo que se vea la entrada de texto.</li>
 </ul>
 </blockquote>
-<p>Las gu&#xED;as de MAterial Design para campos de edici&#xF3;n permiten tambi&#xE9;n que se visualice una icono junto al <strong><code>TextInputLayout</code></strong> pero el ocono debe cambier de color cuando el <strong><code>TextInputEditText</code></strong> recibe el foco.</p>
+<p>Las gu&#xED;as de MAterial Design para campos de edici&#xF3;n permiten tambi&#xE9;n que se visualice un icono junto al <strong><code>TextInputLayout</code></strong> pero el icono debe cambiar de color cuando el <strong><code>TextInputEditText</code></strong> recibe el foco.</p>
 <h4 class="mume-header" id="autocomplete-textview">AutoComplete TextView</h4>
 
 <p>Un control de texto editable que muestra sugerencias mientras el usuario est&#xE1; escribiendo. La lista de sugerencias se muestra en un desplegable en el que el usuario puede elegir un elemento para rellenar el contenido del cuadro de edici&#xF3;n.</p>
-<p>La lista de sugerencias se obtiene de un adaptador de datos y aparece solo despu&#xE9;s de un n&#xFA;mero determinado de caracteres definido por the <strong><code>completionThreshold</code></strong> (l&#xED;nea 20). Como vemos en el ejemplo, puede estar envuelto en un <strong><code>TextInputLatout</code></strong> con un estilo <strong><code>ExposedDropdownMenu</code></strong> que permite con la aparici&#xF3;n de un icono flecha el desplegar la lista (l&#xED;nea2).</p>
+<p>La lista de sugerencias se obtiene de un adaptador de datos y aparece solo despu&#xE9;s de un n&#xFA;mero determinado de caracteres definido por el <strong><code>completionThreshold</code></strong> (l&#xED;nea 20). Como vemos en el ejemplo, puede estar envuelto en un <strong><code>TextInputLatout</code></strong> con un estilo <strong><code>ExposedDropdownMenu</code></strong> que permite con la aparici&#xF3;n de un icono flecha el desplegar la lista (l&#xED;nea2).</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[3,20]}" class="language-xml" data-line="3,20"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.textfield.TextInputLayout</span>
             <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/text_input_layout_pais<span class="token punctuation">&quot;</span></span>
             <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu<span class="token punctuation">&quot;</span></span>
@@ -1669,7 +1743,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </div>
 <h4 class="mume-header" id="checkbox">CheckBox</h4>
 
-<p>Los <strong><code>CheckBos</code></strong> permiten a los usuarios seleccionar uno o m&#xE1;s elementos de un conjunto. Los <strong><code>CheckBos</code></strong> pueden activar o desactivar una opci&#xF3;n.</p>
+<p>Los <strong><code>CheckBox</code></strong> permiten a los usuarios seleccionar uno o m&#xE1;s elementos de un conjunto. Los <strong><code>CheckBox</code></strong> pueden activar o desactivar una opci&#xF3;n.</p>
 <p>Las casillas de verificaci&#xF3;n pueden tener una relaci&#xF3;n padre-hijo con otras casillas de verificaci&#xF3;n.</p>
 <ul>
 <li>Cuando la casilla de verificaci&#xF3;n principal est&#xE1; marcada, todas las casillas de verificaci&#xF3;n secundarias est&#xE1;n marcadas.</li>
@@ -1697,14 +1771,14 @@ pre[data-line] .line-highlight[data-end]:after {
 </blockquote>
 <h3 class="mume-header" id="snackbar">SnackBar</h3>
 
-<p>La <strong><code>snackBar</code></strong> informan a los usuarios sobre un proceso que una aplicaci&#xF3;n ha realizado o realizar&#xE1;. Aparecen temporalmente en la parte inferior de la pantalla. No deben interrumpir la experiencia del usuario y no requieren lacci&#xF3;n dek usuario para desaparecer. Son similates a un <strong><code>Toast</code></strong>. Solo se puede mostrar un <strong><code>snackbar</code></strong> a la vez.</p>
+<p>La <strong><code>snackBar</code></strong> informan a los usuarios sobre un proceso que una aplicaci&#xF3;n ha realizado o realizar&#xE1;. Aparecen temporalmente en la parte inferior de la pantalla. No deben interrumpir la experiencia del usuario y no requieren la acci&#xF3;n del usuario para desaparecer. Son similates a un <strong><code>Toast</code></strong>. Solo se puede mostrar un <strong><code>snackbar</code></strong> a la vez.</p>
 <p>Los ajustes preestablecidos de duraci&#xF3;n disponibles son:</p>
 <ul>
 <li><strong><code>LENGTH_INDEFINITE</code></strong> (Muestra la <strong><code>snackbar</code></strong> hasta que se descarta o hasta que se muestra otra)</li>
 <li><strong><code>LENGTH_LONG</code></strong> (Muestra la <strong><code>snackbar</code></strong> durante un per&#xED;odo largo de tiempo)</li>
 <li><strong><code>LENGTH_SHORT</code></strong> (Muestre la <strong><code>snackbar</code></strong> por un per&#xED;odo de tiempo corto)</li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">Snackbar<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>constraintLayout<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;La acci&#xF3;n seleccionada se ha realizado corrctamente&quot;</span><span class="token punctuation">,</span>Snackbar<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">Snackbar<span class="token punctuation">.</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>constraintLayout<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;La acci&#xF3;n seleccionada se ha realizado correctamente&quot;</span><span class="token punctuation">,</span>Snackbar<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
 </pre><h4 class="mume-header" id="snackbar-con-acci%C3%B3n">SnackBar con acci&#xF3;n</h4>
 
 <p>Para agregar una acci&#xF3;n, use el m&#xE9;todo <strong><code>setAction</code></strong>. Las <strong><code>snackBar</code></strong>`** se descartan autom&#xE1;ticamente cuando se hace clic en la acci&#xF3;n.</p>
@@ -1713,29 +1787,12 @@ pre[data-line] .line-highlight[data-end]:after {
     <span class="token comment">// Responds to click on the action</span>
     <span class="token punctuation">}</span>
     <span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><h4 class="mume-header" id="descartar-snackbar">Descartar SnackBar</h4>
+</pre><p>Desarrollar un ejercicio que se llame <strong>EjemploSnackBar</strong> y probar estos elementos. Recomiendo que coloqu&#xE9;is una actividad con tres botones (tres tipos de <strong><code>snackBar</code></strong>) y un <strong><code>FAB</code></strong>.</p>
+<p>&#xBF;Qu&#xE9; sucede cu&#xE1;ndo lo ejecut&#xE1;is? Se os superponen las <strong><code>snackBar</code></strong> al <strong><code>FAB</code></strong>? Veamos como resolverlo...</p>
+<h4 class="mume-header" id="descartar-snackbar">Descartar SnackBar</h4>
 
-<div align="center">
-    <img height="150" src="./imagenes/constraintLayoutEjemplo.png">
-</div>
-<pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml"></pre><blockquote>
-<p>&#x1F4CC; Aclaraciones:</p>
-</blockquote>
-<blockquote>
-<ul>
-<li><strong>ImageView</strong> l&#xED;neas 10..16:</li>
-</ul>
-</blockquote>
-<div align="center">
-    <img height="50" src="./imagenes/actionbar.png">
-</div>
-<blockquote>
-<p>&#x1F4CC; <a href="https://material.io/design/color/the-color-system.html#tools-for-picking-colors">Aqu&#xED; tenemos un enlace donde se encuentra informaci&#xF3;n sobre la gesti&#xF3;n de colores que ofrece Material Design</a></p>
-</blockquote>
-<blockquote>
-<p>&#x270B; EjercicioPropuestoCardView</p>
-</blockquote>
-<pre data-role="codeBlock" data-info="xml {highlight=[10-16,22-27,33,34,39,44-47,54-56,64-66]}" class="language-xml"></pre><div style="page-break-after:always;"></div>
+<p>Para que la <strong><code>snackBar</code></strong> aparezca por debajo del <strong><code>FAB</code></strong> y este tenga un desplazamiento hacia arriba, es necesario que el contenedor principal sea un <strong><code>CoordinatorLayout</code></strong>, ya utilizado en temas anteriores.</p>
+<p>Adem&#xE1;s el hecho de que utilicemos este elemento nos va a proporcionar tambi&#xE9;n una acci&#xF3;n adicional sobre la <strong><code>snackBar</code></strong>, concretamente el poder descartarla con un gesto. Estas interacciones y animaciones autom&#xE1;ticas son un elemento muy potente visualmente hablando.</p>
 
       </div>
       

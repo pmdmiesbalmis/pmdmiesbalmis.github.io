@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>2&#xBA; DAM Tema 1. Programaci&#xF3;n multimedia y dispositivos m&#xF3;viles</title>
+      <title>PMDM 2&#xBA; DAM  Bloque 3. Exercici Proposat Parcelable</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -333,113 +333,63 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+<h1 class="mume-header undefined" id="bloque-3-exercici-proposat-parcelable">Bloque 3. Exercici Proposat Parcelable</h1>
 
-<p><a href="./Tema_1.pdf">Descargar estos apuntes</a></p>
-<h1 class="mume-header undefined" id="tema-1">Tema 1</h1>
+<p><a href="./EjercicioPropuestoParcelable_val.pdf">Descarregar aquests apunts</a></p>
+<h3 class="mume-header" id="emmagatzematge-dinformaci%C3%B3-en-android">Emmagatzematge d&apos;informaci&#xF3; en Android</h3>
 
-<h2 class="mume-header" id="%C3%ADndice">&#xCD;ndice</h2>
+<p>Exercici que ens servir&#xE0; per a practicar la parcel&#xB7;laci&#xF3; d&apos;unes dades amb un Intent, i tamb&#xE9; la transmissi&#xF3; d&apos;aqueixes dades a una APP diferent on seran rebuts i mostrats.<br>
+Crea una aplicaci&#xF3; <strong>PropuestoParcelable</strong>, amb el seg&#xFC;ent aspecte.</p>
+<div align="center">
+    <img height="200" src="./imagenes/parcelable1.png">
+</div>
+<p>Haur&#xE0; de tindre una classe Pojo anomenada <strong>Persona</strong> que estendr&#xE0; de Parcelable, tindr&#xE0; dos tipus String: dni i nom i un sencer edat.</p>
+<p>Usarem un Intent al qual li afegirem el Bundle amb l&apos;objecte parcel&#xB7;lat. En pr&#xE9;mer el bot&#xF3; <strong>Mandar</strong>, s&apos;haur&#xE0; d&apos;iniciar una aplicaci&#xF3; diferent, <strong>Parcelable2Activity</strong>, que mostrar&#xE0; les dades que haurem ficat en l&apos;aplicaci&#xF3; anterior (pots anul&#xB7;lar el m&#xE8;tode ToString en la classe Persona i mostrar la informaci&#xF3; amb un TextView en la segona activitat).</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; L&apos;&#xFA;nic problema que ens trobarem en aquest exercici, &#xE9;s que no ens permetr&#xE0; recuperar l&apos;objecte parcel&#xB7;lat si no pertany exactament a la mateixa classe d&apos;on l&apos;hem parcel&#xB7;lat. Per a aix&#xF2; haurem de crear un m&#xF2;dul de llibreria <strong><code>.arr</code></strong>, amb la classe Persona en l&apos;App PropuestoParcelable i haurem d&apos;importar aqueix m&#xF2;dul a la classe Parcelables2Activity. La informaci&#xF3; amb els passos a seguir es pot veure en el seg&#xFC;ent <a href="https://developer.android.com/studio/projects/android-library?hl=es-419#CreateLibrary">enlla&#xE7;</a>, encara que s&apos;explica tamb&#xE9; m&#xE9;s a baix.</p>
+</blockquote>
+<h4 class="mume-header" id="com-crear-un-m%C3%B2dul-de-biblioteca">Com crear un m&#xF2;dul de biblioteca</h4>
 
-<ol>
-<li><a href="#%C3%ADndice">&#xCD;ndice</a></li>
-<li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
-<li><a href="#instalaci%C3%B3n-y-configuraci%C3%B3n-de-android-studio">Instalaci&#xF3;n y configuraci&#xF3;n de Android Studio</a></li>
-<li><a href="#android-sdk-software-development-kit">Android SDK (Software Development Kit)</a></li>
-<li><a href="#emuladores">Emuladores</a></li>
-</ol>
-<div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+<p>Per a crear les classes que volem que s&apos;incloguen en una biblioteca, s&apos;ha de crear un nou m&#xF2;dul i afegir tot el codi en aquest. Per a aix&#xF2; tindrem:</p>
+<div align="center">
+    <img height="80" src="./imagenes/biblioteca1.png">
+</div>
+<div align="center">
+    <img height="100" src="./imagenes/biblioteca2.png">
+</div>
+<p>El resultat des de la vista projecte mostrar&#xE0; els dos m&#xF2;duls, el de l&apos;app i el de la biblioteca:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca3.png">
+</div>
+<p>Perqu&#xE8; es cree l&apos;arxiu que despr&#xE9;s exportarem <strong><code>.aar</code></strong>, caldr&#xE0; construir el m&#xF2;dul de biblioteca:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca4.png">
+</div>
+<p>D&apos;aquesta manera es generar&#xE0; l&apos;arxiu:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca5.png">
+</div>
+<p>Per a poder usar la biblioteca dins del mateix projecte, solament haurem d&apos;agregar una depend&#xE8;ncia del m&#xF2;dul de l&apos;aplicaci&#xF3; al m&#xF2;dul de biblioteca:</p>
+<div align="center">
+    <img height="90" src="./imagenes/biblioteca6.png">
+</div>
+<div align="center">
+    <img height="120" src="./imagenes/biblioteca7.png">
+</div>
+<h4 class="mume-header" id="com-afegir-una-biblioteca-al-teu-projecte">Com afegir una biblioteca al teu projecte</h4>
 
-<p>En este primer tema vamos a tener la primera toma de contacto con el entorno de desarrollo (IDE) que se utilizar&#xE1; a lo largo de todo el curso, Android Studio, mediante su instalaci&#xF3;n.</p>
-<p>A pesar de que actualmente los Smartphones modernos est&#xE1;n considerados como peque&#xF1;os ordenadores, estos siguen teniendo una serie de limitaciones que debemos tener en cuenta si queremos dedicarnos a desarrollar aplicaciones m&#xF3;viles. La metodolog&#xED;a para desarrollar una aplicaci&#xF3;n m&#xF3;vil es muy similar a desarrollar una aplicaci&#xF3;n de escritorio, pero debemos tener en cuenta las restricciones hardware que encontramos en estos dispositivos:</p>
-<ul>
-<li>Pantallas m&#xE1;s peque&#xF1;as y de menor resoluci&#xF3;n, aunque ya disponemos de resoluciones muy elevadas</li>
-<li>Menor potencia de los procesadores.</li>
-<li>Memoria RAM limitada.</li>
-<li>Seg&#xFA;n el dispositivo, el almacenamiento tambi&#xE9;n puede ser un inconveniente.</li>
-<li>Tasas de transferencia menores.</li>
-<li>Inestabilidad de las conexiones.</li>
-</ul>
-<p>Tambi&#xE9;n es importante tener en cuenta las siguientes recomendaciones a la hora de comenzar el desarrollo de una App:</p>
-<ul>
-<li>Debido a la cantidad de marcas y modelos diferentes que se pueden encontrar en el mercado, en el campo de Android, se debe buscar la m&#xE1;xima compatibilidad entre todos ellos.</li>
-<li>Es importante crear un buen dise&#xF1;o de la aplicaci&#xF3;n para hacer un uso adecuado de recursos, b&#xE1;sicamente, liberar recursos cuando estos no sean necesarios y no consumir m&#xE1;s recursos de los debidos. Es recomendable hacer que la aplicaci&#xF3;n funcione bien en un modelo de gama baja, ya que esto implica que en un modelo de gama media/alta funcionar&#xE1; mejor.</li>
-</ul>
-<div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="instalaci%C3%B3n-y-configuraci%C3%B3n-de-android-studio">Instalaci&#xF3;n y configuraci&#xF3;n de Android Studio</h2>
-
-<p>Las aplicaciones nativas para Android se desarrollan utilizando Java, o Kotlin, a&#xF1;adido recientemente como lenguaje nativo para aplicaciones Android. Por tanto, ser&#xE1; necesario tener instalado en el SO el software necesario para la ejecuci&#xF3;n de Java. Se hace referencia a la m&#xE1;quina virtual de Java (JVM) y su entorno de ejecuci&#xF3;n de Java (JRE). Como m&#xED;nimo, se recomienda tener instalada la versi&#xF3;n 8 de Java4, puedes descargarlo desde la p&#xE1;gina de recursos t&#xE9;cnicos de Oracle<br>
-(<a href="https://www.oracle.com/technical-resources/">https://www.oracle.com/technical-resources/</a>).</p>
-<p>La documentaci&#xF3;n de Google para el desarrollo de aplicaciones Android es muy completa y de f&#xE1;cil consulta. Se comenzar&#xE1; por centrar la atenci&#xF3;n en la instalaci&#xF3;n de Android Studio, desde este enlace, <a href="https://developer.android.com/studio/index.html">https://developer.android.com/studio/index.html</a>, se puede descargar la &#xFA;ltima versi&#xF3;n del IDE.</p>
-<p><strong>Documentaci&#xF3;n oficial de instalaci&#xF3;n de Android Studio</strong> (<a href="https://developer.android.com/studio/install">https://developer.android.com/studio/install</a>)</p>
-<p>Entramos en el URL de instalaci&#xF3;n y encontramos una pantalla similar a esta con un bot&#xF3;n de descarga.</p>
-<p><img src="imagenes/0_instalaci%C3%B3n.png" alt="Descargar Android Studio"></p>
-<p>Aceptamos las condiciones y pulsamos descargar.</p>
-<p><img src="imagenes/1_instalaci%C3%B3n.png" alt="Aceptar condiciones y descargar"></p>
-<p>Nos muestra una pantalla de Bienvenida</p>
-<p><img src="imagenes/2_instalaci%C3%B3n.png" alt="Welcome to Android Studio"></p>
-<p>Dejamos seleccionados los componentes por defecto, ya que utilizaremos el Android Virtual Device.</p>
-<p><img src="imagenes/3_instalaci%C3%B3n.png" alt="Choose Components"></p>
-<p>Por defecto nos ofrece una carpeta de instalaci&#xF3;n, aunque es posible cambiarla.</p>
-<p><img src="imagenes/4_instalaci%C3%B3n.png" alt="Configuration Settings"></p>
-<p>Nos ofrece la posibilidad de elegir la carpeta de inicio. Es recomendable dejar la opci&#xF3;n por defecto.</p>
-<p><img src="imagenes/5_instalaci%C3%B3n.png" alt="Choose Start Menu Folder"></p>
-<p>Nos mostrar&#xE1; que la instalaci&#xF3;n se ha completado. Le damos a Next.</p>
-<p><img src="imagenes/6_instalaci%C3%B3n.png" alt="Installation Complete"></p>
-<p>Pulsamos Finish, y si est&#xE1; el checkbox marcado se abrir&#xE1; la aplicaci&#xF3;n.</p>
-<p><img src="imagenes/7_instalaci%C3%B3n.png" alt="Completing Android Studio Setup"></p>
-<p>Pedir&#xE1; importar la configuraci&#xF3;n o instalaci&#xF3;n de otra carpeta. Le diremos que no importe.</p>
-<p><img src="imagenes/8_instalaci%C3%B3n.png" alt="Import Android Studio Setting"></p>
-<p>Aqu&#xED; nos pregunta si queremos compartir estad&#xED;sticas de uso con Google.</p>
-<p><img src="imagenes/9_instalaci%C3%B3n.png" alt="Data Sharing"></p>
-<p>Aparece esta pantalla de Bienvenida. Pulsamos Next.</p>
-<p><img src="imagenes/10_instalaci%C3%B3n.png" alt="Android Studio Setup Wizard"></p>
-<p>Nos pide que seleccionemos que tipo de instalaci&#xF3;n deseamos. Seleccionaremos la standard.</p>
-<p><img src="imagenes/11_instalaci%C3%B3n.png" alt="Install Type"></p>
-<p>Podremos elegir si queremos el tema claro u oscuro. Esto posteriormente se puede cambiar.</p>
-<p><img src="imagenes/12_instalaci%C3%B3n.png" alt="Select UI Theme"></p>
-<p>Verificamos la instalaci&#xF3;n. Es importante en este punto estar conectado a Internet, ya que van a descargarse componentes. Pulsamos Finish.<br>
-<img src="imagenes/13_instalaci%C3%B3n.png" alt="Verify Settings"></p>
-<p>Comienza a descargar los componentes.<br>
-<img src="imagenes/14_instalaci%C3%B3n.png" alt="Downloading Components"></p>
-<p>Una vez descargados comprobamos que pone que la instalaci&#xF3;n se ha realizado con &#xE9;xito y le damos a Finish.</p>
-<p><img src="imagenes/15_instalaci%C3%B3n.png" alt="Finished Downloading Components"></p>
-<p>Se abre Android Studio. Esta pantalla ser&#xE1; la que se abra cada vez que utilicemos la aplicaci&#xF3;n.</p>
-<p><img src="imagenes/16_instalaci%C3%B3n.png" alt="Welcome to Android Studio"></p>
-<div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="android-sdk-software-development-kit">Android SDK (Software Development Kit)</h2>
-
-<p>Tras la instalaci&#xF3;n, vendr&#xE1; instalada, parcialmente, la &#xFA;ltima versi&#xF3;n disponible, pero si se investigas un poco, ver&#xE1;s que la &#xFA;ltima versi&#xF3;n, no es siempre la m&#xE1;s utilizada en el caso de Android. Para realizar la instalaci&#xF3;n, se deber&#xE1; ir al men&#xFA; <strong>Configure &gt; SDK Manager</strong>.</p>
-<p><img src="imagenes/17_instalaci%C3%B3n.png" alt="Android SDK"></p>
-<p>En 2019, las versiones m&#xE1;s utilizadas fueron Nougat y Oreo, versiones que se a&#xF1;adir&#xE1;n al IDE, esto variar&#xE1; en funci&#xF3;n de la evoluci&#xF3;n de Android.</p>
-<p>Una vez se pulse el bot&#xF3;n Apply se mostrar&#xE1; un mensaje informando de la descarga e instalaci&#xF3;n que va a producirse, pulsa el bot&#xF3;n OK para comenzar.</p>
-<p><img src="imagenes/18_instalaci%C3%B3n.png" alt="Confirm Change"></p>
-<p>Seguidamente se deber&#xE1; aceptar el contrato de licencia y pulsar el bot&#xF3;n Next para comenzar con el proceso.</p>
-<p><img src="imagenes/19_instalaci%C3%B3n.png" alt="License Agreement"></p>
-<p>A partir de aqu&#xED;, Android Studio comenzar&#xE1; su trabajo, descargar&#xE1; e instalar&#xE1; los componentes seleccionados. Una vez terminado, pulsa el bot&#xF3;n Finish, seguidamente se ver&#xE1; que aparecen marcadas las versiones instaladas. Ya se puede continuar preparando el entorno de trabajo.</p>
-<p><img src="imagenes/20_instalaci%C3%B3n.png" alt="Finished Instalation"></p>
-<div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="emuladores">Emuladores</h2>
-
-<p>Se empezar&#xE1; por el emulador que viene incluido en Android Studio, conocido como AVD (Android Virtual Device). AVD permite crear diferentes perfiles hardware de dispositivos m&#xF3;viles, tablets, Wear OS o Android TV. Es posible crear un perfil durante la ejecuci&#xF3;n de un proyecto, pero no est&#xE1; dem&#xE1;s tenerlo ya preparado antes de empezar. Para ello se utilizar&#xE1; al men&#xFA; <strong>Configure &gt; AVD Manager</strong> de Android Studio.</p>
-<p><img src="imagenes/21_instalaci%C3%B3n_emulador.png" alt="Your Virtual Device"></p>
-<p>Vamos a crear una dispositivo de ejemplo. Pulsamos <strong>Create Virtual Device</strong></p>
-<p>Seleccionaremos un <strong>Pixel 2</strong> , y si nos fijamos vemos que tiene la opci&#xF3;n Play Store activada. Esto significa que es compatible con CTS (Compatibility Test Suite), lo que permitir&#xE1; utilizar im&#xE1;genes de sistema que incluyan la app de Play Store e incluye acceso a los Servicios de Google Play5. Una vez seleccionado el dispositivo pulsa el bot&#xF3;n Next.</p>
-<p><img src="imagenes/22_instalaci%C3%B3n_emulador.png" alt="Select Hardware"></p>
-<p>Seleccionaremos la imagen que deseamos. En nuestro caso <strong>Nougat</strong>. Primero debemos descargar desde su correspondiente <strong>Download</strong></p>
-<p><img src="imagenes/23_instalaci%C3%B3n_emulador.png" alt="System Image"></p>
-<p>Nos aparecer&#xE1; la instalaci&#xF3;n del componente, y daremos a Finish.</p>
-<p><img src="imagenes/24_instalaci%C3%B3n_emulador.png" alt="Component Installer"></p>
-<p>Una vez descargado ya nos dejar&#xE1; continuar.</p>
-<p><img src="imagenes/25_instalaci%C3%B3n_emulador.png" alt="System Image2"></p>
-<p>En esta &#xFA;ltima ventana no se cambiar&#xE1; nada, en todo caso, se puede poner un nombre (AVD Name) que permita identificar f&#xE1;cilmente el dispositivo emulado. Aqu&#xED; ya podr&#xE1;s pulsar el bot&#xF3;n Finish para terminar. A continuaci&#xF3;n, aparecer&#xE1; unas lista con los dispositivos virtuales creados.</p>
-<p><img src="imagenes/26_instalaci%C3%B3n_emulador.png" alt="Android Virtual Device AVD"></p>
-<p>En Actions podemos ver el bot&#xF3;n Play que nos permite la ejecuci&#xF3;n del dispositivo virtual.</p>
-<p><img src="imagenes/27_instalaci%C3%B3n_emulador.png" alt="Your Virtual Device with created device"></p>
-<p>Una vez se haya lanzado el emulador mediante el bot&#xF3;n Play, deber&#xE1; aparecer el emulador del<br>
-dispositivo funcionando</p>
-<p><img src="imagenes/28_instalaci%C3%B3n_emulador.png" alt="Mobile"></p>
-
+<p>Per a afegir una biblioteca externa <strong>jar o aar</strong> al nostre projecte, haurem d&apos;agregar la depend&#xE8;ncia a aquesta com fem normalment, per&#xF2; aquesta vegada seleccionant el tipus <strong><code>JAR/AAR Dependency</code></strong></p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca8.png">
+</div>
+<p>Indicarem la ruta on est&#xE0; guardat l&apos;arxiu <strong><code>.aar</code></strong>, confirmarem, i ja estar&#xE0; afegida.</p>
+<div align="center">
+    <img height="120" src="./imagenes/biblioteca9.png">
+</div> 
+<p>Es podr&#xE0; usar normalment tenint en compte importar correctament el domini. Si volem comprovar que s&apos;ha afegit correctament, es pot veure en <strong><code>External Llibraries</code></strong>:</p>
+<div align="center">
+    <img height="150" src="./imagenes/biblioteca10.png">
+</div>
       </div>
       
       
