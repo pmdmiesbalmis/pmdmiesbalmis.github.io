@@ -349,6 +349,7 @@ justo después del front matter
 <li><a href="#alcance-de-las-corrutinas">Alcance de las corrutinas</a></li>
 <li><a href="#coroutinecontext">CoroutineContext</a></li>
 <li><a href="#funciones-de-suspensi%C3%B3n">Funciones de Suspensi&#xF3;n</a></li>
+<li><a href="#builders-de-corrutinas">Builders de corrutinas</a></li>
 </ol>
 </li>
 </ol>
@@ -376,12 +377,17 @@ Job de la Coroutine, su dispatcher y tambi&#xE9;n su Exception handler.</p>
 <li>
 <p><strong>Job</strong> De acuerdo con la documentaci&#xF3;n oficial &quot;Un Job es una cosa cancelable con un ciclo de vida que culmina con su finalizaci&#xF3;n. Los trabajos de coroutine se crean con launch coroutine builder. Ejecuta un bloque de c&#xF3;digo especificado y se completa a la finalizaci&#xF3;n de este bloque&quot;.</p>
 <p>La ejecuci&#xF3;n de un trabajo no produce un valor de resultado. Deber&#xED;amos utilizar una interfaz Deferred para un trabajo que produzca un resultado. Un trabajo con resultado (Deferred), se crea con el constructor async Coroutine y el resultado se puede recuperar con el m&#xE9;todo await(), que lanza una excepci&#xF3;n si el Deferred ha fallado.</p>
+<p>Los jobs tienen un par de funciones interesantes que pueden ser muy &#xFA;tiles. Pero es importante entender que un Job puede tener a su vez otro Job padre. Ese job padre tiene cierto control sobre los hijos, y ah&#xED; es donde entran en juego estas funciones:</p>
+<ul>
+<li>job.join -&gt; Con est&#xE1; funci&#xF3;n, se puede bloquear la corrutina asociada con el job hasta que todos los jobs hijos hayan finalizado. Todas las funciones de suspension que se llaman dentro de una corrutina est&#xE1;n vinculadas a job, as&#xED; que el job puede detectar cu&#xE1;ndo finalizan todos los jobs hijos y despu&#xE9;s continuar la ejecuci&#xF3;n.</li>
+<li>job.cancel -&gt; Esta funci&#xF3;n cancelar&#xE1; todos sus jobs hijos asociados</li>
+</ul>
 </li>
 <li>
-<p><strong>Dispacher</strong> En Kotlin, todas las Coroutines deben ejecutarse en un dispatcher incluso cuando se ejecutan en el hilo principal. Las coroutines pueden suspenderse a s&#xED; mismas, y el dispatcher es el que sabe c&#xF3;mo reanudarlas. Para especificar d&#xF3;nde deben ejecutarse las coroutines, Kotlin proporciona tres Dispatchers que puedes utilizar:</p>
+<p><strong>Dispacher</strong> En Kotlin, todas las Coroutines deben ejecutarse en un dispatcher incluso cuando se ejecutan en el hilo principal. los Dispatchers son un tipo de contextos de corrutina que especifican el hilo o hilos que pueden ser utilizados por la corrutina para ejecutar su c&#xF3;digo.  Para especificar d&#xF3;nde deben ejecutarse las coroutines, Kotlin proporciona tres Dispatchers que puedes utilizar:</p>
 <ul>
 <li><strong><code>Dispatchers.Main</code></strong>. Hilo principal en Android, interact&#xFA;a con la UI y realiza trabajos ligeros como: llamar a funciones de suspensi&#xF3;n, llamar a funciones de la interfaz de usuario y actualizar LiveData</li>
-<li><strong><code>Dispatchers.IO</code></strong>. Optimizado para la E/S de disco y red fuera del hilo principal: solicitudes de bases de datos, lectura/escritura de archivos; conexi&#xF3;n en red.</li>
+<li><strong><code>Dispatchers.IO</code></strong>. En general, todas las tareas que bloquear&#xE1;n el hilo mientras esperan la respuesta. Optimizado para la E/S de disco y red fuera del hilo principal: solicitudes de bases de datos, lectura/escritura de archivos,sensores, conexi&#xF3;n en red, ...</li>
 <li><strong><code>Dispatchers.Default</code></strong>. Optimizado para el trabajo intensivo de la CPU fuera del hilo principal: ordenar una lista, an&#xE1;lisis de JSON, utilidades</li>
 </ul>
 </li>
@@ -394,13 +400,31 @@ Job de la Coroutine, su dispatcher y tambi&#xE9;n su Exception handler.</p>
 </ul>
 <h4 class="mume-header" id="funciones-de-suspensi%C3%B3n">Funciones de Suspensi&#xF3;n</h4>
 
-<p>Las corrutinas se basan en las <strong>funciones de suspension</strong>  que son funciones normales a las que se les agrega el modificador <strong><code>suspend</code></strong>, de esta manera se agregan dos nuevas operaciones (adem&#xE1;s de invocar / llamar y regresar ):</p>
+<p>Las corrutinas se basan en las <strong>funciones de suspension</strong>  que son funciones normales a las que se les agrega el modificador <strong><code>suspend</code></strong>, las funciones de suspensi&#xF3;n tienen la capacidad de bloquear la ejecuci&#xF3;n de la corrutina mientras est&#xE1;n haciendo su trabajo. Una vez que termina, el resultado de la operaci&#xF3;n se devuelve y se puede utilizar en la siguiente l&#xED;nea.<br>
+De esta manera se agregan dos nuevas operaciones (adem&#xE1;s de invocar / llamar y regresar ):</p>
 <ul>
 <li>suspender - pausa la ejecuci&#xF3;n de la corrutina actual, guardando todas las variables locales. El hilo actual puede continuar con su trabajo, mientras que el c&#xF3;digo de suspensi&#xF3;n se ejecuta en otro hilo.</li>
 <li>reanudar : contin&#xFA;a una corrutina suspendida desde el lugar donde se paus&#xF3; cuando el resultado est&#xE1; listo.</li>
 </ul>
-<p>Solo se pueden llamar a las funciones de suspensi&#xF3;n desde otras funciones de suspensi&#xF3;n, o utilizando un constructor de corrutinas para iniciar una nueva corrutina. Estas funciones pueden ejecutar una operaci&#xF3;n de larga duraci&#xF3;n y esperar a que se complete sin bloquearse. Hay que tener en cuenta que las funciones de suspensi&#xF3;n se sincronizan autom&#xE1;ticamente con otras variables y funciones del hilo principal.</p>
+<p>val user = suspended { userService.doLogin(username, password) }<br>
+val currentFriends = suspended { userService.requestCurrentFriends(user) }<br>
+Las funciones de suspensi&#xF3;n pueden ejecutarse en el hilo actual o en uno diferente. Depende de c&#xF3;mo se configuren. Las funciones de suspensi&#xF3;n solo pueden ejecutarse dentro de una corrutina o dentro de otra funci&#xF3;n de suspensi&#xF3;n.<br>
+Solo se pueden llamar a las funciones de suspensi&#xF3;n desde otras funciones de suspensi&#xF3;n, o utilizando un constructor de corrutinas para iniciar una nueva corrutina. Estas funciones pueden ejecutar una operaci&#xF3;n de larga duraci&#xF3;n y esperar a que se complete sin bloquearse. Hay que tener en cuenta que las funciones de suspensi&#xF3;n se sincronizan autom&#xE1;ticamente con otras variables y funciones del hilo principal.</p>
 <p>Vamos a poner en funcionamiento todos estos conocimientos retomando el ejercicio resuelto del bloque 6 <strong>ProgresIndicators</strong>, mejorando la funcionalidad.</p>
+<h4 class="mume-header" id="builders-de-corrutinas">Builders de corrutinas</h4>
+
+<p>Los coroutine builders sirven para iniciar las corrutinas. Tenemos diferentes builders dependiendo de lo que queramos hacer, e incluso t&#xE9;cnicamente se pueden crear personalizados. Pero para la mayor&#xED;a de los casos son suficientes con los que proporciona la librer&#xED;a:</p>
+<ul>
+<li><strong><code>runBlocking</code></strong>, este builder bloquea el hilo actual hasta<br>
+GlobalScope.lauch{ .. } : crea una nueva Coroutine, el &#xE1;mbito ser&#xE1; el ciclo de vida de la aplicaci&#xF3;n.</li>
+<li><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados). Este builder siempre necesita un scope. launch devuelve un Job.</li>
+<li><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. async siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama Deferred.</li>
+</ul>
+<p>Este objeto tiene una nueva funci&#xF3;n  llamada await() que es la que bloquea. Llamaremos a await() solo cuando necesitemos el resultado. Si el resultado a&#xFA;n no esta listo, la corrutina se suspende en ese punto. Si ya tenemos el resultado, simplemente lo devolver&#xE1; y continuar&#xE1;. De esta manera, puedes ejecutar tantas tareas en segundo plano como necesites.<br>
+coroutineScope { .. } : Crea un nuevo &#xE1;mbito personalizado y no se completa hasta que todos los Coroutines hijos se completan;<br>
+Si el padre se cancela, todos los hijos se cancelan.<br>
+El padre siempre esperar&#xE1; a que se completen sus hijos.</p>
+<p>No recomiendo el uso de GlobalScope porque el padre no va a esperar la finalizaci&#xF3;n de sus hijos y una vez que el padre es cancelado, los otros trabajos van a seguir corriendo aparte. Es decir, ahora es responsabilidad del desarrollador llevar el control del tiempo de vida de las coroutines porque no hay sincronizaci&#xF3;n con los trabajos hijos.</p>
 
       </div>
       
