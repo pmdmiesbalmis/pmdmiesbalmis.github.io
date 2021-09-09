@@ -502,7 +502,7 @@ inmutable<span class="token operator">=</span><span class="token string">&apos;A
    <span class="token function">println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </pre><p>Produiria l&apos;error <span style="color: DarkSlateBlue; font-weight: bold; font-style: italic;">error: type mismatch: inferred type is Float but Int was expected.</span><br>
-Mentre que: <strong><code>a=b.*toInt()+2</code></strong> , evitaria l&apos;error, encara que la funci&#xF3; arredoniria a 3.</p>
+Mentre que: <strong><code>a=b.toInt()+2</code></strong> , evitaria l&apos;error, encara que la funci&#xF3; arredoniria a 3.</p>
 </blockquote>
 <h4 class="mume-header" id="string">String</h4>
 
@@ -549,14 +549,14 @@ Mentre que: <strong><code>a=b.*toInt()+2</code></strong> , evitaria l&apos;error
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">getEstacio</span><span class="token punctuation">(</span>entrada<span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span>String
 <span class="token punctuation">{</span>
-<span class="token keyword">return</span> <span class="token keyword">when</span><span class="token punctuation">(</span>entrada<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">when</span><span class="token punctuation">(</span>entrada<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
     <span class="token number">1</span><span class="token operator">-&gt;</span> <span class="token string">&quot;primavera&quot;</span>
     <span class="token number">2</span><span class="token operator">-&gt;</span> <span class="token string">&quot;estiu&quot;</span>
     <span class="token number">3</span><span class="token operator">-&gt;</span> <span class="token string">&quot;tardor&quot;</span>
     <span class="token number">4</span><span class="token operator">-&gt;</span> <span class="token string">&quot;hivern&quot;</span>
     <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token string">&quot;Estaci&#xF3; incorrecta&quot;</span>
-<span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">getEstacio</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
 </pre></blockquote>
@@ -577,8 +577,7 @@ Mentre que: <strong><code>a=b.*toInt()+2</code></strong> , evitaria l&apos;error
 <div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="funcions">Funcions</h2>
 
-<p>Si queremos crear una <a href="https://kotlinlang.org/docs/basic-syntax.html#functions">funci&#xF3;n</a> en kotlin tendremos que precederla de la palabra reservada <strong>fun</strong>. Por tanto, una funci&#xF3;n constar&#xE1; de la palabra fun seguida por el nombre de la funci&#xF3;n y entre par&#xE9;ntesis los par&#xE1;metros, siempre y cuando los tenga. Si la funci&#xF3;n retorna un valor se definir&#xE1; al final de la signatura (esto &#xFA;ltimo se puede omitir siempre que la funci&#xF3;n no devuelva nada).<br>
-Si volem crear una <a href="https://kotlinlang.org/docs/basic-syntax.html#functions">funci&#xF3;</a> en kotlin haurem de precedir-la de la paraula reservada <strong>fun</strong>. Per tant, una funci&#xF3; constar&#xE0; de la paraula fun seguida pel nom de la funci&#xF3; i entre par&#xE8;ntesi els par&#xE0;metres, sempre que els tinga. Si la funci&#xF3; retorna un valor es definir&#xE0; al final de la signatura (aix&#xF2; &#xFA;ltim es pot ometre sempre que la funci&#xF3; no retorne res).</p>
+<p>Si volem crear una <a href="https://kotlinlang.org/docs/basic-syntax.html#functions">funci&#xF3;</a> en kotlin haurem de precedir-la de la paraula reservada <strong>fun</strong>. Per tant, una funci&#xF3; constar&#xE0; de la paraula fun seguida pel nom de la funci&#xF3; i entre par&#xE8;ntesi els par&#xE0;metres, sempre que els tinga. Si la funci&#xF3; retorna un valor es definir&#xE0; al final de la signatura (aix&#xF2; &#xFA;ltim es pot ometre sempre que la funci&#xF3; no retorne res).</p>
 <p><strong></strong></p><center><strong>fun nomFuncio([nomVariable:Tipus, nomVariable:Tipus, ... ]):TipusDevoluci&#xF3;</strong></center><p></p>
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">sumaDades</span><span class="token punctuation">(</span>datoUno<span class="token operator">:</span>Int<span class="token punctuation">,</span> datoDos<span class="token operator">:</span>Char <span class="token punctuation">)</span>
@@ -604,7 +603,7 @@ Si volem crear una <a href="https://kotlinlang.org/docs/basic-syntax.html#functi
 </pre></blockquote>
 <p>Si la funci&#xF3; nom&#xE9;s t&#xE9; una instrucci&#xF3;, com en el cas anterior, Kotlin permet ometre les claus.</p>
 <blockquote>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">major</span><span class="token punctuation">(</span>numeroUno<span class="token operator">:</span>Int<span class="token punctuation">,</span> numeroDos<span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span>Int<span class="token operator">=</span> <span class="token keyword">if</span><span class="token punctuation">(</span>numeroUno<span class="token operator">&gt;</span>numeroDos<span class="token punctuation">)</span>  numeroUno <span class="token keyword">else</span> numeroDos
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">major</span><span class="token punctuation">(</span>numeroUno<span class="token operator">:</span>Int<span class="token punctuation">,</span> numeroDos<span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span>Int<span class="token operator">=</span> <span class="token keyword">if</span><span class="token punctuation">(</span>numeroUno<span class="token operator">&gt;</span>numeroDos<span class="token punctuation">)</span> numeroUno <span class="token keyword">else</span> numeroDos
 </pre></blockquote>
 <h4 class="mume-header" id="funcions-de-extensi%C3%B3">Funcions de Extensi&#xF3;</h4>
 
@@ -661,8 +660,7 @@ Si volem crear una <a href="https://kotlinlang.org/docs/basic-syntax.html#functi
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
-<p>Si lo que queremos es crear m&#xE1;s de un constructor, tendremos que recurrir a la clausula <strong><code>constructor</code></strong> indicando los par&#xE1;metros necesarios y llamando al constructor por defecto con <strong><code>this</code></strong> para enviarle sus propiedades. Ahora hemos a&#xF1;adido una propiedad m&#xE1;s a la clase Persona, el dni que ser&#xE1; asignado con el segundo constructor<br>
-Si el que volem &#xE9;s crear m&#xE9;s d&apos;un constructor, haurem de rec&#xF3;rrer a la clausula <strong><code>constructor</code></strong> indicant els par&#xE0;metres necessaris i cridant al constructor per defecte amb <strong><code>this</code></strong> per a enviar-li les seues propietats. Ara hem afegit una propietat m&#xE9;s a la classe Persona, el dni que ser&#xE0; assignat amb el segon constructor</p>
+<p>Si el que volem &#xE9;s crear m&#xE9;s d&apos;un constructor, haurem de rec&#xF3;rrer a la clausula <strong><code>constructor</code></strong> indicant els par&#xE0;metres necessaris i cridant al constructor per defecte amb <strong><code>this</code></strong> per a enviar-li les seues propietats. Ara hem afegit una propietat m&#xE9;s a la classe Persona, el dni que ser&#xE0; assignat amb el segon constructor</p>
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Persona</span><span class="token punctuation">(</span>nom<span class="token operator">:</span>String<span class="token punctuation">,</span> <span class="token keyword">var</span> edat<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -737,12 +735,12 @@ Si el que volem &#xE9;s crear m&#xE9;s d&apos;un constructor, haurem de rec&#xF3
    <span class="token keyword">fun</span> <span class="token function">estudis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>String <span class="token comment">// M&#xE8;tode abstracte</span>
    <span class="token keyword">fun</span> <span class="token function">socEstudiant</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// M&#xE8;tode regular</span>
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Soc Estudiant de &quot;</span> <span class="token operator">+</span><span class="token function">estudis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
 <p>I ara fem que la classe Estudiant a m&#xE9;s d&apos;heretar de Persona, implemente la interf&#xED;cie IEstudis, quedant:</p>
 <blockquote>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Estudiant</span><span class="token punctuation">(</span>nom<span class="token operator">:</span>String<span class="token punctuation">,</span>  edat<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&gt;</span><span class="token keyword">var</span> estudis<span class="token operator">:</span>String<span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">Persona</span><span class="token punctuation">(</span>nom<span class="token punctuation">,</span> edat<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&gt;</span>IEstudis
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Estudiant</span><span class="token punctuation">(</span>nom<span class="token operator">:</span>String<span class="token punctuation">,</span>  edat<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&gt;</span><span class="token keyword">var</span> estudis<span class="token operator">:</span>String<span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">Persona</span><span class="token punctuation">(</span>nom<span class="token punctuation">,</span> edat<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">&gt;</span>IEstudis
 <span class="token punctuation">{</span>
    <span class="token keyword">override</span> <span class="token keyword">var</span> curs<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span>
     <span class="token keyword">set</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>field<span class="token operator">=</span>curs<span class="token punctuation">}</span>
@@ -813,7 +811,7 @@ DAW <span class="token number">3</span>
 <span class="token number">3</span> - DAM - Grau Superior
 <span class="token number">4</span> - DAW - Grau Superior
 </pre><blockquote>
-<p>:*pushpin: L&apos;eixida per pantalla mostraria primer els valors assignats a les propietats per defecte <strong><code>name i ordinal</code></strong> <strong>L&#xED;nia 10</strong> i despr&#xE9;s una llista amb les propietats que s&apos;han creat en el constructor <strong><code>valor i estat</code></strong> <strong>L&#xED;nia 11</strong>.</p>
+<p>&#x1F4CC; L&apos;eixida per pantalla mostraria primer els valors assignats a les propietats per defecte <strong><code>name i ordinal</code></strong> <strong>L&#xED;nia 10</strong> i despr&#xE9;s una llista amb les propietats que s&apos;han creat en el constructor <strong><code>valor i estat</code></strong> <strong>L&#xED;nia 11</strong>.</p>
 </blockquote>
 <h4 class="mume-header" id="enumeracions-amb-comportament">Enumeracions amb comportament</h4>
 
@@ -902,7 +900,7 @@ DAW <span class="token number">3</span>
 <td>no</td>
 </tr>
 <tr>
-<td><strong>Modificar longitud</strong></td>
+<td><strong>Modificar grand&#xE0;ria</strong></td>
 <td>no</td>
 <td>no</td>
 <td>s&#xED;</td>
@@ -923,7 +921,7 @@ DAW <span class="token number">3</span>
    <span class="token keyword">val</span> weekDays <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;primavera&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;estiu&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;tardor&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hivern&quot;</span><span class="token punctuation">)</span>
    <span class="token keyword">for</span> <span class="token punctuation">(</span>dato <span class="token keyword">in</span> weekDays<span class="token punctuation">)</span>  <span class="token function">println</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span> <span class="token comment">//Similar al foreach de C#</span>
    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> weekDays<span class="token punctuation">.</span>indices<span class="token punctuation">)</span>  <span class="token function">println</span><span class="token punctuation">(</span>weekDays<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">//Acc&#xE9;s mitjan&#xE7;ant &#xED;ndex</span>
-   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>posicion<span class="token punctuation">,</span> valor<span class="token punctuation">)</span> <span class="token keyword">in</span> weekDays<span class="token punctuation">.</span><span class="token function">withIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//Bolcant totes dues dades en una *tupla*</span>
+   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>posicion<span class="token punctuation">,</span> valor<span class="token punctuation">)</span> <span class="token keyword">in</span> weekDays<span class="token punctuation">.</span><span class="token function">withIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//Bolcant totes dues dades en una tupla</span>
        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span>La posici&#xF3; $posicion cont&#xE9; el valor $valor&quot;<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
@@ -985,7 +983,7 @@ DAW <span class="token number">3</span>
    dentada<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">IntArray</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
 
    <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span>dentada<span class="token punctuation">.</span>size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> 
-   <span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span>dentada<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">!!</span><span class="token punctuation">.</span>size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> dentada<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>j<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span>dentada<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">!!</span><span class="token punctuation">.</span>size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> dentada<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>j<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
 <p>Amb la seg&#xFC;ent l&#xED;nia de codi creem una matriu quadrada de grand&#xE0;ria 4 amb la diagonal a 1.</p>
@@ -1004,7 +1002,7 @@ DAW <span class="token number">3</span>
    <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token keyword">in</span> persones<span class="token punctuation">)</span> p<span class="token punctuation">.</span><span class="token function">imprimir</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
-<p>Per a accedir a un element s&apos;usa la funci&#xF3; <strong>get(<em>posici&#xF3;</em>)</strong> i per a reempla&#xE7;ar <strong>set(<em>posici&#xF3;</em>, <em>element</em>)</strong>, com en els arrays. Es disposa d&apos;una funci&#xF3; que afig una col&#xB7;lecci&#xF3; a la llista mutable *<strong>addAll(coleccion)</strong>, per a eliminar un element de la llista s&apos;usar&#xE0; <strong>remove(<em>element</em>)</strong> o <strong>removeAt(<em>posici&#xF3;</em>)</strong>. Per a buscar tenim <strong>indexOf(<em>element</em>)</strong> o <strong>lastIndexOf(<em>element</em>)</strong>, la funci&#xF3; <strong>clear()</strong> per a netejar tota la llista. A m&#xE9;s disposa d&apos;una funci&#xF3; <strong>iterator()</strong> o l&apos;element <strong>forEach</strong>. Veurem un exemple d&apos;aix&#xF2; &#xFA;ltim.</p>
+<p>Per a accedir a un element s&apos;usa la funci&#xF3; <strong>get(<em>posici&#xF3;</em>)</strong> i per a reempla&#xE7;ar <strong>set(<em>posici&#xF3;</em>, <em>element</em>)</strong>, com en els arrays. Es disposa d&apos;una funci&#xF3; que afig una col&#xB7;lecci&#xF3; a la llista mutable <strong>addAll(coleccion)</strong>, per a eliminar un element de la llista s&apos;usar&#xE0; <strong>remove(<em>element</em>)</strong> o <strong>removeAt(<em>posici&#xF3;</em>)</strong>. Per a buscar tenim <strong>indexOf(<em>element</em>)</strong> o <strong>lastIndexOf(<em>element</em>)</strong>, la funci&#xF3; <strong>clear()</strong> per a netejar tota la llista. A m&#xE9;s disposa d&apos;una funci&#xF3; <strong>iterator()</strong> o l&apos;element <strong>forEach</strong>. Veurem un exemple d&apos;aix&#xF2; &#xFA;ltim.</p>
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span> 
@@ -1033,12 +1031,14 @@ DAW <span class="token number">3</span>
 
    persones<span class="token punctuation">[</span><span class="token string">&quot;21456874L&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">)</span> 
    persones<span class="token punctuation">[</span><span class="token string">&quot;13232345K&quot;</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Luis&quot;</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span>
-   persones<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">{</span><span class="token function">print</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span>key <span class="token operator">+</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
-                    it<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">imprimir</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span> 
+   persones<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">{</span>
+      <span class="token function">print</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span>key <span class="token operator">+</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+      it<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">imprimir</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> 
 
 <span class="token punctuation">}</span>
 </pre></blockquote>
-<p>En el seg&#xFC;ent exemple s&apos;introdueixen una s&#xE8;rie d&apos;elements m&#xE9;s. La classe <strong>Pair</strong> que ens permet crear parells de valors i que ajuda a afegir elements a una mapa, entre altres coses. A m&#xE9;s es pot veure la utilitzaci&#xF3; de l&apos;operador <strong><code>+=</code></strong> com una altra manera d&apos;agregar elements. I un altre exemple de filtre amb comptatge usant els elements <strong>filter i count</strong>.</p>
+<p>En el seg&#xFC;ent exemple s&apos;introdueixen una s&#xE8;rie d&apos;elements m&#xE9;s. La classe <strong>Pair</strong> que ens permet crear parells de valors i que ajuda a afegir elements a una mapa, entre altres coses. A m&#xE9;s es pot veure la utilitzaci&#xF3; de l&apos;operador <strong><code>+=</code></strong> com una altra manera d&apos;agregar elements. I un altre exemple de filtre amb comptatge (conteo) usant els elements <strong>filter i count</strong>.</p>
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span> 
