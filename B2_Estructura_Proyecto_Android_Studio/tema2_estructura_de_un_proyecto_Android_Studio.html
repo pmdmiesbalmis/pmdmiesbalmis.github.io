@@ -501,7 +501,7 @@ El archivo strings.xml es muy &#xFA;til para los desarrolladores. Una de sus gra
 <div align="center">
    <img height="350" src="./imagenes/entorno15.png">
 </div> 
-Al a&#xF1;adir los tres recursos adicionales,  las carpetas quedar&#xED;an de la siguiente manera. La carpeta values sin calificador, ser&#xED;a para el idioma por defecto:
+<p>Al a&#xF1;adir los tres recursos adicionales,  las carpetas quedar&#xED;an de la siguiente manera. La carpeta values sin calificador, ser&#xED;a para el idioma por defecto:</p>
 <div align="center">
    <img height="200" src="./imagenes/entorno16.png">
 </div> 
@@ -509,7 +509,7 @@ Al a&#xF1;adir los tres recursos adicionales,  las carpetas quedar&#xED;an de la
 <div align="center">
    <img height="250" src="./imagenes/entorno17.png">
 </div> 
-Nos quedar&#xED;a asociar esta cadena al TextView que hay en el layout principal. Par ello abrimos el archivo **`activity_main`** de la carpeta **`layout`** y en el atributo text seleccionamos el recurso string hola_mundo.
+<p>Nos quedar&#xED;a asociar esta cadena al TextView que hay en el layout principal. Par ello abrimos el archivo <strong><code>activity_main</code></strong> de la carpeta <strong><code>layout</code></strong> y en el atributo text seleccionamos el recurso string hola_mundo.</p>
 <div align="center">
    <img height="250" src="./imagenes/entorno18.png">
 </div> 
@@ -527,7 +527,7 @@ Al ejecutar la aplicaci&#xF3;n y dependiendo de la configuraci&#xF3;n de idioma 
 <div align="center">
     <img height="200" src="./imagenes/entorno19.png">
 </div>
-<p>Si se quiere acceder a la clase Resources que incluye todos los recursos de android, podemos obtener una instancia <strong>dentro de una actividad</strong> con el m&#xE9;todo <strong><code>getResources()</code></strong>. A trav&#xE9;s de ella podemos acceder a los valores de cualquier tipo de recurso.</p>
+<p>Si se quiere acceder a la clase Resources que incluye todos los recursos de android, podemos obtener una instancia <strong>dentro de una actividad</strong> con la propiedad <strong><code>resources</code></strong>. A trav&#xE9;s de ella podemos acceder a los valores de cualquier tipo de recurso.</p>
 <div align="center">
     <img height="20" src="./imagenes/entorno20.png">
 </div>
@@ -611,13 +611,17 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED
             <span class="token operator">||</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token comment">//Si se decide explicar los motivos de los permisos con algo similar a un dialogo</span>
+                <span class="token comment">//Si se decide explicar los motivos de los permisos</span>
+                <span class="token comment">// con algo similar a un dialogo</span>
             <span class="token punctuation">}</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token comment">//Si se decide explicar los motivos de los permisos con algo similar a un dialogo</span>
+                <span class="token comment">//Si se decide explicar los motivos de los permisos</span>
+                <span class="token comment">// con algo similar a un dialogo</span>
             <span class="token punctuation">}</span>
-            <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos, en este caso dos</span>
-            <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span> RESPUESTA_PERMISOS<span class="token punctuation">)</span>
+            <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos,</span>
+            <span class="token comment">//en este caso dos</span>
+            <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                       RESPUESTA_PERMISOS<span class="token punctuation">)</span>
        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <div class="line-highlight-wrapper">
