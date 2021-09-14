@@ -362,7 +362,6 @@ justo después del front matter
 <li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a>
 <ol>
 <li><a href="#requerir-permisos-al-usuario">Requerir permisos al usuario</a></li>
-<li><a href="#requerir-permisos-al-usuario-1">Requerir permisos al usuario</a></li>
 </ol>
 </li>
 <li><a href="#intent-filter">Intent-filter</a></li>
@@ -436,7 +435,7 @@ Los estados por los cuales puede pasar una Activity son los siguientes: <strong>
 <li>Destrucci&#xF3;n: cuando la actividad ya no existe en memoria se encuentra en estado de destrucci&#xF3;n. Antes de pasar a destruir la aplicaci&#xF3;n se ejecuta el m&#xE9;todo <strong><code>onDestroy()</code></strong>. Es com&#xFA;n que la mayor&#xED;a de actividades no implementen este m&#xE9;todo, a menos que deban destruir procesos como servicios en segundo plano.</li>
 </ul>
 <p>Aunque tu aplicaci&#xF3;n puede tener varias actividades en su estructura, se debe definir una actividad principal. Para hacerlo se debe especificar en tu archivo Android Manifest un componente <strong><code>&lt;actitivy&gt;</code></strong>, con un componente hijo <strong><code>&lt;intent-filter&gt;</code></strong>. Dentro de este componente declararas dos nuevos componentes, <strong><code>&lt;action&gt;</code></strong> y <strong><code>&lt;category&gt;</code></strong>. Al primero le asignaras el elemento enumerado <strong><code>MAIN</code></strong> y al segundo el elemento enumerado <strong><code>LAUNCHER</code></strong>.</p>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Crea un proyecto nuevo y copia el c&#xF3;digo de CicloVidaActivity en la clase principal. Prueba la salida que muestra Logcat en Debug y filtrado por &quot;SALIDA&quot;. F&#xED;jate por que m&#xE9;todos pasa la App seg&#xFA;n los distintos cambios de estado.</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Crea un proyecto nuevo y copia el c&#xF3;digo de CicloVidaActivity en la clase principal. Prueba la salida que muestra Logcat en Debug y filtrado por &quot;SALIDA&quot;. Observa cuales son los m&#xE9;todos por los que pasa la App, seg&#xFA;n los distintos cambios de estado.</span></p>
 <h3 class="mume-header" id="comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</h3>
 
 <p>Uno de los componentes que hemos comentado que forman parte de una aplicaci&#xF3;n android son los <a href="https://developer.android.com/guide/components/intents-filters?hl=es-419">intents</a>. Como dijimos, son los que permiten la comunicaci&#xF3;n con el resto de componentes, tambi&#xE9;n se pueden definir como la voluntad de realizar una acci&#xF3;n o una tarea determinada, estas tareas pueden ser una llamada de tel&#xE9;fono o visualizar una p&#xE1;gina web entre otras.</p>
@@ -638,7 +637,7 @@ Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limit
 </li>
 </ol>
 <p>Podemos crear un c&#xF3;digo parecido al siguiente, en el que se pide permiso para acceder a los contactos y a la memor&#xED;a externa del dispositivo:</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[0,[3-17],5,8,10,14,16}" class="language-kotlin" data-line="0,3-17,5,8,10,14,16"><span class="token keyword">val</span> RESPUESTA_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0,[3-17],5,8,10,14,16]}" class="language-kotlin" data-line="0,3-17,5,8,10,14,16"><span class="token keyword">val</span> RESPUESTA_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
 <span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
 <span class="token keyword">fun</span> <span class="token function">solicitarPermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
 <span class="token punctuation">{</span>
@@ -784,173 +783,7 @@ Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limit
 El hilo que controla la respuesta del usuario, se recoge mediante el m&#xE9;todo sobreescrito <strong><code>onRequestPermissionsResult</code></strong>, a este m&#xE9;todo le llega la informaci&#xF3;n necesaria para poder saber a que petici&#xF3;n de permisos se refiere (usando la constante creada anteriormente <strong>L&#xED;nea 7</strong>), el array con los nombres de los permisos y el resultado de si han sido concedido o no. Con esta informaci&#xF3;n pasaremos a lanzar la funcionalidad que los requiere o a dar otras opciones al usuario.</p>
 </blockquote>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="requerir-permisos-al-usuario-1">Requerir permisos al usuario</h4>
-
-<p>Android est&#xE1; apostando cada vez m&#xE1;s fuerte por la seguridad, por lo que en las versiones m&#xE1;s recientes del sistema operativo no basta con a&#xF1;adir la etiquete <strong><code>&lt;uses-permission ...&gt;</code></strong> en el Manifiesto. Si se quiere acceder a recursos ajenos a la aplicaci&#xF3;n en funcionamiento, se deber&#xE1; realizar una <a href="https://developer.android.com/training/permissions/requesting?hl=es-419">solicitud de permisos</a> de forma explicita al usuario.<br>
-Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limitado, si necesita usar recursos o informaci&#xF3;n ajenos a su propia zona de pruebas deber&#xE1;s seguir los siguientes pasos:</p>
-<ol>
-<li>
-<p>En el archivo de manifiesto de la app, declara los permisos que necesites.</p>
-</li>
-<li>
-<p>Esperar a que el usuario invoque la tarea o acci&#xF3;n de la app que requiere acceso a datos privados espec&#xED;ficos. En ese momento, la app puede solicitar el permiso de tiempo de ejecuci&#xF3;n necesario para acceder a esos datos. Para ello:</p>
-<ol>
-<li>Verifica si el usuario ya otorg&#xF3; el permiso de tiempo de ejecuci&#xF3;n que requiere la app. De ser as&#xED;, esta ya puede acceder a los recursos necesarios.</li>
-<li>En caso contrario, solicitar el permiso en tiempo de ejecuci&#xF3;n, en ese caso el sistema mostrar&#xE1; un dialogo solicitando el permiso y si es otorgado se pasar&#xE1; al acceso de los recursos. En este paso se puede optar por mostrar un dialogo explicando porque motivo son necesarios los recursos.</li>
-</ol>
-</li>
-<li>
-<p>Si el usuario rechaza la solicitud, la app deber&#xED;a proporcionar una opci&#xF3;n elegante al usuario.</p>
-</li>
-</ol>
-<p>Podemos crear un c&#xF3;digo parecido al siguiente, en el que se pide permiso para acceder a los contactos y a la memoria externa del dispositivo:</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[0,[3-17],5,8,10,14,16}" class="language-kotlin" data-line="0,3-17,5,8,10,14,16"><span class="token keyword">val</span> RESPUESTA_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
-<span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
-<span class="token keyword">fun</span> <span class="token function">solicitarPermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED
-        <span class="token operator">||</span> <span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> 
-    <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">)</span> 
-            <span class="token comment">//Si se decide explicar los motivos de los permisos con  similar a un dialogo</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">)</span> 
-            <span class="token comment">//Si se decide explicar los motivos de los permisos con  similar a un dialogo</span>
-        <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos, </span>
-        <span class="token comment">//en este caso dos</span>
-        <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> _CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span> RESPUESTA_PERMISOS<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span> 
-    <span class="token keyword">else</span> <span class="token function">lanzarFuncionalidadQueRequierePermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
-</div></div><div class="line-highlight-wrapper">
-
-<div aria-hidden="true" class="line-highlight" data-range="3-17" data-start="3" data-end="17">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
-</div></div></pre><pre data-role="codeBlock" data-info="kotlin{highlight=[[0-22],7]}" class="language-kotlin" data-line="0-22,7"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>
-       requestCode<span class="token operator">:</span> Int<span class="token punctuation">,</span><span class="token comment">//c&#xF3;digo de identificaci&#xF3;n del resultado</span>
-       permissions<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token keyword">out</span> String<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token comment">//array con los nombres de los permisos</span>
-       grantResults<span class="token operator">:</span> IntArray<span class="token comment">//array de 0 y -1 (permitido, no permitido) en orden) </span>
-<span class="token punctuation">{</span>
-       <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> grantResults<span class="token punctuation">)</span>
-       <span class="token keyword">when</span> <span class="token punctuation">(</span>requestCode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-           RESPUESTA_PERMISOS <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
-               <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
-                   Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
-                       applicationContext<span class="token punctuation">,</span>
-                       permissions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&quot; Permiso concedido&quot;</span><span class="token punctuation">,</span>
-                       Toast<span class="token punctuation">.</span>LENGTH_SHORT
-                   <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-               <span class="token keyword">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
-                   Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
-                       applicationContext<span class="token punctuation">,</span>
-                       permissions<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&quot; Permiso concedido&quot;</span><span class="token punctuation">,</span>
-                       Toast<span class="token punctuation">.</span>LENGTH_SHORT
-                   <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-           <span class="token punctuation">}</span>
-       <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0-22" data-start="0" data-end="22">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div></pre><blockquote>
-<p>&#x1F4CC; <strong>L&#xED;nea 0</strong> creamos una constante identificativa de la petici&#xF3;n de permisos. Desde la <strong>L&#xED;nea 3 hasta la 17</strong> creamos el m&#xE9;todo encargado de lanzar los di&#xE1;logos con la petici&#xF3;n de los dos permisos (en este caso). <strong>L&#xED;nea 5</strong> se comprueba que todav&#xED;a no se han concedido, y en ese caso se lanza la petici&#xF3;n <strong>L&#xED;nea 16</strong>. Las <strong>l&#xED;neas 8 y 10</strong>, servir&#xED;an para a&#xF1;adir alguna forma de explicaci&#xF3;n al usuario. Si el permiso ha sido concedido con anterioridad se pasar&#xE1; a lanzar la funcionalidad que lo usa, <strong>L&#xED;nea 16</strong>.<br>
-El hilo que controla la respuesta del usuario, se recoge mediante el m&#xE9;todo sobreescrito <strong><code>onRequestPermissionsResult</code></strong>, a este m&#xE9;todo le llega la informaci&#xF3;n necesaria para poder saber a que petici&#xF3;n de permisos se refiere (usando la constante creada anteriormente <strong>L&#xED;nea 7</strong>), el array con los nombres de los permisos y el resultado de si han sido concedido o no. Con esta informaci&#xF3;n pasaremos a lanzar la funcionalidad que los requiere o a dar otras opciones al usuario.</p>
-</blockquote>
-<div style="page-break-after:always;" class="mume-header" id="intent-filter"></div>
-###  Intent-filter
+<h3 class="mume-header" id="intent-filter">Intent-filter</h3>
 
 <p>Las actividades y servicios pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar. De esta forma se informa al sistema del tipo de intenciones impl&#xED;citas que puede atender dicho componente. Los intent-filter se definen en el archivo de manifiesto de la aplicaci&#xF3;n dentro de la activity correspondiente.<br>
 Como se ha explicado en el punto anterior, cuando se crea un intent impl&#xED;cito el sistema Android busca el componente apropiado que pueda resolver la petici&#xF3;n dada en el intent.<br>
