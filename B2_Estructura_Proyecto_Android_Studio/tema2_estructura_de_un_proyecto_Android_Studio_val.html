@@ -352,6 +352,12 @@ justo después del front matter
 </ol>
 </li>
 <li><a href="#android-manifest">Android Manifest</a></li>
+<li><a href="#gradle">Gradle</a>
+<ol>
+<li><a href="#projectes-tasques-i-accions">Projectes, tasques i accions</a></li>
+<li><a href="#arxius-de-configuraci%C3%B3-de-gradle">Arxius de configuraci&#xF3; de Gradle</a></li>
+</ol>
+</li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="creant-el-primer-projecte-dandroid">Creant el primer projecte d&apos;Android</h3>
@@ -785,6 +791,154 @@ Un model a seguir podria ser el seg&#xFC;ent:</p>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
 </pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Analitza l&apos;arxiu de manifest anterior, buscant en Internet la informaci&#xF3; que no trobes en el tema. Despr&#xE9;s fes una descripci&#xF3; de com creus que ser&#xE0; l&apos;aplicaci&#xF3; que cont&#xE9; aqueix manifest.</span></p>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Modifica el Manifest de l&apos;exercici HolaMundo de manera que com a requisits del mateix volem que s&apos;execute en manera apa&#xEF;sada i que no afecte el canvi d&apos;orientaci&#xF3; del dispositiu. Canvia la icona i l&apos;etiqueta de la activity principal (provar que si no la t&#xE9;, posa per defecte la de l&apos;aplicaci&#xF3;) i dona permisos d&apos;internet. A m&#xE9;s s&apos;hauran d&apos;afegir dos llenguatges m&#xE9;s per al string Hola M&#xF3;n.</span></p>
+<h3 class="mume-header" id="gradle">Gradle</h3>
+
+<p>Una vegada creada i executada la nostra primera aplicaci&#xF3;, haurem d&apos;aprofundir una mica en el que ocorre en el <strong>proc&#xE9;s de compilaci&#xF3;</strong>, temps transcorregut des del moment que li donem l&apos;ordre de compilaci&#xF3; <strong><code>Play</code></strong>, fins que el AVD mostra per pantalla l&apos;eixida de la nostra app. Qui s&apos;encarrega d&apos;aqueix proc&#xE9;s en Android Studio?, la resposta &#xE9;s <a href="https://developer.android.com/studio/releases/gradle-plugin">Gradle, un complement d&apos;Android</a> que converteix el projecte en un paquet d&apos;aplicacions per a Android (APK) o un <a href="https://developer.android.com/guide/app-bundle?hl=es">Android App Bundle (AAB)</a>. A l&apos;&#xE9;sser un complement necessita de les actualitzacions especifiques de Gradle, independents de les d&apos;Android Studio.</p>
+<div align="center">
+    <img height="350" src="./imagenes/imagenesGradle/build-process_2x.png">
+</div>
+<p>Gradle &#xE9;s una eina de <a href="https://dosideas.com/wiki/automatizacion_de_build">automatitzaci&#xF3; de la construcci&#xF3; de codi</a> que beu de les aportacions que han realitzat eines com <strong>Ant</strong> i <strong>Maven</strong>, per&#xF2; intenta portar-ho tot un pas mes all&#xE0;.</p>
+<div align="center">
+    <img height src="./imagenes/imagenesGradle/G06Cv.gif">
+</div>
+<div style="page-break-after:always;"></div>
+<p>Per a comen&#xE7;ar es recolza en <a href="https://es.wikipedia.org/wiki/groovy_(lenguaje_de_programaci%C3%B3n)">Groovy</a> i en un <a href="https://docs.gradle.org/current/dsl/index.html">DSL (Domain Specific Language)</a> per a treballar amb un llenguatge senzill i clar a l&apos;hora de construir el build, comparat amb Maven que usa <strong>XML</strong>.<br>
+D&apos;altra banda, disposa d&apos;una gran flexibilitat que permet treballar amb altres llenguatges i no sols <strong>Java</strong>.<br>
+Un altre avantatge clau de <strong>Gradle</strong> sobre els sistemes de compilaci&#xF3; anteriors de <strong>Android Studio</strong>, &#xE9;s l&apos;administraci&#xF3; de depend&#xE8;ncies. Abans, per a usar una biblioteca d&apos;Android en un projecte, calia descarregar el codi font, agregar-lo al projecte i passar a la compilaci&#xF3;. Gradle automatitza aquest proc&#xE9;s, ja que amb agregar una sola l&#xED;nia a l&apos;arxiu <strong><code>build.gradle</code></strong> del m&#xF2;dul, s&apos;encarregar&#xE0; de descarregar la biblioteca compilada d&apos;un repositori p&#xFA;blic i l&apos;agregar-la al projecte.</p>
+<h4 class="mume-header" id="projectes-tasques-i-accions">Projectes, tasques i accions</h4>
+
+<p>Quan creguem un nou projecte en android, aquest haur&#xE0; de tindre almenys un projecte de Gradle (per defecte es crear&#xE0; nom&#xE9;s <strong><code>build.gradle</code></strong> de nivell superior). Un projecte ha de tindre almenys una tasca i una tasca consta d&apos;algunes accions (podr&#xED;em veure aquestes com una col&#xB7;lecci&#xF3; de codi, semblan&#xE7;a a una funci&#xF3;).</p>
+<p>Una tasca indica una unitat d&apos;execuci&#xF3; l&#xF2;gica, Gradle t&#xE9; creades moltes tasques per defecte que s&#xF3;n suficients per a treballar en els nostres projectes. Per exemple: quan es compila el projecte es llancen una s&#xE8;rie de tasques de Gradle que automatitzen el treball, podem veure part d&apos;aquestes en la seg&#xFC;ents l&#xED;nies.</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token operator">&gt;</span> Task :app:preBuild UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:preDebugBuild UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:compileDebugAidl NO-SOURCE
+<span class="token operator">&gt;</span><span class="token punctuation">..</span>.
+<span class="token operator">&gt;</span> Task :app:compileDebugKotlin UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:compileDebugSources UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:mergeDebugJavaResource UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:dexBuilderDebug UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:mergeDexDebug UP-TO-DATE
+<span class="token operator">&gt;</span> Task :app:packageDebug
+<span class="token operator">&gt;</span> Task :app:assembleDebug
+
+</pre><p>Si es necessitara realitzar accions especifiques, es podrien crear tasques propies utilitzant el DSL de Gradle.</p>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="arxius-de-configuraci%C3%B3-de-gradle">Arxius de configuraci&#xF3; de Gradle</h4>
+
+<p>Cada vegada que es crea un projecte en <strong>Android Studio</strong>, el sistema genera autom&#xE0;ticament tots els arxius de <a href="https://developer.android.com/studio/build?hl=es-419#*build-*files">configuraci&#xF3; necessaris de Gradle</a>. Alguns es mostra en la seg&#xFC;ent imatge.</p>
+<div align="center">
+    <img height="300" src="./imagenes/imagenesGradle/project-structure_2x.png">
+</div>
+<p>Els projectes d&apos;Android Studio consten d&apos;1 o m&#xE9;s m&#xF2;duls, que s&#xF3;n components que pot compilar, provar i depurar de manera independent. Cada m&#xF2;dul t&#xE9; el seu propi arxiu de compilaci&#xF3;, per la qual cosa cada projecte d&apos;Android Studio cont&#xE9; <strong>2 tipus</strong> d&apos;arxius de compilaci&#xF3; de Gradle.</p>
+<ul>
+<li>
+<p><strong>Arxiu de compilaci&#xF3; de nivell superior</strong>, ac&#xED; trobar&#xE0; les opcions de configuraci&#xF3; que s&#xF3;n comunes a tots els m&#xF2;duls que conformen un projecte.</p>
+</li>
+<li>
+<p><strong>Arxiu de compilaci&#xF3; a nivell de m&#xF2;dul</strong>, cada m&#xF2;dul t&#xE9; el seu propi arxiu de compilaci&#xF3; Gradle que cont&#xE9; configuracions de compilaci&#xF3; espec&#xED;fiques del m&#xF2;dul. Aquests s&#xF3;n els que necessiten m&#xE9;s temps d&apos;edici&#xF3; per part del programador.</p>
+</li>
+</ul>
+<p>Per a accedir r&#xE0;pidament a aquests <strong>build.gradle arxius</strong>, obrirem el panell <strong>Projecte d&apos;Android Studio</strong> (seleccionant la pestanya Android), dins de la carpeta Gradle Scripts els trobarem. Els primers dos elements en la carpeta Gradle Scripts s&#xF3;n els arxius de compilaci&#xF3; de Gradle a nivell de projecte i a nivell de m&#xF2;dul</p>
+<div style="page-break-after:always;"></div>
+<h5 class="mume-header" id="arxiu-de-compilaci%C3%B3-gradle-de-nivell-superior">Arxiu de compilaci&#xF3; Gradle de nivell superior</h5>
+
+<p>Cada projecte d&apos;Android Studio cont&#xE9; un &#xFA;nic arxiu de compilaci&#xF3; de Gradle de nivell superior. Aquest <strong><code>build.gradle</code></strong> arxiu &#xE9;s el primer element que apareix en la carpeta Gradle Scripts i est&#xE0; clarament marcat com a Projecte. La majoria de les vegades, no es necessitar&#xE0; fer canvis en aquest arxiu, per&#xF2; continua sent &#xFA;til per a comprendre el seu contingut i el paper que exerceix en el projecte.</p>
+<pre data-role="codeBlock" data-info="json" class="language-json"><span class="token comment">// Top-level build file where you can add configuration options common to all sub-projects/modules.</span>
+buildscript <span class="token punctuation">{</span>
+    ext.kotlin_version = <span class="token string">&quot;1.5.21&quot;</span>
+    repositories <span class="token punctuation">{</span>
+        google()
+        mavenCentral()
+    <span class="token punctuation">}</span>
+    dependencies <span class="token punctuation">{</span>
+        classpath <span class="token string">&quot;com.android.tools.build:gradle:4.2.2&quot;</span>
+        classpath <span class="token string">&quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;</span>
+
+        <span class="token comment">// NOTE: Do not place your application dependencies here; they belong</span>
+        <span class="token comment">// in the individual module build.gradle files</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+allprojects <span class="token punctuation">{</span>
+    repositories <span class="token punctuation">{</span>
+        google()
+        mavenCentral()
+        jcenter() <span class="token comment">// Warning: this repository is going to shut down soon</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+task clean(type<span class="token operator">:</span> Delete) <span class="token punctuation">{</span>
+    delete rootProject.buildDir
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h5 class="mume-header" id="arxius-de-compilaci%C3%B3-gradle-a-nivell-de-m%C3%B2dul">Arxius de compilaci&#xF3; Gradle a nivell de m&#xF2;dul</h5>
+
+<p>A m&#xE9;s de l&apos;arxiu de compilaci&#xF3; de Gradle a nivell de projecte, cada m&#xF2;dul t&#xE9; un arxiu de compilaci&#xF3; <strong><code>build.gradle</code></strong> propi. A continuaci&#xF3; es mostra una b&#xE0;sica d&apos;un arxiu de compilaci&#xF3; de Gradle a nivell de m&#xF2;dul.</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">plugins <span class="token punctuation">{</span>
+    id &apos;com.android.application&apos;
+    id &apos;kotlin-android&apos;
+<span class="token punctuation">}</span>
+
+android <span class="token punctuation">{</span>
+    compileSdkVersion <span class="token number">30</span>
+    buildToolsVersion <span class="token string">&quot;30.0.3&quot;</span>
+
+    defaultConfig <span class="token punctuation">{</span>
+        applicationId <span class="token string">&quot;com.ejemplos.b2.myapplication&quot;</span>
+        minSdkVersion <span class="token number">19</span>
+        targetSdkVersion <span class="token number">30</span>
+        versionCode <span class="token number">1</span>
+        versionName <span class="token string">&quot;1.0&quot;</span>
+
+        testInstrumentationRunner <span class="token string">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span>
+    <span class="token punctuation">}</span>
+
+    buildTypes <span class="token punctuation">{</span>
+        release <span class="token punctuation">{</span>
+            minifyEnabled <span class="token boolean">false</span>
+            proguardFiles getDefaultProguardFile(&apos;proguard-android-optimize.txt&apos;)<span class="token punctuation">,</span>
+             &apos;proguard-rules.pro&apos;
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    compileOptions <span class="token punctuation">{</span>
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    <span class="token punctuation">}</span>
+    kotlinOptions <span class="token punctuation">{</span>
+        jvmTarget = &apos;<span class="token number">1.8</span>&apos;
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+dependencies <span class="token punctuation">{</span>
+
+    implementation <span class="token string">&quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot;</span>
+    implementation &apos;androidx.core<span class="token operator">:</span>core-ktx<span class="token operator">:</span><span class="token number">1.6</span>.<span class="token number">0</span>&apos;
+    implementation &apos;androidx.appcompat<span class="token operator">:</span>appcompat<span class="token operator">:</span><span class="token number">1.3</span>.<span class="token number">1</span>&apos;
+    implementation &apos;com.google.android.material<span class="token operator">:</span>material<span class="token operator">:</span><span class="token number">1.4</span>.<span class="token number">0</span>&apos;
+    implementation &apos;androidx.constraintlayout<span class="token operator">:</span>constraintlayout<span class="token operator">:</span><span class="token number">2.1</span>.<span class="token number">0</span>&apos;
+    testImplementation &apos;junit<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">4</span>.+&apos;
+    androidTestImplementation &apos;androidx.test.ext<span class="token operator">:</span>junit<span class="token operator">:</span><span class="token number">1.1</span>.<span class="token number">3</span>&apos;
+    androidTestImplementation &apos;androidx.test.espresso<span class="token operator">:</span>espresso-core<span class="token operator">:</span><span class="token number">3.4</span>.<span class="token number">0</span>&apos;
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h5 class="mume-header" id="altres-arxius-de-gradle">Altres arxius de Gradle</h5>
+
+<p>A m&#xE9;s dels arxius build.gradle, la carpeta Gradle Scripts cont&#xE9; alguns altres arxius Gradle. La majoria de les vegades no haur&#xE0; de ser editats manualment, ja que s&apos;actualitzaran autom&#xE0;ticament en fer canvis en el projecte.</p>
+<ul>
+<li>
+<p><strong>gradle-wrapper.properties (Versi&#xF3; Gradle)</strong>. Aquest arxiu verifica si est&#xE0; instal&#xB7;lada la versi&#xF3; correcta de Gradle i desc&#xE0;rrega la versi&#xF3; necess&#xE0;ria si no &#xE9;s aix&#xED;.</p>
+</li>
+<li>
+<p><strong>settings.gradle</strong>. Aquest arxiu fa refer&#xE8;ncia a tots els m&#xF2;duls que componen el projecte.</p>
+</li>
+<li>
+<p><strong>gradle.properties (Propietats del projecte)</strong>. Aquest arxiu cont&#xE9; informaci&#xF3; de configuraci&#xF3; per al projecte.</p>
+</li>
+<li>
+<p><strong>local.properties (ubicaci&#xF3; del SDK)</strong>. Aquest arxiu informa el complement Android Gradle on pot trobar la instal&#xB7;laci&#xF3; d&apos;Android SDK.</p>
+</li>
+</ul>
 
       </div>
       
