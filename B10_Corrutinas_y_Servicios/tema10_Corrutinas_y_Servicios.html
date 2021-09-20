@@ -363,7 +363,7 @@ justo después del front matter
 <h4 class="mume-header" id="alcance-de-las-corrutinas">Alcance de las corrutinas</h4>
 
 <p>Cuando creamos coroutines asumimos de manera impl&#xED;cita dos aspectos muy importantes: El &#xE1;mbito (CoroutineScope y GlobalScope) y el contexto (CoroutineContext).</p>
-<p>El uso de <strong><code>GlobalScope</code></strong> permite crea corrutinas de nivel superior, esto quiere decir que tienen la capacidad de vivir hasta que termine la aplicaci&#xF3;n y es trabajo del desarrollador en control para su cancelaci&#xF3;n, por lo que no se aconseja usar este &#xE1;mbito.</p>
+<p>El uso de <strong><code>GlobalScope</code></strong> permite crea corrutinas de nivel superior, esto quiere decir que tienen la capacidad de vivir hasta que termine la aplicaci&#xF3;n y es trabajo del desarrollador el control para su cancelaci&#xF3;n, por lo que no se aconseja usar este &#xE1;mbito.</p>
 <p>Para reducir este alcance, Kotlin nos permite crear los espacios donde queremos que se d&#xE9; la concurrencia. Esto lo haremos mediante <strong><code>CoroutineScope</code></strong>. Cada vez que usamos un constructor de coroutines en realidad estamos haciendo una llamada a una funci&#xF3;n que recibe como primer par&#xE1;metro un objeto de tipo <strong><code>CoroutineContext</code></strong>.</p>
 <h4 class="mume-header" id="coroutinecontext">CoroutineContext</h4>
 
@@ -422,11 +422,22 @@ withContext es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que 
 <p><strong><code>runBlocking</code></strong>, este builder bloquea el hilo actual hasta que se terminen todas las tareas dentro de esa corrutina. No suele ser una funcionalidad muy usada de las corrutinas, ya que precisamente lo que se pretende con estas es la sincronizaci&#xF3;n de m&#xE1;s de una tarea.</p>
 </li>
 <li>
-<p><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados). Este builder siempre necesita un **<code>scope</code>. launch devuelve un Job.</p>
+<p><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados).Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y por lo tanto el dispatcher) del CoroutineScope desde el que se inicia. Puede iniciarse dentro de otra corrutina omitiendose o no el Dispachers o necesitar&#xE1; obligatoriamente especificar el alcance.</p>
 </li>
-<li>
-<p><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. async siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama Deferred.</p>
-</li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token comment">//launch especificando el alcance mediante CoroutineScope</span>
+<span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+   <span class="token comment">//Al estar dentro de una corrutina padre, se puede omitir </span>
+   <span class="token comment">//el alcance e incluso el Dispatchers si no queremos cambiar </span>
+   <span class="token comment">//el contexto del padre, en este caso si lo cambiamos</span>
+   <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token operator">..</span><span class="token punctuation">.</span>    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div></pre><ul>
+<li><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. async siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama Deferred.</li>
 </ul>
 <p>Este objeto tiene una nueva funci&#xF3;n  llamada await() que es la que bloquea. Llamaremos a await() solo cuando necesitemos el resultado. Si el resultado a&#xFA;n no esta listo, la corrutina se suspende en ese punto. Si ya tenemos el resultado, simplemente lo devolver&#xE1; y continuar&#xE1;. De esta manera, puedes ejecutar tantas tareas en segundo plano como necesites.<br>
 coroutineScope { .. } : Crea un nuevo &#xE1;mbito personalizado y no se completa hasta que todos los Coroutines hijos se completan;<br>

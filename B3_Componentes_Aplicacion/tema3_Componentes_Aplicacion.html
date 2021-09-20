@@ -383,7 +383,7 @@ En Android nos encontramos con los siguientes tipos de contextos:</p>
 <ul>
 <li><strong>Aplicaci&#xF3;n</strong>. Este contexto engloba a todos los dem&#xE1;s, y cubre todo el ciclo de vida de la aplicaci&#xF3;n desde que la arrancamos hasta que muere. Por lo que cada aplicaci&#xF3;n tiene <em><strong>un &#xFA;nico contexto de aplicaci&#xF3;n</strong></em>. El Context de la aplicaci&#xF3;n vive hasta que se termina por completo la aplicaci&#xF3;n (hasta que muere, no hasta que se pausa)<br>
 Se puede acceder desde una <em><strong>Activity</strong></em> o un <em><strong>Service</strong></em> con <strong><code>application</code></strong> o desde cualquiera que herede de Context con <strong><code>applicationContext</code></strong>.</li>
-<li><strong>Activity o Service</strong>. Como hemos dicho, un Context vive tanto como el elemento al que pertenece, por lo que depende del ciclo de vida. As&#xED;, un Context de una Activity vivir&#xE1; el mismo tiempo que vive esta la activity y siempre ser&#xE1; vivir&#xE1; menos que el de la Aplicaci&#xF3;n.</li>
+<li><strong>Activity o Service</strong>. Como hemos dicho, un Context vive tanto como el elemento al que pertenece, por lo que depende del ciclo de vida. As&#xED;, un Context de una Activity vivir&#xE1; el mismo tiempo que viva la activity y siempre ser&#xE1; un tiempo menor que el de la Aplicaci&#xF3;n.</li>
 </ul>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="componentes-de-una-aplicaci%C3%B3n">Componentes de una aplicaci&#xF3;n</h3>
@@ -477,29 +477,32 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 <p><strong><code>ActivityResultContract</code></strong>. <strong>L&#xED;nea6</strong> y par&#xE1;metro del elemento anterior. Un contrato que especifica que una actividad se puede llamar con una entrada de tipo I y producir una salida de tipo O.  La API proporciona <a href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts?hl=es-419">contratos predeterminados</a> para acciones de intent b&#xE1;sicas, como tomar una foto, solicitar permisos, etc. Tambi&#xE9;n se pueden crear contratos personalizados.</p>
 </li>
 <li>
-<p><strong><code>ActivityResultCallback</code></strong>. <strong>L&#xED;nea12</strong> se usa este objeto, creado en la l&#xED;nea 6. Es una devoluci&#xF3;n de llamada con seguridad de tipos que se llamar&#xE1; cuando el resultado de una actividad est&#xE9; disponible. Es una interfaz de m&#xE9;todo &#xFA;nico con un m&#xE9;todo onActivityResult() que toma un objeto del tipo de salida definido en <em><code>ActivityResultContract</code></em></p>
+<p><strong><code>ActivityResultCallback</code></strong>. <strong>L&#xED;nea 8 - 11</strong> . Es una devoluci&#xF3;n de llamada con seguridad de tipos que se llamar&#xE1; cuando el resultado de una actividad est&#xE9; disponible. Es una interfaz de m&#xE9;todo &#xFA;nico con un m&#xE9;todo onActivityResult() que toma un objeto del tipo de salida definido en <em><code>ActivityResultContract</code></em></p>
 </li>
 <li>
-<p><strong><code>ActivityResultLauncher</code></strong>. <strong>L&#xED;nea12</strong> manda el intent que queremos usar. Es un lanzador para una llamada preparada previamente para iniciar el proceso de ejecuci&#xF3;n de un <em><code>ActivityResultContract</code></em>.</p>
+<p><strong><code>ActivityResultLauncher</code></strong>. <strong>L&#xED;nea15</strong>  manda el intent que queremos usar para iniciar la aplicaci&#xF3;n. Se manda a trav&#xE9;s del lanzador, creado en la l&#xED;nea 6, que inicia el proceso de ejecuci&#xF3;n de un <em><code>ActivityResultContract</code></em>.</p>
 </li>
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-10],12, [12,-16]]}" class="language-kotlin" data-line="6,6-10,12,12,-16"><span class="token keyword">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-12],[8-11],15, [16,-17]]}" class="language-kotlin" data-line="6,6-12,8-11,15,16,-17"><span class="token keyword">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         <span class="token keyword">val</span> openPostActivity <span class="token operator">=</span>
-            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token punctuation">{</span> 
                 result <span class="token operator">-&gt;</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span>
                     <span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
-        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span><span class="token punctuation">{</span>
-            openPostActivity<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
+        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>
+            View<span class="token punctuation">.</span><span class="token function">OnClickListener</span><span class="token punctuation">{</span>
+                openPostActivity<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
                 <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span>
-                <span class="token punctuation">{</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <div class="line-highlight-wrapper">
@@ -513,8 +516,21 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="6-10" data-start="6" data-end="10">
+<div aria-hidden="true" class="line-highlight" data-range="6-12" data-start="6" data-end="12">
 
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8-11" data-start="8" data-end="11">
 
 
 
@@ -529,7 +545,10 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
 </div></div><div class="line-highlight-wrapper">
 
 
@@ -541,13 +560,14 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="12-16" data-start="12" data-end="16">
 
 
 
+
+<div aria-hidden="true" class="line-highlight" data-range="16-17" data-start="16" data-end="17">
 
 </div></div></pre><blockquote>
-<p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 10</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 12 a 16</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
+<p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 12</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 16 a 17</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
 </blockquote>
 <p>En la clase invocada devolveremos los datos de la siguiente manera:</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[4,5]}" class="language-kotlin" data-line="4,5">   textView<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
