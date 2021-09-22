@@ -354,7 +354,7 @@ justo después del front matter
 <li><a href="#fragment">Fragment</a></li>
 <li><a href="#widget">Widget</a></li>
 <li><a href="#content-provider">Content provider</a></li>
-<li><a href="#intens">Intens</a></li>
+<li><a href="#intents">Intents</a></li>
 <li><a href="#broadcast-receiver">Broadcast receiver</a></li>
 </ol>
 </li>
@@ -412,7 +412,7 @@ Els serveis tamb&#xE9; tenen un cicle de vida com les activitats, per&#xF2; aque
 <p>Amb el component <strong>Content Provider</strong>, qualsevol aplicaci&#xF3; en Android pot emmagatzemar dades en un fitxer, en una base de dades SQLite o en qualsevol altre format que considere.<br>
 A m&#xE9;s, aquestes <strong>dades poden ser compartits entre diferents aplicacions</strong>. Una classe que implemente el component Content Provider contindr&#xE0; una s&#xE8;rie de m&#xE8;todes que permet emmagatzemar, recuperar, actualitzar i compartir les dades d&apos;una aplicaci&#xF3;.<br>
 Per defecte, el API d&apos;Android porta amb si Content Providers predefinits per a intercanviar informaci&#xF3; d&apos;&#xE0;udio, v&#xED;deo, imatges, i informaci&#xF3; personal. Per&#xF2; si en algun moment desitges intercanviar informaci&#xF3; amb una estructura personalitzada has de crear la teua pr&#xF2;pia subclasse heretada de la classe ContentProvider.</p>
-<h4 class="mume-header" id="intens">Intens</h4>
+<h4 class="mume-header" id="intents">Intents</h4>
 
 <p>Un Intent <strong>&#xE9;s un objecte de missatgeria</strong> que pots usar per a sol&#xB7;licitar una acci&#xF3; d&apos;un altre component d&apos;una app. Els intents faciliten la comunicaci&#xF3; entre components de diverses formes, des de la comunicaci&#xF3; entre activitats, entre fragments, serveis, etc. En un punt posterior d&apos;aquest tema s&apos;explicaran m&#xE9;s extensament.</p>
 <h4 class="mume-header" id="broadcast-receiver">Broadcast receiver</h4>
@@ -474,7 +474,7 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 <p><strong><code>registerForActivityResult()</code></strong>. <strong>L&#xED;nia6</strong> &#xC9;s l&apos;element principal i que s&apos;usa per a registrar la devoluci&#xF3; de resultats. T&#xE9; diverses sobrecarregar, al principi usarem la que pren un objecte <em><code>ActivityResultContract</code></em>. Retorna un element <em><code>ActivityResultLauncher</code></em> que s&apos;usar&#xE0; per a iniciar l&apos;altra activitat.</p>
 </li>
 <li>
-<p><strong><code>ActivityResultContract</code></strong>. <strong>L&#xED;nia6</strong> i par&#xE0;metre de l&apos;element anterior. Un contracte que especifica que una activitat es pot cridar amb una entrada de tipus I i produir una eixida de tipus O. La API proporciona <a href="https://developer.android.com/reference/androidx/activity/result/contract/activityresultcontracts?hl=es-419">contractes predeterminats</a> per a accions de intent b&#xE0;siques, com prendre una foto, sol&#xB7;licitar permisos, etc. Tamb&#xE9; es poden crear contractes personalitzats.</p>
+<p><strong><code>ActivityResultContract</code></strong>. <strong>L&#xED;nia6</strong> i par&#xE0;metre de l&apos;element anterior. Un contracte que especifica que una activitat es pot cridar amb una entrada de tipus I i produir una eixida de tipus O. La API proporciona <a href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts?hl=es-419">contractes predeterminats</a> per a accions de intent b&#xE0;siques, com prendre una foto, sol&#xB7;licitar permisos, etc. Tamb&#xE9; es poden crear contractes personalitzats.</p>
 </li>
 <li>
 <p><strong><code>ActivityResultCallback</code></strong>. <strong>L&#xED;nia12</strong> s&apos;usa aquest objecte, creat en la l&#xED;nia 6. &#xC9;s una devoluci&#xF3; de crida amb seguretat de tipus que es dir&#xE0; quan el resultat d&apos;una activitat estiga disponible. &#xC9;s una interf&#xED;cie de m&#xE8;tode &#xFA;nic amb un m&#xE8;tode onActivityResult() que pren un objecte de la mena d&apos;eixida definit en <em><code>ActivityResultContract</code></em></p>
