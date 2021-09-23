@@ -339,7 +339,7 @@ justo después del front matter
 <h1 class="mume-header undefined" id="bloque-10-ejercicio-resuelto-barra-progreso">Bloque 10 . Ejercicio Resuelto Barra Progreso</h1>
 
 <p><a href="./EjercicioResueltoBarraProgreso.pdf">Descargar este ejercicio</a></p>
-<p>Vamos a partir del ejercicio resuelto <strong>Barra de Progreso</strong> del <strong>Bloque 6</strong>. Como se explica en este ejercicio, la manera de resolverlo con AsynTask ha sido deprecada en versiones recientes, por lo que ahora aplicaremos los conocimientos de <strong><code>corrutinas</code></strong> para resolverlo. Adem&#xE1;s tendremos en cuenta los reinicios de la aplicaci&#xF3;n por giros y dem&#xE1;s.</p>
+<p>Vamos a partir del ejercicio resuelto <strong>Barra de Progreso</strong> del <strong>Bloque 6</strong>. Como se explica en el ejercicio anterior, la manera de resolverlo con AsynTask ha sido deprecada en versiones recientes, por lo que ahora aplicaremos los conocimientos de <strong><code>corrutinas</code></strong> para resolverlo. Adem&#xE1;s tendremos en cuenta los reinicios de la aplicaci&#xF3;n por giros y dem&#xE1;s.</p>
 <h5 class="mume-header" id="main_activityxml">main_activity.xml</h5>
 
 <p>A&#xF1;adiremos un bot&#xF3;n para iniciar el funcionamiento de la barra de progreso.</p>
@@ -362,7 +362,8 @@ justo después del front matter
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toTopOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
 </pre><p>Adem&#xE1;s se deber&#xE1; de tener un <strong><code>layout</code></strong> para la vista del dialogo personalizado. Podr&#xED;a ser un archivo como  el siguiente.</p>
-<h5 class="mume-header" id="main_activityxml-1">main_activity.xml</h5>
+<div style="page-break-after:always;"></div>
+<h5 class="mume-header" id="dialogo_progressxml">dialogo_progress.xml</h5>
 
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span>
@@ -403,472 +404,131 @@ justo después del front matter
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintEnd_toEndOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/loader<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><p>////////////////////////////////</p>
-<p>Para este ejercicio vamos a usar dos elementos <strong><code>navigation</code></strong>. Para el caso de vista <strong>vertical</strong> utilizaremos un gr&#xE1;fo de navegaci&#xF3;n como el siguiente:</p>
-<div align="center">
-    <img height="350" src="./imagenes/imagen5.png">
-</div>
-<p>Como se puede ver en la imagen, tambi&#xE9;n tendremos que crear un <strong><code>FragmentDialog</code></strong>, para que se muestre un dialogo al realizar una pulsaci&#xF3;n larga sobre alg&#xFA;n elemento de la lista para ser eliminado.</p>
-<p>Y para la vista horizontal usaremos otro, solo con la parte de navegaci&#xF3;n entre fragmentLista y el dialogEliminar. La navegaci&#xF3;n del elemento Detalle, se ha realizado usando el <strong><code>FragmentManager</code></strong> y <strong><code>FragmentTransaction</code></strong></p>
-<div align="center">
-    <img height="200" src="./imagenes/imagen6.png">
-</div>
-<p>Para poder hacer los gr&#xE1;ficos de navegaci&#xF3;n, antes debemos crear el c&#xF3;digo <strong><code>Kotlin</code></strong> necesario. Vamos a pasar a ello, junto con sus comentarios por l&#xED;neas.</p>
-<p>En cuanto al c&#xF3;digo del adaptador y del holder del recycler, ser&#xE1; id&#xE9;ntico de como lo hacemos normalmente, en el que implementamos los listeners para el Cick corto y largo:</p>
-<h5 class="mume-header" id="adapterkt">Adapter.kt</h5>
-
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Adapter</span><span class="token punctuation">(</span><span class="token keyword">var</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Datos<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span> 
-                                RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>Adapter<span class="token punctuation">.</span>Holder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                                View<span class="token punctuation">.</span>OnClickListener<span class="token punctuation">,</span> OnLongClickListener 
-<span class="token punctuation">{</span>
-    <span class="token keyword">var</span> listener<span class="token operator">:</span> View<span class="token punctuation">.</span>OnClickListener<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">var</span> listenerLong<span class="token operator">:</span> OnLongClickListener<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateViewHolder</span><span class="token punctuation">(</span>parent<span class="token operator">:</span> ViewGroup<span class="token punctuation">,</span> viewType<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span>
-                                Holder <span class="token punctuation">{</span>
-        <span class="token keyword">val</span> view<span class="token operator">:</span> View
-        view <span class="token operator">=</span> LayoutInflater<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>parent<span class="token punctuation">.</span>context<span class="token punctuation">)</span>
-                        <span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>elemento_lista<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
-        <span class="token keyword">val</span> holder <span class="token operator">=</span> <span class="token function">Holder</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
-        view<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
-        view<span class="token punctuation">.</span><span class="token function">setOnLongClickListener</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> holder
+</pre><div style="page-break-after:always;"></div>
+<p>Como ya hemos hecho en el Bloque 6, deberemos inflar el dialogo que contiene la barra de progreso y mostrarlo cuando pulsemos el bot&#xF3;n. Para ello se puede crear un m&#xE9;todo que se encargue de este trabajo y que puede quedar de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">setDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> builder <span class="token operator">=</span> <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> inflater <span class="token operator">=</span> <span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">.</span>layoutInflater
+        <span class="token keyword">val</span> v <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>dialogo_progress<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        progressBar <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>loader<span class="token punctuation">)</span>
+        loadingMessage <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>loading_msg<span class="token punctuation">)</span>
+        progressMessage <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>progres_msg<span class="token punctuation">)</span>
+        builder<span class="token punctuation">.</span><span class="token function">setView</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+        dialog <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        dialog<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">setCancelable</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+        dialog<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> Holder<span class="token punctuation">,</span> position<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token punctuation">(</span>holder <span class="token keyword">as</span> Holder<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>datos<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> datos<span class="token punctuation">.</span>size
-    <span class="token punctuation">}</span>
-    <span class="token keyword">fun</span> <span class="token function">miOnClick</span><span class="token punctuation">(</span>listener<span class="token operator">:</span> View<span class="token punctuation">.</span>OnClickListener<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>listener <span class="token operator">=</span> listener
-    <span class="token punctuation">}</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onClick</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>listener <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> listener<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">onClick</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">fun</span> <span class="token function">miOnLongClick</span><span class="token punctuation">(</span>listener<span class="token operator">:</span> OnLongClickListener<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        listenerLong <span class="token operator">=</span> listener
-    <span class="token punctuation">}</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onLongClick</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>listenerLong <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> listenerLong<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">onLongClick</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">var</span> lineTexto<span class="token operator">:</span> TextView
-        <span class="token keyword">var</span> imagen<span class="token operator">:</span> ImageView
-        <span class="token keyword">var</span> cardView<span class="token operator">:</span> CardView
-        <span class="token keyword">fun</span> <span class="token function">bind</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> Datos<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            lineTexto<span class="token punctuation">.</span>text <span class="token operator">=</span> dato<span class="token punctuation">.</span>nombre
-            imagen<span class="token punctuation">.</span><span class="token function">setImageResource</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span>icono<span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">init</span> <span class="token punctuation">{</span>
-            lineTexto <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView_titulo<span class="token punctuation">)</span>
-            imagen <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imageView_imagen_miniatura<span class="token punctuation">)</span>
-            cardView <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>cardView<span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><p>La clase que implementa el detalle al pulsar sobre un elemento de la lista, quedar&#xED;a con el siguiente c&#xF3;digo:</p>
-<h5 class="mume-header" id="fragmentdetallekt">FragmentDetalle.kt</h5>
-
-<pre data-role="codeBlock" data-info="kotlin{highlight=[6,9,10,32]}" class="language-kotlin" data-line="6,9,10,32"><span class="token keyword">class</span> FragmentDetalle <span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> mItem<span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span> mItem<span class="token operator">=</span>savedInstanceState<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token string">&quot;POSICION&quot;</span><span class="token punctuation">)</span>
-        <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>arguments <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                mItem <span class="token operator">=</span> arguments<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token string">&quot;POSICION&quot;</span><span class="token punctuation">)</span>
-            <span class="token punctuation">}</span> <span class="token keyword">else</span> mItem <span class="token operator">=</span> <span class="token number">0</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-     <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
-        inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
-        container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
-        savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span>
-    <span class="token punctuation">)</span><span class="token operator">:</span> View <span class="token punctuation">{</span>
-        <span class="token keyword">val</span> rootView<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_detalle<span class="token punctuation">,</span> 
-                                                    container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
-        <span class="token comment">//Mostramos el contenido al usuario</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span>datos<span class="token operator">!!</span><span class="token punctuation">.</span>size <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">val</span> elemento <span class="token operator">=</span> MainActivity<span class="token punctuation">.</span>datos<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>mItem<span class="token operator">!!</span><span class="token punctuation">)</span>
-            <span class="token punctuation">(</span>rootView<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView_superior<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text <span class="token operator">=</span> 
-                                                            elemento<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">nombre</span>
-            <span class="token punctuation">(</span>rootView<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView_inferior<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text <span class="token operator">=</span> 
-                                                            elemento<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">desc</span>
-            <span class="token punctuation">(</span>rootView<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>ImageView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imageView_imagen<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
-                                            <span class="token function">setImageResource</span><span class="token punctuation">(</span>elemento<span class="token operator">!!</span><span class="token punctuation">.</span>icono<span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> rootView
-    <span class="token punctuation">}</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
-        outState<span class="token punctuation">.</span><span class="token function">putInt</span><span class="token punctuation">(</span><span class="token string">&quot;POSICION&quot;</span><span class="token punctuation">,</span> mItem<span class="token operator">!!</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="32" data-start="32">
-</div></div></pre><blockquote>
-<p>&#x1F4CC; las l&#xED;neas a destacar de este c&#xF3;digo son la creadas para guardar la posici&#xF3;n pulsada en determinado momento, para el caso de que ocurra alg&#xFA;n giro de pantalla no perder el elemento pulsado. Guardaremos la posici&#xF3;n mediante el m&#xE9;todo <strong><code>onSaveInstanceState</code></strong> por el que se pasar&#xE1; justo antes de que la aplicaci&#xF3;n se destruya, <strong>L&#xED;nea 32</strong>. Esta posici&#xF3;n se podr&#xE1; recuperar mediante el Bundle que entra en el m&#xE9;todo <strong><code>onCreate</code></strong> <strong>L&#xED;nea 6</strong>. Las <strong>L&#xED;neas 9 y 10</strong> son para recuperar la posici&#xF3;n cuando se pulsa el elemento de la lista en el <strong><code>FragmentLista</code></strong>, se recupera mediante la propiedad <strong><code>arguments</code></strong></p>
-</blockquote>
-<p>El c&#xF3;digo del fragment que contendr&#xE1; el recycler, ser&#xE1; una clase que derivar&#xE1; de Fragment y en la que inflaremos el layout recycler e implementaremos el OnClick, mandando la posici&#xF3;n seleccionada mediante el Bundle a el Fragment Detalle:</p>
-<h5 class="mume-header" id="fragmentlistakt">FragmentLista.kt</h5>
-
-<pre data-role="codeBlock" data-info="kotlin{highlight=[24-31,32-38,43-50,51-58]}" class="language-kotlin" data-line="24-31,32-38,43-50,51-58"><span class="token keyword">class</span> FragmentLista <span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> listenerLargo<span class="token operator">:</span> View<span class="token punctuation">.</span>OnLongClickListener<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">var</span> recyclerView<span class="token operator">:</span> RecyclerView<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">var</span> valores<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Datos<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token keyword">var</span> posicion<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span>
-
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
-        inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
-        container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
-        savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span>
-    <span class="token punctuation">)</span><span class="token operator">:</span> View <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreateView</span><span class="token punctuation">(</span>inflater<span class="token punctuation">,</span> container<span class="token punctuation">,</span> savedInstanceState<span class="token punctuation">)</span>
-        <span class="token keyword">val</span> rootView<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_recycler<span class="token punctuation">,</span> 
-                                                container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
-        recyclerView <span class="token operator">=</span> rootView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>recycler<span class="token punctuation">)</span>
-        adapter <span class="token operator">=</span> <span class="token function">Adapter</span><span class="token punctuation">(</span>MainActivity<span class="token punctuation">.</span>datos<span class="token operator">!!</span><span class="token punctuation">)</span>
-        recyclerView<span class="token operator">?</span><span class="token punctuation">.</span>adapter <span class="token operator">=</span> adapter
-        recyclerView<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">setHasFixedSize</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-        recyclerView<span class="token operator">?</span><span class="token punctuation">.</span>layoutManager <span class="token operator">=</span><span class="token function">LinearLayoutManager</span><span class="token punctuation">(</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
-                                            LinearLayoutManager<span class="token punctuation">.</span>VERTICAL<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
-
-        adapter<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">miOnClick</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
-            <span class="token keyword">val</span> bundle <span class="token operator">=</span> <span class="token function">Bundle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            bundle<span class="token punctuation">.</span><span class="token function">putInt</span><span class="token punctuation">(</span><span class="token string">&quot;POSICION&quot;</span><span class="token punctuation">,</span> recyclerView<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">getChildAdapterPosition</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token keyword">val</span> navController <span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span><span class="token function">findNavController</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragmentLista<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>resources<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span>orientation <span class="token operator">==</span> 
-                    Configuration<span class="token punctuation">.</span>ORIENTATION_PORTRAIT<span class="token punctuation">)</span> navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>
-                    R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragmentLista_to_fragmentDetalle<span class="token punctuation">,</span>
-                    bundle
-                <span class="token punctuation">)</span>
-               <span class="token keyword">else</span>
-                <span class="token punctuation">{</span>
-                    <span class="token keyword">val</span> fT <span class="token operator">=</span> <span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>supportFragmentManager<span class="token punctuation">.</span>
-                                                            <span class="token function">beginTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                    fT<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>detalle<span class="token punctuation">,</span>FragmentDetalle<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span>bundle<span class="token punctuation">)</span><span class="token punctuation">.</span>
-                                                            <span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        adapter<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">miOnLongClick</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
-            <span class="token keyword">val</span> navController <span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span><span class="token function">findNavController</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragmentLista<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">val</span> bundle <span class="token operator">=</span> <span class="token function">Bundle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                posicion<span class="token operator">=</span>recyclerView<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">getChildLayoutPosition</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
-                bundle<span class="token punctuation">.</span><span class="token function">putInt</span><span class="token punctuation">(</span><span class="token string">&quot;POSICION&quot;</span><span class="token punctuation">,</span>posicion<span class="token punctuation">)</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>resources<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span>orientation <span class="token operator">==</span> 
-                                                Configuration<span class="token punctuation">.</span>ORIENTATION_PORTRAIT<span class="token punctuation">)</span>
-                 navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragmentLista_to_dialogEliminar<span class="token punctuation">,</span>
-                                         bundle<span class="token punctuation">)</span>
-                <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                    <span class="token keyword">val</span> navHostFragment <span class="token operator">=</span> <span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
-                    supportFragmentManager<span class="token punctuation">.</span><span class="token function">findFragmentById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>lista<span class="token punctuation">)</span> 
-                    <span class="token keyword">as</span> NavHostFragment
-                    <span class="token keyword">val</span> navControllerLista <span class="token operator">=</span> navHostFragment<span class="token punctuation">.</span>navController
-                    navControllerLista<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>
-                                     action_fragmentLista_to_dialogEliminar<span class="token punctuation">,</span> bundle<span class="token punctuation">)</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-            <span class="token boolean">true</span>
-        <span class="token punctuation">}</span>
-
-        <span class="token keyword">return</span> rootView
-    <span class="token punctuation">}</span>
-
-     <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onAttach</span><span class="token punctuation">(</span>activity<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onAttach</span><span class="token punctuation">(</span>activity<span class="token punctuation">)</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            valores <span class="token operator">=</span> MainActivity<span class="token punctuation">.</span>datos
-            listenerLargo <span class="token operator">=</span> activity <span class="token keyword">as</span> View<span class="token punctuation">.</span>OnLongClickListener<span class="token operator">?</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> ClassCastException<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-        <span class="token keyword">var</span> adapter<span class="token operator">:</span> Adapter<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="24-31" data-start="24" data-end="31">
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="32-38" data-start="32" data-end="38">
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="43-50" data-start="43" data-end="50">
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="51-58" data-start="51" data-end="58">
-
-
-
-
-
-
-
-</div></div></pre><blockquote>
-<p>&#x1F4CC;Desde <strong>L&#xED;nea 24 a 38</strong> al pulsar sobre un elemento de la lista se crear&#xE1; un Bundle para guardar la posici&#xF3;n del elemento pulsado, dependiendo si el dispositivo est&#xE1; en posici&#xF3;n horizontal o vertical: en el primer caso se navegar&#xE1; al fragment detalle utilizando la acci&#xF3;n que habremos creado en el grafo de navegaci&#xF3;n, en el segundo utilizaremos la carga de fragment de forma tradicional. En el c&#xF3;digo que hay desde la <strong>L&#xED;nea 43 a 58</strong>, tambi&#xE9;n se tiene que tener en cuenta la posici&#xF3;n del dispositivo, pero solo para usar uno u otro <strong><code>NavHostFragment</code></strong>, en todo caso navegaremos del elemento pulsado al dialogo que nos permite eliminar un elemento de la lista.</p>
-</blockquote>
-<div style="page-break-after:always;"></div>
-<h5 class="mume-header" id="dialogeliminarkt">DialogEliminar.kt</h5>
-
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> DialogEliminar <span class="token operator">:</span> <span class="token function">DialogFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">onCreateDialog</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Dialog <span class="token punctuation">{</span>
-        <span class="token keyword">val</span> builder<span class="token operator">:</span> AlertDialog<span class="token punctuation">.</span>Builder <span class="token operator">=</span> AlertDialog<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>arguments <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">val</span> posicion <span class="token operator">=</span> arguments<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token string">&quot;POSICION&quot;</span><span class="token punctuation">)</span>
-            builder<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">&quot;Deseas Eliminar el item?&quot;</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">&quot;AVISO&quot;</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">setPositiveButton</span><span class="token punctuation">(</span><span class="token string">&quot;OK&quot;</span><span class="token punctuation">,</span> DialogInterface<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span> 
-                     dialog<span class="token punctuation">,</span> id <span class="token operator">-&gt;</span> MainActivity<span class="token punctuation">.</span>datos<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span>posicion<span class="token operator">!!</span><span class="token punctuation">)</span>
-                    FragmentLista<span class="token punctuation">.</span>adapter<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">notifyItemRemoved</span><span class="token punctuation">(</span>posicion<span class="token operator">!!</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> builder<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x1F4CC;Este dialogo fragment es igual a los que hemos visto en ejercicios anteriores, pasaremos la posici&#xF3;n del elemento a eliminar mediante un bundle</p>
+<p>&#x1F4CC; como se puede ver en este c&#xF3;digo, tenemos tres variables que ser&#xE1;n infladas dentro del m&#xE9;todo pero son propiedades de la clase, ya que tendr&#xE1;n que ser accedidas desde fuera de este para modificar el aspecto de la progressBar. Lo mismo ocurre con el objeto dialog.</p>
 </blockquote>
-<p>En cuanto al c&#xF3;digo de la MainActivity, solo se encargar&#xE1; de rellenar los datos pasados como recurso y de guardar una instancia de estos datos en caso de que la aplicaci&#xF3;n pare de forma brusca, para que pueda ser recuperada al volver a iniciar.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">FragmentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<p>El c&#xF3;digo principal que permite crear la tarea en segundo plano lo podemos realizar de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[3,4,5,[6-7],[8-12],[14-16]]}" class="language-kotlin" data-line="3,4,5,6-7,8-12,14-16"><span class="token keyword">fun</span> <span class="token function">barraProgreso</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token function">setDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    job <span class="token operator">=</span> <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> inicio <span class="token operator">=</span> progreso
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> inicio<span class="token operator">..</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+            <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    progressBar<span class="token operator">!!</span><span class="token punctuation">.</span>progress <span class="token operator">=</span> i
+                    progressMessage<span class="token punctuation">.</span>text <span class="token operator">=</span> i<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;/100&quot;</span>
+                    progreso <span class="token operator">=</span> i
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        progreso <span class="token operator">=</span> <span class="token number">0</span>
+        dialog<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">dismiss</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        dialog <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div><div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-7" data-start="6" data-end="7">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8-12" data-start="8" data-end="12">
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14-16" data-start="14" data-end="16">
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC; lanzamos una corrutina mediante <strong><code>launch</code></strong> con un alcance definido en CoroutineScope fuera del hilo principal y para trabajos costosos en el tiempo <strong><code>Dispachers.Default</code></strong> <strong>L&#xED;nea 4</strong>, (el trabajo costoso se supone que es el retardo que producimos con el bucle y el sleep <strong>L&#xED;neas 6 y 7</strong> ). Para poder cambiar las vistas relacionadas con el hilo principal, lanzamos la funci&#xF3;n de suspensi&#xF3;n <strong><code>withContext</code></strong> con <strong><code>Dispachers.Main</code></strong> <strong>L&#xED;neas 8-12</strong>.<br>
+Las <strong>l&#xED;neas de 14 a 16</strong> se encargan de reiniciar los elementos que se han usado. El dialogo lo cerramos e iniciamos la variable a null, para evitar problemas si se produce un giro. Usamos la propiedad progreso para guardar el progreso de la barra y poder recuperarlo posteriormente al reiniciar despu&#xE9;s de un giro <strong>L&#xED;nea 5 y 14.</strong></p>
+</blockquote>
+<p>Si queremos controlar los giros de pantalla, y que la barra de progreso siga funcionando por el lugar en que se hab&#xED;a quedado al producirse el giro, tendremos que guardar el estado de esta. Eso lo hacemos con la propiedad de tipo entero <strong><code>progreso</code></strong> que hemos comentando anteriormente. Para guardar y recuperar informaci&#xF3;n de una actividad podemos utilizar los m&#xE9;todo <strong><code>onSaveInstanceState</code></strong> y <strong><code>onRestoreInstanceState</code></strong> estos m&#xE9;todos ser&#xE1;n llamados autom&#xE1;ticamente al destruir la aplicaci&#xF3;n y al volverse a crear (siempre y cuando no sea por un cierre realizado de forma correcta por el usuario).</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
+    outState<span class="token punctuation">.</span><span class="token function">putInt</span><span class="token punctuation">(</span><span class="token string">&quot;PROGRESO&quot;</span><span class="token punctuation">,</span> progreso<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>dialog <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dialog<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">dismiss</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            dialog <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onRestoreInstanceState</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onRestoreInstanceState</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+    progreso <span class="token operator">=</span> savedInstanceState<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token string">&quot;PROGRESO&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span> 
+</pre><blockquote>
+<p>&#x1F4CC; m&#xE9;todo <strong><code>onSaveInstanceState</code></strong> utilizamos el bundle que tiene como par&#xE1;metro para guardar el progreso y anulamos el dialogo siempre y cuando est&#xE9; creado. M&#xE9;todo <strong><code>onRestoreInstanceState</code></strong> recuperamos la informaci&#xF3;n del progreso que nos llegar&#xE1; mediante el bundle de par&#xE1;metro. &#xC9;stos m&#xE9;todos guardan la informaci&#xF3;n en la memoria no vol&#xE1;til mediante serializaci&#xF3;n, por lo que el proceso es un poco m&#xE1;s lento que si se usara ViewModel y solo se debe utilizar cuando se quiere guardar informaci&#xF3;n simple.</p>
+</blockquote>
+<p>Para acabar queda el c&#xF3;digo de la MainActivity, donde llamaremos al m&#xE9;todo barraProgreso directamente si hay una posici&#xF3;n guardada de antemano (significa que se ha recuperado el estado despu&#xE9;s de un reinicio), o habr&#xE1; que pulsar en el bot&#xF3;n para que se realice la llamada y se lance la tarea.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+    <span class="token keyword">var</span> dialog<span class="token operator">:</span> AlertDialog<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword">null</span>
+    <span class="token keyword">var</span> progressBar<span class="token operator">:</span> ProgressBar<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token keyword">var</span> progreso <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> loadingMessage<span class="token operator">:</span> TextView
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> progressMessage<span class="token operator">:</span> TextView
+   
+
     <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
-        <span class="token comment">//Recuperar datos despu&#xE9;s giro</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>savedInstanceState <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            datos <span class="token operator">=</span> savedInstanceState<span class="token punctuation">.</span><span class="token function">getParcelableArrayList</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">else</span>  datos <span class="token operator">=</span> <span class="token function">rellenarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span> progreso<span class="token operator">=</span>savedInstanceState<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token string">&quot;PROGRESO&quot;</span><span class="token punctuation">)</span>
+        binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>progreso<span class="token operator">&gt;</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token function">barraProgreso</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        binding<span class="token punctuation">.</span>buttonProgress<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span><span class="token function">barraProgreso</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
-        outState<span class="token punctuation">.</span><span class="token function">putParcelableArrayList</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">,</span> datos<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">fun</span> <span class="token function">rellenarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Datos<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-        <span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
-
-    <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
-         <span class="token keyword">var</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Datos<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
 </pre>
       </div>
