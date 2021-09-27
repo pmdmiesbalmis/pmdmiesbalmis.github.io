@@ -356,8 +356,8 @@ justo después del front matter
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="corrutinas-kotlin">Corrutinas Kotlin</h3>
 
-<p>Una <a href="https://kotlinlang.org/docs/coroutines-guide.html">corrutina de Koytlin</a> es un conjunto de sentencias que realizan una tarea espec&#xED;fica, con la capacidad suspender o resumir su ejecuci&#xF3;n sin bloquear un hilo. Esto permite que tengas diferentes corrutinas cooperando entre ellas y no significa que exista un hilo por cada corrutina, al contrario, puedes ejecutar varias en un solo.</p>
-<p>Las corrutinas hacen parte del paquete kotlinx.coroutines, por lo que necesitas especificar la <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android">dependencia correspondiente</a> en en <strong><code>build.gradle</code></strong>. A d&#xED;a de hoy:</p>
+<p>Una <a href="https://kotlinlang.org/docs/coroutines-guide.html">corrutina de Koytlin</a> es un conjunto de sentencias que realizan una tarea espec&#xED;fica, con la capacidad de suspender o resumir su ejecuci&#xF3;n sin bloquear un hilo. Esto permite que tengas diferentes corrutinas cooperando entre ellas y no significa que exista un hilo por cada corrutina, al contrario, puedes ejecutar varias en un solo.</p>
+<p>Las corrutinas son parte del paquete kotlinx.coroutines, por lo que necesitas especificar la <a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android">dependencia correspondiente</a> en en <strong><code>build.gradle</code></strong>. A d&#xED;a de hoy:</p>
 <pre data-role="codeBlock" data-info="json" class="language-json">implementation <span class="token string">&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1&quot;</span>
 </pre><p>Las <a href="https://babel.es/es/Media/Blog/Julio-2021/Coroutines-en-el-desarrollo-de-Android">corrutinas en el desarrollo de Android</a>, aunque son un elemento que va a permitirnos crear c&#xF3;digos m&#xE1;s sencillos, al principio pueden parecer complejas debido a su nivel de abstracci&#xF3;n.</p>
 <h4 class="mume-header" id="alcance-de-las-corrutinas">Alcance de las corrutinas</h4>
@@ -375,13 +375,16 @@ justo después del front matter
 Job de la Coroutine, su dispatcher y tambi&#xE9;n su Exception handler.</p>
 <ul>
 <li>
-<p><strong>Job</strong> De acuerdo con la documentaci&#xF3;n oficial &quot;Un Job es una cosa cancelable con un ciclo de vida que culmina con su finalizaci&#xF3;n. Los trabajos de coroutine se crean con launch coroutine builder. Ejecuta un bloque de c&#xF3;digo especificado y se completa a la finalizaci&#xF3;n de este bloque&quot;.</p>
-<p>La ejecuci&#xF3;n de un trabajo no produce un valor de resultado. Deber&#xED;amos utilizar una interfaz Deferred para un trabajo que produzca un resultado. Un trabajo con resultado (Deferred), se crea con el constructor async Coroutine y el resultado se puede recuperar con el m&#xE9;todo await(), que lanza una excepci&#xF3;n si el Deferred ha fallado.</p>
+<p><strong>Job</strong> De acuerdo con la documentaci&#xF3;n oficial &quot;Un Job es una cosa cancelable con un ciclo de vida que culmina con su finalizaci&#xF3;n. Los trabajos de coroutine se crean con <strong><code>launch coroutine builder</code></strong>. Ejecuta un bloque de c&#xF3;digo especificado y se completa a la finalizaci&#xF3;n de este bloque&quot;.</p>
+<p>La ejecuci&#xF3;n de un trabajo no produce un valor de resultado. Deber&#xED;amos utilizar una interfaz <strong><code>Deferred</code></strong> para un trabajo que produzca un resultado. Un trabajo con resultado (Deferred), se crea con el <strong><code>async coroutine builder</code></strong> y el resultado se puede recuperar con el m&#xE9;todo <strong><code>await()</code></strong>, que lanza una excepci&#xF3;n si el Deferred ha fallado.</p>
 <p>Los jobs tienen un par de funciones interesantes que pueden ser muy &#xFA;tiles. Pero es importante entender que un Job puede tener a su vez otro Job padre. Ese job padre tiene cierto control sobre los hijos, y ah&#xED; es donde entran en juego estas funciones:</p>
 <ul>
 <li>job.join -&gt; Con est&#xE1; funci&#xF3;n, se puede bloquear la corrutina asociada con el job hasta que todos los jobs hijos hayan finalizado. Todas las funciones de suspension que se llaman dentro de una corrutina est&#xE1;n vinculadas a job, as&#xED; que el job puede detectar cu&#xE1;ndo finalizan todos los jobs hijos y despu&#xE9;s continuar la ejecuci&#xF3;n. job.join() es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que debe llamarse dentro de otra corrutina.</li>
 <li>job.cancel -&gt; Esta funci&#xF3;n cancelar&#xE1; todos sus jobs hijos asociados. job.cancel() esta es una funci&#xF3;n normal, por lo que no requiere una corrutina para ser llamada.</li>
 </ul>
+<blockquote>
+<p>&#x270B; Con GlobalScope el padre no va a esperar la finalizaci&#xF3;n de sus hijos y una vez que el padre es cancelado, los otros trabajos van a seguir corriendo aparte. Es decir, en este caso es responsabilidad del desarrollador llevar el control del tiempo de vida de las coroutines porque no hay sincronizaci&#xF3;n con los trabajos hijos.</p>
+</blockquote>
 </li>
 <li>
 <p><strong>Dispacher</strong> En Kotlin, todas las Coroutines deben ejecutarse en un dispatcher incluso cuando se ejecutan en el hilo principal. los Dispatchers son un tipo de contextos de corrutina que especifican el hilo o hilos que pueden ser utilizados por la corrutina para ejecutar su c&#xF3;digo. Hay dispatchers que solo usan un hilo (como Main) y otros que definen un grupo de hilos que se optimizar&#xE1;n para ejecutar todas las corrutinas que reciben. Para especificar d&#xF3;nde deben ejecutarse las coroutines, Kotlin proporciona tres Dispatchers que puedes utilizar:</p>
@@ -406,23 +409,20 @@ De esta manera se agregan dos nuevas operaciones (adem&#xE1;s de invocar / llama
 <li>suspender - pausa la ejecuci&#xF3;n de la corrutina actual, guardando todas las variables locales. El hilo actual puede continuar con su trabajo, mientras que el c&#xF3;digo de suspensi&#xF3;n se ejecuta en otro hilo.</li>
 <li>reanudar : contin&#xFA;a una corrutina suspendida desde el lugar donde se paus&#xF3; cuando el resultado est&#xE1; listo.</li>
 </ul>
-<p>val user = suspended { userService.doLogin(username, password) }<br>
-val currentFriends = suspended { userService.requestCurrentFriends(user) }<br>
-Las funciones de suspensi&#xF3;n pueden ejecutarse en el hilo actual o en uno diferente. Depende de c&#xF3;mo se configuren. Las funciones de suspensi&#xF3;n solo pueden ejecutarse dentro de una corrutina o dentro de otra funci&#xF3;n de suspensi&#xF3;n.<br>
-Solo se pueden llamar a las funciones de suspensi&#xF3;n desde otras funciones de suspensi&#xF3;n, o utilizando un constructor de corrutinas para iniciar una nueva corrutina. Estas funciones pueden ejecutar una operaci&#xF3;n de larga duraci&#xF3;n y esperar a que se complete sin bloquearse. Hay que tener en cuenta que las funciones de suspensi&#xF3;n se sincronizan autom&#xE1;ticamente con otras variables y funciones del hilo principal.</p>
-<p>Vamos a poner en funcionamiento todos estos conocimientos retomando el ejercicio resuelto del bloque 6 <strong>ProgresIndicators</strong>, mejorando la funcionalidad.</p>
-<p>withContext<br>
-Esta es una funci&#xF3;n que permite cambiar f&#xE1;cilmente el contexto que se utilizar&#xE1; para ejecutar una parte del c&#xF3;digo dentro de una corrutina<br>
-withContext es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que no necesitamos usarla dentro de otra funci&#xF3;n de suspensi&#xF3;n. En su lugar, podemos hacer:</p>
+<p>Las funciones de suspensi&#xF3;n solo pueden llamarse o ejecutarse dentro de una corrutina o dentro de otra funci&#xF3;n de suspensi&#xF3;n.<br>
+Algunas de las funciones vistas en la explicaci&#xF3;n anterior son funciones de suspensi&#xF3;n en si mismas, tales como <strong><code>delay, join, await, withContext, supervisorScope, etc.</code></strong>.</p>
+<h5 class="mume-header" id="withcontext">withContext</h5>
+
+<p>Esta es una funci&#xF3;n de suspensi&#xF3;n que permite cambiar f&#xE1;cilmente el contexto que se utilizar&#xE1; para ejecutar una parte del c&#xF3;digo dentro de una corrutina. <strong><code>WithContext</code></strong> es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma.</p>
 <h4 class="mume-header" id="builders-de-corrutinas">Builders de corrutinas</h4>
 
-<p>Los coroutine builders sirven para iniciar las corrutinas. Tenemos diferentes builders dependiendo de lo que queramos hacer, e incluso t&#xE9;cnicamente se pueden crear personalizados. Pero para la mayor&#xED;a de los casos son suficientes con los que proporciona la librer&#xED;a:</p>
+<p>Los constructores de coroutinas sirven para iniciar las corrutinas. Tenemos diferentes builders dependiendo de lo que queramos hacer, e incluso t&#xE9;cnicamente se pueden crear personalizados. Pero para la mayor&#xED;a de los casos son suficientes con los que proporciona la librer&#xED;a:</p>
 <ul>
 <li>
 <p><strong><code>runBlocking</code></strong>, este builder bloquea el hilo actual hasta que se terminen todas las tareas dentro de esa corrutina. No suele ser una funcionalidad muy usada de las corrutinas, ya que precisamente lo que se pretende con estas es la sincronizaci&#xF3;n de m&#xE1;s de una tarea.</p>
 </li>
 <li>
-<p><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados).Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y por lo tanto el dispatcher) del CoroutineScope desde el que se inicia. Puede iniciarse dentro de otra corrutina omitiendose o no el Dispachers o necesitar&#xE1; obligatoriamente especificar el alcance.</p>
+<p><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados).Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y por lo tanto el dispatcher) del CoroutineScope desde el que se inicia. Puede iniciarse dentro de otra corrutina omitiendose o no el Dispachers, pero si no est&#xE1; dentro de una corrutina necesitar&#xE1; obligatoriamente especificar el alcance.</p>
 </li>
 </ul>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token operator">..</span><span class="token punctuation">.</span>
@@ -437,13 +437,9 @@ withContext es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que 
 <span class="token operator">..</span><span class="token punctuation">.</span>
 <div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
 </div></div></pre><ul>
-<li><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. async siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama Deferred.</li>
+<li><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. async siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama <strong><code>Deferred</code></strong>.<br>
+Deferred tiene una nueva funci&#xF3;n de suspensi&#xF3;n  llamada <strong><code>await()</code></strong> que es la que bloquea. Llamaremos a await() solo cuando necesitemos el resultado. Si el resultado a&#xFA;n no esta listo, la corrutina se suspende en ese punto. Si ya tenemos el resultado, simplemente lo devolver&#xE1; y continuar&#xE1;. De esta manera, puedes ejecutar tantas tareas en segundo plano como necesites.</li>
 </ul>
-<p>Este objeto tiene una nueva funci&#xF3;n  llamada await() que es la que bloquea. Llamaremos a await() solo cuando necesitemos el resultado. Si el resultado a&#xFA;n no esta listo, la corrutina se suspende en ese punto. Si ya tenemos el resultado, simplemente lo devolver&#xE1; y continuar&#xE1;. De esta manera, puedes ejecutar tantas tareas en segundo plano como necesites.<br>
-coroutineScope { .. } : Crea un nuevo &#xE1;mbito personalizado y no se completa hasta que todos los Coroutines hijos se completan;<br>
-Si el padre se cancela, todos los hijos se cancelan.<br>
-El padre siempre esperar&#xE1; a que se completen sus hijos.</p>
-<p>No recomiendo el uso de GlobalScope porque el padre no va a esperar la finalizaci&#xF3;n de sus hijos y una vez que el padre es cancelado, los otros trabajos van a seguir corriendo aparte. Es decir, ahora es responsabilidad del desarrollador llevar el control del tiempo de vida de las coroutines porque no hay sincronizaci&#xF3;n con los trabajos hijos.</p>
 
       </div>
       
