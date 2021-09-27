@@ -364,7 +364,39 @@ justo después del front matter
 
 <p>Cuando creamos coroutines asumimos de manera impl&#xED;cita dos aspectos muy importantes: El &#xE1;mbito (CoroutineScope y GlobalScope) y el contexto (CoroutineContext).</p>
 <p>El uso de <strong><code>GlobalScope</code></strong> permite crea corrutinas de nivel superior, esto quiere decir que tienen la capacidad de vivir hasta que termine la aplicaci&#xF3;n y es trabajo del desarrollador el control para su cancelaci&#xF3;n, por lo que no se aconseja usar este &#xE1;mbito.</p>
-<p>Para reducir este alcance, Kotlin nos permite crear los espacios donde queremos que se d&#xE9; la concurrencia. Esto lo haremos mediante <strong><code>CoroutineScope</code></strong>. Cada vez que usamos un constructor de coroutines en realidad estamos haciendo una llamada a una funci&#xF3;n que recibe como primer par&#xE1;metro un objeto de tipo <strong><code>CoroutineContext</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">ejemploGlobalScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           GlobalScope<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;GlobalScope&quot;</span><span class="token punctuation">,</span>
+            Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; con <strong><code>launch</code></strong> lanzamos la corrutina en el contexto de la Main para poder mostrar el Toast y dentro de esta lanzamos otra para procesos largos (los tres segundos de retardo).</p>
+</blockquote>
+<p>Para reducir este alcance, Kotlin nos permite crear los espacios donde queremos que se d&#xE9; la concurrencia. Esto lo haremos mediante <strong><code>CoroutineScope</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword">var</span> coroutineScope<span class="token operator">=</span> <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">ejemploCoroutineScopeConMain</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+       coroutineScope<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>isActive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;[CoroutineScope-Main] I&apos;m alive on&quot;</span> <span class="token operator">+</span>
+            <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token delimiter variable">}</span></span>!&quot;</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//Al salir del fragment se cancela la corutina</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onDetach</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDetach</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        coroutineScope<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC;esta corrutina permanece activa hasta  que sea cancelada de alguna forma. Est&#xE1; lanzada con <strong><code>launch</code></strong> y en el alcance de la Main, por lo que podremos usar el Toast para mostrar la informaci&#xF3;n. El alcance personalizado lo hemos conseguido con el constructor de <strong><code>CoroutineScope()</code></strong></p>
+</blockquote>
+<p>Cada vez que usamos un constructor de coroutines en realidad estamos haciendo una llamada a una funci&#xF3;n que recibe como primer par&#xE1;metro un objeto de tipo <strong><code>CoroutineContext</code></strong>.</p>
 <h4 class="mume-header" id="coroutinecontext">CoroutineContext</h4>
 
 <p>Las coroutines siempre se ejecutan en alg&#xFA;n contexto que est&#xE1; representado por un valor del tipo CoroutineContext.</p>
@@ -410,7 +442,7 @@ De esta manera se agregan dos nuevas operaciones (adem&#xE1;s de invocar / llama
 <li>reanudar : contin&#xFA;a una corrutina suspendida desde el lugar donde se paus&#xF3; cuando el resultado est&#xE1; listo.</li>
 </ul>
 <p>Las funciones de suspensi&#xF3;n solo pueden llamarse o ejecutarse dentro de una corrutina o dentro de otra funci&#xF3;n de suspensi&#xF3;n.<br>
-Algunas de las funciones vistas en la explicaci&#xF3;n anterior son funciones de suspensi&#xF3;n en si mismas, tales como <strong><code>delay, join, await, withContext, supervisorScope, etc.</code></strong>.</p>
+Algunas de las funciones usadas con frecuencias para lanzar corrutinas son funciones de suspensi&#xF3;n en si mismas, tales como <strong><code>delay, join, await, withContext, supervisorScope, etc.</code></strong>.</p>
 <h5 class="mume-header" id="withcontext">withContext</h5>
 
 <p>Esta es una funci&#xF3;n de suspensi&#xF3;n que permite cambiar f&#xE1;cilmente el contexto que se utilizar&#xE1; para ejecutar una parte del c&#xF3;digo dentro de una corrutina. <strong><code>WithContext</code></strong> es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma.</p>
@@ -420,25 +452,66 @@ Algunas de las funciones vistas en la explicaci&#xF3;n anterior son funciones de
 <ul>
 <li>
 <p><strong><code>runBlocking</code></strong>, este builder bloquea el hilo actual hasta que se terminen todas las tareas dentro de esa corrutina. No suele ser una funcionalidad muy usada de las corrutinas, ya que precisamente lo que se pretende con estas es la sincronizaci&#xF3;n de m&#xE1;s de una tarea.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword">fun</span> <span class="token function">ejemploRunBlocking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+            <span class="token function">runBlocking</span> <span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Lanzamos tres corrutinas con launch</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token comment">//delay es una funcion de suspensi&#xF3;n por lo que al</span>
+                        <span class="token comment">//lanzar las tres corrutinas el tiempo no duran 5segundos</span>
+                        <span class="token comment">//ya que se hacen las tres intercaladas</span>
+                        <span class="token comment">//a diferencia de sleep</span>
+                        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;CORRUTINA&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+                        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;Ya han terminado las tareas lanzadas&quot;</span><span class="token operator">+</span>
+        <span class="token string">&quot;con el constructor runBlocking.&quot;</span> <span class="token operator">+</span>
+        <span class="token string">&quot;\nSe desbloquea el hilo principal y se muestra este texto&quot;</span><span class="token punctuation">,</span>
+        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC;en este ejemplo lanzamos una corrutina que a su vez lanza otras tres corrutinas, la primera con <strong><code>runBlocking</code></strong> bloquear&#xE1; el hilo principal, por lo que el <strong><code>Toast</code></strong> no ocurrir&#xE1; hasta que no terminen todas las subrutinas hijas de <strong><code>runBlocking</code></strong>. <strong><code>launch</code></strong> se lanza, en este ejemplo, en un contexto que no es el Main, por lo que nunca podremos introducir ninguna interacci&#xF3;n con las vistas (por eso la salida la realizamos mediante log). Cada una de las tres corrutinas lanzadas por launch permanecer&#xE1; 5 segundos de espera, pero al realizarse al mismo tiempo, el retardo es de poco m&#xE1;s de 5 segundo. Si  el bucle no lanzara las tres subrutinas con launch y solo dejaramos el <strong><code>delay</code></strong> el retardo ser&#xED;a de unos 15 segundos aproximadamente.</p>
+</blockquote>
 </li>
 <li>
-<p><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados).Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y por lo tanto el dispatcher) del CoroutineScope desde el que se inicia. Puede iniciarse dentro de otra corrutina omitiendose o no el Dispachers, pero si no est&#xE1; dentro de una corrutina necesitar&#xE1; obligatoriamente especificar el alcance.</p>
-</li>
-</ul>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token operator">..</span><span class="token punctuation">.</span>
+<p><strong><code>launch</code></strong>, este es el builder m&#xE1;s usado. A diferencia de runBlocking, no bloquear&#xE1; el subproceso actual (si se usan los dispatchers adecuados).Launch devuelve un Job, que permitir&#xE1; realizar las funciones explicadas anteriormente.<br>
+Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y por lo tanto el dispatcher) del CoroutineScope desde el que se inicia. Puede iniciarse dentro de otra corrutina omitiendose o no el Dispachers, pero si no est&#xE1; dentro de una corrutina necesitar&#xE1; obligatoriamente especificar el alcance. Launch nos devuelve un Job, que permitir&#xE1; realizar las funciones explicadas anteriormente.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token comment">//launch especificando el alcance mediante CoroutineScope</span>
 <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-   <span class="token comment">//Al estar dentro de una corrutina padre, se puede omitir </span>
-   <span class="token comment">//el alcance e incluso el Dispatchers si no queremos cambiar </span>
-   <span class="token comment">//el contexto del padre, en este caso si lo cambiamos</span>
-   <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token operator">..</span><span class="token punctuation">.</span>    <span class="token punctuation">}</span>
+<span class="token comment">//Al estar dentro de una corrutina padre, se puede omitir </span>
+<span class="token comment">//el alcance e incluso el Dispatchers si no queremos cambiar </span>
+<span class="token comment">//el contexto del padre, en este caso si lo cambiamos</span>
+<span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token operator">..</span><span class="token punctuation">.</span>    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span class="token operator">..</span><span class="token punctuation">.</span>
-<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
-</div></div></pre><ul>
-<li><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. async siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama <strong><code>Deferred</code></strong>.<br>
-Deferred tiene una nueva funci&#xF3;n de suspensi&#xF3;n  llamada <strong><code>await()</code></strong> que es la que bloquea. Llamaremos a await() solo cuando necesitemos el resultado. Si el resultado a&#xFA;n no esta listo, la corrutina se suspende en ese punto. Si ya tenemos el resultado, simplemente lo devolver&#xE1; y continuar&#xE1;. De esta manera, puedes ejecutar tantas tareas en segundo plano como necesites.</li>
+</pre></li>
+<li>
+<p><strong><code>async</code></strong>, este otro builder permite ejecutar varias tareas en segundo plano en paralelo. No es una funci&#xF3;n de suspensi&#xF3;n en s&#xED; misma, por lo que cuando ejecutamos async, el proceso en segundo plano se inicia, pero la siguiente l&#xED;nea se ejecuta de inmediato. <strong><code>async</code></strong> siempre debe llamarse dentro de otra corrutina, y devuelve un job especializado que se llama <strong><code>Deferred</code></strong>.<br>
+<strong><code>Deferred</code></strong> tiene una nueva funci&#xF3;n de suspensi&#xF3;n  llamada <strong><code>await()</code></strong> que es la que bloquea. Llamaremos a await() solo cuando necesitemos el resultado. Si el resultado a&#xFA;n no esta listo, la corrutina se suspende en ese punto. Si ya tenemos el resultado, simplemente lo devolver&#xE1; y continuar&#xE1;.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">ejemploAsyncAway</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> cadena<span class="token operator">:</span>String<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword">null</span>
+    <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> job<span class="token operator">=</span>async <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                tiempo<span class="token punctuation">.</span>text <span class="token operator">=</span>i<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token string">&quot;Ha terminado la corrutina async&quot;</span>
+        <span class="token punctuation">}</span>
+        cadena<span class="token operator">=</span>job<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>cadena<span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; lanzamos el <strong><code>async</code></strong> dentro de una corrutina launch con contesto Main, para poder pintar cada segundo el texto que nos interese (en este caso un contador de 1 a 5). Cambiamos el Dispacher a IO para realizar el retardo y devolvemos una cadena como respuesta del <strong><code>async</code></strong>. Cuando termine el trabajo la corrutina, recuperaremos la cadena con <strong><code>await</code></strong> y se lanzar&#xE1; el Toast que la utiliza.</p>
+</blockquote>
+</li>
 </ul>
 
       </div>
