@@ -368,6 +368,7 @@ justo después del front matter
 <li><a href="#jetpack-navigation">Jetpack Navigation</a></li>
 </ol>
 </li>
+<li><a href="#permisos-con-fragments">Permisos con Fragments</a></li>
 <li><a href="#dialogfragment">DialogFragment</a></li>
 <li><a href="#vistas-deslizantes-y-tabs">Vistas Deslizantes y Tabs</a>
 <ol>
@@ -1386,7 +1387,26 @@ C&#xF3;digo <strong>fragment1.xml</strong> con dos botones <em>cancelar y acepta
 </div></div></pre><p>&#x1F4CC; <strong>L&#xED;nea 9</strong> acci&#xF3;n del bot&#xF3;n aceptar que llama al m&#xE9;todo aceptar que ejecuta la acci&#xF3;n de navegaci&#xF3;n. <strong>L&#xED;nea 10</strong> acci&#xF3;n del bot&#xF3;n cancelar que llamar&#xE1; al m&#xE9;todo cancelar de MainActivity, realizando un casteo del contexto.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; A partir del  c&#xF3;digo expuesto en el ejemplo anterior, crea el ejercicio completo. Recuerda que debes crear las acciones de navegaci&#xF3;n creando un  recurso de tipo navigation.</span></p>
-<h3 class="mume-header" id="dialogfragment">DialogFragment</h3>
+<h3 class="mume-header" id="permisos-con-fragments">Permisos con Fragments</h3>
+
+<p>Para realizar la petici&#xF3;n de permisos al usuario en las clases que heredan de Fragment, se codifica de forma distinta a como lo explicamos para las activitys, aunque el concepto es el mismo. Registramos la actividad para esta tarea mediante el m&#xE9;todo, ya utilizado para los intens, <strong><code>registerForActivityResult</code></strong> con un contrato especifico para pedir permisos <strong><code>ActivityResultContracts.RequestPermission</code></strong>. Luego usaremos el <strong><code>ActivityResultLauncher</code></strong> creado, para lanzar la tarea.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token operator">..</span><span class="token punctuation">.</span>
+ <span class="token keyword">lateinit</span>  <span class="token keyword">var</span> registerPermisosStorage<span class="token operator">:</span>ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+    registerPermisosStorage<span class="token operator">=</span> 
+        <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>it <span class="token operator">==</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token function">tomarGaleria</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+ binding<span class="token punctuation">.</span>imagen<span class="token punctuation">.</span><span class="token function">setOnLongClickListener</span> <span class="token punctuation">{</span>
+    registerPermisosStorage<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span>
+    <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+</pre><h3 class="mume-header" id="dialogfragment">DialogFragment</h3>
 
 <p>Como hemos visto al principio del tema, la clase Fragment tiene varias clases hijas que nos permiten realizar tareas concretas, una de ellas es la clase <a href="https://developer.android.com/guide/topics/ui/dialogs">DialogFragment</a>. Al heredar de ella podremos crear distintos tipos de di&#xE1;logos y es la manera aconsejada para hacerlo. Como hemos dicho, para utilizar este tipo de di&#xE1;logos deberemos crearnos una clase derivada de DialogFragment e implementar en ella el tipo de dialogo que queramos (como esta parte ya la conocemos de temas anteriores, solo vamos a comentar un par de AlertDialog diferentes). Como en este caso los di&#xE1;logos est&#xE1;n implementados con fragments para mostrarlos necesitaremos usar un <strong><code>FragmentManager</code></strong>, no la t&#xED;pica llamada al m&#xE9;todo show. Vamos a pasar a ver un ejemplo:</p>
 <div style="page-break-after:always;"></div>
