@@ -350,8 +350,10 @@ justo después del front matter
 <li><a href="#coroutinecontext">CoroutineContext</a></li>
 <li><a href="#funciones-de-suspensi%C3%B3n">Funciones de Suspensi&#xF3;n</a></li>
 <li><a href="#builders-de-corrutinas">Builders de corrutinas</a></li>
+<li><a href="#viewmodel-y-corrutinas">ViewModel y Corrutinas</a></li>
 </ol>
 </li>
+<li><a href="#servicios">Servicios</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="corrutinas-kotlin">Corrutinas Kotlin</h3>
@@ -513,6 +515,68 @@ Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y
 </blockquote>
 </li>
 </ul>
+<h4 class="mume-header" id="viewmodel-y-corrutinas">ViewModel y Corrutinas</h4>
+
+<p>ViewModel es extendido con una propiedad <strong><code>viewModelScope</code></strong> que se encarga de cancelar las corrutinas cuando ya no son necesarias.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">//propiedad viewModelScope extendida de CoroutineScope y</span>
+<span class="token comment">//que a su vez extiende el ViewModel</span>
+<span class="token keyword">val</span> ViewModel<span class="token punctuation">.</span>viewModelScope<span class="token operator">:</span> CoroutineScope
+   <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token keyword">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Gracias al comportamiento de <strong><code>CoroutineScope</code></strong> a trav&#xE9;s de la propiedad <strong><code>viewModelScope</code></strong> se realiza un seguimiento de todas las corrutinas que se crean en este ambito. Por lo tanto, si se cancela un alcance, se cancelan todas las corrutinas creadas en &#xE9;l.</p>
+<p>Por ejemplo, en el siguiente c&#xF3;digo creamos un ViewModel que nos gestionar&#xE1; un <strong><code>MutableLiveData</code></strong> de tipo ArrayList de Strings y que tiene un m&#xE9;todo que simula una descarga de datos que se guardar&#xE1;n en el objeto:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> ItemViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> valores <span class="token operator">=</span>
+        <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;item1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item4&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item5&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item6&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item7&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item8&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token keyword">var</span> liveData <span class="token operator">=</span>
+        MutableLiveData<span class="token operator">&lt;</span>ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//:MutableLiveData&lt;String&gt; by lazy { MutableLiveData&lt;String&gt;() }</span>
+    <span class="token keyword">val</span> datos<span class="token operator">:</span> LiveData<span class="token operator">&lt;</span>ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> liveData
+
+    <span class="token keyword">fun</span> <span class="token function">descargarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> random <span class="token operator">=</span> <span class="token function">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> aux <span class="token operator">=</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">//Simulaci&#xF3;n de una descarga lenta de datos</span>
+        <span class="token keyword">val</span> numeroElementos <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+        viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span>numeroElementos<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                aux<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>valores<span class="token punctuation">[</span>random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>valores<span class="token punctuation">.</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            liveData<span class="token punctuation">.</span>value <span class="token operator">=</span> aux
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC;en el m&#xE9;todo <strong>descargarDatos</strong> se usa la propiedad <strong><code>viewModelScope</code></strong> para lanzar la corrutina que producir&#xE1; el retardo y la lista generada con elementos aleatorios.</p>
+</blockquote>
+<p>El uso del ViewModel desde las distintas partes de la aplicaci&#xF3;n, es igual al que hemos visto en temas anteriores.</p>
+<h3 class="mume-header" id="servicios">Servicios</h3>
+
+<p>A la hora de realizar lo que llamamos <strong>long-time running tasks</strong>, es decir tareas que tienen que estar durante un gran tiempo en segundo plano y no tienen porqu&#xE9; estar ligadas a la actividad que las ha lanzado, una de las opciones para llevarlas a cabo, son los <strong>Servicios</strong>. Los servicios son componentes que se ejecutan en background (o segundo plano) y que no interact&#xFA;an con el usuario. La plataforma Android ofrece una gran cantidad de servicios predefinidos, disponibles regularmente a trav&#xE9;s de la clase Manager. De esta manera, en nuestras actividades podremos acceder a estos servicios a trav&#xE9;s del m&#xE9;todo getSystemService().<br>
+Pero nosotros como programadores podemos definir nuestros propios servicios. Por defecto los servicios corren en el mismo proceso que el hilo (thread) de la aplicaci&#xF3;n. Por lo tanto es necesario ejecutar procesamiento as&#xED;ncrono en el servicio para realizar tareas de uso intensivo de recursos en background. Un m&#xE9;todo com&#xFA;nmente usado es crear y ejecutar un nuevo thread en el servicio para realizar la tarea requerida y finalizar dicho hilo cuando se termin&#xF3; de ejecutar la tarea.<br>
+Tenemos varias opciones para que nuestra activity se comunique con un servicio.<br>
+&#xF0FC; Usar intent: es un escenario simple donde no se requiere comunicaci&#xF3;n directa ni notificaciones de procesos. El servicio recibe los datos v&#xED;a intent y realiza la tarea que sea necesaria sin devolver ning&#xFA;n tipo de dato. Un escenario donde podemos utilizar esto es cuando necesitamos actualizar un content provider. El servicio recibe los datos v&#xED;a intent, actualiza el content provider y este notifica a nuestra app que el contenido est&#xE1; actualizado, sin que se requiera alguna acci&#xF3;n extra por nuestro servicio.<br>
+&#xF0FC; Usar receivers: otro m&#xE9;todo es emitir eventos y registrar receptores (receivers, clase BroadcastReceiver) para establecer la comunicaci&#xF3;n. Por ejemplo, una activity registra din&#xE1;micamente un receiver para un evento, y el servicio es el encargado de emitir ese evento. Este escenario se usa cuando es necesario que el escenario notifique que termin&#xF3; de hacer alguna tarea.<br>
+Si el servicio creado va a realizar tareas que tengan un coste computacional elevado, se pueden provocar problemas en la aplicaci&#xF3;n (Application Not Responding o ANR), para evitar situaciones como estas, el servicio puede ejecutarse en un hilo secundario, para hacer esto la clase de la que hereda nuestro servicio debe ser IntentService, en caso contrario heredar&#xE1; de Service.<br>
+Por otro lado, si necesitamos utilizar servicios propios, estos deben ir declarados en el archivo AndroidManifest.xml. Para desarrollar con servicios hay que tener muy claros estos puntos.</p>
+<p>Android <strong><code>WorkManager</code></strong> es una biblioteca de procesamiento en segundo plano que se utiliza para ejecutar tareas en segundo plano que deber&#xED;an ejecutarse de forma garantizada, pero no necesariamente de forma inmediata. Con WorkManager podemos poner en cola nuestro procesamiento en segundo plano incluso cuando la aplicaci&#xF3;n no se est&#xE1; ejecutando y el dispositivo se reinicia por alguna raz&#xF3;n. WorkManager tambi&#xE9;n nos permite definir las restricciones necesarias para ejecutar la tarea, por ejemplo, la disponibilidad de la red antes de iniciar la tarea en segundo plano.</p>
+<p>Android WorkManager es parte de  Android Jetpack  (un conjunto de bibliotecas para guiar a los desarrolladores a escribir aplicaciones de calidad) y es uno de los  componentes de la arquitectura de Android  (colecci&#xF3;n de componentes que ayudan a los desarrolladores a dise&#xF1;ar aplicaciones robustas, probables y f&#xE1;ciles de mantener).<br>
+Android WorkManager puede ser una biblioteca de procesamiento en segundo plano perfecta para usar cuando su tarea:</p>
+<ol>
+<li>
+<p>No necesita ejecutarse en un momento espec&#xED;fico</p>
+</li>
+<li>
+<p>Puede aplazarse para su ejecuci&#xF3;n</p>
+</li>
+<li>
+<p>Se garantiza que se ejecutar&#xE1; incluso despu&#xE9;s de que se elimine la aplicaci&#xF3;n o se reinicie el dispositivo.</p>
+</li>
+<li>
+<p>Tiene que cumplir con limitaciones como el suministro de bater&#xED;a o la disponibilidad de la red antes de la ejecuci&#xF3;n.</p>
+</li>
+</ol>
+<p>El ejemplo m&#xE1;s simple de esto puede ser cuando su aplicaci&#xF3;n necesita cargar una gran cantidad de datos de usuario en el servidor.</p>
 
       </div>
       
