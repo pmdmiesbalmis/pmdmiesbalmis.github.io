@@ -353,7 +353,12 @@ justo después del front matter
 <li><a href="#viewmodel-y-corrutinas">ViewModel y Corrutinas</a></li>
 </ol>
 </li>
+<li><a href="#servicios-y-tareas-de-larga-duraci%C3%B3n">Servicios y tareas de larga duraci&#xF3;n</a>
+<ol>
 <li><a href="#servicios">Servicios</a></li>
+<li><a href="#workmanager">WorkManager</a></li>
+</ol>
+</li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="corrutinas-kotlin">Corrutinas Kotlin</h3>
@@ -550,33 +555,125 @@ Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y
 <p>&#x1F4CC;en el m&#xE9;todo <strong>descargarDatos</strong> se usa la propiedad <strong><code>viewModelScope</code></strong> para lanzar la corrutina que producir&#xE1; el retardo y la lista generada con elementos aleatorios.</p>
 </blockquote>
 <p>El uso del ViewModel desde las distintas partes de la aplicaci&#xF3;n, es igual al que hemos visto en temas anteriores.</p>
-<h3 class="mume-header" id="servicios">Servicios</h3>
+<h3 class="mume-header" id="servicios-y-tareas-de-larga-duraci%C3%B3n">Servicios y tareas de larga duraci&#xF3;n</h3>
 
-<p>A la hora de realizar lo que llamamos <strong>long-time running tasks</strong>, es decir tareas que tienen que estar durante un gran tiempo en segundo plano y no tienen porqu&#xE9; estar ligadas a la actividad que las ha lanzado, una de las opciones para llevarlas a cabo, son los <strong>Servicios</strong>. Los servicios son componentes que se ejecutan en background (o segundo plano) y que no interact&#xFA;an con el usuario. La plataforma Android ofrece una gran cantidad de servicios predefinidos, disponibles regularmente a trav&#xE9;s de la clase Manager. De esta manera, en nuestras actividades podremos acceder a estos servicios a trav&#xE9;s del m&#xE9;todo getSystemService().<br>
-Pero nosotros como programadores podemos definir nuestros propios servicios. Por defecto los servicios corren en el mismo proceso que el hilo (thread) de la aplicaci&#xF3;n. Por lo tanto es necesario ejecutar procesamiento as&#xED;ncrono en el servicio para realizar tareas de uso intensivo de recursos en background. Un m&#xE9;todo com&#xFA;nmente usado es crear y ejecutar un nuevo thread en el servicio para realizar la tarea requerida y finalizar dicho hilo cuando se termin&#xF3; de ejecutar la tarea.<br>
-Tenemos varias opciones para que nuestra activity se comunique con un servicio.<br>
-&#xF0FC; Usar intent: es un escenario simple donde no se requiere comunicaci&#xF3;n directa ni notificaciones de procesos. El servicio recibe los datos v&#xED;a intent y realiza la tarea que sea necesaria sin devolver ning&#xFA;n tipo de dato. Un escenario donde podemos utilizar esto es cuando necesitamos actualizar un content provider. El servicio recibe los datos v&#xED;a intent, actualiza el content provider y este notifica a nuestra app que el contenido est&#xE1; actualizado, sin que se requiera alguna acci&#xF3;n extra por nuestro servicio.<br>
-&#xF0FC; Usar receivers: otro m&#xE9;todo es emitir eventos y registrar receptores (receivers, clase BroadcastReceiver) para establecer la comunicaci&#xF3;n. Por ejemplo, una activity registra din&#xE1;micamente un receiver para un evento, y el servicio es el encargado de emitir ese evento. Este escenario se usa cuando es necesario que el escenario notifique que termin&#xF3; de hacer alguna tarea.<br>
-Si el servicio creado va a realizar tareas que tengan un coste computacional elevado, se pueden provocar problemas en la aplicaci&#xF3;n (Application Not Responding o ANR), para evitar situaciones como estas, el servicio puede ejecutarse en un hilo secundario, para hacer esto la clase de la que hereda nuestro servicio debe ser IntentService, en caso contrario heredar&#xE1; de Service.<br>
-Por otro lado, si necesitamos utilizar servicios propios, estos deben ir declarados en el archivo AndroidManifest.xml. Para desarrollar con servicios hay que tener muy claros estos puntos.</p>
-<p>Android <strong><code>WorkManager</code></strong> es una biblioteca de procesamiento en segundo plano que se utiliza para ejecutar tareas en segundo plano que deber&#xED;an ejecutarse de forma garantizada, pero no necesariamente de forma inmediata. Con WorkManager podemos poner en cola nuestro procesamiento en segundo plano incluso cuando la aplicaci&#xF3;n no se est&#xE1; ejecutando y el dispositivo se reinicia por alguna raz&#xF3;n. WorkManager tambi&#xE9;n nos permite definir las restricciones necesarias para ejecutar la tarea, por ejemplo, la disponibilidad de la red antes de iniciar la tarea en segundo plano.</p>
-<p>Android WorkManager es parte de  Android Jetpack  (un conjunto de bibliotecas para guiar a los desarrolladores a escribir aplicaciones de calidad) y es uno de los  componentes de la arquitectura de Android  (colecci&#xF3;n de componentes que ayudan a los desarrolladores a dise&#xF1;ar aplicaciones robustas, probables y f&#xE1;ciles de mantener).<br>
-Android WorkManager puede ser una biblioteca de procesamiento en segundo plano perfecta para usar cuando su tarea:</p>
+<p>Las corrutinas est&#xE1;n dise&#xF1;adas para trabajar tareas que deben finalizar cuando el usuario sale de un determinado alcance o termina una interacci&#xF3;n, pero a la hora de realizar lo que llamamos <strong>long-time running tasks</strong>, es decir tareas que tienen que estar durante un gran tiempo en segundo plano y no tienen porqu&#xE9; estar ligadas a la actividad que las ha lanzado o a la interacci&#xF3;n con el usuario, es necesario pensar en otras respuestas:</p>
 <ol>
-<li>
-<p>No necesita ejecutarse en un momento espec&#xED;fico</p>
-</li>
-<li>
-<p>Puede aplazarse para su ejecuci&#xF3;n</p>
-</li>
-<li>
-<p>Se garantiza que se ejecutar&#xE1; incluso despu&#xE9;s de que se elimine la aplicaci&#xF3;n o se reinicie el dispositivo.</p>
-</li>
-<li>
-<p>Tiene que cumplir con limitaciones como el suministro de bater&#xED;a o la disponibilidad de la red antes de la ejecuci&#xF3;n.</p>
-</li>
+<li>Tareas que necesitan ejecutarse de inmediato y procesarse de forma continua, incluso cuando el usuario coloca la aplicaci&#xF3;n en segundo plano o se reinicia el dispositivo. En este caso lo recomendable es el uso de <strong><code>WorkManager</code></strong>.</li>
+<li>En casos concretos en los que se realizan tareas largas como la reproducci&#xF3;n de contenido multimedia o la navegaci&#xF3;n activa, se recomienda el uso de <strong><code>Servicios</code></strong> pero en primer plano.</li>
 </ol>
-<p>El ejemplo m&#xE1;s simple de esto puede ser cuando su aplicaci&#xF3;n necesita cargar una gran cantidad de datos de usuario en el servidor.</p>
+<h4 class="mume-header" id="servicios">Servicios</h4>
+
+<p>Los <a href="https://developer.android.com/guide/components/services?hl=es-419">Servicios</a> son componentes que se ejecutan en background (o segundo plano) y que que no proporciona una interfaz de usuario, por lo que no interact&#xFA;an con el usuario.<br>
+La plataforma Android ofrece una gran cantidad de servicios predefinidos, disponibles regularmente a trav&#xE9;s de la clase Manager. De esta manera, en nuestras actividades podremos acceder a estos servicios a trav&#xE9;s del m&#xE9;todo <strong><code>getSystemService()</code></strong>.<br>
+Si el servicio creado va a realizar tareas que tengan un coste computacional elevado, se pueden provocar problemas en la aplicaci&#xF3;n (Application Not Responding o ANR), para evitar situaciones como estas, el servicio puede ejecutarse en un hilo secundario. Si la aplicaci&#xF3;n est&#xE1; orientada al nivel de API 26 o un nivel superior, el sistema impone restricciones en la ejecuci&#xF3;n de servicios en segundo plano cuando la aplicaci&#xF3;n misma no se encuentra en primer plano. En estos casos es mejor usar una tarea programada, <strong><code>WorkManager</code></strong>.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; Por otro lado, si necesitamos utilizar servicios propios, estos deben ir declarados en el archivo <strong><code>AndroidManifest.xml</code></strong>.</p>
+</blockquote>
+<p>Tenemos varias opciones para que nuestra activity se comunique con un servicio.</p>
+<ul>
+<li>Usar <strong>intent</strong>: es un escenario simple donde no se requiere comunicaci&#xF3;n directa ni notificaciones de procesos. El servicio recibe los datos v&#xED;a intent y realiza la tarea que sea necesaria sin devolver ning&#xFA;n tipo de dato. Un escenario donde podemos utilizar esto es cuando necesitamos actualizar un content provider. El servicio recibe los datos v&#xED;a intent, actualiza el content provider y este notifica a nuestra app que el contenido est&#xE1; actualizado, sin que se requiera alguna acci&#xF3;n extra por nuestro servicio.</li>
+<li>Usar <strong>receivers</strong>: otro m&#xE9;todo es emitir eventos y registrar receptores (receivers, clase <strong><code>BroadcastReceiver</code></strong>) para establecer la comunicaci&#xF3;n. Por ejemplo, una activity registra din&#xE1;micamente un receiver para un evento, y el servicio es el encargado de emitir ese evento. Este escenario se usa cuando es necesario que el escenario notifique que termin&#xF3; de hacer alguna tarea.</li>
+</ul>
+<h5 class="mume-header" id="construyendo-un-servicio">Construyendo un Servicio</h5>
+
+<p>Para crear un Servicio tendremos que extender de <strong><code>Service</code></strong> por lo que tendremos que redefinir y conocer 4 m&#xE9;todos principales:</p>
+<ul>
+<li><strong><code>onCreate</code></strong>: De manera similar a un Activity, se ejecuta la primera vez que se crea el servicio y sirve para inicializar variables.</li>
+<li><strong><code>onStartCommand</code></strong>: Se ejecuta cuando el servicio recibe un intent lanzado mediante el comando startService. Si el servicio ya est&#xE1; iniciado, los intents sucesivos no volver&#xE1;n a generar un <strong><code>onCreate</code></strong> si no que pasaran directamente aqu&#xED;. Es importante tener en cuenta que si se crean hilos en este m&#xE9;todo, debe comprobarse que el hilo no est&#xE9; ya funcionando o podr&#xED;an accidentalmente crearse hilos nuevos cada vez que se pasa por aqu&#xED;.</li>
+<li><strong><code>onBind</code></strong>: Este comando es llamado cuando se ejecuta un bindService() desde un Activity. Sirve para devolver una referencia a modo de IBinder al Activity de la instancia del servicio.</li>
+<li><strong><code>onDestroy</code></strong>: Cuando se llama al comando <strong><code>stopService()</code></strong> o dentro del mismo service al m&#xE9;todo <strong><code>stopSelft()</code></strong> se pasa por este m&#xE9;todo, d&#xF3;nde deben terminarse hilos o tareas que puedan estar ejecut&#xE1;ndose.</li>
+</ul>
+<p>Ejemplo de un servicio sencillo, podemos analizar su funcionamiento visualizando las lineas de LogCat:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MyService<span class="token operator">:</span> <span class="token function">Service</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Creando servicio....&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onStartCommand</span>
+                <span class="token punctuation">(</span>intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">,</span> flags<span class="token operator">:</span> Int<span class="token punctuation">,</span> startId<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onStartCommand</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span> flags<span class="token punctuation">,</span> startId<span class="token punctuation">)</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Recibiendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>  Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Mostrando intent ....+&quot;</span> <span class="token operator">+</span>
+                           <span class="token string">&quot;${intent?.getStringExtra(&quot;</span>CADENA<span class="token string">&quot;)}&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> START_STICKY
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBind</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> IBinder<span class="token operator">?</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Enlazando Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Destruyendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Hay que destacar que este tipo de servicios hay que pararlos expl&#xED;citamente, aunque el sistema tambi&#xE9;n podr&#xED;a pararlos si se encontrase escaso de memoria. Si en el m&#xE9;todo onStartCommand se ha devuelto <strong><code>START_STICKY</code></strong>, el sistema podr&#xE1; revivir el servicio cuando vuelva a tener memoria disponible, aunque hay que tener en cuenta que entonces el intent que recibir&#xE1; onStartCommand ser&#xE1; nulo (null).</p>
+</blockquote>
+<p>Una manera de inicializar este servicio, es desde una actividad y de forma muy parecida a iniciar una activity:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> intento<span class="token operator">:</span>Intent
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        findViewById<span class="token operator">&lt;</span>MaterialButton<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>boton<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
+            intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>MyService<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+            intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CADENA&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Dato Pasado desde Main&quot;</span><span class="token punctuation">)</span>
+            <span class="token function">startService</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">stopService</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x26A0;&#xFE0F; No olvidar que se debe declarar los servicios usados en el manifest.<br>
+<strong><code>&lt;service android:name=&quot;.MyService&quot;/&gt;</code></strong></p>
+</blockquote>
+<p>Como ya se ha indicado, todo este c&#xF3;digo funcionar&#xED;a en primer plano, si deseamos crear un hilo para realizar tareas en segundo plano, habr&#xED;a que hacerlo en onStartCommand:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MyServiceSegundoPlano<span class="token operator">:</span> <span class="token function">Service</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">var</span> hilo<span class="token operator">=</span><span class="token function">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onStartCommand</span>
+                <span class="token punctuation">(</span>intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">,</span> flags<span class="token operator">:</span> Int<span class="token punctuation">,</span> startId<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onStartCommand</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span> flags<span class="token punctuation">,</span> startId<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> cadena<span class="token operator">=</span>intent<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CADENA&quot;</span><span class="token punctuation">)</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Recibiendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>hilo<span class="token operator">==</span><span class="token keyword">null</span> <span class="token operator">||</span> <span class="token operator">!</span>hilo<span class="token operator">?</span><span class="token punctuation">.</span>isAlive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            hilo <span class="token operator">=</span> Thread <span class="token punctuation">{</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>
+                    <span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Mostrando intent ....&quot;</span> <span class="token operator">+</span>
+                            <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>cadena<span class="token delimiter variable">}</span></span>&quot;</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            hilo<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> START_STICKY
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBind</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> IBinder<span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Destruyendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Existen dos tipos de servicios. Aquel que se inicia expl&#xED;citamente a trav&#xE9;s del m&#xE9;todo <strong><code>startService()</code></strong> llamado <strong>Started Service</strong> y el que se liga a un componente con <strong><code>bindService()</code></strong> llamado <strong>Bound Service</strong>.</p>
+<ul>
+<li>Started: Una vez iniciado el servicio, se ejecuta de forma indefinida en segundo plano, incluso si se destruye el componente que lo inici&#xF3;.</li>
+<li>Bound: En este caso, el servicio ofrece una interfaz de tipo cliente-servidor a aquellos componentes que se asocian o enlazan a dicho servicio. Los componentes asociados o enlazados (bound) al servicio pueden enviar peticiones, conseguir resultados y respuestas o, incluso, llevar a cabo tareas de comunicaci&#xF3;n con otros procesos. En este caso, el servicio s&#xF3;lo se ejecuta cuando hay alg&#xFA;n componente asociado o enlazado a &#xE9;l.</li>
+</ul>
+<h4 class="mume-header" id="workmanager">WorkManager</h4>
+
+<p>Android <strong><code>WorkManager</code></strong> es una biblioteca de procesamiento en segundo plano que se utiliza para ejecutar tareas en segundo plano que deber&#xED;an ejecutarse de forma garantizada, pero no necesariamente de forma inmediata. Con WorkManager podemos poner en cola nuestro procesamiento en segundo plano incluso cuando la aplicaci&#xF3;n no se est&#xE1; ejecutando y el dispositivo se reinicia por alguna raz&#xF3;n. WorkManager tambi&#xE9;n nos permite definir las restricciones necesarias para ejecutar la tarea, por ejemplo, la disponibilidad de la red antes de iniciar la tarea en segundo plano.</p>
+<p>Android WorkManager es parte de  Android Jetpack y es una biblioteca de procesamiento en segundo plano perfecta para usar cuando la tarea:</p>
+<ol>
+<li>No necesita ejecutarse en un momento espec&#xED;fico</li>
+<li>Puede aplazarse su ejecuci&#xF3;n</li>
+<li>Se necesita que se ejecute incluso despu&#xE9;s de que se elimine la aplicaci&#xF3;n o se reinicie el dispositivo.</li>
+<li>Tiene que cumplir con limitaciones como el suministro de bater&#xED;a o la disponibilidad de la red antes de la ejecuci&#xF3;n.</li>
+</ol>
 
       </div>
       

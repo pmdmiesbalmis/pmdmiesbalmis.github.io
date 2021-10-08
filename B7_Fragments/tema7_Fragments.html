@@ -730,9 +730,9 @@ Se finaliza la transacci&#xF3;n con el m&#xE9;todo <strong><code>commit()</code>
 Un ViewModel siempre se crea en asociaci&#xF3;n con un &#xE1;mbito (un fragmento o una actividad) y se conservar&#xE1; mientras el &#xE1;mbito est&#xE9; activo. Por ejemplo, si es una Actividad, hasta que se termine. En otras palabras, esto significa que un ViewModel no se destruir&#xE1; si su propietario se destruye por un cambio de configuraci&#xF3;n (por ejemplo, rotaci&#xF3;n). La nueva instancia del propietario se volver&#xE1; a conectar al ViewModel existente.</p>
 <p>El siguiente paso ser&#xE1; crear una clase que derive de ViewModel parecida a la siguiente, y teniendo en cuenta que tipo de datos queremos pasar entre los fragments, en este caso un String aunque podr&#xED;a ser un objeto o incluso colecciones de estos:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> ItemViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">private</span> <span class="token keyword">val</span> liveData <span class="token operator">=</span> MutableLiveData<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">val</span> selectedItem<span class="token operator">:</span> LiveData<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> liveData
-        <span class="token keyword">fun</span> <span class="token function">selectItem</span><span class="token punctuation">(</span>item<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">private</span> <span class="token keyword">val</span> liveData<span class="token operator">=</span>MutableLiveData<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+        <span class="token keyword">val</span> getItem<span class="token operator">:</span> LiveData<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> liveData
+        <span class="token keyword">fun</span> <span class="token function">setItem</span><span class="token punctuation">(</span>item<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
            liveData<span class="token punctuation">.</span>value <span class="token operator">=</span> item
         <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -741,11 +741,28 @@ Un ViewModel siempre se crea en asociaci&#xF3;n con un &#xE1;mbito (un fragmento
 Para observar un elemento <a href="https://developer.android.com/topic/libraries/architecture/livedata?hl=es-419">LiveData</a>, tenemos la clase <strong><code>Observer</code></strong>, que a trav&#xE9;s de su objeto podremos saber si est&#xE1; en estado activo (su ciclo de vida est&#xE1; en el estado STARTED o RESUMED) o inactivo (en cualquier otro caso). LiveData solo notifica a los observadores activos sobre las actualizaciones.</p>
 </blockquote>
 <blockquote>
-<p>&#x1F393; Vamos a suponer un ejemplo en el que, usando el ViewModel del ejemplo anterior, en una activity se cargan dos fragments a la vez y se realiza <strong>la comunicaci&#xF3;n entre los dos fragments</strong>. Uno tendr&#xE1; una lista y en el otro se mostrar&#xE1; el elemento pulsado de la lista. Para ello deberemos crear dos clase Fragments, una que ser&#xE1; el detalle y que solo tendr&#xE1; un texto y una clase <strong>ListaFragment</strong> que heredar&#xE1; de <a href="https://developer.android.com/reference/kotlin/androidx/fragment/app/ListFragment">ListFragment</a> y que debido a esto no necesita tener asociado un xml. El resultado ser&#xE1; parecido al siguiente:</p>
+<p>&#x1F393; Vamos a suponer un ejemplo sencillo en el que, usando el ViewModel mostrado con anterioridad, en una activity se cargan dos fragments a la vez y se realiza <strong>la comunicaci&#xF3;n entre los dos fragments</strong>. Uno tendr&#xE1; un EditText para introducir un valor y un bot&#xF3;n, en el otro se mostrar&#xE1; el contenido del EditText al pulsar el bot&#xF3;n. Para ello deberemos crear dos clase Fragments, una que ser&#xE1; el detalle <strong>FragmentSecundario</strong> y que solo tendr&#xE1; un texto y una clase <strong>FragmentPrimario</strong> que tendr&#xE1; los elementos necesarios. El resultado ser&#xE1; parecido al siguiente:</p>
 <div align="center">
    <img height="200" src="./imagenes/fragments7.png">
 </div>
-<p>El layout del fragment detalle podr&#xED;a ser, <strong>fragment_secundario.xml</strong>:</p>
+<p>El layout del fragment primario podr&#xED;a ser, <strong>fragment_primario.xml</strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>EditText</span>
+       <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>hint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Introduce Texto a pasar<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/texto<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
+       <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Mandar<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/boton<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
+</pre><p>El layout del fragment detalle podr&#xED;a ser, <strong>fragment_secundario.xml</strong>:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
@@ -777,7 +794,7 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
 </pre><p>La actividad principal con la carga de los dos fragments podr&#xED;a quedar as&#xED;, <strong>MainActivity.kt</strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> <span class="token operator">&gt;</span>Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
        <span class="token keyword">val</span> fM<span class="token operator">:</span> FragmentManager <span class="token operator">=</span> supportFragmentManager
@@ -786,7 +803,95 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
        fT<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragment_dos<span class="token punctuation">,</span>FragmentSecundario<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
        fT<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>El Fragment con la lista podr&#xED;a ser como el que sigue, <strong>MyListFragment.kt</strong>:</p>
+</pre><p>El Fragment primario podr&#xED;a ser como el que sigue, <strong>FragmentPrimario.kt</strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[2,8,12]}" class="language-kotlin" data-line="2,8,12"><span class="token keyword">class</span> FragmentPrimario <span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
+       inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
+       container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
+       saveInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span>
+   <span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">val</span> view<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span>
+             <span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_primario<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+             view<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>boton<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
+             model<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                   findViewById<span class="token operator">&lt;</span>EditText<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span>toString<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+             <span class="token punctuation">}</span>
+     <span class="token keyword">return</span> view
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div></pre><p>&#x1F4CC;  <strong>L&#xED;nea 2</strong> se crea una propiedad del <strong><code>ViewModel</code></strong> creado con anterioridad, utilizando el delegado <strong><code>activityViewModels</code></strong> para obtener una referencia al ViewModel en el &#xE1;mbito de su actividad y que se pueda compartir entre las distintas vistas o fragments, mientras el ciclo de vida lo permita. Para poder incluir este delegado, se tiene que a&#xF1;adir la siguiente dependencia (a d&#xED;a de hoy):</p>
+<pre data-role="codeBlock" data-info="groovy" class="language-groovy">implementation <span class="token string">&apos;androidx.fragment:fragment-ktx:1.3.2&apos;</span>
+</pre><p><strong>L&#xED;nea 14</strong>, cuando se pulse el bot&#xF3;n se modificar&#xE1; el valor del LiveData con la informaci&#xF3;n del editext</p>
+<div style="page-break-after:always;"></div>
+<p>El Fragment con el detalle, <strong>FragmentSecundario.kt</strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[2,9,11]}" class="language-kotlin" data-line="2,9,11"><span class="token keyword">class</span> FragmentSecundario<span class="token operator">:</span><span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
+       inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
+       container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
+       saveInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> <span class="token punctuation">{</span>
+       <span class="token keyword">val</span> view<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span>
+                <span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_secundario<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+       <span class="token keyword">val</span> nameObserver <span class="token operator">=</span> Observer<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">{</span>cadena <span class="token operator">-&gt;</span>
+               view<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token operator">=</span>cadena<span class="token punctuation">}</span>
+       model<span class="token punctuation">.</span>getItem<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nameObserver<span class="token punctuation">)</span>
+       <span class="token keyword">return</span> view
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div></pre><p>&#x1F4CC; Instanciamos el ViewModel <strong>L&#xED;nea 2</strong>, Creamos el manejador con la funcionalidad de asignar al TextView el texto que est&#xE1; siendo observado <strong>L&#xED;nea 9</strong>. <strong>L&#xED;nea 11</strong> se asigna al delegado observe el manejador creado con anterioridad.</p>
+</blockquote>
+<blockquote>
+<p>&#x1F393;Vamos a codificar otra vez este caso, pero con un peque&#xF1;o cambio que nos valdr&#xE1; para presentar un elemento nuevo <a href="https://developer.android.com/reference/kotlin/androidx/fragment/app/ListFragment">ListFragment</a>, para ello el <strong>FragmentPrimario</strong> pasaremos a llamarlo <strong>MyListFragment</strong> que heredar&#xE1; <strong><code>ListFragment</code></strong>  y que debido a esto no necesita tener asociado un xml. El resultado ser&#xE1; parecido al siguiente:</p>
+<div align="center">
+   <img height="200" src="./imagenes/fragments7v2.png">
+</div>
+<p>En la &#xFA;nica clase que deberemos realizar cambios es en la nueva clase que ahora se ver&#xE1; as&#xED; <strong>MyListFragment.kt</strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[1,2,8,[11-15],14]}" class="language-kotlin" data-line="1,2,8,11-15,14"><span class="token keyword">class</span> MyListFragment<span class="token operator">:</span> <span class="token function">ListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
    <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
    <span class="token keyword">private</span> <span class="token keyword">val</span> valores <span class="token operator">=</span>
@@ -843,48 +948,7 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 
 
 <div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div></pre><p>&#x1F4CC;<strong>L&#xED;nea 1</strong> en este caso vemos que el fragment hereda de <strong><code>ListFragment</code></strong> en vez de <strong><code>Fragment</code></strong>, esto permite que el fragment est&#xE9; formado por una lista de elementos y que no se tenga que crear ninguna vista espec&#xED;fica para el. Para asociar los elementos a la lista, deberemos crear un <strong><code>ArrayAdapter</code></strong> indicando los valores y el layout de salida (predefinido en los recursos de Android) <strong>L&#xED;nea 8</strong> (Este elemento se ver&#xE1; m&#xE1;s extensamente en temas posteriores). <strong>L&#xED;nea de 11 a 15</strong>, esta sobrecarga del m&#xE9;todo <strong><code>onListItemClick</code></strong> est&#xE1; asociada a la pulsaci&#xF3;n de cualquier elemento de la lista, entrando como par&#xE1;metros la vista y la posici&#xF3;n del elemento pulsado.  <strong>L&#xED;nea 2</strong> se crea una propiedad del <strong><code>ViewModel</code></strong> creado con anterioridad, utilizando el delegado <strong><code>activityViewModels</code></strong> para obtener una referencia al ViewModel en el &#xE1;mbito de su actividad y que se pueda compartir entre las distintas vistas o fragments, mientras el ciclo de vida lo permita. Para poder incluir este delegado, se tiene que a&#xF1;adir la siguiente dependencia (a d&#xED;a de hoy):</p>
-<pre data-role="codeBlock" data-info="groovy" class="language-groovy">implementation <span class="token string">&apos;androidx.fragment:fragment-ktx:1.3.2&apos;</span>
-</pre><p><strong>L&#xED;nea 14</strong>, cuando se pulse un elemento de la lista se modificar&#xE1; el valor del LiveData con la informaci&#xF3;n de esa posici&#xF3;n del array (siempre que no sea nula <em>let{}</em>)</p>
-<div style="page-break-after:always;"></div>
-<p>El Fragment con el detalle, <strong>FragmentSecundario.kt</strong>:</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2,9,11]}" class="language-kotlin" data-line="2,9,11"><span class="token keyword">class</span> FragmentSecundario<span class="token operator">:</span><span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-   <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
-       inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
-       container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
-       saveInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> <span class="token punctuation">{</span>
-       <span class="token keyword">val</span> view<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span>
-                <span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_secundario<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
-       <span class="token keyword">val</span> nameObserver <span class="token operator">=</span> Observer<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">{</span>cadena <span class="token operator">-&gt;</span>
-               view<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token operator">=</span>cadena<span class="token punctuation">}</span>
-       model<span class="token punctuation">.</span>selectedItem<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nameObserver<span class="token punctuation">)</span>
-       <span class="token keyword">return</span> view
-   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
-</div></div></pre><p>&#x1F4CC; Instanciamos el ViewModel <strong>L&#xED;nea 2</strong>, Creamos el manejador con la funcionalidad de asignar al TextView el texto que est&#xE1; siendo observado <strong>L&#xED;nea 9</strong>. <strong>L&#xED;nea 11</strong> se asigna al delegado observe el manejador creado con anterioridad.</p>
+</div></div></pre><p>&#x1F4CC;<strong>L&#xED;nea 1</strong> en este caso vemos que el fragment hereda de <strong><code>ListFragment</code></strong> en vez de <strong><code>Fragment</code></strong>, esto permite que el fragment est&#xE9; formado por una lista de elementos y que no se tenga que crear ninguna vista espec&#xED;fica para el. Para asociar los elementos a la lista, deberemos crear un <strong><code>ArrayAdapter</code></strong> indicando los valores y el layout de salida (predefinido en los recursos de Android) <strong>L&#xED;nea 8</strong> (Este elemento se ver&#xE1; m&#xE1;s extensamente en temas posteriores). <strong>L&#xED;nea de 11 a 15</strong>, esta sobrecarga del m&#xE9;todo <strong><code>onListItemClick</code></strong> est&#xE1; asociada a la pulsaci&#xF3;n de cualquier elemento de la lista, entrando como par&#xE1;metros la vista y la posici&#xF3;n del elemento pulsado.  <strong>L&#xED;nea 2</strong> se crea una propiedad del <strong><code>ViewModel</code></strong> creado con anterioridad, utilizando el delegado <strong><code>activityViewModels</code></strong> para obtener una referencia al ViewModel en el &#xE1;mbito de su actividad y que se pueda compartir entre las distintas vistas o fragments, mientras el ciclo de vida lo permita</p>
 </blockquote>
 <blockquote>
 <p>&#x1F393; Otro caso distinto, podemos tenerlo cuando <strong>el fragment se comunica a trav&#xE9;s de la activity</strong>, mediante el ViewModel. Vamos a suponer, el caso m&#xE1;s com&#xFA;n en el que una activity cargar&#xE1; una lista y al pulsar un elemento de esta se carga el otro fragmento. El layout del <strong>fragment_secundario.xml</strong> y <strong>MyListFragment.kt</strong> tendr&#xE1;n el mismo c&#xF3;digo que para el anterior ejemplo.</p>
@@ -978,7 +1042,7 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Con la informaci&#xF3;n que se pasa en los dos ejemplos, reconstruye y prueba ambos casos a&#xF1;adiendo el c&#xF3;digo que falte. </span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Con la informaci&#xF3;n que se pasa en los tres casos de estudio, reconstruye y prueba estos casos a&#xF1;adiendo el c&#xF3;digo que falte. </span></p>
 <h4 class="mume-header" id="comunicaci%C3%B3n-mediante-interfaces">Comunicaci&#xF3;n mediante Interfaces</h4>
 
 <p>La <a href="https://developer.android.com/training/basics/fragments/communicating?hl=es#DefineInterface">implementaci&#xF3;n de una interface</a>, es la otra manera correcta para pasar informaci&#xF3;n y controlar alg&#xFA;n evento. Se trata de crear una interface en el fragmento y exigir a la activity que la implemente. De esta manera cuando el fragmento reciba un evento tambi&#xE9;n lo har&#xE1; la activity, que se encargara de recibir los datos de ese evento y compartirlos con otros fragmentos.</p>
