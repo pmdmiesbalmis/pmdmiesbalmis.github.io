@@ -745,6 +745,9 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 <div align="center">
    <img height="200" src="./imagenes/fragments7.png">
 </div>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<blockquote>
 <p>El layout del fragment primario podr&#xED;a ser, <strong>fragment_primario.xml</strong>:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
@@ -775,7 +778,10 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/texto<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
 
-</pre><p>El layout de la actividad principal, <strong>activity_main.xml:</strong></p>
+</pre></blockquote>
+<div style="page-break-after:always;"></div>
+<blockquote>
+<p>El layout de la actividad principal, <strong>activity_main.xml:</strong></p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
   <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
@@ -803,7 +809,10 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
        fT<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragment_dos<span class="token punctuation">,</span>FragmentSecundario<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
        fT<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>El Fragment primario podr&#xED;a ser como el que sigue, <strong>FragmentPrimario.kt</strong>:</p>
+</pre></blockquote>
+<div style="page-break-after:always;"></div>
+<blockquote>
+<p>El Fragment primario podr&#xED;a ser como el que sigue, <strong>FragmentPrimario.kt</strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[2,8,12]}" class="language-kotlin" data-line="2,8,12"><span class="token keyword">class</span> FragmentPrimario <span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
    <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
@@ -891,6 +900,9 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 <div align="center">
    <img height="200" src="./imagenes/fragments7v2.png">
 </div>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<blockquote>
 <p>En la &#xFA;nica clase que deberemos realizar cambios es en la nueva clase que ahora se ver&#xE1; as&#xED; <strong>MyListFragment.kt</strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[1,2,8,[11-15],14]}" class="language-kotlin" data-line="1,2,8,11-15,14"><span class="token keyword">class</span> MyListFragment<span class="token operator">:</span> <span class="token function">ListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
    <span class="token keyword">private</span> <span class="token keyword">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -952,6 +964,9 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 </blockquote>
 <blockquote>
 <p>&#x1F393; Otro caso distinto, podemos tenerlo cuando <strong>el fragment se comunica a trav&#xE9;s de la activity</strong>, mediante el ViewModel. Vamos a suponer, el caso m&#xE1;s com&#xFA;n en el que una activity cargar&#xE1; una lista y al pulsar un elemento de esta se carga el otro fragmento. El layout del <strong>fragment_secundario.xml</strong> y <strong>MyListFragment.kt</strong> tendr&#xE1;n el mismo c&#xF3;digo que para el anterior ejemplo.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<blockquote>
 <p>El layout de la actividad principal ahora solo tendr&#xE1; un contenedor, <strong>activity_main.xml:</strong></p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.fragment.app.FragmentContainerView</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
@@ -1026,6 +1041,9 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
 
 <div aria-hidden="true" class="line-highlight" data-range="20" data-start="20">
 </div></div></pre><p>&#x1F4CC;<strong>L&#xED;nea 2</strong>, instanciamos el ViewModel teniendo en cuenta que para la actividad se asocia el delegado <strong><code>viewModels</code></strong>. En el bloque desde la <strong>L&#xED;nea 10 hasta la 19</strong>, construimos un delegado con el observador que se encargar&#xE1; de cargar el FragmentSecundario con la informaci&#xF3;n pasada en un Bundle. <strong>L&#xED;nea 20</strong>, se pone en observaci&#xF3;n el ViewModel con el delegado construido anteriormente.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<blockquote>
 <p>En el <strong>FragmentSecundario.kt</strong> se deber&#xE1; recuperar el bundle para poder modificar el TextView con el dato del elemento pulsado.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> FragmentSecundario<span class="token operator">:</span><span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
