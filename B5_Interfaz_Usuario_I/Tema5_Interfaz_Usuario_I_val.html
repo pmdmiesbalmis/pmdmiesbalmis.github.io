@@ -351,7 +351,7 @@ justo después del front matter
 <li><a href="#icon-button">Icon button</a></li>
 <li><a href="#manejar-esdeveniments-bot%C3%B3">Manejar esdeveniments bot&#xF3;</a></li>
 <li><a href="#toggle-button">Toggle Button</a></li>
-<li><a href="#floating-action-button">Floating Action Button</a></li>
+<li><a href="#floating-action-button-fab">Floating Action Button (FAB)</a></li>
 </ol>
 </li>
 <li><a href="#textinputlayout-etiquetes-flotants">TextInputLayout etiquetes flotants</a>
@@ -400,7 +400,7 @@ justo después del front matter
 </pre><p>A partir d&apos;ara podem fer refer&#xE8;ncia a les vistes del nostre xml. Ho veurem a continuaci&#xF3; tal com anem veient diferents components.</p>
 <h3 class="mume-header" id="botons">Botons</h3>
 
-<p>Els botons formen una part funcional molt important en qualsevol aplicaci&#xF3;. Existeixen diversos tipus est&#xE0;ndard de botons:<strong><code>Floating Action Button</code></strong> (bot&#xF3; circular amb una acci&#xF3; molt concreta en la nostra aplicaci&#xF3;), <strong><code>Filled, elevated button</code></strong> (bot&#xF3; amb relleu amb efecte de pulsaci&#xF3; i fons color), <strong><code>Filled, unelevated button</code></strong> (bot&#xF3; amb relleu sense efecte de pulsaci&#xF3; i color fons), <strong><code>Outlined button</code></strong> (bot&#xF3; fons transparent i bord), <strong><code>Text button</code></strong> (t&#xE9; un fons transparent amb text en color) i <strong><code>Icon*button</code></strong> (incorpora una icona al bot&#xF3;, pot ser amb text i sense text).</p>
+<p>Els botons formen una part funcional molt important en qualsevol aplicaci&#xF3;. Existeixen diversos tipus est&#xE0;ndard de botons:<strong><code>Floating Action Button</code></strong> (bot&#xF3; circular amb una acci&#xF3; molt concreta en la nostra aplicaci&#xF3;), <strong><code>Filled, elevated button</code></strong> (bot&#xF3; amb relleu amb efecte de pulsaci&#xF3; i fons color), <strong><code>Filled, unelevated button</code></strong> (bot&#xF3; amb relleu sense efecte de pulsaci&#xF3; i color fons), <strong><code>Outlined button</code></strong> (bot&#xF3; fons transparent i bord), <strong><code>Text button</code></strong> (t&#xE9; un fons transparent amb text en color) i <strong><code>Icon button</code></strong> (incorpora una icona al bot&#xF3;, pot ser amb text i sense text).</p>
 <p>L&apos;elecci&#xF3; d&apos;un bot&#xF3; o un altre dependr&#xE0; de la import&#xE0;ncia que se li vulga donar al mateix i de la disposici&#xF3; d&apos;aquest.</p>
 <div align="center">
     <img height="150" src="./imagenes/disposicionBotones.png">
@@ -499,7 +499,7 @@ justo después del front matter
 
 <div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; Amb l&apos;atribut <strong><code>app:icon</code></strong> (l&#xED;nia 6) indiquem el recurs que hi ha que carregar en el bot&#xF3;. Hi ha una s&#xE8;rie de propietats que podem usar quan usem <strong><code>IconButton</code></strong>. El <strong><code>app:iconSize=&quot;15dp&quot;</code></strong> per a ample i alt de la icona. Podem agregar l&apos;espai entre la icona i el text amb <strong><code>app:iconPadding=&quot;10dp&quot;</code></strong>. Tamb&#xE9; hi ha una opci&#xF3; per a canviar el color de la icona amb <strong><code>iconTintatributo</code></strong>. Per a canviar la posici&#xF3; de la icona, utilitze l&apos;atribut <strong><code>iconGravity</code></strong>. Tamb&#xE9; podem aplicar un efecte d&apos;arrodoniment a les vores del bot&#xF3; (menys a <strong><code>TextButton</code></strong>) amb la propietat <strong><code>app:cornerRadius</code></strong>.</p>
+<p>&#x1F4CC; Amb l&apos;atribut <strong><code>app:icon</code></strong> (l&#xED;nia 6) indiquem el recurs que hi ha que carregar en el bot&#xF3;. Hi ha una s&#xE8;rie de propietats que podem usar quan usem <strong><code>IconButton</code></strong>. El <strong><code>app:iconSize=&quot;15dp&quot;</code></strong> per a ample i alt de la icona. Podem agregar l&apos;espai entre la icona i el text amb <strong><code>app:iconPadding=&quot;10dp&quot;</code></strong>. Tamb&#xE9; hi ha una opci&#xF3; per a canviar el color de la icona amb l&apos;atribut <strong><code>iconTint</code></strong>. Per a canviar la posici&#xF3; de la icona, utilitze l&apos;atribut <strong><code>iconGravity</code></strong>. Tamb&#xE9; podem aplicar un efecte d&apos;arrodoniment a les vores del bot&#xF3; (menys a <strong><code>TextButton</code></strong>) amb la propietat <strong><code>app:cornerRadius</code></strong>.</p>
 </blockquote>
 <p>[Ac&#xED; tenim un enlla&#xE7; on descarregar icones que ofereix Google.]<br>
 (<a href="https://fonts.google.com/icons?icon.query=mail">https://fonts.google.com/icons?icon.query=mail</a>)</p>
@@ -729,7 +729,27 @@ justo después del front matter
 </div></div></pre><blockquote>
 <p>&#x1F4CC; <strong>Manejar esdeveniments bot&#xF3;</strong>:</p>
 <ul>
-<li><strong><code>android:onClick</code></strong>. Aquest atribut incorporat en la definici&#xF3; d&apos;un bot&#xF3; permet assignar un m&#xE8;tode p&#xFA;blic que s&apos;executar&#xE0; quan aquest es prema (l&#xED;nia 32). Ho aplicarem en el nostre primer bot&#xF3; <strong><code>raised_button</code></strong> i visualitzarem un <strong><code>toast</code></strong> (l&#xED;nia 33) indicant la pulsaci&#xF3; d&apos;aquest:</li>
+<li><strong><code>android:onClick</code></strong>. Aquest atribut incorporat en la definici&#xF3; d&apos;un bot&#xF3; en el XML permet assignar un m&#xE8;tode p&#xFA;blic que s&apos;executar&#xE0; quan aquest es prema (l&#xED;nia 32). Ho aplicarem en el nostre primer bot&#xF3; <strong><code>raised_button</code></strong> i visualitzarem un <strong><code>toast</code></strong> (l&#xED;nia 33) indicant la pulsaci&#xF3; d&apos;aquest:</li>
+</ul>
+</blockquote>
+<pre data-role="codeBlock" data-info="xml {highlight=[8]}" class="language-xml" data-line="8">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.button.MaterialButton</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/material_button_raised<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Button<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/button_label_raised<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>onClick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>visualizarToast<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div></pre><blockquote>
+<ul>
 <li><strong><code>listener an&#xF2;nim</code></strong>. Programem el listener an&#xF2;nim directament sobre la vista i implementem el m&#xE8;tode <strong><code>setOnClickListener()</code></strong> (l&#xED;nia 10). Incloem aquest codi en el <strong><code>onCreate()</code></strong> de l&apos;activitat:</li>
 <li>implementant interf&#xED;cie <strong><code>*setOnclickListener</code></strong> en l&apos;activitat (l&#xED;nia 1), registrar les vistes que seran objecte d&apos;implementaci&#xF3; a trav&#xE9;s de la interf&#xED;cie (l&#xED;nies 14-17) i gestionar la pulsaci&#xF3; (l&#xED;nies 20-30 per a la resta de botons). La l&#xED;nia 36 &#xE9;s una funci&#xF3; per a visualitzar un <strong><code>string</code></strong> en un <strong><code>toast</code></strong>, de manera que per a cada bot&#xF3; puguem traure un text personalitzat del bot&#xF3; premut.</li>
 </ul>
@@ -913,7 +933,7 @@ justo después del front matter
 
 
 <div aria-hidden="true" class="line-highlight" data-range="23" data-start="23">
-</div></div></pre><h4 class="mume-header" id="floating-action-button">Floating Action Button</h4>
+</div></div></pre><h4 class="mume-header" id="floating-action-button-fab">Floating Action Button (FAB)</h4>
 
 <p>Un bot&#xF3; d&apos;acci&#xF3; flotant (FAB) executa l&apos;acci&#xF3; principal o m&#xE9;s comuna en l&apos;activitat. Es caracteritza per tindre una forma circular amb una icona en el centre normalment animat. Els FAB venen en tres tipus: regulars, mini i estesos (amb una etiqueta de text).</p>
 <p>Creem un projecte que es cride <strong>EjemploFAB</strong> i editem el xml de l&apos;activitat:</p>

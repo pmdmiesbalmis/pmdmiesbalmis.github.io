@@ -350,7 +350,7 @@ justo después del front matter
 <li><a href="#icon-button">Icon button</a></li>
 <li><a href="#manejar-eventos-bot%C3%B3n">Manejar eventos bot&#xF3;n</a></li>
 <li><a href="#toggle-button">Toggle Button</a></li>
-<li><a href="#floating-action-button">Floating Action Button</a></li>
+<li><a href="#floating-action-button-fab">Floating Action Button (FAB)</a></li>
 </ol>
 </li>
 <li><a href="#textinputlayout-etiquetas-flotantes">TextInputLayout etiquetas flotantes</a>
@@ -498,7 +498,7 @@ justo después del front matter
 
 <div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; Con el atributo <strong><code>app:icon</code></strong> (l&#xED;nea 6) indicamos el recurso que hay que cargar en el bot&#xF3;n. Hay una serie de propiedades que podemos usar cuando usamos <strong><code>IconButton</code></strong>. El <strong><code>app:iconSize=&quot;15dp&quot;</code></strong> para ancho y alto del icono. Podemos agregar el espacio entre el icono y el texto con <strong><code>app:iconPadding=&quot;10dp&quot;</code></strong>. Tambi&#xE9;n hay una opci&#xF3;n para cambiar el color del icono con <strong><code>iconTintatributo</code></strong>. Para cambiar la posici&#xF3;n del icono, utilice el atributo <strong><code>iconGravity</code></strong>. Tambi&#xE9;n podemos aplicar un efecto de redondeo a los bordes del bot&#xF3;n (menos a <strong><code>TextButton</code></strong>) con la propiedad <strong><code>app:cornerRadius</code></strong>.</p>
+<p>&#x1F4CC; Con el atributo <strong><code>app:icon</code></strong> (l&#xED;nea 6) indicamos el recurso que hay que cargar en el bot&#xF3;n. Hay una serie de propiedades que podemos usar cuando usamos <strong><code>IconButton</code></strong>. El <strong><code>app:iconSize=&quot;15dp&quot;</code></strong> para ancho y alto del icono. Podemos agregar el espacio entre el icono y el texto con <strong><code>app:iconPadding=&quot;10dp&quot;</code></strong>. Tambi&#xE9;n hay una opci&#xF3;n para cambiar el color del icono con el atributo <strong><code>iconTint</code></strong>. Para cambiar la posici&#xF3;n del icono, utilice el atributo <strong><code>iconGravity</code></strong>. Tambi&#xE9;n podemos aplicar un efecto de redondeo a los bordes del bot&#xF3;n (menos a <strong><code>TextButton</code></strong>) con la propiedad <strong><code>app:cornerRadius</code></strong>.</p>
 </blockquote>
 <p><a href="https://fonts.google.com/icons?icon.query=mail">Aqu&#xED; tenemos un enlace donde descargar iconos que ofrece Google.</a></p>
 <p>Para incorporar texto al bot&#xF3;n con icono:</p>
@@ -727,7 +727,27 @@ justo después del front matter
 </div></div></pre><blockquote>
 <p>&#x1F4CC; <strong>Manejar eventos bot&#xF3;n</strong>:</p>
 <ul>
-<li><strong><code>android:onClick</code></strong>. Este atributo incorporado en la definici&#xF3;n de un bot&#xF3;n permite asignar un m&#xE9;todo p&#xFA;blico que se ejecutar&#xE1; cuando este se pulse (l&#xED;nea 32). Vamos a aplicarlo en nuestro primer bot&#xF3;n <strong><code>raised_button</code></strong> y visualizaremos un <strong><code>toast</code></strong> (l&#xED;nea 33) indicando la pulsaci&#xF3;n del mismo:</li>
+<li><strong><code>android:onClick</code></strong>. Este atributo incorporado en la definici&#xF3;n de un bot&#xF3;n en el XML permite asignar un m&#xE9;todo p&#xFA;blico que se ejecutar&#xE1; cuando este se pulse (l&#xED;nea 32). Vamos a aplicarlo en nuestro primer bot&#xF3;n <strong><code>raised_button</code></strong> y visualizaremos un <strong><code>toast</code></strong> (l&#xED;nea 33) indicando la pulsaci&#xF3;n del mismo:</li>
+</ul>
+</blockquote>
+<pre data-role="codeBlock" data-info="xml {highlight=[8]}" class="language-xml" data-line="8">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.button.MaterialButton</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/material_button_raised<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Button<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@string/button_label_raised<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>onClick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>visualizarToast<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div></pre><blockquote>
+<ul>
 <li><strong><code>listener an&#xF3;nimo</code></strong>. Programamos el escuchador an&#xF3;nimo directamente sobre la vista e implementamos el m&#xE9;todo <strong><code>setOnClickListener()</code></strong> (l&#xED;nea 10). Incluimos este c&#xF3;digo en el <strong><code>onCreate()</code></strong> de la actividad:</li>
 <li>implementando interfaz <strong><code>setOnclickListener</code></strong> en la actividad (l&#xED;nea1), registrar las vistas que van a ser objeto de implementaci&#xF3;n a trav&#xE9;s de la interfaz (l&#xED;neas 14-17) y gestionar la pulsaci&#xF3;n (l&#xED;neas 20-30 para el resto de botones). La l&#xED;nea 36 es una funci&#xF3;n para visualizar un <strong><code>string</code></strong> en un <strong><code>toast</code></strong>, de forma que para cada bot&#xF3;n podamos sacar un texto personalizado del bot&#xF3;n pulsado.</li>
 </ul>
@@ -911,7 +931,7 @@ justo después del front matter
 
 
 <div aria-hidden="true" class="line-highlight" data-range="23" data-start="23">
-</div></div></pre><h4 class="mume-header" id="floating-action-button">Floating Action Button</h4>
+</div></div></pre><h4 class="mume-header" id="floating-action-button-fab">Floating Action Button (FAB)</h4>
 
 <p>Un bot&#xF3;n de acci&#xF3;n flotante (FAB) ejecuta la acci&#xF3;n principal o m&#xE1;s com&#xFA;n en la actividad. Se caracteriza por tener una forma circular con un icono en el centro normalmente animado. Los FAB vienen en tres tipos: regulares, mini y extendidos (con una etiqueta de texto).</p>
 <p>Creamos un proyecto que se llame <strong>EjemploFAB</strong> y editamos el xml de la actividad:</p>
