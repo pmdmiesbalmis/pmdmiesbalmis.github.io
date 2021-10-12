@@ -261,15 +261,15 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="ejercicio-resuelto-progress-indicators">Ejercicio resuelto Progress indicators</h1>
+      <h1 class="mume-header undefined" id="exercici-resolt-progress-indicators">Exercici resolt Progress indicators</h1>
 
-<p><a href="./progress_Indicators.pdf">Descargar estos apuntes</a></p>
-<p>Vamos a desarrollar una aplicaci&#xF3;n que simule la carga de un conjunto de archivos, simularemos la carga mediante <strong><code>AsyncTask</code></strong> donde especificaremos un retardo por cada paso de la tarea, y utilizaremos una <strong><code>LinearProgressIndicator</code></strong> para ver la evoluci&#xF3;n del estado de la carga. Todo el proceso comenzar&#xE1; cuando pulsemos el bot&#xF3;n de <strong><code>Load</code></strong> en la pantalla principal.</p>
-<p>El dise&#xF1;o de nuestro <strong>LinearProgressIndicator`</strong> va a ser personalizado, incluyendo unos campos de texto tal y como se ve en la siguiente imagen:</p>
+<p><a href="./progress_Indicators_val.pdf">Descarregar aquests apunts</a></p>
+<p>Desenvoluparem una aplicaci&#xF3; que simule la c&#xE0;rrega d&apos;un conjunt d&apos;arxius, simularem la c&#xE0;rrega mitjan&#xE7;ant <strong><code>AsyncTask</code></strong> on especificarem un retard per cada pas de la tasca, i utilitzarem una <strong><code>LinearProgressIndicator</code></strong> per a veure l&apos;evoluci&#xF3; de l&apos;estat de la c&#xE0;rrega. Tot el proc&#xE9;s comen&#xE7;ar&#xE0; quan premem el bot&#xF3; de <strong><code>Load</code></strong> en la pantalla principal.</p>
+<p>El disseny del nostre <strong>LinearProgressIndicator`</strong> ser&#xE0; personalitzat, incloent uns camps de text tal com es veu en la seg&#xFC;ent imatge:</p>
 <div align="center">
     <img height="120" src="./imagenes/progressIndicatorsEjemplo.png">
 </div>
-<p>El archivo xml correspondiente a esta interfaz ser&#xED;a:</p>
+<p>L&apos;arxiu xml corresponent a aquesta interf&#xED;cie seria:</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[12-18,20-28,30-37]}" class="language-xml" data-line="12-18,20-28,30-37"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
@@ -392,21 +392,21 @@ pre[data-line] .line-highlight[data-end]:after {
 
 
 </div></div></pre><blockquote>
-<p>&#x1F4CC; Aclaraciones:</p>
+<p>&#x1F4CC; Aclariments:</p>
 <ul>
-<li><strong>L&#xED;neas 12-18</strong>: definici&#xF3;n del  <strong><code>LinearProgressIndicator</code></strong>. En la l&#xED;nea 16 especificamos el texto que se visualizar&#xE1; cuando el <strong><code>FAB</code></strong> est&#xE9; pulsado. El resto de propiedades ya est&#xE1;n explicadas.</li>
-<li><strong>L&#xED;neas 20-28</strong>: aqu&#xED; definimos el primer <strong><code>Text</code></strong> que indicaar&#xE1; lo que hace nuestra <strong><code>LinearProgressIndicator</code></strong></li>
-<li><strong>L&#xED;neas 30-37</strong>: aqu&#xED; definimos el texto asociado al progreso de la acci&#xF3;n (1/10, 2/10...)</li>
+<li><strong>L&#xED;nies 12-18</strong>: definici&#xF3; del <strong><code>LinearProgressIndicator</code></strong>. En la l&#xED;nia 16 especifiquem el text que es visualitzar&#xE0; quan el <strong><code>FAB</code></strong> estiga premut. La resta de propietats ja estan explicades.</li>
+<li><strong>L&#xED;nies 20-28</strong>: ac&#xED; definim el primer <strong><code>Text</code></strong> que indicar&#xE0; el que fa la nostra <strong><code>LinearProgressIndicator</code></strong></li>
+<li><strong>L&#xED;nies 30-37</strong>: ac&#xED; definim el text associat al progr&#xE9;s de l&apos;acci&#xF3; (1/10, 2/10...)</li>
 </ul>
 </blockquote>
-<h4 class="mume-header" id="tareas-as%C3%ADncronas">Tareas as&#xED;ncronas</h4>
+<h4 class="mume-header" id="tasques-as%C3%ADncrones">Tasques as&#xED;ncrones</h4>
 
-<p>Un hilo es una unidad de ejecuci&#xF3;n asociada a una aplicaci&#xF3;n. Es la estructura de programaci&#xF3;n concurrente que tiene como objetivo dar la percepci&#xF3;n al usuario que el sistema ejecuta m&#xFA;ltiples tareas a la vez.</p>
-<p>Desde <strong>Androd</strong> podemos ejecutar tareas en segundo plano utilizando <strong><code>thread</code></strong> (hilos), con <strong><code>AsyncTask</code></strong> y con corrutinas <strong><code>Kotlin</code></strong>.</p>
-<p>El problema con los hilos  es que no podemos acceder a ning&#xFA;n elemento de la interfaz gr&#xE1;fica desde dentro del mismo.</p>
-<p>La finalidad de <strong><code>AsyncTask</code></strong> es unificar la actualizaci&#xF3;n de la vista asociada a la tarea en segundo plano con la ejecuci&#xF3;n de la misma. Est&#xE1; marcada como <strong><code>deprecated</code></strong> desde la versi&#xF3;n 11 de <strong>Android (API 30)</strong>. A partir de esta versi&#xF3;n se recomienda el uso de corrutinas.</p>
-<p><strong><code>AsyncTask</code></strong> es una interfaz que nos va a permitir crear un hilo secundario en el que realizar tareas en background.</p>
-<p>La definici&#xF3;n gen&#xE9;rica de una tarea as&#xED;ncrona sigue el siguiente esquema:</p>
+<p>Un fil &#xE9;s una unitat d&apos;execuci&#xF3; associada a una aplicaci&#xF3;. &#xC9;s l&apos;estructura de programaci&#xF3; concurrent que t&#xE9; com a objectiu donar la percepci&#xF3; a l&apos;usuari que el sistema executa m&#xFA;ltiples tasques alhora.</p>
+<p>Des de <strong>Androd</strong> podem executar tasques en segon pla utilitzant <strong><code>thread</code></strong> (fils), amb <strong><code>AsyncTask</code></strong> i amb corrutines <strong><code>Kotlin</code></strong>.</p>
+<p>El problema amb els fils &#xE9;s que no podem accedir a cap element de la interf&#xED;cie gr&#xE0;fica des de dins d&apos;aquest.</p>
+<p>La finalitat de <strong><code>AsyncTask</code></strong> &#xE9;s unificar l&apos;actualitzaci&#xF3; de la vista associada a la tasca en segon pla amb l&apos;execuci&#xF3; d&apos;aquesta. Est&#xE0; marcada com <strong><code>deprecated</code></strong> des de la versi&#xF3; 11 de <strong>Android (API 30)</strong>. A partir d&apos;aquesta versi&#xF3; es recomana l&apos;&#xFA;s de corrutines.</p>
+<p><strong><code>AsyncTask</code></strong> &#xE9;s una interf&#xED;cie que ens permetr&#xE0; crear un fil secundari en el qual fer tasques en background.</p>
+<p>La definici&#xF3; gen&#xE8;rica d&apos;una tarea as&#xED;ncrona segueix el seg&#xFC;ent esquema:</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword">class</span> MiTarea<span class="token operator">:</span>AsyncTask<span class="token operator">&lt;</span>T1<span class="token punctuation">,</span>T2<span class="token punctuation">,</span>T3<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onPreExecute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment">//...</span>
@@ -429,29 +429,29 @@ pre[data-line] .line-highlight[data-end]:after {
         <span class="token comment">//...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>El m&#xE9;todo encargado de ejecutar el hilo secundario es <strong><code>doInBackground()</code></strong>, el resto se ejecutan en el hilo principal.</p>
-<p>El m&#xE9;todo <strong><code>onPreExcuted()</code></strong> se ejecuta antes de empezar la tarea en segundo plano.</p>
-<p>En la definici&#xF3;n se especifican tres tipos de datos:</p>
+</pre><p>El m&#xE8;tode encarregat d&apos;executar el fil secundari &#xE9;s <strong><code>doInBackground()</code></strong>, la resta s&apos;executen en el fil principal.</p>
+<p>El m&#xE8;tode <strong><code>onPreExcuted()</code></strong> s&apos;executa abans de comen&#xE7;ar la tasca en segon pla.</p>
+<p>En la definici&#xF3; s&apos;especifiquen tres tipus de dades:</p>
 <ul>
-<li>El primero es el que recibe el m&#xE9;todo <strong><code>doInBackGround()</code></strong>. La notaci&#xF3;n <strong><code>vararg params:T1</code></strong> indica que se pueden recibir un n&#xFA;mero indeterminado de par&#xE1;metros indeterminado del tipo <strong><code>T1</code></strong>.</li>
-<li>El segundo es que el que permite comunicar el avance de la tarea. La comunicaci&#xF3;n con el hilo principal se realizar&#xE1; a trav&#xE9;s de la invocaci&#xF3;n del m&#xE9;todo <strong><code>publicProgress()</code></strong> que har&#xE1; que se jecute el m&#xE9;todo <strong><code>onProgressUpdate()</code></strong> que se encargar&#xE1; de la actualizaci&#xF3;n de la interfaz.</li>
-<li>El tercero es el tipo de datos que se devolver&#xE1; al finalizar el hilo secundario <strong><code>doInBackground()</code></strong> y que ser&#xE1; recibido en <strong><code>onPostExecuted()</code></strong>.</li>
+<li>El primer &#xE9;s el que rep el m&#xE8;tode <strong><code>doInBackGround()</code></strong>. La notaci&#xF3; <strong><code>vararg params:T1</code></strong> indica que es poden rebre un nombre indeterminat de par&#xE0;metres indeterminat del tipus <strong><code>T1</code></strong>.</li>
+<li>El segon &#xE9;s que el que permet comunicar l&apos;avan&#xE7; de la tasca. La comunicaci&#xF3; amb el fil principal es realitzar&#xE0; a trav&#xE9;s de la invocaci&#xF3; del m&#xE8;tode <strong><code>publicProgress()</code></strong> que far&#xE0; que s&apos;execute el m&#xE8;tode <strong><code>onProgressUpdate()</code></strong> que s&apos;encarregar&#xE0; de l&apos;actualitzaci&#xF3; de la interf&#xED;cie.</li>
+<li>El tercer &#xE9;s el tipus de dades que es retornar&#xE0; en finalitzar el fil secundari <strong><code>doInBackground()</code></strong> i que ser&#xE0; rebut en <strong><code>onPostExecuted()</code></strong>.</li>
 </ul>
-<p>El m&#xE9;todo <strong><code>onCanceled()</code></strong> se ejecuta si la tarea es cancelada, y hace que no se ejecute el <strong><code>onPostExecuted()</code></strong>.</p>
-<p>En general se recomienda trabajar con las corrutinas frente a <strong><code>AsyncTask</code></strong> y <strong><code>Thread</code></strong>, son m&#xE1;s sencillas de utilizar y generan un c&#xF3;digo m&#xE1;s claro al interactuar con la interfaz.</p>
-<p>Es importante, sin embargo, conocer como funcionan, sobre todo <strong><code>AsyncTask</code></strong>, ya que encontraremos multitud de ejemplos de c&#xF3;digo implementados con esta interfaz.</p>
-<h4 class="mume-header" id="corrutinas-kotlin">Corrutinas Kotlin</h4>
+<p>El m&#xE8;tode <strong><code>onCanceled()</code></strong> s&apos;executa si la tasca &#xE9;s cancel&#xB7;lada, i fa que no s&apos;execute el <strong><code>onPostExecuted()</code></strong>.</p>
+<p>En general es recomana treballar amb les corrutines enfront de <strong><code>AsyncTask</code></strong> i <strong><code>Thread</code></strong>, s&#xF3;n m&#xE9;s senzilles d&apos;utilitzar i generen un codi m&#xE9;s clar en interactuar amb la interf&#xED;cie.</p>
+<p>&#xC9;s important, no obstant aix&#xF2;, con&#xE9;ixer com funcionen, sobretot <strong><code>AsyncTask</code></strong>, ja que trobarem multitud d&apos;exemples de codi implementats amb aquesta interf&#xED;cie.</p>
+<h4 class="mume-header" id="corrutines-kotlin">Corrutines Kotlin</h4>
 
-<p>Para comenzar a utilizarlas lo primero es a&#xF1;adir en el fichero <strong><code>build:gradle</code></strong> perteneciente a <strong><code>Module:app</code></strong>, las siguientes referencias:</p>
+<p>Per a comen&#xE7;ar a utilitzar-les el primer &#xE9;s afegir en el fitxer <strong><code>build:gradle</code></strong> pertanyent a <strong><code>Module:app</code></strong>, les seg&#xFC;ents refer&#xE8;ncies:</p>
 <pre data-role="codeBlock" data-info="gradle" class="language-gradle"><code> implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9&apos;
  implementation &apos;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9&apos;
-</code></pre><p>Existen diferentes formas de trabajar con corrutinas. En este punto vamos a ver c&#xF3;mo hacerlo con <strong><code>CorrutineScope</code></strong>. Para lanzar una tarea en segundo plano mediante esta clase usaremos su m&#xE9;todo <strong><code>launch</code></strong>. En este m&#xE9;todo se especifica el <strong><code>dispatcher</code></strong> (emisor o tipo de hilo) donde tiene que ejecutarse el c&#xF3;digo. Kotlin proporciona tres <strong><code>dispatcher</code></strong>:</p>
+</code></pre><p>Existeixen diferents maneres de treballar amb corrutines. En aquest punt veurem c&#xF3;m fer-ho amb <strong><code>CorrutineScope</code></strong>. Per a llan&#xE7;ar una tasca en segon pla mitjan&#xE7;ant aquesta classe usarem el seu m&#xE8;tode <strong><code>launch</code></strong>. En aquest m&#xE8;tode s&apos;especifica el <strong><code>dispatcher</code></strong> (emissor o tipus de fil) on ha d&apos;executar-se el codi. Kotlin proporciona tres <strong><code>dispatcher</code></strong>:</p>
 <ul>
-<li><strong><code>Dispatcher.Default</code></strong> el emisor por defecto de las tareas en segundo plano.</li>
-<li><strong><code>Dispatcher.IO</code></strong>, hilo secundario para tareas de entrada/salida, permite paralelizar m&#xE1;s tareas concurrentes que el anterior.</li>
-<li><strong><code>Dispatcher.Main</code></strong>, donde se indica el c&#xF3;digo que se ejecuta en el hilo principal y permite, por tanto, interactuar con la interfaz de usuario.</li>
+<li><strong><code>Dispatcher.Default</code></strong> l&apos;emissor per defecte de les tasques en segon pla.</li>
+<li><strong><code>Dispatcher.io</code></strong>, fil secundari per a tasques d&apos;entrada/eixida, permet *paralelizar m&#xE9;s tasques concurrents que l&apos;anterior.</li>
+<li><strong><code>Dispatcher.Main</code></strong>, on s&apos;indica el codi que s&apos;executa en el fil principal i permet, per tant, interactuar amb la interf&#xED;cie d&apos;usuari.</li>
 </ul>
-<p>Veamos el c&#xF3;digo que permite visualizar una barra de progreso mientras se cargan unos archivos (de forma simulada &#x1F609;)</p>
+<p>Vegem el codi que permet visualitzar una barra de progr&#xE9;s mentre es carreguen uns arxius (de forma simulada &#x1F609;)</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[8,9,10,11,12,17]}" class="language-kotlin" data-line="8,9,10,11,12,17"><span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
@@ -557,16 +557,16 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; Aclaraciones:</p>
+<p>&#x1F4CC; Aclariments:</p>
 <ul>
-<li><strong>L&#xED;nea 8</strong>, ejecutamos en hilo principal y tras la pulsaci&#xF3;n del bot&#xF3;n, el di&#xE1;logo correspondiente a nuestra <strong>bara de progreso</strong>.</li>
-<li><strong>L&#xED;nea 9</strong>, invocamos a <strong><code>GlobalScope.launch (Dispatchers.IO)</code></strong> el hilo secundario. Simularemos un proceso de carga de archivos (<strong>l&#xED;nea 10</strong>) mediante un <strong><code>sleep</code></strong> (<strong>l&#xED;nea 11</strong>).</li>
-<li><strong>L&#xED;nea 12</strong>, ejecutamos c&#xF3;digo destinado a actualizar la interfaz del hilo principal con <strong><code>launch(Dispatchers.Main)</code></strong>, concretamente actualizamos la <strong><code>LinearProgressIndicatos</code></strong> y las vistas de texto.</li>
-<li><strong>L&#xED;nea 17</strong>, cuando terminamos la tarea secundaria de carga de archivos, cerramos el di&#xE1;logo, para ello volvemos a envolver el c&#xF3;digo correspondiente en un <strong><code>launch(Dispatchers.Main)</code></strong>.</li>
+<li><strong>L&#xED;nia 8</strong>, executem en fil principal i despr&#xE9;s de la pulsaci&#xF3; del bot&#xF3;, el di&#xE0;leg corresponent a la nostra <strong>bara de progr&#xE9;s</strong>.</li>
+<li><strong>L&#xED;nia 9</strong>, invoquem a <strong><code>GlobalScope.launch (Dispatchers.io)</code></strong> el fil secundari. Simularem un proc&#xE9;s de c&#xE0;rrega de archius (<strong>l&#xED;nia 10</strong>) mitjan&#xE7;ant un <strong><code>sleep</code></strong> (<strong>l&#xED;nia 11</strong>).</li>
+<li><strong>L&#xED;nia 12</strong>, executem codi destinat a actualitzar la interf&#xED;cie del fil principal amb <strong><code>launch(Dispatchers.Main)</code></strong>, concretament actualitzem la <strong><code>LinearProgressIndicatos</code></strong> i les vistes de text.</li>
+<li><strong>L&#xED;nia 17</strong>, quan acabem la tasca secund&#xE0;ria de c&#xE0;rrega d&apos;arxius, tanquem el di&#xE0;leg, per a aix&#xF2; tornem a embolicar el codi corresponent en un <strong><code>launch(Dispatchers.Main)</code></strong>.</li>
 </ul>
 </blockquote>
 <blockquote>
-<p>&#x270B;<strong>Ejercicio propuesto</strong>: Si en el ejemplo desarrollado anteriormente giramos la pantalla &#xBF;qu&#xE9; sucede?. Plantear una soluci&#xF3;n a esta problem&#xE1;tica.</p>
+<p>&#x270B;<strong>Exercici proposat</strong>: Si en l&apos;exemple desenvolupat anteriorment girem la pantalla qu&#xE8; succeeix?. Plantejar una soluci&#xF3; a aquesta problem&#xE0;tica.</p>
 </blockquote>
 
       </div>
