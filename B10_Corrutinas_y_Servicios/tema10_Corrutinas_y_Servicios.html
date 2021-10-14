@@ -356,6 +356,7 @@ justo después del front matter
 <li><a href="#servicios-y-tareas-de-larga-duraci%C3%B3n">Servicios y tareas de larga duraci&#xF3;n</a>
 <ol>
 <li><a href="#servicios">Servicios</a></li>
+<li><a href="#broadcastreceiver">BroadCastReceiver</a></li>
 <li><a href="#workmanager">WorkManager</a></li>
 </ol>
 </li>
@@ -664,6 +665,374 @@ Si el servicio creado va a realizar tareas que tengan un coste computacional ele
 <li>Started: Una vez iniciado el servicio, se ejecuta de forma indefinida en segundo plano, incluso si se destruye el componente que lo inici&#xF3;.</li>
 <li>Bound: En este caso, el servicio ofrece una interfaz de tipo cliente-servidor a aquellos componentes que se asocian o enlazan a dicho servicio. Los componentes asociados o enlazados (bound) al servicio pueden enviar peticiones, conseguir resultados y respuestas o, incluso, llevar a cabo tareas de comunicaci&#xF3;n con otros procesos. En este caso, el servicio s&#xF3;lo se ejecuta cuando hay alg&#xFA;n componente asociado o enlazado a &#xE9;l.</li>
 </ul>
+<h5 class="mume-header" id="aplicaci%C3%B3n-ejemplo-para-crear-un-servicio-para-poder-consumirlo-desde-una-actividad">Aplicaci&#xF3;n ejemplo para crear un servicio para poder consumirlo desde una actividad</h5>
+
+<p>Vamos a crear un servicio para que desde una actividad podamos consumirlo. El objetivo del servicio ser&#xE1; recuperar datos de forma peri&#xF3;dica para que de esta forma la actividad pueda desplegarlos a trav&#xE9;s de una ListView, siempre pudiendo pedir los datos m&#xE1;s actualizados de este servicio.<br>
+Vamos a enlazar el servicio enlaz&#xE1;ndolo con la actividad (Bound) Teniendo el concepto claro, pasemos a codificarlo:</p>
+<ol>
+<li>Creamos un nuevo proyecto llamado MiServicio.</li>
+<li>Como dato adicional, a la actividad principal del proyecto la he llamado Consumer:</li>
+<li>Creamos una nueva clase llamada MiServicio que es en d&#xF3;nde vamos a escribir todo el c&#xF3;digo correspondiente a lo que hace el servicio. A continuaci&#xF3;n te proporciono el c&#xF3;digo que deber&#xE1; tener esta clase:</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[15, [36-39]]}" class="language-kotlin" data-line="15,36-39">  <span class="token keyword">class</span> MiService <span class="token operator">:</span> <span class="token function">Service</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> timer<span class="token operator">:</span> Timer<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword">null</span>
+    <span class="token keyword">var</span> miBinder<span class="token operator">:</span> IBinder <span class="token operator">=</span> <span class="token function">MiBinder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> lista<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+    <span class="token keyword">var</span> array <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;blanco&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;azul&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;verde&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> pos <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pos <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        timer<span class="token operator">=</span><span class="token function">Timer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        lista <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">pollForUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">fun</span> <span class="token function">pollForUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        timer<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">scheduleAtFixedRate</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> <span class="token function">TimerTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>lista<span class="token punctuation">.</span>size <span class="token operator">&gt;=</span> array<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    lista<span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+                lista<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span>pos<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                pos<span class="token operator">++</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">&gt;=</span> array<span class="token punctuation">.</span>size<span class="token punctuation">)</span> pos <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> UPDATE_INTERVAL<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        timer<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBind</span><span class="token punctuation">(</span>intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> IBinder <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> miBinder
+    <span class="token punctuation">}</span>
+    <span class="token keyword">fun</span> <span class="token function">getLista</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> lista
+    <span class="token punctuation">}</span>
+    <span class="token keyword">internal</span> <span class="token keyword">inner</span> <span class="token keyword">class</span> MiBinder <span class="token operator">:</span> <span class="token function">Binder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> service<span class="token operator">:</span> MiService
+            <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token label symbol">@MiService</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword">private</span> <span class="token keyword">const</span> <span class="token keyword">val</span> UPDATE_INTERVAL<span class="token operator">:</span> Long <span class="token operator">=</span> <span class="token number">5000</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="36-39" data-start="36" data-end="39">
+
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC;En primer lugar podemos observar que esta clase hereda de <strong><code>Service</code></strong>. Dentro de la clase MiServicio declaramos un <strong><code>Timer</code></strong> que nos ayudar&#xE1; a retardar las actualizaciones de la informaci&#xF3;n que proveer&#xE1; el servicio junto con la constante est&#xE1;tica UPDATE_INTERVAL que fijamos con un valor de 5 segundos.<br>
+Tenemos un ArrayList y un arreglo de cadenas que nos servir&#xE1;n para jugar con la informaci&#xF3;n del servicio; y un IBinder que permite interactuar con un objeto de forma remota.<br>
+Dentro de los m&#xE9;todos que estamos creando en nuestro servicio se encuentra <strong><code>pollForUpdates()</code></strong> en el que definimos la tarea cuya ejecuci&#xF3;n se repetir&#xE1; seg&#xFA;n el tiempo que hayamos establecido, mediante el m&#xE9;todo de la clase Timer <strong><code>scheduleAtFixedRat()</code></strong>, <strong>L&#xED;nea 15</strong><br>
+Con respecto al uso de IBinder, la documentaci&#xF3;n de Android nos dice que no debemos implementarla de manera directa, y que para efectos pr&#xE1;cticos debemos utilizar una clase que extienda de Binder. Es por ello que creamos una clase interna llamada MyBinder <strong>L&#xED;neas 36-39</strong>. El resto es incluir los m&#xE9;todos anulados <strong><code>onDestroy()</code></strong> y <strong><code>onBind()</code></strong>, para cancelar el servicio o para devolverlo respectivamente.</p>
+</blockquote>
+<ol start="4">
+<li>Ahora pasemos a codificar la actividad que consumir&#xE1; este servicio. Para la cu&#xE1;l definimos la interfaz gr&#xE1;fica con un bot&#xF3;n para refrescar la informaci&#xF3;n del servicio y una ListView para desplegar los datos del mismo.</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[[19-30],32,37]}" class="language-kotlin" data-line="19-30,32,37"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">Activity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> miservicio<span class="token operator">:</span> MiService<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword">null</span>
+    <span class="token keyword">lateinit</span>  <span class="token keyword">var</span> values<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+    <span class="token keyword">lateinit</span>  <span class="token keyword">var</span> adapter<span class="token operator">:</span> ArrayAdapter<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+    <span class="token keyword">lateinit</span>  <span class="token keyword">var</span> lista<span class="token operator">:</span> ListView
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> boton<span class="token operator">:</span> Button
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        lista <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>listView<span class="token punctuation">)</span>
+        boton <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span>
+        <span class="token function">doBindService</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        values <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        adapter <span class="token operator">=</span> ArrayAdapter<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>
+                                       simple_list_item_1<span class="token punctuation">,</span> values<span class="token punctuation">)</span>
+        lista<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>adapter<span class="token punctuation">)</span>
+        boton<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>  <span class="token function">showServiceData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">private</span> <span class="token keyword">val</span> mConnection<span class="token operator">:</span> ServiceConnection <span class="token operator">=</span> <span class="token keyword">object</span> <span class="token operator">:</span> ServiceConnection 
+    <span class="token punctuation">{</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onServiceConnected</span><span class="token punctuation">(</span>name<span class="token operator">:</span> ComponentName<span class="token punctuation">,</span> 
+                                        service<span class="token operator">:</span> IBinder<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            miservicio <span class="token operator">=</span> <span class="token punctuation">(</span>service <span class="token keyword">as</span> MiBinder<span class="token punctuation">)</span><span class="token punctuation">.</span>service
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token string">&quot;Connectado&quot;</span><span class="token punctuation">,</span>
+                        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onServiceDisconnected</span><span class="token punctuation">(</span>name<span class="token operator">:</span> ComponentName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            miservicio <span class="token operator">=</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">fun</span> <span class="token function">doBindService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">bindService</span><span class="token punctuation">(</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> MiService<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">,</span> mConnection<span class="token punctuation">,</span> 
+                           BIND_AUTO_CREATE<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">fun</span> <span class="token function">showServiceData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>miservicio <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">val</span> listaTrabajo<span class="token operator">:</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token operator">=</span> miservicio<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">getLista</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            values<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            values<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>listaTrabajo<span class="token punctuation">)</span>
+            adapter<span class="token punctuation">.</span><span class="token function">notifyDataSetChanged</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="19-30" data-start="19" data-end="30">
+
+
+
+
+
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="32" data-start="32">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="37" data-start="37">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Declaramos un ArrayList y un objeto de tipo MiServicio. Para poder trabajar con el servicio ser&#xE1; indispensable crear un objeto de tipo <strong><code>ServiceConnection</code></strong> <strong>L&#xED;nea 19 - 30</strong> , por medio del cual realizaremos las funciones necesarias para que nuestra actividad pueda conectarse con el servicio creado y podamos as&#xED;, acceder a la informaci&#xF3;n que nos provee. Este objeto ser&#xE1; inicializado a trav&#xE9;s del m&#xE9;todo <strong><code>bindService()</code></strong> <strong>L&#xED;nea 32</strong>, que es llamado en el <strong><code>onCreate()</code></strong> de la activity. Como vamos a llenar una ListView con estos datos, es importante crear un adaptador. Luego, en el m&#xE9;todo propio <strong><code>showServiceData()</code></strong> actualizamos la lista con los datos recibidos del servicio <strong>L&#xED;nea 37</strong>.</p>
+</blockquote>
+<ol start="5">
+<li>IMPORTANTE , una vez que hemos terminado la l&#xF3;gica de la aplicaci&#xF3;n nos faltar&#xE1; dar de alta el servicio creado, en el archivo AndroidManifest.xml.</li>
+</ol>
+<h4 class="mume-header" id="broadcastreceiver">BroadCastReceiver</h4>
+
+<p>Un broadcast receiver es el componente que permite recibir y responder ante eventos del sistema (aviso de bater&#xED;a baja, un SMS recibido,&#x2026;) o eventos producidos por otras aplicaciones o servicios.<br>
+Algunos eventos son de acceso privilegiado y hay que establecerlos en el archivo de manifiesto de la aplicaci&#xF3;n con la etiqueta <strong><code>&lt;uses_permission&gt;</code></strong>.<br>
+Para crear un broadcast receiver simplemente tenemos que crear una clase que herede de <strong><code>BroadcastReceiver</code></strong> y anular el m&#xE9;todo <strong><code>onReceive()</code></strong>, que es el m&#xE9;todo que se ejecutar&#xE1; cada vez que se produzca el evento al que se suscriba nuestro broadcast receiver (similar al onCreate() de una activity).<br>
+La clase BroadcastReceiver es capaz de recibir intents a trav&#xE9;s del m&#xE9;todo <strong><code>sendBroadcast()</code></strong>.<br>
+Otra de las clase utiles es <strong><code>PendingIntent</code></strong>, que es un token que le damos a otra aplicaci&#xF3;n a trav&#xE9;s de un Notification Manager, Alarm Manager u otras aplicaciones de terceros, que les permiten a estos componentes utilizar los permisos de nuestra aplicaci&#xF3;n para ejecutar un trozo de c&#xF3;digo predefinido.</p>
+<h5 class="mume-header" id="aplicaci%C3%B3n-ejemplo-para-activar-la-vibraci%C3%B3n-y-la-alarma-del-dispositivo">Aplicaci&#xF3;n ejemplo para activar la vibraci&#xF3;n y la alarma del dispositivo</h5>
+
+<p>Vamos a definir un broadcast receiver que escuche los cambios de estado del tel&#xE9;fono. Queremos tener en la pantalla de nuestra aplicaci&#xF3;n un EditText para introducir los segundos que pasar&#xE1;n antes de que nos vibre el tel&#xE9;fono y un bot&#xF3;n para iniciar el conteo. El layout de la actividad principal se omite por su sencillez. Pasamos a explicar la clase que hereda de <strong><code>BroadCastReceiver</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> BroadCastAlarma <span class="token operator">:</span> <span class="token function">BroadcastReceiver</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>O<span class="token punctuation">)</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onReceive</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">,</span> intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+            context<span class="token punctuation">,</span>
+            <span class="token string">&quot;Vibraci&#xF3;n activa porque el tiempo se ha terminado&quot;</span><span class="token punctuation">,</span>
+            Toast<span class="token punctuation">.</span>LENGTH_LONG
+        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> vibrator <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getSystemService</span><span class="token punctuation">(</span>Context<span class="token punctuation">.</span>VIBRATOR_SERVICE<span class="token punctuation">)</span> 
+                                                       <span class="token keyword">as</span> Vibrator
+        vibrator<span class="token punctuation">.</span><span class="token function">vibrate</span><span class="token punctuation">(</span>VibrationEffect<span class="token punctuation">.</span><span class="token function">createOneShot</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">,</span> 
+                                       VibrationEffect<span class="token punctuation">.</span>DEFAULT_AMPLITUDE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC;Como vemos implementamos el m&#xE9;todo <strong><code>onRecive()</code></strong> que recibe el contexto desde donde es llamado y el intent que lo disparar&#xE1;. Visualizamos un toast para indicar que el tiempo de espera finaliz&#xF3; y que el modo vibraci&#xF3;n se activar&#xE1;. A continuaci&#xF3;n activamos la vibraci&#xF3;n durante ocho segundos. Para ello definimos un objeto de tipo <strong><code>Vibrator</code></strong> que lo inicializamos con el servicio propio del sistema y llamamos al m&#xE9;todo <strong><code>vibrate(</code></strong>) de dicho objeto.</p>
+</blockquote>
+<p>En la activity principal solamente tenemos que implementar la pulsaci&#xF3;n del bot&#xF3;n, se recoger&#xE1; la informaci&#xF3;n introducida en el EditText, se programar&#xE1; una alarma y cuando esta termine se invocar&#xE1; al broadcast receiver definido anteriormente. Veamos el c&#xF3;digo:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0,[13-15],[16-19]]}" class="language-kotlin" data-line="0,13-15,16-19"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> texto<span class="token operator">:</span>EditText
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        texto<span class="token operator">=</span>findViewById<span class="token operator">&lt;</span>EditText<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>editText<span class="token punctuation">)</span>
+        texto<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span>
+        findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>  <span class="token function">activar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">activar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> tiempo <span class="token operator">=</span> texto<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span>BroadCastAlarma<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> pendingIntent <span class="token operator">=</span> PendingIntent<span class="token punctuation">.</span><span class="token function">getBroadcast</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> 
+                                                 REQUESTCODE<span class="token punctuation">,</span> intent<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> alarmManager <span class="token operator">=</span> <span class="token function">getSystemService</span><span class="token punctuation">(</span>ALARM_SERVICE<span class="token punctuation">)</span> <span class="token keyword">as</span> AlarmManager
+        alarmManager<span class="token punctuation">[</span>AlarmManager<span class="token punctuation">.</span>RTC_WAKEUP<span class="token punctuation">,</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                                                        <span class="token operator">+</span> tiempo <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">]</span> <span class="token operator">=</span>
+                                                             pendingIntent
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">&quot;Has fijado la alarma en &quot;</span><span class="token operator">+</span>tiempo<span class="token operator">+</span><span class="token string">&quot;segundos&quot;</span><span class="token punctuation">,</span>
+                                        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">companion</span> <span class="token keyword">object</span><span class="token punctuation">{</span>
+        <span class="token keyword">val</span> REQUESTCODE<span class="token operator">=</span><span class="token number">1111</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13-15" data-start="13" data-end="15">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16-19" data-start="16" data-end="19">
+
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC;Lo primero que hacemos es recuperar la referencia al EditText y parseamos el contenido a Integer. Visualizamos un toast para informar que se va a establecer la cuenta atr&#xE1;s en los segundos especificados en el EditText.<br>
+<strong>&#xA1;&#xA1;Lo interesante!!</strong> Definimos un intent que apunta a nuestro broadcast receiver. Luego hacemos uso de un PendingIntent en el que se recoge el contexto en el que este objeto se ejecutar&#xE1; cuando sea atendido, un c&#xF3;digo de identificaci&#xF3;n, el intent donde se define la acci&#xF3;n y un flag. Nosotros lo hacemos con <strong><code>PendinIntent.getBroadcast()</code></strong>, porque lo que hemos definido o quien va atender esta petici&#xF3;n est&#xE1; en un BroadcastReceiver <strong>L&#xED;neas 13 - 15</strong>.<br>
+<em>Usar&#xED;amos <strong><code>nombrePendinIntent.getActivity()</code></strong> si inici&#xE1;ramos una activity y <strong><code>nombrePendinIntent.getService()</code></strong> para un servicio.</em><br>
+Finalmente creamos un objeto AlarmManager inicializ&#xE1;ndolo con el servicio propio del sistema (ALARM_SERVICE). Con el m&#xE9;todo set() definimos el tiempo en el que ser&#xE1; lanzada la alarma (i segundos despu&#xE9;s del actual) y el PendingIntent que resuelve la l&#xF3;gica de nuestra aplicaci&#xF3;n y que se ha definido anteriormente <strong>L&#xED;neas 16 - 19</strong>.</p>
+</blockquote>
+<blockquote>
+<p>&#x26A0;&#xFE0F;Para probar esta aplicaci&#xF3;n es necesario un terminal real y no el emulador, ya que &#xE9;ste &#xFA;ltimo no puede reproducir la vibraci&#xF3;n.</p>
+</blockquote>
+<h5 class="mume-header" id="aplicaci%C3%B3n-ejemplo-para-escuchar-cambios-de-estado-en-el-tel%C3%A9fono">Aplicaci&#xF3;n ejemplo para escuchar cambios de estado en el tel&#xE9;fono</h5>
+
+<p>Vamos a definir un broadcast receiver que escuche los cambios de estado del tel&#xE9;fono. Si el tel&#xE9;fono recibe una llamada, nuestro receptor ser&#xE1; notificado y registrar&#xE1; un mensaje.</p>
+<ol>
+<li>Creamos un nuevo proyecto llamado BroadcastReceiverTest</li>
+<li>En este caso no necesitaremos una actividad por lo que la clase que hereda de Activity la modificaremos para que en su lugar herede de la clase BroadcastReceiver.</li>
+</ol>
 <h4 class="mume-header" id="workmanager">WorkManager</h4>
 
 <p>Android <strong><code>WorkManager</code></strong> es una biblioteca de procesamiento en segundo plano que se utiliza para ejecutar tareas en segundo plano que deber&#xED;an ejecutarse de forma garantizada, pero no necesariamente de forma inmediata. Con WorkManager podemos poner en cola nuestro procesamiento en segundo plano incluso cuando la aplicaci&#xF3;n no se est&#xE1; ejecutando y el dispositivo se reinicia por alguna raz&#xF3;n. WorkManager tambi&#xE9;n nos permite definir las restricciones necesarias para ejecutar la tarea, por ejemplo, la disponibilidad de la red antes de iniciar la tarea en segundo plano.</p>
@@ -674,7 +1043,9 @@ Si el servicio creado va a realizar tareas que tengan un coste computacional ele
 <li>Se necesita que se ejecute incluso despu&#xE9;s de que se elimine la aplicaci&#xF3;n o se reinicie el dispositivo.</li>
 <li>Tiene que cumplir con limitaciones como el suministro de bater&#xED;a o la disponibilidad de la red antes de la ejecuci&#xF3;n.</li>
 </ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">`` 
 
+</pre>
       </div>
       
       
