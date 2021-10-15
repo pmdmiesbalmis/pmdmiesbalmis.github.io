@@ -521,6 +521,7 @@ Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y
 </blockquote>
 </li>
 </ul>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Copia los c&#xF3;digos de los ejemplos y completalos hasta hacerlos funcionar. Para ayudarte en la comprensi&#xF3;n puedes analizar el ejercicio resuelto de la Barra de Progreso</span></p>
 <h4 class="mume-header" id="viewmodel-y-corrutinas">ViewModel y Corrutinas</h4>
 
 <p>ViewModel es extendido con una propiedad <strong><code>viewModelScope</code></strong> que se encarga de cancelar las corrutinas cuando ya no son necesarias.</p>
@@ -556,6 +557,7 @@ Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y
 <p>&#x1F4CC;en el m&#xE9;todo <strong>descargarDatos</strong> se usa la propiedad <strong><code>viewModelScope</code></strong> para lanzar la corrutina que producir&#xE1; el retardo y la lista generada con elementos aleatorios.</p>
 </blockquote>
 <p>El uso del ViewModel desde las distintas partes de la aplicaci&#xF3;n, es igual al que hemos visto en temas anteriores.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Realiza el ejercicio propuesto del cron&#xF3;metro</span></p>
 <h3 class="mume-header" id="servicios-y-tareas-de-larga-duraci%C3%B3n">Servicios y tareas de larga duraci&#xF3;n</h3>
 
 <p>Las corrutinas est&#xE1;n dise&#xF1;adas para trabajar tareas que deben finalizar cuando el usuario sale de un determinado alcance o termina una interacci&#xF3;n, pero a la hora de realizar lo que llamamos <strong>long-time running tasks</strong>, es decir tareas que tienen que estar durante un gran tiempo en segundo plano y no tienen porqu&#xE9; estar ligadas a la actividad que las ha lanzado o a la interacci&#xF3;n con el usuario, es necesario pensar en otras respuestas:</p>
@@ -660,7 +662,8 @@ Si el servicio creado va a realizar tareas que tengan un coste computacional ele
         <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Existen dos tipos de servicios. Aquel que se inicia expl&#xED;citamente a trav&#xE9;s del m&#xE9;todo <strong><code>startService()</code></strong> llamado <strong>Started Service</strong> y el que se liga a un componente con <strong><code>bindService()</code></strong> llamado <strong>Bound Service</strong>.</p>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba los dos ejemplos anteriores y mira el resultado en el Logcat</span></p>
+<p>Existen dos tipos de servicios. Aquel que se inicia expl&#xED;citamente a trav&#xE9;s del m&#xE9;todo <strong><code>startService()</code></strong> llamado <strong>Started Service</strong> y el que se liga a un componente con <strong><code>bindService()</code></strong> llamado <strong>Bound Service</strong>.</p>
 <ul>
 <li>Started: Una vez iniciado el servicio, se ejecuta de forma indefinida en segundo plano, incluso si se destruye el componente que lo inici&#xF3;.</li>
 <li>Bound: En este caso, el servicio ofrece una interfaz de tipo cliente-servidor a aquellos componentes que se asocian o enlazan a dicho servicio. Los componentes asociados o enlazados (bound) al servicio pueden enviar peticiones, conseguir resultados y respuestas o, incluso, llevar a cabo tareas de comunicaci&#xF3;n con otros procesos. En este caso, el servicio s&#xF3;lo se ejecuta cuando hay alg&#xFA;n componente asociado o enlazado a &#xE9;l.</li>
@@ -928,6 +931,7 @@ Con respecto al uso de IBinder, la documentaci&#xF3;n de Android nos dice que no
 <ol start="5">
 <li>IMPORTANTE , una vez que hemos terminado la l&#xF3;gica de la aplicaci&#xF3;n nos faltar&#xE1; dar de alta el servicio creado, en el archivo AndroidManifest.xml.</li>
 </ol>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Reconstruye el ejemplo para entender el funcionamiento del la comunicaci&#xF3;n mediante Bind</span></p>
 <h4 class="mume-header" id="broadcastreceiver">BroadCastReceiver</h4>
 
 <p>Un broadcast receiver es el componente que permite recibir y responder ante eventos del sistema (aviso de bater&#xED;a baja, un SMS recibido,&#x2026;) o eventos producidos por otras aplicaciones o servicios.<br>
@@ -1026,9 +1030,11 @@ Finalmente creamos un objeto AlarmManager inicializ&#xE1;ndolo con el servicio p
 <blockquote>
 <p>&#x26A0;&#xFE0F;Para probar esta aplicaci&#xF3;n es necesario un terminal real y no el emulador, ya que &#xE9;ste &#xFA;ltimo no puede reproducir la vibraci&#xF3;n.</p>
 </blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba el ejemplo del BroadcastReceiver</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Sigue el ejercicio resuelto que muestra un Toast indicando si se ha conectado/desconectado el dispositivo a la alimentaci&#xF3;n</span></p>
 <h4 class="mume-header" id="workmanager">WorkManager</h4>
 
-<p>Android <strong><code>WorkManager</code></strong> es una biblioteca de procesamiento que se utiliza para ejecutar tareas en segundo plano que deber&#xED;an ejecutarse de forma garantizada, pero no necesariamente de forma inmediata. Con WorkManager podemos poner en cola nuestro procesamiento en segundo plano incluso cuando la aplicaci&#xF3;n no se est&#xE1; ejecutando o el dispositivo se reinicia por alguna raz&#xF3;n. WorkManager tambi&#xE9;n nos permite definir las restricciones necesarias para ejecutar la tarea, por ejemplo, la disponibilidad de la red antes de iniciar la tarea en segundo plano.</p>
+<p>Android <a href="https://developer.android.com/topic/libraries/architecture/workmanager?hl=es">WorkManager</a> es una biblioteca de procesamiento que se utiliza para ejecutar tareas en segundo plano que deber&#xED;an ejecutarse de forma garantizada, pero no necesariamente de forma inmediata. Con WorkManager podemos poner en cola nuestro procesamiento en segundo plano incluso cuando la aplicaci&#xF3;n no se est&#xE1; ejecutando o el dispositivo se reinicia por alguna raz&#xF3;n. WorkManager tambi&#xE9;n nos permite definir las restricciones necesarias para ejecutar la tarea, por ejemplo, la disponibilidad de la red antes de iniciar la tarea en segundo plano.</p>
 <p>Android WorkManager es parte de  Android Jetpack y es perfecta para usar cuando la tarea:</p>
 <ol>
 <li>No necesita ejecutarse en un momento espec&#xED;fico</li>
@@ -1036,7 +1042,131 @@ Finalmente creamos un objeto AlarmManager inicializ&#xE1;ndolo con el servicio p
 <li>Se necesita que se ejecute incluso despu&#xE9;s de que se elimine la aplicaci&#xF3;n o se reinicie el dispositivo.</li>
 <li>Tiene que cumplir con limitaciones como el suministro de bater&#xED;a o la disponibilidad de la red antes de la ejecuci&#xF3;n.</li>
 </ol>
-<p>Para crear un trabajo de este tipo, se deber&#xE1; implementar una clase que herede de</p>
+<p>Para poder trabajar con <strong><code>WorkManager</code></strong> ser&#xE1; necesario incluir la siguiente implementaci&#xF3;n:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">   implementation &apos;androidx.work<span class="token operator">:</span>work-runtime-ktx<span class="token operator">:</span><span class="token number">2.6</span>.<span class="token number">0</span>&apos;
+</pre><h5 class="mume-header" id="crear-un-trabajo">Crear un trabajo</h5>
+
+<p>Para crear un trabajo de este tipo, se deber&#xE1; implementar una clase que herede de <strong><code>WorkManager</code></strong> y anular su m&#xE9;todo <strong><code>doWork()</code></strong> donde a&#xF1;adiremos el c&#xF3;digo que queramos que se ejecute en segundo plano (a diferencia de los servicios, no habr&#xE1; que crear ning&#xFA;n hilo ya que se encarga el sistema).</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token keyword">class</span> <span class="token function">WorkManager</span><span class="token punctuation">(</span><span class="token keyword">val</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
+       <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+           Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">}</span>
+        <span class="token keyword">var</span> intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        intento<span class="token punctuation">.</span><span class="token function">setComponent</span><span class="token punctuation">(</span>
+            <span class="token function">ComponentName</span><span class="token punctuation">(</span><span class="token string">&quot;com.ejemplos.b10.ejemploviewmodelcorrutinas&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;com.ejemplos.b10.ejemploviewmodelcorrutinas.MainActivity&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment">//Se a&#xF1;ade el Flag para que se pueda abrir una activity</span>
+        <span class="token comment">// desde un hilo en segundo plano</span>
+        intento<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_ACTIVITY_NEW_TASK<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token function">startActivity</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>intento<span class="token punctuation">,</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Result<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Este ejemplo crea una trabajo que realiza un retardo de 5 segundos y lanza un Intent para abrir otra aplicaci&#xF3;n. Como se puede ver todo el c&#xF3;digo est&#xE1; implementado en el m&#xE9;todo <strong><code>doWork()</code></strong>.</p>
+</blockquote>
+<h5 class="mume-header" id="iniciar-un-trabajo">Iniciar un trabajo</h5>
+
+<p>Este tipo de trabajos permite definir si queremos el hilo como tarea &#xFA;nica o periodica cada <strong><code>X</code></strong> tiempo. Para ello se usan dos clases distintas <strong><code>OneTimeWorkRequestBuilder&lt;T&gt;()</code></strong> y <strong><code>PeriodicWorkRequestBuilder&lt;T&gt;()</code></strong>. Veamos ejemplos de la creaci&#xF3;n de trabajos de los dos tipos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> work <span class="token operator">=</span> OneTimeWorkRequestBuilder<span class="token operator">&lt;</span>MiWorkManager<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> workPeriodico <span class="token operator">=</span>PeriodicWorkRequestBuilder<span class="token operator">&lt;</span>MiWorkManager<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>MINUTES<span class="token punctuation">)</span>
+                                                           <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>E el caso de tarea &#xFA;nica no hay nada que explicar, en cambio de la periodica podemos decir que le entra como primer argumento el intervalo que tiene que pasar hasta que se vuelva a realizar la siguiente iteraci&#xF3;n y el segundo argumento especifica las unidades del anterior (en este caso la tarea se repetir&#xE1; cada 16 minutos).</p>
+<div style="page-break-after:always;"></div>
+<blockquote>
+<p>&#x270B; Algunos puntos importantes a tener en cuenta al trabajar con <strong><code>WorkManager</code></strong> son:</p>
+<ul>
+<li>La primera ejecuci&#xF3;n ocurre inmediatamente despu&#xE9;s de que se cumplen las restricciones mencionadas por la solicitud de trabajo</li>
+<li>El trabajo se puede encadenar con otras solicitudes de trabajo.</li>
+<li>Si no se cancela se seguir&#xE1; ejecutando hasta que acabe.</li>
+</ul>
+<p>Adem&#xE1;s de lo anterior en caso de  trabajos de tipo periodicos, <strong><code>PeriodicWorkRequest</code></strong>, tambi&#xE9;n se tendr&#xE1; en cuenta son:</p>
+<ul>
+<li>El trabajo se ejecuta varias veces.</li>
+<li>Si no se cancela se seguir&#xE1; ejecutando peri&#xF3;dicamente.</li>
+<li>La siguiente ejecuci&#xF3;n ocurre despu&#xE9;s de que transcurra el periodo de tiempo indicado en los argumentos.</li>
+<li>El intervalo m&#xED;nimo de repetici&#xF3;n es de <em>15 minutos</em>.</li>
+<li>El trabajo no se puede encadenar con otras solicitudes de &gt;trabajo.</li>
+<li>El intervalo de tiempo entre 2 intervalos peri&#xF3;dicos puede diferir seg&#xFA;n las restricciones de optimizaci&#xF3;n del sistema operativo.</li>
+</ul>
+</blockquote>
+<p>Una vez creado el objeto, para ejecutar la solicitud de trabajo necesitamos llamar al m&#xE9;todo <strong><code>enqueue()</code></strong> desde una instancia de <strong><code>WorkManager</code></strong> y pasar el <strong><code>WorkRequest</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> workPeriodico <span class="token operator">=</span> PeriodicWorkRequestBuilder<span class="token operator">&lt;</span>WorkPeriodico<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>MINUTES<span class="token punctuation">)</span>
+                                                               <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>workPeriodico<span class="token punctuation">)</span>
+</pre><p>El m&#xE9;todo <strong><code>enqueue()</code></strong> pone en cola una o m&#xE1;s <strong><code>WorkRequests</code></strong> para que se ejecuten en segundo plano.</p>
+<h5 class="mume-header" id="funcionalidad-de-workmanager">Funcionalidad de WorkManager</h5>
+
+<p>Las instancias de <strong><code>WorkManager</code></strong> proporcionan una serie de funcionalidades para manejarnos con las tareas. Por ejemplo, podemos controlar si las tareas est&#xE1;n canceladas o cancelarlas si nos interesa, etc:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> workManager <span class="token operator">=</span> WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> id<span class="token operator">:</span>UUID
+id <span class="token operator">=</span> workPeriodico<span class="token punctuation">.</span>id
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>workManager<span class="token punctuation">.</span><span class="token function">getWorkInfoById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">.</span>isCancelled<span class="token punctuation">)</span>
+                 workManager<span class="token punctuation">.</span><span class="token function">cancelWorkById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+<span class="token comment">//En este caso se cancelan todas las tareas lanzadas por esta actividad</span>
+workManager<span class="token punctuation">.</span><span class="token function">cancelAllWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Cuando cancelamos un trabajo, este no se cancela autom&#xE1;ticamente sino que es el sistema el que se encarga de informar de la cancelaci&#xF3;n. Por lo que ser&#xE1; tarea del programador atender a la informaci&#xF3;n del sistema para parar el trabajo. Esto se hace desde la clase que hereda de <strong><code>WorkManager</code></strong>, por ejemplo de las siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">MiUnicoWork</span><span class="token punctuation">(</span><span class="token keyword">val</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+     <span class="token comment">//isStopped devolver&#xE1; true cuando el sistema informe</span>
+     <span class="token comment">//que el trabajo ha sido cancelado desde c&#xF3;digo</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>isStopped<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Realizar tarea larga&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token keyword">return</span> Result<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="restricciones-de-workmanager">Restricciones de WorkManager</h5>
+
+<p>Una de las ventajas que proporciona esta clase, es la de permitir <a href="https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work#work-constraints">restringir</a> la funcionalidad de la tarea hasta que se cumplan una serie de condiciones que se le hayan asociado. Logicamente, estas restricciones se impondr&#xE1;n al ser necesarios algunos requisitos para la funcionalidad de la app. Por ejemplo, si se necesita Internet para realizar una descarga de datos. En el siguiente c&#xF3;digo se han a&#xF1;adido todas las restricciones posibles:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token comment">//Se construyen las restricciones</span>
+<span class="token keyword">val</span> constraints <span class="token operator">=</span> Constraints<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresBatteryNotLow</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiredNetworkType</span><span class="token punctuation">(</span>NetworkType<span class="token punctuation">.</span>CONNECTED<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresCharging</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresStorageNotLow</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresDeviceIdle</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> workUnico <span class="token operator">=</span> OneTimeWorkRequestBuilder<span class="token operator">&lt;</span>MiUnicoWork<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//Se a&#xF1;aden al trabajo</span>
+workUnico<span class="token punctuation">.</span><span class="token function">setConstraints</span><span class="token punctuation">(</span>constraints<span class="token punctuation">)</span>
+WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>workUnico<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><h5 class="mume-header" id="comunicaci%C3%B3n-con-workmanager">Comunicaci&#xF3;n con WorkManager</h5>
+
+<p>Si queremos comunicar informaci&#xF3;n a la tarea, ya sea como datos de entrada antes de su ejecuci&#xF3;n o como datos de salida al terminar, se utiliza la clase <strong><code>Data.Builder</code></strong>. La informaci&#xF3;n se a&#xF1;ade al objeto mediante el ya conocido m&#xE9;todo del mapa clave-valor.<br>
+Para acceder a estos datos de entrada dentro del Worker, se usa la propiedad <strong><code>inputData</code></strong> dentro del m&#xE9;todo <strong><code>doWork()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> inputData <span class="token operator">=</span> Data<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">putString</span><span class="token punctuation">(</span><span class="token string">&quot;USER&quot;</span><span class="token punctuation">,</span> user<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">putString</span><span class="token punctuation">(</span><span class="token string">&quot;PASS&quot;</span><span class="token punctuation">,</span> pass<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">val</span> workUnico <span class="token operator">=</span> OneTimeWorkRequestBuilder<span class="token operator">&lt;</span>MiUnicoWork<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+workUnico<span class="token punctuation">.</span><span class="token function">setInputData</span><span class="token punctuation">(</span>inputData<span class="token punctuation">)</span>
+WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>workUnico<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">MiUnicoWork</span><span class="token punctuation">(</span><span class="token keyword">val</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword">val</span> user <span class="token operator">=</span> inputData<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;USER&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">val</span> pass <span class="token operator">=</span> inputData<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;PASS&quot;</span><span class="token punctuation">)</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token keyword">return</span> Result<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio resuelto n&#xFA;meros primos<br>
+</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio propuesto temporizador con vibraci&#xF3;n<br>
+</span></p>
 
       </div>
       
