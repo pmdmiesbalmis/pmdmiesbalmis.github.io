@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 11. Persistencia de Datos</title>
+      <title>PMDM 2&#xBA; DAM  Tema 11. Persistencia de Datos I</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -338,15 +338,29 @@ justo después del front matter
 </style>
 <h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
-<p><a href="./tema11_Persistencia_de_Datos.pdf">Descargar estos apuntes</a></p>
-<h1 class="mume-header undefined" id="tema-11-persistencia-de-datos">Tema 11. Persistencia de Datos</h1>
+<p><a href="./tema11_Persistencia_de_Datos_I.pdf">Descargar estos apuntes</a></p>
+<h1 class="mume-header undefined" id="tema-11-persistencia-de-datos-i">Tema 11. Persistencia de Datos I</h1>
 
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 <ol>
-<li><a href="#acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</a>
+<li><a href="#acceso-a-bases-de-datos-locales-sqlite">Acceso a bases de datos locales. SQLite</a>
 <ol>
 <li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
+<li><a href="#creaci%C3%B3n-y-apertura-de-la-bd">Creaci&#xF3;n y apertura de la BD</a></li>
+<li><a href="#acceso-y-modificaci%C3%B3n-de-los-datos-en-la-bd">Acceso y modificaci&#xF3;n de los datos en la BD</a>
+<ol>
+<li><a href="#acceso-a-la-bd-mediante-sentencias-sql">Acceso a la BD mediante sentencias sql</a></li>
+<li><a href="#acceso-a-la-bd-mediante-sqlitedatabase">Acceso a la BD mediante SQLiteDataBase</a></li>
+<li><a href="#recuperaci%C3%B3n-de-datos-con-rawquery">Recuperaci&#xF3;n de datos con rawQuery</a></li>
+<li><a href="#recuperaci%C3%B3n-de-datos-con-query">Recuperaci&#xF3;n de datos con query</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</a>
+<ol>
+<li><a href="#introducci%C3%B3n-1">Introducci&#xF3;n</a></li>
 <li><a href="#acceso-a-bases-de-datos-con-apirest-y-retrofit">Acceso a bases de datos con Apirest y Retrofit</a>
 <ol>
 <li><a href="#definici%C3%B3n-del-servicio-rest">Definici&#xF3;n del Servicio Rest</a></li>
@@ -357,9 +371,260 @@ justo después del front matter
 </li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</h2>
+<h2 class="mume-header" id="acceso-a-bases-de-datos-locales-sqlite">Acceso a bases de datos locales. SQLite</h2>
 
 <h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
+
+<p>La plataforma Android proporciona dos herramientas principales para el almacenamiento y consulta de datos estructurados: la base de datos <strong>SQLite</strong> y <strong>Content Providers</strong> (lo trabajaremos en temas posteriores).<br>
+Vamos a centrarnos en <a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a>, aunque no entraremos ni en el dise&#xF1;o de BBDD relacionales ni en el uso avanzado de la BBDD. Para conocer toda la funcionalidad de SQLite se recomienda usar la documentaci&#xF3;n oficial.<br>
+Para el acceso a las bases de datos tendremos tres clases que tenemos que conocer. La clase <strong><code>SQLiteOpenHelder</code></strong>, que encapsula todas las funciones de creaci&#xF3;n de la base de datos y versiones de la misma. La clase <strong><code>SQLiteDatabase</code></strong>, que incorpora la gesti&#xF3;n de tablas y datos. Y por &#xFA;ltimo la clase <strong><code>Cursor</code></strong>, que usaremos para movernos por el recordset que nos devuelve una consulta <em>SELECT</em>.</p>
+<h3 class="mume-header" id="creaci%C3%B3n-y-apertura-de-la-bd">Creaci&#xF3;n y apertura de la BD</h3>
+
+<p>El m&#xE9;todo recomendado para la creaci&#xF3;n de la base de datos es extender la clase <strong><code>SQLiteOpenHelder</code></strong> y sobrescribir los m&#xE9;todos <strong><code>onCreate</code></strong> y <strong><code>onUpgrade</code></strong>. El primer m&#xE9;todo se utiliza para crear la base de datos por primera vez y el segundo para actualizaciones de la misma. Si la base de datos ya existe y su versi&#xF3;n actual coincide con la solicitada, se realizar&#xE1; la conexi&#xF3;n a ella.</p>
+<p>Para ejecutar la sentencia SQL utilizaremos el m&#xE9;todo <strong><code>execSQL</code></strong> proporcionado por la API para SQLite de Android.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">internal</span> <span class="token keyword">inner</span> <span class="token keyword">class</span> <span class="token function">BDClientes</span><span class="token punctuation">(</span>
+        context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span>
+        name<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+        factory<span class="token operator">:</span> CursorFactory<span class="token operator">?</span><span class="token punctuation">,</span>
+        version<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">SQLiteOpenHelper</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> name<span class="token punctuation">,</span> factory<span class="token punctuation">,</span> version<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+     <span class="token keyword">var</span> sentencia <span class="token operator">=</span>
+            <span class="token string">&quot;create table if not exists clientes&quot;</span> <span class="token operator">+</span> 
+            <span class="token string">&quot;(dni VARCHAR PRIMARY KEY NOT NULL, nombre TEXT, apellidos TEXT);&quot;</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">,</span> i<span class="token operator">:</span> Int<span class="token punctuation">,</span> i2<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Si la base de datos existe pero su versi&#xF3;n actual es anterior a la solicitada, se llamar&#xE1; autom&#xE1;ticamente al m&#xE9;todo onUgrade(). Si la base de datos no existe se llama autom&#xE1;ticamente a onCreate().</p>
+</blockquote>
+<h3 class="mume-header" id="acceso-y-modificaci%C3%B3n-de-los-datos-en-la-bd">Acceso y modificaci&#xF3;n de los datos en la BD</h3>
+
+<p>Una vez creada la clase, instanciaremos un objeto del tipo creado y usaremos uno de los dos siguientes m&#xE9;todos para tener acceso a la gesti&#xF3;n de datos: <strong><code>getWritableDatabase()</code></strong> para acceso de escritura y <strong><code>getReadableDatabase()</code></strong> para acceso de solo lectura. En ambos casos se devolver&#xE1; un objeto de la clase <strong><code>SQLiteDatabase</code></strong> para el acceso a los datos.<br>
+Para realizar una codificaci&#xF3;n limpia y reutilizable, lo mejor es crear una clase con todos los m&#xE9;todos que necesitemos para trabajar con la Base de Datos, adem&#xE1;s es &#xFA;til tener la clase derivada de SQLiteOpenHelper interna a esta.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">BDAdapter</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword">private</span>  <span class="token keyword">var</span> clientes<span class="token operator">:</span> BDClientes
+    
+  <span class="token keyword">init</span> <span class="token punctuation">{</span>
+        clientes <span class="token operator">=</span> <span class="token function">BDClientes</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;BDClientes&quot;</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+     
+  <span class="token operator">..</span><span class="token punctuation">.</span> 
+
+  <span class="token keyword">internal</span> <span class="token keyword">inner</span> <span class="token keyword">class</span> <span class="token function">BDClientes</span><span class="token punctuation">(</span>
+        context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span>
+        name<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+        factory<span class="token operator">:</span> CursorFactory<span class="token operator">?</span><span class="token punctuation">,</span>
+        version<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">SQLiteOpenHelper</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> name<span class="token punctuation">,</span> factory<span class="token punctuation">,</span> version<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> sentencia <span class="token operator">=</span>
+            <span class="token string">&quot;create table if not exists clientes&quot;</span> <span class="token operator">+</span>
+            <span class="token string">&quot;(dni VARCHAR PRIMARY KEY NOT NULL, nombre TEXT, apellidos TEXT);&quot;</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">,</span> i<span class="token operator">:</span> Int<span class="token punctuation">,</span> i2<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Como podemos ver en el c&#xF3;digo, creamos un objeto del tipo de BDClientes con el que vamos a trabajar llamando al constructor BDClientes(), a este m&#xE9;todo le pasamos el contexto, el nombre de la BBDD, un objeto cursor (con valor null) y la versi&#xF3;n de la BD que necesitamos.</p>
+</blockquote>
+<p>Para poder usar los m&#xE9;todos creados en la clase, tan solo instanciaremos un objeto de esta pas&#xE1;ndole el contexto (de tipo activity). Con esta instancia podremos llamar a cualquiera de los m&#xE9;todos que crearemos en la clase de utilidad.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> bdAdapter <span class="token operator">=</span> <span class="token function">BDAdapter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+bdAdapter<span class="token punctuation">.</span><span class="token function">insertarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><h4 class="mume-header" id="acceso-a-la-bd-mediante-sentencias-sql">Acceso a la BD mediante sentencias sql</h4>
+
+<p>El acceso a la BBDD se hace en dos fases, primero se consigue un objeto del tipo <strong><code>SQLiteDatabase</code></strong> y posteriormente usamos sus funciones para gestionar los datos. Si hemos abierto correctamente la base de datos entonces podremos empezar con las inserciones, actualizaciones, borrado, etc. No deberemos olvidar cerrar el acceso a la BD, siempre y cuando no se est&#xE9; usando un cursor.</p>
+<p><em>Por ejemplo, vamos a insertar 10 registros en nuestra tabla clientes. Para ello podremos crear un m&#xE9;todo en el <strong>BDAdapter</strong> parecido al siguiente:</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">insertarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> dbClientes <span class="token operator">=</span>clientes<span class="token punctuation">.</span>writableDatabase
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dbClientes <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">val</span> sentencia <span class="token operator">=</span> <span class="token string">&quot;INSERT INTO Clientes (dni, nombre, apellidos) VALUES&quot;</span> <span class="token operator">+</span>
+                        <span class="token string">&quot; (&apos;&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;&apos;,&apos;nombre&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;&apos;,&apos;apellido&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;&apos;);&quot;</span>
+                dbClientes<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            dbClientes<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; Vale, &#xBF;y ahora qu&#xE9;? &#xBF;D&#xF3;nde est&#xE1; la base de datos que acabamos de crear? &#xBF;C&#xF3;mo podemos comprobar que todo ha ido bien y que los registros se han insertado correctamente?, en primer lugar veamos d&#xF3;nde se ha creado nuestra base de datos. Todas las bases de datos SQLite creadas por aplicaciones Android se almacenan en la memoria del tel&#xE9;fono en un fichero con el mismo nombre de la base de datos situado en una ruta que sigue el siguiente patr&#xF3;n: <strong>/data/data/paquete.java.de.la.aplicacion/databases/nombre_base_datos</strong><br>
+En el caso de nuestro ejemplo, la base de datos se almacenar&#xED;a por tanto en la ruta siguiente: <strong>/data/data/ejemplo.basedatos/databases/DBClientes</strong><br>
+Para comprobar que los datos se han grabado podemos acceder de forma remota al emulador a trav&#xE9;s de su consola de comandos (shell). Pero es mas sencillo abrir el archivo creado con un bloc de notas y echar un vistazo a su contenido.</p>
+</blockquote>
+<h4 class="mume-header" id="acceso-a-la-bd-mediante-sqlitedatabase">Acceso a la BD mediante SQLiteDataBase</h4>
+
+<p>La API de Android nos ofrece dos m&#xE9;todos para acceder a los datos. El primero de ellos ya lo hemos visto, se trata de ejecutar sentencias SQL a trav&#xE9;s de <strong>execSql</strong>. Este m&#xE9;todo tiene como par&#xE1;metro una cadena con cualquier instrucci&#xF3;n SQL v&#xE1;lida. La otra forma es utilizar los m&#xE9;todos espec&#xED;ficos <strong>insert(), update() y delete()</strong> de la clase <strong>SQLiteDatabase</strong>.<br>
+Veamos a continuaci&#xF3;n cada uno de estos m&#xE9;todos.</p>
+<ul>
+<li><strong><code>insert()</code></strong>: recibe tres par&#xE1;metros <em><code>insert(table, nullColumnHack, values)</code></em>, el primero es el nombre de la tabla, el segundo se utiliza en caso de que necesitemos insertar valores nulos en la tabla &quot;nullColumnHack&quot; en este caso lo dejaremos pasar ya que no lo vamos a usar y por lo tanto lo ponemos a null y el tercero son los valores del registro a insertar. Los valores a insertar los pasaremos a su vez como elementos de una colecci&#xF3;n de tipo <strong><code>ContentValues</code></strong>.  Estos elementos se almacenan como parejas <strong>clave-valor</strong>, donde la clave ser&#xE1; el nombre de cada campo y el valor ser&#xE1; el dato que se va a insertar.</li>
+<li><strong><code>update()</code></strong>: Pr&#xE1;cticamente es igual que el anterior m&#xE9;todo pero con la excepci&#xF3;n de que aqu&#xED; estamos usando el m&#xE9;todo <em><code>update(table, values, whereClause, whereArgs)</code></em> para actualizar/modificar registros de nuestra tabla. Este m&#xE9;todo nos pide el nombre de la tabla &quot;table&quot;, los valores a modificar/actualizar &quot;values&quot; (ContentValues), una condici&#xF3;n WHERE &quot;whereClause&quot; que nos sirve para indicarle que valor queremos que actualice y como &#xFA;ltimo par&#xE1;metro &quot;whereArgs&quot; podemos pasarle los valores nuevos a insertar, en este caso no lo vamos a necesitar por lo tanto lo ponemos a null.</li>
+<li><strong><code>delete()</code></strong>: el m&#xE9;todo <em><code>delete(table, whereClause, whereArgs)</code></em> nos pide el nombre de la tabla &quot;table&quot;, el registro a borrar &quot;whereClause&quot; que tomaremos como referencia su id y como &#xFA;ltimo par&#xE1;metro &quot;whereArgs&quot; los valores a borrar.</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden;">
+<td align="center">
+<div align="left">
+    Insertando con ContentValues
+</div>
+</td>
+<td style="border:hidden;">
+<div>
+<img height="160" src="./imagenes/imagen8.png">
+</div>
+</td>
+</tr>
+<tr style="border:hidden;">
+<td style="border:hidden;">
+<div>
+<img height="130" src="./imagenes/imagen9.png">
+</div>
+</td>
+<td style="border:hidden;">
+<div align="left">
+    Modificando con ContentValues
+</div>
+</td>
+</tr>
+<tr style="border:hidden;">
+<td align="center">
+<div align="left">
+    Borrando con ContentValues
+</div>
+</td>
+<td style="border:hidden;">
+<div>
+<img height="70" src="./imagenes/imagen10.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>Los valores que hemos dejado anteriormente como null son realmente argumentos que podemos utilizar en la sentencia SQL. Ve&#xE1;moslo con un ejemplo:</p>
+<div align="center">
+    <img height="130" src="./imagenes/imagen11.png">
+</div>
+<p>Donde las <code>?</code> indican los emplazamientos de los argumentos.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea un ejercicio EjercicioResueltoBD en el que pruebes el c&#xF3;digo visto anteriormente: Creaci&#xF3;n de la BD, insertar elementos con SQL y modificar, eliminar e insertar mediante ContentValue.</span></p>
+<h4 class="mume-header" id="recuperaci%C3%B3n-de-datos-con-rawquery">Recuperaci&#xF3;n de datos con rawQuery</h4>
+
+<p>Existen dos formas de recuperar informaci&#xF3;n (SELECT de la base de datos), aunque ambas se apoyan en el concepto de <strong>cursor</strong>, que es en definitiva el objeto que recoge los resultados de la consulta.Vamos a completar el ejercicio anterior, para que nos permita ir insertando registros en la BD y visualiz&#xE1;ndolos en un listView.</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr>
+<td style="border:hidden;">
+<div align="left">
+    La primera forma de obtener datos es utilizar el m&#xE9;todo rawQuery() de la clase SQLiteDatabase. Este m&#xE9;todo recibe como par&#xE1;metro la sentencia SQL, donde se indican los campos a recuperar y los criterios de selecci&#xF3;n.
+</div>
+</td>
+<td style="border:hidden;">
+<div align="center">
+    <img width="600" src="./imagenes/imagen12.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">seleccionarDatosSelect</span><span class="token punctuation">(</span>sentencia<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> listaCliente<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span>
+        <span class="token keyword">val</span> dbClientes <span class="token operator">=</span> clientes<span class="token punctuation">.</span>readableDatabase
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dbClientes <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">val</span> cursor<span class="token operator">:</span> Cursor <span class="token operator">=</span> dbClientes<span class="token punctuation">.</span><span class="token function">rawQuery</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            listaCliente <span class="token operator">=</span> <span class="token function">getClientes</span><span class="token punctuation">(</span>cursor<span class="token punctuation">)</span>
+            dbClientes<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>listaCliente <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token boolean">false</span> <span class="token keyword">else</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+</pre><p>Evidentemente, ahora tendremos que recorrer el cursor y visualizar los datos devueltos. Para ello se dispone de los m&#xE9;todos <strong><code>moveToFirst()</code></strong>, <strong><code>moveToNext()</code></strong>, <strong><code>moveToLast()</code></strong>, <strong><code>moveToPrevius()</code></strong>, <strong><code>isFirst()</code></strong> y <strong><code>isLast()</code></strong>.<br>
+Existen m&#xE9;todos espec&#xED;ficos para la recuperaci&#xF3;n de datos getXXX(indice), donde XXX indica el tipo de dato (String, Blob, Float,&#x2026;) y el par&#xE1;metro &#xED;ndice permite recuperar la columna indicada en el mismo, teniendo en cuenta que comienza en 0.</p>
+<p>El m&#xE9;todo getClientes (implementado por nosotros) es el que nos permite leer los datos existentes en la BD y llevarlos al arrayList:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">getClientes</span><span class="token punctuation">(</span>cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span><span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> clientes<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span>
+    <span class="token keyword">var</span> cliente<span class="token operator">:</span> Clientes
+    cursor<span class="token punctuation">.</span><span class="token function">moveToFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>cursor<span class="token punctuation">.</span><span class="token function">isAfterLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        clientes <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>cursor<span class="token punctuation">.</span><span class="token function">isAfterLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            cliente <span class="token operator">=</span>
+              <span class="token function">Clientes</span><span class="token punctuation">(</span>cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            clientes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>cliente<span class="token punctuation">)</span>
+            cursor<span class="token punctuation">.</span><span class="token function">moveToNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> clientes
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span>
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="recuperaci%C3%B3n-de-datos-con-query">Recuperaci&#xF3;n de datos con query</h4>
+
+<p>La segunda forma de recuperar informaci&#xF3;n de la BD es utilizar el m&#xE9;todo <strong><code>query()</code></strong>. Recibe como par&#xE1;metros el nombre de la tabla, un string con los campos a recuperar, un string donde especificar las condiciones del WHERE, otro para los argumentos si los hubiera, otro para el GROUP BY, otro para HAVING y finalmente otro para ORDER BY.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">seleccionarDatosCodigo</span><span class="token punctuation">(</span>
+        columnas<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">,</span>
+        <span class="token keyword">where</span><span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+        valores<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">,</span>
+        orderBy<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span> 
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> listaCliente<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> dbClientes <span class="token operator">=</span> clientes<span class="token punctuation">.</span>readableDatabase
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>dbClientes <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+            <span class="token keyword">val</span> cursor<span class="token operator">:</span> Cursor <span class="token operator">=</span> 
+             dbClientes<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token string">&quot;clientes&quot;</span><span class="token punctuation">,</span> columnas<span class="token punctuation">,</span> <span class="token keyword">where</span><span class="token punctuation">,</span> valores<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> orderBy<span class="token punctuation">)</span>
+            listaCliente <span class="token operator">=</span> <span class="token function">getClientes</span><span class="token punctuation">(</span>cursor<span class="token punctuation">)</span>
+            dbClientes<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> listaCliente
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+</pre><p>Donde la llamada al m&#xE9;todo podr&#xED;a ser la siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword">val</span> listaCliente <span class="token operator">=</span> bdAdapter<span class="token punctuation">.</span><span class="token function">seleccionarDatosCodigo</span><span class="token punctuation">(</span>
+                    <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;dni&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token keyword">null</span><span class="token punctuation">,</span>
+                    <span class="token keyword">null</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea un ejercicio ejemploBD en el que pruebes el c&#xF3;digo visto anteriormente: Recuperaci&#xF3;n de los datos con rawQuery y con query. Para ello crea la aplicaci&#xF3;n como en la imagen, de forma que con un bot&#xF3;n se guarde la informaci&#xF3;n en la BD y con el otro se extraiga y se muestre en una lista o en un recycler. Si vais a utilizar una lista como se muestra en la imagen, debereis crear una clase adaptador como la de la siguiente imagen y asociarla a la lista con el setAdapter:</span></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> binding<span class="token punctuation">.</span>listView<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>
+                   <span class="token function">AdaptadorClientes</span><span class="token punctuation">(</span>
+                       <span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span>
+                       R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>list_layout<span class="token punctuation">,</span>
+                       listaCliente<span class="token operator">!!</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>Clase Adaptador para un ListView:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">AdaptadorClientes</span><span class="token punctuation">(</span><span class="token keyword">var</span> activitycontext<span class="token operator">:</span> Activity<span class="token punctuation">,</span> 
+                           resource<span class="token operator">:</span> Int<span class="token punctuation">,</span> 
+                           objects<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span>
+                           <span class="token punctuation">)</span> <span class="token operator">:</span>
+   ArrayAdapter<span class="token operator">&lt;</span>Any<span class="token operator">&gt;</span><span class="token punctuation">(</span>activitycontext<span class="token punctuation">,</span> resource<span class="token punctuation">,</span> objects <span class="token keyword">as</span> List<span class="token operator">&lt;</span>Any<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">var</span> objects<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span>
+   <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">getView</span><span class="token punctuation">(</span>position<span class="token operator">:</span> Int<span class="token punctuation">,</span> 
+                         convertView<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">,</span> 
+                         parent<span class="token operator">:</span> ViewGroup<span class="token punctuation">)</span><span class="token operator">:</span> View <span class="token punctuation">{</span>
+       <span class="token keyword">var</span> vista<span class="token operator">:</span> View<span class="token operator">?</span><span class="token operator">=</span> convertView
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>vista <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token keyword">val</span> inflater <span class="token operator">=</span> activitycontext<span class="token punctuation">.</span>layoutInflater
+           vista <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>list_layout<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+           <span class="token punctuation">(</span>vista<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>apellidolist<span class="token punctuation">)</span> <span class="token keyword">as</span> TextView<span class="token punctuation">)</span>
+                                <span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>objects<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">.</span>apellidos<span class="token punctuation">)</span>
+           <span class="token punctuation">(</span>vista<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>nombrelist<span class="token punctuation">)</span> <span class="token keyword">as</span> TextView<span class="token punctuation">)</span>
+                                <span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>objects<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
+           <span class="token punctuation">(</span>vista<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>dnilist<span class="token punctuation">)</span> <span class="token keyword">as</span> TextView<span class="token punctuation">)</span>
+                                <span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>objects<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">.</span>dni<span class="token punctuation">)</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">return</span> vista
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">init</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>objects <span class="token operator">=</span> objects
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio Propuesto Recorrer BD</span></p>
+<h2 class="mume-header" id="acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</h2>
+
+<h3 class="mume-header" id="introducci%C3%B3n-1">Introducci&#xF3;n</h3>
 
 <p>Para obtener y guardar informaci&#xF3;n de una base de datos remota, es necesario conectarse a un servidor donde se encontrar&#xE1; la BBDD. El esquema de funcionamiento lo podemos ver en la siguiente imagen:</p>
 <div align="center">
