@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
       
       
       
@@ -264,7 +264,7 @@ pre[data-line] .line-highlight[data-end]:after {
       <h1 class="mume-header undefined" id="ejercicio-resuelto-di%C3%A1logo-personalizado">Ejercicio resuelto di&#xE1;logo personalizado</h1>
 
 <p><a href="./dialogo_Personalizado.pdf">Descargar estos apuntes</a></p>
-<p>Vamos a desarrollar una aplicaci&#xF3;n (EjemploDialogoPersonalizado) que abra un di&#xE1;logo dise&#xF1;ado por nosotros tras pulsar un bot&#xF3;n en la pantalla de la actividad principal.</p>
+<p>Vamos a desarrollar una aplicaci&#xF3;n (EjemploDialogoPersonalizado) que abra un di&#xE1;logo dise&#xF1;ado por nosotros, como se muestra abajo,  tras pulsar un bot&#xF3;n en la pantalla de la actividad principal. Deb&#xE9;is a&#xF1;adir un bot&#xF3;n en el layout <strong>main_activity.xml</strong>, y crear el xml para el di&#xE1;logo.</p>
 <div align="center">
     <img height="190" src="./imagenes/dialogoPersonalizado.png">
 </div>
@@ -290,7 +290,7 @@ pre[data-line] .line-highlight[data-end]:after {
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>normal_padding<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>8dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>button_padding<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>24dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
-</pre><p>El archivo xml correspondiente a esta interfaz ser&#xED;a:</p>
+</pre><p>El archivo xml correspondiente a la interfaz <strong>dialogo.xml</strong> ser&#xED;a:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
@@ -417,34 +417,34 @@ pre[data-line] .line-highlight[data-end]:after {
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintTop_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/olvidar_text<span class="token punctuation">&quot;</span></span>  <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
 </pre><p>Solamente nos falta analizar el c&#xF3;digo de nuestra aplicaci&#xF3;n, donde iremos visualizando los elementos de la vista y las acciones de cada uno de los botones.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[18-20,21-30]}" class="language-kotlin" data-line="18-20,21-30"><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+<pre data-role="codeBlock" data-info="kotlin {highlight=[18-20,21-30]}" class="language-kotlin" data-line="18-20,21-30"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> binding<span class="token operator">:</span> ActivityMainBinding
 
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
-        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token keyword keyword-val">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
         <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
 
         binding<span class="token punctuation">.</span>button1<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">val</span> al <span class="token operator">=</span> <span class="token function">createLoginDialogo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-val">val</span> al <span class="token operator">=</span> <span class="token function">createLoginDialogo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             al<span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">fun</span> <span class="token function">createLoginDialogo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> MaterialAlertDialogBuilder <span class="token punctuation">{</span>
-        <span class="token keyword">val</span> builder <span class="token operator">=</span> <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">)</span>
-        <span class="token keyword">val</span> inflater <span class="token operator">=</span> <span class="token keyword">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">.</span>layoutInflater
-        <span class="token keyword">val</span> v <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>dialogo<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">createLoginDialogo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> MaterialAlertDialogBuilder <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> builder <span class="token operator">=</span> <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> inflater <span class="token operator">=</span> <span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">.</span>layoutInflater
+        <span class="token keyword keyword-val">val</span> v <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>dialogo<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
         builder<span class="token punctuation">.</span><span class="token function">setView</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
-        <span class="token keyword">val</span> crear <span class="token operator">=</span> v<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>View<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>crear_boton<span class="token punctuation">)</span> <span class="token keyword">as</span> Button
-        <span class="token keyword">val</span> entrar <span class="token operator">=</span> v<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>View<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>entrar_boton<span class="token punctuation">)</span> <span class="token keyword">as</span> Button
+        <span class="token keyword keyword-val">val</span> crear <span class="token operator">=</span> v<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>View<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>crear_boton<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> Button
+        <span class="token keyword keyword-val">val</span> entrar <span class="token operator">=</span> v<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>View<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>entrar_boton<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> Button
         crear<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span> <span class="token comment">// Crear Cuenta...</span>
             Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> <span class="token string">&quot;Pulsaste CREAR&quot;</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
         entrar<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span> 
             Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> <span class="token string">&quot;Pulsaste ENTRAR&quot;</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> builder
+        <span class="token keyword keyword-return">return</span> builder
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -501,7 +501,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </div></div></pre><blockquote>
 <p>&#x1F4CC; Aclaraciones:</p>
 <ul>
-<li><strong>L&#xED;neas 18-20</strong>: la idea es que tenemos que superponer la vista de nuestro di&#xE1;logo sobre la vista de nuestra actividad, es decir, inflar la vista. Para ello utilizamos un objeto <strong><code>inflater</code></strong> que hace referencia a la vista principal (su xml) con <strong><code>this@MainActivity.layoutInflater</code></strong>. Posteriormente a&#xF1;adimos o inflamos sobre esa vista el dise&#xF1;o de nuestro di&#xE1;logo, obteniendo una nueva jeraqu&#xED;a de vista (l&#xED;nea 11). Finalmente esa vista se asigna al di&#xE1;logo que  estamos construyendo (l&#xED;nea 20).</li>
+<li><strong>L&#xED;neas 18-20</strong>: la idea es que tenemos que superponer la vista de nuestro di&#xE1;logo sobre la vista de nuestra actividad, es decir, inflar la vista. Para ello utilizamos un objeto <strong><code>inflater</code></strong> que hace referencia a la vista principal (su xml) con <strong><code>this@MainActivity.layoutInflater</code></strong>. Posteriormente a&#xF1;adimos o inflamos sobre esa vista el dise&#xF1;o de nuestro di&#xE1;logo, obteniendo una nueva jeraqu&#xED;a de vista (l&#xED;nea 19). Finalmente esa vista se asigna al di&#xE1;logo que  estamos construyendo (l&#xED;nea 20).</li>
 <li><strong>L&#xED;neas 21-30</strong>: referenciamos las vistas del di&#xE1;logo que queremos tratar y escribimos los escuchadores correspondientes.</li>
 </ul>
 </blockquote>
