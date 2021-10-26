@@ -264,78 +264,13 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <style>/* 
-Añade 
-
-@import "../EstilosPersonalizadosMarkdownEnhanced.less"
-
-justo después del front matter 
-*/
-/* Please visit the URL below for more information: */
-/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
-@font-face {
-  font-family: 'Catamaran';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
-}
-.contenedor {
-  display: flex;
-  justify-content: center;
-  margin: 30px auto 30px auto;
-}
-.fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
-  background-size: cover;
-  width: 75%;
-  height: 160px;
-  border-radius: 10px;
-  position: relative;
-}
-.cita {
-  font-family: Arial;
-  font-style: italic;
-  font-weight: 600;
-  text-align: justify;
-  line-height: 1.5rem;
-  opacity: 0.6;
-  color: white;
-  padding: 5rem;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  font-size: 1.3rem;
-  transform: translate(-50%, -50%);
-}
-.abre_comilla {
-  font-family: "Catamaran";
-  font-weight: 600;
-  color: white;
-  padding-left: 30px;
-  position: absolute;
-  font-size: 6rem;
-  transform: translate(0%, -15%);
-}
-.cierra_comilla {
-  font-family: "Catamaran";
-  font-weight: 600;
-  color: white;
-  padding-right: 30px;
-  right: 0%;
-  position: absolute;
-  font-size: 6rem;
-  transform: translate(0%, 55%);
-}
-.autor {
-  font-family: Arial;
-  color: white;
-  margin: 0px;
-  padding-left: 30px;
-  position: absolute;
-  top: 83%;
-  font-size: 1rem;
-}
-</style>
+      <pre>FileError: resource &apos;https://fonts.googleapis.com/css?family=Catamaran&apos; gave this Error:
+  Error: getaddrinfo ENOTFOUND fonts.googleapis.com
+ in input on line 13, column 1:
+12 
+13 @import url(https://fonts.googleapis.com/css?family=Catamaran);
+14 
+</pre>  
 <h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
 <p><a href="./tema11_Persistencia_de_Datos_I.pdf">Descargar estos apuntes</a></p>
@@ -356,6 +291,11 @@ justo después del front matter
 <li><a href="#recuperaci%C3%B3n-de-datos-con-query">Recuperaci&#xF3;n de datos con query</a></li>
 </ol>
 </li>
+<li><a href="#uso-de-simplecursoradapter">Uso de SimpleCursorAdapter</a>
+<ol>
+<li><a href="#cursores-con-recyclerview">Cursores con RecyclerView</a></li>
+</ol>
+</li>
 </ol>
 </li>
 <li><a href="#acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</a>
@@ -365,6 +305,12 @@ justo después del front matter
 <ol>
 <li><a href="#definici%C3%B3n-del-servicio-rest">Definici&#xF3;n del Servicio Rest</a></li>
 <li><a href="#consumo-de-un-servicio-rest-desde-android">Consumo de un Servicio Rest desde Android</a></li>
+</ol>
+</li>
+<li><a href="#acceso-a-base-de-datos-con-firebase">Acceso a Base de Datos con FIREBASE</a>
+<ol>
+<li><a href="#creando-un-app-de-firebase">Creando un app de Firebase</a></li>
+<li><a href="#cloud-firestore">Cloud Firestore</a></li>
 </ol>
 </li>
 </ol>
@@ -622,6 +568,276 @@ Existen m&#xE9;todos espec&#xED;ficos para la recuperaci&#xF3;n de datos getXXX(
 <span class="token punctuation">}</span>
 </pre></blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio Propuesto Recorrer BD</span></p>
+<h3 class="mume-header" id="uso-de-simplecursoradapter">Uso de SimpleCursorAdapter</h3>
+
+<p>Se utiliza para mapear las columnas de un cursor abierto en una base de datos a los diferentes elementos visuales contenidos en el control de selecci&#xF3;n. As&#xED; se evita el volcado de todos los elementos descargados de la BD a una colecci&#xF3;n, con el ahorro de memoria que conlleva.<br>
+Nos encontramos con dos casos: cuando usamos <strong><code>Spinner</code></strong> o <strong><code>ListView</code></strong> sencillos el adaptador que gestiona este volcado ya est&#xE1; creado, si usamos <strong><code>RecyclerView</code></strong> tendremos que crear y gestionar el adaptador.<br>
+Vamos a programar un ejemplo para practicar este concepto, ser&#xE1; una sencilla actividad con un <strong><code>Spinner</code></strong> que mostrar&#xE1; los ciclos inform&#xE1;ticos con la categor&#xED;a a la que pertenecen:</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr>
+<td>
+<div align="center">
+    <img height src="./imagenes/imagen13.png">
+</div>
+</td>
+<td>
+<div align="center">
+    <img height src="./imagenes/imagen14.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>Para ello nos creamos la base de datos e insertamos elementos como ya hemos visto hasta el momento:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">DBAdapter</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span>  <span class="token keyword">var</span> ohCategoria<span class="token operator">:</span> OHCategoria
+    <span class="token keyword">init</span> <span class="token punctuation">{</span>
+        ohCategoria <span class="token operator">=</span> <span class="token function">OHCategoria</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;BBDCategorias&quot;</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">fun</span> <span class="token function">insertarDatosCodigo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">val</span> sqLiteDatabase <span class="token operator">=</span> ohCategoria<span class="token punctuation">.</span>writableDatabase
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sqLiteDatabase <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">val</span> valores <span class="token operator">=</span> <span class="token function">ContentValues</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ASIR&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cate&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Superior&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;idcategoria&quot;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token string">&quot;categoria&quot;</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> valores<span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;DAM&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cate&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Superior&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;idcategoria&quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token string">&quot;categoria&quot;</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> valores<span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;SMR&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cate&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Medio&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;idcategoria&quot;</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token string">&quot;categoria&quot;</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> valores<span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">fun</span> <span class="token function">leerDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>Cursor<span class="token operator">?</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> sqLiteDatabase <span class="token operator">=</span> ohCategoria<span class="token punctuation">.</span>readableDatabase
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sqLiteDatabase <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> sqLiteDatabase<span class="token punctuation">.</span><span class="token function">rawQuery</span><span class="token punctuation">(</span>
+                <span class="token string">&quot;select  idcategoria as _id, nombre, cate from categoria&quot;</span><span class="token punctuation">,</span>
+                <span class="token keyword">null</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">inner</span> <span class="token keyword">class</span> <span class="token function">OHCategoria</span><span class="token punctuation">(</span>
+         context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span> name<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+         factory<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">.</span>CursorFactory<span class="token operator">?</span><span class="token punctuation">,</span> 
+         version<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">QLiteOpenHelper</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> name<span class="token punctuation">,</span> factory<span class="token punctuation">,</span> version<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> cadena <span class="token operator">=</span>
+            &quot;create table <span class="token keyword">if</span> not exists <span class="token function">categoria</span><span class="token punctuation">(</span>idcategoria
+             INTEGER PRIMARY KEY NOT NULL<span class="token punctuation">,</span> nombre TEXT<span class="token punctuation">,</span> cate TEXT<span class="token punctuation">)</span><span class="token punctuation">;</span>&quot;
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>db<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            db<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>cadena<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>db<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">,</span> 
+                               oldVersion<span class="token operator">:</span> Int<span class="token punctuation">,</span> newVersion<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Posteriormente pasamos a crear el cursorAdapter, pero para ello vamos a usar un Spinner para mostrar la informaci&#xF3;n, lo incluimos en el layout principal.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[9,10]}" class="language-kotlin" data-line="9,10"> <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> from <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;cate&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> <span class="token keyword">to</span> <span class="token operator">=</span> <span class="token function">intArrayOf</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>ciclo<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>cate<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_my<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> dbAdapter<span class="token operator">=</span><span class="token function">DBAdapter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        dbAdapter<span class="token punctuation">.</span><span class="token function">insertarDatosCodigo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> desplegable <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>Spinner<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>spinner<span class="token punctuation">)</span>
+        <span class="token keyword">val</span> cursor<span class="token operator">=</span>dbAdapter<span class="token punctuation">.</span><span class="token function">leerDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">val</span> mAdapter <span class="token operator">=</span> <span class="token function">SimpleCursorAdapter</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>spinner_layout<span class="token punctuation">,</span> 
+                                           cursor<span class="token punctuation">,</span> from<span class="token punctuation">,</span> <span class="token keyword">to</span><span class="token punctuation">,</span> <span class="token number">0x0</span><span class="token punctuation">)</span>
+        desplegable<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>mAdapter<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; en la <strong>L&#xED;nea 9</strong> se devuelve el cursor con la selecci&#xF3;n de los datos de la BD (cuidado!! no se deber&#xE1; cerrar el cursor). <strong>L&#xED;nea 19</strong> para el funcionamiento del <strong><code>SimpleCursorAdapter</code></strong>, es necesario indicar en su definici&#xF3;n los siguientes elementos: el contexto, el layout sobre el que se va a definir la vista, el cursor que va a ser origen de los datos, lista con el nombre de las columnas que se quiere enlazar, una lista con los id de las vistas donde se van a mostrar los campos (el orden es importante) y un flag (0 por defecto)</p>
+</blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba la aplicaci&#xF3;n del ejemplo anterior</span></p>
+<h4 class="mume-header" id="cursores-con-recyclerview">Cursores con RecyclerView</h4>
+
+<p>Como era de esperar, no se puede aplicar directamente un adaptador de tipo <strong><code>SimpleCursorAdapter</code></strong> a un tipo <strong><code>RecyclerView</code></strong>. Si queremos aprovechar los beneficios de los cursores en los recyclers, tendremos que fabricarlos a medida. Los pasos son los siguientes:</p>
+<ol>
+<li>
+<p>Crear una clase <strong>Abstracta</strong> base que derive de <strong>RecyclerView.Adapter</strong> y en la que implementaremos los m&#xE9;todos sobrescritos derivados de RecyclerView.Adapter:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8,10,12,16]}" class="language-kotlin" data-line="8,10,12,16"> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token function">CursorRecyclerAdapter</span><span class="token punctuation">(</span>cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> <span class="token operator">:</span>
+ RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword">var</span> mCursor<span class="token operator">:</span> Cursor
+ <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token punctuation">,</span> 
+                               position<span class="token operator">:</span> Int<span class="token punctuation">)</span> 
+ <span class="token punctuation">{</span>
+     <span class="token function">checkNotNull</span><span class="token punctuation">(</span>mCursor<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token string">&quot;ERROR, cursos vacio&quot;</span> <span class="token punctuation">}</span>
+     <span class="token function">check</span><span class="token punctuation">(</span>mCursor<span class="token punctuation">.</span><span class="token function">moveToPosition</span><span class="token punctuation">(</span>position<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token string">&quot;ERROR, no se puede&quot;</span> <span class="token operator">+</span>
+             <span class="token string">&quot; encontrar la posicion:  <span class="token interpolation variable">$position</span>&quot;</span> <span class="token punctuation">}</span>
+     <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token punctuation">,</span> mCursor<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">abstract</span> <span class="token keyword">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token punctuation">,</span> 
+                               cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span>
+ <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int
+ <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>mCursor <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>    mCursor<span class="token punctuation">.</span><span class="token function">getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span> <span class="token number">0</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">init</span> <span class="token punctuation">{</span>
+     mCursor <span class="token operator">=</span> cursor
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Al heredar de <strong><code>RecyclerView.Adapter</code></strong> habr&#xE1; que implementar los m&#xE9;todos <strong><code>onBindViewHolder()</code></strong> al que le llega la posici&#xF3;n de la l&#xED;nea del recycler que est&#xE1; activa en ese momento y <strong><code>getItemCount()</code></strong> que tendr&#xE1; que devolver los elementos que tiene el cursor <strong>L&#xED;nea 16</strong>, le llega en el constructor. En el m&#xE9;todo onBindViewHolder se comprobar&#xE1; que el cursor no est&#xE1; vacio y que se puede acceder a la posici&#xF3;n que llega como par&#xE1;metro <strong>L&#xED;nea 8</strong>, y en ese caso se llamar&#xE1; al m&#xE9;todo <strong><code>onBindViewHolder(holder: RecyclerView.ViewHolder, cursor: Cursor)</code></strong> abstracto que debemos crear en esta clase <strong>L&#xED;nea 12</strong>, pero esta vez con un <strong><code>Cursor</code></strong> como par&#xE1;metro.</p>
+</blockquote>
+</li>
+<li>
+<p>Ahora tendremos que crear nuestra clase RecyclerView derivada de la anterior.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[12]}" class="language-kotlin" data-line="12"><span class="token keyword">class</span> <span class="token function">RecyclerAdapter</span><span class="token punctuation">(</span>c<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">CursorRecyclerAdapter</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateViewHolder</span><span class="token punctuation">(</span>parent<span class="token operator">:</span> ViewGroup<span class="token punctuation">,</span> 
+                                 viewType<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span> 
+ <span class="token punctuation">{</span>
+     <span class="token keyword">val</span> v<span class="token operator">:</span> View <span class="token operator">=</span> LayoutInflater<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>parent<span class="token punctuation">.</span>context<span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>recycler_layout<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+     <span class="token keyword">return</span> <span class="token function">SimpleViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">override</span>  <span class="token keyword">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token punctuation">,</span>
+                                cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> 
+ <span class="token punctuation">{</span>
+     <span class="token punctuation">(</span>holder <span class="token keyword">as</span> SimpleViewHolder<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>cursor<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">internal</span> <span class="token keyword">inner</span> <span class="token keyword">class</span> <span class="token function">SimpleViewHolder</span><span class="token punctuation">(</span>itemView<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span>
+                   RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span> 
+ <span class="token punctuation">{</span>
+     <span class="token keyword">var</span> nombre<span class="token operator">:</span> TextView
+     <span class="token keyword">var</span> cate<span class="token operator">:</span> TextView
+     <span class="token keyword">var</span> imagen<span class="token operator">:</span> ImageView
+     <span class="token keyword">fun</span> <span class="token function">bind</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         nombre<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         cate<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token keyword">val</span> theImage<span class="token operator">:</span> Bitmap <span class="token operator">=</span> MainActivity<span class="token punctuation">.</span>
+                          <span class="token function">convertirStringBitmap</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         imagen<span class="token punctuation">.</span><span class="token function">setImageBitmap</span><span class="token punctuation">(</span>theImage<span class="token punctuation">)</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">init</span> <span class="token punctuation">{</span>
+         nombre <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>ciclo<span class="token punctuation">)</span>
+         cate <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>cate<span class="token punctuation">)</span>
+         imagen <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imagen<span class="token punctuation">)</span> <span class="token keyword">as</span> ImageView
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; A esta clase le llegar&#xE1; el cursor por el constructor que a su vez ser&#xE1; pasado a la clase padre. Al heredar de la clase abstracta, tendremos que implementar su m&#xE9;todo abstracto y ser&#xE1; ah&#xED; donde aprovecharemos que el cursos se ha posicionado en el elemento correcto de la BD, para llamar al m&#xE9;todo <strong><code>bind(cursor)</code></strong>  <strong>L&#xED;nea 12</strong> del <strong><code>Holder</code></strong>, con ese estado del cursor.  En el <strong><code>Holder</code></strong> trataremos los elementos que sacamos del cursos de forma correcta.</p>
+</blockquote>
+</li>
+</ol>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden;">
+<td>
+3. Como esta App es un poco diferente a la anterior, se han incluido im&#xE1;genes para dar m&#xE1;s funcionalidad, hay dos m&#xE9;todos que nos permiten pasar im&#xE1;genes de Bitmap a String y viceversa para poderlas guardar en la BD a trav&#xE9;s del cursor (En la BD se guardar&#xE1;n como Blob). Est&#xE1;n localizados en MyActivity y son est&#xE1;ticos para poder acceder a ellos sin necesidad de objeto.
+</td>
+<td style="border:hidden;">
+<div align="center">
+    <img width="1000" src="./imagenes/imagen15.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">companion</span> <span class="token keyword">object</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword">fun</span> <span class="token function">convertirStringBitmap</span><span class="token punctuation">(</span>imagen<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Bitmap <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> decodedString<span class="token operator">:</span> ByteArray <span class="token operator">=</span> Base64<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>imagen<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> BitmapFactory<span class="token punctuation">.</span><span class="token function">decodeByteArray</span><span class="token punctuation">(</span>decodedString<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> decodedString<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">fun</span> <span class="token function">ConvertirImagenString</span><span class="token punctuation">(</span>bitmap<span class="token operator">:</span> Bitmap<span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> stream <span class="token operator">=</span> <span class="token function">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    bitmap<span class="token punctuation">.</span><span class="token function">compress</span><span class="token punctuation">(</span>Bitmap<span class="token punctuation">.</span>CompressFormat<span class="token punctuation">.</span>PNG<span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">,</span> stream<span class="token punctuation">)</span>
+    <span class="token keyword">val</span> byte_arr<span class="token operator">:</span> ByteArray <span class="token operator">=</span> stream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> Base64<span class="token punctuation">.</span><span class="token function">encodeToString</span><span class="token punctuation">(</span>byte_arr<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Prueba la aplicaci&#xF3;n del ejemplo anterior<br>
+</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio propuesto cursor con recycler</span></p>
 <h2 class="mume-header" id="acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</h2>
 
 <h3 class="mume-header" id="introducci%C3%B3n-1">Introducci&#xF3;n</h3>
@@ -857,6 +1073,142 @@ En el builder de Retrofit se incluye la url base del api terminada con <strong><
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;EjercicioPropuestoBDExternas</span></p>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;EjercicioPropuestoAgenda</span></p>
+<h3 class="mume-header" id="acceso-a-base-de-datos-con-firebase">Acceso a Base de Datos con FIREBASE</h3>
+
+<p><a href="https://firebase.google.com/">Firebase</a> es una plataforma de backend para construir aplicaciones m&#xF3;viles y web, se encarga del manejo de la infraestructura permitiendo que el desarrollador se enfoque en otros aspectos de la aplicaci&#xF3;n. Entre sus caracter&#xED;sticas se incluye base de datos de tiempo real, autenticaci&#xF3;n de usuarios y almacenamiento (hosting) est&#xE1;tico. La idea de usar Firebase es no tener que escribir c&#xF3;digo del lado del servidor y aprovechar al m&#xE1;ximo las caracter&#xED;sticas que nos provee la plataforma. Para utilizar Firebase con Android disponemos de un SDK, lo que nos permitir&#xE1; integrarlo f&#xE1;cilmente a nuestra aplicaci&#xF3;n. Para este ejemplo vamos a construir un listado de cosas por hacer usando la base de datos de tiempo real de Firebase como backend y autenticaci&#xF3;n con email/password.</p>
+<h4 class="mume-header" id="creando-un-app-de-firebase">Creando un app de Firebase</h4>
+
+<p>El primer paso es asociar nuestra cuenta de Firebase a una de nuestras cuentas de correo electr&#xF3;nico:</p>
+<div align="center">
+    <img height="250" src="./imagenes/imagen16.png">
+</div>
+<p>Una vez est&#xE1; lista veremos la pantalla donde es posible visualizar nuestros proyectos o crear nuevos.</p>
+<div align="center">
+    <img height="250" src="./imagenes/imagen17.png">
+</div>
+<span style="align: center;">
+<table align="center">
+<tbody><tr>
+<td style="border: 0;">
+Para crear un nuevo proyecto solamente tendremos que introducir un nombre y la organizaci&#xF3;n o carpeta principal del proyecto. Google nos pedir&#xE1; si queremos habilitar Google Analytics en el proyecto, lo dejaremos habilitado.
+</td>
+<td style="border: 0;">
+<div align="center">
+    <img width="1000" src="./imagenes/imagen18.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<div align="left">
+    <img height="50" src="./imagenes/imagen19.png">
+</div>
+<p>Y lo asociaremos a la cuenta por defecto. Una vez realizados estos pasos, se crear&#xE1; el proyecto de firebase.</p>
+<p>Posteriormente nos aparecer&#xE1; la pantalla que nos permitir&#xE1; a&#xF1;adir la aplicaci&#xF3;n a nuestro proyecto Cada proyecto estar&#xE1; asociado a una o m&#xE1;s aplicaciones, por lo que antes de crear el proyecto necesitaremos crear la aplicaci&#xF3;n o decidir el espacio de nombres de esta.</p>
+<p>Vamos a crear una aplicaci&#xF3;n sencilla con el siguiente aspecto, que nos permita entender el funcionamiento de acceso a Firebase para enviar y recibir datos sin autentificaci&#xF3;n.</p>
+<div align="center">
+    <img height="50" src="./imagenes/imagen19.png">
+</div>
+<p>Cuando el usuario meta la informaci&#xF3;n en los TextView y pulse el bot&#xF3;n a&#xF1;adir, la informaci&#xF3;n se guarda en Firebase y cuando se modifique esta desde Firebase, se mostrar&#xE1; un mensaje con el texto modificado en el Txt de la aplicaci&#xF3;n.</p>
+<div align="center">
+    <img height="150" src="./imagenes/imagen20.png">
+</div>
+<p>Una vez tengamos el espacio de nombre, podremos seguir con los pasos que nos pide Firebase para crear la aplicaci&#xF3;n. En nuestro caso no ser&#xE1; necesario introducir la firma de certificaci&#xF3;n.</p>
+<div align="center">
+    <img height="350" src="./imagenes/imagen21.png">
+</div>
+<p>Justo en el momento que termina de crearse la aplicaci&#xF3;n, se descargara un archivo JSON que deberemos copiar en nuestro proyecto Android. Solo tendremos que seguir las instrucciones que proporciona muy claramente la p&#xE1;gina Web de Firebase (copiar el archivo y a&#xF1;adir las l&#xED;neas que indican que vamos a usar servicios de google en los build.gradle de la app y del proyecto).</p>
+<ol>
+<li>
+<p>En el proyecto</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">  dependencies <span class="token punctuation">{</span>
+     classpath <span class="token string">&quot;com.android.tools.build:gradle:7.0.3&quot;</span>
+     classpath <span class="token string">&quot;com.google.gms:google-services:4.3.10&quot;</span> <span class="token comment">//a&#xF1;adir esta l&#xED;nea</span>
+     ...
+  <span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>En la APP</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">plugins <span class="token punctuation">{</span>
+   id &apos;com.android.application&apos;
+   id &apos;kotlin-android&apos;
+   id &apos;com.google.gms.google-services&apos;  <span class="token comment">// Google Services plugin</span>
+<span class="token punctuation">}</span>
+
+dependencies <span class="token punctuation">{</span>
+    ...
+    implementation &apos;androidx.appcompat<span class="token operator">:</span>appcompat<span class="token operator">:</span><span class="token number">1.3</span>.<span class="token number">1</span>&apos;
+    <span class="token comment">//a&#xF1;adir las siguientes dos l&#xED;neas</span>
+    implementation platform(&apos;com.google.firebase<span class="token operator">:</span>firebase-bom<span class="token operator">:</span><span class="token number">28.4</span>.<span class="token number">1</span>&apos;)
+    implementation &apos;com.google.firebase<span class="token operator">:</span>firebase-analytics&apos;
+    ...
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<p>La dependencia de firebase bom permitir&#xE1; evitar a&#xF1;adir la versi&#xF3;n al resto de dependencias de Firebase que incluyamos en nuestro proyecto, facilitando mucho el trabajo.<br>
+Muy importante no olvidar a&#xF1;adir en el SDK, el servicio de Google Play</p>
+<div align="center">
+    <img height src="./imagenes/imagen22.png">
+</div>
+<p>En el modo consola podremos acceder a todos nuestros proyectos, y podemos comprobar la aplicaci&#xF3;n o aplicaciones a&#xF1;adidas sobre un proyecto (podemos a&#xF1;adir m&#xE1;s de una).</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden;">
+<td align="center" rowspan="2">
+<div align="left">
+    <img width="400" src="./imagenes/imagen24.png">
+</div>
+</td>
+<td style="border:hidden;">
+<div align="center">
+    <img height="150" src="./imagenes/imagen23.png">
+</div>
+</td>
+</tr>
+<tr>
+<td style="border:hidden;">
+Accediendo a la configuraci&#xF3;n de la aplicaci&#xF3;n o del proyecto, podremos ver informaci&#xF3;n sobre las claves, ID de aplicaci&#xF3;n y dem&#xE1;s. Tambi&#xE9;n podremos descargar de nuevo el .json de configuraci&#xF3;n de los servicios.
+</td>
+</tr>
+
+</tbody></table>
+</span>
+<p>Todas las aplicaciones por defecto se encuentran en modo desarrollo y bajo el plan gratis que soporta hasta 100 conexiones concurrentes, 1GB de almacenamiento y 10GB de transferencia en el backend. Luego de creada el app nos dirigimos a ver sus detalles, podemos entrar en diversas pesta&#xF1;as que nos permitir&#xE1;n trabajar con la APP, pero a nosotros nos interesa la BD. Firebase ofrece dos soluciones de bases de datos en la nube y accesibles para los clientes que admiten sincronizaci&#xF3;n en tiempo real:</p>
+<ul>
+<li><strong><code>Cloud Firestore</code></strong> es la base de datos m&#xE1;s reciente de Firebase. Aprovecha lo mejor de Realtime Database con un modelo de datos nuevo, permite consultas m&#xE1;s ricas y r&#xE1;pidas, y el escalamiento se ajusta a un nivel m&#xE1;s alto que Realtime Database.</li>
+<li><strong><code>Realtime Database</code></strong> es la base de datos original de Firebase. Es una soluci&#xF3;n eficiente y de baja latencia destinada a las apps para dispositivos m&#xF3;viles que necesitan estados sincronizados entre los clientes en tiempo real. Es similar a la anterior en su uso, por lo que no la explicaremos.</li>
+</ul>
+<div align="center">
+    <img height="250" src="./imagenes/imagen25.png">
+</div>
+<h4 class="mume-header" id="cloud-firestore">Cloud Firestore</h4>
+
+<p>Base de datos NoSQL flexible, escalable y en la nube a fin de almacenar y sincronizar datos para la programaci&#xF3;n en el lado del cliente y del servidor. Al igual que Firebase Realtime Database, mantiene los datos sincronizados entre apps cliente a trav&#xE9;s de agentes de escucha en tiempo real. El modelo de datos de Cloud Firestore admite estructuras de datos flexibles y jer&#xE1;rquicas. Almacena los datos en documentos organizados en colecciones, los documentos pueden contener objetos anidados complejos, adem&#xE1;s de subcolecciones. Cloud Firestore est&#xE1; optimizado para almacenar grandes colecciones de documentos peque&#xF1;os. El modelo de datos est&#xE1; formado por documentos, cada documento contiene un conjunto de pares clave-valor. Todos los documentos se deben almacenar en colecciones, los documentos pueden contener subcolecciones y objetos anidados, y ambos pueden incluir campos primitivos como strings o tipos de objetos complejos como listas. Las colecciones y los documentos se crean de manera impl&#xED;cita en Cloud Firestore. Solo debes asignar datos a un documento dentro de una colecci&#xF3;n. Si la colecci&#xF3;n o el documento no existen, Cloud Firestore los crea. Cada documento est&#xE1; identificado por una clave &#xFA;nica, que puede generarse autom&#xE1;ticamente o que se puede a&#xF1;adir a la vez que el documento:</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen26.png">
+</div>
+<p>Son muy similares a JSON, de hecho, b&#xE1;sicamente son JSON. Existen algunas diferencias, por ejemplo: los documentos admiten <strong>tipos de datos adicionales</strong> y su tama&#xF1;o se limita a 1 MB, pero en general, puedes tratar los documentos como registros JSON livianos. Los documentos viven en colecciones, que simplemente son contenedores de documentos. Por ejemplo, podr&#xED;as tener una colecci&#xF3;n llamada users con los distintos usuarios de tu app, en la que haya un documento que represente a cada uno:</p>
+<div align="center">
+    <img height="250" src="./imagenes/imagen27.png">
+</div>
+<p>Vamos a modificar el ejercicio del que hemos creado el layout de inicio para que nos permita interactuar con la base de datos de Cloud Firestore. En el proyecto de Firebase que acabamos de crear, a&#xF1;adiremos una base de datos Cloud Firestore.</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">  implementation &apos;com.google.firebase<span class="token operator">:</span>firebase-auth&apos;
+</pre><p>Vamos a modificar el ejercicio del que hemos creado el layout de inicio para que nos permita interactuar con la base de datos de Cloud Firestore. En el proyecto de Firebase que acabamos de crear, a&#xF1;adiremos una base de datos Cloud Firestore.</p>
+<div align="center">
+    <img height="150" src="./imagenes/imagen28.png">
+</div>
+<p>Deberemos seleccionar la ubicaci&#xF3;n de nuestra Base de Datos, podemos seleccionar Z&#xDA;RICH(europe-west6). Un elemento importante y que todav&#xED;a no hemos mencionado, son la Reglas. La Firebase Cloud Firestore proporciona un lenguaje de reglas flexibles basadas en expresiones y sintaxis similar a la de JavaScript <a href="https://firebase.google.com/docs/firestore/security/get-started?authuser=0">https://firebase.google.com/docs/firestore/security/get-started?authuser=0</a>, que permite definir f&#xE1;cilmente la manera en que tus datos deben estructurarse e indexarse, y el momento en que pueden someterse a lectura y escritura. Estas reglas las podremos configurar desde la pesta&#xF1;a RULES de nuestra BD,</p>
+<div align="center">
+    <img height="150" src="./imagenes/imagen29.png">
+</div>
+<p>Por defecto vendr&#xED;an configuradas para modo producci&#xF3;n, aunque para iniciarse podemos seleccionar modo de prueba (dura 30 d&#xED;as).</p>
+<div align="center">
+    <img height="220" src="./imagenes/imagen30.png">
+</div>
+<div align="center">
+    <img height="150" src="./imagenes/imagen31.png">
+</div>
+<p>Si nos hubi&#xE9;semos confundido o quisi&#xE9;ramos cambiar las reglas, habr&#xED;a que cambiar su valor y sobre todo <strong>No olvidar Publicar</strong>. Para referenciar a nuestra base de datos solamente tendremos que crearnos un objeto de tipo FirebaseFirestore. El archivo que descargamos al enlazar la app con el proyecto, es el que se encarga de todo el trabajo interno para la conexi&#xF3;n.</p>
 
       </div>
       
