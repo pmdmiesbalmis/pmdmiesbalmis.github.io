@@ -957,14 +957,14 @@ Per a observar un element <a href="https://developer.android.com/topic/libraries
 
 
 <div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div></pre><p>&#x1F4CC;<strong>L&#xED;nia 1</strong> en aquest cas veiem que el fragment hereta de <strong><code>ListFragment</code></strong> en comptes de <strong><code>Fragment</code></strong>, aix&#xF2; permet que el fragment estiga format per una llista d&apos;elements i que no s&apos;haja de crear cap vista espec&#xED;fica per al. Per a associar els elements a la llista, haurem de crear un <strong><code>ArrayAdapter</code></strong> indicant els valors i el *layout d&apos;eixida (predefinit en els recursos d&apos;Android) <strong>L&#xED;nia 8</strong> (Aquest element es veur&#xE0; m&#xE9;s extensament en temes posteriors). <strong>L&#xED;nia d&apos;11 a 15</strong>, aquesta sobrec&#xE0;rrega del m&#xE8;tode <strong><code>onListItemClick</code></strong> est&#xE0; associada a la pulsaci&#xF3; de qualsevol element de la llista, entrant com a par&#xE0;metres la vista i la posici&#xF3; de l&apos;element premut. <strong>L&#xED;nia 2</strong> es crea una propietat del <strong><code>ViewModel</code></strong> creat amb anterioritat, utilitzant el delegat <strong><code>activityViewModels</code></strong> per a obtindre una refer&#xE8;ncia al ViewModel en l&apos;&#xE0;mbit de la seua activitat i que es puga compartir entre les diferents vistes o fragments, mentre el cicle de vida ho permeta</p>
+</div></div></pre><p>&#x1F4CC;<strong>L&#xED;nia 1</strong> en aquest cas veiem que el fragment hereta de <strong><code>ListFragment</code></strong> en comptes de <strong><code>Fragment</code></strong>, aix&#xF2; permet que el fragment estiga format per una llista d&apos;elements i que no s&apos;haja de crear cap vista espec&#xED;fica per al. Per a associar els elements a la llista, haurem de crear un <strong><code>ArrayAdapter</code></strong> indicant els valors i el layout d&apos;eixida (predefinit en els recursos d&apos;Android) <strong>L&#xED;nia 8</strong> (Aquest element es veur&#xE0; m&#xE9;s extensament en temes posteriors). <strong>L&#xED;nia d&apos;11 a 15</strong>, aquesta sobrec&#xE0;rrega del m&#xE8;tode <strong><code>onListItemClick</code></strong> est&#xE0; associada a la pulsaci&#xF3; de qualsevol element de la llista, entrant com a par&#xE0;metres la vista i la posici&#xF3; de l&apos;element premut. <strong>L&#xED;nia 2</strong> es crea una propietat del <strong><code>ViewModel</code></strong> creat amb anterioritat, utilitzant el delegat <strong><code>activityViewModels</code></strong> per a obtindre una refer&#xE8;ncia al ViewModel en l&apos;&#xE0;mbit de la seua activitat i que es puga compartir entre les diferents vistes o fragments, mentre el cicle de vida ho permeta</p>
 </blockquote>
 <blockquote>
 <p>&#x1F393; Un altre cas diferent, podem tindre&apos;l quan <strong>el fragment es comunica a trav&#xE9;s de la activity</strong>, mitjan&#xE7;ant el ViewModel. Suposarem, el cas m&#xE9;s com&#xFA; en el qual unisca activity carregar&#xE0; una llista i en pr&#xE9;mer un element d&apos;aquesta es carrega l&apos;altre fragment. El layout del <strong>fragment_secundari.xml</strong> i <strong>MyListFragment.kt</strong> tindran el mateix codi que per a l&apos;anterior exemple.</p>
 </blockquote>
 <div style="page-break-after:always;"></div>
 <blockquote>
-<p>El *layout de l&apos;activitat principal ara nom&#xE9;s tindr&#xE0; un contenidor, <strong>activity_main.xml:</strong></p>
+<p>El layout de l&apos;activitat principal ara nom&#xE9;s tindr&#xE0; un contenidor, <strong>activity_main.xml:</strong></p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.fragment.app.FragmentContainerView</span>
    <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
@@ -994,7 +994,7 @@ Per a observar un element <a href="https://developer.android.com/topic/libraries
            fT<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
            fT<span class="token punctuation">.</span><span class="token function">addToBackStack</span><span class="token punctuation">(</span><span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
        <span class="token punctuation">}</span>
-       model<span class="token punctuation">.</span>selectedItem<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> nameObserver<span class="token punctuation">)</span>
+       model<span class="token punctuation">.</span>getItem<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> nameObserver<span class="token punctuation">)</span>
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <div class="line-highlight-wrapper">
@@ -1038,7 +1038,7 @@ Per a observar un element <a href="https://developer.android.com/topic/libraries
 
 
 <div aria-hidden="true" class="line-highlight" data-range="20" data-start="20">
-</div></div></pre><p>&#x1F4CC;<strong>L&#xED;nia 2</strong>, *instanciamos el ViewModel tenint en compte que per a l&apos;activitat s&apos;associa el delegat <strong><code>viewModels</code></strong>. En el bloc des de la <strong>L&#xED;nia 10 fins a la 19</strong>, constru&#xEF;m un delegat amb l&apos;observador que s&apos;encarregar&#xE0; de carregar el FragmentSecundario amb la informaci&#xF3; passada en un Bundle. <strong>L&#xED;nia 20</strong>, es posa en observaci&#xF3; el ViewModel amb el delegat constru&#xEF;t anteriorment.</p>
+</div></div></pre><p>&#x1F4CC;<strong>L&#xED;nia 2</strong>, instanciem el ViewModel tenint en compte que per a l&apos;activitat s&apos;associa el delegat <strong><code>viewModels</code></strong>. En el bloc des de la <strong>L&#xED;nia 10 fins a la 19</strong>, constru&#xEF;m un delegat amb l&apos;observador que s&apos;encarregar&#xE0; de carregar el FragmentSecundario amb la informaci&#xF3; passada en un Bundle. <strong>L&#xED;nia 20</strong>, es posa en observaci&#xF3; el ViewModel amb el delegat constru&#xEF;t anteriorment.</p>
 </blockquote>
 <div style="page-break-after:always;"></div>
 <blockquote>
@@ -1205,7 +1205,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 <p>FragmentManager tamb&#xE9; t&#xE9; diversos m&#xE8;todes d&apos;utilitat, entre els quals es troben:</p>
 <ul>
 <li>
-<p><strong><code>popBackStack</code></strong> *desapila fragments de la pila de retorn,simulant l&apos;&#xFA;s del comando Arrere per part de l&apos;usuari. Tamb&#xE9; es pot seleccionar un fragment en concret per a desapilar.</p>
+<p><strong><code>popBackStack</code></strong> desapila fragments de la pila de retorn,simulant l&apos;&#xFA;s del comando Arrere per part de l&apos;usuari. Tamb&#xE9; es pot seleccionar un fragment en concret per a desapilar.</p>
 </li>
 <li>
 <p>Per a obtindre fragments que ja existeixen en l&apos;activitat amb <strong><code>findFragmentById()</code></strong> (per a fragments que proporcionen una IU en el disseny de l&apos;activitat) o <strong><code>findFragmentByTag()</code></strong> (per a fragments amb o sense IU).</p>
@@ -1219,7 +1219,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 <ul>
 <li><strong>Gr&#xE0;fic de navegaci&#xF3;</strong>: &#xC9;s un recurs XML que cont&#xE9; tota la informaci&#xF3; relacionada amb la navegaci&#xF3;.</li>
 <li><strong>NavHost</strong>: &#xC9;s un contenidor buit que mostra els destins del teu gr&#xE0;fic de navegaci&#xF3;. Per defecte est&#xE0; implementat el <strong><code>NavHostFragment</code></strong> per a fragments i que ser&#xE0; el que usem.</li>
-<li><strong>NavController</strong>: &#xC9;s l&apos;objecte que administra la navegaci&#xF3; de l&apos;app dins d&apos;un *NavHost.</li>
+<li><strong>NavController</strong>: &#xC9;s l&apos;objecte que administra la navegaci&#xF3; de l&apos;app dins d&apos;un NavHost.</li>
 </ul>
 <blockquote>
 <p>&#x270B;Ser&#xE0; important decidir com volem passar d&apos;uns fragments a uns altres, <strong>perqu&#xE8; el que no s&apos;ha de fer &#xE9;s mesclar el sistema de Navigation amb el qual usem amb FragmentManager</strong>.</p>
@@ -1297,7 +1297,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 
 <div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; En l&apos;activitat principal, per exemple, podem crear l&apos;espai per a inserir els fragmentes, en aquest cas des de <strong>L&#xED;nia 9 a 15</strong>. Els atributs nous i que s&apos;han de posar per al funcionament correcte s&#xF3;n: el nom assignat a la classe <strong>L&#xED;nia 10</strong>, s&apos;usa el <strong><code>NavHostFragment</code></strong> que ja est&#xE0; implementat; <strong>L&#xED;nia 13</strong>, el *atrivuto <strong><code>defaultNavHost</code></strong> garanteix que el teu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3; Arrere del sistema; En el <strong>navGraph</strong> s&apos;indica el nom del gr&#xE0;fic de navegaci&#xF3;. Element que explicarem ara <strong>L&#xED;nia 14</strong>.</p>
+<p>&#x1F4CC; En l&apos;activitat principal, per exemple, podem crear l&apos;espai per a inserir els fragmentes, en aquest cas des de <strong>L&#xED;nia 9 a 15</strong>. Els atributs nous i que s&apos;han de posar per al funcionament correcte s&#xF3;n: el nom assignat a la classe <strong>L&#xED;nia 10</strong>, s&apos;usa el <strong><code>NavHostFragment</code></strong> que ja est&#xE0; implementat; <strong>L&#xED;nia 13</strong>, l&apos;atribut <strong><code>defaultNavHost</code></strong> garanteix que el teu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3; Arrere del sistema; En el <strong>navGraph</strong> s&apos;indica el nom del gr&#xE0;fic de navegaci&#xF3;. Element que explicarem ara <strong>L&#xED;nia 14</strong>.</p>
 </blockquote>
 <h5 class="mume-header" id="navgraph">NavGraph</h5>
 
@@ -1427,7 +1427,7 @@ Codi <strong>fragment1.xml</strong> amb dos botons <em>cancel&#xB7;lar i accepta
 
 
 <div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
-</div></div></pre><p>&#x1F4CC; S&apos;ha creat un m&#xE8;tode <strong>cancelar</strong> que permet executar l&apos;acci&#xF3; global, s&apos;ha fet d&apos;aquesta manera per a no repetir codi en els *fragments i de pas con&#xE9;ixer com s&apos;executa una acci&#xF3; des de la main. <strong>L&#xED;nia 6</strong>, creem la inst&#xE0;ncia del <strong><code>NavHostFragment</code></strong>. <strong>L&#xED;nia 11 i 12</strong> instanciem el <strong><code>NavController</code></strong> i executem l&apos;acci&#xF3; global de navegaci&#xF3; al Fragment1.</p>
+</div></div></pre><p>&#x1F4CC; S&apos;ha creat un m&#xE8;tode <strong>cancelar</strong> que permet executar l&apos;acci&#xF3; global, s&apos;ha fet d&apos;aquesta manera per a no repetir codi en els fragments i de pas con&#xE9;ixer com s&apos;executa una acci&#xF3; des de la main. <strong>L&#xED;nia 6</strong>, creem la inst&#xE0;ncia del <strong><code>NavHostFragment</code></strong>. <strong>L&#xED;nia 11 i 12</strong> instanciem el <strong><code>NavController</code></strong> i executem l&apos;acci&#xF3; global de navegaci&#xF3; al Fragment1.</p>
 <p>El <strong>Fragment1.kt</strong> i per tant, la resta de Fragments. Amb el bot&#xF3; <strong>aceptar</strong> que realitzar&#xE0; l&apos;acci&#xF3; de moure&apos;s al seg&#xFC;ent fragment (en Fragment3 ser&#xE0; la global de moure&apos;s al fragment1) i el bot&#xF3; <strong>cancelar</strong> que llan&#xE7;ar&#xE0; l&apos;acci&#xF3; global.</p>
 </blockquote>
 <blockquote>
@@ -1620,14 +1620,14 @@ class MainActivity : FragmentActivity()
 </pre><blockquote>
 <p>&#x1F4CC; En aquest cas ens ha convingut que MainActivity herete de <strong><code>FragmentActivity</code></strong>, perqu&#xE8; d&apos;aquesta manera no ens de problemes l&apos;anomenada al constructor de <strong><code>FragmentStateAdapter</code></strong>.<br>
 <strong>L&#xED;nia 7</strong> instanciem l&apos;objecte <strong><code>ViewPager2</code></strong> de <em>activity_main.xml</em>.<br>
-<strong>L&#xED;nia 8</strong> *instanciamos un objecte de la classe que hereta de <strong><code>FragmentStateAdapter</code></strong>.<br>
+<strong>L&#xED;nia 8</strong> instanciem un objecte de la classe que hereta de <strong><code>FragmentStateAdapter</code></strong>.<br>
 <strong>L&#xED;nia 9</strong> relacionem tots dos objectes per a fer la connexi&#xF3;. <strong>Bloc 11 a 13</strong>, anul&#xB7;lem el BackPressed perqu&#xE8; realitze el comportament correcte de canvi de fragments. Com es pot veure es fa mitjan&#xE7;ant la propietat <strong><code>currentItem</code></strong> decrementant-la en 1.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Reconstrueix l&apos;exemple explicat amb anterioritat per a provar el funcionament del ViewPager. Podr&#xE0;s comprovar que el pas d&apos;informaci&#xF3; amb ViewModel continua funcionant correctament<br>
 </span></p>
 <h4 class="mume-header" id="tabslayout">TabsLayout</h4>
 
-<p>Un objecte <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2#add_tabs_using_a_tablayout">*TabLayout</a> proporciona una forma crear pestanyes horitzontals. Quan s&apos;usa juntament amb un ViewPager2 ens permet el lliscament al mateix temps que es marca la pestanya activa.</p>
+<p>Un objecte <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2#add_tabs_using_a_tablayout">TabLayout</a> proporciona una forma crear pestanyes horitzontals. Quan s&apos;usa juntament amb un ViewPager2 ens permet el lliscament al mateix temps que es marca la pestanya activa.</p>
 <div align="center">
     <img height="120" src="./imagenes/taps1.png">
 </div>
@@ -1666,12 +1666,12 @@ class MainActivity : FragmentActivity()
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><blockquote>
-<p>&#x1F4CC; En crear una inst&#xE0;ncia de la classe <strong>TabLayoutMediator</strong> s&apos;ha d&apos;implementar la *interface <strong><code>TabLayoutMediator.TabConfigurationStrategy</code></strong> per a configurar la pestanya de la p&#xE0;gina en la posici&#xF3; especificada (en aquesta interface s&apos;establir&#xE0; el text de la pestanya i qualsevol estil de les pestanyes que es necessite).<br>
+<p>&#x1F4CC; En crear una inst&#xE0;ncia de la classe <strong>TabLayoutMediator</strong> s&apos;ha d&apos;implementar la interface <strong><code>TabLayoutMediator.TabConfigurationStrategy</code></strong> per a configurar la pestanya de la p&#xE0;gina en la posici&#xF3; especificada (en aquesta interface s&apos;establir&#xE0; el text de la pestanya i qualsevol estil de les pestanyes que es necessite).<br>
 <strong><code>TabLayoutMediator</code></strong> sincronitzar&#xE0; la posici&#xF3; de ViewPager2 amb la pestanya seleccionada quan se seleccione una pestanya, i la posici&#xF3; de despla&#xE7;ament de TabLayout quan l&apos;usuari arrossegament ViewPager2.</p>
 </blockquote>
 <p>A m&#xE9;s <strong><code>TabLayoutMediator</code></strong> escolta diferents elements, per a controlar les diferents situacions:</p>
 <ul>
-<li><strong><code>OnPageChangeCallback</code></strong> de ViewPager2 per a ajustar la pestanya quan *ViewPager2 es moga.</li>
+<li><strong><code>OnPageChangeCallback</code></strong> de ViewPager2 per a ajustar la pestanya quan ViewPager2 es moga.</li>
 <li><strong><code>OnTabSelectedListener</code></strong> de TabLayout per a ajustar VP2 quan es mou la pestanya.</li>
 <li><strong><code>AdapterDataObserver</code></strong> de RecyclerView per a recrear el contingut de la pestanya quan canvia el conjunt de dades.</li>
 </ul>
