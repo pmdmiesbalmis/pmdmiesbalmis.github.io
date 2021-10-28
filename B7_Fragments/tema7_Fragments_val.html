@@ -1168,7 +1168,7 @@ Primer crearem la interf&#xED;cie amb el m&#xE8;tode que necessitem, <strong>Pas
 
 
 
-</div></div></pre><p>&#x1F4CC; <strong>L&#xED;nia 2</strong> es crea una inst&#xE0;ncia de la interface. <strong>L&#xED;nia des de 17 a 20</strong> s&apos;anual el m&#xE8;tode <strong><code>onAttach</code></strong> que &#xE9;s invocat en el moment que el fragment s&apos;enlla&#xE7;a en l&apos;activitat, en aquest m&#xE8;tode assignem el context d&apos;entrada a la inst&#xE0;ncia de la *interface creada. <strong>L&#xED;nia 14</strong> amb l&apos;objecte de la interface cridem al seu m&#xE8;tode passant el valor de l&apos;element premut.</p>
+</div></div></pre><p>&#x1F4CC; <strong>L&#xED;nia 2</strong> es crea una inst&#xE0;ncia de la interface. <strong>L&#xED;nia des de 17 a 20</strong> s&apos;anula el m&#xE8;tode <strong><code>onAttach</code></strong> que &#xE9;s invocat en el moment que el fragment s&apos;enlla&#xE7;a en l&apos;activitat, en aquest m&#xE8;tode assignem el context d&apos;entrada a la inst&#xE0;ncia de la interface creada. <strong>L&#xED;nia 14</strong> amb l&apos;objecte de la interface cridem al seu m&#xE8;tode passant el valor de l&apos;element premut.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Reconstrueix l&apos;exemple anterior i prova el seu funcionament</span></p>
 <h3 class="mume-header" id="pila-dactivitats">Pila d&apos;activitats</h3>
@@ -1176,7 +1176,7 @@ Primer crearem la interf&#xED;cie amb el m&#xE8;tode que necessitem, <strong>Pas
 <h4 class="mume-header" id="tasks-i-backstacks">Tasks i BackStacks</h4>
 
 <p>Una <a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack">tasca</a> &#xE9;s una col&#xB7;lecci&#xF3; de metadades i informaci&#xF3; entorn a un pila d&apos;activitats. Quan iniciem una app el sistema busca si aqueixa tasca ja ha sigut iniciada pr&#xE8;viament i en aqueix cas la repr&#xE9;n i tornar exactament al punt on estava. Si no existeix la tasca la inicia, llan&#xE7;ant l&apos;activitat principal com a base en la <strong>pila de tasques</strong>.</p>
-<p>Cada vegada que s&apos;inicia una activitat o es realitza una transacci&#xF3; de fragment afegint la transici&#xF3; al la pila <strong><code>addToBackStack()</code></strong>, s&apos;afig aqueixa activitat/fragmente a la tasca el que fa que l&apos;activitat que queda per davall es pause o es detinga si la nova activitat oculta per complet l&apos;anterior.</p>
+<p>Cada vegada que s&apos;inicia una activitat o es realitza una transacci&#xF3; de fragment afegint la transici&#xF3; a la pila <strong><code>addToBackStack()</code></strong>, s&apos;afig aqueixa activitat/fragment a la tasca el que fa que l&apos;activitat que queda per davall es pause o es detinga si la nova activitat oculta per complet l&apos;anterior.</p>
 <div align="center">
     <img height="200" src="./imagenes/tareas1.png">
 </div>
@@ -1197,7 +1197,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 <ul>
 <li><strong><code>add()</code></strong> rep l&apos;id del contenidor del fragment (ha de ser de tipus <strong><code>FragmentContainerView</code></strong>) i el fragment que desitja agregar. El fragment agregat es trasllada a l&apos;estat de RESUMED a espera del pr&#xF2;xim commit.</li>
 <li><strong><code>remove()</code></strong> permet eliminar un fragment que s&apos;ha de recuperar de l&apos;administrador de fragments a trav&#xE9;s de <strong><code>findFragmentById() o findFragmentByTag()</code></strong>. Si la vista del fragment es va agregar pr&#xE8;viament a un contenidor, s&apos;eliminar&#xE0; despr&#xE9;s de l&apos;anomenada a aquest m&#xE8;tode. El fragment eliminat es trasllada a l&apos;estat de DESTROYED.</li>
-<li><strong><code>replau()</code></strong> reempla&#xE7;a un fragment existent en un contenidor amb una inst&#xE0;ncia d&apos;un nou que es proporcione com a argument. &#xC9;s equivalent a cridar remove i add en un mateix contenidor.</li>
+<li><strong><code>replace()</code></strong> reempla&#xE7;a un fragment existent en un contenidor amb una inst&#xE0;ncia d&apos;un nou que es proporcione com a argument. &#xC9;s equivalent a cridar remove i add en un mateix contenidor.</li>
 <li><strong><code>show() i hide()</code></strong> s&#xF3;n m&#xE8;todes que permeten mostrar i ocultar la vista dels fragments que s&apos;han agregat a un contenidor. Aquests m&#xE8;todes estableixen la visibilitat de les vistes del fragment sense afectar el cicle de vida del fragment.</li>
 <li><strong><code>addToBackStack()</code></strong> De manera predeterminada, els canvis realitzats en a FragmentTransaction no s&apos;agreguen a la pila d&apos;activitats, cal usar aquest m&#xE8;tode per a fer-lo (es pot afegir un tag identificatiu)</li>
 <li><strong><code>commit</code></strong> programa una confirmaci&#xF3; de les transaccions pendents de manera as&#xED;ncrona, que es realitzar&#xE0; la pr&#xF2;xima vegada que aqueix fil estiga llest.</li>
@@ -1215,7 +1215,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 </ul>
 <h4 class="mume-header" id="jetpack-navigation">Jetpack Navigation</h4>
 
-<p>El component <a href="https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost">Navitacion</a> d&apos;Android Jetpack, permet implementar la navegaci&#xF3; dels elements de l&apos;aplicaci&#xF3; de forma m&#xE9;s coherent i senzilla, des de simples clics de botons fins a patrons m&#xE9;s complexos, com les barres d&apos;apps i els panells laterals de navegaci&#xF3;. &#xC9;s important seguir el sistema establit de <a href="https://developer.android.com/guide/navigation/navigation-principles">principis</a>, perqu&#xE8; l&apos;usuari puga entendre correctament el funcionament de l&apos;app. Podem trobar tres elements fonamentals:</p>
+<p>El component <a href="https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost">Navigation</a> d&apos;Android Jetpack, permet implementar la navegaci&#xF3; dels elements de l&apos;aplicaci&#xF3; de forma m&#xE9;s coherent i senzilla, des de simples clics de botons fins a patrons m&#xE9;s complexos, com les barres d&apos;apps i els panells laterals de navegaci&#xF3;. &#xC9;s important seguir el sistema establit de <a href="https://developer.android.com/guide/navigation/navigation-principles">principis</a>, perqu&#xE8; l&apos;usuari puga entendre correctament el funcionament de l&apos;app. Podem trobar tres elements fonamentals:</p>
 <ul>
 <li><strong>Gr&#xE0;fic de navegaci&#xF3;</strong>: &#xC9;s un recurs XML que cont&#xE9; tota la informaci&#xF3; relacionada amb la navegaci&#xF3;.</li>
 <li><strong>NavHost</strong>: &#xC9;s un contenidor buit que mostra els destins del teu gr&#xE0;fic de navegaci&#xF3;. Per defecte est&#xE0; implementat el <strong><code>NavHostFragment</code></strong> per a fragments i que ser&#xE0; el que usem.</li>
@@ -1322,7 +1322,7 @@ Per a afegir <strong>elements</strong> premerem el s&#xED;mbol de <strong><code>
     " src="./imagenes/navigation5.png">
 </div>
 <div style="page-break-after:always;"></div>
-<p>Hi ha un tipus de <strong>accions globals</strong> que permeten arribar a un dest&#xED; des de qualsevol lloc. Es mostren com una <strong><code>-&gt;</code></strong> tala enlla&#xE7;ada solament pel dest&#xED;, i que es creen mitjan&#xE7;ant el men&#xFA; contextual del dest&#xED; seleccionat.</p>
+<p>Hi ha un tipus de <strong>accions globals</strong> que permeten arribar a un dest&#xED; des de qualsevol lloc. Es mostren com una <strong><code>-&gt;</code></strong> curta enlla&#xE7;ada solament pel dest&#xED;, i que es creen mitjan&#xE7;ant el men&#xFA; contextual del dest&#xED; seleccionat.</p>
 <div align="center">
     <img height="200
     " src="./imagenes/navigation6.png">
@@ -1494,7 +1494,7 @@ Codi <strong>fragment1.xml</strong> amb dos botons <em>cancel&#xB7;lar i accepta
 <span class="token operator">..</span><span class="token punctuation">.</span>
 </pre><h3 class="mume-header" id="dialogfragment">DialogFragment</h3>
 
-<p>Com hem vist al principi del tema, la classe Fragment t&#xE9; diverses classes filles que ens permeten fer tasques concretes, una d&apos;elles &#xE9;s la classe <a href="https://developer.android.com/guide/topics/ui/dialogs">DialogFragment</a>. En heretar d&apos;ella podrem crear diferents tipus de di&#xE0;legs i &#xE9;s la manera aconsellada per a fer-ho. Com hem dit, per a utilitzar aquest tipus de di&#xE0;legs haurem de crear-nos una classe derivada de DialogFragment i implementar en ella el tipus de dialogue que vulguem (com aquesta part ja la coneixem de temes anteriors, nom&#xE9;s comentarem un parell de AlertDialog diferents). Com en aquest cas els di&#xE0;legs estan implementats amb fragments per a mostrar-los necessitarem usar un <strong><code>FragmentManager</code></strong>, no la t&#xED;pica anomenada al m&#xE8;tode xou. Passarem a veure un exemple:</p>
+<p>Com hem vist al principi del tema, la classe Fragment t&#xE9; diverses classes filles que ens permeten fer tasques concretes, una d&apos;elles &#xE9;s la classe <a href="https://developer.android.com/guide/topics/ui/dialogs">DialogFragment</a>. En heretar d&apos;ella podrem crear diferents tipus de di&#xE0;legs i &#xE9;s la manera aconsellada per a fer-ho. Com hem dit, per a utilitzar aquest tipus de di&#xE0;legs haurem de crear-nos una classe derivada de DialogFragment i implementar en ella el tipus de dialogue que vulguem (com aquesta part ja la coneixem de temes anteriors, nom&#xE9;s comentarem un parell de AlertDialog diferents). Com en aquest cas els di&#xE0;legs estan implementats amb fragments per a mostrar-los necessitarem usar un <strong><code>FragmentManager</code></strong>, no la t&#xED;pica anomenada al m&#xE8;tode show. Passarem a veure un exemple:</p>
 <div style="page-break-after:always;"></div>
 <h5 class="mume-header" id="di%C3%A0leg-dalerta">Di&#xE0;leg d&apos;Alerta</h5>
 
@@ -1563,7 +1563,7 @@ Codi <strong>fragment1.xml</strong> amb dos botons <em>cancel&#xB7;lar i accepta
         <span class="token keyword keyword-return">return</span> builder<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Cada vegada que se selecciona un element de la llista s&apos;executar&#xE0; el listener <strong><code>OnMultiChoiceClickListener</code></strong>, arribant a aquest el item premut i si aquesta <em>checked</em> o <em>unchecked</em>.</p>
+</pre><p>Cada vegada que se selecciona un element de la llista s&apos;executar&#xE0; el listener <strong><code>OnMultiChoiceClickListener</code></strong>, arribant a aquest el item premut i si est&#xE0; <em>checked</em> o <em>unchecked</em>.</p>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio PropuestoDialogoPersonalizado</span></p>
 <h3 class="mume-header" id="vistes-lliscants-vistas-deslizantes-y-tabs">Vistes Lliscants (Vistas Deslizantes) y Tabs</h3>
 
@@ -1572,57 +1572,95 @@ Codi <strong>fragment1.xml</strong> amb dos botons <em>cancel&#xB7;lar i accepta
 <p>Les <a href="https://developer.android.com/guide/navigation/navigation-swipe-view-2">vistes lliscants o paginaci&#xF3; horitzontal</a>, permeten navegar entre pantalles relacionades. Per exemple, entre pestanyes, amb un gest horitzontal del dit o un lliscament. Per a crear, hui dia, vistes lliscants s&apos;utilitza l&apos;element <strong><code>ViewPager2</code></strong>.<br>
 Reprendrem l&apos;exemple de <strong>FragmentV3ViewModel</strong> i afegir el codi necessari per a aconseguir l&apos;efecte de despla&#xE7;ament entre fragments. Els passos s&#xF3;n els seg&#xFC;ents:</p>
 <ol>
-<li>El layout de l&apos;activitat on s&apos;afegiran els fragments, haur&#xE0; d&apos;incloure un <strong><code>ViewPager2</code></strong>. Si la pantalla mostra els fragments complets, aquest element pot ser l&apos;arrel. Per exemple, el <em>.xml</em> del <strong>MainActivity</strong> podria ser:</li>
-</ol>
-<pre data-role="codeBlock" data-info="xml" class="language-xml">      <span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.viewpager2.widget.ViewPager2</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com
-      /apk/res/android<span class="token punctuation">&quot;</span></span>
-              <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/ViewPager<span class="token punctuation">&quot;</span></span>
-              <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-              <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-  ```
-2. S&apos;haur&#xE0; de crear una classe que manejar&#xE0; la c&#xE0;rrega dels fragments amb el despla&#xE7;ament. Aquesta classe haur&#xE0; d&apos;heretar de la classe abstracta **`FragmentStateAdapter`**, per la qual cosa obligar&#xE0; a implementar el m&#xE8;tode **`createFragment()`** a fi d&apos;aprovisionar inst&#xE0;ncies de Fragments a la paginaci&#xF3;, i el m&#xE8;tode **`getItemCount()`**, que ha de retornar el n&#xFA;mero exacte de fragments que es paginar&#xE0;n.
-
-      ```kotlin
-      class FragmentPageAdapter(fragment: FragmentActivity): 
-                              FragmentStateAdapter(fragment) 
-      {
-          override fun getItemCount()=3
-          override fun createFragment(position: Int): Fragment {
-              return when (position) {
-                  0 -&gt; MyListFragment()
-                  1 -&gt; FragmentSecundario()
-                  2 -&gt; FragmentTercero()
-                  else -&gt; MyListFragment()
-              }
-          }
-      }
-      ```
-&gt;:hand: L&#xF2;gicament les classes amb els fragments i els seus layouts relacionats han d&apos;existir, en aquest cas s&apos;ha duplicat FragmentSecundario de l&apos;exemple anterior i s&apos;ha canviat de nom a FragmenTercero.
-
-3. Finalment s&apos;haur&#xE0; de connectar el **`FragmentStateAdapter`** als objectes **`ViewPager2`**.
-
-```kotlin{highlight=[7,8,9,[11-13]]}
-class MainActivity : FragmentActivity() 
-{
-  lateinit var viewPager:ViewPager2
-  override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-      setContentView(R.layout.activity_main)
-      viewPager = findViewById(R.id.ViewPager)
-      val pagerAdapter = FragmentPageAdapter(this)
-      viewPager.adapter = pagerAdapter
-  }
-  override fun onBackPressed() {
-      if (viewPager.currentItem == 0)  super.onBackPressed()
-      else viewPager.currentItem = viewPager.currentItem - 1  }
-}
+<li>
+<p>El layout de l&apos;activitat on s&apos;afegiran els fragments, haur&#xE0; d&apos;incloure un <strong><code>ViewPager2</code></strong>. Si la pantalla mostra els fragments complets, aquest element pot ser l&apos;arrel. Per exemple, el <em>.xml</em> del <strong>MainActivity</strong> podria ser:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml">    <span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.viewpager2.widget.ViewPager2</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com
+    /apk/res/android<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/ViewPager<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</pre></li>
+<li>
+<p>S&apos;haur&#xE0; de crear una classe que manejar&#xE0; la c&#xE0;rrega dels fragments amb el despla&#xE7;ament. Aquesta classe haur&#xE0; d&apos;heretar de la classe abstracta <strong><code>FragmentStateAdapter</code></strong>, per la qual cosa obligar&#xE0; a implementar el m&#xE8;tode <strong><code>createFragment()</code></strong> a fi d&apos;aprovisionar inst&#xE0;ncies de Fragments a la paginaci&#xF3;, i el m&#xE8;tode <strong><code>getItemCount()</code></strong>, que ha de retornar el n&#xFA;mero exacte de fragments que es paginar&#xE0;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">FragmentPageAdapter</span><span class="token punctuation">(</span>fragment<span class="token operator">:</span> FragmentActivity<span class="token punctuation">)</span><span class="token operator">:</span> 
+            <span class="token function">FragmentStateAdapter</span><span class="token punctuation">(</span>fragment<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">3</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">createFragment</span><span class="token punctuation">(</span>position<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Fragment <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>position<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token number">0</span> <span class="token operator">-&gt;</span> <span class="token function">MyListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token number">1</span> <span class="token operator">-&gt;</span> <span class="token function">FragmentSecundario</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token number">2</span> <span class="token operator">-&gt;</span> <span class="token function">FragmentTercero</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-else">else</span> <span class="token operator">-&gt;</span> <span class="token function">MyListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </pre><blockquote>
+<p>&#x270B; L&#xF2;gicament les classes amb els fragments i els seus layouts relacionats han d&apos;existir, en aquest cas s&apos;ha duplicat FragmentSecundario de l&apos;exemple anterior i s&apos;ha canviat de nom a FragmenTercero.</p>
+</blockquote>
+</li>
+<li>
+<p>Finalment s&apos;haur&#xE0; de connectar el <strong><code>FragmentStateAdapter</code></strong> als objectes <strong><code>ViewPager2</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[7,8,9,[11-13]]}" class="language-kotlin" data-line="7,8,9,11-13"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">FragmentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> viewPager<span class="token operator">:</span>ViewPager2
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        viewPager <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>ViewPager<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> pagerAdapter <span class="token operator">=</span> <span class="token function">FragmentPageAdapter</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+        viewPager<span class="token punctuation">.</span>adapter <span class="token operator">=</span> pagerAdapter
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBackPressed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>viewPager<span class="token punctuation">.</span>currentItem <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onBackPressed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-else">else</span> viewPager<span class="token punctuation">.</span>currentItem <span class="token operator">=</span> viewPager<span class="token punctuation">.</span>currentItem <span class="token operator">-</span> <span class="token number">1</span>  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11-13" data-start="11" data-end="13">
+
+
+</div></div></pre><blockquote>
 <p>&#x1F4CC; En aquest cas ens ha convingut que MainActivity herete de <strong><code>FragmentActivity</code></strong>, perqu&#xE8; d&apos;aquesta manera no ens de problemes l&apos;anomenada al constructor de <strong><code>FragmentStateAdapter</code></strong>.<br>
 <strong>L&#xED;nia 7</strong> instanciem l&apos;objecte <strong><code>ViewPager2</code></strong> de <em>activity_main.xml</em>.<br>
 <strong>L&#xED;nia 8</strong> instanciem un objecte de la classe que hereta de <strong><code>FragmentStateAdapter</code></strong>.<br>
 <strong>L&#xED;nia 9</strong> relacionem tots dos objectes per a fer la connexi&#xF3;. <strong>Bloc 11 a 13</strong>, anul&#xB7;lem el BackPressed perqu&#xE8; realitze el comportament correcte de canvi de fragments. Com es pot veure es fa mitjan&#xE7;ant la propietat <strong><code>currentItem</code></strong> decrementant-la en 1.</p>
 </blockquote>
+</li>
+</ol>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Reconstrueix l&apos;exemple explicat amb anterioritat per a provar el funcionament del ViewPager. Podr&#xE0;s comprovar que el pas d&apos;informaci&#xF3; amb ViewModel continua funcionant correctament<br>
 </span></p>
 <h4 class="mume-header" id="tabslayout">TabsLayout</h4>

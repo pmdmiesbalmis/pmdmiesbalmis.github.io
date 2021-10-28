@@ -1167,7 +1167,7 @@ Primero crearemos la interface con el m&#xE9;todo que necesitemos, <strong>PasoC
 
 
 
-</div></div></pre><p>&#x1F4CC; <strong>L&#xED;nea 2</strong> se crea una instancia de la interface. <strong>L&#xED;nea desde 17 a 20</strong> se anual el m&#xE9;todo <strong><code>onAttach</code></strong> que es invocado en el momento que el fragment se enlaza en la actividad, en este m&#xE9;todo asignamos el contexto de entrada a la instancia de la interface creada. <strong>L&#xED;nea 14</strong> con el objeto de la interface llamamos a su m&#xE9;todo pasando el valor del elemento pulsado.</p>
+</div></div></pre><p>&#x1F4CC; <strong>L&#xED;nea 2</strong> se crea una instancia de la interface. <strong>L&#xED;nea desde 17 a 20</strong> se anula el m&#xE9;todo <strong><code>onAttach</code></strong> que es invocado en el momento que el fragment se enlaza en la actividad, en este m&#xE9;todo asignamos el contexto de entrada a la instancia de la interface creada. <strong>L&#xED;nea 14</strong> con el objeto de la interface llamamos a su m&#xE9;todo pasando el valor del elemento pulsado.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Reconstruye el ejemplo anterior y prueba su funcionamiento</span></p>
 <h3 class="mume-header" id="pila-de-actividades">Pila de actividades</h3>
@@ -1175,7 +1175,7 @@ Primero crearemos la interface con el m&#xE9;todo que necesitemos, <strong>PasoC
 <h4 class="mume-header" id="tasks-y-backstacks">Tasks y BackStacks</h4>
 
 <p>Una <a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack">tarea</a> es una colecci&#xF3;n de metadatos e informaci&#xF3;n entorno a un pila de actividades. Cuando iniciamos una app el sistema busca si esa tarea ya ha sido iniciada previamente y en ese caso la reanuda y regresar exactamente al punto donde estaba. Si no existe la tarea la inicia, lanzando la actividad principal como base en la <strong>pila de tareas</strong>.<br>
-Cada vez que se inicia una actividad o se realiza una transacci&#xF3;n de fragmento a&#xF1;adiendo la transici&#xF3;n al la pila <strong><code>addToBackStack()</code></strong>, se a&#xF1;ade esa actividad/fragmento a la tarea lo que hace que la actividad que queda por debajo se pause o se detenga si la nueva actividad oculta por completo la anterior.</p>
+Cada vez que se inicia una actividad o se realiza una transacci&#xF3;n de fragmento a&#xF1;adiendo la transici&#xF3;n a la pila <strong><code>addToBackStack()</code></strong>, se a&#xF1;ade esa actividad/fragmento a la tarea lo que hace que la actividad que queda por debajo se pause o se detenga si la nueva actividad oculta por completo la anterior.</p>
 <div align="center">
     <img height="200" src="./imagenes/tareas1.png">
 </div>
@@ -1214,7 +1214,7 @@ Para obtener una instancia de FragmentTransaction utilizamos <strong><code>begin
 </ul>
 <h4 class="mume-header" id="jetpack-navigation">Jetpack Navigation</h4>
 
-<p>El componente <a href="https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost">Navitacion</a> de Android Jetpack,  permite implementar la navegaci&#xF3;n de los elementos de la aplicaci&#xF3;n de forma m&#xE1;s coherente y sencilla, desde simples clics de botones hasta patrones m&#xE1;s complejos, como las barras de apps y los paneles laterales de navegaci&#xF3;n. Es importante seguir el sistema establecido de <a href="https://developer.android.com/guide/navigation/navigation-principles">principios</a>, para que el usuario pueda entender correctamente el funcionamiento de la app. Podemos encontrar tres elementos fundamentales:</p>
+<p>El componente <a href="https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost">Navigation</a> de Android Jetpack,  permite implementar la navegaci&#xF3;n de los elementos de la aplicaci&#xF3;n de forma m&#xE1;s coherente y sencilla, desde simples clics de botones hasta patrones m&#xE1;s complejos, como las barras de apps y los paneles laterales de navegaci&#xF3;n. Es importante seguir el sistema establecido de <a href="https://developer.android.com/guide/navigation/navigation-principles">principios</a>, para que el usuario pueda entender correctamente el funcionamiento de la app. Podemos encontrar tres elementos fundamentales:</p>
 <ul>
 <li><strong>Gr&#xE1;fico de navegaci&#xF3;n</strong>: Es un recurso XML que contiene toda la informaci&#xF3;n relacionada con la navegaci&#xF3;n.</li>
 <li><strong>NavHost</strong>: Es un contenedor vac&#xED;o que muestra los destinos de tu gr&#xE1;fico de navegaci&#xF3;n. Por defecto est&#xE1; implementado el <strong><code>NavHostFragment</code></strong> para fragments y que ser&#xE1; el que usemos.</li>
@@ -1296,7 +1296,7 @@ Para obtener una instancia de FragmentTransaction utilizamos <strong><code>begin
 
 <div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; En la actividad principal, por ejemplo, podemos crear el espacio para insertar los fragmentes, en este caso desde <strong>L&#xEC;nea 9 a 15</strong>. Los atributos nuevos y que se tienen que poner para el funcionamiento correcto son: el nombre asignado a la clase <strong>L&#xED;nea 10</strong>, se usa el <strong><code>NavHostFragment</code></strong> que ya est&#xE1; implementado; <strong>L&#xED;nea 13</strong>, el atrivuto <strong><code>defaultNavHost</code></strong> garantiza que tu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3;n Atr&#xE1;s del sistema; En el <strong>navGraph</strong> se indica el nombre del gr&#xE1;fico de navegaci&#xF3;n. Elemento que vamos a explicar ahora <strong>L&#xED;nea 14</strong>.</p>
+<p>&#x1F4CC; En la actividad principal, por ejemplo, podemos crear el espacio para insertar los fragmentes, en este caso desde <strong>L&#xEC;nea 9 a 15</strong>. Los atributos nuevos y que se tienen que poner para el funcionamiento correcto son: el nombre asignado a la clase <strong>L&#xED;nea 10</strong>, se usa el <strong><code>NavHostFragment</code></strong> que ya est&#xE1; implementado; <strong>L&#xED;nea 13</strong>, el atributo <strong><code>defaultNavHost</code></strong> garantiza que tu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3;n Atr&#xE1;s del sistema; En el <strong>navGraph</strong> se indica el nombre del gr&#xE1;fico de navegaci&#xF3;n. Elemento que vamos a explicar ahora <strong>L&#xED;nea 14</strong>.</p>
 </blockquote>
 <h5 class="mume-header" id="navgraph">NavGraph</h5>
 
