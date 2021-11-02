@@ -1229,7 +1229,8 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 <p>&#x270B;Ser&#xE0; important decidir com volem passar d&apos;uns fragments a uns altres, <strong>perqu&#xE8; el que no s&apos;ha de fer &#xE9;s mesclar el sistema de Navigation amb el qual usem amb FragmentManager</strong>.</p>
 </blockquote>
 <p>Per a usar aquestes caracter&#xED;stiques inclourem la depend&#xE8;ncia:</p>
-<pre data-role="codeBlock" data-info="json" class="language-json"> implementation &apos;androidx.navigation<span class="token operator">:</span>navigation-ui-ktx<span class="token operator">:</span><span class="token number">2.3</span>.<span class="token number">5</span>&apos;
+<pre data-role="codeBlock" data-info="json" class="language-json">implementation &apos;androidx.navigation<span class="token operator">:</span>navigation-ui-ktx<span class="token operator">:</span><span class="token number">2.3</span>.<span class="token number">5</span>&apos;
+implementation &apos;androidx.navigation<span class="token operator">:</span>navigation-fragment-ktx<span class="token operator">:</span><span class="token number">2.3</span>.<span class="token number">5</span>&apos;
 </pre><h5 class="mume-header" id="navhost">NavHost</h5>
 
 <p>Per a comen&#xE7;ar el primer que hem de fer &#xE9;s crear el <strong><code>NavHost</code></strong>, per a aix&#xF2; usarem el contenidor on inserirem els fragments. Aquest element ha de ser de tipus <strong><code>FragmentContainerView</code></strong> i caldr&#xE0; afegir els seg&#xFC;ents atributs:</p>
@@ -1452,9 +1453,9 @@ Codi <strong>fragment1.xml</strong> amb dos botons <em>cancel&#xB7;lar i accepta
 <span class="token punctuation">}</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">aceptar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword keyword-val">val</span> navController<span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span>findNavController<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token operator">&gt;</span>fragment1<span class="token punctuation">)</span>
-         navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token operator">&gt;</span>action_fragment1_to_fragment2<span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> navController<span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span><span class="token function">findNavController</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragment1<span class="token punctuation">)</span>
+         navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragment1_to_fragment2<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <div class="line-highlight-wrapper">
