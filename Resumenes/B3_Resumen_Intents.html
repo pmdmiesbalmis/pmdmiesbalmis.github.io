@@ -1,0 +1,681 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  B3 Resumen Intents</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+
+<p><a href="./B3_Resumen_Intents.pdf">Descargar estos apuntes</a></p>
+<h1 class="mume-header undefined" id="b3-resumen-intents">B3 Resumen Intents</h1>
+
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+<ol>
+<li><a href="#intents">Intents</a>
+<ol>
+<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a>
+<ol>
+<li><a href="#intent-expl%C3%ADcito">Intent expl&#xED;cito</a></li>
+<li><a href="#intent-con-devoluci%C3%B3n-de-resultado">Intent con devoluci&#xF3;n de resultado</a></li>
+<li><a href="#intent-impl%C3%ADcito">Intent Impl&#xED;cito</a></li>
+<li><a href="#requerir-permisos-al-usuario">Requerir permisos al usuario</a></li>
+</ol>
+</li>
+<li><a href="#intent-filter">Intent-filter</a></li>
+<li><a href="#declarar-content-provider-para-acceder-a-recursos-peuna-canci%C3%B3n">Declarar content provider para acceder a recursos( p.e.una canci&#xF3;n)</a></li>
+</ol>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="intents">Intents</h2>
+
+<h3 class="mume-header" id="comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</h3>
+
+<p><a href="https://developer.android.com/guide/components/intents-filters?hl=es-419">Intents</a>. Son los que permiten la comunicaci&#xF3;n con el resto de componentes, tambi&#xE9;n se pueden definir como la voluntad de realizar una acci&#xF3;n o una tarea determinada, estas tareas pueden ser una llamada de tel&#xE9;fono o visualizar una p&#xE1;gina web entre otras.</p>
+<h4 class="mume-header" id="intent-expl%C3%ADcito">Intent expl&#xED;cito</h4>
+
+<p>En el inicio de una nueva actividad se pueden dar varias circunstancias:</p>
+<ul>
+<li>
+<p>Inicio de una actividad sin argumentos ni devoluci&#xF3;n de resultados:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Inicio de una actividad con argumentos y sin devoluci&#xF3;n de resultados. Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span>
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+</pre><p>En la clase invocada obtendremos los datos recibidos de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span>intent
+findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre></li>
+</ul>
+<h4 class="mume-header" id="intent-con-devoluci%C3%B3n-de-resultado">Intent con devoluci&#xF3;n de resultado</h4>
+
+<p><a href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts?hl=es-419">Contratos predeterminados</a></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+
+        <span class="token comment">//creo en contrato al crear la activity</span>
+        <span class="token keyword keyword-val">val</span> contrato <span class="token operator">=</span>
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token punctuation">{</span> 
+                result <span class="token operator">-&gt;</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">//recupero dato devuelto, en este ejemplo una cadena llamada &quot;DATORETURN&quot;                    </span>
+                    <span class="token keyword keyword-val">val</span> cadena <span class="token operator">=</span> result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO_RETORNO&quot;</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>
+            <span class="token comment">//Al darle al bot&#xF3;n, lanzo el contrato</span>
+            intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+            <span class="token comment">//intent.putExtra(...) Si se quiera mandar algo</span>
+            contrato<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>.</p>
+</blockquote>
+<p>En la clase <strong>invocada</strong> devolveremos los datos de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5]}" class="language-kotlin" data-line="4,5">   textView<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+            <span class="token comment">//creamos un intent</span>
+            <span class="token keyword keyword-val">val</span> intentoResultado<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment">//a&#xF1;adimos el resultado, </span>
+            <span class="token comment">//se debe llamar igual que el que espera recibir el contrato</span>
+            intentoResultado<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO_RETORNO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Este es el dato&quot;</span><span class="token punctuation">)</span>
+            <span class="token comment">//setResultado con el c&#xF3;digo y el intentResultado. </span>
+            <span class="token comment">// Esto lo recoger&#xE1; el contrato creado antes</span>
+            <span class="token function">setResult</span><span class="token punctuation">(</span>Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">,</span>intentoResultado<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><h4 class="mume-header" id="intent-impl%C3%ADcito">Intent Impl&#xED;cito</h4>
+
+<p>B&#xE1;sicamente los pasos para lanzar una actividad con un <strong>intent impl&#xED;cito</strong> ser&#xED;an los siguientes:</p>
+<ul>
+<li>Declaramos el intent con la acci&#xF3;n apropiada (ACTION_VIEW, ACTION_WEB_SEARCH, etc).</li>
+<li>Adjuntamos informaci&#xF3;n adicional necesaria dependiendo de la acci&#xF3;n del intent.</li>
+<li>Lanzamos el intent dejando que el sistema encuentre la actividad adecuada.</li>
+</ul>
+<p>Para iniciar la actividad utilizaremos igualmente startActivity. Algunos ejemplos de <a href="https://developer.android.com/guide/components/intents-common?hl=es-419">Intents Comunes</a>:</p>
+<ul>
+<li>
+<p>Para mostrar una web dentro de un navegador:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> 
+        Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.google.es&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</pre><p>Requiere los permisos: <strong><code>&lt;uses-permission android:name=&quot; android.permission.INTERNET &quot;/&gt;</code></strong></p>
+</li>
+<li>
+<p>Para utilizar la b&#xFA;squeda de google;</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_WEB_SEARCH<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span>SearchManager<span class="token punctuation">.</span>QUERY<span class="token punctuation">,</span> 
+        <span class="token string">&quot;I.E.S. Doctor Balmis&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Requiere los permisos <strong><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;</code></strong></p>
+</li>
+<li>
+<p>Para mostrar los contactos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> 
+            Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</pre><p>Requiere los permisos: <strong><code>&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;</code></strong></p>
+</li>
+<li>
+<p>Para abrir una aplicaci&#xF3;n externa</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intent<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+intent<span class="token punctuation">.</span><span class="token function">setComponent</span><span class="token punctuation">(</span>
+    <span class="token function">ComponentName</span><span class="token punctuation">(</span><span class="token string">&quot;com.ejemplos.myapplication&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;com.ejemplos.myapplication.MainActivity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intent<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>           
+    <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Tomar una foto con la Camara: el contraro debe ser creado en onCreate</p>
+</li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-fun">fun</span> <span class="token function">creaContratoFoto</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        resultadoCamara <span class="token operator">=</span>
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> result<span class="token operator">-&gt;</span>
+                    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode<span class="token operator">==</span> RESULT_OK<span class="token punctuation">)</span>
+                        binding<span class="token punctuation">.</span>imagen<span class="token punctuation">.</span>background<span class="token operator">=</span>
+                        <span class="token function">BitmapDrawable</span><span class="token punctuation">(</span>resources<span class="token punctuation">,</span>
+                        <span class="token punctuation">(</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span>extras<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;data&quot;</span><span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> Bitmap<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">tomarFoto</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">checkSelfPermission</span>           
+                <span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> 
+                Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CAMERA<span class="token punctuation">)</span>
+                <span class="token operator">!=</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            ActivityCompat<span class="token punctuation">.</span><span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> 
+                <span class="token function">arrayOf</span><span class="token punctuation">(</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CAMERA<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                RESPUESTA_CAMARA<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-else">else</span> <span class="token function">lanzarIntentFoto</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">lanzarIntentFoto</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        uriImagen <span class="token operator">=</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;imagen&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> cameraIntent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>MediaStore<span class="token punctuation">.</span>ACTION_IMAGE_CAPTURE<span class="token punctuation">)</span>
+        resultadoCamara<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>cameraIntent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><ul>
+<li>Seleccionar una foto de la galeria<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  resultadoGaleria <span class="token operator">=</span>
+        <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>
+            ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token punctuation">{</span> result <span class="token operator">-&gt;</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                binding<span class="token punctuation">.</span>imagen<span class="token punctuation">.</span><span class="token function">setImageURI</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+</pre></li>
+<li>LLamada<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   <span class="token keyword keyword-fun">fun</span> <span class="token function">lanzarLlamada</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">checkSelfPermission</span>   
+              <span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> 
+              Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">)</span>
+          <span class="token operator">!=</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+          <span class="token punctuation">{</span>
+              ActivityCompat<span class="token punctuation">.</span><span class="token function">requestPermissions</span><span class="token punctuation">(</span>
+                  <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> 
+                  <span class="token function">arrayOf</span><span class="token punctuation">(</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  RESPUESTA_LLAMADA<span class="token punctuation">)</span>
+          <span class="token punctuation">}</span>
+      <span class="token keyword keyword-else">else</span>    
+      <span class="token function">startActivity</span><span class="token punctuation">(</span><span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_CALL<span class="token punctuation">,</span> 
+          Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;tel:&quot;</span> <span class="token operator">+</span> binding<span class="token punctuation">.</span>tlfText<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</pre></li>
+<li>Lanzar correo<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">lanzarCorreo</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_SEND<span class="token punctuation">)</span>
+    intent<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token string">&quot;message/rfc822&quot;</span>
+    intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>EXTRA_EMAIL<span class="token punctuation">,</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span>email<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">startActivity</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span><span class="token function">createChooser</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span> <span class="token string">&quot;Tipo mensaje&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ul>
+<div align="center">
+    <img height="180" src="imagenes/intents5.png">
+</div>
+<p>Es posible que en ocasiones no se pueda acceder a una aplicaci&#xF3;n debido a que no est&#xE1; instalada en el dispositivo, a restricciones de perfil o a la configuraci&#xF3;n de un administrador. Para verificar que una actividad recibir&#xE1; la intent, es muy importante usar antes <strong><code>resolveActivity()</code></strong> en el objeto Intent. Si el resultado no es nulo, hay al menos una aplicaci&#xF3;n que puede administrar la intent y es seguro llamar a <strong><code>startActivity()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> 
+       Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+ <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> 
+       <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</pre><h4 class="mume-header" id="requerir-permisos-al-usuario">Requerir permisos al usuario</h4>
+
+<p><a href="https://developer.android.com/training/permissions/requesting?hl=es-419">Solicitud de permisos</a></p>
+<ol>
+<li>
+<p>En el archivo de manifiesto de la app, declara los permisos que necesites.</p>
+</li>
+<li>
+<p>Esperar a que el usuario invoque la tarea o acci&#xF3;n de la app que requiere acceso a datos privados espec&#xED;ficos. En ese momento, la app puede solicitar el permiso de tiempo de ejecuci&#xF3;n necesario para acceder a esos datos. Para ello:<br>
+<strong>a</strong>. Verifica si el usuario ya otorg&#xF3; el permiso de tiempo de ejecuci&#xF3;n que requiere la app. De ser as&#xED;, esta ya puede acceder a los recursos necesarios.<br>
+<strong>b</strong>. En caso contrario, solicitar el permiso en tiempo de ejecuci&#xF3;n, en ese caso el sistema mostrar&#xE1; un dialogo solicitando el permiso y si es otorgado se pasar&#xE1; al acceso de los recursos. En este paso se puede optar por mostrar un dialogo explicando porque motivo son necesarios los recursos.</p>
+</li>
+<li>
+<p>Si el usuario rechaza la solicitud, la app deber&#xED;a proporcionar una opci&#xF3;n elegante al usuario.</p>
+</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> RESPUESTA_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
+<span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">solicitarPermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED
+        <span class="token operator">||</span> <span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token comment">//Si se decide explicar los motivos de los permisos con  similar a un dialogo</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+            <span class="token comment">//Si se decide explicar los motivos de los permisos con  similar a un dialogo</span>
+        <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos, </span>
+        <span class="token comment">//en este caso dos</span>
+        <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> _CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span> RESPUESTA_PERMISOS<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> 
+    <span class="token keyword keyword-else">else</span> <span class="token function">lanzarFuncionalidadQueRequierePermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> RESPUESTA_SOLICITUD_PERMISOS <span class="token operator">=</span> <span class="token number">111</span>
+<span class="token keyword keyword-val">val</span> RESPUESTA_SOLICITUD_PERMISOS_2 <span class="token operator">=</span> <span class="token number">222</span>
+<span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
+<span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>
+       requestCode<span class="token operator">:</span> Int<span class="token punctuation">,</span><span class="token comment">//c&#xF3;digo de identificaci&#xF3;n del resultado</span>
+       permissions<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token keyword keyword-out">out</span> String<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token comment">//array con los nombres de los permisos</span>
+       grantResults<span class="token operator">:</span> IntArray<span class="token comment">//array de 0 y -1 (permitido, no permitido) en orden) </span>
+<span class="token punctuation">{</span>
+       <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> grantResults<span class="token punctuation">)</span>
+       <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>requestCode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           RESPUESTA_SOLICITUD_PERMISOS <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+               <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+                   Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                       applicationContext<span class="token punctuation">,</span>
+                       permissions<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">&quot; Permiso concedido&quot;</span><span class="token punctuation">,</span>
+                       Toast<span class="token punctuation">.</span>LENGTH_SHORT
+                   <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+               <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
+                  <span class="token operator">..</span><span class="token punctuation">.</span>
+            RESPUESTA_SOLICIUD_PERMISOS_2 <span class="token operator">-&gt;</span> 
+            <span class="token operator">..</span><span class="token operator">..</span><span class="token punctuation">.</span>
+           <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>El hilo que controla la respuesta del usuario, se recoge mediante el m&#xE9;todo sobreescrito <strong><code>onRequestPermissionsResult</code></strong>, a este m&#xE9;todo le llega la informaci&#xF3;n necesaria para poder saber a que petici&#xF3;n de permisos se refiere (usando las constantes RESPUESTA_PERMISOS utilizadas en las peticiones), el array con los nombres de los permisos y el resultado de si han sido concedido o no.<br>
+En cada petici&#xF3;n de permisos puede haber un array con varios ermisos.<br>
+permissions[0] ser&#xE1; el primer permiso de esta solicitud, y grantResults[0] la respuesta a ese permiso. permissions[1] ser&#xE1; el segundo permiso de esta solicitud, y grantResults[1] la respuesta a ese permiso.</p>
+</blockquote>
+<h3 class="mume-header" id="intent-filter">Intent-filter</h3>
+
+<p>Cuando se crea un intent impl&#xED;cito el sistema Android busca el componente apropiado que pueda resolver la petici&#xF3;n dada en el intent.  La b&#xFA;squeda la realiza analizando los <strong>intent-filter</strong> definidos en los archivos de manifiesto de las aplicaciones instaladas en el dispositivo.<br>
+A un Intent podemos asociarle una acci&#xF3;n, unos datos y una categor&#xED;a. Las actividades pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar.</p>
+<ul>
+<li>Las acciones son cadenas de texto est&#xE1;ndar que describen lo que la actividad puede hacer. Por ejemplo <strong><code>android.intent.action.VIEW</code></strong>, es una acci&#xF3;n que indica que la actividad puede mostrar datos al usuario.</li>
+<li>La misma actividad puede declarar el tipo de datos del que se ocupa, por ejemplo <strong><code>vnd.android.cursor.dir/person</code></strong>, indica que la actividad manipula los datos de la agenda.</li>
+<li>Tambi&#xE9;n pueden declarar una categor&#xED;a, que b&#xE1;sicamente indica si la actividad va a ser lanzada desde el lanzador de aplicaciones, desde el men&#xFA; de otra aplicaci&#xF3;n o directamente desde otra actividad.las actividades que est&#xE1;n dispuestas a recibir intents impl&#xED;citos deben incluir <strong><code>android.intent.category.DEFAULT</code></strong>.</li>
+</ul>
+<p>Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.VIEW<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.category.DEFAULT<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vnd.android.cursor.dir/person<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Una activity puede tener varios intent-filter definidos. Igualmente cada uno de esos intent-filter puede tener varias acciones definidas.</p>
+<h3 class="mume-header" id="declarar-content-provider-para-acceder-a-recursos-peuna-canci%C3%B3n">Declarar content provider para acceder a recursos( p.e.una canci&#xF3;n)</h3>
+
+<ol>
+<li>Crear una carpeta xml en los recursos, <strong><code>res\xml</code></strong> y dentro un fichero, por ejemplo <strong><code>provider_paths</code></strong>. Donde a&#xF1;adiremos el siguiente c&#xF3;digo para referenciar al directorio ra&#xED;z.</li>
+</ol>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>paths</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>external-path</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>external_files<span class="token punctuation">&quot;</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>paths</span><span class="token punctuation">&gt;</span></span>
+</pre><ol start="2">
+<li>A&#xF1;adir en el Manifest un provider que haga referencia al recurso creado. Dentro de la etiqueta aplicaci&#xF3;n y teniendo en cuenta no olvidar los permisos de <strong><code>READ_EXTERNAL_STORAGE</code></strong>.</li>
+</ol>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>provider</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>androidx.core.content.FileProvider<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>authorities</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>${applicationId}.provider<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>exported</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>grantUriPermissions</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta-data</span>
+        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.support.FILE_PROVIDER_PATHS<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>resource</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@xml/provider_paths<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>provider</span><span class="token punctuation">&gt;</span></span>
+</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">escucharCancion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Ruta de la carpeta que usa android para guardar recursos </span>
+        <span class="token comment">//de la aplicaci&#xF3;n, consta del dominio y es privada a esta</span>
+        <span class="token keyword keyword-var">var</span> directorio<span class="token operator">=</span><span class="token function">getExternalFilesDir</span><span class="token punctuation">(</span><span class="token keyword keyword-null">null</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>absolutePath
+        <span class="token comment">//Cogemos el inicio  de la ruta, que corresponde con </span>
+        <span class="token comment">//los archivos multimedia &apos;storage/emulated/0/&apos;</span>
+        <span class="token comment">//Realizamos las modificaciones en directorio para adaptarlo a lo que necesitemos y creamos la ruta del fichero       </span>
+        <span class="token keyword keyword-val">val</span> <span class="token keyword keyword-data">data</span> <span class="token operator">=</span> <span class="token function">File</span><span class="token punctuation">(</span>directorio <span class="token operator">+</span> <span class="token string">&quot;music/minions.mp3&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> uri <span class="token operator">=</span> FileProvider<span class="token punctuation">.</span><span class="token function">getUriForFile</span><span class="token punctuation">(</span>
+            <span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span>
+            BuildConfig<span class="token punctuation">.</span>APPLICATION_ID <span class="token operator">+</span> <span class="token string">&quot;.provider&quot;</span><span class="token punctuation">,</span>
+            <span class="token keyword keyword-data">data</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">)</span>
+        intent<span class="token punctuation">.</span><span class="token function">setDataAndType</span><span class="token punctuation">(</span>uri<span class="token punctuation">,</span> <span class="token string">&quot;audio/.mp3&quot;</span><span class="token punctuation">)</span>
+        intent<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_GRANT_READ_URI_PERMISSION<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
