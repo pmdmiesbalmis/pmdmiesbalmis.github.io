@@ -341,7 +341,6 @@ justo después del front matter
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 <ol>
-<li><a href="#subclases-de-fragment">Subclases de Fragment</a></li>
 <li><a href="#crear-un-fragment">Crear un Fragment</a></li>
 <li><a href="#agregar-un-fragment-a-una-activity">Agregar un Fragment a una Activity</a>
 <ol>
@@ -379,13 +378,6 @@ justo después del front matter
 <li><strong><code>onDestroyView()</code></strong>. Este m&#xE9;todo es llamado cuando la jerarqu&#xED;a de views a la cual ha sido asociado el fragmento ha sido destruida.</li>
 <li><strong><code>onDetach()</code></strong>. Se llama cuando el fragmento ya no est&#xE1; asociado a la actividad anfitriona.</li>
 </ul>
-<h3 class="mume-header" id="subclases-de-fragment">Subclases de Fragment</h3>
-
-<ul>
-<li>DialogFragment - Muestra un cuadro de dialogo flotante.</li>
-<li>ListFragment - Muestra una lista de elementos.</li>
-<li>PreferenceFragment - Muestra una lista de preferencias.</li>
-</ul>
 <h3 class="mume-header" id="crear-un-fragment">Crear un Fragment</h3>
 
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> FragmentUno<span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -414,12 +406,12 @@ justo después del front matter
 
 <p><a href="https://developer.android.com/reference/androidx/fragment/app/FragmentContainerView">FragmentContainerView</a></p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.fragment.app.FragmentContainerView</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.ejemplos.b3.ejemplofragmentv1.FragmentUno<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragment_uno<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragment_container<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.5<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-</pre><p>Nos creamos una clase para el fragment y un layout para gestionar el aspecto.</p>
+</pre><p>Nos creamos una clase para el fragment y un layout.xml para gestionar el aspecto.<br>
+O  podemos usar alg&#xFA;n layout estandar, como <em>android.R.layout.simple_list_item_1</em> para mostrar una lista.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
 <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span>
@@ -434,6 +426,24 @@ justo después del front matter
         fragmentTransaction<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>              
+</pre><p><a href="https://developer.android.com/reference/kotlin/androidx/fragment/app/ListFragment">Ejemplo de un ListFragment</a></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MyListFragment<span class="token operator">:</span> <span class="token function">ListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> valores <span class="token operator">=</span>
+              arrayOf<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token string">&quot;item1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item4&quot;</span><span class="token punctuation">,</span>
+                                <span class="token string">&quot;item5&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item6&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item7&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item8&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        listAdapter <span class="token operator">=</span> ArrayAdapter<span class="token operator">&lt;</span>Any<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                      android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_list_item_1<span class="token punctuation">,</span> 
+                      valores<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onListItemClick</span><span class="token punctuation">(</span>l<span class="token operator">:</span> ListView<span class="token punctuation">,</span> v<span class="token operator">:</span> View<span class="token punctuation">,</span>
+                                    position<span class="token operator">:</span> Int<span class="token punctuation">,</span> id<span class="token operator">:</span> Long<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onListItemClick</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> v<span class="token punctuation">,</span> position<span class="token punctuation">,</span> id<span class="token punctuation">)</span>
+   
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </pre><p><a href="https://developer.android.com/topic/libraries/view-binding?hl=es-419#fragments">Binding con Fragments</a></p>
 <h4 class="mume-header" id="gestionar-fragments">Gestionar Fragments.</h4>
 
@@ -448,6 +458,13 @@ Para a&#xF1;adir la transacci&#xF3;n a la pila de retroceso de la activity utili
 <li>La comunicaci&#xF3;n entre fragmentos debe hacerse a trav&#xE9;s de los asociados activity.</li>
 <li>Los fragmentos no necesitan conocer qui&#xE9;n es su actividad principal.</li>
 </ul>
+<blockquote>
+<p>&#x1F4CC;&#xBF;Cuando debemos usar cada tipo de comunicaci&#xF3;n?<br>
+Bundle solo de una activity principal a un fragment. De un fragment a otro fragment o de un fragment a activity usaremos ViewModel o Interface.<br>
+Como la funcionalidad est&#xE1; en los fragments, la activity suele ser intermediaria  (recibe con viewmodel o interface y manda con bundle)<br>
+No se recomienda comunicaci&#xF3;n directa mediante bundle entre fragment si usas fragmentTransaccion (commit, add, etc).<br>
+Si est&#xE1;s usando navigation no hay problema, ya que al ejecutar la action le puedes pasar el bundle desde cualquier lugar accesible (recuerda en origen poner bundle.putextra y asignar el bundle a arguments, y en destino usaremos argument.getextra)</p>
+</blockquote>
 <h4 class="mume-header" id="comunicaci%C3%B3n-mediante-viewmodel">Comunicaci&#xF3;n mediante ViewModel</h4>
 
 <p><a href="https://developer.android.com/guide/fragments/communicate?hl=es-419#viewmodel">ViewModel</a>.</p>
@@ -506,38 +523,26 @@ Para observar un elemento <a href="https://developer.android.com/topic/libraries
         saveInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> view<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span>
                  <span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_secundario<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+
+        <span class="token comment">//Aqu&#xED; implementamos que vamos a hacer cuando observe un cambio</span>
         <span class="token keyword keyword-val">val</span> nameObserver <span class="token operator">=</span> Observer<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">{</span>cadena <span class="token operator">-&gt;</span>
                 view<span class="token punctuation">.</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token operator">=</span>cadena<span class="token punctuation">}</span>
+
+        <span class="token comment">//aqu&#xED; lanzamos el observador, indicando la implementaci&#xF3;n anterior</span>
         model<span class="token punctuation">.</span>getItem<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nameObserver<span class="token punctuation">)</span>
+
         <span class="token keyword keyword-return">return</span> view
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><p><a href="https://developer.android.com/reference/kotlin/androidx/fragment/app/ListFragment">ListFragment</a></p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MyListFragment<span class="token operator">:</span> <span class="token function">ListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> model<span class="token operator">:</span>ItemViewModel <span class="token keyword keyword-by">by</span> <span class="token function">activityViewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> valores <span class="token operator">=</span>
-              arrayOf<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token string">&quot;item1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item4&quot;</span><span class="token punctuation">,</span>
-                                <span class="token string">&quot;item5&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item6&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item7&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item8&quot;</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-        listAdapter <span class="token operator">=</span> ArrayAdapter<span class="token operator">&lt;</span>Any<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
-                      android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>simple_list_item_1<span class="token punctuation">,</span> 
-                      valores<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onListItemClick</span><span class="token punctuation">(</span>l<span class="token operator">:</span> ListView<span class="token punctuation">,</span> v<span class="token operator">:</span> View<span class="token punctuation">,</span>
-                                    position<span class="token operator">:</span> Int<span class="token punctuation">,</span> id<span class="token operator">:</span> Long<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onListItemClick</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> v<span class="token punctuation">,</span> position<span class="token punctuation">,</span> id<span class="token punctuation">)</span>
-        model<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span>valores<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">)</span> 
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
 <p>&#x1F393; Otro caso distinto, podemos tenerlo cuando <strong>el fragment se comunica a trav&#xE9;s de la activity</strong>, mediante el ViewModel.<br>
 La actividad principal con la carga del fragment con la lista y con el observador sobre el ViewModel, quedar&#xE1; as&#xED; <strong>MainActivity.kt</strong>:</p>
 </blockquote>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2,[10-19],20]}" class="language-kotlin" data-line="2,10-19,20"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">//Instanciamos el ViewModel teniendo en cuenta que </span>
     <span class="token comment">//para la actividad se asocia el delegado viewModels</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> model<span class="token operator">:</span> ItemViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
@@ -545,80 +550,20 @@ La actividad principal con la carga del fragment con la lista y con el observado
         <span class="token keyword keyword-var">var</span> fT<span class="token operator">:</span> FragmentTransaction <span class="token operator">=</span> fM<span class="token punctuation">.</span><span class="token function">beginTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         fT<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>contenedor_fragment<span class="token punctuation">,</span> <span class="token function">MyListFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
         fT<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
+       
         <span class="token comment">//Construimos un delegado con el observador que se encargar&#xE1; de</span>
         <span class="token comment">//cargar el FragmentSecundario con la informaci&#xF3;n </span>
         <span class="token comment">//pasada en un Bundle.</span>
         <span class="token keyword keyword-val">val</span> nameObserver <span class="token operator">=</span> Observer<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">{</span>cadena <span class="token operator">-&gt;</span>
-            <span class="token keyword keyword-val">val</span> bundle<span class="token operator">=</span><span class="token function">Bundle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            bundle<span class="token punctuation">.</span><span class="token function">putString</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span>cadena<span class="token punctuation">)</span>
-            <span class="token keyword keyword-var">var</span> fragmentSecundario<span class="token operator">=</span><span class="token function">FragmentSecundario</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            fragmentSecundario<span class="token punctuation">.</span>arguments<span class="token operator">=</span>bundle
-            fT<span class="token operator">=</span>fM<span class="token punctuation">.</span><span class="token function">beginTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            fT<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>contenedor_fragment<span class="token punctuation">,</span>fragmentSecundario <span class="token punctuation">)</span>
-            fT<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            fT<span class="token punctuation">.</span><span class="token function">addToBackStack</span><span class="token punctuation">(</span><span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+            <span class="token comment">//nos llega el dato pasado al </span>
+            <span class="token comment">//viewModel (cadena, en este caso)</span>
+            <span class="token comment">// a la activity </span>
+            <span class="token operator">..</span><span class="token punctuation">.</span>   
         <span class="token punctuation">}</span>
+        
     <span class="token comment">//Se pone en observaci&#xF3;n el ViewModel </span>
     <span class="token comment">//con el delegado construido anteriormente.</span>
       model<span class="token punctuation">.</span>getItem<span class="token punctuation">.</span><span class="token function">observe</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> nameObserver<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10-19" data-start="10" data-end="19">
-
-
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="20" data-start="20">
-</div></div></pre><p>En el <strong>FragmentSecundario.kt</strong> se deber&#xE1; recuperar el bundle.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> FragmentSecundario<span class="token operator">:</span><span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
-        inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
-        container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
-        saveInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span>
-    <span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-val">val</span> bundle<span class="token operator">=</span>arguments
-        <span class="token keyword keyword-val">val</span> view<span class="token operator">:</span> View <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>
-            R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment_secundario<span class="token punctuation">,</span>
-            container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
-        <span class="token keyword keyword-val">val</span> texto<span class="token operator">=</span>bundle<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span>
-        <span class="token operator">..</span><span class="token punctuation">.</span>
-        <span class="token keyword keyword-return">return</span> view
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><h4 class="mume-header" id="comunicaci%C3%B3n-mediante-interfaces">Comunicaci&#xF3;n mediante Interfaces</h4>
