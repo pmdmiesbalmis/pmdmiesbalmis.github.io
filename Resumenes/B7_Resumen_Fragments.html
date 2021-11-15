@@ -445,7 +445,25 @@ O  podemos usar alg&#xFA;n layout estandar, como <em>android.R.layout.simple_lis
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><p><a href="https://developer.android.com/topic/libraries/view-binding?hl=es-419#fragments">Binding con Fragments</a></p>
-<h4 class="mume-header" id="gestionar-fragments">Gestionar Fragments.</h4>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
+        inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span> container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
+        savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span>
+    <span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Ya no haremos el return que propone</span>
+       <span class="token comment">// return inflater.inflate(R.layout.layout_edit_contact, container, false)</span>
+       <span class="token comment">//llamaremos al padre</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreateView</span><span class="token punctuation">(</span>inflater<span class="token punctuation">,</span> container<span class="token punctuation">,</span> savedInstanceState<span class="token punctuation">)</span>
+        <span class="token comment">//inflaremos el binding con la clase correspondiente</span>
+        binding <span class="token operator">=</span> MiClaseBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>inflater<span class="token punctuation">,</span> container<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+
+        <span class="token comment">//Aqu&#xED; podremos tratar lo que necesitemos</span>
+        <span class="token comment">//por ejemplo binding.boton.setOnClickListener</span>
+
+        <span class="token comment">//Devolvemos la vista</span>
+        <span class="token keyword keyword-val">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token keyword keyword-return">return</span> view
+    <span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="gestionar-fragments">Gestionar Fragments.</h4>
 
 <p><a href="https://developer.android.com/guide/fragments/fragmentmanager?hl=es-419">FragmentManager</a></p>
 <p>Cada transacci&#xF3;n es un conjunto de cambios que se realizan al mismo tiempo. Podremos realizar dichos cambios a trav&#xE9;s de los m&#xE9;todos <strong><code>add()</code></strong>, <strong><code>replace()</code></strong>, <strong><code>remove()</code></strong> terminando la transacci&#xF3;n con el m&#xE9;todo <strong><code>commit()</code></strong>.<br>
@@ -460,7 +478,7 @@ Para a&#xF1;adir la transacci&#xF3;n a la pila de retroceso de la activity utili
 </ul>
 <blockquote>
 <p>&#x1F4CC;&#xBF;Cuando debemos usar cada tipo de comunicaci&#xF3;n?<br>
-Bundle solo de una activity principal a un fragment. De un fragment a otro fragment o de un fragment a activity usaremos ViewModel o Interface.<br>
+Bundle solo de una <strong>activity a un fragment</strong>. De un <strong>fragment a otro fragment</strong> o de un <strong>fragment a activity</strong> (que no recibe bundle) usaremos ViewModel o Interface.<br>
 Como la funcionalidad est&#xE1; en los fragments, la activity suele ser intermediaria  (recibe con viewmodel o interface y manda con bundle)<br>
 No se recomienda comunicaci&#xF3;n directa mediante bundle entre fragment si usas fragmentTransaccion (commit, add, etc).<br>
 Si est&#xE1;s usando navigation no hay problema, ya que al ejecutar la action le puedes pasar el bundle desde cualquier lugar accesible (recuerda en origen poner bundle.putextra y asignar el bundle a arguments, y en destino usaremos argument.getextra)</p>
@@ -717,7 +735,9 @@ Para que el usuario pueda entender correctamente el funcionamiento de la app. Po
             <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>
                     ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
-                <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>it <span class="token operator">==</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token function">tomarGaleria</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                permiso<span class="token operator">-&gt;</span> <span class="token comment">//si no declaro permiso, ser&#xE1; it</span>
+                    <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>permiso <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
+                        <span class="token function">tomarGaleria</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
