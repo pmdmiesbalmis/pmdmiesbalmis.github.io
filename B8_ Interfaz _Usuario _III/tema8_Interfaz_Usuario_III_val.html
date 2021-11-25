@@ -1325,26 +1325,33 @@ adaptador<span class="token punctuation">.</span><span class="token function">se
 
 
 <div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div></pre><p>A m&#xE9;s s&apos;haur&#xE0; de fixar la grand&#xE0;ria del recycler <strong>L&#xED;nia 1</strong>, assignar a l&apos;adaptador la propietat de HasStableIds a true <strong>L&#xED;nia 3</strong>. i passar la inst&#xE0;ncia de Tracker a l&apos;adaptador mitjan&#xE7;ant un m&#xE8;tode que crearem en aquest <strong>l&#xED;nia 15</strong>.<br>
-Per a controlar amb m&#xE9;s seguretat l&apos;estabilitat de l&apos;app, s&apos;hauria d&apos;anul&#xB7;lar el m&#xE8;tode <strong><code>onSaveInstanceState</code></strong> per a passar la informaci&#xF3; capturada, a la inst&#xE0;ncia del <strong><code>tracker</code></strong>.</p>
+</div></div></pre><p>A m&#xE9;s s&apos;haur&#xE0; de fixar la grand&#xE0;ria del recycler <strong>L&#xED;nia 1</strong>, assignar a l&apos;adaptador la propietat de HasStableIds a true <strong>L&#xED;nia 3</strong>. i passar la inst&#xE0;ncia de Tracker a l&apos;adaptador mitjan&#xE7;ant un m&#xE8;tode que crearem en aquest <strong>l&#xED;nia 15</strong>.</p>
+<blockquote>
+<p>&#x270B; No deberemos olvidar que el adaptador debe proporcionar unos identificadores estables, una manera sencilla de hacerlo es anulando su m&#xE9;todo <strong><code>getItemId</code></strong> (asigna la posici&#xF3;n del elemento como id):</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getItemId</span><span class="token punctuation">(</span>position<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Long <span class="token punctuation">{</span>
+   <span class="token keyword keyword-return">return</span> position<span class="token punctuation">.</span><span class="token function">toLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+</li>
+</ol>
+<p>Per a controlar amb m&#xE9;s seguretat l&apos;estabilitat de l&apos;app, s&apos;hauria d&apos;anul&#xB7;lar el m&#xE8;tode <strong><code>onSaveInstanceState</code></strong> per a passar la informaci&#xF3; capturada, a la inst&#xE0;ncia del <strong><code>tracker</code></strong>.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
     <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>outState <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
-        tracker<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
+            tracker<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre><p>I en iniciar l&apos;aplicaci&#xF3; afegir la seg&#xFC;ent l&#xED;nia per a recuperar el tracker guardat:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>savedInstanceState <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
-            tracker<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onRestoreInstanceState</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        tracker<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">onRestoreInstanceState</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
 </pre><p>Per la seua part en l&apos;adaptador nom&#xE9;s tindrem aquests dos canvis.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> Holder<span class="token punctuation">,</span> position<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> item<span class="token operator">:</span> Usuario <span class="token operator">=</span> datos<span class="token punctuation">[</span>position<span class="token punctuation">]</span>
-    holder<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span>tracker<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    holder<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span>tracker<span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">setTracker</span><span class="token punctuation">(</span>tracker<span class="token operator">:</span> SelectionTracker<span class="token operator">&lt;</span>Long<span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>tracker <span class="token operator">=</span> tracker
+        <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>tracker <span class="token operator">=</span> tracker
 <span class="token punctuation">}</span>
 </pre><p>Despr&#xE9;s de realitzar aquests passos, podem provar el funcionament de l&apos;aplicaci&#xF3;.</p>
-</li>
-</ol>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Reconstrueix l&apos;exemple i prova el funcionament</span></p>
 <ol start="4">
 <li>

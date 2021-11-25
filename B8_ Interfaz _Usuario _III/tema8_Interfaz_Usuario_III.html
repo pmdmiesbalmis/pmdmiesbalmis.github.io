@@ -1318,8 +1318,14 @@ adaptador<span class="token punctuation">.</span><span class="token function">se
 
 
 <div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div></pre><p>Adem&#xE1;s se deber&#xE1; fijar el tama&#xF1;o del recycler <strong>L&#xED;nea 1</strong>,  asignar al adaptador la propiedad de HasStableIds a true <strong>L&#xED;nea 3</strong>. y pasar la instancia de Tracker al adaptador mediante un m&#xE9;todo que crearemos en este <strong>l&#xED;nea 15</strong>.<br>
-Para controlar con m&#xE1;s seguridad la estabilidad de la app, se deber&#xED;a de anular el m&#xE9;todo <strong><code>onSaveInstanceState</code></strong> para pasar la informaci&#xF3;n capturada, a la instancia del <strong><code>tracker</code></strong>.</p>
+</div></div></pre><p>Adem&#xE1;s se deber&#xE1; fijar el tama&#xF1;o del recycler <strong>L&#xED;nea 1</strong>,  asignar al adaptador la propiedad de HasStableIds a true <strong>L&#xED;nea 3</strong>. y pasar la instancia de Tracker al adaptador mediante un m&#xE9;todo que crearemos en este <strong>l&#xED;nea 15</strong>.</p>
+<blockquote>
+<p>&#x270B; No deberemos olvidar que el adaptador debe proporcionar unos identificadores estables, una manera sencilla de hacerlo es anulando su m&#xE9;todo <strong><code>getItemId</code></strong> (asigna la posici&#xF3;n del elemento como id):</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getItemId</span><span class="token punctuation">(</span>position<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Long <span class="token punctuation">{</span>
+   <span class="token keyword keyword-return">return</span> position<span class="token punctuation">.</span><span class="token function">toLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<p>Para controlar con m&#xE1;s seguridad la estabilidad de la app, se deber&#xED;a de anular el m&#xE9;todo <strong><code>onSaveInstanceState</code></strong> para pasar la informaci&#xF3;n capturada, a la instancia del <strong><code>tracker</code></strong>.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token operator">:</span> Bundle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onSaveInstanceState</span><span class="token punctuation">(</span>outState<span class="token punctuation">)</span>
     <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>outState <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
