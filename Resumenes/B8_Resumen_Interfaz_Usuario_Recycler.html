@@ -349,6 +349,7 @@ justo después del front matter
 <li><a href="#click-en-cualquier-lugar-de-la-vista-pasando-informaci%C3%B3n-a-la-actividad-principal">Click en cualquier lugar de la vista pasando informaci&#xF3;n a la Actividad Principal</a></li>
 </ol>
 </li>
+<li><a href="#pasos-resumen-recyclerview">PASOS RESUMEN RECYCLERVIEW</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="spinner">Spinner</h3>
@@ -819,7 +820,7 @@ justo después del front matter
 
 
 </div></div></pre><p>En la ActivityMain, tendremos que llamar al m&#xE9;todo <strong><code>OnTouch</code></strong> del adaptador pas&#xE1;ndole un objeto de la clase <strong><code>SwipeDetector</code></strong> <strong>L&#xED;nea 2</strong>, pero a la hora de detectar el movimiento tendremos que usar la interfaz onClikListener <strong>L&#xED;nea 3</strong>, como vemos en el c&#xF3;digo siguiente. Si nos fijamos, podremos ver que el objeto swipeDetector detectar si el movimiento se ha producido a la derecha o a la izquierda.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2,3]}" class="language-kotlin" data-line="2,3"><span class="token keyword keyword-val">val</span> swipeDetector <span class="token operator">=</span> <span class="token function">SwipeDetector</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> swipeDetector <span class="token operator">=</span> <span class="token function">SwipeDetector</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 adaptador<span class="token punctuation">.</span><span class="token function">onTouch</span><span class="token punctuation">(</span>swipeDetector<span class="token punctuation">)</span>
 adaptador<span class="token punctuation">.</span><span class="token function">onClick</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
             <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>swipeDetector<span class="token punctuation">.</span><span class="token function">swipeDetected</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -847,12 +848,117 @@ adaptador<span class="token punctuation">.</span><span class="token function">on
                 <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
+</pre><h3 class="mume-header" id="pasos-resumen-recyclerview">PASOS RESUMEN RECYCLERVIEW</h3>
 
-<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
-</div></div></pre>
+<ol>
+<li>Creamos el <strong>Holder</strong>:</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Declaramos las propiedades</span>
+    <span class="token keyword keyword-val">val</span> textNombre<span class="token operator">:</span> TextView
+      
+    <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+        <span class="token comment">//inicializamos el binding o v.findViewById</span>
+        <span class="token comment">//esto se hace en el contructor, una sola vez</span>
+        textNombre <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView<span class="token punctuation">)</span>
+        <span class="token comment">//Si queremos tratar la pulsaci&#xF3;n sobre un elemento debemos </span>
+        <span class="token comment">//ponerle el escuchador al elemento</span>
+    <span class="token punctuation">}</span> 
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">bind</span><span class="token punctuation">(</span>entity<span class="token operator">:</span> Usuario<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Asignamos a la propiedad la de la clase POJO</span>
+        textNombre<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>entity<span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
+     
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//En caso de querer</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> onClick<span class="token punctuation">{</span>
+        <span class="token comment">//Si queremos pasar un dato se realizar&#xE1; mediante interfaz</span>
+    <span class="token punctuation">}</span>
+    
+<span class="token punctuation">}</span>
+</pre><ol start="2">
+<li>Creamos el <strong>Adaptador</strong></li>
+</ol>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">Adaptador</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+                    RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>Holder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token comment">//adem&#xE1;s heredar&#xE1; de los que necesite: OnClick, OnTouch...</span>
+<span class="token punctuation">{</span>
+   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreateViewHolder</span><span class="token punctuation">(</span>viewGroup<span class="token operator">:</span> ViewGroup<span class="token punctuation">,</span>
+                                   i<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span>Holder
+   <span class="token punctuation">{</span>
+       <span class="token comment">//Se construye el Holder nuevo, teniendo en cuenta el layout</span>
+       <span class="token comment">// con el recycler que vamos a usar</span>
+       <span class="token keyword keyword-val">val</span> itemView<span class="token operator">:</span> View <span class="token operator">=</span> 
+          LayoutInflater<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>viewGroup<span class="token punctuation">.</span>context<span class="token punctuation">)</span>
+           <span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>recyclerlayout<span class="token punctuation">,</span> viewGroup<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+       <span class="token keyword keyword-val">val</span> holder <span class="token operator">=</span> <span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span>
+
+       <span class="token comment">//Aqu&#xED; pondremos los escuchadores sobre los elementos que queramos</span>
+       <span class="token comment">//y adaptador deber&#xE1; implementar la interfaz y la funcion onClick</span>
+       <span class="token comment">//itemView.setOnClickListener(this)      </span>
+      
+       <span class="token comment">//si hemos recibido el dato de una interfaz</span>
+       <span class="token comment">//holder.pasarDatos(object: PadarDatosInterfaz{</span>
+       <span class="token comment">// override fun pasarDatos(datos: Datos){</span>
+       <span class="token comment">//     //con la propiedad creada de esa interfaz, </span>
+       <span class="token comment">//     //llamamos el m&#xE9;todo pasarDatos creado</span>
+       <span class="token comment">//   }</span>
+       <span class="token comment">//})   </span>
+       <span class="token comment">//No olvidar crear el m&#xE9;todo fun </span>
+       <span class="token comment">// pasarDatos que nos pasa la interfaz</span>
+       <span class="token comment">// y es llamado desde la Activity</span>
+
+       <span class="token keyword keyword-return">return</span> <span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+    
+   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> Holder<span class="token punctuation">,</span> position<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment">//Actualizamos los holder existentes </span>
+       <span class="token keyword keyword-val">val</span> item<span class="token operator">:</span> Usuario <span class="token operator">=</span> datos<span class="token punctuation">[</span>position<span class="token punctuation">]</span>
+       holder<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+      
+   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+       <span class="token comment">//Devuelve el tama&#xF1;o</span>
+       <span class="token keyword keyword-return">return</span> datos<span class="token punctuation">.</span>size
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<ol start="3">
+<li>Ya podemos asignar el <strong>adaptador a la Activity</strong></li>
+</ol>
+<blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+  
+   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span>
+   <span class="token punctuation">{</span>
+       <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+       binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
+       <span class="token keyword keyword-val">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+       <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
+
+       <span class="token comment">//val datos = anadirDatos()</span>
+       <span class="token keyword keyword-val">val</span> recyclerView <span class="token operator">=</span> binding<span class="token punctuation">.</span>mirecycler
+       <span class="token keyword keyword-val">val</span> adaptador <span class="token operator">=</span> <span class="token function">Adaptador</span><span class="token punctuation">(</span>datos<span class="token punctuation">)</span>
+       recyclerView<span class="token punctuation">.</span>adapter <span class="token operator">=</span> adaptador
+       recyclerView<span class="token punctuation">.</span>layoutManager <span class="token operator">=</span>
+           <span class="token function">LinearLayoutManager</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> 
+                          LinearLayoutManager<span class="token punctuation">.</span>VERTICAL<span class="token punctuation">,</span> 
+                          <span class="token boolean">false</span><span class="token punctuation">)</span>
+      <span class="token comment">//Aqu&#xED; podemos llamar a la funci&#xF3;n creada para el adaptador</span>
+      <span class="token comment">//Podemos saber la posici&#xF3;n pulsada getChildAdapterPosition()</span>
+      <span class="token comment">//adaptador.onClick{ .... }</span>
+
+       <span class="token comment">//Para actualizar el adaptador si eliminamos posicion</span>
+       <span class="token comment">//adaptador.notyfyItemRemoved(posicionEliminada)</span>
+   <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</pre></blockquote>
+
       </div>
       
       
