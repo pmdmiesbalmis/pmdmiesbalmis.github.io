@@ -333,11 +333,9 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
-
-<p><a href="./B8_Resumen_Interfaz_Usuario_Recycler.pdf">Descargar estos apuntes</a></p>
 <h1 class="mume-header undefined" id="resumen-interfaz-de-usuario-recyclerview">Resumen Interfaz de Usuario RecyclerView</h1>
 
+<p><a href="./B8_Resumen_Interfaz_Usuario_Recycler.pdf">Descargar estos apuntes</a></p>
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 <ol>
@@ -478,14 +476,6 @@ justo después del front matter
                           <span class="token boolean">false</span><span class="token punctuation">)</span>
    <span class="token punctuation">}</span>
 
-   <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">anadirDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span> 
-   <span class="token punctuation">{</span>
-       <span class="token keyword keyword-var">var</span> datos <span class="token operator">=</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-       <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">0</span><span class="token operator">..</span><span class="token number">19</span><span class="token punctuation">)</span>
-           datos<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Usuario</span><span class="token punctuation">(</span><span class="token string">&quot;nombre<span class="token interpolation variable">$i</span>&quot;</span><span class="token punctuation">,</span> 
-                          <span class="token string">&quot;apellido1<span class="token interpolation variable">$i</span> Apellido2<span class="token interpolation variable">$i</span>&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-       <span class="token keyword keyword-return">return</span> datos
-   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
 <h4 class="mume-header" id="click-sobre-un-elemento-de-la-lista">Click sobre un elemento de la lista</h4>
@@ -508,7 +498,7 @@ justo después del front matter
 <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
     <span class="token keyword keyword-return">return</span> datos<span class="token punctuation">.</span>size
 <span class="token punctuation">}</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">onClick</span><span class="token punctuation">(</span>listener<span class="token operator">:</span>View<span class="token punctuation">.</span>OnClickListener<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">inicializamosInterfazOnClick</span><span class="token punctuation">(</span>listener<span class="token operator">:</span>View<span class="token punctuation">.</span>OnClickListener<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>listenerClick<span class="token operator">=</span>listener
 <span class="token punctuation">}</span>
 <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onClick</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -518,16 +508,20 @@ justo después del front matter
 </pre><blockquote>
 <p>&#x1F4CC; El m&#xE9;todo onClick ser&#xE1; al que tendremos que llamar desde donde queramos detectar el evento. Esto lo podemos ver en el c&#xF3;digo de la <strong>MainActivity</strong>.</p>
 </blockquote>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">adaptador<span class="token punctuation">.</span><span class="token function">onClick</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span> valor <span class="token operator">-&gt;</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">adaptador<span class="token punctuation">.</span><span class="token function">inicializamosInterfazOnClick</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span> valor <span class="token operator">-&gt;</span>
     Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
         <span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span>
         <span class="token string">&quot;Has pulsado&quot;</span> <span class="token operator">+</span> recyclerView<span class="token punctuation">.</span><span class="token function">getChildAdapterPosition</span><span class="token punctuation">(</span>valor<span class="token punctuation">)</span><span class="token punctuation">,</span>
         Toast<span class="token punctuation">.</span>LENGTH_SHORT
         <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</pre><h4 class="mume-header" id="click-en-cualquier-lugar-de-la-vista">Click en cualquier lugar de la vista</h4>
+</pre><blockquote>
+<p>&#x1F4CC; Depende de los que queramos hacer, podemos hacerlo desde el Holder. Si por ejemplo, no queremos hacer nada con la lista de datos, podemos hacerlo directamente en el Holder, en el que podremos gestionar click en cualquier propiedad, o en la vista completa del Holder (que es lo que hemos hecho aqu&#xED;).<br>
+Pero si necesitamos hacer algo con la lista de datos, por ejemplo, eliminar uno, no lo podr&#xED;amos hacer en el Holder, y se har&#xED;a como acabamos de explicar.</p>
+</blockquote>
+<h4 class="mume-header" id="click-en-cualquier-lugar-de-la-vista">Click en cualquier lugar de la vista</h4>
 
-<p>Si quisi&#xE9;ramos detectar la pulsaci&#xF3;n de cualquier elemento de la l&#xED;nea del recycler, deberemos actuar sobre esa vista en el Holder (es donde podemos hacer referencia a cada uno de los view del layout). La forma de hacerlo es igual como se ha hecho anteriormente, usando un listener de la interfaz que nos haga falta y mandando la informaci&#xF3;n a trav&#xE9;s de esta.</p>
+<p>Si quisi&#xE9;ramos detectar la pulsaci&#xF3;n de cualquier elemento de la l&#xED;nea del recycler, deberemos actuar sobre esa vista en el Holder (es donde podemos hacer referencia a cada uno de los view del layout). La forma de hacerlo es m&#xE1;s sencilla, ya que en el Holder (al igual que en todos los elementos que tenemos una vista), podemos usar onClick. En el holder tenemos todos los views, el del contenedor padre, y todos los de su contenido.</p>
 <p>Para ver el funcionamiento, primero vamos a incluir una imagen en el  layout <strong>recyclerlayout.xml</strong>, para que al pulsar sobre esa imagen se abra el dial del tel&#xE9;fono. Podr&#xED;amos a&#xF1;adir la imagen de la siguiente manera:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.cardview.widget.CardView</span><span class="token punctuation">&gt;</span></span>
   ...
@@ -539,7 +533,7 @@ justo después del front matter
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.cardview.widget.CardView</span><span class="token punctuation">&gt;</span></span>
 
-</pre><p>Ahora a&#xF1;adiremos en el c&#xF3;digo de la clase Holder (aqu&#xED; es donde se sabe que vista se ha pulsado de entres todas), la llamada al intel que abre el d&#xED;al:</p>
+</pre><p>Ahora a&#xF1;adiremos en el c&#xF3;digo de la clase Holder (aqu&#xED; es donde se sabe que vista se ha pulsado de entres todas), la llamada al intent que abre el d&#xED;al:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">,</span> context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                           View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> textNombre<span class="token operator">:</span> TextView
@@ -556,7 +550,12 @@ justo después del front matter
         textApellido <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView2<span class="token punctuation">)</span>
         imagen<span class="token operator">=</span>v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imagen<span class="token punctuation">)</span>
         imagen<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+        <span class="token comment">//podemos poner tambien el escuchador sobre</span>
+        <span class="token comment">//el elemento entero, si no tenemos que </span>
+        <span class="token comment">//hacer nada en datos</span>
+        <span class="token comment">//v.setOnClickListener(this)</span>
     <span class="token punctuation">}</span>
+
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onClick</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> i <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_DIAL<span class="token punctuation">)</span>
         <span class="token function">startActivity</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>i<span class="token punctuation">,</span><span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
@@ -567,7 +566,7 @@ justo después del front matter
 </blockquote>
 <h4 class="mume-header" id="click-en-cualquier-lugar-de-la-vista-pasando-informaci%C3%B3n-a-la-actividad-principal">Click en cualquier lugar de la vista pasando informaci&#xF3;n a la Actividad Principal</h4>
 
-<p>En este caso adem&#xE1;s de detectar la pulsaci&#xF3;n sobre un elemento, tendremos que devolver la informaci&#xF3;n que nos interese hacia atr&#xE1;s. No se puede usar un ViewModel en el Holder, ya que no tiene ciclo de vida. ViewModel s&#xF3;lo podemos utilizarlo cuando hay ciclo de vida, como en los Fragments o Activities. Vamos a utilizar una interfaz</p>
+<p>En este caso adem&#xE1;s de detectar la pulsaci&#xF3;n sobre un elemento, tendremos que devolver la informaci&#xF3;n que nos interese hacia atr&#xE1;s. No se puede usar un ViewModel en el Holder, ya que no tiene ciclo de vida. ViewModel s&#xF3;lo podemos utilizarlo cuando hay ciclo de vida, como en los Fragments o Activities. Vamos a utilizar una interfaz.</p>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[5,13,14,20,24]}" class="language-kotlin" data-line="5,13,14,20,24"><span class="token keyword keyword-class">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                           View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> textNombre<span class="token operator">:</span> TextView
@@ -670,14 +669,9 @@ justo después del front matter
 
 
 <div aria-hidden="true" class="line-highlight" data-range="24" data-start="24">
-</div></div></pre><blockquote>
-<p>&#x1F4CC; <strong>L&#xED;nea 5</strong> creamos un objeto del tipo de Interface creada, en este caso ser&#xED;a as&#xED;:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> PasarCadenaInterface<span class="token punctuation">{</span>
-   <span class="token keyword keyword-fun">fun</span> <span class="token function">pasarCadena</span><span class="token punctuation">(</span>cadena<span class="token operator">:</span>String<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-</pre></blockquote>
+</div></div></pre><p>Deberemos crear la interfaz, en este caso PasarCadenaInterfaz.</p>
 <p>En el <strong>Adaptador</strong> tendremos que hacer los siguientes cambios:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[5,10,17]}" class="language-kotlin" data-line="5,10,17"><span class="token keyword keyword-class">class</span> Adaptador <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> Adaptador <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
     RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>Holder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>View<span class="token punctuation">.</span>OnClickListener<span class="token punctuation">,</span> 
     View<span class="token punctuation">.</span><span class="token function">OnLongClickListener</span><span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
@@ -698,39 +692,7 @@ justo después del front matter
         <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>pasarCadenaInterface<span class="token operator">=</span>pasarCadenaInterface
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
-</div></div></pre><p>En la <strong>Main</strong> tendremos que llamar a este &#xFA;ltimo m&#xE9;todo de la misma forma que en el adaptador.</p>
+</pre><p>En la <strong>Main</strong> tendremos que llamar a este &#xFA;ltimo m&#xE9;todo de la misma forma que en el adaptador.</p>
 <blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">adaptador<span class="token punctuation">.</span><span class="token function">pasarCadena</span><span class="token punctuation">(</span><span class="token keyword keyword-object">object</span> <span class="token operator">:</span> PasarCadenaInterface <span class="token punctuation">{</span>
           <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">pasarCadena</span><span class="token punctuation">(</span>cadena<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -743,7 +705,7 @@ justo después del front matter
 <h5 class="mume-header" id="detectar-swipe-izqder-sobre-un-elemento-del-recycler">Detectar swipe izq/der sobre un elemento del recycler</h5>
 
 <p>Una opci&#xF3;n muy utilizada en las listas, es la de controlar el deslizamiento a la izquierda o hacia la derecha sobre uno de sus elementos. Para ello tendremos que usar una clase que ya est&#xE1; definida y que tendremos que copiar en nuestro proyecto, llamada <strong><code>SwipeDetector</code></strong> (se pasa en los recursos). En el Adaptador tendr&#xED;amos que implementar la interfaz onTouch, para que nos detecte el desplazamiento, esto lo haremos como lo hicimos en puntos anteriores. <strong>L&#xED;neas marcadas en el Adaptador</strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[3,7,14,[18-25]]}" class="language-kotlin" data-line="3,7,14,18-25"><span class="token keyword keyword-class">class</span> Adaptador <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> Adaptador <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
     RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>Holder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>View<span class="token punctuation">.</span>OnClickListener<span class="token punctuation">,</span>
     View<span class="token punctuation">.</span>OnLongClickListener<span class="token punctuation">,</span> View<span class="token punctuation">.</span><span class="token function">OnTouchListener</span>
 <span class="token punctuation">{</span>
@@ -760,7 +722,7 @@ justo después del front matter
         <span class="token keyword keyword-val">val</span> holder<span class="token operator">=</span><span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span>
         <span class="token keyword keyword-return">return</span> holder
     <span class="token punctuation">}</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">onTouch</span><span class="token punctuation">(</span>listenerOnTouch<span class="token operator">:</span>View<span class="token punctuation">.</span>OnTouchListener<span class="token punctuation">)</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">inicializamosInterfazOnTouch</span><span class="token punctuation">(</span>listenerOnTouch<span class="token operator">:</span>View<span class="token punctuation">.</span>OnTouchListener<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>listenerOnTouch<span class="token operator">=</span>listenerOnTouch
     <span class="token punctuation">}</span>
@@ -770,59 +732,11 @@ justo después del front matter
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<div class="line-highlight-wrapper">
-
-<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="18-25" data-start="18" data-end="25">
-
-
-
-
-
-
-
-</div></div></pre><p>En la ActivityMain, tendremos que llamar al m&#xE9;todo <strong><code>OnTouch</code></strong> del adaptador pas&#xE1;ndole un objeto de la clase <strong><code>SwipeDetector</code></strong> <strong>L&#xED;nea 2</strong>, pero a la hora de detectar el movimiento tendremos que usar la interfaz onClikListener <strong>L&#xED;nea 3</strong>, como vemos en el c&#xF3;digo siguiente. Si nos fijamos, podremos ver que el objeto swipeDetector detectar si el movimiento se ha producido a la derecha o a la izquierda.</p>
+</pre><p>En la ActivityMain, tendremos que llamar al m&#xE9;todo <strong><code>OnTouch</code></strong> del adaptador pas&#xE1;ndole un objeto de la clase <strong><code>SwipeDetector</code></strong> <strong>L&#xED;nea 2</strong>, pero a la hora de detectar el movimiento tendremos que usar la interfaz onClikListener <strong>L&#xED;nea 3</strong>, como vemos en el c&#xF3;digo siguiente. Si nos fijamos, podremos ver que el objeto swipeDetector detectar si el movimiento se ha producido a la derecha o a la izquierda.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> swipeDetector <span class="token operator">=</span> <span class="token function">SwipeDetector</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 adaptador<span class="token punctuation">.</span><span class="token function">onTouch</span><span class="token punctuation">(</span>swipeDetector<span class="token punctuation">)</span>
-adaptador<span class="token punctuation">.</span><span class="token function">onClick</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
+adaptador<span class="token punctuation">.</span><span class="token function">inicializamosInterfazOnClick</span><span class="token punctuation">(</span>
+        View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
             <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>swipeDetector<span class="token punctuation">.</span><span class="token function">swipeDetected</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>swipeDetector<span class="token punctuation">.</span>action<span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     SwipeDetector<span class="token punctuation">.</span>Action<span class="token punctuation">.</span>LR <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
@@ -897,7 +811,7 @@ adaptador<span class="token punctuation">.</span><span class="token function">on
        <span class="token keyword keyword-val">val</span> holder <span class="token operator">=</span> <span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span>
 
        <span class="token comment">//Aqu&#xED; pondremos los escuchadores sobre los elementos que queramos</span>
-       <span class="token comment">//y adaptador deber&#xE1; implementar la interfaz y la funcion onClick</span>
+       <span class="token comment">//y adaptador deber&#xE1; implementar la interfaz </span>
        <span class="token comment">//itemView.setOnClickListener(this)      </span>
       
        <span class="token comment">//si hemos recibido el dato de una interfaz</span>
@@ -907,9 +821,9 @@ adaptador<span class="token punctuation">.</span><span class="token function">on
        <span class="token comment">//     //llamamos el m&#xE9;todo pasarDatos creado</span>
        <span class="token comment">//   }</span>
        <span class="token comment">//})   </span>
-       <span class="token comment">//No olvidar crear el m&#xE9;todo fun </span>
-       <span class="token comment">// pasarDatos que nos pasa la interfaz</span>
-       <span class="token comment">// y es llamado desde la Activity</span>
+
+       <span class="token comment">//No olvidar funcion para inicializar</span>
+       <span class="token comment">//las propiedades de las interfaces</span>
 
        <span class="token keyword keyword-return">return</span> <span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span>
    <span class="token punctuation">}</span>
@@ -926,7 +840,7 @@ adaptador<span class="token punctuation">.</span><span class="token function">on
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre></blockquote>
-<ol start="3">
+<ol>
 <li>Ya podemos asignar el <strong>adaptador a la Activity</strong></li>
 </ol>
 <blockquote>
@@ -940,7 +854,8 @@ adaptador<span class="token punctuation">.</span><span class="token function">on
        <span class="token keyword keyword-val">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
        <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
 
-       <span class="token comment">//val datos = anadirDatos()</span>
+       <span class="token keyword keyword-val">val</span> datos <span class="token operator">=</span> <span class="token function">anadirDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+       
        <span class="token keyword keyword-val">val</span> recyclerView <span class="token operator">=</span> binding<span class="token punctuation">.</span>mirecycler
        <span class="token keyword keyword-val">val</span> adaptador <span class="token operator">=</span> <span class="token function">Adaptador</span><span class="token punctuation">(</span>datos<span class="token punctuation">)</span>
        recyclerView<span class="token punctuation">.</span>adapter <span class="token operator">=</span> adaptador
@@ -950,7 +865,7 @@ adaptador<span class="token punctuation">.</span><span class="token function">on
                           <span class="token boolean">false</span><span class="token punctuation">)</span>
       <span class="token comment">//Aqu&#xED; podemos llamar a la funci&#xF3;n creada para el adaptador</span>
       <span class="token comment">//Podemos saber la posici&#xF3;n pulsada getChildAdapterPosition()</span>
-      <span class="token comment">//adaptador.onClick{ .... }</span>
+      <span class="token comment">//adaptador.inicializarInterfazOnClick{ .... }</span>
 
        <span class="token comment">//Para actualizar el adaptador si eliminamos posicion</span>
        <span class="token comment">//adaptador.notyfyItemRemoved(posicionEliminada)</span>
