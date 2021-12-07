@@ -443,6 +443,7 @@ justo después del front matter
 <h4 class="mume-header" id="manejar-eventos-bot%C3%B3n">Manejar eventos bot&#xF3;n</h4>
 
 <p>Para gestionar la pulsaci&#xF3;n realizada sobre un bot&#xF3;n tenemos varias posibilidades: usar atributo <strong><code>onClick</code></strong> del bot&#xF3;n en el <strong>layout.xml</strong>, un escuchador an&#xF3;nimo o implementar la interfaz <strong><code>View.OnClickListener</code></strong>.</p>
+<p>Tambi&#xE9;n podemos implementar la interfaz <strong><code>View.OnLongClickListener</code></strong>, que es igual pero devolviendo un boolean. Con true se captura la propagaci&#xF3;n del click, por lo que si tuvieramos un click sobre el mismo elemento no se activar&#xED;a. Con false, har&#xED;amos el c&#xF3;digo del onClick y del onLongClick.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
                     View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> binding<span class="token operator">:</span> ActivityMainBinding
