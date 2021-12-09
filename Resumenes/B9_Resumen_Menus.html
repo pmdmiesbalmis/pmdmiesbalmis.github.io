@@ -633,12 +633,24 @@ NavigationView<span class="token punctuation">.</span><span class="token functio
         navigationView<span class="token punctuation">.</span><span class="token function">setNavigationItemSelectedListener</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
 
         drawer_layout<span class="token operator">=</span>binding<span class="token punctuation">.</span>drawerLayout
+
         toolbar<span class="token operator">=</span>binding<span class="token punctuation">.</span>topAppBar
         <span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span>
+
         toggle <span class="token operator">=</span> <span class="token function">ActionBarDrawerToggle</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> drawer_layout<span class="token punctuation">,</span> 
-        binding<span class="token punctuation">.</span>topAppBar<span class="token punctuation">,</span> R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>navigation_open<span class="token punctuation">,</span>
+         toolbar<span class="token punctuation">,</span> R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>navigation_open<span class="token punctuation">,</span>
          R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>navigation_close<span class="token punctuation">)</span>
+
         drawer_layout<span class="token punctuation">.</span><span class="token function">addDrawerListener</span><span class="token punctuation">(</span>toggle<span class="token punctuation">)</span>
+
+        <span class="token comment">//Set whether to include the application home </span>
+        <span class="token comment">//affordance in the action bar.</span>
+        <span class="token comment">// (and put a back mark at icon in ActionBar for &quot;up&quot; navigation)</span>
+        supportActionBar<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">setDisplayHomeAsUpEnabled</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+
+        <span class="token comment">//Enable or disable the &quot;home&quot; button in </span>
+        <span class="token comment">//the corner of the action bar (clickable or not)</span>
+        supportActionBar<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">setHomeButtonEnabled</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><p>A continuaci&#xF3;n implementamos el m&#xE9;todo <strong><code>onPostCreate()</code></strong> y <strong><code>onConfigurationChanged()</code></strong> para poder gestionar los cambios en el <strong><code>Navigationdrawer</code></strong> o actualizar tras un cambio de orientaci&#xF3;n en la <em>app</em>. <strong><code>syncState()</code></strong> sincroniza el estado del indicador de la barra de navegaci&#xF3;n con el <strong><code>DrawerLayout</code></strong> vinculado.</p>
