@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Bloque 10. Ejercicio Propuesto Temporizador Vibraci&#xF3;n</title>
+      <title>PMDM 2&#xBA; DAM  Tema 12. Notificaciones</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -336,51 +336,83 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="bloque-10-ejercicio-propuesto-temporizador-vibraci%C3%B3n">Bloque 10 . Ejercicio Propuesto Temporizador Vibraci&#xF3;n</h1>
+<p><a href="./tema12_Notificaciones.pdf">Descargar estos apuntes</a></p>
+<h1 class="mume-header undefined" id="tema-12-notificaciones">Tema 12. Notificaciones</h1>
 
-<p><a href="./EjercicioPropuestoTermporizadorVibracion.pdf">Descargar este ejercicio</a></p>
-<p>Vamos a realizar una aplicaci&#xF3;n que usando un trabajo creado con <strong><code>WorkManager</code></strong>, nos actualice un temporizador con decremento, de forma que cuando llegue a 0 suene una vibraci&#xF3;n. La aplicaci&#xF3;n tendr&#xE1; un aspecto similar al siguiente:</p>
-<div align="center">
-    <img height="200" src="./imagenes/imagen1.png">
-</div>
-<p>De forma que tenga un TextView que muestre la cuenta atr&#xE1;s desde la hora establecida. Para establecer la hora se realizar&#xE1; un click corto sobre el TextView, que abrir&#xE1; un dialogo que permitir&#xE1; introducir la hora, minutos y segundos desde los que comienza la cuenta atr&#xE1;s:</p>
-<div align="center">
-    <img height="150" src="./imagenes/imagen2.png">
-</div>
-<p>Se comprobar&#xE1; que los datos de entrada cumplen con el patr&#xF3;n de fechas.</p>
-<blockquote>
-<p>&#x1F4A1; puedes usar la siguiente pista para poder controlar la fecha correcta mediante un patr&#xF3;n.    <strong><code>val regex = Regex(&quot;^[0-2][0-3]:[0-5][0-9]:[0-5][0-9]$&quot;)</code></strong><br>
-Busca informaci&#xF3;n de como se codifican las expresiones regulares mediante Kotlin.</p>
-</blockquote>
-<p>Una vez se pulse el bot&#xF3;n aceptar del dialogo y la fecha introducida es correcta, se mostrar&#xE1; el contador de marcha atr&#xE1;s.</p>
-<div align="center">
-    <img height="70" src="./imagenes/imagen3.png">
-</div>
-<p>A partir de ah&#xED; pueden ocurrir tres cosas:</p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
 <ol>
-<li>Que el contador llegue a 0, es decir el Work habr&#xE1; finalizado correctamente y se sentir&#xE1; la vibraci&#xF3;n del m&#xF3;vil.</li>
-<li>Que el usuario cierre la aplicaci&#xF3;n, en ese caso se tendr&#xE1; que cancelar la tarea y que no quede en segundo plano.</li>
-<li>Que el usuario decida cambiar la hora al temporizador, en ese caso y si la hora introducida es correcta, se cambiar&#xE1; el TextView con la hora nueva y se iniciar&#xE1; la cuenta atr&#xE1;s desde esos n&#xFA;meros.</li>
+<li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
+<li><a href="#elementos-de-una-notificaci%C3%B3n">Elementos de una notificaci&#xF3;n</a></li>
+<li><a href="#canales-de-notificaci%C3%B3n">Canales de notificaci&#xF3;n</a></li>
 </ol>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h4>
+
+<p>Las <a href="https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=es-419">notificaciones</a> son mensajes que se muestran en el sistema para proporcionar al usuario informaci&#xF3;n adicional de la app (mensajes, avisos, etc). Los usuarios pueden presionar la notificaci&#xF3;n para abrir la app o realizar una acci&#xF3;n directamente desde la notificaci&#xF3;n.</p>
+<p>Las notificaciones se muestran de diferentes maneras:</p>
+<ul>
+<li>Iconos en la barra de estado.</li>
+<li>Entrada m&#xE1;s detallada en el panel desplegable de notificaciones.</li>
+<li>Notificaciones emergentes (normalmente para notificaciones importantes).</li>
+<li>Notificaciones de pantalla de bloqueo.</li>
+<li>Distintivo en el &#xED;cono de la app, en versiones m&#xE1;s recientes.</li>
+</ul>
+<h5 class="mume-header" id="notificaciones-en-la-barra-de-estado">Notificaciones en la Barra de Estado</h5>
+
+<p>La barra de estado de Android se encuentra situada en la parte superior de la pantalla. La parte izquierda de esta barra est&#xE1; reservada para visualizar notificaciones. Cuando se crea una nueva notificaci&#xF3;n, aparece un texto desplaz&#xE1;ndose en la barra, y a continuaci&#xF3;n, un peque&#xF1;o icono permanecer&#xE1; en la barra para recordar al usuario la notificaci&#xF3;n.<br>
+El usuario puede arrastrar la barra de notificaciones hacia abajo, para mostrar el listado de las notificaciones por leer.</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden">
+<td style="border:hidden">
+<div align="center">
+    <img height src="./imagenes/imagen1.png">
+</div>
+</td>
+<td>
+<div align="center">
+    <img height src="./imagenes/imagen2.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<h4 class="mume-header" id="elementos-de-una-notificaci%C3%B3n">Elementos de una notificaci&#xF3;n</h4>
+
+<p>Las notificaciones podemos verlas de dos formas distintas, la vista normal antes de que el usuario la despliegue y la vista ampliada.</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr>
+<td>
+<div align="center">
+    <img height width="1500" src="./imagenes/imagen3.png">
+</div>
+</td>
+<td>
+<div align="left">
+1. Icono peque&#xF1;o: se establece con <i>setSmallIcon()</i>. <br> 
+2. Nombre de la aplicaci&#xF3;n: proporcionado por el sistema. <br> 
+3. Hora a la que se emiti&#xF3; la notificaci&#xF3;n. Se puede establecer un valor expl&#xED;cito con <i>setWhen()</i> u ocultarlo <i>setShowWhen(false)</i>; si no se hace se mostrar&#xE1; por defecto la hora del sistema en el momento de recepci&#xF3;n de la notificaci&#xF3;n.<br>
+4. Icono grande: es opcional (generalmente se usa solo para fotos de contacto; no lo use para el icono de su aplicaci&#xF3;n) se establece con <i>setLargeIcon().<br> 
+5. T&#xED;tulo: Esto es opcional y se establece con <i>setContentTitle()</i>. <br> 
+6. Texto: esto es opcional y se establece con <i>setContentText()</i>.
+</i></div><i>
+</i></td>
+</tr>
+</tbody></table>
+</span>
+<p>La vista ampliada s&#xF3;lo aparece cuando se expande la notificaci&#xF3;n, lo que sucede cuando la notificaci&#xF3;n est&#xE1; en la parte superior del buz&#xF3;n de notificaciones, o cuando el usuario ampl&#xED;a la notificaci&#xF3;n con un gesto.</p>
+<h4 class="mume-header" id="canales-de-notificaci%C3%B3n">Canales de notificaci&#xF3;n</h4>
+
+<p>A partir de Android 8.0 (nivel de API 26), todas las notificaciones deben asignarse a un canal o directamente no ser&#xE1;n visibles. <a href="https://developer.android.com/training/notify-user/channels?hl=es-419">Los canales</a> de notificaci&#xF3;n permiten a los desarrolladores agrupar las notificaciones en categor&#xED;as (canales). Esto permitir&#xE1; al usuario la habilidad de modificar los ajustes de notificaci&#xF3;n para el canal entero a la vez. Por ejemplo, para cada canal, los usuarios pueden bloquear completamente todas las notificaciones, anular el nivel de importancia, o permitir que la insignia de la notificaci&#xF3;n se muestre. Los usuarios tambi&#xE9;n pueden presionar una notificaci&#xF3;n para cambiar los comportamientos del canal asociado. Todas las notificaciones publicadas en el mismo canal de notificaci&#xF3;n tienen el mismo comportamiento.</p>
 <blockquote>
-<p>&#x1F4A1; para trabajar con el temporizador, la mejor forma de hacerlo es pasando los datos de entradas a segundos y luego ir decrementando con un retardo de un segundo. Se puede usar el siguiente c&#xF3;digo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">transformasSegundosAHoras</span><span class="token punctuation">(</span>segundos<span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span>String
-  <span class="token punctuation">{</span>
-      <span class="token keyword keyword-val">val</span> hora <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>segundos <span class="token operator">/</span> <span class="token number">3600</span><span class="token punctuation">)</span>
-      <span class="token keyword keyword-val">val</span> minutos <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>segundos  <span class="token operator">%</span> <span class="token number">3600</span> <span class="token operator">/</span> <span class="token number">60</span><span class="token punctuation">)</span>
-      <span class="token keyword keyword-val">val</span> segundos <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>segundos  <span class="token operator">%</span> <span class="token number">3600</span> <span class="token operator">%</span> <span class="token number">60</span><span class="token punctuation">)</span>
-      <span class="token keyword keyword-var">var</span> stringBuilder<span class="token operator">=</span> <span class="token function">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      stringBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>hora<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">&quot;0<span class="token interpolation variable">$hora</span>&quot;</span>
-                            <span class="token keyword keyword-else">else</span> hora<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      stringBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot;:&quot;</span><span class="token punctuation">)</span>
-      stringBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>minutos<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token string">&quot;0<span class="token interpolation variable">$minutos</span>&quot;</span>
-                            <span class="token keyword keyword-else">else</span> minutos<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      stringBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot;:&quot;</span><span class="token punctuation">)</span>
-      stringBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>segundos<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">&quot;0<span class="token interpolation variable">$segundos</span>&quot;</span> 
-                             <span class="token keyword keyword-else">else</span> segundos<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      <span class="token keyword keyword-return">return</span>  stringBuilder<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-</pre></blockquote>
+<p>&#x26A0;&#xFE0F; la interfaz de usuario se refiere a los canales de notificaci&#xF3;n como &quot;categor&#xED;as&quot;.</p>
+</blockquote>
+<p>En los dispositivos que ejecutan Android 7.1 (nivel de API 25) e inferior, los usuarios pueden administrar las notificaciones solo por aplicaci&#xF3;n (de hecho, cada aplicaci&#xF3;n solo tiene un canal). Por lo tanto antes crear la notificaci&#xF3;n, deberemos crear el canal o los canales a los que queremos a&#xF1;adir nuestras notificaciones.</p>
+<h5 class="mume-header" id="crear-canales-de-notificaci%C3%B3n">Crear canales de notificaci&#xF3;n</h5>
+
+<p>Antes de publicar una notificaci&#xF3;n se debe crear el canal, por lo que es importante que al iniciarse la aplicaci&#xF3;n o antes de crear la notificaci&#xF3;n se ejecute el c&#xF3;digo de creaci&#xF3;n. Veamos un ejemplo para crear dos canales de notificaci&#xF3;n:</p>
 
       </div>
       
