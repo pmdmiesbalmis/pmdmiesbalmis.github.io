@@ -345,6 +345,10 @@ justo después del front matter
 <li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
 <li><a href="#elementos-de-una-notificaci%C3%B3n">Elementos de una notificaci&#xF3;n</a></li>
 <li><a href="#canales-de-notificaci%C3%B3n">Canales de notificaci&#xF3;n</a></li>
+<li><a href="#crear-una-notificaci%C3%B3n">Crear una notificaci&#xF3;n</a></li>
+<li><a href="#estilos-de-notifiaci%C3%B3n">Estilos de notifiaci&#xF3;n</a></li>
+<li><a href="#botones">Botones</a></li>
+<li><a href="#algunos-extras-de-notificaciones">Algunos extras de notificaciones</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h4 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h4>
@@ -413,6 +417,226 @@ El usuario puede arrastrar la barra de notificaciones hacia abajo, para mostrar 
 <h5 class="mume-header" id="crear-canales-de-notificaci%C3%B3n">Crear canales de notificaci&#xF3;n</h5>
 
 <p>Antes de publicar una notificaci&#xF3;n se debe crear el canal, por lo que es importante que al iniciarse la aplicaci&#xF3;n o antes de crear la notificaci&#xF3;n se ejecute el c&#xF3;digo de creaci&#xF3;n. Veamos un ejemplo para crear dos canales de notificaci&#xF3;n:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearCanal</span><span class="token punctuation">(</span>
+        idCanal<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        nombreCanal<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        descripcion<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        importancia<span class="token operator">:</span> Int
+    <span class="token punctuation">)</span><span class="token operator">:</span> NotificationChannel<span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION<span class="token punctuation">.</span>SDK_INT <span class="token operator">&gt;=</span> Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>O<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> canal <span class="token operator">=</span> <span class="token function">NotificationChannel</span><span class="token punctuation">(</span>idCanal<span class="token punctuation">,</span> nombreCanal<span class="token punctuation">,</span> importancia<span class="token punctuation">)</span>
+        canal<span class="token punctuation">.</span>description <span class="token operator">=</span> descripcion
+        <span class="token keyword keyword-return">return</span> canal
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearCananlesNotificacion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION<span class="token punctuation">.</span>SDK_INT <span class="token operator">&gt;=</span> Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>O<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> notificationManager <span class="token operator">=</span> <span class="token function">getSystemService</span><span class="token punctuation">(</span>
+                NotificationManager<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java
+            <span class="token punctuation">)</span>
+        <span class="token keyword keyword-var">var</span> canal <span class="token operator">=</span> <span class="token function">crearCanal</span><span class="token punctuation">(</span>
+                CHANNELAVISOS_ID<span class="token punctuation">,</span>
+                <span class="token string">&quot;Avisos&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;Avisos importantes&quot;</span><span class="token punctuation">,</span>
+                NotificationManager<span class="token punctuation">.</span>IMPORTANCE_HIGH
+            <span class="token punctuation">)</span>
+        canal<span class="token operator">!!</span><span class="token punctuation">.</span>vibrationPattern <span class="token operator">=</span> <span class="token function">longArrayOf</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+        <span class="token comment">// Registrando el canal en el sistema. Despu&#xE9;s de esto no se </span>
+        <span class="token comment">//podr&#xE1; cambiar las caracter&#xED;sticas del canal</span>
+        <span class="token comment">// (importancia u otras propiedadesdel)</span>
+        notificationManager<span class="token punctuation">.</span><span class="token function">createNotificationChannel</span><span class="token punctuation">(</span>canal<span class="token punctuation">)</span>
+        canal <span class="token operator">=</span> <span class="token function">crearCanal</span><span class="token punctuation">(</span>
+                CHANNELMENSAJES_ID<span class="token punctuation">,</span>
+                <span class="token string">&quot;Mensajes&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;Mensajes&quot;</span><span class="token punctuation">,</span>
+                NotificationManager<span class="token punctuation">.</span>IMPORTANCE_LOW
+            <span class="token punctuation">)</span>
+        notificationManager<span class="token punctuation">.</span><span class="token function">createNotificationChannel</span><span class="token punctuation">(</span>canal<span class="token operator">!!</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Los pasos a seguir son:</p>
+<ol>
+<li>Construir un objeto del tipo <strong><code>NotificationChannel</code></strong>, con un ID de canal &#xFA;nico, un nombre visible para el usuario, una descripci&#xF3;n y un nivel de importancia.</li>
+<li>Si en el constructor no especificamos la descripci&#xF3;n, se puede especificar despu&#xE9;s con setDescription().</li>
+<li>Podemos aplicar otros comportamientos visuales y sonoros a nuestro canal, en el ejemplo hemos activado vibraci&#xF3;n para el canal de Avisos.</li>
+<li>Por &#xFA;ltimo registrar el canal de notificaci&#xF3;n pas&#xE1;ndolo al sistema con el m&#xE9;todo <strong><code>createNotificationChannel()</code></strong>.<br>
+En nuestro ejemplo definimos un m&#xE9;todo que crea un canal y que es llamado por el m&#xE9;todo que asigna los canales creados a la aplicaci&#xF3;n.</li>
+</ol>
+</blockquote>
+<p>La prioridad de nuestras notificaciones se ajusta a las siguientes opciones:</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen4.png">
+</div>
+Evidentemente, a todas las notificaciones para un canal se les dar&#xE1; el mismo nivel de importancia.
+<p>Las categor&#xED;as creadas aparecer&#xE1;n en las opciones de configuraci&#xF3;n de nuestro dispositivo. <em>Ir a Ajustes-&gt;Notificaciones-&gt;Seleccionamos Aplicaci&#xF3;n y nos aparecer&#xE1; la categor&#xED;a creada. Tambi&#xE9;n se mostrar&#xE1; si se pulsa largamente sobre la notificaci&#xF3;n desplegada y despu&#xE9;s sobre el icono de informaci&#xF3;n.</em></p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen5.png">
+</div>
+<p>Si entramos dentro de la categor&#xED;a ver&#xED;amos su definici&#xF3;n detallada:</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style=" border:hidden;">
+<td style=" border:hidden;">
+<div align="center">
+    <img height="200" src="./imagenes/imagen6.png">
+</div>
+</td>
+<td>
+<div align="center">
+    <img height="200" src="./imagenes/imagen7.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>Es en este panel donde el usuario activa o no las notificaciones de una determinada categor&#xED;a, tambi&#xE9;n puede cambiar la acci&#xF3;n que ocurrir&#xE1; al lanzarse la notificaci&#xF3;n asociada a la categor&#xED;a.</p>
+<h4 class="mume-header" id="crear-una-notificaci%C3%B3n">Crear una notificaci&#xF3;n</h4>
+
+<p>Para crear notificaciones se utiliza la clase <strong><code>NotificationCompat.Builder</code></strong>. Para crear una notificaci&#xF3;n solamente crearemos un objeto de este tipo y le asignaremos el contexto de la aplicaci&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notificacion<span class="token operator">:</span> NotificationCompat<span class="token punctuation">.</span>Builder
+notificacion <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> CHANNELMENSAJES_ID<span class="token punctuation">)</span>
+</pre><p>se usa como en el siguiente ejemplo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notificacion<span class="token operator">:</span> NotificationCompat<span class="token punctuation">.</span>Builder
+notificacion <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> CHANNELMENSAJES_ID<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setContentText</span><span class="token punctuation">(</span><span class="token string">&quot;Este es el texto de mi notificaci&#xF3;n&quot;</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Mi notificaci&#xF3;n&quot;</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setSmallIcon</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>mipmap<span class="token punctuation">.</span>ic_launcher<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setLargeIcon</span><span class="token punctuation">(</span>
+            <span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">getDrawable</span><span class="token punctuation">(</span>
+                <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>sym_action_email
+            <span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> BitmapDrawable<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">!!</span><span class="token punctuation">.</span>bitmap
+        <span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setTicker</span><span class="token punctuation">(</span><span class="token string">&quot;Optional ticker&quot;</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setWhen</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setAutoCancel</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">//elimina notificaci&#xF3;n una vez visualizada</span>
+</pre><blockquote>
+<p>&#x1F4CC; Los m&#xE9;todos <strong><code>setContentTitle()</code></strong> y <strong><code>setContentText()</code></strong>, permiten colocar el t&#xED;tulo y el texto de la notificaci&#xF3;n. Para mostrar los iconos se utilizar&#xE1;n los m&#xE9;todos <strong><code>setSmallIcon()</code></strong> y <strong><code>setLargeIcon()</code></strong> que se corresponden con los iconos mostrados a la derecha y a la izquierda del contenido de la notificaci&#xF3;n en versiones recientes de Android, en versiones m&#xE1;s antiguas tan s&#xF3;lo se mostrar&#xE1; el icono peque&#xF1;o a la izquierda de la notificaci&#xF3;n. Adem&#xE1;s, el icono peque&#xF1;o tambi&#xE9;n se mostrar&#xE1; en la barra de estado superior.<br>
+El ticker (texto que aparece por unos segundos en la barra de estado al generarse una nueva notificaci&#xF3;n) lo a&#xF1;adiremos mediante <strong><code>setTicker()</code></strong> y el texto auxiliar (opcional) que aparecer&#xE1; a la izquierda del icono peque&#xF1;o de la notificaci&#xF3;n mediante <strong><code>setContentInfo()</code></strong>.<br>
+La fecha/hora asociada a nuestra notificaci&#xF3;n se tomar&#xE1; autom&#xE1;ticamente de la fecha/hora actual si no se establece nada, o bien puede utilizarse el m&#xE9;todo <strong><code>setWhen()</code></strong> para indicar otra marca de tiempo.</p>
+</blockquote>
+<p>El siguiente paso, una vez tenemos completamente configuradas las opciones de nuestra notificaci&#xF3;n, ser&#xE1; el de generarla llamando al m&#xE9;todo <strong><code>notify()</code></strong>. Para ello nos crearemos un objeto de tipo <strong><code>NotificationManagerCompat</code></strong> al que le pasaremos el contexto, a trav&#xE9;s de este llamaremos al m&#xE9;todo notify(). <strong><code>notify</code></strong> necesitar&#xE1; un entero que identifique nuestra notificaci&#xF3;n y el resultado del builder que hemos construido antes.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> idNotificacion<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span>
+<span class="token keyword keyword-val">val</span> notificationManager <span class="token operator">=</span> NotificationManagerCompat<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span>idNotificacion<span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>El &#xFA;ltimo paso ser&#xE1; establecer la actividad a la cual debemos dirigir al usuario autom&#xE1;ticamente si &#xE9;ste pulsa sobre la notificaci&#xF3;n. Para ello debemos construir un objeto <strong><code>PendingIntent</code></strong>, que ser&#xE1; el que contenga la informaci&#xF3;n de la actividad asociada a la notificaci&#xF3;n y que ser&#xE1; lanzado al pulsar sobre ella. Para ello definiremos en primer lugar un objeto <strong><code>Intent</code></strong>, indicando la clase de la actividad a lanzar, que en nuestro caso ser&#xE1; una b&#xFA;squeda por <strong><code>URL</code></strong>. Este intent lo utilizaremos para construir el <strong><code>PendingIntent</code></strong> final mediante el m&#xE9;todo <strong><code>PendingIntent.getActivity()</code></strong>. Por &#xFA;ltimo asociaremos este objeto a la notificaci&#xF3;n mediante el m&#xE9;todo <strong><code>setContentIntent()</code></strong> de la notificaci&#xF3;n creada.<br>
+Veamos c&#xF3;mo quedar&#xED;a esta &#xFA;ltima parte comentada:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">)</span>
+intent<span class="token punctuation">.</span>data <span class="token operator">=</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.ua.es&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> intent2 <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> MainActivity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setContentIntent</span><span class="token punctuation">(</span>PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>intent<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setDeleteIntent</span><span class="token punctuation">(</span>PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>intent2<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x26A0;&#xFE0F; En este caso, adem&#xE1;s, hemos a&#xF1;adido m&#xE1;s funcionalidad al lanzar otro pendigintent una vez borrada la notificaci&#xF3;n. Este pending lo a&#xF1;adiremos con el m&#xE9;todo <strong><code>setDeleteIntent()</code></strong> sobre la notificaci&#xF3;n, y se ejecutar&#xE1; al deslizar la notificaci&#xF3;n para eliminarla.</p>
+</blockquote>
+<h4 class="mume-header" id="estilos-de-notifiaci%C3%B3n">Estilos de notifiaci&#xF3;n</h4>
+
+<p>Las notificaciones nos permiten <a href="https://developer.android.com/training/notify-user/expanded?hl=es-419">personalizarlas</a> creando layouts propios, pero nosotros nos centraremos en los 3 estilos que vienen de serie. Recordad que estos estilos se expanden y contraen, por lo que tenemos que definir unos datos para la notificaci&#xF3;n normal y otros para la expandida. Adem&#xE1;s, por defecto s&#xF3;lo aparecer&#xE1; expandida la primera notificaci&#xF3;n de la bandeja, el resto estar&#xE1;n contra&#xED;das y el usuario podr&#xE1; abrirlas manualmente con un gesto. Los estilos posibles son:</p>
+<h5 class="mume-header" id="estilo-bigtext">Estilo BigText</h5>
+
+<p>Se usa a partir de un objeto de tipo Builder, pas&#xE1;ndolo como par&#xE1;metro a la clase <strong><code>NotificationCompat.BigTextStyle</code></strong> para poder aplicarle algunos m&#xE9;todos opcionales. Queda m&#xE1;s claro con un ejemplo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">NotificationCompat<span class="token punctuation">.</span><span class="token function">BigTextStyle</span><span class="token punctuation">(</span>notificacion<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">bigText</span><span class="token punctuation">(</span>&quot;Lorem ipsum dolor sit amet<span class="token punctuation">,</span> consectetur adipiscing elit<span class="token punctuation">.</span>
+                    Donec id ex hendrerit<span class="token punctuation">,</span> ullamcorper lacus quis<span class="token punctuation">,</span> auctor odio<span class="token punctuation">.</span> 
+                    Curabitur <span class="token keyword keyword-in">in</span> feugiat elit<span class="token punctuation">,</span> ut laoreet ex<span class="token punctuation">.</span> Nunc <span class="token keyword keyword-in">in</span> tristique elit<span class="token punctuation">,</span> 
+                    at posuere magna<span class="token punctuation">.</span> Curabitur augue lectus<span class="token punctuation">,</span> tristique a consectetur 
+                    vitae<span class="token punctuation">,</span> luctus a nisi<span class="token punctuation">.</span> Quisque nec nulla neque<span class="token punctuation">.</span> Proin gravida lacinia
+                     lorem <span class="token keyword keyword-in">in</span> tempus<span class="token punctuation">.</span> Interdum et malesuada fames ac ante ipsum primis
+                    <span class="token keyword keyword-in">in</span> faucibus<span class="token punctuation">.</span>&quot;<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">setBigContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Expanded BigText title&quot;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">setSummaryText</span><span class="token punctuation">(</span><span class="token string">&quot;Summary text&quot;</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC;Como se puede suponer al crear el estilo, lo haremos sobre una notificaci&#xF3;n base creada con anterioridad y que la pasaremos al objeto <strong><code>BigTextStyle</code></strong>.<br>
+Al crear el nuevo estilo estableceremos el texto largo, como puede ser el contenido de un correo electr&#xF3;nico o de un SMS, el t&#xED;tulo que llevar&#xE1; en su forma expandida si queremos que sea diferente, y un resumen opcional que se mostrar&#xE1; en 1 l&#xED;nea al final del texto. En la captura pod&#xE9;is ver un ejemplo de c&#xF3;mo quedar&#xED;a la misma notificaci&#xF3;n expandida y contra&#xED;da (la imagen no coincide exacta con el c&#xF3;digo).</p>
+</blockquote>
+<div align="center">
+    <img height="200" src="./imagenes/imagen8.png">
+</div>
+<h5 class="mume-header" id="estilo-bigpicture">Estilo BigPicture</h5>
+
+<p>Si la notificaci&#xF3;n es relativa a una imagen tambi&#xE9;n podemos usar una notificaci&#xF3;n expandida para mostrar dicha imagen en la bandeja gracias a <strong><code>NotificationCompat.BigPictureStyle</code></strong>. Su uso es casi id&#xE9;ntico al anterior, cambiando la clase y m&#xE9;todos del estilo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">NotificationCompat<span class="token punctuation">.</span><span class="token function">BigPictureStyle</span><span class="token punctuation">(</span>notificacion<span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">bigPicture</span><span class="token punctuation">(</span>
+                        ContextCompat<span class="token punctuation">.</span><span class="token function">getDrawable</span><span class="token punctuation">(</span>
+                            <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_launcher_foreground
+                        <span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">toBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">bigLargeIcon</span><span class="token punctuation">(</span>
+                        ContextCompat<span class="token punctuation">.</span><span class="token function">getDrawable</span><span class="token punctuation">(</span>
+                            <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_launcher_foreground
+                        <span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">toBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">setBigContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Expanded BigPicture title&quot;</span><span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">setSummaryText</span><span class="token punctuation">(</span><span class="token string">&quot;Summary text&quot;</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; En este caso en vez de un texto, se a&#xF1;adir&#xE1; imagen grande que queremos mostrar con <strong><code>bigPicture()</code></strong> y si queremos que la imagen &quot;peque&#xF1;a&quot; a la izquierda de la notificaci&#xF3;n sea distinta en la forma expandida tambi&#xE9;n la cambiamos con <strong><code>bigLargeIcon()</code></strong>.</p>
+</blockquote>
+<div align="center">
+    <img height="200" src="./imagenes/imagen9.png">
+</div>
+<h5 class="mume-header" id="estilo-inbox-l%C3%ADnea-a-l%C3%ADnea">Estilo Inbox, l&#xED;nea a l&#xED;nea</h5>
+
+<p>El &#xFA;ltimo estilo que proporciona Android es el <strong><code>Notification.InboxStyle</code></strong>, que muestra una lista de texto. Como varios correos recibidos, o lo que nos escribe alguien por mensajer&#xED;a instant&#xE1;nea. Muy similar tambi&#xE9;n a los anteriores.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notificacionInboxStyle <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span><span class="token function">InboxStyle</span><span class="token punctuation">(</span>notificacion<span class="token punctuation">)</span>
+                             <span class="token punctuation">.</span><span class="token function">setBigContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Expanded Inbox title&quot;</span><span class="token punctuation">)</span>
+                             <span class="token punctuation">.</span><span class="token function">setSummaryText</span><span class="token punctuation">(</span><span class="token string">&quot;Summary text&quot;</span><span class="token punctuation">)</span>     
+notificacionInboxStyle<span class="token punctuation">.</span><span class="token function">addLine</span><span class="token punctuation">(</span><span class="token string">&quot;Mensaje 1&quot;</span><span class="token punctuation">)</span>
+notificacionInboxStyle<span class="token punctuation">.</span><span class="token function">addLine</span><span class="token punctuation">(</span><span class="token string">&quot;Mensaje 2&quot;</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> notificacionInboxStyle<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>En esta ocasi&#xF3;n a&#xF1;adimos las l&#xED;neas una a una con addLine(), aunque nos aconsejan un m&#xE1;ximo de 5. Nos quedar&#xED;a algo as&#xED; (c&#xF3;digo e imagen no coinciden).</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen10.png">
+</div>
+<h4 class="mume-header" id="botones">Botones</h4>
+
+<p>Otra novedad introducida en Jelly Bean es la posibilidad de a&#xF1;adir hasta 3 botones a las notificaciones con sus acciones asociadas. Se hace sobre el objeto de tipo <strong><code>Notification.Builder</code></strong> con el m&#xE9;todo <strong><code>addAction()</code></strong>, as&#xED; que es compatible con cualquiera de los 4 tipos de notificaciones anteriores. En la notificaci&#xF3;n normal los botones se considerar&#xE1;n como parte &quot;expandida&quot;, por lo que tendr&#xE1;n el mismo comportamiento que estas.</p>
+<div align="center">
+    <img height="140" src="./imagenes/imagen11.png">
+</div>
+<p>En el ejemplo vemos un m&#xE9;todo que a&#xF1;ade 2 botones a cualquier builder que pasemos como par&#xE1;metro.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> action <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span>Action<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>
+                    android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_menu_delete<span class="token punctuation">,</span>
+                    <span class="token string">&quot;Delete&quot;</span><span class="token punctuation">,</span> PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">addAction</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">addAction</span><span class="token punctuation">(</span>
+                    android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_menu_share<span class="token punctuation">,</span>
+                    <span class="token string">&quot;Share&quot;</span><span class="token punctuation">,</span>
+                    PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; Le pasamos como par&#xE1;metros un drawable del icono que llevar&#xE1; el bot&#xF3;n a la izquierda del texto, el texto que llevar&#xE1;, y un PendingIntent que se activar&#xE1; cuando pulsemos el bot&#xF3;n.</p>
+</blockquote>
+<h4 class="mume-header" id="algunos-extras-de-notificaciones">Algunos extras de notificaciones</h4>
+
+<p>Por ahora todo lo que hemos visto ha sido para crear la notificaci&#xF3;n, pero a&#xFA;n tenemos que mostrarla y quiz&#xE1; hacer que el m&#xF3;vil suene y/o vibre. Tambi&#xE9;n podemos hacer estas cosas con los m&#xE9;todos de la clase <strong><code>NotificationCompat.Builder</code></strong>. Veamos unos ejemplos:</p>
+<h5 class="mume-header" id="sonido">Sonido</h5>
+
+<p>Podemos reproducir un sonido al activar la notificaci&#xF3;n. El la imagen se reproduce el sonido por defecto, puede ser otro.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> uri<span class="token operator">=</span>RingtoneManager<span class="token punctuation">.</span><span class="token function">getDefaultUri</span><span class="token punctuation">(</span>RingtoneManager<span class="token punctuation">.</span>TYPE_ALARM<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setSound</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span>
+</pre><h5 class="mume-header" id="vibraci%C3%B3n">Vibraci&#xF3;n</h5>
+
+<p>Tambi&#xE9;n podemos hacer que el tel&#xE9;fono vibre. Para eso lo primero que necesitamos es declarar el permiso de vibraci&#xF3;n <strong><code>&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot; /&gt;</code></strong><br>
+Luego creamos un patr&#xF3;n de vibraci&#xF3;n. Consiste en un array de long alternando el tiempo de vibraci&#xF3;n y pausa en milisegundos. Y se lo asignamos a la notificaci&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> pattern <span class="token operator">=</span> <span class="token function">longArrayOf</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setVibrate</span><span class="token punctuation">(</span>pattern<span class="token punctuation">)</span>
+</pre><p>La vibraci&#xF3;n por defecto la podemos conseguir de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kolin" class="language-kolin"><code> notificacion.setDefaults(Notification.DEFAULT_VIBRATE)
+</code></pre><h5 class="mume-header" id="getactivenotifications">getActiveNotifications</h5>
+
+<p>A partir del Api 23 se ha agregado a la clase <strong><code>NotificationManager</code></strong> el m&#xE9;todo <strong><code>getActiveNotifications()</code></strong>. Muy &#xFA;til para consultar el estado de las notificaciones, este m&#xE9;todo devuelve un array con el estado de todas las notificaciones activas en el momento.</p>
+<p><strong>StatusBarNotification [] getActiveNotifications ()</strong></p>
+<p>Recupera una lista de notificaciones activas: aquellas publicadas por la aplicaci&#xF3;n que a&#xFA;n no han sido descartadas por el usuario o canceladas por la aplicaci&#xF3;n. Se puede identificar la notificaci&#xF3;n a partir del tag o del id suministrado al <strong><code>notify()</code></strong>, as&#xED; como una copia del original Notification objeto a trav&#xE9;s <strong><code>getNotification()</code></strong>.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio Resuelto Notificadiones Expandibles</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio Propuesto Temporizador Huevo</span></p>
 
       </div>
       
