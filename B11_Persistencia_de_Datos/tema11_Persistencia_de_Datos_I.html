@@ -1705,47 +1705,11 @@ Si queremos autentificarnos como usuarios, tenemos varias opciones:<strong><code
     <img width="500" src=".\imagenes/imagen50.png">
 </div>
 <p>Una vez a&#xF1;adido los proveedores, tendremos dos formas de crear los usuarios: <strong>a trav&#xE9;s de la consola y desde la aplicaci&#xF3;n</strong>. Desde la consola nos tendremos que ir a la pesta&#xF1;a usuarios, aqu&#xED; podremos crear los usuarios que necesitemos. Los usuarios an&#xF3;nimos aparecer&#xE1;n solamente con el id &#xFA;nico que asigna Firebase a cada usuario creado.<br>
-El otro caso ser&#xE1; al codificar la aplicaci&#xF3;n. Para todos los casos de autentificaci&#xF3;n necesitamos a&#xF1;adir un escuchador a una variable de tipo <strong><code>FirebaseAuth.AuthStateListener</code></strong>. Este escuchador ser&#xE1; asignado en el m&#xE9;todo onStart y eliminado en onStop, y su funci&#xF3;n es la de controlar cualquier cambio que ocurra con el usuario.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> FragmentLogearse <span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> mAuthListener<span class="token operator">:</span> AuthStateListener
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> mAuth<span class="token operator">:</span> FirebaseAuth
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> user<span class="token operator">:</span> TextInputLayout
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> pasword<span class="token operator">:</span> TextInputLayout
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> interfaceFragments<span class="token operator">:</span> InterfaceFragments
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        mAuth<span class="token punctuation">.</span><span class="token function">addAuthStateListener</span><span class="token punctuation">(</span>mAuthListener<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onStop</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            mAuth<span class="token punctuation">.</span><span class="token function">removeAuthStateListener</span><span class="token punctuation">(</span>mAuthListener<span class="token punctuation">)</span>
-            mAuth<span class="token punctuation">.</span><span class="token function">signOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onAttach</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onAttach</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
-        interfaceFragments <span class="token operator">=</span> context <span class="token keyword keyword-as">as</span> InterfaceFragments
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">////Escuchador de cambios en los usuarios</span>
-mAuthListener <span class="token operator">=</span> AuthStateListener 
-<span class="token punctuation">{</span> 
-    firebaseAuth <span class="token operator">-&gt;</span>
-        <span class="token keyword keyword-val">val</span> user <span class="token operator">=</span> firebaseAuth<span class="token punctuation">.</span>currentUser
-        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>user <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> user<span class="token punctuation">.</span>email <span class="token operator">+</span> <span class="token string">&quot; LOGEADO&quot;</span><span class="token punctuation">,</span> 
-                               Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                mAuth <span class="token operator">=</span> firebaseAuth
-            <span class="token punctuation">}</span> 
-        <span class="token keyword keyword-else">else</span> Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;Usuario NULO&quot;</span><span class="token punctuation">,</span>
-                             Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-</pre><blockquote>
-<p>&#x26A0;&#xFE0F; El escuchador AuthStateListener deber&#xE1; ser incluido en el m&#xE9;todo onCreate de la aplicaci&#xF3;n.</p>
-</blockquote>
+El otro caso ser&#xE1; al codificar la aplicaci&#xF3;n. Para todos los casos de autentificaci&#xF3;n necesitamos una instancia de <strong><code>FirebaseAuth.getInstance()</code></strong>, a partir de esta podremos a&#xF1;adir los escuchadores necesarios:</p>
 <p>El siguiente paso ser&#xE1; decidir si queremos permitir crear usuarios nuevos, o solamente logearnos con alguno existente. En nuestra aplicaci&#xF3;n vamos a hacer las dos cosas, e incluso nos logearemos como an&#xF3;nimos. El c&#xF3;digo aparece a continuaci&#xF3;n, y un enlace con toda la informaci&#xF3;n <a href="https://firebase.google.com/docs/auth/android/password-auth">https://firebase.google.com/docs/auth/android/password-auth</a></p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token comment">////// Crear usuario nueveo y iniciar sesi&#xF3;n</span>
         btCrear<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
-                mAuth<span class="token punctuation">.</span><span class="token function">createUserWithEmailAndPassword</span><span class="token punctuation">(</span>
+               FirebaseAuth<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">createUserWithEmailAndPassword</span><span class="token punctuation">(</span>
                     user<span class="token punctuation">.</span>editText<span class="token operator">!!</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pasword<span class="token punctuation">.</span>editText<span class="token operator">!!</span>
                         <span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">)</span>
@@ -1767,7 +1731,7 @@ mAuthListener <span class="token operator">=</span> AuthStateListener
 
 </pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">/////Iniciar sesi&#xF3;n con usuario y contrase&#xF1;a</span>
         btIniciar<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
-            mAuth<span class="token punctuation">.</span><span class="token function">signInWithEmailAndPassword</span><span class="token punctuation">(</span>
+             FirebaseAuth<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">signInWithEmailAndPassword</span><span class="token punctuation">(</span>
                 user<span class="token punctuation">.</span>editText<span class="token operator">!!</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pasword<span class="token punctuation">.</span>editText<span class="token operator">!!</span>
                     <span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">)</span>
@@ -1785,7 +1749,7 @@ mAuthListener <span class="token operator">=</span> AuthStateListener
         <span class="token punctuation">}</span>
 </pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token comment">//////// Iniciar sesi&#xF3;n con an&#xF3;nimo</span>
         btAnonimus<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
-                mAuth<span class="token punctuation">.</span><span class="token function">signInAnonymously</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addOnCompleteListener</span>
+                 FirebaseAuth<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">signInAnonymously</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addOnCompleteListener</span>
                 <span class="token punctuation">(</span>
                     <span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
                     OnCompleteListener<span class="token operator">&lt;</span>AuthResult<span class="token operator">?</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span> task <span class="token operator">-&gt;</span>
@@ -1799,7 +1763,7 @@ mAuthListener <span class="token operator">=</span> AuthStateListener
                     <span class="token punctuation">}</span>
                 <span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
-</pre><p>Como podemos ver en el c&#xF3;digo, lo que se hace es a&#xF1;adir el mismo escuchador a cualquiera de los m&#xE9;todos que hayamos elegido (login, an&#xF3;nimo o a&#xF1;adir usuario) sobre un objeto <strong><code>FirebaseAuth</code></strong>. Con estos pasos tendremos la autentificaci&#xF3;n controlada, y podremos seguir con nuestra aplicaci&#xF3;n.</p>
+</pre><p>Como podemos ver en el c&#xF3;digo, lo que se hace es usar cualquiera de los m&#xE9;todos que hayamos elegido (login, an&#xF3;nimo o a&#xF1;adir usuario) sobre la instancia de <strong><code>FirebaseAuth</code></strong>. Con estos pasos tendremos la autentificaci&#xF3;n controlada, y podremos seguir con nuestra aplicaci&#xF3;n.</p>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Resuelve el ejercicio de los ejemplos hasta conseguir un correcto funcionamiento</span></p>
 
       </div>
