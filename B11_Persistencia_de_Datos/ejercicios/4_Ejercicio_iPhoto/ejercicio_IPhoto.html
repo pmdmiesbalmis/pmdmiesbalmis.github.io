@@ -261,7 +261,7 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="ejercicio-iphoto-sqlite-apirest-y-firebase">Ejercicio iPhoto (SQLite, APIRest y Firebase)</h1>
+      <h2 class="mume-header undefined" id="ejercicio-iphoto-sqlite-apirest-y-firebase">Ejercicio iPhoto (SQLite, APIRest y Firebase)</h2>
 
 <p><a href="./ejercicio_IPhoto.pdf">Descargar estos apuntes</a></p>
 <h2 class="mume-header" id="enunciado-y-descripci%C3%B3n-de-la-aplicaci%C3%B3n">Enunciado y descripci&#xF3;n de la aplicaci&#xF3;n</h2>
@@ -270,13 +270,19 @@ pre[data-line] .line-highlight[data-end]:after {
 La aplicaci&#xF3;n tendr&#xE1; el mismo dise&#xF1;o: una actividad principal con un <strong><code>FragmentContainerView</code></strong> donde se cargar&#xE1;n los <strong><code>fragments</code></strong>. Concretamente tendremos dos: uno que contiene un <strong><code>recycler</code></strong> con un <strong><code>FAB</code></strong> y otro para hacer una foto, puntuarla y almacenarla. La carga de <strong><code>Fragments</code></strong> se realizar&#xE1; con <strong><code>Navigation</code></strong>.</p>
 <h2 class="mume-header" id="dise%C3%B1o-de-la-aplicaci%C3%B3n">Dise&#xF1;o de la aplicaci&#xF3;n</h2>
 
-<h3 class="mume-header" id="esquema-de-layouts">Esquema de layouts</h3>
-
+<p>En el archivo <strong>themes.xml</strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Theme.IPhotoRateSqlite<span class="token punctuation">&quot;</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Theme.MaterialComponents.DayNight.NoActionBar<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+</pre><p>Utlizar el recurso <strong>strings.xml</strong> para dar de alta todos los textos.</p>
+<p>En el archivo <strong>AndroidManifest.xml</strong></p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-feature</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.hardware.camera<span class="token punctuation">&quot;</span></span>
+       <span class="token attr-name"><span class="token namespace">android:</span>required</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.CAMERA<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.INTERNET<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+</pre><h4>Esquema de layouts</h4>
 <div align="center">
     <img height="175" src="./imagenes/arbol_layouts.png">
 </div>
-<h3 class="mume-header" id="activity_mainxml">activity_main.xml</h3>
-
+<h4>Archivo activity_main.xml</h4>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
@@ -294,7 +300,8 @@ La aplicaci&#xF3;n tendr&#xE1; el mismo dise&#xF1;o: una actividad principal con
         <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>androidx.navigation.fragment.NavHostFragment<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>navGraph</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@navigation/navigation<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><h3 class="mume-header" id="navigation">Navigation</h3>
+ialComponents.DayNight.NoActionBar&quot;&gt;
+</pre><h4 class="mume-header" id="navigation">Navigation</h4>
 
 <p>Nuesta aplicaci&#xF3;n cargar&#xE1; en primer lugar el <strong>FragmentRecycler</strong></p>
 <div align="center">
@@ -329,7 +336,7 @@ La aplicaci&#xF3;n tendr&#xE1; el mismo dise&#xF1;o: una actividad principal con
 <div align="center">
     <img height="75" src="./imagenes/noapilar.png">
 </div>
-<h3 class="mume-header" id="dise%C3%B1o-fragmentrecycler">Dise&#xF1;o FragmentRecycler</h3>
+<h4 class="mume-header" id="dise%C3%B1o-fragmentrecycler">Dise&#xF1;o FragmentRecycler</h4>
 
 <p>Los componentes de la l&#xED;nea del <strong><code>recycler</code></strong> son los siguientes:</p>
 <div align="center">
@@ -427,11 +434,11 @@ La aplicaci&#xF3;n tendr&#xE1; el mismo dise&#xF1;o: una actividad principal con
         <span class="token attr-name"><span class="token namespace">android:</span>layout_margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>16dp<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">android:</span>src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@drawable/ic_add<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.coordinatorlayout.widget.CoordinatorLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><h3 class="mume-header" id="dise%C3%B1o-fragmentaddphoto">Dise&#xF1;o FragmentAddPhoto</h3>
+</pre><h4 class="mume-header" id="dise%C3%B1o-fragmentaddphoto">Dise&#xF1;o FragmentAddPhoto</h4>
 
 <p>Los componentes de la l&#xED;nea del <strong><code>recycler</code></strong> son los siguientes:</p>
 <div align="center">
-    <img height="200" src="./imagenes/componentes_fragment_foto.png">
+    <img height="100" src="./imagenes/componentes_fragment_foto.png">
 </div>
 <p>y el dise&#xF1;o:</p>
 <div align="center">
@@ -447,7 +454,14 @@ La aplicaci&#xF3;n tendr&#xE1; el mismo dise&#xF1;o: una actividad principal con
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintBottom_toBottomOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintEnd_toEndOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span>
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintStart_toStartOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-</pre><pre data-role="codeBlock" data-info="xml" class="language-xml"></pre><div align="center">
+</pre><h2 class="mume-header" id="desarrollo-sqlite">Desarrollo SQLite</h2>
+
+<h4 class="mume-header" id="archivos-java-necesarios">Archivos .java necesarios</h4>
+
+<div align="center">
+    <img height="300" src="./imagenes/javaSqlite.png">
+</div>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"></pre><div align="center">
     <img height="300" src="./imagenes/a.png">
 </div>
       </div>
