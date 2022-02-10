@@ -274,7 +274,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v14/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -356,6 +356,26 @@ justo después del front matter
 <li><a href="#uso-de-simplecursoradapter">Uso de SimpleCursorAdapter</a>
 <ol>
 <li><a href="#cursores-con-recyclerview">Cursores con RecyclerView</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</a>
+<ol>
+<li><a href="#acceso-a-bases-de-datos-con-apirest-y-retrofit">Acceso a bases de datos con Apirest y Retrofit</a>
+<ol>
+<li><a href="#consumo-de-un-servicio-rest-desde-android">Consumo de un Servicio Rest desde Android</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#acceso-a-base-de-datos-con-firebase">Acceso a Base de Datos con FIREBASE</a>
+<ol>
+<li><a href="#creando-un-app-de-firebase">Creando un app de Firebase</a></li>
+<li><a href="#firestore-database">Firestore DataBase</a>
+<ol>
+<li><a href="#firebaseui-y-recyclerview">FirebaseUI y RecyclerView</a></li>
+<li><a href="#filtrado-y-ordenaci%C3%B3n">Filtrado y ordenaci&#xF3;n</a></li>
 </ol>
 </li>
 <li><a href="#firebase-auth-autenticaci%C3%B3n">Firebase Auth. Autenticaci&#xF3;n</a></li>
@@ -736,6 +756,16 @@ Existen m&#xE9;todos espec&#xED;ficos para la recuperaci&#xF3;n de datos getXXX(
 </ol>
 <div style="page-break-after:always;"></div>
 <span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden;">
+<td>
+<ol start="3">
+<li>Se han incluido im&#xE1;genes para dar m&#xE1;s funcionalidad, hay dos m&#xE9;todos que nos permiten pasar im&#xE1;genes de Bitmap a String y viceversa para poderlas guardar en la BD a trav&#xE9;s del cursor (En la BD se guardar&#xE1;n como Blob). Est&#xE1;n localizados en MyActivity y son est&#xE1;ticos para poder acceder a ellos sin necesidad de objeto.</li>
+</ol>
+</td>
+</tr>
+</tbody></table>
+</span>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> 
 <span class="token punctuation">{</span>
   <span class="token keyword keyword-fun">fun</span> <span class="token function">convertirStringBitmap</span><span class="token punctuation">(</span>imagen<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Bitmap <span class="token punctuation">{</span>
@@ -750,12 +780,22 @@ Existen m&#xE9;todos espec&#xED;ficos para la recuperaci&#xF3;n de datos getXXX(
     <span class="token keyword keyword-return">return</span> Base64<span class="token punctuation">.</span><span class="token function">encodeToString</span><span class="token punctuation">(</span>byte_arr<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div><h2>Acceso a bases de datos remotas</h2><h3>Acceso a bases de datos con Apirest y Retrofit</h3><h4>Consumo de un Servicio Rest desde Android</h4><p>Retrofit la utilizaremos para hacer peticiones y procesar las respuestas del APIRest, mientras que con Gson transformaremos los datos de JSON a los propios que utilice la aplicaci&#xF3;n.<br>
-Para ello a&#xF1;adiremos las siguientes l&#xED;neas en el build.gradle de la app, y no olvides incluir permisos de internet:</p><pre data-role="codeBlock" data-info="json" class="language-json">            implementation <span class="token string">&quot;com.squareup.retrofit2:converter-gson:2.9.0&quot;</span>
+</pre><div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="acceso-a-bases-de-datos-remotas">Acceso a bases de datos remotas</h2>
+
+<h3 class="mume-header" id="acceso-a-bases-de-datos-con-apirest-y-retrofit">Acceso a bases de datos con Apirest y Retrofit</h3>
+
+<h4 class="mume-header" id="consumo-de-un-servicio-rest-desde-android">Consumo de un Servicio Rest desde Android</h4>
+
+<p>Retrofit la utilizaremos para hacer peticiones y procesar las respuestas del APIRest, mientras que con Gson transformaremos los datos de JSON a los propios que utilice la aplicaci&#xF3;n.<br>
+Para ello a&#xF1;adiremos las siguientes l&#xED;neas en el build.gradle de la app, y no olvides incluir permisos de internet:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">            implementation <span class="token string">&quot;com.squareup.retrofit2:converter-gson:2.9.0&quot;</span>
             implementation &apos;com.squareup.retrofit2<span class="token operator">:</span>retrofit<span class="token operator">:</span><span class="token number">2.9</span>.<span class="token number">0</span>&apos;
-</pre><p>Podemos decir que los pasos a seguir ser&#xE1;n los siguientes:</p><ol>
+</pre><p>Podemos decir que los pasos a seguir ser&#xE1;n los siguientes:</p>
+<ol>
 <li>Creaci&#xF3;n de un builder de Retrofit.</li>
-</ol><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearRetrofit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ProveedorSersvicio <span class="token punctuation">{</span>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearRetrofit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ProveedorSersvicio <span class="token punctuation">{</span>
     <span class="token comment">//val url = &quot;http://10.0.2.2/usuarios/&quot; //para el AVD de android</span>
     <span class="token keyword keyword-val">val</span> url<span class="token operator">=</span><span class="token string">&quot;http://xusa.iesdoctorbalmis.info/usuarios/&quot;</span> <span class="token comment">//para servidor del instituto</span>
     <span class="token keyword keyword-val">val</span> retrofit <span class="token operator">=</span> Retrofit<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -781,7 +821,8 @@ Para ello a&#xF1;adiremos las siguientes l&#xED;neas en el build.gradle de la ap
 <li>
 <p>Necesitaremos crear una interfaz con todos los servicios que quieras utilizar. Aqu&#xED; tienes unos ejemplos:</p>
 </li>
-</ol><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> ProveedorSersvicio <span class="token punctuation">{</span>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> ProveedorSersvicio <span class="token punctuation">{</span>
     <span class="token annotation builtin">@GET</span><span class="token punctuation">(</span><span class="token string">&quot;usuarios&quot;</span><span class="token punctuation">)</span>
     <span class="token annotation builtin">@Headers</span><span class="token punctuation">(</span><span class="token string">&quot;Accept: application/json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type: application/json&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">usuarios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Response<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Usuarios<span class="token operator">&gt;</span><span class="token operator">&gt;</span>
@@ -802,7 +843,8 @@ Para ello a&#xF1;adiremos las siguientes l&#xED;neas en el build.gradle de la ap
     <span class="token annotation builtin">@Headers</span><span class="token punctuation">(</span><span class="token string">&quot;Accept: application/json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type: application/json&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insertarMensaje</span><span class="token punctuation">(</span><span class="token annotation builtin">@Body</span> mensaje<span class="token operator">:</span> Mensaje<span class="token punctuation">)</span><span class="token operator">:</span> Response<span class="token operator">&lt;</span>RespuestaJSon<span class="token operator">&gt;</span>
 <span class="token punctuation">}</span>
-</pre><p>[<a href="http://square.github.io/retrofit/">http://square.github.io/retrofit/</a>]</p><blockquote>
+</pre><p>[<a href="http://square.github.io/retrofit/">http://square.github.io/retrofit/</a>]</p>
+<blockquote>
 <p>&#x1F4A1; <strong>Retrofit</strong> para invocar la url de la petici&#xF3;n usa <strong><code>@GET, @POST, @PUT y @DELETE</code></strong>. El par&#xE1;metro corresponder&#xE1; con la url de la petici&#xF3;n.<br>
 En el builder de Retrofit se incluye la url base del api terminada con <strong><code>/</code></strong>, que unida con el par&#xE1;metro del servicio crear&#xE1;n la url completa de la petici&#xF3;n:<br>
 <strong><code>@GET -&gt; http://&gt;10.0.2.2/usuarios/usuario</code></strong></p>
@@ -813,9 +855,12 @@ En el builder de Retrofit se incluye la url base del api terminada con <strong><
 <li><strong><code>@Body</code></strong>. Es equivalente a Fields pero para variables objeto.</li>
 <li><strong><code>@Query</code></strong>. Se usa cuando la petici&#xF3;n va a necesitar par&#xE1;metros (los valores que van despu&#xE9;s del <strong><code>?</code></strong> en una url).</li>
 </ul>
-</blockquote><ol start="4">
-<li>Pedir datos a la Api ser&#xED;a el &#xFA;ltimo paso a realizar. Retrofit nos da la opci&#xF3;n de realizarlo de manera s&#xED;ncrona o as&#xED;ncrona.</li>
-</ol><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">anyadirUsuario</span><span class="token punctuation">(</span>usuarios<span class="token operator">:</span> Usuarios<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</blockquote>
+<ol start="4">
+<li>Pedir datos a la Api ser&#xED;a el &#xFA;ltimo paso a realizar. Retrofit nos da la opci&#xF3;n de realizarlo de manera s&#xED;ncrona o as&#xED;ncrona.<br>
+Si no vamos a esperar a que acabe la corrutina:</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">anyadirUsuario</span><span class="token punctuation">(</span>usuarios<span class="token operator">:</span> Usuarios<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> context<span class="token operator">=</span><span class="token keyword keyword-this">this</span>
         <span class="token keyword keyword-var">var</span> salida<span class="token operator">:</span>String<span class="token operator">?</span>
         <span class="token keyword keyword-val">val</span> proveedorServicios<span class="token operator">:</span> ProveedorSersvicio <span class="token operator">=</span> <span class="token function">crearRetrofit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -835,7 +880,43 @@ En el builder de Retrofit se incluye la url base del api terminada con <strong><
                 <span class="token function">limpiaControl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div><h2>Acceso a Base de Datos con FIREBASE</h2><p><a href="https://firebase.google.com/">Firebase</a></p><h3>Creando un app de Firebase</h3><p>Justo en el momento que termina de crearse la aplicaci&#xF3;n, se descargara un archivo JSON que deberemos copiar en nuestro proyecto Android. Solo tendremos que seguir las instrucciones que proporciona muy claramente la p&#xE1;gina Web de Firebase (copiar el archivo y a&#xF1;adir las l&#xED;neas que indican que vamos a usar servicios de google en los build.gradle de la app y del proyecto).</p><ol>
+</pre><p>Y este ser&#xED;a un ejemplo, en el que esperamos a que termine.</p>
+<p>Si en el APIAdapter me creo una funci&#xF3;n c&#xF3;mo esta, que implementa la interfaz <strong>Deferred</strong> [<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html">https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/index.html</a>] , y lanza una corrutina de <strong>modo as&#xED;ncrono</strong> [<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html">https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html</a>]:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-fun">fun</span> <span class="token function">seleccionarFotos</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">)</span><span class="token operator">:</span> Deferred<span class="token operator">&lt;</span>ArrayList<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> proveedorServicios<span class="token operator">:</span> ProveedorServicios <span class="token operator">=</span> <span class="token function">crearRetrofit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">async</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-var">var</span> datosDev<span class="token operator">=</span>ArrayList<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-val">val</span> response<span class="token operator">:</span> Response<span class="token operator">&lt;</span>ArrayList<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span><span class="token operator">&gt;</span>
+            response<span class="token operator">=</span>proveedorServicios<span class="token punctuation">.</span><span class="token function">getFotos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>isSuccessful<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                datosDev <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">!!</span>
+            <span class="token punctuation">}</span>
+            datosDev
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</pre><p>Posteriormente podr&#xE9; llamarla diciendo que espere a que dicha funci&#xF3;n termine mediante <strong>.await()</strong> al final:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  MainActivity<span class="token punctuation">.</span>datos <span class="token operator">=</span> 
+  ApiRestAdapter<span class="token punctuation">.</span><span class="token function">seleccionarFotos</span><span class="token punctuation">(</span><span class="token function">requireContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC;Hay que tener en cuenta que si  dentro de una corrutina necesito acceder a this, debo grabarlo anteriormente en una variable, ya que dentro de la rutina this me darr&#xE1; error.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-fun">fun</span> <span class="token function">prepararDatos</span><span class="token punctuation">(</span>tipo<span class="token operator">:</span>Int<span class="token punctuation">,</span> texto<span class="token operator">:</span>String<span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword keyword-val">val</span> contextoAplicacion<span class="token operator">:</span>Context<span class="token operator">=</span><span class="token keyword keyword-this">this</span>
+     <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">.</span>launch <span class="token operator">&gt;</span><span class="token punctuation">{</span>
+
+        <span class="token keyword keyword-val">val</span> adaptadorAPI<span class="token operator">=</span>AdaptadorAPI<span class="token operator">&gt;</span><span class="token punctuation">(</span>contextoAplicacion<span class="token punctuation">)</span>
+         <span class="token operator">..</span><span class="token punctuation">.</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+</pre></blockquote>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="acceso-a-base-de-datos-con-firebase">Acceso a Base de Datos con FIREBASE</h2>
+
+<p><a href="https://firebase.google.com/">Firebase</a></p>
+<h3 class="mume-header" id="creando-un-app-de-firebase">Creando un app de Firebase</h3>
+
+<p>Justo en el momento que termina de crearse la aplicaci&#xF3;n, se descargara un archivo JSON que deberemos copiar en nuestro proyecto Android. Solo tendremos que seguir las instrucciones que proporciona muy claramente la p&#xE1;gina Web de Firebase (copiar el archivo y a&#xF1;adir las l&#xED;neas que indican que vamos a usar servicios de google en los build.gradle de la app y del proyecto).</p>
+<ol>
 <li>
 <p>En el proyecto</p>
 <pre data-role="codeBlock" data-info="json" class="language-json">  dependencies <span class="token punctuation">{</span>
@@ -861,21 +942,38 @@ dependencies <span class="token punctuation">{</span>
     ...
 <span class="token punctuation">}</span>
 </pre></li>
-</ol><p>Muy importante no olvidar a&#xF1;adir en el SDK, el servicio de Google Play</p><h3>Firestore DataBase</h3><p><a href="https://firebase.google.com/docs/database">Firebase Realtime Database</a><br>
-<a href="https://firebase.google.com/docs/firestore">Firebase Firestore DataBase</a></p><p>Antes de comenzar con el c&#xF3;digo de acceso a la BD, tendremos que a&#xF1;adir la dependencia que nos permitir&#xE1; hacerlo:</p><pre data-role="codeBlock" data-info="json" class="language-json">   implementation &apos;com.google.firebase<span class="token operator">:</span>firebase-firestore&apos;
-</pre><p>Para referenciar a nuestra base de datos solamente tendremos que crear un objeto de tipo <strong><code>FirebaseFirestore</code></strong>. El archivo que descargamos al enlazar la app con el proyecto, es el que se encarga de todo el trabajo interno para la conexi&#xF3;n:</p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> firebaseFirestore <span class="token operator">=</span> FirebaseFirestore<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p>Para hacer referencia a una colecci&#xF3;n existente o a&#xF1;adirla en caso de no existir, utilizaremos el m&#xE9;todo <strong><code>collection</code></strong> con el nombre de la colecci&#xF3;n como argumento.</p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span>
-</pre><p>Este m&#xE9;todo devuelve una referencia a la colecci&#xF3;n seleccionada, y con &#xE9;l podremos a&#xF1;adir nuevos elementos a ella (la colecci&#xF3;n se crear&#xE1; al a&#xF1;adir el primer documento, en caso de haber sido creada anteriormente har&#xE1; la referencia solamente).</p><p>Para a&#xF1;adir un objeto (documento) a la colecci&#xF3;n lo podremos hacer de dos maneras:</p><ol>
+</ol>
+<blockquote>
+<p>&#x1F4CC;Muy importante no olvidar a&#xF1;adir en el SDK, el servicio de Google Play</p>
+</blockquote>
+<h3 class="mume-header" id="firestore-database">Firestore DataBase</h3>
+
+<p><a href="https://firebase.google.com/docs/database">Firebase Realtime Database</a><br>
+<a href="https://firebase.google.com/docs/firestore">Firebase Firestore DataBase</a></p>
+<p>Antes de comenzar con el c&#xF3;digo de acceso a la BD, tendremos que a&#xF1;adir la dependencia que nos permitir&#xE1; hacerlo:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">   implementation &apos;com.google.firebase<span class="token operator">:</span>firebase-firestore&apos;
+</pre><p>Para referenciar a nuestra base de datos solamente tendremos que crear un objeto de tipo <strong><code>FirebaseFirestore</code></strong>. El archivo que descargamos al enlazar la app con el proyecto, es el que se encarga de todo el trabajo interno para la conexi&#xF3;n:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> firebaseFirestore <span class="token operator">=</span> FirebaseFirestore<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Para hacer referencia a una colecci&#xF3;n existente o a&#xF1;adirla en caso de no existir, utilizaremos el m&#xE9;todo <strong><code>collection</code></strong> con el nombre de la colecci&#xF3;n como argumento.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span>
+</pre><p>Este m&#xE9;todo devuelve una referencia a la colecci&#xF3;n seleccionada, y con &#xE9;l podremos a&#xF1;adir nuevos elementos a ella (la colecci&#xF3;n se crear&#xE1; al a&#xF1;adir el primer documento, en caso de haber sido creada anteriormente har&#xE1; la referencia solamente).</p>
+<p>Para a&#xF1;adir un objeto (documento) a la colecci&#xF3;n lo podremos hacer de dos maneras:</p>
+<ol>
 <li>Dejando que la plataforma genere una clave aleat&#xF3;ria, para eso utilizaremos el m&#xE9;todo add.</li>
-</ol><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Usuario</span><span class="token punctuation">(</span><span class="token string">&quot;Pepe&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;correo@gmail.com&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Usuario</span><span class="token punctuation">(</span><span class="token string">&quot;Pepe&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;correo@gmail.com&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre><div align="center">
     <img height="95" src="./imagenes/imagen33.png">
-</div><ol>
+</div>
+<ol>
 <li>A&#xF1;adiendo nosotros la clave, esta debe ser &#xFA;nica para que el usuario se a&#xF1;ada.</li>
-</ol><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span>usuario<span class="token punctuation">.</span>correo<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>usuario<span class="token punctuation">)</span>
-</pre><div align="center">
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span>usuario<span class="token punctuation">.</span>correo<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>usuario<span class="token punctuation">)</span>
+</pre> <div align="center">
     <img height="95" src="./imagenes/imagen34.png">
-</div><p><strong>Cuidado deberemos tener los atributos p&#xFA;blicos o usar getter y setter.</strong></p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> Usuario <span class="token operator">:</span> Serializable <span class="token punctuation">{</span>
+</div>
+<p><strong>Cuidado deberemos tener los atributos p&#xFA;blicos o usar getter y setter.</strong></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> Usuario <span class="token operator">:</span> Serializable <span class="token punctuation">{</span>
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> usuario<span class="token operator">:</span> String
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> correo<span class="token operator">:</span> String
 
@@ -885,7 +983,8 @@ dependencies <span class="token punctuation">{</span>
         <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>correo <span class="token operator">=</span> correo
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p><em>El c&#xF3;digo completo para crear la aplicaci&#xF3;n que nos a&#xF1;adir&#xE1; un usuario cada vez que pulsemos el bot&#xF3;n a&#xF1;adir, de forma que el id del usuario sea el correo, ser&#xE1; el siguiente:</em></p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</pre><p><em>El c&#xF3;digo completo para crear la aplicaci&#xF3;n que nos a&#xF1;adir&#xE1; un usuario cada vez que pulsemos el bot&#xF3;n a&#xF1;adir, de forma que el id del usuario sea el correo, ser&#xE1; el siguiente:</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> firebaseFirestore<span class="token operator">:</span> FirebaseFirestore
     <span class="token keyword keyword-var">var</span> listenerRegistration<span class="token operator">:</span> ListenerRegistration<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -918,7 +1017,8 @@ dependencies <span class="token punctuation">{</span>
                 <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre><p><a href="https://cloud.google.com/firestore/docs/query-data/queries?hl=es">Buscar un documento en Cloud Firestore</a>, existen distintas posibilidades  basadas en la clausula <strong>Where</strong>. <em>Por ejemplo, si quisieramos comprobar si el id del usuario no est&#xE1; repetido y solo en ese caso a&#xF1;adirlo, podr&#xED;amos modificar el anterior c&#xF3;digo de la siguiente manera:</em></p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-fun">fun</span> <span class="token function">compruebaSiExisteyAnayade</span><span class="token punctuation">(</span>usuario<span class="token operator">:</span> Usuario<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</pre><p><a href="https://cloud.google.com/firestore/docs/query-data/queries?hl=es">Buscar un documento en Cloud Firestore</a>, existen distintas posibilidades  basadas en la clausula <strong>Where</strong>. <em>Por ejemplo, si quisieramos comprobar si el id del usuario no est&#xE1; repetido y solo en ese caso a&#xF1;adirlo, podr&#xED;amos modificar el anterior c&#xF3;digo de la siguiente manera:</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-fun">fun</span> <span class="token function">compruebaSiExisteyAnayade</span><span class="token punctuation">(</span>usuario<span class="token operator">:</span> Usuario<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span>
             <span class="token punctuation">.</span><span class="token function">whereEqualTo</span><span class="token punctuation">(</span>FieldPath<span class="token punctuation">.</span><span class="token function">documentId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> usuario<span class="token punctuation">.</span>correo<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">.</span><span class="token function">addOnCompleteListener</span><span class="token punctuation">(</span>OnCompleteListener<span class="token operator">&lt;</span>QuerySnapshot<span class="token operator">?</span><span class="token operator">&gt;</span>
@@ -954,7 +1054,8 @@ dependencies <span class="token punctuation">{</span>
                 <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre><p><em>Si quisieramos dar funcionalidad al bot&#xF3;n <strong>Eliminar</strong>, podemos hacer algo parecido a lo siguiente. En este caso se est&#xE1; eliminando por nombre de usuario, as&#xED; que en el caso de existir m&#xE1;s de un documento con el mismo nombre, se eliminar&#xE1;n todos.</em></p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">Elimina</span><span class="token punctuation">(</span>usuario<span class="token operator">:</span> Usuario<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</pre><p><em>Si quisieramos dar funcionalidad al bot&#xF3;n <strong>Eliminar</strong>, podemos hacer algo parecido a lo siguiente. En este caso se est&#xE1; eliminando por nombre de usuario, as&#xED; que en el caso de existir m&#xE1;s de un documento con el mismo nombre, se eliminar&#xE1;n todos.</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">Elimina</span><span class="token punctuation">(</span>usuario<span class="token operator">:</span> Usuario<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span>
                          <span class="token punctuation">.</span><span class="token function">whereEqualTo</span><span class="token punctuation">(</span><span class="token string">&quot;usuario&quot;</span><span class="token punctuation">,</span> usuario<span class="token punctuation">.</span>usuario<span class="token punctuation">)</span>
                          <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -962,7 +1063,8 @@ dependencies <span class="token punctuation">{</span>
                <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>documento <span class="token keyword keyword-in">in</span> task<span class="token punctuation">.</span>result<span class="token operator">!!</span><span class="token punctuation">)</span> documento<span class="token punctuation">.</span>reference<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
                                    <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre><p>Si lo que queremos es controlar los cambios que ocurren en la BD, sea a trav&#xE9;s de una aplicaci&#xF3;n o directamente desde la consola de Firebase, tendremos que registrar un listener del tipo ListenerRegistration, que se inicializar&#xE1; sobre la consulta que deseemos con <strong><code>addSnapshotListener</code></strong>. <em>En el siguiente ejemplo ponemos a escuchar todos los documentos de la colecci&#xF3;n Usuarios, mostrando en el TextView (que est&#xE1; bajo los botones) el resultado de cualquier modificaci&#xF3;n en cualquier documento de la colecci&#xF3;n.</em></p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">listarUsuarios</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</pre><p>Si lo que queremos es controlar los cambios que ocurren en la BD, sea a trav&#xE9;s de una aplicaci&#xF3;n o directamente desde la consola de Firebase, tendremos que registrar un listener del tipo ListenerRegistration, que se inicializar&#xE1; sobre la consulta que deseemos con <strong><code>addSnapshotListener</code></strong>. <em>En el siguiente ejemplo ponemos a escuchar todos los documentos de la colecci&#xF3;n Usuarios, mostrando en el TextView (que est&#xE1; bajo los botones) el resultado de cualquier modificaci&#xF3;n en cualquier documento de la colecci&#xF3;n.</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">listarUsuarios</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> query <span class="token operator">=</span> firebaseFirestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string">&quot;Usuarios&quot;</span><span class="token punctuation">)</span>
         listenerRegistration <span class="token operator">=</span> query<span class="token punctuation">.</span><span class="token function">addSnapshotListener</span> <span class="token punctuation">{</span>value<span class="token punctuation">,</span> error<span class="token operator">-&gt;</span>
            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>error <span class="token operator">==</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -985,14 +1087,20 @@ dependencies <span class="token punctuation">{</span>
                                   Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre><p>Se puede realizar la consulta sobre cualquier elemento de la colecci&#xF3;n despu&#xE9;s de haber sido seleccionado, de la siguiente manera:</p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   query<span class="token punctuation">.</span><span class="token function">whereEqualTo</span><span class="token punctuation">(</span><span class="token string">&quot;correo&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;manuel@gamil.com&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addSnapshotListener</span><span class="token punctuation">{</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
+</pre><p>Se puede realizar la consulta sobre cualquier elemento de la colecci&#xF3;n despu&#xE9;s de haber sido seleccionado, de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">   query<span class="token punctuation">.</span><span class="token function">whereEqualTo</span><span class="token punctuation">(</span><span class="token string">&quot;correo&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;manuel@gamil.com&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addSnapshotListener</span><span class="token punctuation">{</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
 </pre><blockquote>
 <p>&#x26A0;&#xFE0F; Otro tema importante a tener en cuenta, es que la suscripci&#xF3;n a una referencia de una base de datos de Firebase, es decir, el hecho de asignar un listener a una ubicaci&#xF3;n del &#xE1;rbol para estar al tanto de sus cambios <strong>no es algo gratuito</strong> desde el punto de vista de consumo de recursos. Por tanto, es recomendable eliminar esa suscripci&#xF3;n cuando ya no la necesitamos. Para hacer esto basta con llamar al m&#xE9;todo <strong><code>remove()</code></strong> del listener registrado, cuando no deseemos seguir escuchando.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
        listenerRegistration<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
    <span class="token punctuation">}</span>
-</pre></blockquote><h4>FirebaseUI y RecyclerView</h4><p><a href="https://github.com/firebase/FirebaseUI-Android">FirebaseUI</a></p><p>En el momento de actualizaci&#xF3;n de estos apuntes:</p><pre data-role="codeBlock" data-info="json" class="language-json">implementation &apos;com.firebaseui<span class="token operator">:</span>firebase-ui-firestore<span class="token operator">:</span><span class="token number">8.0</span>.<span class="token number">0</span>&apos;
+</pre></blockquote>
+<h4 class="mume-header" id="firebaseui-y-recyclerview">FirebaseUI y RecyclerView</h4>
+
+<p><a href="https://github.com/firebase/FirebaseUI-Android">FirebaseUI</a></p>
+<p>En el momento de actualizaci&#xF3;n de estos apuntes:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">implementation &apos;com.firebaseui<span class="token operator">:</span>firebase-ui-firestore<span class="token operator">:</span><span class="token number">8.0</span>.<span class="token number">0</span>&apos;
 </pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">Adaptador</span><span class="token punctuation">(</span>options<span class="token operator">:</span> FirestoreRecyclerOptions<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
     FirestoreRecyclerAdapter<span class="token operator">&lt;</span>Usuario<span class="token punctuation">,</span> Adaptador<span class="token punctuation">.</span>Holder<span class="token operator">&gt;</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">,</span>
     View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
@@ -1027,12 +1135,11 @@ dependencies <span class="token punctuation">{</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Al crear un objeto de esta clase, debemos pasarle un objeto de la misma librer&#xED;a, de tipo <strong><code>FirestoreRecyclerOptions</code></strong>.</p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> firestoreRecyclerOptions <span class="token operator">=</span> FirestoreRecyclerOptions<span class="token punctuation">.</span>Builder<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Al crear un objeto de esta clase, debemos pasarle un objeto de la misma librer&#xED;a, de tipo <strong><code>FirestoreRecyclerOptions</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> firestoreRecyclerOptions <span class="token operator">=</span> FirestoreRecyclerOptions<span class="token punctuation">.</span>Builder<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">.</span><span class="token function">setQuery</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> Usuario<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p>Al que debemos pasarle la siguiente informaci&#xF3;n:</p><ul>
-<li>El objeto clase de nuestro Item (Usuario.class),</li>
-<li>La referencia al nodo de la base de datos que contiene la lista de elementos que queremos mostrar en el control.</li>
-</ul><p>Ahora solo quedar&#xED;a crear un objeto del tipo adaptador que nos hemos creado, pas&#xE1;ndole el elemento <strong><code>firebaseRecyclerOption</code></strong> y ya tendr&#xED;amos casi todo hecho.</p><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">cargarRecycler</span><span class="token punctuation">(</span>query<span class="token operator">:</span> Query<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</pre><p>Ahora solo quedar&#xED;a crear un objeto del tipo adaptador que nos hemos creado, pas&#xE1;ndole el elemento <strong><code>firebaseRecyclerOption</code></strong> y ya tendr&#xED;amos casi todo hecho.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">cargarRecycler</span><span class="token punctuation">(</span>query<span class="token operator">:</span> Query<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> firestoreRecyclerOptions <span class="token operator">=</span> FirestoreRecyclerOptions<span class="token punctuation">.</span>
                                        Builder<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">.</span><span class="token function">setQuery</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> Usuario<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1053,129 +1160,34 @@ dependencies <span class="token punctuation">{</span>
         recyclerView<span class="token operator">!!</span><span class="token punctuation">.</span>adapter <span class="token operator">=</span> adapter
         recyclerView<span class="token operator">!!</span><span class="token punctuation">.</span>layoutManager <span class="token operator">=</span> <span class="token function">LinearLayoutManager</span><span class="token punctuation">(</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-</pre><p>No deberemos olvidar iniciar el escuchador del adaptador al comenzar la aplicaci&#xF3;n y cerrarlo al acabar.</p><h4>Filtrado y ordenaci&#xF3;n</h4><p>Para las consultas podemos encontrar la informaci&#xF3;n que necesitamos en el siguiente enlace <a href="https://firebase.google.com/docs/firestore/query-data/queries">https://firebase.google.com/docs/firestore/query-data/queries</a>.<br>
-Para realizar consultas se utiliza cualquiera de los m&#xE9;todos <strong><code>where</code></strong> que indican que tipo de consulta necesitamos.</p><div align="center">
+</pre><p>No deberemos olvidar iniciar el escuchador del adaptador al comenzar la aplicaci&#xF3;n y cerrarlo al acabar.</p>
+<h4 class="mume-header" id="filtrado-y-ordenaci%C3%B3n">Filtrado y ordenaci&#xF3;n</h4>
+
+<p><a href="https://firebase.google.com/docs/firestore/query-data/queries">https://firebase.google.com/docs/firestore/query-data/queries</a>.</p>
+<div align="center">
     <img height="20" src=".\imagenes/imagen38.png">
-</div><p>Se pueden enlazar b&#xFA;squedas con <strong><code>where</code></strong>, de la siguiente manera:</p><div align="center">
+</div>
+<p>Se pueden enlazar b&#xFA;squedas con <strong><code>where</code></strong>, de la siguiente manera:</p>
+<div align="center">
     <img height="20" src=".\imagenes/imagen39.png">
-</div><p>Tambi&#xE9;n est&#xE1; la opci&#xF3;n de buscar dentro de una colecci&#xF3;n directamente. Si algunos de nuestros documentos tienen un miembro que es una colecci&#xF3;n, podremos realizar la consulta sobre este elemento usando alguna de las sobrecargas de <strong><code>whereArrayContains</code></strong></p><div align="center">
+</div>
+<p>Tambi&#xE9;n est&#xE1; la opci&#xF3;n de buscar dentro de una colecci&#xF3;n directamente. Si algunos de nuestros documentos tienen un miembro que es una colecci&#xF3;n, podremos realizar la consulta sobre este elemento usando alguna de las sobrecargas de <strong><code>whereArrayContains</code></strong></p>
+<div align="center">
     <img height="30" src=".\imagenes/imagen40.png">
-</div><p>Si lo que queremos hacer es ordenar los datos obtenidos, tenemos toda la informaci&#xF3;n en la url <a href="https://firebase.google.com/docs/firestore/query-data/orderlimitdata?hl=es">https://firebase.google.com/docs/firestore/query-data/orderlimitdata?hl=es</a>  Se utilizar&#xE1; cualquiera de las sobrecargas del m&#xE9;todo <strong><code>orderBy</code></strong></p><div align="center">
+</div>
+<p>Si lo que queremos hacer es ordenar los datos obtenidos, tenemos toda la informaci&#xF3;n en la url <a href="https://firebase.google.com/docs/firestore/query-data/orderlimitdata?hl=es">https://firebase.google.com/docs/firestore/query-data/orderlimitdata?hl=es</a>  Se utilizar&#xE1; cualquiera de las sobrecargas del m&#xE9;todo <strong><code>orderBy</code></strong></p>
+<div align="center">
     <img height="30" src=".\imagenes/imagen42.png">
-</div><p>Una cl&#xE1;usula <strong><code>orderBy</code></strong> tambi&#xE9;n filtra en busca de la existencia del campo dado. El conjunto de resultados no incluir&#xE1; documentos que no contengan el campo correspondiente.  Como es de esperar, tambi&#xE9;n se pueden ordenar los datos despu&#xE9;s de realizar una consulta <strong><code>where</code></strong>,  pero con la condici&#xF3;n que debe ser sobre el mismo campo por el que se ha hecho la b&#xFA;squeda.</p><div align="center">
+</div>
+<p>Una cl&#xE1;usula <strong><code>orderBy</code></strong> tambi&#xE9;n filtra en busca de la existencia del campo dado. El conjunto de resultados no incluir&#xE1; documentos que no contengan el campo correspondiente.  Como es de esperar, tambi&#xE9;n se pueden ordenar los datos despu&#xE9;s de realizar una consulta <strong><code>where</code></strong>,  pero con la condici&#xF3;n que debe ser sobre el mismo campo por el que se ha hecho la b&#xFA;squeda.</p>
+<div align="center">
     <img height="33" src=".\imagenes/imagen43.png">
-</div><p>Si con orderBy se puede especificar el orden de clasificaci&#xF3;n de los datos, con limit puedes limitar la cantidad de documentos recuperados.</p><div align="center">
+</div>
+<p>Si con orderBy se puede especificar el orden de clasificaci&#xF3;n de los datos, con limit puedes limitar la cantidad de documentos recuperados.</p>
+<div align="center">
     <img height="25" src=".\imagenes/imagen44.png">
-</div><p>Otros cursores de consultas que est&#xE1;n disponibles son:</p><span style="align: center;">
-</span><table align="center">
-<tbody><tr style="border:hidden;">
-<td>
-3. Se han incluido im&#xE1;genes para dar m&#xE1;s funcionalidad, hay dos m&#xE9;todos que nos permiten pasar im&#xE1;genes de Bitmap a String y viceversa para poderlas guardar en la BD a trav&#xE9;s del cursor (En la BD se guardar&#xE1;n como Blob). Est&#xE1;n localizados en MyActivity y son est&#xE1;ticos para poder acceder a ellos sin necesidad de objeto.
-</td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</tr></tbody></table><table align="center">
-<tbody><tr>
-<td style="border:hidden;">
-<ul>
-<li><strong><code>startAt</code></strong> -&gt; La consulta s&#xF3;lo devolver&#xE1; los elementos cuyo<br>
-valor sea igual o superior al dato pasado como par&#xE1;metro.<br>
-<em>Ciudades con n&#xFA;mero de habitantes 100000 y ordenados por n&#xFA;mero de poblaci&#xF3;n</em></li>
-</ul>
-</td>
-<td style="border:hidden;">
-<div align="center">
-    <img height src=".\imagenes/imagen46.png">
 </div>
-</td>
-</tr>
-<tr>
-<td style="border:hidden;" colspan="2">
-<ul>
-<li><strong><code>startAfter</code></strong> -&gt; Id&#xE9;ntico al anterior pero para valores superiores, no incluye los documentos con valor igual.</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td style="border:hidden;">
-<ul>
-<li><strong><code>endAt</code></strong> -&gt; La consulta s&#xF3;lo devolver&#xE1; los elementos cuyo valor sea igual o inferior al dato pasado como par&#xE1;metro.<br>
-<em>Ciudades con n&#xFA;mero de habitantes &lt;= 100000 y ordenados por n&#xFA;mero de poblaci&#xF3;n</em></li>
-</ul>
-
-</td>
-<td style="border:hidden;">
-<div align="center">
-    <img width="400" src=".\imagenes/imagen47.png">
-</div>
-</td>
-</tr>
-<tr>
-<td style="border:hidden;" colspan="2">
-<ul>
-<li><strong><code>endBefore</code></strong> -&gt; Id&#xE9;ntico al anterior pero para valores inferiores, no incluye los documentos con valor igual.</li></ul></td>
-
-
-</tr>
-</tbody></table>
-</span>
-<p>Tambi&#xE9;n podremos utilizar varios criterios de filtrado en la misma consulta, es decir podremos combinar varios de los m&#xE9;todos anteriores para obtener s&#xF3;lo el rango de elementos necesario.</p>
+<p>Otros cursores de consultas que est&#xE1;n disponibles son: startAt, startAfter,endAt, endBefore</p>
 <div align="center">
     <img width="300" src=".\imagenes/imagen48.png">
 </div>
