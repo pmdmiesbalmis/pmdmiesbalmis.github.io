@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
       
       
       
@@ -277,7 +277,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v15/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -377,7 +377,7 @@ justo después del front matter
 <div align="center">
     <img height="350" src="./imagenes/entorno3.png">
 </div>
-<p>A partir de aqu&#xED; deberemos seleccionar el nombre de paquete que vamos a dar a nuestra aplicaci&#xF3;n, la localizaci&#xF3;n y el nombre de la aplicaci&#xF3;n, adem&#xE1;s tambi&#xE9;n deberemos seleccionar el Lenguaje con el que queremos trabajas (Java o Kotlin). Es mejor no editar el nombre de paquete, se generar&#xE1; solo al modificar el nombre de dominio y el nombre de aplicaci&#xF3;n. En <strong>Save location</strong> podemos seleccionar donde queremos dejar nuestra aplicaci&#xF3;n.</p>
+<p>A partir de aqu&#xED; deberemos seleccionar el nombre de paquete que vamos a dar a nuestra aplicaci&#xF3;n que si no se modifica coincidir&#xE1; con el <a href="https://developer.android.com/studio/build/application-id?hl=es-419">ID de la aplicaci&#xF3;n</a>, la localizaci&#xF3;n y el nombre de la aplicaci&#xF3;n que suele estar incluido en el paquete, adem&#xE1;s tambi&#xE9;n deberemos seleccionar el Lenguaje con el que queremos trabajas (Java o Kotlin).  En <strong>Save location</strong> podemos seleccionar donde queremos dejar nuestra aplicaci&#xF3;n.</p>
 <div align="center">
     <img height="350" src="./imagenes/entorno4.png">
 </div>
@@ -596,38 +596,52 @@ De esta manera Android sabe que al ser pulsado el icono de la aplicaci&#xF3;n, d
 <p>A partir de los dispositivos con instalaci&#xF3;n Android 6.0 (nivel de API 23) o superior, es necesario pedir los <a href="https://developer.android.com/training/permissions/requesting">permisos en el momento de ejecuci&#xF3;n</a> de la aplicaci&#xF3;n. Se debe tener en cuenta que los permisos se pedir&#xE1;n justo en el momento en el que el usuario comience a interactuar con la funci&#xF3;n que los requiere, si estos son rechazados por el usuario es importante que el flujo de la App pueda seguir funcionando.<br>
 Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 <ol>
-<li>Declara los permisos necesarios en el Manifest.</li>
-<li>Esperar a que el usuario invoque la acci&#xF3;n que requiere los permisos.
+<li>
+<p>Declara los permisos necesarios en el Manifest.</p>
+</li>
+<li>
+<p>Registrar los permisos en una variable de tipo <code>ActivityResultLauncher&lt;String&gt;</code> <strong>L&#xED;nia 7 a 18</strong></p>
 <ol>
-<li>Comprueba que los permisos todav&#xED;a no han sido otorgados. <strong>L&#xED;nea 5</strong></li>
-<li>Muestra justificaci&#xF3;n (Dialogo) por la que se requieren los permisos, en caso que se vea necesario.  <strong>L&#xED;nea 7 y 11</strong></li>
-<li>Solicita los permisos.  <strong>L&#xED;nea 17</strong></li>
+<li>Primero habremos creado los variable de este tipo, <strong>L&#xED;nia 4 i 5</strong>.</li>
+<li>Registraremos en esta o estas variables (en este ejemplo dos), la acci&#xF3;n que queremos que ocurra cuando los permisos hayan sido otorgados por el usuario. En este caso cambiaremos el texto de la aplicaci&#xF3;n.</li>
 </ol>
 </li>
-<li>Verifica la respuesta del usuario. En caso afirmativo se acceder&#xE1; a los recursos, proporcionando una salida elegante en caso que el usuario se niegue a proporcionarlos.</li>
+<li>
+<p>En el momento en el que el usuario invoca la acci&#xF3;n que necesita los permisos, lanzar la petici&#xF3;n del permiso requerido. Esto mostrar&#xE1; el dialogo con la petici&#xF3;n.<strong>L&#xED;nia 19 a 26</strong></p>
+</li>
 </ol>
 <p>El siguiente c&#xF3;digo es la base funcional, a partir de la cual podemos a&#xF1;adir lo necesario para nuestras distintas aplicaciones. F&#xED;jate que en el ejemplo se piden dos permisos.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[5,7,11,17]}" class="language-kotlin" data-line="5,7,11,17"> <span class="token keyword keyword-val">val</span> RESPUESTA_PERMISOS<span class="token operator">=</span> <span class="token number">111</span>
-    <span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>Q<span class="token punctuation">)</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">solicitarPermisos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-       <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED
-            <span class="token operator">||</span><span class="token function">checkSelfPermission</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_DENIED<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token comment">//Si se decide explicar los motivos de los permisos</span>
-                <span class="token comment">// con algo similar a un dialogo</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5, 7-18,19-26]}" class="language-kotlin" data-line="4,5,7-18,19-26">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        <span class="token keyword keyword-var">var</span> texto <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span>
+        <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoReadExternalStorage<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+        <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoCallPhone<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+
+        registerPermisoReadExternalStorage <span class="token operator">=</span>
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
+                    texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;ExternalStorage&quot;</span>
             <span class="token punctuation">}</span>
-            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">shouldShowRequestPermissionRationale</span><span class="token punctuation">(</span>READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token comment">//Si se decide explicar los motivos de los permisos</span>
-                <span class="token comment">// con algo similar a un dialogo</span>
+        registerPermisoCallPhone <span class="token operator">=</span>
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
+                    texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;CallPhone&quot;</span>
             <span class="token punctuation">}</span>
-            <span class="token comment">//Con requestPermissions se pide al usuario que permita los permisos,</span>
-            <span class="token comment">//en este caso dos</span>
-            <span class="token function">requestPermissions</span><span class="token punctuation">(</span><span class="token function">arrayOf</span><span class="token punctuation">(</span>READ_EXTERNAL_STORAGE<span class="token punctuation">,</span> READ_CONTACTS<span class="token punctuation">)</span><span class="token punctuation">,</span>
-                                       RESPUESTA_PERMISOS<span class="token punctuation">)</span>
-       <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+        texto<span class="token punctuation">.</span><span class="token function">setOnLongClickListener</span> <span class="token punctuation">{</span>
+            registerPermisoReadExternalStorage<span class="token punctuation">.</span>
+                          <span class="token function">launch</span><span class="token punctuation">(</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>READ_EXTERNAL_STORAGE<span class="token punctuation">)</span>
+            <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+        texto<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
+            registerPermisoCallPhone<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
 <div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
 
 
 
@@ -638,7 +652,18 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+<div aria-hidden="true" class="line-highlight" data-range="7-18" data-start="7" data-end="18">
+
+
+
+
+
+
+
+
+
+
+
 </div></div><div class="line-highlight-wrapper">
 
 
@@ -649,8 +674,6 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
-</div></div><div class="line-highlight-wrapper">
 
 
 
@@ -659,6 +682,7 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 
 
 
+<div aria-hidden="true" class="line-highlight" data-range="19-26" data-start="19" data-end="26">
 
 
 
@@ -666,68 +690,13 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
-</div></div></pre><pre data-role="codeBlock" data-info="kotlin {highlight=[9,10,11]}" class="language-kotlin" data-line="9,10,11"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>
-        requestCode<span class="token operator">:</span> Int<span class="token punctuation">,</span><span class="token comment">//codigo de identificaci&#xF3;n del resultado</span>
-        permissions<span class="token operator">:</span> Array<span class="token operator">&lt;</span><span class="token keyword keyword-out">out</span> String<span class="token operator">&gt;</span><span class="token punctuation">,</span><span class="token comment">//array con los nombres de los permisos</span>
-        grantResults<span class="token operator">:</span> IntArray<span class="token comment">//array de 0 y -1 (permitido, no permitido) en orden</span>
-    <span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onRequestPermissionsResult</span><span class="token punctuation">(</span>requestCode<span class="token punctuation">,</span> permissions<span class="token punctuation">,</span> grantResults<span class="token punctuation">)</span>
-        <span class="token keyword keyword-when">when</span> <span class="token punctuation">{</span>
-            RESPUESTA_PERMISOS <span class="token operator">==</span> requestCode <span class="token operator">&amp;&amp;</span> grantResults<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
-                <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">0</span><span class="token operator">..</span>permissions<span class="token punctuation">.</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>grantResults<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> PackageManager<span class="token punctuation">.</span>PERMISSION_GRANTED<span class="token punctuation">)</span>
-                        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
-                            applicationContext<span class="token punctuation">,</span> <span class="token string">&quot;Permiso Concedido &quot;</span> <span class="token operator">+</span>
-                                    permissions<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT
-                        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
-</div></div></pre><blockquote>
-<p>&#x1F4CC;  M&#xE9;todo que se ejecuta cuando el usuario responde a los permisos. Al m&#xE9;todo le llega el c&#xF3;digo de la petici&#xF3;n, el array con los nombres de los permisos, y el array de enteros indicando si el permiso ha sido denegado o concedido.<br>
-<strong>L&#xED;nea 9</strong> se comprueba si el c&#xF3;digo de entrada es el establecido y si hay resultados.<br>
-<strong>L&#xED;nea 10 y 11</strong> se recorren todos los permisos y se muestra con un toast los permisos concedidos.</p>
-</blockquote>
-<p>La salida por pantalla ser&#xED;a similar a la siguiente a la hora de pedir permisos al usuario:</p>
+</div></div></pre><p>La salida por pantalla ser&#xED;a similar a la siguiente a la hora de pedir permisos al usuario:</p>
 <span style="align: center;">
 <table align="center">
 <tbody><tr>
 <td>
 <div align="center">
-    <img height="200" src="./imagenes/manifest3.png">
+    <img height="150" src="./imagenes/manifest3.png">
 </div>
 </td>
 <td>
@@ -743,6 +712,7 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
     <img height="150" src="./imagenes/manifest5.png">
 </div>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba el c&#xF3;digo anterior en una aplicaci&#xF3;n y comprueba su funcionamiento</span></p>
+<div style="page-break-after:always;"></div>
 <h5 class="mume-header" id="etiqueta-uses-features">Etiqueta uses-features</h5>
 
 <p>Permite especificar las caracter&#xED;sticas hardware que requiere nuestra aplicaci&#xF3;n pantalla multit&#xE1;ctil, soporte OpenGL, etc. para poder instalarse. Algunas restricciones hardware para nuestra aplicaci&#xF3;n podr&#xED;an ser:</p>
@@ -753,7 +723,6 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 <li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.camera.flash&quot; android:required=&quot;false&quot;/&gt;</code></strong></li>
 <li><strong><code>&lt;uses-featureandroid:name=&quot;android.hardware.touchscreen.multitouch&quot; android:required=&quot;true&quot;/&gt;</code></strong></li>
 </ul>
-<div style="page-break-after:always;"></div>
 <p>Manifiesto completo de ejemplo:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span> 
