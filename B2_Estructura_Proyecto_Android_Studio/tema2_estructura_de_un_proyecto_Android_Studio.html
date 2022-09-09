@@ -338,7 +338,7 @@ justo después del front matter
 </style>
 <h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
-<p><a href="./tema2_estructura_de_un_proyecto_Android_Studio.pdf">Descargar estos apuntes</a></p>
+<p>Descargar estos apuntes en <a href="./tema2_estructura_de_un_proyecto_Android_Studio.pdf">pdf</a> o <a href="./tema2_estructura_de_un_proyecto_Android_Studio.html">html</a></p>
 <h1 class="mume-header undefined" id="tema-2-estructura-de-un-proyecto-android-studio">Tema 2 . Estructura de un proyecto Android Studio</h1>
 
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
@@ -580,7 +580,7 @@ Dentro de <strong><code>activity</code></strong> nos podemos encontrar:</li>
 Con la etiqueta <strong><code>intent-filter</code></strong> y su elemento <strong><code>&lt;action&gt;</code></strong> estamos indicando que esta activity va a ser un punto de entrada para nuestra aplicaci&#xF3;n. S&#xF3;lo puede haber una activity que reaccione a este intent. Con elemento <strong><code>&lt;category&gt;</code></strong> le decimos a Android que queremos que esta activity sea a&#xF1;adida al lanzador de la aplicaci&#xF3;n. Pueden haber varias activities que reaccionen a este intent.<br>
 De esta manera Android sabe que al ser pulsado el icono de la aplicaci&#xF3;n, debe iniciar esta activity. Si no hubi&#xE9;ramos establecido el <strong><code>&lt;intent-filter&gt;</code></strong>, esta activity s&#xF3;lo se podr&#xED;a llamar desde dentro de la aplicaci&#xF3;n. Fij&#xE9;monos que ambos elementos s&#xF3;lo tienen el atributo name siendo su valor el nombre del intent.</p>
 <div align="center">
-    <img height="120" src="./imagenes/manifest2.png">
+    <img height="100" src="./imagenes/manifest2.png">
 </div> 
 <h5 class="mume-header" id="etiqueta-uses-permissions">Etiqueta uses-permissions</h5>
 
@@ -600,34 +600,31 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 <p>Declara los permisos necesarios en el Manifest.</p>
 </li>
 <li>
-<p>Registrar los permisos en una variable de tipo <code>ActivityResultLauncher&lt;String&gt;</code> <strong>L&#xED;nia 7 a 18</strong></p>
+<p>Registrar los permisos en una variable de tipo <code>ActivityResultLauncher&lt;String&gt;</code> <strong>L&#xED;nia 6 a 20</strong></p>
 <ol>
 <li>Primero habremos creado los variable de este tipo, <strong>L&#xED;nia 4 i 5</strong>.</li>
 <li>Registraremos en esta o estas variables (en este ejemplo dos), la acci&#xF3;n que queremos que ocurra cuando los permisos hayan sido otorgados por el usuario. En este caso cambiaremos el texto de la aplicaci&#xF3;n.</li>
 </ol>
 </li>
 <li>
-<p>En el momento en el que el usuario invoca la acci&#xF3;n que necesita los permisos, lanzar la petici&#xF3;n del permiso requerido. Esto mostrar&#xE1; el dialogo con la petici&#xF3;n.<strong>L&#xED;nia 19 a 26</strong></p>
+<p>En el momento en el que el usuario invoca la acci&#xF3;n que necesita los permisos, lanzar la petici&#xF3;n del permiso requerido. Esto mostrar&#xE1; el dialogo con la petici&#xF3;n.<strong>L&#xED;nia 21 a 23</strong></p>
 </li>
 </ol>
 <p>El siguiente c&#xF3;digo es la base funcional, a partir de la cual podemos a&#xF1;adir lo necesario para nuestras distintas aplicaciones. F&#xED;jate que en el ejemplo se piden dos permisos.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5, 7-18,19-26]}" class="language-kotlin" data-line="4,5,7-18,19-26">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5, 6-20,21-23]}" class="language-kotlin" data-line="4,5,6-20,21-23">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         <span class="token keyword keyword-var">var</span> texto <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span>
         <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoReadExternalStorage<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
         <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoCallPhone<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
-
         registerPermisoReadExternalStorage <span class="token operator">=</span>
             <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
-                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
-                    texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;ExternalStorage&quot;</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;ExternalStorage&quot;</span>
             <span class="token punctuation">}</span>
         registerPermisoCallPhone <span class="token operator">=</span>
             <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
-                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
-                    texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;CallPhone&quot;</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;CallPhone&quot;</span>
             <span class="token punctuation">}</span>
         texto<span class="token punctuation">.</span><span class="token function">setOnLongClickListener</span> <span class="token punctuation">{</span>
             registerPermisoReadExternalStorage<span class="token punctuation">.</span>
@@ -651,8 +648,10 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 
 
 
+<div aria-hidden="true" class="line-highlight" data-range="6-20" data-start="6" data-end="20">
 
-<div aria-hidden="true" class="line-highlight" data-range="7-18" data-start="7" data-end="18">
+
+
 
 
 
@@ -682,12 +681,9 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="19-26" data-start="19" data-end="26">
 
 
-
-
-
+<div aria-hidden="true" class="line-highlight" data-range="21-23" data-start="21" data-end="23">
 
 
 </div></div></pre><p>La salida por pantalla ser&#xED;a similar a la siguiente a la hora de pedir permisos al usuario:</p>
@@ -696,12 +692,12 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 <tbody><tr>
 <td>
 <div align="center">
-    <img height="150" src="./imagenes/manifest3.png">
+    <img height="110" src="./imagenes/manifest3.png">
 </div>
 </td>
 <td>
 <div align="center">
-    <img height="150" src="./imagenes/manifest4.png">
+    <img height="110" src="./imagenes/manifest4.png">
 </div>
 </td>
 </tr>
@@ -709,9 +705,13 @@ Un modelo a seguir podr&#xED;a ser el siguiente:</p>
 </span>
 <p>Adem&#xE1;s si entramos dentro de los permisos de la aplicaci&#xF3;n y el usuario los ha concedido, podremos verlos.</p>
 <div align="center">
-    <img height="150" src="./imagenes/manifest5.png">
+    <img height="100" src="./imagenes/manifest5.png">
 </div>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba el c&#xF3;digo anterior en una aplicaci&#xF3;n y comprueba su funcionamiento</span></p>
+<blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prueba el funcionamiento del c&#xF3;digo anterior. Para ello deber&#xE1;s copiar dentro de la funci&#xF3;n <font size="4">onCreate</font> de la <font size="4">MainActivity</font> de un proyecto nuevo. Para que funcione correctamente, tendr&#xE1;s que abrir el archivo <font size="4">activity_main.xml</font> de la carpeta layout y a&#xF1;adir la siguiente l&#xED;nea</span></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/texto&quot;</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">dentro de la etiquete TextView que contiene el &quot;Hola Mundo&quot;.</span></p>
+</blockquote>
 <div style="page-break-after:always;"></div>
 <h5 class="mume-header" id="etiqueta-uses-features">Etiqueta uses-features</h5>
 
