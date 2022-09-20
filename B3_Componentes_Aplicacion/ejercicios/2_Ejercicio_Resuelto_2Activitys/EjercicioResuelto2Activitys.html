@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
       
       
       
@@ -277,7 +277,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -338,7 +338,7 @@ justo después del front matter
 </style>
 <h1 class="mume-header undefined" id="bloque-3-ejercicio-resuelto-dos-activitys">Bloque 3. Ejercicio Resuelto Dos Activitys</h1>
 
-<p><a href="./EjercicioResuelto2Activitys.pdf">Descargar este ejercicio</a></p>
+<p>Descargar este ejercicio <a href="./EjercicioResuelto2Activitys.pdf">pdf</a> o <a href="./EjercicioResuelto2Activitys.html">html</a></p>
 <p>Vamos a crear un nuevo proyecto que se llamar&#xE1; EjercicioResuelto2Activitys. Como requisitos del mismo: queremos que se ejecute en modo apaisado y que no le afecte el cambio de orientaci&#xF3;n del dispositivo. La versi&#xF3;n m&#xED;nima soportada ser&#xE1; la 19. La aplicaci&#xF3;n constar&#xE1; de dos actividades, en la primera el usuario introducir&#xE1; su nombre en un EditText y cuando el usuario pulse el bot&#xF3;n Saludo, se abrir&#xE1; otra ventana donde saludaremos de forma personalizada al usuario.</p>
 <h4 class="mume-header" id="paso1-crearemos-el-proyecto-siguiendo-los-pasos-ya-realizados-en-los-ejercicios-anteriores">PASO1. Crearemos el proyecto siguiendo los pasos ya realizados en los ejercicios anteriores</h4>
 
@@ -396,12 +396,12 @@ justo después del front matter
 </pre><h4 class="mume-header" id="paso4-crear-una-activity-para-la-pantalla-secundaria">PASO4. Crear una activity para la pantalla secundaria.</h4>
 
 <p>Crearemos una clase nueva derivada de AppCompactActivity. En ella implementaremos el m&#xE9;todo onCreate, al igual que se hizo para la anterior.</p>
-<pre data-role="codeBlock" data-info="kotlin highlight=[4,5,6,7]" class="language-kotlin" data-line="4,5,6,7"><span class="token keyword">class</span> Activity2 <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin highlight=[4,5,6,7]" class="language-kotlin" data-line="4,5,6,7"><span class="token keyword keyword-class">class</span> Activity2 <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity2<span class="token punctuation">)</span>
-        <span class="token keyword">val</span> textView<span class="token operator">=</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">val</span> intento<span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>intent
+        <span class="token keyword keyword-val">val</span> textView<span class="token operator">=</span>findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-val">val</span> intento<span class="token operator">=</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>intent
         textView<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">&quot;Hola &quot;</span><span class="token operator">+</span>intento<span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span><span class="token operator">+</span> <span class="token string">&quot;, &#xBF;como estas?&quot;</span><span class="token punctuation">)</span>
        <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -471,13 +471,13 @@ justo después del front matter
 <h4 class="mume-header" id="paso5-vamos-a-implementar-la-l%C3%B3gica-de-funcionamiento-de-nuestra-aplicaci%C3%B3n">PASO5. Vamos a implementar la l&#xF3;gica de funcionamiento de nuestra aplicaci&#xF3;n.</h4>
 
 <p>El c&#xF3;digo es el siguiente, solo se explican los elementos nuevos del c&#xF3;digo.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[5,6,7,8,9]}" class="language-kotlin" data-line="5,6,7,8,9"><span class="token keyword">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[5,6,7,8,9]}" class="language-kotlin" data-line="5,6,7,8,9"><span class="token keyword keyword-class">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
-                <span class="token keyword">val</span> intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
-                <span class="token keyword">val</span> datos<span class="token operator">=</span>findViewById<span class="token operator">&lt;</span>EditText<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>datos<span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> datos<span class="token operator">=</span>findViewById<span class="token operator">&lt;</span>EditText<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>datos<span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> datos<span class="token punctuation">)</span>
                 <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
