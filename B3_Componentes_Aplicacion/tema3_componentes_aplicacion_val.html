@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3. Componentes de una aplicaci&#xF3;n Android</title>
+      <title>PMDM 2&#xBA; DAM  Tema 3. Components d&apos;una aplicaci&#xF3; Android</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -336,17 +336,17 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+<h1 class="mume-header undefined" id="apunts">Apunts</h1>
 
-<p>Descargar estos apuntes <a href="./tema3_componentes_aplicacion.pdf">pdf</a> o <a href="./tema3_componentes_aplicacion.html">html</a></p>
-<h1 class="mume-header undefined" id="tema-3-componentes-de-una-aplicaci%C3%B3n-android">Tema 3 . Componentes de una aplicaci&#xF3;n Android</h1>
+<p>Descarregar aquests apunts <a href="./tema3_componentes_aplicacion_val.pdf">pdf</a> o <a href="./tema3_componentes_aplicacion_val.html">html</a></p>
+<h1 class="mume-header undefined" id="tema-3-components-duna-aplicaci%C3%B3-android">Tema 3 . Components d&apos;una aplicaci&#xF3; Android</h1>
 
-<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+<h2 class="mume-header undefined" id="%C3%ADndex">&#xCD;ndex</h2>
 
 <ol>
-<li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
-<li><a href="#contexto-de-una-aplicaci%C3%B3n">Contexto de una aplicaci&#xF3;n</a></li>
-<li><a href="#componentes-de-una-aplicaci%C3%B3n">Componentes de una aplicaci&#xF3;n</a>
+<li><a href="#introducci%C3%B3">Introducci&#xF3;</a></li>
+<li><a href="#context-duna-aplicaci%C3%B3">Context d&apos;una aplicaci&#xF3;</a></li>
+<li><a href="#components-duna-aplicaci%C3%B3">Components d&apos;una aplicaci&#xF3;</a>
 <ol>
 <li><a href="#activity">Activity</a></li>
 <li><a href="#services">Services</a></li>
@@ -358,325 +358,256 @@ justo después del front matter
 <li><a href="#broadcast-receiver">Broadcast receiver</a></li>
 </ol>
 </li>
-<li><a href="#ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</a></li>
-<li><a href="#comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</a>
+<li><a href="#cicle-de-vida-duna-activity">Cicle de vida d&apos;una Activity</a></li>
+<li><a href="#comunicaci%C3%B3-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3; de Activitys a trav&#xE9;s de Intents</a>
 <ol>
-<li><a href="#requerir-permisos-al-usuario">Requerir permisos al usuario</a></li>
+<li><a href="#requerir-permisos-a-lusuari">Requerir permisos a l&apos;usuari</a></li>
 </ol>
 </li>
 <li><a href="#intent-filter">Intent-filter</a></li>
-<li><a href="#trabajando-con-parcelables">Trabajando con Parcelables</a></li>
+<li><a href="#treballant-amb-parcelables">Treballant amb Parcelables</a></li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
+<h3 class="mume-header" id="introducci%C3%B3">Introducci&#xF3;</h3>
 
-<p>En este tema estudiaremos los <a href="https://developer.android.com/guide/components/fundamentals?hl=es-419">componentes de una aplicaci&#xF3;n Android</a> y sus respectivas funciones, adem&#xE1;s de la comunicaci&#xF3;n entre activitis.<br>
-Para cualquier aplicaci&#xF3;n Android, en general, ser&#xE1; necesario construir una ventana en la que se ir&#xE1;n a&#xF1;adiendo componentes, cada componente es un punto de entrada por el que el sistema o un usuario interact&#xFA;a con tu aplicaci&#xF3;n. Algunos componentes dependen de otros.<br>
-Lo primero que haremos ser&#xE1; comprender que es el contexto de una aplicaci&#xF3;n y como permite relacionar los componentes.<br>
-Luego veremos el concepto de <strong>Actividades, Intents, Servicios, BroadCast Receivers y Content Providers</strong>.</p>
-<h3 class="mume-header" id="contexto-de-una-aplicaci%C3%B3n">Contexto de una aplicaci&#xF3;n</h3>
+<p>En aquest tema estudiarem els <a href="https://developer.android.com/guide/components/fundamentals?hl=es-419">components d&apos;una aplicaci&#xF3; Android</a> i les seues respectives funcions, a m&#xE9;s de la comunicaci&#xF3; entre <em>&apos;activities&apos;</em>.</p>
+<p>Per a qualsevol aplicaci&#xF3; Android, en general, ser&#xE0; necessari construir una finestra en la qual s&apos;aniran afegint components, cada component &#xE9;s un punt d&apos;entrada pel qual el sistema o un usuari interactua amb la teua aplicaci&#xF3;. Alguns components depenen d&apos;uns altres.</p>
+<p>El primer que farem ser&#xE0; comprendre que &#xE9;s el context d&apos;una aplicaci&#xF3; i com permet relacionar els components.</p>
+<p>Despr&#xE9;s veurem el concepte de <strong>Activitats, Intents, Serveis, BroadCast Receivers i Content Providers</strong>.</p>
+<h3 class="mume-header" id="context-duna-aplicaci%C3%B3">Context d&apos;una aplicaci&#xF3;</h3>
 
-<p>El contexto de una aplicaci&#xF3;n es una interfaz entre la aplicaci&#xF3;n y el sistema operativo, la cual describe la informaci&#xF3;n que representa tu aplicaci&#xF3;n dentro del ambiente del sistema operativo.<br>
-Tambi&#xE9;n permite acceder a los recursos de la aplicaci&#xF3;n y coordinar el funcionamiento de los bloques de la aplicaci&#xF3;n.<br>
-El contexto representa toda la meta-informaci&#xF3;n sobre las relaciones que tiene la aplicaci&#xF3;n con otras aplicaciones o el sistema y podemos implementarlo a trav&#xE9;s de la <strong>clase abstracta Context</strong>.<br>
-En Android nos encontramos con los siguientes tipos de contextos:</p>
+<p>El context d&apos;una aplicaci&#xF3; &#xE9;s una interf&#xED;cie entre l&apos;aplicaci&#xF3; i el sistema operatiu, la qual descriu la informaci&#xF3; que representa la teua aplicaci&#xF3; dins de l&apos;ambient del sistema operatiu.</p>
+<p>Tamb&#xE9; permet accedir als recursos de l&apos;aplicaci&#xF3; i coordinar el funcionament dels blocs de l&apos;aplicaci&#xF3;.</p>
+<p>El context representa tota la meta-informaci&#xF3; sobre les relacions que t&#xE9; l&apos;aplicaci&#xF3; amb altres aplicacions o el sistema i podem implementar-lo a trav&#xE9;s de la <strong>classe abstracta Context</strong>.</p>
+<p>En Android ens trobem amb els seg&#xFC;ents tipus de contextos:</p>
 <ul>
-<li>
-<p><strong>Aplicaci&#xF3;n</strong>. Este contexto engloba a todos los dem&#xE1;s, y cubre todo el ciclo de vida de la aplicaci&#xF3;n desde que la arrancamos hasta que muere. Por lo que cada aplicaci&#xF3;n tiene <em><strong>un &#xFA;nico contexto de aplicaci&#xF3;n</strong></em>. El Context de la aplicaci&#xF3;n vive hasta que se termina por completo la aplicaci&#xF3;n (hasta que muere, no hasta que se pausa)<br>
-Se puede acceder desde una <em><strong>Activity</strong></em> o un <em><strong>Service</strong></em> con <strong><code>application</code></strong> o desde cualquiera que herede de Context con <strong><code>applicationContext</code></strong>.</p>
-</li>
-<li>
-<p><strong>Activity o Service</strong>. Como hemos dicho, un Context vive tanto como el elemento al que pertenece, por lo que depende del ciclo de vida. As&#xED;, un Context de una Activity vivir&#xE1; el mismo tiempo que viva la activity y siempre ser&#xE1; un tiempo menor que el de la Aplicaci&#xF3;n.</p>
-</li>
+<li><strong>Aplicaci&#xF3;</strong>. Aquest context engloba a tots els altres, i cobreix tot el cicle de vida de l&apos;aplicaci&#xF3; des que l&apos;arranquem fins que mor. Pel que cada aplicaci&#xF3; t&#xE9; <em><strong>un &#xFA;nic context d&apos;aplicaci&#xF3;</strong></em>. El Context de l&apos;aplicaci&#xF3; viu fins que s&apos;acaba per complet l&apos;aplicaci&#xF3; (fins que mor, no fins que es pausa)<br>
+Es pot accedir des d&apos;una <em><strong>Activity</strong></em> o un <em><strong>Service</strong></em> amb <strong><code>application</code></strong> o des de qualsevol que herete de Context amb <strong><code>applicationContext</code></strong>.</li>
+<li><strong>Activity o Service</strong>. Com hem dit, un Context viu tant com l&apos;element al qual pertany, per la qual cosa dep&#xE8;n del cicle de vida. Aix&#xED;, un Context d&apos;una Activity viur&#xE0; el mateix temps que viu aquesta la activity i sempre viur&#xE0; menys temps que el de l&apos;Aplicaci&#xF3;.</li>
 </ul>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="componentes-de-una-aplicaci%C3%B3n">Componentes de una aplicaci&#xF3;n</h3>
+<h3 class="mume-header" id="components-duna-aplicaci%C3%B3">Components d&apos;una aplicaci&#xF3;</h3>
 
 <h4 class="mume-header" id="activity">Activity</h4>
 
-<p>Las Activitys son los componentes visibles de la aplicaci&#xF3;n, tienen una interface de usuario que permite interactuar con ellas.<br>
-La mayor&#xED;a de las aplicaciones permiten la ejecuci&#xF3;n de varias acciones a trav&#xE9;s de la existencia de una o m&#xE1;s pantallas. Por ejemplo:  <em>una aplicaci&#xF3;n de mensajes de texto podr&#xE1; tener la lista de contactos que se muestra en una ventana, mediante el despliegue de una segunda ventana el usuario puede escribir el mensaje al contacto elegido, y en otra tercera puede repasar su historial de mensajes enviados o recibidos</em>.<br>
-Cada una de estas ventanas puede estar representada a trav&#xE9;s de un componente Activity, de forma que navegar de una ventana a otra implica lanzar una actividad o dormir otra.</p>
+<p>Les <em>&apos;activities&apos;</em> s&#xF3;n els components visibles de l&apos;aplicaci&#xF3;, tenen una interf&#xED;cie d&apos;usuari que permet interactuar amb elles.<br>
+La majoria de les aplicacions permeten l&apos;execuci&#xF3; de diverses accions a trav&#xE9;s de l&apos;exist&#xE8;ncia d&apos;una o m&#xE9;s pantalles.</p>
+<blockquote>
+<p>&#x1F393; <strong>Example:</strong> Una aplicaci&#xF3; de missatges de text podr&#xE0; tindre la llista de contactes que es mostra en una finestra, mitjan&#xE7;ant el desplegament d&apos;una segona finestra l&apos;usuari pot escriure el missatge al contacte triat, i en una altra tercera pot repassar el seu historial de missatges enviats o rebuts.</p>
+<p>Cadascuna d&apos;aquestes finestres pot estar representada a trav&#xE9;s d&apos;un component Activity, de manera que navegar d&apos;una finestra a una altra implica llan&#xE7;ar una activitat o dormir una altra.</p>
+</blockquote>
 <h4 class="mume-header" id="services">Services</h4>
 
-<p>Un servicio es una entidad que <strong>ejecuta instrucciones en segundo plano</strong> sin que el usuario lo note en la interfaz. Son muy utilizados para realizar acciones de larga duraci&#xF3;n mientras las actividades muestran otro tipo de informaci&#xF3;n. Por ejemplo guardar la informaci&#xF3;n en la base de datos, escuchar m&#xFA;sica mientras se ejecuta la aplicaci&#xF3;n, administrar conexiones de red, etc.<br>
-Los servicios tambi&#xE9;n tienen un ciclo de vida como las actividades, pero este es m&#xE1;s corto. Solo se comprende de los estados de Creaci&#xF3;n, Ejecuci&#xF3;n y Destrucci&#xF3;n.</p>
+<p>Un servei &#xE9;s una entitat que <strong>executa instruccions en segon pla</strong> sense que l&apos;usuari el note en la interf&#xED;cie. S&#xF3;n molt utilitzats per a realitzar accions de llarga duraci&#xF3; mentre les activitats mostren un altre tipus d&apos;informaci&#xF3;. Per exemple guardar la informaci&#xF3; en la base de dades, escoltar m&#xFA;sica mentre s&apos;executa l&apos;aplicaci&#xF3;, administrar connexions de xarxa, etc.</p>
+<p>Els serveis tamb&#xE9; tenen un cicle de vida com les activitats, per&#xF2; aquest &#xE9;s m&#xE9;s curt. Nom&#xE9;s es compren dels estats de Creaci&#xF3;, Execuci&#xF3; i Destrucci&#xF3;.</p>
 <h4 class="mume-header" id="view">View</h4>
 
-<p>Las vistas (view) son los componentes b&#xE1;sicos con los que se construye la interfaz gr&#xE1;fica de la aplicaci&#xF3;n, an&#xE1;logo por ejemplo a los controles de Java o .NET. De inicio, Android pone a nuestra disposici&#xF3;n una gran cantidad de controles b&#xE1;sicos, como cuadros de texto, botones, listas desplegables o im&#xE1;genes, aunque tambi&#xE9;n existe la posibilidad de extender la funcionalidad de estos controles b&#xE1;sicos o crear nuestros propios controles personalizados.</p>
+<p>Les vistes (view) s&#xF3;n els components b&#xE0;sics amb els quals es construeix la interf&#xED;cie gr&#xE0;fica de l&apos;aplicaci&#xF3;, an&#xE0;leg per exemple als controls de Java o .NET. D&apos;inici, Android posa a la nostra disposici&#xF3; una gran quantitat de controls b&#xE0;sics, com a quadres de text, botons, llistes desplegables o imatges, encara que tamb&#xE9; existeix la possibilitat d&apos;estendre la funcionalitat d&apos;aquests controls b&#xE0;sics o crear els nostres propis controls personalitzats.</p>
 <h4 class="mume-header" id="fragment">Fragment</h4>
 
-<p>Los fragmentos (fragment) se pueden entender como secciones o partes (habitualmente reutilizables) de la interfaz de usuario de una aplicaci&#xF3;n. De esta forma, una actividad podr&#xED;a contener varios fragmentos para formar la interfaz completa de la aplicaci&#xF3;n, y adicionalmente estos fragmentos se podr&#xED;an reutilizar en distintas actividades o partes de la aplicaci&#xF3;n.</p>
+<p>Els fragments (fragment) es poden entendre com a seccions o parts (habitualment reutilitzables) de la interf&#xED;cie d&apos;usuari d&apos;una aplicaci&#xF3;. D&apos;aquesta manera, una activitat podria contindre diversos fragments per a formar la interf&#xED;cie completa de l&apos;aplicaci&#xF3;, i addicionalment aquests fragments es podrien reutilitzar en diferents activitats o parts de l&apos;aplicaci&#xF3;.</p>
 <div style="page-break-after:always;"></div>
 <h4 class="mume-header" id="widget">Widget</h4>
 
-<p>Los widgets son elementos visuales, normalmente interactivos, que pueden mostrarse en la pantalla principal del dispositivo Android y recibir actualizaciones peri&#xF3;dicas. Permiten mostrar informaci&#xF3;n de la aplicaci&#xF3;n al usuario directamente sobre la pantalla principal.</p>
+<p>Els widgets s&#xF3;n elements visuals, normalment interactius, que poden mostrar-se en la pantalla principal del dispositiu Android i rebre actualitzacions peri&#xF2;diques.</p>
+<p>Permeten mostrar informaci&#xF3; de l&apos;aplicaci&#xF3; a l&apos;usuari directament sobre la pantalla principal.</p>
 <h4 class="mume-header" id="content-provider">Content provider</h4>
 
-<p>Con el componente <strong>Content Provider</strong>, cualquier aplicaci&#xF3;n en Android puede almacenar datos en un fichero, en una base de datos SQLite o en cualquier otro formato que considere.<br>
-Adem&#xE1;s, estos <strong>datos pueden ser compartidos entre distintas aplicaciones</strong>. Una clase que implemente el componente Content Provider contendr&#xE1; una serie de m&#xE9;todos que permite almacenar, recuperar, actualizar y compartir los datos de una aplicaci&#xF3;n.<br>
-Por defecto, el API de Android trae consigo Content Providers predefinidos para intercambiar informaci&#xF3;n de audio, v&#xED;deo, im&#xE1;genes, e informaci&#xF3;n personal. Pero si en alg&#xFA;n momento deseas intercambiar informaci&#xF3;n con una estructura personalizada debes crear tu propia subclase heredada de la clase ContentProvider.</p>
+<p>Amb el component <strong>Content Provider</strong>, qualsevol aplicaci&#xF3; en Android pot emmagatzemar dades en un fitxer, en una base de dades SQLite o en qualsevol altre format que considere.<br>
+A m&#xE9;s, aquestes <strong>dades poden ser compartits entre diferents aplicacions</strong>. Una classe que implemente el component Content Provider contindr&#xE0; una s&#xE8;rie de m&#xE8;todes que permet emmagatzemar, recuperar, actualitzar i compartir les dades d&apos;una aplicaci&#xF3;.<br>
+Per defecte, el API d&apos;Android porta amb si Content Providers predefinits per a intercanviar informaci&#xF3; d&apos;&#xE0;udio, v&#xED;deo, imatges, i informaci&#xF3; personal. Per&#xF2; si en algun moment desitges intercanviar informaci&#xF3; amb una estructura personalitzada has de crear la teua pr&#xF2;pia subclasse heretada de la classe ContentProvider.</p>
 <h4 class="mume-header" id="intents">Intents</h4>
 
-<p>Un Intent <strong>es un objeto de mensajer&#xED;a</strong> que puedes usar para solicitar una acci&#xF3;n de otro componente de una app. Los intents facilitan la comunicaci&#xF3;n entre componentes de varias formas, desde la comunicaci&#xF3;n entre actividades, entre fragments, servicios, etc. En un punto posterior de este tema se explicar&#xE1;n m&#xE1;s extensamente.</p>
+<p>Un Intent <strong>&#xE9;s un objecte de missatgeria</strong> que pots usar per a sol&#xB7;licitar una acci&#xF3; d&apos;un altre component d&apos;una app. Els intents faciliten la comunicaci&#xF3; entre components de diverses formes, des de la comunicaci&#xF3; entre activitats, entre fragments, serveis, etc. En un punt posterior d&apos;aquest tema s&apos;explicaran m&#xE9;s extensament.</p>
 <h4 class="mume-header" id="broadcast-receiver">Broadcast receiver</h4>
 
-<p>Finalmente, el &#xFA;ltimo componente clave son los <strong>Broadcast Receives</strong>, o receptores de emisi&#xF3;n, que <strong>reaccionan a intents espec&#xED;ficos pudiendo a su vez ejecutar una acci&#xF3;n</strong> o iniciando una activity o pueden devolver otro intent al sistema para que siga la ejecuci&#xF3;n. Realmente este tipo de componentes son capaces de procesar los mensajes del sistema operativo.</p>
-<h3 class="mume-header" id="ciclo-de-vida-de-una-activity">Ciclo de vida de una Activity</h3>
+<p>Finalment, l&apos;&#xFA;ltim component clau s&#xF3;n els <strong>Broadcast Receives</strong>, o receptors d&apos;emissi&#xF3;, que <strong>reaccionen a intents espec&#xED;fics podent al seu torn executar una acci&#xF3;</strong> o iniciant una activity o poden retornar un altre intent al sistema perqu&#xE8; seguisca l&apos;execuci&#xF3;. Realment aquest tipus de components s&#xF3;n capa&#xE7;os de processar els missatges del sistema operatiu.</p>
+<h3 class="mume-header" id="cicle-de-vida-duna-activity">Cicle de vida d&apos;una Activity</h3>
 
-<p>Como hemos comentado en el punto anterior. La activity es uno de los componentes esenciales de una aplicaci&#xF3;n Android, adem&#xE1;s que es el componente que tiene asociada la interfaz de usuario. Una misma aplicaci&#xF3;n puede tener una o varias actividades y Android permite controlar por completo el <a href="https://developer.android.com/guide/components/activities/activity-lifecycle?hl=es">ciclo de vida</a> de cada una de estas.<br>
-Los estados por los cuales puede pasar una Activity son los siguientes: <strong>Creaci&#xF3;n, Ejecuci&#xF3;n, Reanudaci&#xF3;n, Pausa, Parada y Destrucci&#xF3;n</strong>.</p>
-<p>A la relaci&#xF3;n entre ellos se le llama <strong>Ciclo de vida de una Actividad</strong>.</p>
+<p>Com hem comentat en el punt anterior. La activity &#xE9;s un dels components essencials d&apos;una aplicaci&#xF3; Android, a m&#xE9;s que &#xE9;s el component que t&#xE9; associada la interf&#xED;cie d&apos;usuari. Una mateixa aplicaci&#xF3; pot tindre una o diverses activitats i Android permet controlar per complet el <a href="https://developer.android.com/guide/components/activities/activity-lifecycle?hl=es">cicle de vida</a> de cadascuna d&apos;aquestes.<br>
+Els estats pels quals pot passar una Activity s&#xF3;n els seg&#xFC;ents: <strong>Creaci&#xF3;, Execuci&#xF3;, Represa, Pausa, Parada i Destrucci&#xF3;</strong>.</p>
+<p>A la relaci&#xF3; entre ells se&apos;n diu <strong>Cicle de vida d&apos;una Activitat</strong>.</p>
 <div align="center">
     <img height="350" src="./imagenes/ciclo_vida.png">
 </div>
-<p>El ciclo de vida de una Activity nos describe los estados y las transiciones entre estados que una determinada Activity, como hemos comentado son:</p>
+<p>El cicle de vida d&apos;una Activity ens descriu els estats i les transicions entre estats que una determinada Activity, com hem comentat s&#xF3;n:</p>
 <ul>
-<li>Creaci&#xF3;n: una actividad se ha creado cuando su estructura se encuentra en memoria, pero esta no es visible aun. Cuando el usuario presiona sobre el icono de la aplicaci&#xF3;n en su dispositivo, el m&#xE9;todo <strong><code>onCreate()</code></strong> es ejecutado inmediatamente para cargar el layout de la actividad principal en memoria.</li>
-<li>Ejecuci&#xF3;n-Reanudaci&#xF3;n: despu&#xE9;s de haber sido cargada la actividad se ejecutan en secuencia  el m&#xE9;todo <strong><code>onStart() y onResume()</code></strong>. Aunque <strong><code>onStart()</code></strong> hace visible la actividad, es <strong><code>onResume()</code></strong> quien le transfiere el foco para que interact&#xFA;e con el usuario.</li>
-<li>Pausa: una actividad est&#xE1; en pausa cuando se encuentra en la pantalla parcialmente visible. Un ejemplo: <em>cuando se abren di&#xE1;logos que toman el foco superponi&#xE9;ndose a la actividad</em>. El m&#xE9;todo llamado para la transici&#xF3;n hacia la pausa es <strong><code>onPause()</code></strong>.</li>
-<li>Detenci&#xF3;n: una actividad est&#xE1; detenida cuando no es visible en la pantalla, pero a&#xFA;n se encuentra en memoria y en cualquier momento puede ser reanudada. Cuando una aplicaci&#xF3;n es enviada a segundo plano se ejecuta el m&#xE9;todo <strong><code>onStop()</code></strong>. Al reanudar la actividad, se pasa por el m&#xE9;todo <strong><code>onRestart()</code></strong> hasta llegar a el estado de ejecuci&#xF3;n y luego al de reanudaci&#xF3;n.</li>
-<li>Destrucci&#xF3;n: cuando la actividad ya no existe en memoria se encuentra en estado de destrucci&#xF3;n. Antes de pasar a destruir la aplicaci&#xF3;n se ejecuta el m&#xE9;todo <strong><code>onDestroy()</code></strong>. Es com&#xFA;n que la mayor&#xED;a de actividades no implementen este m&#xE9;todo, a menos que deban destruir procesos como servicios en segundo plano.</li>
+<li><strong>Creaci&#xF3;</strong>: una activitat s&apos;ha creat quan la seua estructura es troba en mem&#xF2;ria, per&#xF2; aquesta no &#xE9;s visible fins i tot. Quan l&apos;usuari pressiona sobre la icona de l&apos;aplicaci&#xF3; en el seu dispositiu, el m&#xE8;tode <strong><code>onCreate()</code></strong> &#xE9;s executat immediatament per a carregar el layout de l&apos;activitat principal en mem&#xF2;ria.</li>
+<li><strong>Execuci&#xF3;-Represa</strong>: despr&#xE9;s d&apos;haver sigut carregada l&apos;activitat s&apos;executen en seq&#xFC;&#xE8;ncia el m&#xE8;tode <strong><code>onStart()</code></strong> i <strong><code>onResume()</code></strong>. Encara que <strong><code>onStart()</code></strong> fa visible l&apos;activitat, &#xE9;s <strong><code>onResume()</code></strong> qui li transfereix el focus perqu&#xE8; interactue amb l&apos;usuari.</li>
+<li><strong>Pausa</strong>: una activitat est&#xE0; en pausa quan es troba en la pantalla parcialment visible. Un exemple: <em>quan s&apos;obrin di&#xE0;legs que prenen el focus superposant-se a l&apos;activitat</em>. El m&#xE8;tode anomenat per a la transici&#xF3; cap a la pausa &#xE9;s <strong><code>onPause()</code></strong>.</li>
+<li><strong>Detenci&#xF3;</strong>: una activitat est&#xE0; detinguda quan no &#xE9;s visible en la pantalla, per&#xF2; encara es troba en mem&#xF2;ria i en qualsevol moment pot ser represa. Quan una aplicaci&#xF3; &#xE9;s enviada a segon pla s&apos;executa el m&#xE8;tode <strong><code>onStop()</code></strong>. En reprendre l&apos;activitat, es passa pel m&#xE8;tode <strong><code>onRestart()</code></strong> fins a arribar a l&apos;estat d&apos;execuci&#xF3; i despr&#xE9;s al de represa.</li>
+<li><strong>Destrucci&#xF3;</strong>: quan l&apos;activitat ja no existeix en mem&#xF2;ria es troba en estat de destrucci&#xF3;. Abans de passar a destruir l&apos;aplicaci&#xF3; s&apos;executa el m&#xE8;tode <strong><code>onDestroy()</code></strong>. &#xC9;s com&#xFA; que la majoria d&apos;activitats no implementen aquest m&#xE8;tode, llevat que hagen de destruir processos com a serveis en segon pla.</li>
 </ul>
-<p>Aunque tu aplicaci&#xF3;n puede tener varias actividades en su estructura, se debe definir una actividad principal. Para hacerlo se debe especificar en tu archivo Android Manifest un componente <strong><code>&lt;actitivy&gt;</code></strong>, con un componente hijo <strong><code>&lt;intent-filter&gt;</code></strong>. Dentro de este componente declararas dos nuevos componentes, <strong><code>&lt;action&gt;</code></strong> y <strong><code>&lt;category&gt;</code></strong>. Al primero le asignaras el elemento enumerado <strong><code>MAIN</code></strong> y al segundo el elemento enumerado <strong><code>LAUNCHER</code></strong>.</p>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Crea un proyecto nuevo y copia el c&#xF3;digo de CicloVidaActivity en la clase principal. Prueba la salida que muestra Logcat en Debug y filtrado por &quot;SALIDA&quot;. Observa cuales son los m&#xE9;todos por los que pasa la App, seg&#xFA;n los distintos cambios de estado.</span></p>
-<h3 class="mume-header" id="comunicaci%C3%B3n-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3;n de Activitys a trav&#xE9;s de Intents</h3>
+<p>Encara que la teua aplicaci&#xF3; pot tindre diverses activitats en la seua estructura, s&apos;ha de definir una activitat principal. Per a fer-ho s&apos;ha d&apos;especificar en el teu arxiu Android Manifest un component <strong><code>&lt;actitivy&gt;</code></strong>, amb un component fill <strong><code>&lt;intent-filter&gt;</code></strong>. Dins d&apos;aquest component declarares dos nous components, <strong><code>&lt;action&gt;</code></strong> i <strong><code>&lt;category&gt;</code></strong>. Al primer li assignares l&apos;element enumerat <strong><code>MAIN</code></strong> i al segon l&apos;element enumerat <strong><code>LAUNCHER</code></strong>.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Crea un projecte nou i c&#xF2;pia el codi de CicloVidaActivity en la classe principal. Prova l&apos;eixida que mostra Logcat en Debug i filtrat per &quot;SALIDA&quot;. Fixa&apos;t perqu&#xE8; m&#xE8;todes passa l&apos;App segons els diferents canvis d&apos;estat.</span></p>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="comunicaci%C3%B3-de-activitys-a-trav%C3%A9s-de-intents">Comunicaci&#xF3; de Activitys a trav&#xE9;s de Intents</h3>
 
-<p>Uno de los componentes que hemos comentado que forman parte de una aplicaci&#xF3;n android son los <a href="https://developer.android.com/guide/components/intents-filters?hl=es-419">intents</a>. Como dijimos, son los que permiten la comunicaci&#xF3;n con el resto de componentes, tambi&#xE9;n se pueden definir como la voluntad de realizar una acci&#xF3;n o una tarea determinada, estas tareas pueden ser una llamada de tel&#xE9;fono o visualizar una p&#xE1;gina web entre otras.</p>
-<p>Android soporta dos tipos de Intentos <strong>expl&#xED;citos e impl&#xED;citos</strong>.</p>
+<p>Un dels components que hem comentat que formen part d&apos;una aplicaci&#xF3; android s&#xF3;n els <a href="https://developer.android.com/guide/components/intents-filters?hl=es-419">intents</a>. Com vam dir, s&#xF3;n els que permeten la comunicaci&#xF3; amb la resta de components, tamb&#xE9; es poden definir com la voluntat de realitzar una acci&#xF3; o una tasca determinada, aquestes tasques poden ser una trucada de tel&#xE8;fon o visualitzar una p&#xE0;gina web entre altres.</p>
+<p>Android suporta dos tipus d&apos;Intents <strong>expl&#xED;cits i impl&#xED;cits</strong>.</p>
 <div align="center">
     <img height="150" src="./imagenes/intents.png">
 </div>
-<p>Son expl&#xED;citos cuando ejecutamos un componente en espec&#xED;fico. Son impl&#xED;citos cuando se entrega una referencia gen&#xE9;rica sobre alguna condici&#xF3;n, y aquellas entidades que cumplan ese requisito ser&#xE1;n presentadas como candidatas para la tarea.</p>
-<h4>Intent expl&#xED;cito</h4>
-<p>Se especifica exactamente el componente a lanzar. Se suele utilizar cuando se quiere ejecutar los componentes internos de una aplicaci&#xF3;n.<br>
-Un ejemplo de <strong>Intent explicito</strong> se da cuando invocamos una actividad con un tipo de clase especifico. Por ejemplo, <em>sup&#xF3;n que dentro de nuestra aplicaci&#xF3;n tenemos dos actividades llamadas A y B. Si decidimos iniciar la actividad B desde la actividad A usar&#xED;amos un Intent explicito debido a que &#x201C;B&#x201D; es un tipo definido</em>.</p>
+<p>S&#xF3;n expl&#xED;cits quan executem un component en espec&#xED;fic. S&#xF3;n impl&#xED;cits quan s&apos;entrega una refer&#xE8;ncia gen&#xE8;rica sobre alguna condici&#xF3;, i aquelles entitats que complisquen aqueix requisit seran presentades com a candidates per a la tasca.</p>
+<h4>Intent expl&#xED;cit</h4>
+<p>S&apos;especifica exactament el component a llan&#xE7;ar. Se sol utilitzar quan es vol executar els components interns d&apos;una aplicaci&#xF3;.</p>
+<blockquote>
+<p>&#x1F393; <strong>Exemple:</strong> Un exemple de <strong>Intent explicite</strong> es dona quan invoquem una activitat amb una mena de classe especifica. Per exemple, suposa que dins de la nostra aplicaci&#xF3; tenim dues activitats anomenades <strong><code>A</code></strong> i <strong><code>B</code></strong>. Si decidim iniciar l&apos;activitat <strong><code>B</code></strong> des de l&apos;activitat <strong><code>A</code></strong> usar&#xED;em un <strong>Intent</strong> explicit pel fet que <strong><code>B</code></strong> &#xE9;s un tipus definit.</p>
+</blockquote>
 <div align="center">
     <img height="150" src="./imagenes/intents2.png">
 </div>
-<p>En el inicio de una nueva actividad se pueden dar varias circunstancias:</p>
+<p>En l&apos;inici d&apos;una nova activitat es poden donar diverses circumst&#xE0;ncies:</p>
 <ul>
 <li>
-<p>Inicio de una actividad sin argumentos ni devoluci&#xF3;n de resultados:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
-<span class="token comment">//var intento=Intent(applicationContext, Activity2::class.java)</span>
+<p>Inici d&apos;una activitat sense arguments ni devoluci&#xF3; de resultats:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+<span class="token comment">//var intento =Intent(applicationContext, Activity2::class.java)</span>
 <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
 </pre></li>
 <li>
-<p>Inicio de una actividad con argumentos y sin devoluci&#xF3;n de resultados. Podemos pasar informaci&#xF3;n a las actividades a&#xF1;adiendo datos al objeto intent con el m&#xE9;todo putExtra:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+<p>Inici d&apos;una activitat amb arguments i sense devoluci&#xF3; de resultats. Podem passar informaci&#xF3; a les activitats afegint dades a l&apos;objecte intent amb el m&#xE8;tode putExtra:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
 intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span>
 <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
-</pre><p>En la clase invocada obtendremos los datos recibidos de la siguiente manera:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span>intent
+</pre><p>En la classe invocada obtindrem les dades rebudes de la seg&#xFC;ent manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> intento <span class="token operator">=</span> intent
 findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity2<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </pre></li>
 <li>
-<p>Inicio de una actividad con argumentos y devoluci&#xF3;n de resultados. Cuando se inicia una actividad para obtener un resultado, es posible (y casi seguro en el caso de las operaciones que consumen mucha memoria, como el uso de la c&#xE1;mara) que se destruya tu proceso y tu actividad debido a la poca memoria. Por lo que se debe separar la devoluci&#xF3;n de llamada del resto de c&#xF3;digo, para ello la librer&#xED;a de Android nos proporciona distintos componentes:</p>
+<p>Inici d&apos;una activitat amb arguments i devoluci&#xF3; de resultats. Quan s&apos;inicia una activitat per a obtindre un resultat, &#xE9;s possible (i quasi segur en el cas de les operacions que consumeixen molta mem&#xF2;ria, com l&apos;&#xFA;s de la cambra) que es destru&#xEF;sca el teu proc&#xE9;s i la teua activitat a causa de la poca mem&#xF2;ria. Pel que s&apos;ha de separar la devoluci&#xF3; de crida de la resta de codi, per a aix&#xF2; la llibreria d&apos;Android ens proporciona diferents components:</p>
 <ul>
-<li>
-<p><strong><code>registerForActivityResult()</code></strong>. <strong>L&#xED;nea6</strong> Es el elemento principal y que se usa para registrar la devoluci&#xF3;n de resultados. Tiene varias sobrecargar, en un principio usaremos la que toma un objeto <em><code>ActivityResultContract</code></em>. Devuelve un elemento <em><code>ActivityResultLauncher</code></em> que se usar&#xE1; para iniciar la otra actividad.</p>
-</li>
-<li>
-<p><strong><code>ActivityResultContract</code></strong>. <strong>L&#xED;nea6</strong> y par&#xE1;metro del elemento anterior. Un contrato que especifica que una actividad se puede llamar con una entrada de tipo I y producir una salida de tipo O.  La API proporciona <a href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts?hl=es-419">contratos predeterminados</a> para acciones de intent b&#xE1;sicas, como tomar una foto, solicitar permisos, etc. Tambi&#xE9;n se pueden crear contratos personalizados.</p>
-</li>
-<li>
-<p><strong><code>ActivityResultCallback</code></strong>. <strong>L&#xED;nea 8 - 11</strong> . Es una devoluci&#xF3;n de llamada con seguridad de tipos que se llamar&#xE1; cuando el resultado de una actividad est&#xE9; disponible. Es una interfaz de m&#xE9;todo &#xFA;nico con un m&#xE9;todo onActivityResult() que toma un objeto del tipo de salida definido en <em><code>ActivityResultContract</code></em></p>
-</li>
-<li>
-<p><strong><code>ActivityResultLauncher</code></strong>. <strong>L&#xED;nea15</strong>  manda el intent que queremos usar para iniciar la aplicaci&#xF3;n. Se manda a trav&#xE9;s del lanzador, creado en la l&#xED;nea 6, que inicia el proceso de ejecuci&#xF3;n de un <em><code>ActivityResultContract</code></em>.</p>
-</li>
+<li><strong><code>registerForActivityResult()</code></strong>. <strong>L&#xED;nia 6</strong> &#xC9;s l&apos;element principal i que s&apos;usa per a registrar la devoluci&#xF3; de resultats. T&#xE9; diverses sobrecarregar, al principi usarem la que pren un objecte <strong><code>ActivityResultContract</code></strong>. Retorna un element <strong><code>ActivityResultLauncher</code></strong> que s&apos;usar&#xE0; per a iniciar l&apos;altra activitat.</li>
+<li><strong><code>ActivityResultContract</code></strong>. <strong>L&#xED;nia 6</strong> i par&#xE0;metre de l&apos;element anterior. Un contracte que especifica que una activitat es pot cridar amb una entrada de tipus I i produir una eixida de tipus O. La API proporciona <a href="https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts?hl=es-419">contractes predeterminats</a> per a accions de intent b&#xE0;siques, com prendre una foto, sol&#xB7;licitar permisos, etc. Tamb&#xE9; es poden crear contractes personalitzats.</li>
+<li><strong><code>ActivityResultCallback</code></strong>. <strong>L&#xED;nia 12</strong> s&apos;usa aquest objecte, creat en la l&#xED;nia 6. &#xC9;s una devoluci&#xF3; de crida amb seguretat de tipus que es dir&#xE0; quan el resultat d&apos;una activitat estiga disponible. &#xC9;s una interf&#xED;cie de m&#xE8;tode &#xFA;nic amb un m&#xE8;tode onActivityResult() que pren un objecte de la mena d&apos;eixida definit en <strong><code>ActivityResultContract</code></strong></li>
+<li><strong><code>ActivityResultLauncher</code></strong>. <strong>L&#xED;nia 12</strong> mana el intent que volem usar. &#xC9;s un llan&#xE7;ador per a una crida preparada pr&#xE8;viament per a iniciar el proc&#xE9;s d&apos;execuci&#xF3; d&apos;un <strong><code>ActivityResultContract</code></strong>.</li>
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-12],[8-11],15, [16,-17]]}" class="language-kotlin" data-line="6,6-12,8-11,15,16,-17"><span class="token keyword keyword-class">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         <span class="token keyword keyword-val">val</span> openPostActivity <span class="token operator">=</span>
-            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-            <span class="token punctuation">{</span> 
+            <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 result <span class="token operator">-&gt;</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span>
                     <span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
-        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>
-            View<span class="token punctuation">.</span><span class="token function">OnClickListener</span><span class="token punctuation">{</span>
-                openPostActivity<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
+        findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textoActivity1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span>View<span class="token punctuation">.</span><span class="token function">OnClickListener</span><span class="token punctuation">{</span>
+            openPostActivity<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
                 <span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span>
-                <span class="token punctuation">{</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Este es el valor que se manda desde Main Activity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6-12" data-start="6" data-end="12">
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8-11" data-start="8" data-end="11">
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16-17" data-start="16" data-end="17">
-
-</div></div></pre><blockquote>
-<p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 12</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 16 a 17</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> De <strong>L&#xED;nia 6 a L&#xED;nia 10</strong>, es registra l&apos;activitat per a esperar resultats d&apos;altres <em>&apos;activities&apos;</em> o <em>&apos;fragments&apos;</em>. S&apos;ha de registrar l&apos;activitat per a possibles resultats en el m&#xE8;tode <strong><code>onCreate()</code></strong>. Si el resultat &#xE9;s OK realitzem el codi necessari, en aquest cas s&apos;ha extret la informaci&#xF3; del intent rebut <strong><code>result.data</code></strong>. De <strong>L&#xED;nia 12 a 16</strong> es llan&#xE7;a el intent de l&apos;activitat que es vol iniciar, per&#xF2; amb l&apos;objecte <code>ActivityResultCallback</code> creat en el bloc anterior.</p>
 </blockquote>
-<p>En la clase invocada devolveremos los datos de la siguiente manera:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5]}" class="language-kotlin" data-line="4,5">   textView<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
-            <span class="token keyword keyword-val">val</span> intentoResultado<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            intentoResultado<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Este es el dato&quot;</span><span class="token punctuation">)</span>
-            <span class="token function">setResult</span><span class="token punctuation">(</span>Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">,</span>intentoResultado<span class="token punctuation">)</span>
-            <span class="token function">finish</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div></pre><blockquote>
-<p>&#x1F4CC; en la <strong>L&#xED;nea 4</strong> preparamos el resultado de la actividad indicando que ha sido correcto y a&#xF1;adiendo un intent con informaci&#xF3;n si lo creemos necesario. <strong>L&#xED;nea 5</strong> cerramos la activity.</p>
+<p>En la classe invocada retornarem les dades de la seg&#xFC;ent manera:</p>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers">textView<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> intentoResultado <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    intentoResultado<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Este es el dato&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">setResult</span><span class="token punctuation">(</span>Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">,</span> intentoResultado<span class="token punctuation">)</span>
+    <span class="token function">finish</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> en la <strong>L&#xED;nia 4</strong> preparem el resultat de l&apos;activitat indicant que ha sigut correcte i afegint un intent amb informaci&#xF3; si el creiem necessari. <strong>L&#xED;nia 5</strong> tanquem la activity.</p>
 </blockquote>
 <blockquote>
-<p>&#x1F480; Para garantizar que tu aplicaci&#xF3;n sea segura, siempre <strong>usa una intent expl&#xED;cita cuando inicies un Service</strong> y no declares filtros de intents para los servicios. El uso de una intent impl&#xED;cita para iniciar un servicio es un riesgo de seguridad porque no puedes garantizar qu&#xE9; servicio responder&#xE1; a la intent, y el usuario no puede ver qu&#xE9; servicio se inicia. A partir de Android 5.0 (nivel de API 21), el sistema arroja una excepci&#xF3;n si llamas a bindService() con una intent impl&#xED;cita.</p>
+<p>&#x1F480; Per a garantir que la teua aplicaci&#xF3; siga segura, sempre <strong>usa una intent expl&#xED;cita quan inicies un Service</strong> i no declares filtres d&apos;intents per als servicis. L&apos;&#xFA;s d&apos;una intent impl&#xED;cita per a iniciar un servici &#xE9;s un risc de seguretat perqu&#xE8; no pots garantir quin servici respondr&#xE0; a la intent, i l&apos;usuari no pot veure quin servici s&apos;inicia. A partir d&apos;Android 5.0 (nivell d&apos;API 21) , el sistema tira una excepci&#xF3; si flames a bindService () amb una intent impl&#xED;cita.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio Resuelto2Activitys</span><br>
 <span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio Propuesto3ActivitysRetornoDatos</span></p>
 <div style="page-break-after:always;"></div>
-<h4>Intent Impl&#xED;cito</h4>
-<p>Los Intent impl&#xED;citos son aquellos que le preguntan al sistema qu&#xE9; servicio o componente es el m&#xE1;s adecuado para realizar la petici&#xF3;n, es decir, no espec&#xED;fica un componente en especial, y solo se especifica la funcionalidad requerida a trav&#xE9;s de una acci&#xF3;n (ver, hacer b&#xFA;squeda, hacer foto, marcar n&#xFA;mero&#x2026;) y un dato (URL, n&#xFA;mero a marcar&#x2026;)En este caso el sistema determina el componente para su resoluci&#xF3;n, desencadenando un &#x201C;intent&#x201D; sin conocer exactamente cu&#xE1;l es la aplicaci&#xF3;n o componente que lo recibir&#xE1;, si no puede establecer exactamente el componente a utilizar porque hay m&#xE1;s de uno, muestra una ventana con las opciones a seleccionar.</p>
- <div align="center">
+<h4>Intent Impl&#xED;cit</h4>
+<p>Els Intent impl&#xED;cits s&#xF3;n aquells que li pregunten al sistema quin servei o component &#xE9;s el m&#xE9;s adequat per a realitzar la petici&#xF3;, &#xE9;s a dir, no espec&#xED;fica un component especialment, i nom&#xE9;s s&apos;especifica la funcionalitat requerida a trav&#xE9;s d&apos;una acci&#xF3; (veure, fer cerca, fer foto, marcar n&#xFA;mero&#x2026;) i una dada (URL, n&#xFA;mero a marcar&#x2026;)En aquest cas el sistema determina el component per a la seua resoluci&#xF3;, desencadenant un &#x201C;intent&#x201D; sense con&#xE8;ixer exactament quina &#xE9;s l&apos;aplicaci&#xF3; o component que ho rebr&#xE0;, si no pot establir exactament el component a utilitzar perqu&#xE8; hi ha m&#xE9;s d&apos;un, mostra una finestra amb les opcions a seleccionar.</p>
+<div align="center">
     <img height="200" src="./imagenes/intents3.png">
 </div>
-<p>Un ejemplo de <strong>Intent impl&#xED;cito</strong>: <em>ser&#xED;a cuando deseas compartir un sitio web en alguna red social. Para ello Android nos ofrece un dialogo listando las app sociales instaladas en el dispositivo en ese momento, para que elijamos la de nuestro inter&#xE9;s. No especificamos que aplicaci&#xF3;n quer&#xED;amos, simplemente se mostraron todas las aplicaciones que podr&#xED;an responder a ese tipo de acci&#xF3;n</em>.</p>
+<p>Un exemple de <strong>Intent impl&#xED;cit</strong>: es quan desitges compartir un lloc web en alguna xarxa social. Per a aix&#xF2; Android ens ofereix un dialogue llistant les app socials instal&#xB7;lades en el dispositiu en aqueix moment, perqu&#xE8; triem la del nostre inter&#xE8;s. No especifiquem que aplicaci&#xF3; vol&#xED;em, simplement es van mostrar totes les aplicacions que podrien respondre a aqueixa mena d&apos;acci&#xF3;.</p>
 <div align="center">
     <img height="200" src="./imagenes/intents4.png">
 </div>
-<p>B&#xE1;sicamente los pasos para lanzar una actividad con un <strong>intent impl&#xED;cito</strong> ser&#xED;an los siguientes:</p>
+<p>B&#xE0;sicament els passos per a llan&#xE7;ar una activitat amb un <strong>intent impl&#xED;cit</strong> serien els seg&#xFC;ents:</p>
 <ul>
-<li>Declaramos el intent con la acci&#xF3;n apropiada (ACTION_VIEW, ACTION_WEB_SEARCH, etc).</li>
-<li>Adjuntamos informaci&#xF3;n adicional necesaria dependiendo de la acci&#xF3;n del intent.</li>
-<li>Lanzamos el intent dejando que el sistema encuentre la actividad adecuada).</li>
+<li>Declarem el intent amb l&apos;acci&#xF3; apropiada (ACTION_VIEW, ACTION_WEB_SEARCH, etc).</li>
+<li>Adjuntem informaci&#xF3; addicional necess&#xE0;ria depenent de l&apos;acci&#xF3; del intent.</li>
+<li>Llancem el intent deixant que el sistema trobe l&apos;activitat adequada).</li>
 </ul>
-<p>Para iniciar la actividad utilizaremos igualmente startActivity. Algunos ejemplos de <a href="https://developer.android.com/guide/components/intents-common?hl=es-419">Intents Comunes</a>:</p>
+<p>Per a iniciar l&apos;activitat utilitzarem igualment startActivity. Alguns exemples de <a href="https://developer.android.com/guide/components/intents-common?hl=es-419">Intents Comuns</a>:</p>
 <ul>
 <li>
-<p>Para mostrar una web dentro de un navegador:</p>
+<p>Per a mostrar una web dins d&apos;un navegador:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.google.es&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-</pre><p>Requiere los permisos: <strong><code>&lt;uses-permission android:name=&quot; android.permission.INTERNET &quot;/&gt;</code></strong></p>
+</pre><p>Requereix els permisos: <strong><code>&lt;uses-permission android:name=&quot; android.permission.INTERNET &quot;/&gt;</code></strong></p>
 </li>
 <li>
-<p>Para utilizar la b&#xFA;squeda de google;</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_WEB_SEARCH<span class="token punctuation">)</span><span class="token punctuation">;</span> 
- intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span>SearchManager<span class="token punctuation">.</span>QUERY<span class="token punctuation">,</span> <span class="token string">&quot;I.E.S. Doctor Balmis&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
- <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</pre><p>Requiere los permisos <strong><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;</code></strong></p>
+<p>Per a utilitzar la cerca de google;</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_WEB_SEARCH<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span>SearchManager<span class="token punctuation">.</span>QUERY<span class="token punctuation">,</span> <span class="token string">&quot;I.E.S. Doctor Balmis&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Requereix els permisos <strong><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;</code></strong></p>
 </li>
 <li>
-<p>Para mostrar los contactos.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>Per a mostrar els contactes.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-</pre><p>Requiere los permisos: <strong><code>&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;</code></strong></p>
+</pre><p>Requereix els permisos: <strong><code>&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;</code></strong></p>
 </li>
 </ul>
 <div align="center">
     <img height="180" src="./imagenes/intents5.png">
 </div>
-<p>Es posible que en ocasiones no se pueda acceder a una aplicaci&#xF3;n debido a que no est&#xE1; instalada en el dispositivo, a restricciones de perfil o a la configuraci&#xF3;n de un administrador. En ese caso, no se produce la llamada y se bloquea la app. Para verificar que una actividad recibir&#xE1; la intent, es muy importante usar antes <strong><code>resolveActivity()</code></strong> en el objeto Intent. Si el resultado no es nulo, hay al menos una aplicaci&#xF3;n que puede administrar la intent y es seguro llamar a <strong><code>startActivity()</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>&#xC9;s possible que a vegades no es puga accedir a una aplicaci&#xF3; pel fet que no est&#xE0; instal&#xB7;lada en el dispositiu, a restriccions de perfil o a la configuraci&#xF3; d&apos;un administrador. En aqueix cas, no es produeix la crida i es bloqueja l&apos;app. Per a verificar que una activitat rebr&#xE0; la intent, &#xE9;s molt important usar abans <strong><code>resolveActivity()</code></strong> en l&apos;objecte Intent. Si el resultat no &#xE9;s nul, hi ha almenys una aplicaci&#xF3; que pot administrar la intent i &#xE9;s segur cridar a <strong><code>startActivity()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
- <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token function">startActivity</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span><span class="token punctuation">;</span> 
 </pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Ejercicio ResueltoIntentImplicito</span></p>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="requerir-permisos-al-usuario">Requerir permisos al usuario</h4>
+<h4 class="mume-header" id="requerir-permisos-a-lusuari">Requerir permisos a l&apos;usuari</h4>
 
-<p>Android est&#xE1; apostando cada vez m&#xE1;s fuerte por la seguridad, por lo que en las versiones m&#xE1;s recientes del sistema operativo no basta con a&#xF1;adir la etiquete <strong><code>&lt;uses-permission ...&gt;</code></strong> en el Manifiesto. Si se quiere acceder a recursos ajenos a la aplicaci&#xF3;n en funcionamiento, se deber&#xE1; realizar una <a href="https://developer.android.com/training/permissions/requesting?hl=es-419">solicitud de permisos</a> de forma explicita al usuario.<br>
-Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limitado, si necesita usar recursos o informaci&#xF3;n ajenos a su propia zona de pruebas deber&#xE1;s seguir los siguientes pasos:</p>
+<p>Android est&#xE0; apostant cada vegada m&#xE9;s fort per la seguretat, per la qual cosa en les versions m&#xE9;s recents del sistema operatiu no n&apos;hi ha prou amb afegir l&apos;etiquete <strong><code>&lt;uses-permission ...&gt;</code></strong> en el Manifest. Si es vol accedir a recursos aliens (ajenos) a l&apos;aplicaci&#xF3; en funcionament, s&apos;haur&#xE0; de realitzar una <a href="https://developer.android.com/training/permissions/requesting?hl=es-419">sol&#xB7;licitud de permisos</a> de forma explicita a l&apos;usuari.</p>
+<p>Aix&#xF2; &#xE9;s pel fet que cada app s&apos;executa en una zona de proves amb acc&#xE9;s limitat, si necessita usar recursos o informaci&#xF3; aliens a la seua pr&#xF2;pia zona de proves haur&#xE0;s de seguir els seg&#xFC;ents passos:</p>
 <ol>
 <li>
-<p>Declara los permisos necesarios en el Manifest.</p>
+<p>Declara els permisos necessaris en el Manifest.</p>
 </li>
 <li>
-<p>Registrar los permisos en una variable de tipo <code>ActivityResultLauncher&lt;String&gt;</code> <strong>L&#xED;nia 6 a 20</strong></p>
+<p>Registrar els permisos en una variable de tipus <code>ActivityResultLauncher&lt;String&gt;</code> <strong>L&#xED;nia 7 a 18</strong></p>
 <ol>
-<li>Primero habremos creado los variable de este tipo, <strong>L&#xED;nia 4 i 5</strong>.</li>
-<li>Registraremos en esta o estas variables (en este ejemplo dos), la acci&#xF3;n que queremos que ocurra cuando los permisos hayan sido otorgados por el usuario. En este caso cambiaremos el texto de la aplicaci&#xF3;n.</li>
+<li>Primer haurem creat els variable d&apos;aquest tipus, <strong>L&#xED;nia 4 i 5</strong>.</li>
+<li>Registrarem en aquesta o aquestes variables (en aquest exemple dos), l&apos;acci&#xF3; que volem que oc&#xF3;rrega quan els permisos hagen sigut atorgats per l&apos;usuari. En aquest cas canviarem el text de l&apos;aplicaci&#xF3;.</li>
 </ol>
 </li>
 <li>
-<p>En el momento en el que el usuario invoca la acci&#xF3;n que necesita los permisos, lanzar la petici&#xF3;n del permiso requerido. Esto mostrar&#xE1; el dialogo con la petici&#xF3;n.<strong>L&#xED;nia 21 a 23</strong></p>
+<p>En el moment en el qual l&apos;usuari invoca l&apos;acci&#xF3; que necessita els permisos, llan&#xE7;ar la petici&#xF3; del perm&#xED;s requerit. Aix&#xF2; mostrar&#xE0; el dialogue amb la petici&#xF3;.<strong>L&#xED;nia 19 a 26</strong></p>
 </li>
 </ol>
-<p>El siguiente c&#xF3;digo, ya usado en el tema2, es la base funcional a partir de la cual podemos a&#xF1;adir lo necesario para nuestras distintas aplicaciones. F&#xED;jate que en el ejemplo se piden dos permisos.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5, 6-20,21-23]}" class="language-kotlin" data-line="4,5,6-20,21-23">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+<blockquote>
+<p>&#x26A0;&#xFE0F; Recorda perqu&#xE8; funcione correctament, haur&#xE0;s d&apos;obrir l&apos;arxiu <font size="4">activity_main.xml</font> de la carpeta layout i afegir la seg&#xFC;ent l&#xED;nia</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/texto&quot;</span>
+</pre><p>dins de l&apos;etiquete TextView que cont&#xE9; &quot;Hola Mundo&quot;</p>
+</blockquote>
+<p>El seg&#xFC;ent codi &#xE9;s la base funcional, a partir de la qual podem afegir el necessari per a les nostres diferents aplicacions. Fixa&apos;t que en l&apos;exemple es demanen dos permisos.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5, 7-18,19-26]}" class="language-kotlin" data-line="4,5,7-18,19-26">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         <span class="token keyword keyword-var">var</span> texto <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span>
         <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoReadExternalStorage<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
         <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoCallPhone<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+
         registerPermisoReadExternalStorage <span class="token operator">=</span>
             <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
-                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;ExternalStorage&quot;</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
+                    texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;ExternalStorage&quot;</span>
             <span class="token punctuation">}</span>
         registerPermisoCallPhone <span class="token operator">=</span>
             <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">{</span>
-                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;CallPhone&quot;</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> 
+                    texto<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;CallPhone&quot;</span>
             <span class="token punctuation">}</span>
         texto<span class="token punctuation">.</span><span class="token function">setOnLongClickListener</span> <span class="token punctuation">{</span>
             registerPermisoReadExternalStorage<span class="token punctuation">.</span>
@@ -700,10 +631,8 @@ Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limit
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="6-20" data-start="6" data-end="20">
 
-
-
+<div aria-hidden="true" class="line-highlight" data-range="7-18" data-start="7" data-end="18">
 
 
 
@@ -733,50 +662,53 @@ Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limit
 
 
 
+<div aria-hidden="true" class="line-highlight" data-range="19-26" data-start="19" data-end="26">
 
 
-<div aria-hidden="true" class="line-highlight" data-range="21-23" data-start="21" data-end="23">
 
 
-</div></div></pre><blockquote>
-<p>&#x26A0;&#xFE0F; Recuerda que para que funcione correctamente, tendr&#xE1;s que abrir el archivo <font size="4">activity_main.xml</font> de la carpeta layout y a&#xF1;adir la siguiente l&#xED;nea</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/texto&quot;</span>
-</pre><p>dentro de la etiquete TextView que contiene el &quot;Hola Mundo&quot;.</p>
-</blockquote>
-<div style="page-break-after:always;"></div>
+
+
+
+</div></div></pre><div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="intent-filter">Intent-filter</h3>
 
-<p>Las actividades y servicios pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar. De esta forma se informa al sistema del tipo de intenciones impl&#xED;citas que puede atender dicho componente. Los intent-filter se definen en el archivo de manifiesto de la aplicaci&#xF3;n dentro de la activity correspondiente.<br>
-Como se ha explicado en el punto anterior, cuando se crea un intent impl&#xED;cito el sistema Android busca el componente apropiado que pueda resolver la petici&#xF3;n dada en el intent.<br>
-La b&#xFA;squeda la realiza analizando los <strong>intent-filter</strong> definidos en los archivos de manifiesto de las aplicaciones instaladas en el dispositivo. Si existe coincidencia lanza dicha aplicaci&#xF3;n. Si la coincidencia es m&#xFA;ltiple (varias aplicaciones pueden dar respuesta a esa petici&#xF3;n), el sistema muestra un cuadro de di&#xE1;logo con el fin de que el usuario decida. A un Intent podemos asociarle una acci&#xF3;n, unos datos y una categor&#xED;a.<br>
-Las actividades pueden declarar el tipo de acciones que pueden llevar a cabo y los tipos de datos que pueden gestionar.</p>
+<p>Les activitats i serveis poden declarar el tipus d&apos;accions que poden dur a terme i els tipus de dades que poden gestionar. D&apos;aquesta manera s&apos;informa el sistema de la mena d&apos;intencions impl&#xED;cites que pot atendre aquest component. Els intent-filter es defineixen en l&apos;arxiu de manifest de l&apos;aplicaci&#xF3; dins de la activity corresponent.</p>
+<p>Com s&apos;ha explicat en el punt anterior, quan es crea un intent impl&#xED;cit el sistema Android busca el component apropiat que puga resoldre la petici&#xF3; donada en el intent. La cerca la realitza analitzant els <strong>intent-filter</strong> definits en els arxius de manifest de les aplicacions instal&#xB7;lades en el dispositiu. Si existeix coincid&#xE8;ncia llan&#xE7;a aquesta aplicaci&#xF3;. Si la coincid&#xE8;ncia &#xE9;s m&#xFA;ltiple (diverses aplicacions poden donar resposta a aqueixa petici&#xF3;), el sistema mostra un quadre de di&#xE0;leg amb la finalitat que l&apos;usuari decidisca. A un Intent podem associar-li una acci&#xF3;, unes dades i una categoria.</p>
+<p>Les activitats poden declarar el tipus d&apos;accions que poden dur a terme i els tipus de dades que poden gestionar.</p>
 <ul>
-<li>Las acciones son cadenas de texto est&#xE1;ndar que describen lo que la actividad puede hacer. Por ejemplo <strong><code>android.intent.action.VIEW</code></strong>, es una acci&#xF3;n que indica que la actividad puede mostrar datos al usuario.</li>
-<li>La misma actividad puede declarar el tipo de datos del que se ocupa, por ejemplo <strong><code>vnd.android.cursor.dir/person</code></strong>, indica que la actividad manipula los datos de la agenda.</li>
-<li>Tambi&#xE9;n pueden declarar una categor&#xED;a, que b&#xE1;sicamente indica si la actividad va a ser lanzada desde el lanzador de aplicaciones, desde el men&#xFA; de otra aplicaci&#xF3;n o directamente desde otra actividad.las actividades que est&#xE1;n dispuestas a recibir intents impl&#xED;citos deben incluir <strong><code>android.intent.category.DEFAULT</code></strong>.</li>
+<li>
+<p>Les accions s&#xF3;n cadenes de text est&#xE0;ndard que descriuen el que l&apos;activitat pot fer. Per exemple <strong><code>android.intent.action.VIEW</code></strong>, &#xE9;s una acci&#xF3; que indica que l&apos;activitat pot mostrar dades a l&apos;usuari.</p>
+</li>
+<li>
+<p>La mateixa activitat pot declarar el tipus de dades del qual s&apos;ocupa, per exemple <strong><code>vnd.android.cursor.dir/person, indica</code></strong> que l&apos;activitat manipula les dades de l&apos;agenda*.</p>
+</li>
+<li>
+<p>Tamb&#xE9; poden declarar una categoria, que b&#xE0;sicament indica si l&apos;activitat ser&#xE0; llan&#xE7;ada des del llan&#xE7;ador d&apos;aplicacions <strong><code>android.intent.category.DEFAULT</code></strong>, des del men&#xFA; d&apos;una altra aplicaci&#xF3; o directament des d&apos;una altra activitat.<br>
+Un possible exemple del <strong><code>AndroidManifest.xml</code></strong> que complisca les anteriors condicions:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.VIEW<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.category.DEFAULT<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vnd.android.cursor.dir/person<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+</pre></li>
 </ul>
-<p>Un posible ejemplo del AndroidManifest.xml que cumpla las anteriores condiciones:</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.VIEW<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.category.DEFAULT<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vnd.android.cursor.dir/person<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span> 
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
-</pre><p>Una activity puede tener varios intent-filter definidos. Igualmente cada uno de esos intent-filter puede tener varias acciones definidas.</p>
+<p>Una activity pot tindre diversos intent-filter definits. Igualment cadascun d&apos;aqueixos intent-filter pot tindre diverses accions definides.</p>
 <div style="page-break-after:always;"></div>
-<p>Manifest ejemplo de varios intent-filter:</p>
+<p>Manifest exemple de diversos intent-filter:</p>
 <div align="center">
     <img height="350" src="./imagenes/intents6.png">
 </div>
 <blockquote>
-<p>&#x1F4CC;El primer intent-filter define que esta activity es punto de entrada para la aplicaci&#xF3;n. La categor&#xED;a especifica que debe aparecer en el lanzador de aplicaciones. El segundo, permite a la activity visualizar y editar el directorio de datos (a trav&#xE9;s de las actions VIEW y EDIT), o recuperar una entrada particular y devolverla (a trav&#xE9;s de la action PICK). En data se especifica el tipo de datos que se manejan. Como est&#xE1; definido con la Categor&#xED;a DEFAULT, estamos indicando que atender&#xE1; a los intents impl&#xED;citos que soliciten otras aplicaciones.</p>
+<p>&#x1F4CC; <strong>Nota:</strong> El primer intent-filter defineix que aquesta activity &#xE9;s punt d&apos;entrada per a l&apos;aplicaci&#xF3;. La categoria especifica que ha d&apos;apar&#xE8;ixer en el llan&#xE7;ador d&apos;aplicacions. El segon, permet a la activity visualitzar i editar el directori de dades (a trav&#xE9;s de les actions VIEW i EDIT), o recuperar una entrada particular i retornar-la (a trav&#xE9;s de la action PICK). En data s&apos;especifica el tipus de dades que es manegen. Com est&#xE0; definit amb la Categoria DEFAULT, estem indicant que atendr&#xE0; els intents impl&#xED;cits que sol&#xB7;liciten altres aplicacions.</p>
 </blockquote>
-<h3 class="mume-header" id="trabajando-con-parcelables">Trabajando con Parcelables</h3>
+<h3 class="mume-header" id="treballant-amb-parcelables">Treballant amb Parcelables</h3>
 
-<p>Cuando estamos desarrollando en Android y necesitamos enviar datos a otra Activity lo podemos realizar mediante un <strong>Intent y Bundle</strong> pero qu&#xE9; sucede si deseamos enviar un objeto para economizar una llamada a la API. Android nos brinda las opciones de <strong>Serializable</strong> (propia de Java) y <strong>Parcelable</strong>, sin embargo esta &#xFA;ltima es hasta 10 veces m&#xE1;s r&#xE1;pida por lo que nos vamos a enfocar en ella.<br>
-Parcelable es una interfaz y podemos implementarla manual o mediante un plugin que, en las &#xFA;ltimas versiones de Android Studio, viene incluido por defecto.<br>
-Claramente tendremos que crear la clase POJO, como se hace siempre, pero est&#xE1; deber&#xE1; derivar de la <strong><code>Interfaz Parcelable</code></strong>. Como es de suponer esto nos obligar&#xE1; a implementar una serie de m&#xE9;todos y una variable CREATOR que hereda de Creator y que tendr&#xE1; todos sus miembros est&#xE1;ticos gracias el modificador <strong><code>companion</code></strong>.<br>
-Veamos un ejemplo con dos activitys, una en la que se pueden introducir los datos de un contacto y que al pulsar un bot&#xF3;n env&#xED;e los datos existentes en la pantalla a una segunda actividad que mostrar&#xE1; los datos de forma sencilla.</p>
-<p>Clase <strong>Contacto</strong> que hereda de la <strong><code>Interfaz Parcelable</code></strong>:</p>
+<p>Quan estem desenvolupant en Android i necessitem enviar dades a una altra Activity ho podem realitzar mitjan&#xE7;ant un <strong>Intent i Bundle</strong> per&#xF2; qu&#xE8; succeeix si desitgem enviar un objecte per a economitzar una anomenada a la API. Android ens brinda les opcions de <strong>Serializable</strong> (pr&#xF2;pia de Java) i <strong>Parcelable</strong>, no obstant aix&#xF2; aquesta &#xFA;ltima &#xE9;s fins a 10 vegades m&#xE9;s r&#xE0;pida pel que ens enfocarem en ella.</p>
+<p>Parcelable &#xE9;s una interf&#xED;cie i podem implementar-la manual o mitjan&#xE7;ant un plugin que, en les &#xFA;ltimes versions d&apos;Android Studio, ve incl&#xF2;s per defecte.<br>
+Clarament haurem de crear la classe POJO, com es fa sempre, per&#xF2; est&#xE0; haur&#xE0; de derivar de la <strong><code>Interf&#xED;cie Parcelable</code></strong>. Com &#xE9;s de suposar aix&#xF2; ens obligar&#xE0; a implementar una s&#xE8;rie de m&#xE8;todes i una variable CREATOR que hereta de Creator i que tindr&#xE0; tots els seus membres est&#xE0;tics gr&#xE0;cies el modificador <strong><code>companion</code></strong>.<br>
+Vegem un exemple amb dos activitys, una en la qual es poden introduir les dades d&apos;un contacte i que en pr&#xE9;mer un bot&#xF3; envie les dades existents en la pantalla a una segona activitat que mostrar&#xE0; les dades de manera senzilla.</p>
+<p>Classe <strong>Contacte</strong> que hereta de la <strong><code>Interf&#xED;cie Parcelable</code></strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">Contacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> Parcelable <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> nombre<span class="token operator">:</span> String<span class="token operator">?</span>
     <span class="token keyword keyword-var">var</span> telefono<span class="token operator">:</span> String<span class="token operator">?</span>
@@ -812,10 +744,11 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
         parcel<span class="token punctuation">.</span><span class="token function">writeString</span><span class="token punctuation">(</span>email<span class="token punctuation">)</span>
         parcel<span class="token punctuation">.</span><span class="token function">writeParcelable</span><span class="token punctuation">(</span>foto<span class="token punctuation">,</span> flags<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-    <span class="token comment">//Clase creada autom&#xE1;ticamente. Un companion object es la forma que tienen Kotlin </span>
-    <span class="token comment">//de definir miembros staticos dentro de una clase, todos los elementos </span>
-    <span class="token comment">//de este object ser&#xE1;n static</span>
-    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> CREATOR <span class="token operator">:</span> Creator<span class="token operator">&lt;</span>Contacto<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Classe creada autom&#xE0;ticament. </span>
+    <span class="token comment">// Un companion object &#xE9;s la forma que t&#xE9; Kotlin </span>
+    <span class="token comment">// de definir membres statics dins d&apos;una classe.</span>
+    <span class="token comment">// Tots el elements d&apos;aquest object seran static</span>
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> CREATOR <span class="token operator">:</span> Parcelable<span class="token punctuation">.</span>Creator<span class="token operator">&lt;</span>Contacto<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">createFromParcel</span><span class="token punctuation">(</span>parcel<span class="token operator">:</span> Parcel<span class="token punctuation">)</span><span class="token operator">:</span> Contacto <span class="token punctuation">{</span>
             <span class="token keyword keyword-return">return</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>parcel<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
@@ -824,8 +757,8 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Clase <strong>MainActivity</strong> que inicia la actividad segunda mandando el objeto parcelado.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[15,16]}" class="language-kotlin" data-line="15,16"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Classe <strong>MainActivity</strong> que inicia l&apos;activitat segona manant l&apos;objecte parcel&#xB7;lat.</p>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
@@ -843,42 +776,11 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
                 intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CONTACTO&quot;</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span>
                 <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span><span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
-</div></div></pre><blockquote>
-<p>&#x1F4CC; <strong>L&#xED;nea 15</strong> se crea el intent para la actividad 2 . <strong>L&#xED;nea 16</strong> como se puede ver, aunque el elemento que a&#xF1;adimos al intent es un objeto de tipo Contacto, se puede hacer con <strong><code>putExtra</code></strong> debido a que el contacto hereda de Parcelable.</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4CC; <strong>L&#xED;nia 15</strong> es crea el intent per a l&apos;activitat 2 . <strong>L&#xED;nia 16</strong> com es pot veure, encara que l&apos;element que afegim al intent &#xE9;s un objecte de tipus Contacte, es pot fer amb <strong><code>putExtra</code></strong> pel fet que el contacte hereta de Parcelable.</p>
 </blockquote>
-<p>En la <strong>Activity2</strong> recuperaremos el objeto pasado, con la  <strong>l&#xED;nea 6</strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=6}" class="language-kotlin" data-line="6"><span class="token keyword keyword-class">class</span> Activity2<span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p>En la <strong>Activity2</strong> recuperarem l&apos;objecte passat, amb la <strong>l&#xED;nia 6</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> Activity2<span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity2<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -894,16 +796,10 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
             correo<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>email<span class="token punctuation">)</span>
             img<span class="token punctuation">.</span><span class="token function">setImageBitmap</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>foto<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div></pre><blockquote>
-<p>&#x270B; <strong>Importante:</strong> No olvides declarar en el Manifest las dos actividades.</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x270B; <strong>Important:</strong> No oblides declarar en el Manifest les dos activitats.</p>
 </blockquote>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio ResueltoParcelabe</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio ResueltoParcelable</span></p>
 <div style="page-break-after:always;"></div>
       </div>
       
