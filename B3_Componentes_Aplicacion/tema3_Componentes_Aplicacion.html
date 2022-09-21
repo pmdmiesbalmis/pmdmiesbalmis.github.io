@@ -489,7 +489,7 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
 </ul>
 </li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[6, [6-12],[8-11],15, [16,-17]]}" class="language-kotlin" data-line="6,6-12,8-11,15,16,-17"><span class="token keyword keyword-class">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> MainActivity<span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
@@ -509,68 +509,7 @@ findViewById<span class="token operator">&lt;</span>TextView<span class="token o
                 <span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6-12" data-start="6" data-end="12">
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8-11" data-start="8" data-end="11">
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16-17" data-start="16" data-end="17">
-
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x1F4CC; De <strong>L&#xED;nea 6 a L&#xED;nea 12</strong>, se registra la actividad para esperar resultados de otras activitys o fragments. Se debe registrar la actividad para posibles resultados en el m&#xE9;todo <em>onCreate()</em>.Si el resultado es OK realizamos el c&#xF3;digo necesario, en este caso se ha extra&#xED;do la informaci&#xF3;n del intent recibido <strong><code>result.data</code></strong>. De <strong>L&#xED;nea 16 a 17</strong> se lanza el intent de la actividad que se quiere iniciar, pero con el objeto <code>ActivityResultCallback</code> creado en el bloque anterior.</p>
 </blockquote>
 <p>En la clase invocada devolveremos los datos de la siguiente manera:</p>
@@ -663,7 +602,7 @@ Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limit
 </li>
 </ol>
 <p>El siguiente c&#xF3;digo, ya usado en el tema2, es la base funcional a partir de la cual podemos a&#xF1;adir lo necesario para nuestras distintas aplicaciones. F&#xED;jate que en el ejemplo se piden dos permisos.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5, 6-20,21-23]}" class="language-kotlin" data-line="4,5,6-20,21-23">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers">    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
         <span class="token keyword keyword-var">var</span> texto <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>TextView<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>texto<span class="token punctuation">)</span>
         <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> registerPermisoReadExternalStorage<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
@@ -686,59 +625,7 @@ Esto es debido a que cada app se ejecuta en una zona de pruebas con acceso limit
         texto<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
             registerPermisoCallPhone<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>CALL_PHONE<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6-20" data-start="6" data-end="20">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="21-23" data-start="21" data-end="23">
-
-
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x26A0;&#xFE0F; Recuerda que para que funcione correctamente, tendr&#xE1;s que abrir el archivo <font size="4">activity_main.xml</font> de la carpeta layout y a&#xF1;adir la siguiente l&#xED;nea</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">android<span class="token operator">:</span>id<span class="token operator">=</span><span class="token string">&quot;@+id/texto&quot;</span>
 </pre><p>dentro de la etiquete TextView que contiene el &quot;Hola Mundo&quot;.</p>
@@ -825,7 +712,7 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><p>Clase <strong>MainActivity</strong> que inicia la actividad segunda mandando el objeto parcelado.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[15,16]}" class="language-kotlin" data-line="15,16"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
@@ -843,42 +730,11 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
                 intent<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CONTACTO&quot;</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span>
                 <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span><span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x1F4CC; <strong>L&#xED;nea 15</strong> se crea el intent para la actividad 2 . <strong>L&#xED;nea 16</strong> como se puede ver, aunque el elemento que a&#xF1;adimos al intent es un objeto de tipo Contacto, se puede hacer con <strong><code>putExtra</code></strong> debido a que el contacto hereda de Parcelable.</p>
 </blockquote>
 <p>En la <strong>Activity2</strong> recuperaremos el objeto pasado, con la  <strong>l&#xED;nea 6</strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=6}" class="language-kotlin" data-line="6"><span class="token keyword keyword-class">class</span> Activity2<span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> Activity2<span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity2<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -894,13 +750,7 @@ Veamos un ejemplo con dos activitys, una en la que se pueden introducir los dato
             correo<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>email<span class="token punctuation">)</span>
             img<span class="token punctuation">.</span><span class="token function">setImageBitmap</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>foto<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x270B; <strong>Importante:</strong> No olvides declarar en el Manifest las dos actividades.</p>
 </blockquote>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio ResueltoParcelabe</span></p>
