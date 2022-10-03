@@ -497,6 +497,9 @@ Hem de separar la resposta de la crida per que despr&#xE9;s d&apos;acabar la act
 <p><strong><code>ActivityResultCallback</code></strong> es un SAM <em>&apos;consumidor&apos;</em> al que le arriba un objecte de tipus <strong><code>O</code></strong>, para el nostre contracte un <strong><code>ActivityResult</code></strong> i fa una determinada acci&#xF3; sense retornar o &apos;<em>produir</em>&apos; r&#xE9;s. <strong><code>result : ActivityResult -&gt; void</code></strong></p>
 </li>
 </ul>
+<blockquote>
+<p>&#x270B; <strong>Important</strong>: Los <strong><code>registerForActivityResult</code></strong> deuen sempre ser-se avan&#xE7; del <strong><code>OnStart()</code></strong> aix&#xF2; &#xE9;s en el <strong><code>OnCreate()</code></strong></p>
+</blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> activityResultLauncher <span class="token operator">=</span>
     <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> result <span class="token operator">-&gt;</span>
         <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -534,7 +537,48 @@ Hem de separar la resposta de la crida per que despr&#xE9;s d&apos;acabar la act
 </ul>
 </li>
 </ol>
-</li>
+<p>Exemple de c&#xF3;di.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> lanzadorActividad2<span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>Intent<span class="token operator">&gt;</span>
+
+<span class="token comment">// Los registros deben hacerse al crear la Activity.</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">registraRespuestasActividades</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    lanzadorActividad2 <span class="token operator">=</span> <span class="token function">registraRespuestaActivity2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">registraRespuestaActivity2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ActivityResultLauncher<span class="token operator">&lt;</span>Intent<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> <span class="token function">registerForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> result <span class="token operator">-&gt;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                applicationContext<span class="token punctuation">,</span>
+                result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATORETURN&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                Toast<span class="token punctuation">.</span>LENGTH_SHORT
+            <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">manejadoresEventos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">manejadoreClickBoton</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">manejadoreClickBoton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> boton <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span>
+    boton<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> edit <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>EditText<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>datos<span class="token punctuation">)</span>
+        <span class="token keyword keyword-var">var</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> Activity2<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">,</span> edit<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        lanzadorActividad2<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+    <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+
+    <span class="token function">registraRespuestasActividades</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">manejadoresEventos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></li>
 <li>
 <p><strong>Implicit:</strong> Aquells que li pregunten al sistema quin servei o component &#xE9;s el m&#xE9;s adequat per a realitzar la petici&#xF3;, &#xE9;s a dir, no espec&#xED;fica un component especialment. Sin&#xF3; que volem fer i led dades per a fer-ho seguint els seg&#xFC;ents passos:</p>
 <ol>
@@ -542,10 +586,6 @@ Hem de separar la resposta de la crida per que despr&#xE9;s d&apos;acabar la act
 <li>Adjuntem informaci&#xF3; addicional necess&#xE0;ria depenent de l&apos;acci&#xF3; del intent.</li>
 <li>Llancem el intent deixant que el sistema trobe l&apos;activitat adequada.</li>
 </ol>
-<p>Per exemple per a mostrar els contactes seria...</p>
-<blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Requereix els permisos: <strong><code>&lt;uses-permission android:name=&quot;android.permission.READ_CONTACTS&quot;/&gt;</code></strong></p>
-</blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Obrir els contactes.</span>
 <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;content://contacts/people/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// resolveActivity si est&#xE0; disponible el que volem fer.</span>
@@ -557,6 +597,34 @@ Hem de separar la resposta de la crida per que despr&#xE9;s d&apos;acabar la act
 <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;geo:38.3619129, -0.4905111?z=18&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// 2. Fer una trucada per tel&#xE8;fon</span>
 <span class="token keyword keyword-val">val</span> intento <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_CALL<span class="token punctuation">,</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;tel:676188432&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>Per&#xF2; des de el <strong>API 30</strong> per a que <strong><code>intento.resolveActivity(packageManager)</code></strong> ens diga si est&#xE0; disponible la activitat impl&#xED;cita que volem obrir hem de incloure al <strong><code>manifest.xml</code></strong> la etiqueta <strong><code>&lt;queries&gt;</code></strong> indicant que la nostra activitat voldr&#xE0; preguntar per la activity o el servei a llan&#xE7;ar mitjan&#xE7;ant el intent. Per exemple, per a <strong><code>Intent.ACTION_VIEW</code></strong> posar&#xED;em.</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span><span class="token punctuation">&gt;</span></span>
+...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>queries</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.intent.action.WEB_SEARCH<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>queries</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
+</pre><blockquote>
+<p>&#x270B; <strong>Important</strong>: A m&#xE9;s, si el intent precisa de permisos com accedir a la c&#xE0;mera. Haur&#xED;em de especificar-los al manifest i avan&#xE7; de llan&#xE7;ar el intent fer una petici&#xF3; de sol&#xB7;licitud del mateixos.</p>
+</blockquote>
+<p>Per a executar un altra aplicaci&#xF3;, no fa falta posar la una &apos;<em>query</em>&apos; per&#xF2; s&#xED; hem de con&#xE8;ixer el nom del paquet i el nom de la classe de la activitat que volem obrir.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> Els noms de paquet els podem consultar a la carpeta <strong><code>data/data</code></strong> dins del emmagatzematge del nostre dispositiu. Per exemple ...</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+intent<span class="token punctuation">.</span><span class="token function">setComponent</span><span class="token punctuation">(</span><span class="token function">ComponentName</span><span class="token punctuation">(</span><span class="token string">&quot;com.example.ejercicioresuelto2activity&quot;</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;com.example.ejercicioresuelto2activity.MainActivity&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intent<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+        <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> ActivityNotFoundException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;No existe la actividad aejercicioresuelto2activity&quot;</span><span class="token punctuation">,</span> 
+                        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
 </pre></li>
 </ul>
 <h3 class="mume-header" id="requerir-permisos-a-lusuari">Requerir permisos a l&apos;usuari</h3>
