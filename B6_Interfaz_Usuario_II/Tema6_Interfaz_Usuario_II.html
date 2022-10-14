@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
       
       
       
@@ -277,7 +277,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -369,6 +369,10 @@ justo después del front matter
 
 <p>Permiten a los usuarios ver y seleccionar un valor (o rango) del intervalo mostrado a lo largo de una barra. Son ideales para ajustar configuraciones como el volumen y el brillo, o para aplicar filtros de imagen. Al interactuar con un control deslizante, los cambios deben reflejarse inmediatamente al usuario.</p>
 <p>Los controles deslizantes pueden usar iconos en ambos extremos de la barra para representar una escala num&#xE9;rica o relativa. El rango de valores o la naturaleza de los valores, como el cambio de volumen, se pueden indicar con iconos.</p>
+<div align="center">
+    <img height="100
+    " src="./imagenes/sliders.png">
+</div>
 <p>Pueden ser continuos (permiten seleccionar un valor aproximado subjetivo) o discretos (permiten seleccionar un valor exacto).</p>
 <pre data-role="codeBlock" data-info="xml {highlight=[6,7,16,17]}" class="language-xml" data-line="6,7,16,17">    <span class="token comment">&lt;!-- Continue slider --&gt;</span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.slider.Slider</span>
@@ -443,12 +447,12 @@ justo después del front matter
 </ul>
 </blockquote>
 <p>Podemos atender los cambios sobre el <strong><code>slider</code></strong> con los escuchadores:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">slider<span class="token punctuation">.</span><span class="token function">addOnSliderTouchListener</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> Slider<span class="token punctuation">.</span><span class="token function">OnSliderTouchListener</span> <span class="token punctuation">{</span>
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onStartTrackingTouch</span><span class="token punctuation">(</span>slider<span class="token operator">:</span> Slider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">slider<span class="token punctuation">.</span><span class="token function">addOnSliderTouchListener</span><span class="token punctuation">(</span><span class="token keyword keyword-object">object</span> <span class="token operator">:</span> Slider<span class="token punctuation">.</span><span class="token function">OnSliderTouchListener</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStartTrackingTouch</span><span class="token punctuation">(</span>slider<span class="token operator">:</span> Slider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// Responds to when slider&apos;s touch event is being started</span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onStopTrackingTouch</span><span class="token punctuation">(</span>slider<span class="token operator">:</span> Slider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStopTrackingTouch</span><span class="token punctuation">(</span>slider<span class="token operator">:</span> Slider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// Responds to when slider&apos;s touch event is being stopped</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
@@ -457,14 +461,20 @@ slider<span class="token punctuation">.</span><span class="token function">addOn
     <span class="token comment">// Responds to when slider&apos;s value is changed</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x270B; EjercicioPropuesto:</p>
-<ul>
-<li>Realizar un nuevo proyecto que permita modificar el color de fondo de nuestro <strong><code>layout</code></strong> a trav&#xE9;s de tres <strong><code>slider</code></strong> que permitan variar el <strong>RGB</strong> del color del mismo.</li>
-</ul>
+<p>&#x270B; Practica realizando un nuevo proyecto que permita modificar el color de fondo de nuestro <strong><code>layout</code></strong> a trav&#xE9;s de tres <strong><code>slider</code></strong> que permitan variar el <strong>RGB</strong> del color del mismo.</p>
 </blockquote>
 <h3 class="mume-header" id="chips">Chips</h3>
 
-<p>Uno de los componentes m&#xE1;s atractivos de la librer&#xED;a <strong><code>Material Design</code></strong> es el <strong><code>Chip</code></strong>. Existen cuatro tipos: de entrada, de filtro, de elecci&#xF3;n y de acci&#xF3;n.</p>
+<p>Uno de los componentes m&#xE1;s atractivos de la librer&#xED;a <strong><code>Material Design</code></strong> es el <strong><code>Chip</code></strong>.</p>
+<div align="center">
+    <img height src="./imagenes/chip.png">
+</div>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.chip.Chip</span>
+        <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@style/Widget.MaterialComponents.Chip.Choice<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Chip<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+</pre><p>Existen cuatro tipos: de entrada, de filtro, de elecci&#xF3;n y de acci&#xF3;n.</p>
 <p>Los <strong><code>Chips</code></strong> se utilizan habitualmente agrupados. Para poder hacerlo de forma eficiente se recomienda la utilizaci&#xF3;n del componente <strong><code>ChipGroup</code></strong> que permite patrones de comportamiento sobre la vista.</p>
 <p>Los cambios de un chip se pueden observar as&#xED;:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">chip<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
@@ -691,10 +701,7 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
         <span class="token attr-name"><span class="token namespace">app:</span>layout_constraintLeft_toLeftOf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>parent<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
 </pre><blockquote>
-<p>&#x270B; EjercicioPropuesto:</p>
-<ul>
-<li>Modificar el ejercicio anterior de forma que se incorporen los <strong><code>chip</code></strong> al campo <strong><code>AutoCompleteTextView</code></strong>. Hay que conseguir que el bot&#xF3;n de eliminaci&#xF3;n del <strong><code>chip</code></strong> est&#xE9; activo y utilizable.</li>
-</ul>
+<p>&#x270B; Practica modificando el ejercicio anterior de forma que se incorporen los <strong><code>chip</code></strong> al campo <strong><code>AutoCompleteTextView</code></strong>. Hay que conseguir que el bot&#xF3;n de eliminaci&#xF3;n del <strong><code>chip</code></strong> est&#xE9; activo y utilizable.</p>
 </blockquote>
 <h3 class="mume-header" id="di%C3%A1logos">Di&#xE1;logos</h3>
 
@@ -726,7 +733,7 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
     <img height="150" src="./imagenes/simpleDialog.png">
 </div>
 <p>Para gestionar los eventos sobre el mismo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> items <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> items <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
 
 <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span>resources<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -741,8 +748,8 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
     <img height="150" src="./imagenes/confirmDialog.png">
 </div>
 <p>Para gestionar los eventos sobre el mismo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> singleItems <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
-<span class="token keyword">val</span> checkedItem <span class="token operator">=</span> <span class="token number">1</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> singleItems <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> checkedItem <span class="token operator">=</span> <span class="token number">1</span>
 
 <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span>resources<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -758,8 +765,8 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
          <span class="token punctuation">}</span>
         <span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><p>Es posible tambi&#xE9;n seleccionar m&#xE1;s un elemento de los presentados en el di&#xE1;logo. Para implementar este tipo de di&#xE1;logo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">val</span> multiItems <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
-<span class="token keyword">val</span> checkedItems <span class="token operator">=</span> <span class="token function">booleanArrayOf</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> multiItems <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 3&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> checkedItems <span class="token operator">=</span> <span class="token function">booleanArrayOf</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
 
 <span class="token function">MaterialAlertDialogBuilder</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
         <span class="token operator">..</span><span class="token punctuation">.</span>
@@ -779,25 +786,25 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
 
 <p>Permiten a los usuarios seleccionar una fecha o un rango de fechas. Los <strong><code>dataPicker</code></strong> se adaptan a la orientaci&#xF3;n del dispositivo:</p>
 <div align="center">
-    <img height="150" src="./imagenes/dataPicker.png">
+    <img height="250" src="./imagenes/dataPicker.png">
 </div>
 <p>Lo m&#xE1;s frecuente es que estos controles no aparezcan directamente en la interfaz, sino que cuando pulsamos un campo de edici&#xF3;n asociado a una fecha, nos aparezca un di&#xE1;logo (o <strong><code>fragmentDialog</code></strong>) que incluye el <strong><code>dataPicker</code></strong>.</p>
 <p>Crearemos el proyecto <strong>EjemploDataPicker</strong> y colocamos en la actividad principal un <strong><code>TextInputEditText</code></strong> en el escuchador correspondiente al <strong><code>onClick</code></strong> activaremos el <strong><code>dataPicker</code></strong> y sobre &#xE9;l visualizaremos la entrada realizada en el <strong><code>dataPicker</code></strong> cuando este se cierre.</p>
 <div align="center">
     <img height="50" src="./imagenes/dataPickerEntrada.png">
 </div>
-<p>Es importante que nuestro <strong><code>TextInputEditText</code></strong> tenga las siguientes propiedades <strong><code>android:clickable=&quot;false&quot;</code></strong> y <strong><code>android:focusable=&quot;false&quot;</code></strong> que evitan que nuestro campo de edici&#xF3;n se pueda seleccionar o pulsar, evitando de esta manera que aparezca el teclado, solamente se mostrar&#xE1; el <strong><code>dataPicker</code></strong>.<br>
-Veamos el c&#xF3;digo:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">lateinit</span> <span class="token keyword">var</span> binding<span class="token operator">:</span> ActivityMainBinding
-    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+<p>Es importante que nuestro <strong><code>TextInputEditText</code></strong> tenga las siguientes propiedades <strong><code>android:clickable=&quot;false&quot;</code></strong> y <strong><code>android:focusable=&quot;false&quot;</code></strong> que evitan que nuestro campo de edici&#xF3;n se pueda seleccionar o pulsar, evitando de esta manera que aparezca el teclado, solamente se mostrar&#xE1; el <strong><code>dataPicker</code></strong>.</p>
+<p>Veamos el c&#xF3;digo:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> binding<span class="token operator">:</span> ActivityMainBinding
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         binding <span class="token operator">=</span> ActivityMainBinding<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">)</span>
-        <span class="token keyword">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
+        <span class="token keyword keyword-val">val</span> view <span class="token operator">=</span> binding<span class="token punctuation">.</span>root
         <span class="token function">setContentView</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span>
 
         binding<span class="token punctuation">.</span>dateText<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
-            <span class="token keyword">val</span> datePicker <span class="token operator">=</span> MaterialDatePicker<span class="token punctuation">.</span>Builder<span class="token punctuation">.</span><span class="token function">datePicker</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-val">val</span> datePicker <span class="token operator">=</span> MaterialDatePicker<span class="token punctuation">.</span>Builder<span class="token punctuation">.</span><span class="token function">datePicker</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">setTitleText</span><span class="token punctuation">(</span><span class="token string">&quot;Fecha de nacimiento&quot;</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">setSelection</span><span class="token punctuation">(</span>MaterialDatePicker<span class="token punctuation">.</span><span class="token function">todayInUtcMilliseconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
                 <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -810,9 +817,8 @@ Veamos el c&#xF3;digo:</p>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x270B; EjercicioPropuesto:</p>
+<p>&#x270B; Practica modificando el ejercicio anterior de forma que si el campo de edici&#xF3;n tiene una fecha, la muestra al abrir el <strong><code>dataPicker</code></strong>.</p>
 <ul>
-<li>Modificar el ejercicio anterior de forma que si el campo de edici&#xF3;n tiene una fecha, la muestra al abrir el <strong><code>dataPicker</code></strong>.</li>
 <li>A&#xF1;adir dos campos de fecha m&#xE1;s al dise&#xF1;o con esquema <strong>Fecha de Entrada</strong> y <strong>Fecha de salida</strong> similar a los utilizados en una reserva de hotel, usando un <strong><code>MaterialDatePicker.Builder.dateRangePicker</code></strong> para su implementaci&#xF3;n</li>
 </ul>
 </blockquote>
@@ -832,7 +838,7 @@ Veamos el c&#xF3;digo:</p>
     <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 </pre><p>A cualquiera de los dos tipos se le puede decir que es indeterminado con la propiedad <strong><code>android:indeterminate=&quot;true&quot;</code></strong>, por defecto es determinado.</p>
 <blockquote>
-<p>&#x270B; <a href="./ejercicio/2_Progress_Indicators/../../ejercicios/2_Progress_Indicators/progres_Indicators.pdf">EjercicioResueltoProgress: tareas as&#xED;ncronas</a></p>
+<p>&#x26A0;&#xFE0F; Por ahora utilizaremos Progress Indicator Indeterminado hasta que aprendamos a crear corrutinas m&#xE1;s adelante.</p>
 </blockquote>
 
       </div>
