@@ -819,6 +819,33 @@ chip<span class="token punctuation">.</span><span class="token function">setOnCh
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
+<p>&#x1F4A1; De vegades ser&#xE0; necessari que el DatePicker inicie amb una data establida per l&apos;aplicaci&#xF3;, l&apos;usario, etc. per a aix&#xF2; es necessitar&#xE0; usar el seg&#xFC;ent codi que ens permet inicialitzar amb un string una inst&#xE0;ncia de tipus Date a un format especificat, per a posteriorment assignar-la a la propietat <strong><code>setSelection</code></strong> de DatePicker en milisegons:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> format <span class="token operator">=</span> <span class="token function">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">&quot;dd/MM/yyyy&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> fecha <span class="token operator">=</span> format<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;14/03/2020&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> fechaInicio<span class="token operator">=</span> Calendar<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+fechaInicio<span class="token punctuation">.</span>time<span class="token operator">=</span>fecha
+<span class="token keyword keyword-val">val</span> datePicker <span class="token operator">=</span> MaterialDatePicker<span class="token punctuation">.</span>Builder<span class="token punctuation">.</span><span class="token function">datePicker</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token function">setTitleText</span><span class="token punctuation">(</span><span class="token string">&quot;Fecha de nacimiento&quot;</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token function">setSelection</span><span class="token punctuation">(</span>fechaInicio<span class="token punctuation">.</span>timeInMillis<span class="token punctuation">)</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+</pre></blockquote>
+<blockquote>
+<p>&#x1F4A1; Tamb&#xE9; podem necessitar realitzar l&apos;operaci&#xF3; contr&#xE0;ria, &#xE9;s a dir extraure la data seleccionada per l&apos;usuari en el DatePicker per&#xF2; traent-la amb format de data, per a aix&#xF2; podr&#xED;em fer el codic seguent, en este cas hem compost una cadena amb les dades per a mostrar el Toast com el que es veu baix.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">datePicker<span class="token punctuation">.</span><span class="token function">addOnPositiveButtonClickListener</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-val">val</span> date <span class="token operator">=</span> <span class="token function">Date</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> calendar<span class="token operator">=</span>Calendar<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+calendar<span class="token punctuation">.</span>time<span class="token operator">=</span>date
+<span class="token keyword keyword-var">var</span> dia <span class="token operator">=</span> calendar<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Calendar<span class="token punctuation">.</span>DAY_OF_MONTH<span class="token punctuation">)</span>
+<span class="token keyword keyword-var">var</span> mes <span class="token operator">=</span> calendar<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Calendar<span class="token punctuation">.</span>MONTH<span class="token punctuation">)</span>
+<span class="token keyword keyword-var">var</span> anyo <span class="token operator">=</span> calendar<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Calendar<span class="token punctuation">.</span>YEAR<span class="token punctuation">)</span>
+<span class="token keyword keyword-var">var</span> fechaSeleccionada<span class="token operator">=</span><span class="token string">&quot;<span class="token interpolation variable">$dia</span> / <span class="token interpolation variable">$mes</span> / <span class="token interpolation variable">$anyo</span>&quot;</span> 
+Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>fechaSeleccionada<span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+</pre></blockquote>
+<div align="center">
+    <img height src="./imagenes/toast.png">
+</div>
+<blockquote>
 <p>&#x270B; Practica modificant l&apos;exercici anterior de manera que si el camp d&apos;edici&#xF3; t&#xE9; una data, la mostra en obrir el <strong><code>dataPicker</code></strong>.</p>
 <ul>
 <li>Afegir dos camps de data m&#xE9;s al disseny amb esquema <strong>Data d&apos;Entrada</strong> i <strong>Data d&apos;eixida</strong> similar als utilitzats en una reserva d&apos;hotel, usant un <strong><code>MaterialDatePicker.Builder.dateRangePicker</code></strong> per a la seua implementaci&#xF3;.</li>
