@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
       
       
       
@@ -277,7 +277,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -351,9 +351,7 @@ justo después del front matter
 <li><a href="#agregar-un-fragment-a-una-activity">Agregar un Fragment a una Activity</a>
 <ol>
 <li><a href="#agregar-fragments-est%C3%A0tics">Agregar Fragments Est&#xE0;tics</a></li>
-<li><a href="#agregar-fragment-din%C3%A0mic-amb-jetpack-navigation">Agregar Fragment Din&#xE0;mic amb Jetpack Navigation</a></li>
-<li><a href="#gestionar-fragments-amb-jetpack-navigation">Gestionar Fragments amb Jetpack Navigation</a></li>
-<li><a href="#exemple-de-navegaci%C3%B3-entre-tres-fragments-amb-jetpack-navigation">Exemple de navegaci&#xF3; entre tres fragments amb JetPack Navigation</a></li>
+<li><a href="#agregar-fragment-din%C3%A0mic">Agregar Fragment Din&#xE0;mic</a></li>
 <li><a href="#gestionar-fragments">Gestionar Fragments.</a></li>
 </ol>
 </li>
@@ -367,7 +365,7 @@ justo después del front matter
 <ol>
 <li><a href="#tasks-i-backstacks">Tasks i BackStacks</a></li>
 <li><a href="#fragmentmanager">FragmentManager</a></li>
-<li><a href="#jetpack-navigation-1">Jetpack Navigation</a></li>
+<li><a href="#jetpack-navigation">Jetpack Navigation</a></li>
 </ol>
 </li>
 <li><a href="#permisos-amb-fragments">Permisos amb Fragments</a></li>
@@ -441,13 +439,6 @@ Un altre avantatge d&apos;usar-los &#xE9;s que permeten crear dissenys d&apos;in
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x1F4CC; En sobreescriure el m&#xE8;tode <strong><code>onCreateView()</code></strong> podem observar que de s&#xE8;rie ens dona la possibilitat d&apos;utilitzar un LayoutInflater, un ViewGroup i un Bundle. El LayoutInflater normalment ho utilitzarem per a unflar el layout del nostre fragment. El ViewGroup ser&#xE0; la vista pare on s&apos;inserira el layout del nostre fragment. I finalment el Bundle podrem utilitzar-ho per a recuperar dades d&apos;una inst&#xE0;ncia anterior del nostre fragment.<br>
-D&apos;aquesta manera ja tindrem creat un fragment que ens retornar&#xE0; una vista i que podrem inserir en qualsevol activity del nostre projecte.</p>
-</blockquote>
-<blockquote>
-<p>&#x270B; Si es vol usar Binding amb Fragments, informate del seu &#xFA;s en el seg&#xFC;ent enlla&#xE7;, <a href="https://developer.android.com/topic/libraries/view-binding?hl=es-419#fragments">vincular vistes</a></p>
-</blockquote>
-<blockquote>
 <p>&#x270B; Comentar que pr&#xE8;viament s&apos;ha creat el layout per a aquest fragment i es correspon amb <strong><code>fragment_un.xml</code></strong>.</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
@@ -460,6 +451,10 @@ D&apos;aquesta manera ja tindrem creat un fragment que ens retornar&#xE0; una vi
       <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Informaci&#xF3;n fragment1<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
 </pre></blockquote>
+<blockquote>
+<p>&#x1F4CC; En sobreescriure el m&#xE8;tode <strong><code>onCreateView()</code></strong> podem observar que de s&#xE8;rie ens dona la possibilitat d&apos;utilitzar un LayoutInflater, un ViewGroup i un Bundle. El LayoutInflater normalment ho utilitzarem per a unflar el layout del nostre fragment. El ViewGroup ser&#xE0; la vista pare on s&apos;inserira el layout del nostre fragment. I finalment el Bundle podrem utilitzar-ho per a recuperar dades d&apos;una inst&#xE0;ncia anterior del nostre fragment.<br>
+D&apos;aquesta manera ja tindrem creat un fragment que ens retornar&#xE0; una vista i que podrem inserir en qualsevol activity del nostre projecte.</p>
+</blockquote>
 <h3 class="mume-header" id="agregar-un-fragment-a-una-activity">Agregar un Fragment a una Activity</h3>
 
 <p>A l&apos;hora d&apos;agregar un fragment a una activitat el podrem realitzar de dues maneres:</p>
@@ -498,386 +493,8 @@ Una vegada creat el layout de la activity simplement creem una activitat i li ap
     <img height="200" src="./imagenes/fragments4.png">
 </div>
 <p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea una App FragmentEstatico, per a provar els fragments est&#xE0;tics de l&apos;exemple anterior</span></p>
-<h4 class="mume-header" id="agregar-fragment-din%C3%A0mic-amb-jetpack-navigation">Agregar Fragment Din&#xE0;mic amb Jetpack Navigation</h4>
+<h4 class="mume-header" id="agregar-fragment-din%C3%A0mic">Agregar Fragment Din&#xE0;mic</h4>
 
-<p>Els fragments din&#xE0;mics, &#xE9;s a dir els fragments que es poden afegir a l&apos;activitat en qualsevol moment, es poden gestionar de dos maneres:</p>
-<ol>
-<li>Usant <strong>JetPack Navigation</strong>, que aporta senzillesa a esta tasca.</li>
-<li>Usant <strong>FragmentManager</strong> i la pila d&apos;activitats. Afegit posteriorment en el tema com a concepte d&apos;ampliaci&#xF3;.</li>
-</ol>
-<p>Majorit&#xE0;riament usarem Jetpack Navigation, per la qual cosa necessitarem saber com es realitzen estos passos</p>
-<h5 class="mume-header" id="jetpack-navigation">Jetpack Navigation</h5>
-
-<p>El component <a href="https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost">Navigation</a> d&apos;Android Jetpack, permet implementar la navegaci&#xF3; dels elements de l&apos;aplicaci&#xF3; de forma m&#xE9;s coherent i senzilla, des de simples clics de botons fins a patrons m&#xE9;s complexos, com les barres d&apos;apps i els panells laterals de navegaci&#xF3;. &#xC9;s important seguir el sistema establit de <a href="https://developer.android.com/guide/navigation/navigation-principles">principis</a>, perqu&#xE8; l&apos;usuari puga entendre correctament el funcionament de l&apos;app. Podem trobar tres elements fonamentals:</p>
-<ul>
-<li><strong>Gr&#xE1;fico de navegaci&#xF3;n</strong>: &#xC9;s un recurs XML que cont&#xE9; tota la informaci&#xF3; relacionada amb la navegaci&#xF3;.</li>
-<li><strong>NavHost</strong>: &#xC9;s un contenidor buit que mostra els destins del teu gr&#xE0;fic de navegaci&#xF3;. Per defecte est&#xE0; implementat el <strong><code>NavHostFragment</code></strong> per a fragments i que ser&#xE0; el que usem.</li>
-<li><strong>NavController</strong>: &#xC9;s l&apos;objecte que administra la navegaci&#xF3; de l&apos;app dins d&apos;un NavHost</li>
-</ul>
-<blockquote>
-<p>&#x270B;Ser&#xE1; important decidir com volem passar d&apos;uns fragments a altres, <strong>porque el que no s&apos;ha de fer &#xE9;s mesclar el sistema de Navigation amb el que usem amb FragmentManager</strong>.</p>
-</blockquote>
-<h5 class="mume-header" id="navhost">NavHost</h5>
-
-<p>En l&apos;exemple ampliarem la versi&#xF3; anterior agregant un fragment din&#xE0;mic junt amb a l&apos;est&#xE0;tic. Ens crearem una classe per al fragment2, semblant a l&apos;anterior i un layout per a gestionar l&apos;aspecte. Despr&#xE9;s definirem en el layout un espai on poder afegir el fragment din&#xE0;mic, i que es correspondr&#xE0; amb el <strong><code>NavHost</code></strong>, per a aix&#xF2; usarem el contenidor <strong><code>FragmentContainerView</code></strong> amb id <em>fragment_container</em> i caldr&#xE0; afegir els atributs seg&#xFC;ents:&quot;</p>
-<pre data-role="codeBlock" data-info="xml{highlight=[15-24,17,18,19]}" class="language-xml" data-line="15-24,17,18,19"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>horizontal<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.fragment.app.FragmentContainerView</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.ejemplo.b7.myapplication.FragmentUno<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragment_uno<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.5<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">tools:</span>layout</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@layout/fragment_uno<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.fragment.app.FragmentContainerView</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragment_container<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>androidx.navigation.fragment.NavHostFragment<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>defaultNavHost</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>navGraph</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@navigation/nav_graf<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.5<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>#3355CC00<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.fragment.app.FragmentContainerView</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
-<div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15-24" data-start="15" data-end="24">
-
-
-
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="18" data-start="18">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="19" data-start="19">
-</div></div></pre><blockquote>
-<p>&#x1F4CC; el espacio para insertar los fragmentes esta definido entre las <strong>L&#xEC;neas 15 a 24</strong>, los atributos nuevos que se tienen que poner para el funcionamiento correcto son: el nombre asignado a la clase <strong>L&#xED;nea 17</strong>, se usa el <strong><code>NavHostFragment</code></strong> que ya est&#xE1; implementado; <strong>L&#xED;nea 18</strong>, el atributo <strong><code>defaultNavHost</code></strong> garantiza que tu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3;n Atr&#xE1;s del sistema; En el <strong>navGraph</strong> se indica el nombre del gr&#xE1;fico de navegaci&#xF3;n. Elemento que vamos a explicar ahora <strong>L&#xED;nea 19</strong>.</p>
-</blockquote>
-<p>&#x1F4CC; l&apos;espai per a insertar els fragmentes esta definit entre les <strong>L&#xEC;neas 15 a 24</strong>, els atributs nous que s&apos;han de posar per al funcionament correcte s&#xF3;n: el nom assignat a la classe <strong>L&#xED;nea 17</strong>, s&apos;usa el <strong><code>NavHostFragment</code></strong> que ja est&#xE0; implementat; <strong>L&#xED;nea 18</strong>, l&apos;atribut <strong><code>defaultNavHost</code></strong> garantix que el teu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3; Arrere del sistema; En el <strong>navGraph</strong> s&apos;indica el nom del gr&#xE0;fic de navegaci&#xF3;. Element que explicarem ara <strong>L&#xED;nea 19</strong>.</p>
-<h5 class="mume-header" id="navgraph">NavGraph</h5>
-
-<p>Per a crear el <strong><code>NavGraph</code></strong> hem de crear un nou recurs de tipus navigation <em><strong>res-&gt;new-&gt;android resource file</strong></em>.</p>
-<div align="center">
-    <img height="200" src="./imagenes/navigation1.png">
-</div>
-<p>Al fer a&#xE7;&#xF2; es crear&#xE0; una nova carpeta navigation amb el recurs dins d&apos;ella. L&apos;arxiu <em>.xml</em> es podr&#xE0; treballar de forma gr&#xE0;fica o per mitj&#xE0; de codi, encara que en este cas &#xE9;s m&#xE9;s senzill utilitzar la part visual. Podrem afegir els elements pels quals volem que navegue l&apos;app i crear les accions entre ells, tot &#xE9;s molt visual i senzill.</p>
-<div align="center">
-    <img height="150
-    " src="./imagenes/navigation3.png">
-</div>
-<p>Podem veure que en la part del Host s&apos;ha afegit l&apos;element <strong>NavHost</strong> al crear el contenidor de fragments com hem explicat anteriorment (enlla&#xE7;ant, <em>per nombre</em>, amb el recurs en la l&#xED;nia <strong><code>app:navGraph=&amp;#34;\@navigation/navegacion_fragments&amp;#34;</code></strong>) . Si no es crea correctament el Host no funcionaran les accions. Per a afegir <strong>elements</strong> polsarem el s&#xED;mbol de <strong><code>+</code></strong> i seleccionarem de la llista d&apos;elements navegables que tinguem en l&apos;app.</p>
-<div align="center">
-    <img height="200
-    " src="./imagenes/navigation4.png">
-</div>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Crea una App fragmentV1, per a provar l&apos;exemple anterior, el fragment1 ser&#xE0; est&#xE0;tic mentres que el fragment2 ser&#xE0; afegit de forma din&#xE0;mica des del codi</span></p>
-<h4 class="mume-header" id="gestionar-fragments-amb-jetpack-navigation">Gestionar Fragments amb Jetpack Navigation</h4>
-
-<p>Una vegada agregats els elements, podem afegir les <strong>accions</strong> entre ells, que ens permetran gestionar la c&#xE0;rrega dels distints fragments en els contenidors. Per a aix&#xF2; crearem un altre exemple que tindr&#xE0; un contenidor per als fragments (usarem els dos fragments de l&apos;exemple anterior), i un bot&#xF3; que ens permetr&#xE0; l&apos;acci&#xF3; de canvi entre ells</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>FrameLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.fragment.app.FragmentContainerView</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>androidx.navigation.fragment.NavHostFragment<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>defaultNavHost</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">app:</span>navGraph</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@navigation/nav_graf<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragment_container<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.fragment.app.FragmentContainerView</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>20dp<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/boton<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>CAMBIAR<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center|bottom<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>FrameLayout</span><span class="token punctuation">&gt;</span></span>
-</pre><p>Despr&#xE9;s de crear el xml, haurem d&apos;afegir els dos fragments al gr&#xE0;fic de navegaci&#xF3;, quedant de la manera seg&#xFC;ent:</p>
-<div align="center">
-    <img height="200" src="./imagenes/navigation8.png">
-</div>
-<p>El pas seg&#xFC;ent ser&#xE0; el d&apos;afegir l&apos;acci&#xF3;, per a afegir les accions haurem de seleccionar un element i arrossegar l&apos;acci&#xF3; al seg&#xFC;ent. Una altra manera seria indicant, d&apos;entre els elements afegits en el gr&#xE0;fic, el dest&#xED; on ens portar&#xE0; eixa acci&#xF3;, l&apos;aneu de l&apos;acci&#xF3; es crega autom&#xE0;ticament i s&apos;usar&#xE0; posteriorment en el codi.</p>
-<div align="center">
-    <img height="100
-    " src="./imagenes/navigation5.png">
-</div>
-<div style="page-break-after:always;"></div>
-<p>Hi ha un tipus de <strong>acciones globales</strong> que permeten arribar a un dest&#xED; des de qualsevol lloc. Es mostren com una <strong><code>-&gt;</code></strong> curta enlla&#xE7;ada nom&#xE9;s pel dest&#xED;, i que es creen per mitj&#xE0; del men&#xFA; contextual del dest&#xED; seleccionat.</p>
-<div align="center">
-    <img height="200
-    " src="./imagenes/navigation6.png">
-</div>
-<p>En el nostre exemple haurem de crear dos accions que ens porten d&apos;un fragment a l&apos;altre, com en la imatge seg&#xFC;ent:</p>
-<div align="center">
-    <img height="200
-    " src="./imagenes/navigation9.png">
-</div>
-<p>Si polsem diverses vegades el bot&#xF3; s&apos;anir&#xE0; canviant entre fragments, el problema que ens trobarem al polsar l&apos;obci&#xF3;n <strong><code>Back</code></strong> del dispositiu &#xE9;s que deurem de passar per totes les transaccions realitzades fins a arribar al final d&apos;estes. Per a aix&#xF2; haurem de fer el seg&#xFC;ent:</p>
-<blockquote>
-<p>&#x270B; Quan estem creant el gr&#xE0;fic de navegaci&#xF3; podem optar per perfeccionar les accions perqu&#xE8; a l&apos;oc&#xF3;rrer estes i botar a un lloc concret, es desapilen els elements intermedis innecessaris. A&#xE7;&#xF2; evitar&#xE0; que al polsar el <strong><code>backPressed</code></strong>, es passe per cada un dels fragments apilats en les distintes accions. Per a aix&#xF2; nom&#xE9;s hem d&apos;anar a la propietat <strong>Pop Behavior</strong> de l&apos;acci&#xF3; desitjada, i indicar en <strong>popUpTo</strong> fins que element es vol desapilar, amb <strong>popUpToInclusive</strong> a true, indiquem que tamb&#xE9; es desapile eixe element.</p>
-</blockquote>
-<div align="center">
-    <img height="80
-    " src="./imagenes/navigation7.png">
-</div>
-<p>Encara que podem realitzar tota l&apos;operaci&#xF3; usant el dissenyador de Navigation este t&#xE9; el codi xml associat, en el cas del nostre exemple el codi associat al <strong><code>nav_graf.xml</code></strong> seria el seg&#xFC;ent:</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>navigation</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>app</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/nav_graf<span class="token punctuation">&quot;</span></span>
-    <span class="token attr-name"><span class="token namespace">app:</span>startDestination</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/fragmentUno<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fragment</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragmentUno<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.ejemplo.b7.ejemplofragmentv2.FragmentUno<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>FragmentUno<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/action_fragmentUno_to_fragmentDos2<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">app:</span>destination</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/fragmentDos<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">app:</span>popUpToInclusive</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fragment</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fragment</span>
-        <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/fragmentDos<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>com.ejemplo.b7.ejemplofragmentv2.FragmentDos<span class="token punctuation">&quot;</span></span>
-        <span class="token attr-name"><span class="token namespace">android:</span>label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>FragmentDos<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span>
-            <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/action_fragmentDos_to_fragmentUno<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">app:</span>destination</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/fragmentUno<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">app:</span>popUpTo</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@id/fragmentUno<span class="token punctuation">&quot;</span></span>
-            <span class="token attr-name"><span class="token namespace">app:</span>popUpToInclusive</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fragment</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>navigation</span><span class="token punctuation">&gt;</span></span>
-</pre><h5 class="mume-header" id="navcontroller">NavController</h5>
-
-<p>Este element ja el usarem de forma program&#xE0;tica i &#xE9;s el que ens permet executar les accions que hem creat amb el <strong><code>NavGraph</code></strong>. Cada <strong><code>NavHost</code></strong> t&#xE9; el seu propi <a href="https://developer.android.com/guide/navigation/navigation-navigate">NavController</a> corresponent. Com s&apos;explica en la documentaci&#xF3; oficial, hi ha diverses formes de fer-ho. Per exemple <strong>desde una activity</strong> i resolent el codi del nostre exemple ho podr&#xED;em fer de la manera seg&#xFC;ent:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-      <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
-      findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>boton<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>
-            <span class="token keyword keyword-val">val</span> navHostFragment<span class="token operator">=</span> supportFragmentManager<span class="token punctuation">.</span>
-                            <span class="token function">findFragmentById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragment_container<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> NavHostFragment
-            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>navHostFragment<span class="token punctuation">.</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragmentUno<span class="token punctuation">)</span>
-                  navHostFragment<span class="token punctuation">.</span>navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragmentUno_to_fragmentDos2<span class="token punctuation">)</span>
-              <span class="token keyword keyword-else">else</span> navHostFragment<span class="token punctuation">.</span>navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragmentDos_to_fragmentUno<span class="token punctuation">)</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-</pre><blockquote>
-<p>&#x1F4CC; Primer usem una de les maneres existents per a referenciar al <strong><code>NavController</code></strong> per a aix&#xF2; creem un objecte <strong><code>NavHostFragment</code></strong> identificant-ho amb l&apos;id del contenidor dels fragments. Abans de navegar a una acci&#xF3;, &#xE9;s interessant comprovar si estem en el fragment que t&#xE9; creada eixa acci&#xF3;, d&apos;esta manera evitarem excepcions. Finalment, navegarem al fragment desitjat usant el <strong><code>id</code></strong> de l&apos;acci&#xF3; registrada amb anterioritat. <em>L&#xF3;gicamente, este codi ho tindrem d&apos;afegir al bot&#xF3; o un altre element que vullguem que execute la navegaci&#xF3;</em>.</p>
-</blockquote>
-<p>Si la navegaci&#xF3; la fem <strong>de un fragment a altre</strong>, el codi &#xE9;s molt paregut, encara que en este cas l&apos;objecte creat &#xE9;s el NavController a partir de referenciar-ho amb el NavHostFragment per defecte, que c&#xE0;rrega el fragment.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> navController<span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span><span class="token function">findNavController</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
-<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragment1<span class="token punctuation">)</span>
-            navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragment1_to_fragment2<span class="token punctuation">)</span>
-</pre><blockquote>
-<p>&#x270B; NavController tamb&#xE9; permet <a href="https://developer.android.com/guide/navigation/navigation-pass-data#bundle">pasar dades entre fragment per mitj&#xE0; de bundle</a>, el proc&#xE9;s &#xE9;s semblant a l&apos;usat en altres explicacions.</p>
-</blockquote>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Prueba l&apos;anterior exemple FragmentV2: bot&#xF3; que et vaja carregant l&apos;un o l&apos;altre fragment i alhora que s&apos;acumulen en la pila. Provar que al polsar el bot&#xF3; de retroc&#xE9;s, es passa per cada un dels fragments que s&apos;han carregat anteriorment. I realitza el que &#xE9;s necessari perqu&#xE8; no haja de passar per tots els fragments al polsar Back</span></p>
-<h4 class="mume-header" id="exemple-de-navegaci%C3%B3-entre-tres-fragments-amb-jetpack-navigation">Exemple de navegaci&#xF3; entre tres fragments amb JetPack Navigation</h4>
-
-<blockquote>
-<p>&#x1F393; Mostrarem el codi d&apos;una activitat amb tres fragments de manera que: del primer es puga navegar al segon, del segon al tercer i del tercer al primer sempre que es polse el <strong>bot&#xF3;n aceptar</strong>, mentres que si es polsa el <strong>bot&#xF3;n cancelar</strong> es navegar&#xE0; sempre al primer (la navegaci&#xF3; al primer es realitzar&#xE0; amb una acci&#xF3; global) . Per a aix&#xF2; s&apos;hauran de construir els <em>.xml</em> dels Fragments, tots seran iguals, canviant el color i el text. Codi <strong>fragment1.xml</strong> amb dos botons <em>cancelar i aceptar</em>:</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/&gt;res/android<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>#2196F3<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>center<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span>
-       <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-       <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-       <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>20dp<span class="token punctuation">&quot;</span></span>
-       <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Fragment1<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span>
-       <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-       <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-       <span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>horizontal<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.button.MaterialButton</span>
-           <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/aceptar<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.5<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>backgroundTint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>#2196F3<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Aceptar<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
-       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.button.MaterialButton</span>
-           <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wrap_content<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0.5<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>backgroundTint</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>#2196F3<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Cancelar<span class="token punctuation">&quot;</span></span>
-           <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/cancelar<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
-   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
-</pre></blockquote>
-<blockquote>
-<p>El <em>.xml</em> de l&apos;activitat principal ser&#xE0; com el que hem posat al principi de l&apos;explicaci&#xF3; de <strong><code>Navigation</code></strong>. Mentres que <strong>MainActivity.kt</strong> tendr&#xE1; el seguent c&#xF3;dig:</p>
-</blockquote>
-<blockquote>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[6,11,12]}" class="language-kotlin" data-line="6,11,12"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> navHostFragment<span class="token operator">:</span>NavHostFragment
-   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-       <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-       <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
-       navHostFragment <span class="token operator">=</span> supportFragmentManager<span class="token punctuation">.</span>
-          <span class="token function">findFragmentById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>contenedor<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> NavHostFragment
-   <span class="token punctuation">}</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">cancelar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword keyword-val">val</span> navController <span class="token operator">=</span> navHostFragment<span class="token punctuation">.</span>navController
-        navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_global_fragment1<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
-</div></div></pre><p>//////////////////////////<br>
-&#x1F4CC; Se ha creado un m&#xE9;todo <strong>cancelar</strong> que permite ejecutar la acci&#xF3;n global, se ha hecho de esta forma para no repetir c&#xF3;digo en los fragments y de paso conocer como se ejecuta una acci&#xF3;n desde la main. <strong>L&#xED;nea 6</strong>, creamos la instancia del <strong><code>NavHostFragment</code></strong>. <strong>L&#xED;nea 11 y 12</strong> instanciamos el <strong><code>NavController</code></strong> y ejecutamos la acci&#xF3;n global de navegaci&#xF3;n al Fragment1.</p>
-<p>El <strong>Fragment1.kt</strong> y por ende, el resto de Fragments. Con el bot&#xF3;n <strong>aceptar</strong> que realizar&#xE1; la acci&#xF3;n de moverse al siguiente fragment (en Fragment3 ser&#xE1; la global de moverse al fragment1) y el bot&#xF3;n <strong>cancelar</strong> que lanzar&#xE1; la acci&#xF3;n global.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[8,10]}" class="language-kotlin" data-line="8,10"><span class="token keyword keyword-class">class</span> Fragment1<span class="token operator">:</span> <span class="token function">Fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreateView</span><span class="token punctuation">(</span>
-       inflater<span class="token operator">:</span> LayoutInflater<span class="token punctuation">,</span>
-       container<span class="token operator">:</span> ViewGroup<span class="token operator">?</span><span class="token punctuation">,</span>
-       savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span>
-   <span class="token punctuation">)</span><span class="token operator">:</span> View<span class="token operator">?</span> <span class="token punctuation">{</span>
-       <span class="token keyword keyword-val">val</span> view<span class="token operator">=</span>inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>fragment1<span class="token punctuation">,</span>container<span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span>
-       view<span class="token punctuation">.</span><span class="token function">findViewByIdMaterialButton</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>aceptar<span class="token punctuation">)</span><span class="token punctuation">.</span>
-                setOnClickListener <span class="token punctuation">{</span> <span class="token function">aceptar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
-       view<span class="token punctuation">.</span><span class="token function">findViewByIdMaterialButton</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>cancelar<span class="token punctuation">)</span><span class="token punctuation">.</span>
-                setOnClickListener<span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> MainActivity<span class="token punctuation">)</span>
-                                    <span class="token punctuation">.</span><span class="token function">cancelar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
-       <span class="token keyword keyword-return">return</span> view
-<span class="token punctuation">}</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">aceptar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword keyword-val">val</span> navController<span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span><span class="token function">findNavController</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>navController<span class="token punctuation">.</span>currentDestination<span class="token operator">?</span><span class="token punctuation">.</span>id <span class="token operator">==</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fragment1<span class="token punctuation">)</span>
-         navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>action_fragment1_to_fragment2<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
-</div></div></pre><p>&#x1F4CC; <strong>L&#xED;nea 9</strong> acci&#xF3;n del bot&#xF3;n aceptar que llama al m&#xE9;todo aceptar que ejecuta la acci&#xF3;n de navegaci&#xF3;n. <strong>L&#xED;nea 10</strong> acci&#xF3;n del bot&#xF3;n cancelar que llamar&#xE1; al m&#xE9;todo cancelar de MainActivity, realizando un casteo del contexto.</p>
-</blockquote>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; A partir del  c&#xF3;digo expuesto en el ejemplo anterior, crea el ejercicio completo. Recuerda que debes crear las acciones de navegaci&#xF3;n creando un  recurso de tipo navigation.</span></p>
-<div style="page-break-after:always;"></div>
-<p>///////////////////////////////////////////////////////////////</p>
 <p>D&apos;aquesta manera podem agregar un fragment a una activity en qualsevol moment. Simplement indicarem el id d&apos;una vista pare (ViewGroup, recomanat usar <strong><code>FragmentContainerView</code></strong>) on haur&#xE0; de col&#xB7;locar-se el fragment.<br>
 En l&apos;exemple agregarem  un fragment din&#xE0;mic al costat d&apos;un est&#xE0;tic. El primer &#xE9;s definir en el layout de la activity un espai on poder afegir el fragment, per a aix&#xF2; usarem el segon FragmentContainerView amb el id <em>fragment_contenidor</em>.</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
@@ -952,6 +569,9 @@ En l&apos;exemple agregarem  un fragment din&#xE0;mic al costat d&apos;un est&#x
 
 <div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
 </div></div></pre><blockquote>
+<p>&#x270B; Si es vol usar Binding amb Fragments, informate del seu &#xFA;s en el seg&#xFC;ent enlla&#xE7;, <a href="https://developer.android.com/topic/libraries/view-binding?hl=es-419#fragments">vincular vistes</a></p>
+</blockquote>
+<blockquote>
 <p>&#x1F4CC;En aquest cas nostra activity c&#xE0;rrega un layout amb un View <strong><code>fragment</code></strong> per al fragment est&#xE0;tic i un <strong><code>FragmeLayout</code></strong> que no mostra res per&#xF2; ens servir&#xE0; com a contenidor per a agregar el fragment din&#xE0;mic program&#xE0;ticament.</p>
 </blockquote>
 <p>El primer que fem &#xE9;s crear una inst&#xE0;ncia de <strong><code>FragmentManager</code></strong> a trav&#xE9;s del seu m&#xE8;tode <strong><code>getSupportFragmentManaget()</code></strong>, <strong>L&#xED;nia 7</strong>. D&apos;aquesta manera estem creant un objecte que ens servir&#xE0; per a manejar els fragments.<br>
@@ -1598,7 +1218,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 </pre></li>
 </ul>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="jetpack-navigation-1">Jetpack Navigation</h4>
+<h4 class="mume-header" id="jetpack-navigation">Jetpack Navigation</h4>
 
 <p>El component <a href="https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost">Navigation</a> d&apos;Android Jetpack, permet implementar la navegaci&#xF3; dels elements de l&apos;aplicaci&#xF3; de forma m&#xE9;s coherent i senzilla, des de simples clics de botons fins a patrons m&#xE9;s complexos, com les barres d&apos;apps i els panells laterals de navegaci&#xF3;. &#xC9;s important seguir el sistema establit de <a href="https://developer.android.com/guide/navigation/navigation-principles">principis</a>, perqu&#xE8; l&apos;usuari puga entendre correctament el funcionament de l&apos;app. Podem trobar tres elements fonamentals:</p>
 <ul>
@@ -1612,7 +1232,7 @@ Per a obtindre una inst&#xE0;ncia de FragmentTransaction utilitzem <strong><code
 <p>Per a usar aquestes caracter&#xED;stiques inclourem la depend&#xE8;ncia:</p>
 <pre data-role="codeBlock" data-info="json" class="language-json">implementation &apos;androidx.navigation<span class="token operator">:</span>navigation-ui-ktx<span class="token operator">:</span><span class="token number">2.3</span>.<span class="token number">5</span>&apos;
 implementation &apos;androidx.navigation<span class="token operator">:</span>navigation-fragment-ktx<span class="token operator">:</span><span class="token number">2.3</span>.<span class="token number">5</span>&apos;
-</pre><h5 class="mume-header" id="navhost-1">NavHost</h5>
+</pre><h5 class="mume-header" id="navhost">NavHost</h5>
 
 <p>Per a comen&#xE7;ar el primer que hem de fer &#xE9;s crear el <strong><code>NavHost</code></strong>, per a aix&#xF2; usarem el contenidor on inserirem els fragments. Aquest element ha de ser de tipus <strong><code>FragmentContainerView</code></strong> i caldr&#xE0; afegir els seg&#xFC;ents atributs:</p>
 <pre data-role="codeBlock" data-info="xml{highlight=[9-15,10,13,14]}" class="language-xml" data-line="9-15,10,13,14"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -1686,7 +1306,7 @@ implementation &apos;androidx.navigation<span class="token operator">:</span>nav
 </div></div></pre><blockquote>
 <p>&#x1F4CC; En l&apos;activitat principal, per exemple, podem crear l&apos;espai per a inserir els fragmentes, en aquest cas des de <strong>L&#xED;nia 9 a 15</strong>. Els atributs nous i que s&apos;han de posar per al funcionament correcte s&#xF3;n: el nom assignat a la classe <strong>L&#xED;nia 10</strong>, s&apos;usa el <strong><code>NavHostFragment</code></strong> que ja est&#xE0; implementat; <strong>L&#xED;nia 13</strong>, l&apos;atribut <strong><code>defaultNavHost</code></strong> garanteix que el teu <strong><code>NavHostFragment</code></strong> intercepte el bot&#xF3; Arrere del sistema; En el <strong>navGraph</strong> s&apos;indica el nom del gr&#xE0;fic de navegaci&#xF3;. Element que explicarem ara <strong>L&#xED;nia 14</strong>.</p>
 </blockquote>
-<h5 class="mume-header" id="navgraph-1">NavGraph</h5>
+<h5 class="mume-header" id="navgraph">NavGraph</h5>
 
 <p>Per a crear el <strong><code>NavGraph</code></strong> hem de crear un nou recurs de tipus navigation <em><strong>res-&gt;new-&gt;android resource file</strong></em>.</p>
 <div align="center">
@@ -1721,7 +1341,7 @@ Per a afegir <strong>elements</strong> premerem el s&#xED;mbol de <strong><code>
     <img height="80
     " src="./imagenes/navigation7.png">
 </div>
-<h5 class="mume-header" id="navcontroller-1">NavController</h5>
+<h5 class="mume-header" id="navcontroller">NavController</h5>
 
 <p>Aquest element ja l&apos;usarem de manera program&#xE0;tica i &#xE9;s el que ens permet executar les accions que hem creat amb el <strong><code>NavGraph</code></strong>. Cada <strong><code>NavHost</code></strong> t&#xE9; el seu propi <a href="https://developer.android.com/guide/navigation/navigation-navigate">NavController</a> corresponent. Com s&apos;explica en la documentaci&#xF3; oficial, hi ha diverses maneres de fer-ho. Per exemple <strong>des d&apos;un fragment</strong> podem fer-lo de la seg&#xFC;ent manera:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-val">val</span> navController<span class="token operator">=</span> NavHostFragment<span class="token punctuation">.</span><span class="token function">findNavController</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
