@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
       
       
       
@@ -264,78 +264,13 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <style>/* 
-Añade 
-
-@import "../EstilosPersonalizadosMarkdownEnhanced.less"
-
-justo después del front matter 
-*/
-/* Please visit the URL below for more information: */
-/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
-@font-face {
-  font-family: 'Catamaran';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
-}
-.contenedor {
-  display: flex;
-  justify-content: center;
-  margin: 30px auto 30px auto;
-}
-.fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
-  background-size: cover;
-  width: 75%;
-  height: 160px;
-  border-radius: 10px;
-  position: relative;
-}
-.cita {
-  font-family: Arial;
-  font-style: italic;
-  font-weight: 600;
-  text-align: justify;
-  line-height: 1.5rem;
-  opacity: 0.6;
-  color: white;
-  padding: 5rem;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  font-size: 1.3rem;
-  transform: translate(-50%, -50%);
-}
-.abre_comilla {
-  font-family: "Catamaran";
-  font-weight: 600;
-  color: white;
-  padding-left: 30px;
-  position: absolute;
-  font-size: 6rem;
-  transform: translate(0%, -15%);
-}
-.cierra_comilla {
-  font-family: "Catamaran";
-  font-weight: 600;
-  color: white;
-  padding-right: 30px;
-  right: 0%;
-  position: absolute;
-  font-size: 6rem;
-  transform: translate(0%, 55%);
-}
-.autor {
-  font-family: Arial;
-  color: white;
-  margin: 0px;
-  padding-left: 30px;
-  position: absolute;
-  top: 83%;
-  font-size: 1rem;
-}
-</style>
+      <pre>FileError: resource &apos;https://fonts.googleapis.com/css?family=Catamaran&apos; gave this Error:
+  Error: getaddrinfo ENOTFOUND fonts.googleapis.com
+ in input on line 13, column 1:
+12 
+13 @import url(https://fonts.googleapis.com/css?family=Catamaran);
+14 
+</pre>  
 <h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
 <p><a href="./tema8_Interfaz_Usuario_III_val.pdf">Descarregar aquests apunts</a></p>
@@ -488,8 +423,6 @@ Els dos &#xFA;ltims components de la llista <strong><code>ItemDecoration</code><
 De totes maneres, no sempre ser&#xE0; obligatori implementar tots aquests components per a fer &#xFA;s d&apos;un RecyclerView. <strong>El m&#xE9;s habitual ser&#xE0; implementar el Adapter i el ViewHolder, utilitzar algun dels LayoutManager predefinits</strong>, i nom&#xE9;s en cas de necessitat crear els Item Decoration i Item Animator necessaris per a donar un toc de personalitzaci&#xF3; especial a la nostra aplicaci&#xF3;.</p>
 <blockquote>
 <p>&#x1F393; Crearem un exemple que mostre un recycler amb la llista d&apos;una ser&#xED;e d&apos;usuaris. Per a aix&#xF2; haurem de crear un nou projecte <strong>EjemploRecycler</strong>. El primer que haurem de fer &#xE9;s crear una classe <em>pojo</em> que ens servisca per a les dades dels usuaris. Per exemple <strong>Usuari.kt</strong> de la seg&#xFC;ent manera:</p>
-</blockquote>
-<blockquote>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">Usuario</span><span class="token punctuation">(</span>nombre<span class="token operator">:</span>String<span class="token punctuation">,</span> apellidos<span class="token operator">:</span>String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
    <span class="token keyword keyword-var">var</span> nombre<span class="token operator">:</span> String
    <span class="token keyword keyword-var">var</span> apellidos<span class="token operator">:</span> String
@@ -499,23 +432,20 @@ De totes maneres, no sempre ser&#xE0; obligatori implementar tots aquests compon
    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><p>El seg&#xFC;ent pas seria afegir el recycler al lloc on volem que siga mostrat, per exemple a l&apos;activitat principal. En aquest cas podria quedar la <strong>main_activity.xml</strong> de la seg&#xFC;ent manera:</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> 
-   <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span> 
-   <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.recyclerview.widget.RecyclerView</span>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.constraintlayout.widget.ConstraintLayout</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">tools:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MainActivity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.recyclerview.widget.RecyclerView</span>
    <span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@+id/recyclerList<span class="token punctuation">&quot;</span></span>
-   <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>@color/azul<span class="token punctuation">&quot;</span></span>
+   <span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>#F87A7D87<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.constraintlayout.widget.ConstraintLayout</span><span class="token punctuation">&gt;</span></span>
+
 </pre><p>Tamb&#xE9; hem de pensar com &#xE9;s el disseny que desitgem per a cadascun dels elements del recycler, aix&#xF2; es fa en un recurs layout i de la forma que ja sabem. Per exemple podria ser l&apos;arxiu <strong>recyclerlayout.xml</strong>:</p>
-</blockquote>
-<blockquote>
 <pre data-role="codeBlock" data-info="xml{highlight=[0]}" class="language-xml" data-line="0"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>androidx.cardview.widget.CardView</span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>com.google.android.material.card.MaterialCardView</span> 
    <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">xmlns:</span>card_view</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res-auto<span class="token punctuation">&quot;</span></span>
    <span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>match_parent<span class="token punctuation">&quot;</span></span>
@@ -552,7 +482,7 @@ De totes maneres, no sempre ser&#xE0; obligatori implementar tots aquests compon
                <span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>15sp<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.cardview.widget.CardView</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>com.google.android.material.card.MaterialCardView</span> <span class="token punctuation">&gt;</span></span>
 </pre><p>&#x270B; Per a aconseguir una separaci&#xF3; entre els elements de la llista, es pot usar el contenidor <strong><code>CardView</code></strong> que ja coneixem de temes anteriors. RecyclerView no t&#xE9; la separaci&#xF3; per elements creada per defecte, s&apos;hauria de simular de diferents maneres, una &#xE9;s usant targetes com en aquest cas.</p>
 <p>El seg&#xFC;ent pas seria escriure el nostre adaptador. Aquest adaptador haur&#xE0; d&apos;estendre de la classe <strong><code>RecyclerView.Adapter</code></strong>, de la qual haurem de sobreescriure principalment tres m&#xE8;todes:</p>
 <ul>
@@ -805,7 +735,10 @@ Aprofitarem la creaci&#xF3; de cada nou ViewHolder per a assignar a la seua vist
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>androidx.cardview.widget.CardView</span><span class="token punctuation">&gt;</span></span>
 
-</pre><p>Ara afegirem en el codi de la classe Holder (ac&#xED; &#xE9;s on se sap que vista s&apos;ha premut d&apos;entres totes), l&apos;anomenada al intel que obri el d&#xED;al:</p>
+</pre><p>La app ara quedar&#xED;a amb un aspecte similar al seguent:</p>
+<div align="center">  <img height="150" src="./imagenes/recycler1_2.png">
+</div>
+<p>Ara afegirem en el codi de la classe Holder (ac&#xED; &#xE9;s on se sap que vista s&apos;ha premut d&apos;entres totes), l&apos;anomenada al intel que obri el d&#xED;al:</p>
 <pre data-role="codeBlock" data-info="kotlin{highlight=[1,2,12,16,18]}" class="language-kotlin" data-line="1,2,12,16,18"><span class="token keyword keyword-class">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">,</span> context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                           View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> textNombre<span class="token operator">:</span> TextView
@@ -883,24 +816,35 @@ Aprofitarem la creaci&#xF3; de cada nou ViewHolder per a assignar a la seua vist
 <h4 class="mume-header" id="clic-en-qualsevol-lloc-de-la-vista-passant-informaci%C3%B3-a-lactivitat-principal">Clic en qualsevol lloc de la vista passant informaci&#xF3; a l&apos;Activitat Principal</h4>
 
 <p>En aquest cas a m&#xE9;s de detectar la pulsaci&#xF3; sobre un element, haurem de retornar la informaci&#xF3; que ens interesse cap endarrere. Es podria usar un ViewModel, com ja hem explicat i usat amb anterioritat, per&#xF2; utilitzarem una Interface per a recordar el sistema.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[5,13,14,20,24]}" class="language-kotlin" data-line="5,13,14,20,24"><span class="token keyword keyword-class">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[7,18,19,31,35]}" class="language-kotlin" data-line="7,18,19,31,35"><span class="token keyword keyword-class">class</span> <span class="token function">Holder</span><span class="token punctuation">(</span>v<span class="token operator">:</span> View<span class="token punctuation">,</span> context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                           View<span class="token punctuation">.</span><span class="token function">OnClickListener</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> textNombre<span class="token operator">:</span> TextView
     <span class="token keyword keyword-val">val</span> textApellido<span class="token operator">:</span> TextView
+    <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+    <span class="token keyword keyword-val">val</span> imagen<span class="token operator">:</span> ImageView
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> pasarCadenaInterface<span class="token operator">:</span> PasarCadenaInterface
     <span class="token keyword keyword-fun">fun</span> <span class="token function">bind</span><span class="token punctuation">(</span>entity<span class="token operator">:</span> Usuario<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         textNombre<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>entity<span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
         textApellido<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>entity<span class="token punctuation">.</span>apellidos<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
     <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>context <span class="token operator">=</span> context
         textNombre <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView<span class="token punctuation">)</span>
         textApellido <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView2<span class="token punctuation">)</span>
+        imagen <span class="token operator">=</span> v<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imagen<span class="token punctuation">)</span>
+        imagen<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
         textNombre<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
         textApellido<span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onClick</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-var">var</span> cadena<span class="token operator">:</span>String
-        <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>p0<span class="token operator">?</span><span class="token punctuation">.</span>id<span class="token operator">==</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView<span class="token punctuation">)</span> cadena<span class="token operator">=</span>textNombre<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>p0<span class="token operator">?</span><span class="token punctuation">.</span>id<span class="token operator">==</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imagen<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> i <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_DIAL<span class="token punctuation">)</span>
+            <span class="token function">startActivity</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+            cadena<span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>p0<span class="token operator">?</span><span class="token punctuation">.</span>id<span class="token operator">==</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView<span class="token punctuation">)</span> cadena<span class="token operator">=</span>textNombre<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token keyword keyword-else">else</span> cadena<span class="token operator">=</span>textApellido<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         pasarCadenaInterface<span class="token punctuation">.</span><span class="token function">pasarCadena</span><span class="token punctuation">(</span>cadena<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
@@ -913,34 +857,9 @@ Aprofitarem la creaci&#xF3; de cada nou ViewHolder per a assignar a la seua vist
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
 
 
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
 </div></div><div class="line-highlight-wrapper">
 
 
@@ -958,9 +877,7 @@ Aprofitarem la creaci&#xF3; de cada nou ViewHolder per a assignar a la seua vist
 
 
 
-
-
-<div aria-hidden="true" class="line-highlight" data-range="20" data-start="20">
+<div aria-hidden="true" class="line-highlight" data-range="18" data-start="18">
 </div></div><div class="line-highlight-wrapper">
 
 
@@ -979,28 +896,89 @@ Aprofitarem la creaci&#xF3; de cada nou ViewHolder per a assignar a la seua vist
 
 
 
+<div aria-hidden="true" class="line-highlight" data-range="19" data-start="19">
+</div></div><div class="line-highlight-wrapper">
 
 
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="24" data-start="24">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="31" data-start="31">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="35" data-start="35">
 </div></div></pre><blockquote>
-<p>&#x1F4CC; <strong>L&#xED;nia 5</strong> creem un objecte de la mena de Interface creada, en aquest cas seria aix&#xED;:</p>
+<p>&#x1F4CC; <strong>L&#xED;nia 7</strong> creem un objecte de la mena de Interface creada, en aquest cas seria aix&#xED;:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> PasarCadenaInterface<span class="token punctuation">{</span>
    <span class="token keyword keyword-fun">fun</span> <span class="token function">pasarCadena</span><span class="token punctuation">(</span>cadena<span class="token operator">:</span>String<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</pre><p><strong>L&#xED;nia 13 i 14</strong> posem listeners de l&apos;esdeveniment Clic sobre les vistes que necessitem. En anul&#xB7;lar el OnClick, cridem al m&#xE8;tode de la interface amb el text que desitgem <strong>L&#xED;nia 20</strong>. Perqu&#xE8; la interface no siga nul&#xB7;la, seguim l&apos;estrat&#xE8;gia que ja coneixem de l&apos;anterior punt, creguem un m&#xE8;tode al qual li arriba la interface <strong>L&#xED;nia 24</strong>.<br>
-En el <strong>Adaptador</strong> haurem de fer els seg&#xFC;ents canvis:</p>
+</pre><p><strong>L&#xED;nia 18 i 19</strong> posem listeners de l&apos;esdeveniment Clic sobre les vistes que necessitem. En anul&#xB7;lar el OnClick, cridem al m&#xE8;tode de la interface amb el text que desitgem <strong>L&#xED;nia 31</strong>. Perqu&#xE8; la interface no siga nul&#xB7;la, seguim l&apos;estrat&#xE8;gia que ja coneixem de l&apos;anterior punt, creguem un m&#xE8;tode al qual li arriba la interface <strong>L&#xED;nia 35</strong>.</p>
 </blockquote>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[5,10,17]}" class="language-kotlin" data-line="5,10,17"><span class="token keyword keyword-class">class</span> Adaptador <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+<p>En el <strong>Adaptador</strong> haurem de fer els seg&#xFC;ents canvis:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5,10,17]}" class="language-kotlin" data-line="5,10,17"><span class="token keyword keyword-class">class</span> Adaptador <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span> <span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context <span class="token punctuation">)</span> <span class="token operator">:</span>
     RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>Holder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>View<span class="token punctuation">.</span>OnClickListener<span class="token punctuation">,</span> 
     View<span class="token punctuation">.</span><span class="token function">OnLongClickListener</span><span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> pasarCadenaInterface<span class="token operator">:</span> PasarCadenaInterface
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreateViewHolder</span><span class="token punctuation">(</span>viewGroup<span class="token operator">:</span> ViewGroup<span class="token punctuation">,</span> i<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span>Holder<span class="token punctuation">{</span>
         <span class="token operator">..</span><span class="token punctuation">.</span>
-        <span class="token keyword keyword-val">val</span> holder<span class="token operator">=</span><span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> holder<span class="token operator">=</span><span class="token function">Holder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">,</span>context<span class="token punctuation">)</span>
         holder<span class="token punctuation">.</span><span class="token function">pasarCadena</span><span class="token punctuation">(</span><span class="token keyword keyword-object">object</span> <span class="token operator">:</span>PasarCadenaInterface<span class="token punctuation">{</span>
             <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">pasarCadena</span><span class="token punctuation">(</span>cadena<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 pasarCadenaInterface<span class="token punctuation">.</span><span class="token function">pasarCadena</span><span class="token punctuation">(</span>cadena<span class="token punctuation">)</span>
