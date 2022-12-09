@@ -1,0 +1,1189 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 10. Corrutinas i Servicis</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview {
+  background-color: #FFFF;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+
+<p><a href="./tema10_Corrutinas_y_Servicios_val.pdf">Descarregar estos apunts</a></p>
+<h1 class="mume-header undefined" id="tema-10-corrutinas-i-servicis">Tema 10. Corrutinas i Servicis</h1>
+
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+<ol>
+<li><a href="#corrutines-kotlin">Corrutines Kotlin</a>
+<ol>
+<li><a href="#abast-de-les-corrutinas">Abast de les corrutinas</a></li>
+<li><a href="#coroutinecontext">CoroutineContext</a></li>
+<li><a href="#builders-de-corrutines">Builders de corrutines</a></li>
+<li><a href="#viewmodel-i-corrutines">ViewModel i Corrutines</a></li>
+</ol>
+</li>
+<li><a href="#servicis-i-tasques-de-llarga-duraci%C3%B3">Servicis i tasques de llarga duraci&#xF3;</a>
+<ol>
+<li><a href="#servicis">Servicis</a></li>
+<li><a href="#broadcastreceiver">BroadCastReceiver</a></li>
+<li><a href="#workmanager">WorkManager</a></li>
+</ol>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="corrutines-kotlin">Corrutines Kotlin</h3>
+
+<p>Una <a href="https://kotlinlang.org/docs/coroutines-guide.html">corrutina de Kotlin</a> &#xE9;s un conjunt de sent&#xE8;ncies que realitzen una tasca espec&#xED;fica, amb la capacitat de suspendre o resumir la seua execuci&#xF3; sense bloquejar un fil. A&#xE7;&#xF2; permet que tingues diferents corrutines cooperant entre elles i no significa que existisca un fil per cada corrutina, al contrari, pots executar diverses en un sol. Les corrutinas s&#xF3;n part del paquet kotlinx.coroutines, per la qual cosa necessites especificar la [dependencia correspondent] (<a href="https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android">https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android</a>) en en <strong><code>build.gradle</code></strong>. A hores d&apos;ara:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">implementation <span class="token string">&quot;org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1&quot;</span>
+</pre><p>Les <a href="https://babel.es/es/Media/Blog/Julio-2021/Coroutines-en-el-desarrollo-de-Android">corrutines en el desenrotllament d&apos;Android</a>, encara que s&#xF3;n un element que va a permetre&apos;ns crear codis m&#xE9;s senzills, al principi poden par&#xE9;ixer complexes a causa del seu nivell d&apos;abstracci&#xF3;.</p>
+<h4 class="mume-header" id="abast-de-les-corrutinas">Abast de les corrutinas</h4>
+
+<p>Quan creguem coroutines assumim de manera impl&#xED;cita dos aspectes molt importants: L&apos;&#xE0;mbit (CoroutineScope i GlobalScope) i el context (CoroutineContext) .</p>
+<p>L&apos;&#xFA;s de <strong><code>GlobalScope</code></strong> permet crear corrutinas de nivell superior, a&#xE7;&#xF2; vol dir que tenen la capacitat de viure fins que acabe l&apos;aplicaci&#xF3; i &#xE9;s treball del desenvolupador el control per a la seua cancel&#xB7;laci&#xF3;, per la qual cosa no s&apos;aconsella usar este &#xE0;mbit.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">ejemploGlobalScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           GlobalScope<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;GlobalScope&quot;</span><span class="token punctuation">,</span>
+            Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; amb <strong><code>launch</code></strong> llancem la corrutina en el context de la Main per a poder mostrar el Toast i dins d&apos;esta llancem una altra per a processos llargs (els tres segons de retard).</p>
+</blockquote>
+<p>Per a reduir este abast, Kotlin ens permet crear els espais on volem que es done la concurr&#xE8;ncia. A&#xE7;&#xF2; ho farem per mitj&#xE0; de <strong><code>CoroutineScope</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-var">var</span> coroutineScope<span class="token operator">=</span> <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">ejemploCoroutineScopeConMain</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+       coroutineScope<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>isActive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;[CoroutineScope-Main] I&apos;m alive on&quot;</span> <span class="token operator">+</span>
+            <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token delimiter variable">}</span></span>!&quot;</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//Al salir del fragment se cancela la corutina</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onDetach</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onDetach</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        coroutineScope<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC;esta corrutina roman activa fins que siga cancel&#xB7;lada d&apos;alguna forma. Est&#xE0; llan&#xE7;ada amb <strong><code>launch</code></strong> i en l&apos;abast de la Main, per la qual cosa podrem usar el Toast per a mostrar la informaci&#xF3;. L&apos;abast personalitzat ho hem aconseguit amb el constructor de <strong><code>CoroutineScope ()</code></strong></p>
+</blockquote>
+<p>Cada vegada que usem un constructor de coroutines en realitat estem fent una crida a una funci&#xF3; que rep com a primer par&#xE0;metre un objecte de tipus <strong><code>CoroutineContext</code></strong>.</p>
+<h4 class="mume-header" id="coroutinecontext">CoroutineContext</h4>
+
+<p>Les coroutines sempre s&apos;executen en algun context que est&#xE0; representat per un valor del tipus CoroutineContext.</p>
+<div align="center">
+    <img height src="./imagenes/corrutinas2.png">
+</div>
+<p>El context de Coroutine &#xE9;s un conjunt de diversos elements. Els elements principals s&#xF3;n el Job de la Coroutine, el seu dispatcher i tamb&#xE9; el seu Exception handler.</p>
+<ul>
+<li>
+<p><strong>Job</strong> D&apos;acord amb la documentaci&#xF3; oficia &quot;Un Job &#xE9;s una cosa cancel&#xB7;lable amb un cicle de vida que culmina amb la seua finalitzaci&#xF3;. Els treballs de coroutine es creguen amb <strong><code>launch coroutine builder</code></strong>. Executa un bloc de codi especificat i es completa a la finalitzaci&#xF3; d&apos;este bloquc.<br>
+L&apos;execuci&#xF3; d&apos;un treball no produ&#xEF;x un valor de resultat. Haur&#xED;em d&apos;utilitzar una interf&#xED;cie <strong><code>Deferred</code></strong> per a un treball que produ&#xEF;sca un resultat. Un treball amb resultat (Deferred) , es crega amb el <strong><code>async coroutine builder</code></strong> i el resultat es pot recuperar amb el m&#xE8;tode <strong><code>await()</code></strong>, que llan&#xE7;a una excepci&#xF3; si el Deferred ha fallat.</p>
+<p>Els jobs tenen un parell de funcions interessants que poden ser molt &#xFA;tils. Per&#xF2; &#xE9;s important entendre que un Job pot tindre al seu torn un altre Job pare. Eixe job pare t&#xE9; un cert control sobre els fills, i ac&#xED; &#xE9;s on entren en joc estes funcions:</p>
+<ul>
+<li>job.join -&gt; Amb est&#xE0; funci&#xF3;, es pot bloquejar la corrutina associada amb el job fins que tots els jobs fills hagen finalitzat. Totes les funcions de suspensi&#xF3; que es criden dins d&apos;una corrutina estan vinculades a job, aix&#xED; que el job pot detectar quan finalitzen tots els jobs fills i despr&#xE9;s continuar l&apos;execuci&#xF3;. job.join () &#xE9;s una funci&#xF3; de suspensi&#xF3; en si mateixa, per la qual cosa ha de cridar-se dins d&apos;una altra corrutina.</li>
+<li>job.cancel -&gt; Esta funci&#xF3; cancel&#xB7;lar&#xE0; tots els seus jobs fills associats. job.cancel () esta &#xE9;s una funci&#xF3; normal, per la qual cosa no requerix una corrutina per a ser cridada.</li>
+</ul>
+<blockquote>
+<p>&#x270B; Amb GlobalScope el pare no esperar&#xE0; la finalitzaci&#xF3; dels seus fills i una vegada que el pare &#xE9;s cancel&#xB7;lat, els altres treballs continuaran corrent a banda. &#xC9;s a dir, en este cas &#xE9;s responsabilitat del desenvolupador portar el control del temps de vida de les coroutines perqu&#xE8; no hi ha sincronitzaci&#xF3; amb els treballs fills.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Dispacher</strong> En Kotlin, totes les Coroutines han d&apos;executar-se en un dispatcher incl&#xFA;s quan s&apos;executen en el fil principal. Els Dispatchers s&#xF3;n un tipus de contextos de corrutina que especifiquen el fil o fils que poden ser utilitzats per la corrutina per a executar el seu codi. Hi ha dispatchers que nom&#xE9;s usen un fil (com Main) i altres que definixen un grup de fils que s&apos;optimitzaran per a executar totes les corrutinas que reben. Per a especificar on han d&apos;executar-se les coroutines, Kotlin proporciona tres Dispatchers que pots utilitzar:</p>
+<ul>
+<li><strong><code>Dispatchers.Main</code></strong>. Fil principal en Android, interactua amb la UI i realitza treballs lleugers com: cridar a funcions de suspensi&#xF3;, cridar a funcions de la interf&#xED;cie d&apos;usuari i actualitzar LiveData</li>
+<li><strong><code>Dispatchers.IO</code></strong>. En general, totes les tasques que bloquejaran el fil mentres esperen la resposta. Optimitzat per a l&apos;E/S de disc i xarxa fora del fil principal: sol&#xB7;licituds de bases de dades, lectura/escritura d&apos;archivis, sensors, connexi&#xF3; en xarxa, ...</li>
+<li><strong><code>Dispatchers.Default</code></strong>. Optimitzat per al treball intensiu de la CPU fora del fil principal: ordenar una llista, an&#xE0;lisi de JSON, utilitats, etc.</li>
+</ul>
+</li>
+</ul>
+<div align="center">
+    <img height="200" src="./imagenes/corrutinas1.png">
+</div>
+<ul>
+<li><strong>Exception Handler</strong>. Este element &#xE9;s opcional del CoroutineContext, i ens permet manejar excepcions no capturades. I d&apos;esta manera millorar l&apos;expericencia d&apos;usuari</li>
+</ul>
+<h4>Funcions de Suspensi&#xF3;</h4>
+<p>Les corrutinas es basen en les <strong>funciones de suspension</strong> que s&#xF3;n funcions normals a qu&#xE8; se&apos;ls agrega el modificador <strong><code>suspend</code></strong>, les funcions de suspensi&#xF3; tenen la capacitat de bloquejar l&apos;execuci&#xF3; de la corrutina mentres estan fent el seu treball. Una vegada que acaba, el resultat de l&apos;operaci&#xF3; es torna i es pot utilitzar en la seg&#xFC;ent l&#xED;nia.</p>
+<p>D&apos;esta manera s&apos;agreguen dos noves operacions (a m&#xE9;s d&apos;invocar/cridar i tornar):</p>
+<ul>
+<li>
+<p>suspendre: pausa l&apos;execuci&#xF3; de la corrutina actual, guardant totes les variables locals. El fil actual pot continuar amb el seu treball, mentres que el codi de suspensi&#xF3; s&apos;executa en un altre fil.</p>
+</li>
+<li>
+<p>reprendre: continua una corrutina suspesa des del lloc on es va interrompre quan el resultat est&#xE0; preparat.</p>
+</li>
+</ul>
+<p>Les funcions de suspensi&#xF3; nom&#xE9;s poden cridar-se o executar-se dins d&apos;una corrutina o dins d&apos;una altra funci&#xF3; de suspensi&#xF3;. Algunes de les funcions usades amb freq&#xFC;&#xE8;ncies per a llan&#xE7;ar corrutinas s&#xF3;n funcions de suspensi&#xF3; en si mateixes, com ara <strong><code>delay, join, await, withContext, supervisorScope, etc.</code></strong>.</p>
+<h5 class="mume-header" id="withcontext">withContext</h5>
+
+<p>Esta &#xE9;s una funci&#xF3; de suspensi&#xF3; que permet canviar f&#xE0;cilment el context que s&apos;utilitzar&#xE0; per a executar una part del codi dins d&apos;una corrutina. <strong><code>WithContext</code></strong> &#xE9;s una funci&#xF3; de suspensi&#xF3; en si mateixa.</p>
+<h4 class="mume-header" id="builders-de-corrutines">Builders de corrutines</h4>
+
+<p>Els constructors de coroutinas servixen per a iniciar les corrutinas. Tenim diferents builders depenent del que vullguem fer, i incl&#xFA;s t&#xE8;cnicament es poden crear personalitzats. Per&#xF2; per a la majoria dels casos s&#xF3;n suficients amb els que proporciona la llibreria:</p>
+<ul>
+<li>
+<p><strong><code>runBlocking</code></strong>, este builder bloqueja el fil actual fins que s&apos;acaben totes les tasques dins d&apos;eixa corrutina. No sol ser una funcionalitat molt usada de les corrutinas, ja que precisament el que es pret&#xE9;n amb estes &#xE9;s la sincronitzaci&#xF3; de m&#xE9;s d&apos;una tasca.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-fun">fun</span> <span class="token function">ejemploRunBlocking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+            <span class="token function">runBlocking</span> <span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token comment">//Lanzamos tres corrutinas con launch</span>
+                <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token comment">//delay es una funcion de suspensi&#xF3;n por lo que al</span>
+                        <span class="token comment">//lanzar las tres corrutinas el tiempo no duran 5segundos</span>
+                        <span class="token comment">//ya que se hacen las tres intercaladas</span>
+                        <span class="token comment">//a diferencia de sleep</span>
+                        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;CORRUTINA&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+                        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">5000</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;Ya han terminado las tareas lanzadas&quot;</span><span class="token operator">+</span>
+        <span class="token string">&quot;con el constructor runBlocking.&quot;</span> <span class="token operator">+</span>
+        <span class="token string">&quot;\nSe desbloquea el hilo principal y se muestra este texto&quot;</span><span class="token punctuation">,</span>
+        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre></li>
+</ul>
+<p>&#x1F4CC;en este exemple llancem una corrutina que al seu torn llan&#xE7;a altres tres corrutinas, la primera amb <strong><code>runBlocking</code></strong> bloquejar&#xE0; el fil principal, per la qual cosa el <strong><code>Toast</code></strong> no ocorrer&#xE0; fins que no acaben totes les subrutines filles de <strong><code>runBlocking</code></strong>. <strong><code>launch</code></strong> es llan&#xE7;a, en este exemple, en un context que no &#xE9;s el Main, per la qual cosa mai podrem introduir cap interacci&#xF3; amb les vistes (per aix&#xF2; l&apos;eixida la realitzem per mitj&#xE0; de log) . Cada una de les tres corrutinas llan&#xE7;ades per launch romandr&#xE0; 5 segons d&apos;espera, per&#xF2; al realitzar-se al mateix temps, el retard &#xE9;s de poc m&#xE9;s de 5 segon. Si el bucle no llan&#xE7;ara les tres subrutines amb launch i nom&#xE9;s deix&#xE0;rem el <strong><code>delay</code></strong> el retard seria d&apos;uns 15 segons aproximadament.</p>
+<ul>
+<li>
+<p><strong><code>launch</code></strong>, este &#xE9;s el builder m&#xE9;s usat. A difer&#xE8;ncia de runBlocking, no bloquejar&#xE0; el subproc&#xE9;s actual (si s&apos;usen els dispatchers adequats) .Launch torna un Job, que permetr&#xE0; realitzar les funcions explicades anteriorment.</p>
+<p>Quan <strong>launch</strong> s&apos;usa sense par&#xE0;metres, hereta el context (i per tant el dispatcher) del CoroutineScope des del que s&apos;inicia. Pot iniciar-se dins d&apos;una altra corrutina ometent-se o no el Dispachers, per&#xF2; si no est&#xE0; dins d&apos;una corrutina necessitar&#xE0; obligat&#xF2;riament especificar l&apos;abast. Launch ens torna un Job, que permetr&#xE0; realitzar les funcions explicades anteriorment.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token operator">..</span><span class="token punctuation">.</span>
+ <span class="token comment">//launch especificando el alcance mediante CoroutineScope</span>
+ <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token punctuation">{</span>
+ <span class="token comment">//Al estar dentro de una corrutina padre, se puede omitir </span>
+ <span class="token comment">//el alcance e incluso el Dispatchers si no queremos cambiar </span>
+ <span class="token comment">//el contexto del padre, en este caso si lo cambiamos</span>
+ <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token operator">..</span><span class="token punctuation">.</span>    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+ <span class="token operator">..</span><span class="token punctuation">.</span>
+</pre></li>
+<li>
+<p><strong><code>async</code></strong>, este altre builder tamb&#xE9; permet executar diverses tasques en segon pla en paral&#xB7;lel. No &#xE9;s una funci&#xF3; de suspensi&#xF3; en si mateixa, per la qual cosa quan executem async, el proc&#xE9;s en segon pla s&apos;inicia, per&#xF2; la seg&#xFC;ent l&#xED;nia s&apos;executa immediatament. <strong><code>async</code></strong> sempre ha de cridar-se dins d&apos;una altra corrutina, i torna un job especialitzat que s&apos;anomena <strong><code>Deferred</code></strong>.</p>
+<p><strong><code>Deferred</code></strong> t&#xE9; una nova funci&#xF3; de suspensi&#xF3; cridada <strong><code>await ()</code></strong> que &#xE9;s la que bloqueja. Cridarem a await() nom&#xE9;s quan necessitem el resultat. Si el resultat encara no esta llest, la corrutina se susp&#xE9;n en eixe punt. Si ja tenim el resultat, simplement ho tornar&#xE0; i continuar&#xE0;.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">ejemploAsyncAway</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> cadena<span class="token operator">:</span>String<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword keyword-null">null</span>
+    <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> job<span class="token operator">=</span>async <span class="token punctuation">{</span>
+            <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                tiempo<span class="token punctuation">.</span>text <span class="token operator">=</span>i<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token string">&quot;Ha terminado la corrutina async&quot;</span>
+        <span class="token punctuation">}</span>
+        cadena<span class="token operator">=</span>job<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>cadena<span class="token punctuation">,</span>Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; llancem el <strong><code>async</code></strong> dins d&apos;una corrutina launch amb context Main, per a poder pintar cada segon el text que ens interesse (en este cas un comptador d&apos;1 a 5) . Canviem el Dispacher a IO per a realitzar el retard i tornem una cadena com a resposta del <strong><code>async</code></strong>. Quan acabe el treball la corrutina, recuperarem la cadena amb <strong><code>await</code></strong> i es llan&#xE7;ar&#xE0; el Toast que la utilitza.</p>
+</blockquote>
+</li>
+</ul>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; C&#xF2;pia els codis dels exemples i completa&apos;ls fins a fer-los funcionar. Per a ajudar-te en la comprensi&#xF3; pots analitzar l&apos;exercici resolt de la Barra de Progr&#xE9;s</span></p>
+<h4 class="mume-header" id="viewmodel-i-corrutines">ViewModel i Corrutines</h4>
+
+<p>ViewModel &#xE9;s est&#xE9;s amb una propietat <strong><code>viewModelScope</code></strong> que s&apos;encarrega de cancel&#xB7;lar les corrutinas quan ja no s&#xF3;n necess&#xE0;ries.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">//propiedad viewModelScope extendida de CoroutineScope y</span>
+<span class="token comment">//que a su vez extiende el ViewModel</span>
+<span class="token keyword keyword-val">val</span> ViewModel<span class="token punctuation">.</span>viewModelScope<span class="token operator">:</span> CoroutineScope
+   <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token keyword keyword-set">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Gr&#xE0;cies al comportament de <strong><code>CoroutineScope</code></strong> a trav&#xE9;s de la propietat <strong><code>viewModelScope</code></strong> es realitza un seguiment de totes les corrutinas que es creguen en este ambet. Per tant, si es cancel&#xB7;la un abast, es cancel&#xB7;len totes les corrutinas creades en ell.</p>
+<p>Per exemple, en el seg&#xFC;ent codi creguem un ViewModel que ens gestionar&#xE0; un <strong><code>MutableLiveData</code></strong> de tipus ArrayList de Strings i que t&#xE9; un m&#xE8;tode que simula una desc&#xE0;rrega de dades que es guardaran en l&apos;objecte:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> ItemViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> valores <span class="token operator">=</span>
+        <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;item1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item4&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item5&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item6&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item7&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;item8&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-var">var</span> liveData <span class="token operator">=</span>
+        MutableLiveData<span class="token operator">&lt;</span>ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//:MutableLiveData&lt;String&gt; by lazy { MutableLiveData&lt;String&gt;() }</span>
+    <span class="token keyword keyword-val">val</span> datos<span class="token operator">:</span> LiveData<span class="token operator">&lt;</span>ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> liveData
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">descargarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> random <span class="token operator">=</span> <span class="token function">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-var">var</span> aux <span class="token operator">=</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">//Simulaci&#xF3;n de una descarga lenta de datos</span>
+        <span class="token keyword keyword-val">val</span> numeroElementos <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+        viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">0</span><span class="token operator">..</span>numeroElementos<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                aux<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>valores<span class="token punctuation">[</span>random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>valores<span class="token punctuation">.</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            liveData<span class="token punctuation">.</span>value <span class="token operator">=</span> aux
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC;en el m&#xE8;tode <strong>descargarDatos</strong> s&apos;usa la propietat <strong><code>viewModelScope</code></strong> per a llan&#xE7;ar la corrutina que produir&#xE0; el retard i la llista generada amb elements aleatoris.</p>
+</blockquote>
+<p>L&apos;&#xFA;s del ViewModel des de les distintes parts de l&apos;aplicaci&#xF3;, &#xE9;s igual a qu&#xE8; hem vist en temes anteriors.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Realitza l&apos;exercici proposat del cron&#xF2;metre</span></p>
+<h3 class="mume-header" id="servicis-i-tasques-de-llarga-duraci%C3%B3">Servicis i tasques de llarga duraci&#xF3;</h3>
+
+<p>Les corrutinas estan dissenyades per a treballar tasques que han de finalitzar quan l&apos;usuari ix d&apos;un determinat abast o acaba una interacci&#xF3;, per&#xF2; a l&apos;hora de realitzar el que cridem <strong>long-time running tasks</strong>, &#xE9;s a dir tasques que han d&apos;estar durant un gran temps en segon pla i no tenen perqu&#xE8; estar lligades a l&apos;activitat que les ha llan&#xE7;at o a la interacci&#xF3; amb l&apos;usuari, &#xE9;s necessari pensar en altres respostes:</p>
+<ol>
+<li>Tasques que no necessiten executar-se immediatament i processar-se de forma cont&#xED;nua, incl&#xFA;s quan l&apos;usuari col&#xB7;loca l&apos;aplicaci&#xF3; en segon pla o es reinicia el dispositiu. En este cas el recomanable &#xE9;s l&apos;&#xFA;s de <strong><code>WorkManager</code></strong>.</li>
+<li>En casos concrets en qu&#xE8; es realitzen tasques llargues com la reproducci&#xF3; de contingut multim&#xE8;dia o la navegaci&#xF3; activa, es recomana l&apos;&#xFA;s de <strong><code>Servicios</code></strong> per&#xF2; en primer pla.</li>
+</ol>
+<h4 class="mume-header" id="servicis">Servicis</h4>
+
+<p>Els <a href="https://developer.android.com/guide/components/services?hl=es-419">Servicis</a> s&#xF3;n components que poden executar-se en background (o segon pla) i que que no proporciona una interf&#xED;cie d&apos;usuari, per la qual cosa no estan pensats per a interactuen amb l&apos;usuari.</p>
+<p>La plataforma Android oferix una gran quantitat de servicis predefinits, disponibles regularment a trav&#xE9;s de la classe M&#xE0;nager. D&apos;esta manera, en les nostres activitats podrem accedir a estos servicis a trav&#xE9;s del m&#xE8;tode <strong><code>getSystemService ()</code></strong>.</p>
+<p>Si el servici creat realitzar&#xE0; tasques que tinguen un cost computacional elevat, es poden provocar problemes en l&apos;aplicaci&#xF3; (Application Not Responding o ANR), per a evitar situacions com estes, el servici pot executar-se en un fil secundari. Si l&apos;aplicaci&#xF3; est&#xE0; orientada al nivell d&apos;API 26 o un nivell superior, el sistema imposa restriccions en l&apos;execuci&#xF3; de servicis en segon pla quan l&apos;aplicaci&#xF3; mateixa no es troba en primer pla. En estos casos &#xE9;s millor usar una tasca programada, <strong><code>WorkManager</code></strong>.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; D&apos;altra banda, si necessitem utilitzar servicis propis, estos han d&apos;anar declarats en l&apos;arxiu <strong><code>AndroidManifest.xml</code></strong>.</p>
+</blockquote>
+<p>Tenim diverses opcions perqu&#xE8; nostra activity es comunique amb un servici.</p>
+<ul>
+<li>Usar <strong>intent</strong>: &#xE9;s un escenari simple on no es requerix comunicaci&#xF3; directa ni notificacions de processos. El servici rep les dades via intent i realitza la tasca que siga necess&#xE0;ria sense tornar cap tipus de dada. Un escenari on podem utilitzar a&#xE7;&#xF2; &#xE9;s quan necessitem actualitzar un content provider. El servici rep les dades via intent, actualitza el content provider i este notifica a la nostra app que el contingut est&#xE0; actualitzat, sense que es requerisca alguna acci&#xF3; extra pel nostre servici.</li>
+<li>Usar <strong>receivers</strong>: un altre m&#xE8;tode &#xE9;s emetre esdeveniments i registrar receptors (receivers, classe <strong><code>BroadcastReceiver</code></strong>) per a establir la comunicaci&#xF3;. Per exemple, una activity registra din&#xE0;micament un receiver per a un esdeveniment, i el servici &#xE9;s l&apos;encarregat d&apos;emetre eixe esdeveniment. Este escenari s&apos;usa quan &#xE9;s necessari que l&apos;escenari notifique que va acabar de fer alguna tasca.</li>
+</ul>
+<h5 class="mume-header" id="construint-un-servici">Construint un Servici</h5>
+
+<p>Per a crear un Servici haurem d&apos;estendre de <strong><code>Service</code></strong> pel que tindrem que redefinir i con&#xE9;ixer 4 m&#xE8;todes principals:</p>
+<ul>
+<li>
+<p><strong><code>onCreate</code></strong>: De manera semblant a un Activity, s&apos;executa la primera vegada que es crega el servici i servix per a inicialitzar variables.</p>
+</li>
+<li>
+<p><strong><code>onStartCommand</code></strong>: S&apos;executa quan el servici rep un intent llan&#xE7;at per mitj&#xE0; del comando startService. Si el servici ja est&#xE0; iniciat, els intents successius no tornaran a generar un <strong><code>onCreate</code></strong> si no que passaren directament ac&#xED;. &#xC9;s important tindre en compte que si es creen fils en este m&#xE8;tode, ha de comprovar-se que el fil no estiga ja funcionant o podrien accidentalment crear-se fils nous cada vegada que es passa per ac&#xED;.</p>
+</li>
+<li>
+<p><strong><code>onBind</code></strong>: Este comando &#xE9;s cridat quan s&apos;executa un bindService () des d&apos;un Activity. Servix per a tornar una refer&#xE8;ncia a manera d&apos;IBinder a l&apos;Activity de la inst&#xE0;ncia del servici. * <strong><code>onDestroy</code></strong>: Quan s&apos;anomena al comando <strong><code>stopService()</code></strong> o dins del mateix service al m&#xE8;tode.</p>
+</li>
+<li>
+<p><strong><code>stopSelft()</code></strong> es passa per este m&#xE8;tode, on han d&apos;acabar-se fils o tasques que puguen estar executant-se.</p>
+</li>
+</ul>
+<p>Exemple d&apos;un servici senzill, podem analitzar el seu funcionament visualitzant les esbosses de LogCat:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MyService<span class="token operator">:</span> <span class="token function">Service</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Creando servicio....&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStartCommand</span>
+                <span class="token punctuation">(</span>intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">,</span> flags<span class="token operator">:</span> Int<span class="token punctuation">,</span> startId<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onStartCommand</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span> flags<span class="token punctuation">,</span> startId<span class="token punctuation">)</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Recibiendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-while">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>  Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Mostrando intent ....+&quot;</span> <span class="token operator">+</span>
+                           <span class="token string">&quot;${intent?.getStringExtra(&quot;</span>CADENA<span class="token string">&quot;)}&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> START_STICKY
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBind</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> IBinder<span class="token operator">?</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Enlazando Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Destruyendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Cal destacar que este tipus de servicis cal parar-los expl&#xED;citament, encara que el sistema tamb&#xE9; podria parar-los si es trobara esc&#xE0;s de mem&#xF2;ria. Si en el m&#xE8;tode onStartCommand s&apos;ha tornat <strong><code>START_STICKY</code></strong>, el sistema podr&#xE0; reviure el servici quan torne a tindre mem&#xF2;ria disponible, encara que cal tindre en compte que llavors l&apos;intent que rebr&#xE0; onStartCommand ser&#xE0; nul (null).</p>
+</blockquote>
+<p>Una manera d&apos;inicialitzar este servici, &#xE9;s des d&apos;una activitat i de forma molt pareguda a iniciar una activity:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> intento<span class="token operator">:</span>Intent
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        findViewById<span class="token operator">&lt;</span>MaterialButton<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>boton<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span><span class="token punctuation">{</span>
+            intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span>MyService<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+            intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CADENA&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Dato Pasado desde Main&quot;</span><span class="token punctuation">)</span>
+            <span class="token function">startService</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">stopService</span><span class="token punctuation">(</span>intento<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x26A0;&#xFE0F; No oblidar que s&apos;ha de declarar els servicis usats en el manifest.<br>
+<strong><code>&lt;service android:name=&quot;.MyService&quot;/&gt;</code></strong></p>
+</blockquote>
+<p>Com ja s&apos;ha indicat, tot este codi funcionaria en primer pla, si desitgem crear un fil per a realitzar tasques en segon pla, caldria fer-ho en <strong><code>onStartCommand</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MyServiceSegundoPlano<span class="token operator">:</span> <span class="token function">Service</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword keyword-var">var</span> hilo<span class="token operator">=</span><span class="token function">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStartCommand</span>
+                <span class="token punctuation">(</span>intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">,</span> flags<span class="token operator">:</span> Int<span class="token punctuation">,</span> startId<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onStartCommand</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span> flags<span class="token punctuation">,</span> startId<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> cadena<span class="token operator">=</span>intent<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getStringExtra</span><span class="token punctuation">(</span><span class="token string">&quot;CADENA&quot;</span><span class="token punctuation">)</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Recibiendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>hilo<span class="token operator">==</span><span class="token keyword keyword-null">null</span> <span class="token operator">||</span> <span class="token operator">!</span>hilo<span class="token operator">?</span><span class="token punctuation">.</span>isAlive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            hilo <span class="token operator">=</span> Thread <span class="token punctuation">{</span>
+                <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>
+                    <span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Mostrando intent ....&quot;</span> <span class="token operator">+</span>
+                            <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>cadena<span class="token delimiter variable">}</span></span>&quot;</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            hilo<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword keyword-return">return</span> START_STICKY
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBind</span><span class="token punctuation">(</span>p0<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> IBinder<span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATO&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Destruyendo Intent ....&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prova els dos exemples anteriors i mira el resultat en el Logcat</span></p>
+<p>Hi ha dos tipus de servicis. Aquell que s&apos;inicia expl&#xED;citament a trav&#xE9;s del m&#xE8;tode <strong><code>startService()</code></strong> cridat <strong>Started Service</strong> i el que es lliga a un component amb <strong><code>bindService()</code></strong> cridat <strong>Bound Service</strong>.</p>
+<ul>
+<li>
+<p>Started: Una vegada iniciat el servici, s&apos;executa de forma indefinida, incl&#xFA;s si el component que ho va iniciar no est&#xE0; en primer pla.</p>
+</li>
+<li>
+<p>Bound: En este cas, el servici oferix una interf&#xED;cie de tipus client-servidor a aquells components que s&apos;associen o enllacen al dit servici. Els components associats o enlla&#xE7;ats (bound) al servici poden enviar peticions, aconseguir resultats i respostes o, incl&#xFA;s, dur a terme tasques de comunicaci&#xF3; amb altres processos. En este cas, el servici nom&#xE9;s s&apos;executa quan hi ha algun component associat o enlla&#xE7;at a ell.</p>
+</li>
+</ul>
+<h5>Aplicaci&#xF3; exemple per a crear un servici per a poder consumir-ho des d&apos;una activitat</h5>
+<p>Crearem un servici perqu&#xE8; des d&apos;una activitat podem consumir-ho. L&apos;objectiu del servici ser&#xE0; recuperar dades de forma peri&#xF2;dica perqu&#xE8; d&apos;esta manera l&apos;activitat puga desplegar-los a trav&#xE9;s d&apos;una ListView, sempre podent demanar les dades m&#xE9;s actualitzats d&apos;este servici. Enlla&#xE7;arem el servici amb l&apos;activitat (Bound) . Tenint el concepte clar, passem a codificar-ho:</p>
+<ol>
+<li>Creguem un nou projecte cridat MiServicio.</li>
+<li>Creguem una nova classe crida MiService que &#xE9;s on escriurem tot el codi corresponent al que fa el servici. A continuaci&#xF3; es proporciona el codi que haur&#xE0; de tindre esta classe:</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[15, [36-39]]}" class="language-kotlin" data-line="15,36-39">  <span class="token keyword keyword-class">class</span> MiService <span class="token operator">:</span> <span class="token function">Service</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> timer<span class="token operator">:</span> Timer<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword keyword-null">null</span>
+    <span class="token keyword keyword-var">var</span> miBinder<span class="token operator">:</span> IBinder <span class="token operator">=</span> <span class="token function">MiBinder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> lista<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+    <span class="token keyword keyword-var">var</span> array <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;blanco&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;azul&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;verde&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-var">var</span> pos <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword keyword-override">override</span>  <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pos <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        timer<span class="token operator">=</span><span class="token function">Timer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        lista <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">pollForUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">pollForUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        timer<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">scheduleAtFixedRate</span><span class="token punctuation">(</span><span class="token keyword keyword-object">object</span> <span class="token operator">:</span> <span class="token function">TimerTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-override">override</span>  <span class="token keyword keyword-fun">fun</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>lista<span class="token punctuation">.</span>size <span class="token operator">&gt;=</span> array<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    lista<span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+                lista<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span>pos<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                pos<span class="token operator">++</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>pos <span class="token operator">&gt;=</span> array<span class="token punctuation">.</span>size<span class="token punctuation">)</span> pos <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> UPDATE_INTERVAL<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span>  <span class="token keyword keyword-fun">fun</span> <span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        timer<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBind</span><span class="token punctuation">(</span>intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> IBinder <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> miBinder
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getLista</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> lista
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-inner">inner</span> <span class="token keyword keyword-class">class</span> MiBinder <span class="token operator">:</span> <span class="token function">Binder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> service<span class="token operator">:</span> MiService
+            <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-this">this</span><span class="token label symbol">@MiService</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> UPDATE_INTERVAL<span class="token operator">:</span> Long <span class="token operator">=</span> <span class="token number">5000</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="36-39" data-start="36" data-end="39">
+
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC;En primer lloc podem observar que esta classe hereta de <strong><code>Service</code></strong>. Dins de la classe MiServicio declarem un <strong><code>Timer</code></strong> que ens ajudar&#xE0; a retardar les actualitzacions de la informaci&#xF3; que proveir&#xE0; el servici junt amb la constant est&#xE0;tica UPDATE_INTERVAL que fixem amb un valor de 5 segons.<br>
+Tenim un ArrayList i un arreglament de cadenes que ens serviran per a jugar amb la informaci&#xF3; del servici; i un IBinder que permet interactuar amb un objecte de forma remota.<br>
+Dins dels m&#xE8;todes que estem creant en el nostre servici es troba <strong><code>pollForUpdates()</code></strong> en el que definim la tasca l&apos;execuci&#xF3; de la qual es repetir&#xE0; segons el temps que h&#xE0;gem establit, per mitj&#xE0; del m&#xE8;tode de la classe Timer <strong><code>scheduleAtFixedRat()</code></strong>, <strong>L&#xED;nea 15</strong>.<br>
+Respecte a l&apos;&#xFA;s d&apos;IBinder, la documentaci&#xF3; d&apos;Android ens diu que no hem d&apos;implementar-la de manera directa, i que per a efectes pr&#xE0;ctics hem d&apos;utilitzar una classe que estenga de Binder. &#xC9;s per aix&#xF2; que creguem una classe interna crida MiBinder <strong>L&#xED;neas 36-39</strong>. La resta &#xE9;s incloure els m&#xE8;todes anul&#xB7;lats <strong><code>onDestroy()</code></strong> i <strong><code>onBind()</code></strong>, per a cancel&#xB7;lar el servici o per a tornar-ho respectivament.</p>
+</blockquote>
+<ol>
+<li>Ara passem a codificar l&apos;activitat que consumir&#xE0; este servici. Per a la quina definim la interf&#xED;cie gr&#xE0;fica amb un bot&#xF3; per a refrescar la informaci&#xF3; del servici i una ListView per a desplegar les dades del mateix.</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[[19-30],32,37]}" class="language-kotlin" data-line="19-30,32,37"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">Activity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> miservicio<span class="token operator">:</span> MiService<span class="token operator">?</span><span class="token operator">=</span><span class="token keyword keyword-null">null</span>
+    <span class="token keyword keyword-lateinit">lateinit</span>  <span class="token keyword keyword-var">var</span> values<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+    <span class="token keyword keyword-lateinit">lateinit</span>  <span class="token keyword keyword-var">var</span> adapter<span class="token operator">:</span> ArrayAdapter<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>
+    <span class="token keyword keyword-lateinit">lateinit</span>  <span class="token keyword keyword-var">var</span> lista<span class="token operator">:</span> ListView
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> boton<span class="token operator">:</span> Button
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        lista <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>listView<span class="token punctuation">)</span>
+        boton <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span>
+        <span class="token function">doBindService</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        values <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        adapter <span class="token operator">=</span> ArrayAdapter<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>
+                                       simple_list_item_1<span class="token punctuation">,</span> values<span class="token punctuation">)</span>
+        lista<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>adapter<span class="token punctuation">)</span>
+        boton<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>  <span class="token function">showServiceData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> mConnection<span class="token operator">:</span> ServiceConnection <span class="token operator">=</span> <span class="token keyword keyword-object">object</span> <span class="token operator">:</span> ServiceConnection 
+    <span class="token punctuation">{</span>
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onServiceConnected</span><span class="token punctuation">(</span>name<span class="token operator">:</span> ComponentName<span class="token punctuation">,</span> 
+                                        service<span class="token operator">:</span> IBinder<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            miservicio <span class="token operator">=</span> <span class="token punctuation">(</span>service <span class="token keyword keyword-as">as</span> MiBinder<span class="token punctuation">)</span><span class="token punctuation">.</span>service
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token string">&quot;Connectado&quot;</span><span class="token punctuation">,</span>
+                        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onServiceDisconnected</span><span class="token punctuation">(</span>name<span class="token operator">:</span> ComponentName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            miservicio <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">doBindService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">bindService</span><span class="token punctuation">(</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> MiService<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">,</span> mConnection<span class="token punctuation">,</span> 
+                           BIND_AUTO_CREATE<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">showServiceData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>miservicio <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> listaTrabajo<span class="token operator">:</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token operator">=</span> miservicio<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">getLista</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            values<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            values<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>listaTrabajo<span class="token punctuation">)</span>
+            adapter<span class="token punctuation">.</span><span class="token function">notifyDataSetChanged</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="19-30" data-start="19" data-end="30">
+
+
+
+
+
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="32" data-start="32">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="37" data-start="37">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Declarem un ArrayList i un objecte de tipus MiServicio. Per a poder treballar amb el servici ser&#xE0; indispensable crear un objecte de tipus <strong><code>ServiceConnection</code></strong> <strong>L&#xED;nea 19 - 30</strong> , per mitj&#xE0; del qual realitzarem les funcions necess&#xE0;ries perqu&#xE8; nostra activitat puga connectar-se amb el servici creat i podem aix&#xED;, accedir a la informaci&#xF3; que ens prove&#xEF;x. Este objecte ser&#xE0; inicialitzat a trav&#xE9;s del m&#xE8;tode <strong><code>bindService()</code></strong> <strong>L&#xED;nea 32</strong>, que &#xE9;s cridat en el <strong><code>onCreate()</code></strong> de l&apos;activity. Com omplirem una ListView amb estes dades, &#xE9;s important crear un adaptador. Despr&#xE9;s, en el m&#xE8;tode propi <strong><code>showServiceData()</code></strong> actualitzem la llista amb les dades rebuts del servici <strong>L&#xED;nea 37</strong>.</p>
+</blockquote>
+<ol>
+<li>IMPORTANT, una vegada que hem acabat la l&#xF2;gica de l&apos;aplicaci&#xF3; ens faltar&#xE0; donar d&apos;alta el servici creat, en l&apos;arxiu AndroidManifest.xml</li>
+</ol>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Reconstru&#xEF;x l&apos;exemple per a entendre el funcionament del la comunicaci&#xF3; per mitj&#xE0; de Bind.</span></p>
+<h4 class="mume-header" id="broadcastreceiver">BroadCastReceiver</h4>
+
+<p>Un broadcast receiver &#xE9;s el component que permet rebre i respondre davant d&apos;esdeveniments del sistema (av&#xED;s de bateria baixa, un SMS recibido,...) o esdeveniments produ&#xEF;ts per altres aplicacions o servicis. Alguns esdeveniments s&#xF3;n d&apos;acc&#xE9;s privilegiat i cal establir-los en l&apos;arxiu de manifest de l&apos;aplicaci&#xF3; amb l&apos;etiqueta <strong><code>&lt;uses_permission&gt;</code></strong>.<br>
+Per a crear un broadcast receiver simplement hem de crear una classe que herete de <strong><code>BroadcastReceiver</code></strong> i anul&#xB7;lar el m&#xE8;tode <strong><code>onReceive()</code></strong>, que &#xE9;s el m&#xE8;tode que s&apos;executar&#xE0; cada vegada que es produ&#xEF;sca l&apos;esdeveniment a qu&#xE8; se subscriga el nostre broadcast receiver (semblant a l&apos;onCreate() d&apos;una activity).<br>
+La classe BroadcastReceiver &#xE9;s capa&#xE7; de rebre intents a trav&#xE9;s del m&#xE8;tode <strong><code>sendBroadcast()</code></strong>.</p>
+<p>Altra de les classe &#xFA;tils &#xE9;s <strong><code>PendingIntent</code></strong>, que &#xE9;s un token que li donem a una altra aplicaci&#xF3; a trav&#xE9;s d&apos;un Notification M&#xE0;nager, Alarm M&#xE0;nager o altres aplicacions de tercers, que els permeten a estos components utilitzar els permisos de la nostra aplicaci&#xF3; per a executar un tros de codi predefinit.</p>
+<h5 class="mume-header" id="aplicaci%C3%B3-exemple-per-a-activar-la-vibraci%C3%B3-i-lalarma-del-dispositiu">Aplicaci&#xF3; exemple per a activar la vibraci&#xF3; i l&apos;alarma del dispositiu</h5>
+
+<p>Definirem un broadcast receiver que escolte els canvis d&apos;estat del tel&#xE8;fon. Volem tindre en la pantalla de la nostra aplicaci&#xF3; un EditText per a introduir els segons que passaran abans de que ens vibre el tel&#xE8;fon i un bot&#xF3; per a iniciar el conteo. El layout de l&apos;activitat principal s&apos;omet per la seua senzillesa. Passem a explicar la classe que hereta de <strong><code>BroadCastReceiver</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> BroadCastAlarma <span class="token operator">:</span> <span class="token function">BroadcastReceiver</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token annotation builtin">@RequiresApi</span><span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>O<span class="token punctuation">)</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onReceive</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">,</span> intent<span class="token operator">:</span> Intent<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+            context<span class="token punctuation">,</span>
+            <span class="token string">&quot;Vibraci&#xF3;n activa porque el tiempo se ha terminado&quot;</span><span class="token punctuation">,</span>
+            Toast<span class="token punctuation">.</span>LENGTH_LONG
+        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> vibrator <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getSystemService</span><span class="token punctuation">(</span>Context<span class="token punctuation">.</span>VIBRATOR_SERVICE<span class="token punctuation">)</span> 
+                                                       <span class="token keyword keyword-as">as</span> Vibrator
+        vibrator<span class="token punctuation">.</span><span class="token function">vibrate</span><span class="token punctuation">(</span>VibrationEffect<span class="token punctuation">.</span><span class="token function">createOneShot</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">,</span> 
+                                       VibrationEffect<span class="token punctuation">.</span>DEFAULT_AMPLITUDE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Com veiem implementem el m&#xE8;tode <strong><code>onRecive()</code></strong> que rep el context des d&apos;on &#xE9;s cridat i l&apos;intent que el disparar&#xE0;. Visualitzem un toast per a indicar que el temps d&apos;espera va finalitzar i que el mode vibraci&#xF3; s&apos;activar&#xE0;. A continuaci&#xF3; activem la vibraci&#xF3; durant huit segons. Per a aix&#xF2; definim un objecte de tipus <strong><code>Vibrator</code></strong> que ho inicialitzem amb el servici propi del sistema i cridem al m&#xE8;tode <strong><code>vibrate()</code></strong> del dit objecte.</p>
+</blockquote>
+<p>En l&apos;activity principal nom&#xE9;s hem d&apos;implementar la pulsaci&#xF3; del bot&#xF3;, s&apos;arreplegar&#xE0; la informaci&#xF3; introdu&#xEF;da en l&apos;EditText, es programar&#xE0; una alarma i quan esta acabe s&apos;invocar&#xE0; al broadcast receiver definit anteriorment. Vegem el codi:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0,[13-15],[16-19]]}" class="language-kotlin" data-line="0,13-15,16-19"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span><span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> texto<span class="token operator">:</span>EditText
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        texto<span class="token operator">=</span>findViewById<span class="token operator">&lt;</span>EditText<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>editText<span class="token punctuation">)</span>
+        texto<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span>
+        findViewById<span class="token operator">&lt;</span>Button<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span>  <span class="token function">activar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">activar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> tiempo <span class="token operator">=</span> texto<span class="token punctuation">.</span>text<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>BroadCastAlarma<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> pendingIntent <span class="token operator">=</span> PendingIntent<span class="token punctuation">.</span><span class="token function">getBroadcast</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> 
+                                                 REQUESTCODE<span class="token punctuation">,</span> intent<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> alarmManager <span class="token operator">=</span> <span class="token function">getSystemService</span><span class="token punctuation">(</span>ALARM_SERVICE<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> AlarmManager
+        alarmManager<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>AlarmManager<span class="token punctuation">.</span>RTC_WAKEUP<span class="token punctuation">,</span> 
+                         System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> tiempo <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+                         pendingIntent<span class="token punctuation">)</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> <span class="token string">&quot;Has fijado la alarma en &quot;</span><span class="token operator">+</span>tiempo<span class="token operator">+</span><span class="token string">&quot;segundos&quot;</span><span class="token punctuation">,</span>
+                                        Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span><span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> REQUESTCODE<span class="token operator">=</span><span class="token number">1111</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13-15" data-start="13" data-end="15">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16-19" data-start="16" data-end="19">
+
+
+
+</div></div></pre><blockquote>
+<p>&#x1F4CC;La primera cosa que fem &#xE9;s recuperar la refer&#xE8;ncia a l&apos;EditText i parseamos el contingut a Integer. Visualitzem un toast per a informar que es va a establir el compte arrere en els segons especificats en l&apos;EditText.<br>
+<strong>&#xA1;&#xA1;Lo interessant!!</strong> Definim un intent que apunta al nostre broadcast receiver. Despr&#xE9;s fem &#xFA;s d&apos;un PendingIntent en el que s&apos;arreplega el context en qu&#xE8; este objecte s&apos;executar&#xE0; quan siga at&#xE9;s, un codi d&apos;identificaci&#xF3;, l&apos;intent on es definix l&apos;acci&#xF3; i un flag. Nosaltres ho fem amb <strong><code>PendinIntent.getBroadcast()</code></strong>, perqu&#xE8; el que hem definit o qui va atendre esta petici&#xF3; est&#xE0; en un BroadcastReceiver <strong>L&#xED;neas 13 - 15</strong>.Usar&#xED;amos <strong><code>nombrePendinIntent.getActivity()</code></strong> si inici&#xE0;rem una activity i <strong><code>nombrePendinIntent.getService ()</code></strong> per a un servicio.*<br>
+Finalment creguem un objecte AlarmManager inicialitzant-ho amb el servici propi del sistema (ALARM_SERVICE). Amb el m&#xE8;tode set() definim el temps en qu&#xE8; ser&#xE0; llan&#xE7;ada l&apos;alarma (i segons despr&#xE9;s de l&apos;actual) i el PendingIntent que resol la l&#xF2;gica de la nostra aplicaci&#xF3; i que s&apos;ha definit anteriorment <strong>L&#xED;neas 16 - 19</strong>.</p>
+</blockquote>
+<blockquote>
+<p>&#x26A0;&#xFE0F; Per a provar esta aplicaci&#xF3; &#xE9;s necessari un terminal real i no l&apos;emulador, ja que este &#xFA;ltim no pot reproduir la vibraci&#xF3;.</p>
+</blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prova l&apos;exemple del BroadcastReceiver</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Seguix l&apos;exercici resolt que mostra un Toast indicant si s&apos;ha conectado/desconectado el dispositiu a l&apos;alimentaci&#xF3;</span></p>
+<h4 class="mume-header" id="workmanager">WorkManager</h4>
+
+<p>Android <a href="https://developer.android.com/topic/libraries/architecture/workmanager?hl=es">WorkManager</a> &#xE9;s una biblioteca de processament que s&apos;utilitza per a executar tasques en segon pla que haurien d&apos;executar-se de forma garantida, per&#xF2; no necess&#xE0;riament de forma immediata. Amb WorkManager podem posar en cua nostre processament en segon pla incl&#xFA;s quan l&apos;aplicaci&#xF3; no s&apos;est&#xE0; executant o el dispositiu es reinicia per alguna ra&#xF3;. WorkManager tamb&#xE9; ens permet definir les restriccions necess&#xE0;ries per a executar la tasca, per exemple, la disponibilitat de la xarxa abans d&apos;iniciar la tasca en segon pla.</p>
+<p>Android WorkManager &#xE9;s part d&apos;Android Jetpack i &#xE9;s perfecta per a usar quan la tasca:</p>
+<ol>
+<li>No necessita executar-se en un moment espec&#xED;fic</li>
+<li>Pot ajornar-se la seua execuci&#xF3;</li>
+<li>Es necessita que s&apos;execute incl&#xFA;s despr&#xE9;s que es tancament l&apos;aplicaci&#xF3; o es reinicie el dispositiu.</li>
+<li>Ha de complir amb limitacions com el subministrament de bateria o la disponibilitat de la xarxa abans de l&apos;execuci&#xF3;.</li>
+</ol>
+<p>Per a poder treballar amb <strong><code>WorkManager</code></strong> ser&#xE0; necessari incloure la implementaci&#xF3; seg&#xFC;ent:</p>
+<pre data-role="codeBlock" data-info="json" class="language-json">   implementation &apos;androidx.work<span class="token operator">:</span>work-runtime-ktx<span class="token operator">:</span><span class="token number">2.6</span>.<span class="token number">0</span>&apos;
+</pre><h5 class="mume-header" id="crear-un-treball">Crear un treball</h5>
+
+<p>Per a crear un treball d&apos;este tipus, s&apos;haur&#xE0; d&apos;implementar una classe que herete de <strong><code>Worker</code></strong> i anul&#xB7;lar el seu m&#xE8;tode <strong><code>doWork ()</code></strong> on afegirem el codi que vullguem que s&apos;execute en segon pla (a difer&#xE8;ncia dels servicis, no caldr&#xE0; crear cap fil ja que s&apos;encarrega el sistema)</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token keyword keyword-class">class</span> <span class="token function">WorkManager</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
+       <span class="token keyword keyword-for">for</span><span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">0</span><span class="token operator">..</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+           Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">}</span>
+        <span class="token keyword keyword-var">var</span> intento<span class="token operator">=</span><span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        intento<span class="token punctuation">.</span><span class="token function">setComponent</span><span class="token punctuation">(</span>
+            <span class="token function">ComponentName</span><span class="token punctuation">(</span><span class="token string">&quot;com.ejemplos.b10.ejemploviewmodelcorrutinas&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;com.ejemplos.b10.ejemploviewmodelcorrutinas.MainActivity&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment">//Se a&#xF1;ade el Flag para que se pueda abrir una activity</span>
+        <span class="token comment">// desde un hilo en segundo plano</span>
+        intento<span class="token punctuation">.</span><span class="token function">addFlags</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>FLAG_ACTIVITY_NEW_TASK<span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intento<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+            <span class="token function">startActivity</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span>intento<span class="token punctuation">,</span><span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> Result<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Este exemple crea una treball que realitza un retard de 5 segons i llan&#xE7;a un Intent per a obrir una altra aplicaci&#xF3;. Com es pot veure tot el codi est&#xE0; implementat en el m&#xE8;tode <strong><code>doWork()</code></strong>.</p>
+</blockquote>
+<h5 class="mume-header" id="iniciar-un-treball">Iniciar un treball</h5>
+
+<p>Este tipus de treballs permet definir si volem el fil com a tasca &#xFA;nica o peri&#xF2;dica cada <strong><code>X</code></strong> temps. Per a aix&#xF2; s&apos;usen dos classes distintes <strong><code>OneTimeWorkRequestBuilder ()</code></strong> i <strong><code>PeriodicWorkRequestBuilder()</code></strong>. Vegem exemples de la creaci&#xF3; de treballs dels dos tipus:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> work <span class="token operator">=</span> OneTimeWorkRequestBuilder<span class="token operator">&lt;</span>MiWorkManager<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> workPeriodico <span class="token operator">=</span>PeriodicWorkRequestBuilder<span class="token operator">&lt;</span>MiWorkManager<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>MINUTES<span class="token punctuation">)</span>
+                                                           <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>En el cas de tasca &#xFA;nica no hi ha res a explicar, en canvi de la peri&#xF2;dica podem dir que li entra com a primer argument l&apos;interval que ha de passar fins que es torne a realitzar la seg&#xFC;ent iteraci&#xF3; i el segon argument especifica les unitats de l&apos;anterior (en este cas la tasca es repetir&#xE0; cada 16 minuts) .</p>
+<div style="page-break-after:always;"></div>
+<blockquote>
+<p>&#x270B; Alguns punts importants a tindre en compte al treballar amb <strong><code>WorkManager</code></strong> son:</p>
+<ul>
+<li>La primera execuci&#xF3; ocorre immediatament despr&#xE9;s que es complixen les restriccions mencionades per la sol&#xB7;licitud de treball</li>
+<li>El treball es pot encadenar amb altres sol&#xB7;licituds de treball.</li>
+<li>Si no es cancel&#xB7;la es continuar&#xE0; executant fins que acabe.</li>
+</ul>
+<p>Adem&#xE1;s de l&apos;anterior en cas de treballs de tipus peri&#xF2;dics, <strong><code>PeriodicWorkRequest</code></strong>, tamb&#xE9; es tindr&#xE0; en compte que:</p>
+<ul>
+<li>El treball s&apos;executa diverses vegades.</li>
+<li>Si no es cancel&#xB7;la es continuar&#xE0; executant peri&#xF2;dicament.</li>
+<li>La seg&#xFC;ent execuci&#xF3; ocorre despr&#xE9;s que transc&#xF3;rrega el per&#xED;ode de temps indicat en els arguments.</li>
+<li>L&apos;interval m&#xED;nim de repetici&#xF3; &#xE9;s de <em>15 minutos</em>.</li>
+<li>El treball no es pot encadenar amb altres sol&#xB7;licituds de treball.</li>
+<li>L&apos;interval de temps entre 2 intervals peri&#xF2;dics pot diferir segons les restriccions d&apos;optimitzaci&#xF3; del sistema operatiu.</li>
+</ul>
+</blockquote>
+<p>Una vegada creat l&apos;objecte, per a executar la sol&#xB7;licitud de treball necessitem cridar al m&#xE8;tode <strong><code>enqueue()</code></strong> des d&apos;una inst&#xE0;ncia de <strong><code>WorkManager</code></strong> i passar el <strong><code>WorkRequest</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> workPeriodico <span class="token operator">=</span> PeriodicWorkRequestBuilder<span class="token operator">&lt;</span>WorkPeriodico<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>MINUTES<span class="token punctuation">)</span>
+                                                               <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>workPeriodico<span class="token punctuation">)</span>
+</pre><p>El m&#xE8;tode <strong><code>enqueue()</code></strong> posa en cua una o m&#xE9;s <strong><code>WorkRequests</code></strong> perqu&#xE8; s&apos;executen en segon pla.</p>
+<h5 class="mume-header" id="funcionalitat-de-workmanager">Funcionalitat de WorkManager</h5>
+
+<p>Les inst&#xE0;ncies de <strong><code>WorkManager</code></strong> proporcionen una s&#xE8;rie de funcionalitats per a manejar-nos amb les tasques. Per exemple, podem controlar si les tasques estan cancel&#xB7;lades o cancel&#xB7;lar-les si ens interessa, etc:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> workManager <span class="token operator">=</span> WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> id<span class="token operator">:</span>UUID
+id <span class="token operator">=</span> workPeriodico<span class="token punctuation">.</span>id
+<span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token operator">!</span>workManager<span class="token punctuation">.</span><span class="token function">getWorkInfoById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">.</span>isCancelled<span class="token punctuation">)</span>
+                 workManager<span class="token punctuation">.</span><span class="token function">cancelWorkById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+<span class="token comment">//En este caso se cancelan todas las tareas lanzadas por esta actividad</span>
+workManager<span class="token punctuation">.</span><span class="token function">cancelAllWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Quan cancel&#xB7;lem un treball, este no es cancel&#xB7;la autom&#xE0;ticament sin&#xF3; que &#xE9;s el sistema el que s&apos;encarrega d&apos;informar de la cancel&#xB7;laci&#xF3;. Pel que ser&#xE0; tasca del programador atendre a la informaci&#xF3; del sistema per a parar el treball. A&#xE7;&#xF2; es fa des de la classe que hereta de <strong><code>WorkManager</code></strong>, per exemple de les manera seg&#xFC;ent:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">MiUnicoWork</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+     <span class="token comment">//isStopped devolver&#xE1; true cuando el sistema informe</span>
+     <span class="token comment">//que el trabajo ha sido cancelado desde c&#xF3;digo</span>
+        <span class="token keyword keyword-while">while</span><span class="token punctuation">(</span><span class="token operator">!</span>isStopped<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;DATOS&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Realizar tarea larga&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token keyword keyword-return">return</span> Result<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h5 class="mume-header" id="restriccions-de-workmanager">Restriccions de WorkManager</h5>
+
+<p>Una de les avantatges que proporciona esta classe, &#xE9;s la de permetre <a href="https://developer.android.com/topic/libraries/architecture/workmanager/how-to/define-work#work-constraints">restringir</a> la funcionalitat de la tasca fins que es complisquen una s&#xE8;rie de condicions que se li hagen associat. Logicamente, estes restriccions s&apos;imposaran al ser necessaris alguns requisits per a la funcionalitat de l&apos;app. Per exemple, si es necessita Internet per a realitzar una desc&#xE0;rrega de dades. En el seg&#xFC;ent codi s&apos;han afegit totes les restriccions possibles:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token comment">//Se construyen las restricciones</span>
+<span class="token keyword keyword-val">val</span> constraints <span class="token operator">=</span> Constraints<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresBatteryNotLow</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiredNetworkType</span><span class="token punctuation">(</span>NetworkType<span class="token punctuation">.</span>CONNECTED<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresCharging</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresStorageNotLow</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setRequiresDeviceIdle</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> workUnico <span class="token operator">=</span> OneTimeWorkRequestBuilder<span class="token operator">&lt;</span>MiUnicoWork<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//Se a&#xF1;aden al trabajo</span>
+workUnico<span class="token punctuation">.</span><span class="token function">setConstraints</span><span class="token punctuation">(</span>constraints<span class="token punctuation">)</span>
+WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>workUnico<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><h5 class="mume-header" id="comunicaci%C3%B3-amb-workmanager">Comunicaci&#xF3; amb WorkManager</h5>
+
+<p>Si volem comunicar informaci&#xF3; a la tasca, ja siga com a dades d&apos;entrada abans de la seua execuci&#xF3; o com a dades d&apos;eixida a l&apos;acabar, s&apos;utilitza la classe <strong><code>Data.Builder</code></strong>. La informaci&#xF3; s&apos;afig a l&apos;objecte per mitj&#xE0; del ja conegut m&#xE8;tode del mapa clau-valor.<br>
+Per a accedir a estes dades d&apos;entrada dins del Worker, s&apos;usa la propietat <strong><code>inputData</code></strong> dins del m&#xE8;tode <strong><code>doWork()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> inputData <span class="token operator">=</span> Data<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">putString</span><span class="token punctuation">(</span><span class="token string">&quot;USER&quot;</span><span class="token punctuation">,</span> user<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">putString</span><span class="token punctuation">(</span><span class="token string">&quot;PASS&quot;</span><span class="token punctuation">,</span> pass<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> workUnico <span class="token operator">=</span> OneTimeWorkRequestBuilder<span class="token operator">&lt;</span>MiUnicoWork<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+workUnico<span class="token punctuation">.</span><span class="token function">setInputData</span><span class="token punctuation">(</span>inputData<span class="token punctuation">)</span>
+WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">enqueue</span><span class="token punctuation">(</span>workUnico<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">MiUnicoWork</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-val">val</span> user <span class="token operator">=</span> inputData<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;USER&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> pass <span class="token operator">=</span> inputData<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;PASS&quot;</span><span class="token punctuation">)</span>
+     <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token keyword keyword-return">return</span> Result<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Exercici resolt nombres primers.<br>
+</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Exercici proposat temporitzador amb vibraci&#xF3;.<br>
+</span></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
