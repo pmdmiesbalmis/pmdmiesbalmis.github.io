@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>Ejercicio Propuesto Cron&#xF3;metro</title>
+      <title>PMDM 2&#xBA; DAM  Bloc 10. Exercici Resolt BroadCast Alimentaci&#xF3;</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -264,23 +264,112 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="ejercicio-propuesto-cron%C3%B3metro">Ejercicio Propuesto Cron&#xF3;metro</h1>
+      <style>/* 
+Añade 
 
-<p><a href="./ejercicio_Propuesto_Cronometro.pdf">Descargar estos apuntes</a></p>
-<p>El ejercicio tratar&#xE1; de crear un nuevo proyecto Cronometro, en el cual la pantalla inicial tendr&#xE1; el siguiente aspecto:</p>
-<div align="center">
-    <img height="200" src="./imagenes/imagen1.png">
-</div>
-<p>Cada bot&#xF3;n tendr&#xE1; su evento correspondiente a las acciones deseadas:</p>
-<ul>
-<li>Start, iniciar&#xE1; la visualizaci&#xF3;n de los segundos, minutos y horas transcurridos desde su pulsaci&#xF3;n</li>
-<li>Stop pausar&#xE1; el cron&#xF3;metro (cancelaremos la corrutina). Reanudar seguir&#xE1; el conteo desde el segundo en el que se ha pausado, con anterioridad (se crear&#xE1; una corrutina nueva, pero iniciando desde el tiempo en el que se hab&#xED;a parado)</li>
-<li>Reset parar&#xE1; el hilo de conteo y reiniciar&#xE1; el contador a 0.</li>
-</ul>
-<p>Para hacer la pr&#xE1;ctica deberemos crear una Corrutina que se encargue de incrementar en un segundo un contador y de mostrar el resultado en un TextView.</p>
-<div align="center">
-    <img height="100" src="./imagenes/imagen2.png">
-</div>
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="bloc-10-exercici-resolt-broadcast-alimentaci%C3%B3">Bloc 10 . Exercici Resolt BroadCast Alimentaci&#xF3;</h1>
+
+<p><a href="./EjercicioResueltoBroadCastAlimentacion_val.pdf">Descarregar este exercici</a></p>
+<p>Definirem un broadcast receiver que es quede escoltant si es conecta/desconecta el tel&#xE8;fon a l&apos;alimentaci&#xF3; i que mostre un Toast indicant el que ha ocorregut. Perqu&#xE8; no es mostre una activitat durant l&apos;execuci&#xF3;, la tancarem en l&apos;instant d&apos;iniciar el receiver. El codi del receiver ser&#xE0; el seg&#xFC;ent, crearem la classe <strong>MiBroadcastReceiver.kt</strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MiBroadcastReceiver <span class="token operator">:</span> <span class="token function">BroadcastReceiver</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onReceive</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span> intent<span class="token operator">:</span> Intent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> action <span class="token operator">=</span> intent<span class="token punctuation">.</span>action
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_POWER_CONNECTED <span class="token operator">==</span> action<span class="token punctuation">)</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;Alimentaci&#xF3;n conectada&quot;</span><span class="token punctuation">,</span> 
+            Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_POWER_DISCONNECTED <span class="token operator">==</span> action<span class="token punctuation">)</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;Alimentaci&#xF3;n desconectada&quot;</span><span class="token punctuation">,</span> 
+            Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Com es pot veure en el codi, l&apos;&#xFA;nica cosa que fem en el broadcastReceiver &#xE9;s controlar les accions de l&apos;intent d&apos;entrada, si coincidixen amb les especificades per a estos casos es mostra el missatge corresponent.</p>
+</blockquote>
+<p>D&apos;altra banda, en l&apos;activitat principal tindrem el codi seg&#xFC;ent:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> filter <span class="token operator">=</span> <span class="token function">IntentFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        filter<span class="token punctuation">.</span><span class="token function">addAction</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_POWER_CONNECTED <span class="token punctuation">)</span>
+        filter<span class="token punctuation">.</span><span class="token function">addAction</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_POWER_DISCONNECTED <span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> rcv <span class="token operator">=</span> <span class="token function">MiBroadcastReceiver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">registerReceiver</span><span class="token punctuation">(</span>rcv<span class="token punctuation">,</span> filter<span class="token punctuation">)</span>
+        <span class="token function">finish</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; A partir de les &#xFA;ltimes versions d&apos;android, <a href="https://developer.android.com/guide/components/activities/background-starts">no es permet iniciar activitats des de segon pla</a> pel que llancem l&apos;activitat i la finalitzem a l&apos;instant, el broadcast quedar&#xE0; en segon pla fins que es desinstal&#xB7;le l&apos;activitat. Afegim l&apos;acci&#xF3; a l&apos;IntentFilter i registrem el BroadCastReceiver.</p>
+</blockquote>
 
       </div>
       
