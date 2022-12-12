@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
       
       
       
@@ -277,7 +277,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -373,12 +373,15 @@ justo después del front matter
 <p>Cuando creamos coroutines asumimos de manera impl&#xED;cita dos aspectos muy importantes: El &#xE1;mbito (CoroutineScope y GlobalScope) y el contexto (CoroutineContext).</p>
 <p>El uso de <strong><code>GlobalScope</code></strong> permite crea corrutinas de nivel superior, esto quiere decir que tienen la capacidad de vivir hasta que termine la aplicaci&#xF3;n y es trabajo del desarrollador el control para su cancelaci&#xF3;n, por lo que no se aconseja usar este &#xE1;mbito.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">ejemploGlobalScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-           GlobalScope<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-             <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span>
+               GlobalScope<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">)</span>
+                <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                    <span class="token string">&quot;GlobalScope despues 8 segundos&quot;</span><span class="token punctuation">,</span>
+                Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
             Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">requireActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;GlobalScope&quot;</span><span class="token punctuation">,</span>
-            Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 </pre><blockquote>
@@ -517,7 +520,7 @@ Cuando <strong>launch</strong> se usa sin par&#xE1;metros, hereda el contexto (y
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x1F4CC; lanzamos el <strong><code>async</code></strong> dentro de una corrutina launch con contesto Main, para poder pintar cada segundo el texto que nos interese (en este caso un contador de 1 a 5). Cambiamos el Dispacher a IO para realizar el retardo y devolvemos una cadena como respuesta del <strong><code>async</code></strong>. Cuando termine el trabajo la corrutina, recuperaremos la cadena con <strong><code>await</code></strong> y se lanzar&#xE1; el Toast que la utiliza.</p>
+<p>&#x1F4CC; lanzamos el <strong><code>async</code></strong> dentro de una corrutina launch con contexto Main, para poder pintar cada segundo el texto que nos interese (en este caso un contador de 1 a 5). Cambiamos el Dispacher a IO para realizar el retardo y devolvemos una cadena como respuesta del <strong><code>async</code></strong>. Cuando termine el trabajo la corrutina, recuperaremos la cadena con <strong><code>await</code></strong> y se lanzar&#xE1; el Toast que la utiliza.</p>
 </blockquote>
 </li>
 </ul>
