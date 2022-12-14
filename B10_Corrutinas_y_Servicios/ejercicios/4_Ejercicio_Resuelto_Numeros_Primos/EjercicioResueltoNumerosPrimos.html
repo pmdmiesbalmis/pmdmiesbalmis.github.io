@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
       
       
       
@@ -274,7 +274,7 @@ justo después del front matter
   font-family: 'Catamaran';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/catamaran/v8/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
 .contenedor {
   display: flex;
@@ -351,7 +351,7 @@ justo después del front matter
 </div>
 <p>Empecemos definiendo el c&#xF3;digo de nuestro trabajo que llamaremos <strong>GeneradorNumeros.kt</strong>. Hay que tener en cuenta que cuando se implementa un <strong><code>WorkManager</code></strong> como una clase derivada de <strong><code>Worker</code></strong> es necesario definir el m&#xE9;todo <strong><code>doWork()</code></strong>, es aqu&#xED; donde se implementan las instrucciones que permiten proporcionar el servicio a trav&#xE9;s de un hilo diferente.</p>
 <p>El c&#xF3;digo de nuestro servicio:</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2,[4-5],6, 7,9,15]}" class="language-kotlin" data-line="2,4-5,6,7,9,15"><span class="token keyword keyword-class">class</span> <span class="token function">GeneradorNumeros</span><span class="token punctuation">(</span><span class="token keyword keyword-var">var</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> <span class="token function">GeneradorNumeros</span><span class="token punctuation">(</span><span class="token keyword keyword-var">var</span> context<span class="token operator">:</span> Context<span class="token punctuation">,</span> workerParams<span class="token operator">:</span> WorkerParameters<span class="token punctuation">)</span> <span class="token operator">:</span>
     <span class="token function">Worker</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> workerParams<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Result <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> datos<span class="token operator">=</span>inputData
@@ -370,56 +370,12 @@ justo después del front matter
         <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> ACCION <span class="token operator">=</span> <span class="token string">&quot;com.ejemplos.b10.a3_ergeneradornumerosworkmanager.recibirNumero&quot;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4-5" data-start="4" data-end="5">
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x1F4CC; <strong>L&#xED;nea 2</strong> heredamos de la clase Worker que nos obligar&#xE1; a implementar el m&#xE9;todo necesario. En el m&#xE9;todo doWork() se codifica la funcionalidad del trabajo. <strong>L&#xED;nea 4 - 5</strong> aqu&#xED; recuperamos un Data para extraer la informaci&#xF3;n mandada al crear el trabajo, en este caso el valor de inicio del contador. Recordad que este lo &#xFA;nico que hace es generar n&#xFA;meros (bucle con contador), es en el broadcast donde se realizar&#xE1;n las comprobaciones de si es o no primo y se comunicar&#xE1; a la activity principal. Observar que la constante ACCION del intent <strong>i</strong>, <strong>L&#xED;nea 7</strong> tiene como valor una cadena &#xFA;nica que identificar&#xE1; el trabajo en el <strong><code>BroadcastReceiver</code></strong>, usamos una variable est&#xE1;tica para hacerlo <strong>L&#xED;nea 15</strong>. Mandamos el Broadcast pasando como par&#xE1;metros el valor del contador <strong>L&#xED;nea 9</strong>. Para cada iteraci&#xF3;n se mandar&#xE1; el broadcast, por lo que ir&#xE1;n llegando al receiver los n&#xFA;meros.</p>
 </blockquote>
 <div style="page-break-after:always;"></div>
 <p>Veamos ahora la implementaci&#xF3;n de la <strong>MainActivity.kt</strong>:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> mreceiver<span class="token operator">:</span> MyReceiver
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> t1<span class="token operator">:</span> TextView
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> t2<span class="token operator">:</span> TextView
@@ -437,9 +393,9 @@ justo después del front matter
         b2<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span> <span class="token function">pararServicio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Por ahora nada que comentar, solamente creamos el broadcast receiver y asociamos elementos a las view del layout. Implementamos tambi&#xE9;n la funcionalidad de los botones, llamando a dos m&#xE9;todos que implementaremos a continuaci&#xF3;n.Nos crearemos tambi&#xE9;n una propiedad para guardar el id del trabajo y poder acceder para su cancelaci&#xF3;n.</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>Por ahora nada que comentar, solamente creamos el broadcast receiver y asociamos elementos a las view del layout. Implementamos tambi&#xE9;n la funcionalidad de los botones, llamando a dos m&#xE9;todos que implementaremos a continuaci&#xF3;n.Nos crearemos tambi&#xE9;n una propiedad para guardar el id del trabajo y poder acceder para su cancelaci&#xF3;n.</p>
 <p>El bot&#xF3;n de inicio de servicio tiene el siguiente c&#xF3;digo:</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2,5,8,[9-10],[11-14],15,16]}" class="language-kotlin" data-line="2,5,8,9-10,11-14,15,16"><span class="token keyword keyword-fun">fun</span> <span class="token function">iniciarServicio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-fun">fun</span> <span class="token function">iniciarServicio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token operator">!</span>iniciado<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             iniciado<span class="token operator">=</span><span class="token boolean">true</span>
@@ -458,81 +414,11 @@ justo después del front matter
         <span class="token keyword keyword-else">else</span>  Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> <span class="token string">&quot;El trabajo ya se ha lanzado&quot;</span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="9-10" data-start="9" data-end="10">
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="11-14" data-start="11" data-end="14">
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x1F4CC;<strong>L&#xED;nea 2</strong> se comprueba si se hab&#xED;a iniciado con anterioridad el trabajo, para no lanzar otro si antes no ha sido parado. <strong>L&#xED;nea 5</strong> se crea el <strong><code>IntentFilter</code></strong> para registrar el receiver con una cadena &#xFA;nica que permita al BroadcastReceiver reconocer de donde viene la informaci&#xF3;n, registramos el receiver a&#xF1;adiendo el filter creado. <strong>L&#xED;nea  9-10</strong> se crea un <strong><code>Data.Build</code></strong> para pasar la informaci&#xF3;n necesaria al <strong><code>Work</code></strong>, en este caso un entero para que el contador conserve el n&#xFA;mero por el que estaba funcionando, aunque se reinicie el trabajo. <strong><code>L&#xED;nea 11-14</code></strong> se crea un trabaja unico, se a&#xF1;aden los datos anteriores y se construye. <strong><code>L&#xED;nea 15</code></strong> se guarda el id generado por este trabajo para poder cancelarlo posteriormente. <strong><code>L&#xED;nea 16</code></strong> se encola el trabajo para que comience su funcionamiento cuando el sistema pueda hacerlo.</p>
 </blockquote>
 <p>El bot&#xF3;n de parada de servicio tiene el siguiente c&#xF3;digo:</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2,4,6 ]}" class="language-kotlin" data-line="2,4,6"><span class="token keyword keyword-fun">fun</span> <span class="token function">pararServicio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-fun">fun</span> <span class="token function">pararServicio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
              <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>iniciado<span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     iniciado<span class="token operator">=</span><span class="token boolean">false</span>
                     WorkManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token label symbol">MainActivity@</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
@@ -543,25 +429,14 @@ justo después del front matter
                <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> <span class="token string">&quot;El Trabajo ya estaba detenido&quot;</span><span class="token punctuation">,</span> 
                                     Toast<span class="token punctuation">.</span>LENGTH_LONG<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div></pre><blockquote>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
 <p>&#x1F4CC;<strong>L&#xED;nea 2</strong>, comprobamos que el servicio todav&#xED;a no est&#xE1; parado. Localizamos el servicio y lo cancelamos <strong>L&#xED;nea 4</strong> y anulamos el registro del <strong><code>BroadcastService()</code></strong> <strong>L&#xED;nea 6</strong>.</p>
 </blockquote>
 <p>Pasemos ahora a definir el c&#xF3;digo del receptor <strong>MyReceiver</strong>, lo haremos como clase interna a MainActivity.</p>
 <p>Cada vez que el trabajo genera un nuevo n&#xFA;mero, env&#xED;a un mensaje de broadcast a trav&#xE9;s de un <strong><code>IntentFilter</code></strong>. El receptor se registr&#xF3; para atender mensajes a trav&#xE9;s de un IntentFilter donde se especifica la acci&#xF3;n que va a atender, es por esto que cada vez que reciba un mensaje el receptor MyReceiver disparar&#xE1; el m&#xE9;todo <strong><code>onReceive()</code></strong>. Se obtendr&#xE1;n los datos extras del intent y se actualizar&#xE1;n los dos TextView. Uno de ellos se actualiza siempre y otro solamente si el contador que se ha pasado en un n&#xFA;mero primo.<br>
 Recordad que en el c&#xF3;digo de la activity principal se pasan al constructor del receptor dos par&#xE1;metros, que son las referencias de las vistas que tenemos que actualizar.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">MyReceiver</span><span class="token punctuation">(</span><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> t1<span class="token operator">:</span> TextView<span class="token punctuation">,</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> t2<span class="token operator">:</span> TextView<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">BroadcastReceiver</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> <span class="token function">MyReceiver</span><span class="token punctuation">(</span><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> t1<span class="token operator">:</span> TextView<span class="token punctuation">,</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> t2<span class="token operator">:</span> TextView<span class="token punctuation">)</span> <span class="token operator">:</span> 
+<span class="token function">BroadcastReceiver</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-fun">fun</span> <span class="token function">esPrimo</span><span class="token punctuation">(</span>n<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
             <span class="token keyword keyword-var">var</span> i<span class="token operator">:</span> Int
             i <span class="token operator">=</span> <span class="token number">2</span>
@@ -581,7 +456,7 @@ Recordad que en el c&#xF3;digo de la activity principal se pasan al constructor 
             t2<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">&quot;0&quot;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
       </div>
       
       
