@@ -1,0 +1,824 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 11. Persist&#xE8;ncia de Dades I SQLite</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview .slides > section {
+  height: 100%;
+  font-size: 90%;
+  overflow-y: auto !important;
+}
+.markdown-preview.markdown-preview .slide code {
+  color: yellow;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="apunts">Apunts</h1>
+
+<p>Descarregar aquest apunts <a href="./tema11_1_Persistencia_de_Datos_I_sqlite_val.pdf">pdf</a> y <a href="./tema11_1_Persistencia_de_Datos_I_sqlite_val.html">html</a></p>
+<h1 class="mume-header undefined" id="tema-111-persist%C3%A8ncia-de-dades-i-sqlite">Tema 11.1. Persist&#xE8;ncia de Dades I SQLite</h1>
+
+<h2 class="mume-header undefined" id="%C3%ADndex">&#xCD;ndex</h2>
+
+<ol>
+<li><a href="#acc%C3%A9s-a-bases-de-dades-locals-sqlite">Acc&#xE9;s a bases de dades locals. SQLite</a>
+<ol>
+<li><a href="#introducci%C3%B3">Introducci&#xF3;</a></li>
+<li><a href="#creaci%C3%B3-i-obertura-de-la-bd">Creaci&#xF3; i obertura de la BD</a></li>
+<li><a href="#acc%C3%A9s-i-modificaci%C3%B3-de-les-dades-en-la-bd">Acc&#xE9;s i modificaci&#xF3; de les dades en la BD</a>
+<ol>
+<li><a href="#acc%C3%A9s-a-la-bd-mitjan%C3%A7ant-sent%C3%A8ncies-sql">Acc&#xE9;s a la BD mitjan&#xE7;ant sent&#xE8;ncies sql</a></li>
+<li><a href="#acc%C3%A9s-a-la-bd-mitjan%C3%A7ant-sqlitedatabase">Acc&#xE9;s a la BD mitjan&#xE7;ant SQLiteDataBase</a></li>
+<li><a href="#recuperaci%C3%B3-de-dades-amb-rawquery">Recuperaci&#xF3; de dades amb rawQuery</a></li>
+<li><a href="#recuperaci%C3%B3-de-dades-amb-query">Recuperaci&#xF3; de dades amb query</a></li>
+</ol>
+</li>
+<li><a href="#%C3%BAs-de-simplecursoradapter">&#xDA;s de SimpleCursorAdapter</a>
+<ol>
+<li><a href="#cursors-amb-recyclerview">Cursors amb RecyclerView</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="acc%C3%A9s-a-bases-de-dades-locals-sqlite">Acc&#xE9;s a bases de dades locals. SQLite</h2>
+
+<h3 class="mume-header" id="introducci%C3%B3">Introducci&#xF3;</h3>
+
+<p>La plataforma Android proporciona dues eines principals per a l&apos;emmagatzematge i consulta de dades estructurades: la base de dades <strong>SQLite</strong> i <strong>Content Providers</strong> (ho treballarem en temes posteriors).</p>
+<p>Ens centrarem en <a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a>, encara que no entrarem ni en el disseny de BBDD relacionals ni en l&apos;&#xFA;s avan&#xE7;at de la BBDD. Per a con&#xE8;ixer tota la funcionalitat de SQLite es recomana usar la documentaci&#xF3; oficial.</p>
+<p>Per a l&apos;acc&#xE9;s a les bases de dades tindrem tres classes que hem de con&#xE8;ixer. La classe <strong><code>SQLiteOpenHelder</code></strong>, que encapsula totes les funcions de creaci&#xF3; de la base de dades i versions d&apos;aquesta. La classe <strong><code>SQLiteDatabase</code></strong>, que incorpora la gesti&#xF3; de taules i dades. I finalment la classe <strong><code>Cursor</code></strong>, que usarem per a moure&apos;ns pel *recordset que ens retorna una consulta <em>SELECT</em>.</p>
+<h3 class="mume-header" id="creaci%C3%B3-i-obertura-de-la-bd">Creaci&#xF3; i obertura de la BD</h3>
+
+<p>El m&#xE8;tode recomanat per a la creaci&#xF3; de la base de dades &#xE9;s estendre la classe <strong><code>SQLiteOpenHelder</code></strong> i sobreescriure els m&#xE8;todes <strong><code>onCreate</code></strong> i <strong><code>onUpgrade</code></strong>. El primer m&#xE8;tode s&apos;utilitza per a crear la base de dades per primera vegada i el segon per a actualitzacions d&apos;aquesta. Si la base de dades ja existeix i la seua versi&#xF3; actual coincideix amb la sol&#xB7;licitada, es realitzar&#xE0; la connexi&#xF3; a ella.</p>
+<p>Per a executar la sent&#xE8;ncia SQL utilitzarem el m&#xE8;tode <strong><code>execSQL</code></strong> proporcionat per la API per a SQLite d&apos;Android.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-inner">inner</span> <span class="token keyword keyword-class">class</span> <span class="token function">BDClientes</span><span class="token punctuation">(</span>
+        context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span>
+        name<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+        factory<span class="token operator">:</span> CursorFactory<span class="token operator">?</span><span class="token punctuation">,</span>
+        version<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">SQLiteOpenHelper</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> name<span class="token punctuation">,</span> factory<span class="token punctuation">,</span> version<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+     <span class="token keyword keyword-var">var</span> sentencia <span class="token operator">=</span>
+            <span class="token string">&quot;create table if not exists clientes&quot;</span> <span class="token operator">+</span> 
+            <span class="token string">&quot;(dni VARCHAR PRIMARY KEY NOT NULL, nombre TEXT, apellidos TEXT);&quot;</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">,</span> i<span class="token operator">:</span> Int<span class="token punctuation">,</span> i2<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> Si la base de dades existeix per&#xF2; la seua versi&#xF3; actual &#xE9;s anterior a la sol&#xB7;licitada, es dir&#xE0; autom&#xE0;ticament al m&#xE8;tode <strong><code>onUgrde()</code></strong>. Si la base de dades no existeix es diu autom&#xE0;ticament a <strong><code>onCreate()</code></strong>.</p>
+</blockquote>
+<h3 class="mume-header" id="acc%C3%A9s-i-modificaci%C3%B3-de-les-dades-en-la-bd">Acc&#xE9;s i modificaci&#xF3; de les dades en la BD</h3>
+
+<p>Una vegada creada la classe, instanciarem un objecte del tipus creat i usarem un dels dos seg&#xFC;ents m&#xE8;todes per a tindre acc&#xE9;s a la gesti&#xF3; de dades: <strong><code>getWritableDatabase()</code></strong> per a acc&#xE9;s d&apos;escriptura i <strong><code>getReadableDatabase()</code></strong> per a acc&#xE9;s de nom&#xE9;s lectura. En tots dos casos es retornar&#xE0; un objecte de la classe <strong><code>SQLiteDatabase</code></strong> per a l&apos;acc&#xE9;s a les dades.</p>
+<p>Per a realitzar una codificaci&#xF3; neta i reutilitzable, el millor &#xE9;s crear una classe amb tots els m&#xE8;todes que necessitem per a treballar amb la Base de dades, a m&#xE9;s &#xE9;s &#xFA;til tindre la classe derivada de SQLiteOpenHelper interna a aquesta.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">BDAdapter</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword keyword-private">private</span>  <span class="token keyword keyword-var">var</span> clientes<span class="token operator">:</span> BDClientes
+    
+  <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+        clientes <span class="token operator">=</span> <span class="token function">BDClientes</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;BDClientes&quot;</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  
+  <span class="token operator">..</span><span class="token punctuation">.</span> 
+
+  <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-inner">inner</span> <span class="token keyword keyword-class">class</span> <span class="token function">BDClientes</span><span class="token punctuation">(</span>
+        context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span>
+        name<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+        factory<span class="token operator">:</span> CursorFactory<span class="token operator">?</span><span class="token punctuation">,</span>
+        version<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">SQLiteOpenHelper</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> name<span class="token punctuation">,</span> factory<span class="token punctuation">,</span> version<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> sentencia <span class="token operator">=</span>
+            <span class="token string">&quot;create table if not exists clientes&quot;</span> <span class="token operator">+</span>
+            <span class="token string">&quot;(dni VARCHAR PRIMARY KEY NOT NULL, nombre TEXT, apellidos TEXT);&quot;</span>
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>sqLiteDatabase<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">,</span> i<span class="token operator">:</span> Int<span class="token punctuation">,</span> i2<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> Com podem veure en el codi, creguem un objecte del tipus de BDClientes amb el qual treballarem cridant al constructor BDClientes(), a aquest m&#xE8;tode li passem el context, el nom de la BBDD, un objecte cursor (amb valor null) i la versi&#xF3; de la BD que necessitem.</p>
+</blockquote>
+<p>Per a poder usar els m&#xE8;todes creats en la classe, tan sols instanciarem un objecte d&apos;aquesta passant-li el context (de tipus activity). Amb aquesta inst&#xE0;ncia podrem cridar a qualsevol dels m&#xE8;todes que crearem en la classe d&apos;utilitat.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> bdAdapter <span class="token operator">=</span> <span class="token function">BDAdapter</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+bdAdapter<span class="token punctuation">.</span><span class="token function">insertarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><h4 class="mume-header" id="acc%C3%A9s-a-la-bd-mitjan%C3%A7ant-sent%C3%A8ncies-sql">Acc&#xE9;s a la BD mitjan&#xE7;ant sent&#xE8;ncies sql</h4>
+
+<p>L&apos;acc&#xE9;s a la BBDD es fa en dues fases, primer s&apos;aconsegueix un objecte del tipus <strong><code>SQLiteDatabase</code></strong> i posteriorment usem les seues funcions per a gestionar les dades. Si hem obert correctament la base de dades llavors podrem comen&#xE7;ar amb les insercions, actualitzacions, esborrat, etc. No haurem d&apos;oblidar tancar l&apos;acc&#xE9;s a la BD, sempre que no s&apos;estiga usant un cursor.</p>
+<p><em>Per exemple, inserirem 10 registres en la nostra taula clients. Per a aix&#xF2; podrem crear un m&#xE8;tode en el <strong>BDAdapter</strong> semblant al seg&#xFC;ent:</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">insertarDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> dbClientes <span class="token operator">=</span>clientes<span class="token punctuation">.</span>writableDatabase
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>dbClientes <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">0</span><span class="token operator">..</span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> sentencia <span class="token operator">=</span> <span class="token string">&quot;INSERT INTO Clientes (dni, nombre, apellidos) VALUES&quot;</span> <span class="token operator">+</span>
+                        <span class="token string">&quot; (&apos;&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;&apos;,&apos;nombre&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;&apos;,&apos;apellido&quot;</span> <span class="token operator">+</span> i <span class="token operator">+</span> <span class="token string">&quot;&apos;);&quot;</span>
+                dbClientes<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            dbClientes<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; Val, i ara qu&#xE8;? On est&#xE0; la base de dades que acabem de crear? Com podem comprovar que tot ha anat b&#xE9; i que els registres s&apos;han inserit correctament?, en primer lloc vegem on s&apos;ha creat la nostra base de dades. Totes les bases de dades SQLite creades per aplicacions Android s&apos;emmagatzemen en la mem&#xF2;ria del tel&#xE8;fon en un fitxer amb el mateix nom de la base de dades situat en una ruta que segueix el seg&#xFC;ent patr&#xF3;: <strong>/data/data/paquete.java.de.la.aplicacion/databases/nom_base_dades</strong></p>
+<p>En el cas del nostre exemple, la base de dades s&apos;emmagatzemaria per tant en la ruta seg&#xFC;ent: <strong>/data/data/exemple.basedatos/databases/DBClientes</strong></p>
+<p>Per a comprovar que les dades s&apos;han gravat podem accedir de manera remota a l&apos;emulador a trav&#xE9;s de la seua consola de comandos (shell). Per&#xF2; &#xE9;s mes senzill obrir l&apos;arxiu creat amb un bloc de notes i donar una ullada al seu contingut.</p>
+</blockquote>
+<h4 class="mume-header" id="acc%C3%A9s-a-la-bd-mitjan%C3%A7ant-sqlitedatabase">Acc&#xE9;s a la BD mitjan&#xE7;ant SQLiteDataBase</h4>
+
+<p>La API d&apos;Android ens ofereix dos m&#xE8;todes per a accedir a les dades. El primer d&apos;ells ja ho hem vist, es tracta d&apos;executar sent&#xE8;ncies SQL a trav&#xE9;s de <strong>execSql</strong>. Aquest m&#xE8;tode t&#xE9; com a par&#xE0;metre una cadena amb qualsevol instrucci&#xF3; SQL v&#xE0;lida. L&apos;altra forma &#xE9;s utilitzar els m&#xE8;todes espec&#xED;fics <strong>insert(), update() i delete()</strong> de la classe <strong>SQLiteDatabase</strong>.</p>
+<p>Vegem a continuaci&#xF3; cadascun d&apos;aquests m&#xE8;todes.</p>
+<ul>
+<li>
+<p><strong><code>insert()</code></strong>: rep tres par&#xE0;metres <em><code>insert(table, nullColumnHack, values)</code></em>, el primer &#xE9;s el nom de la taula, el segon s&apos;utilitza en cas que necessitem inserir valors nuls en la taula &quot;nullColumnHack&quot; en aquest cas el deixarem passar ja que no l&apos;usarem i per tant el posem a *null i el tercer s&#xF3;n els valors del registre a inserir. Els valors a inserir els passarem al seu torn com a elements d&apos;una col&#xB7;lecci&#xF3; de tipus <strong><code>ContentValues</code></strong>. Aquests elements s&apos;emmagatzemen com a parelles <strong>clau-valor</strong>, on la clau ser&#xE0; el nom de cada camp i el valor ser&#xE0; la dada que s&apos;inserir&#xE0;.</p>
+</li>
+<li>
+<p><strong><code>update()</code></strong>: Pr&#xE0;cticament &#xE9;s igual que l&apos;anterior m&#xE8;tode per&#xF2; amb l&apos;excepci&#xF3; que ac&#xED; estem usant el m&#xE8;tode <em><code>update(table, values, whereClause, whereArgs)</code></em> per a actualitzar/modificar registres de la nostra taula. Aquest m&#xE8;tode ens demana el nom de la taula &quot;table&quot;, els valors a modificar/actualitzar &quot;values&quot; (ContentValues), una condici&#xF3; WHERE &quot;whereClause&quot; que ens serveix per a indicar-li que valor volem que actualitze i com a &#xFA;ltim par&#xE0;metre &quot;whereArgs&quot; podem passar-li els valors nous a inserir, en aquest cas no el necessitarem per tant el posem a null.</p>
+</li>
+<li>
+<p><strong><code>delete()</code></strong>: el m&#xE8;tode <em><code>delete(table, whereClause, whereArgs)</code></em> ens demana el nom de la taula &quot;table&quot;, el registre a esborrar &quot;whereClause&quot; que prendrem com a refer&#xE8;ncia la seua aneu i com a &#xFA;ltim par&#xE0;metre &quot;whereArgs&quot; els valors a esborrar.</p>
+</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden;">
+<td align="center">
+<div align="left">
+    Inserint amb ContentValues
+</div>
+</td>
+<td style="border:hidden;">
+<div>
+<img height="160" src="./imagenes/imagen8.png">
+</div>
+</td>
+</tr>
+<tr style="border:hidden;">
+<td style="border:hidden;">
+<div>
+<img height="130" src="./imagenes/imagen9.png">
+</div>
+</td>
+<td style="border:hidden;">
+<div align="left">
+    Modificant amb ContentValues
+</div>
+</td>
+</tr>
+<tr style="border:hidden;">
+<td align="center">
+<div align="left">
+    Borrant amb ContentValues
+</div>
+</td>
+<td style="border:hidden;">
+<div>
+<img height="70" src="./imagenes/imagen10.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>Els valors que hem deixat anteriorment com null s&#xF3;n realment arguments que podem utilitzar en la sent&#xE8;ncia SQL. Vegem-ho amb un exemple:</p>
+<div align="center">
+    <img height="130" src="./imagenes/imagen11.png">
+</div>
+<p>On les <code>?</code> indiquen els empla&#xE7;aments dels arguments.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Crea un exercici EjercicioResueltoBD en el qual proves el codi vist anteriorment: Creaci&#xF3; de la BD, inserir elements amb SQL i modificar, eliminar i inserir mitjan&#xE7;ant ContentValue.</span></p>
+<p>mde_sa</p>
+<h4 class="mume-header" id="recuperaci%C3%B3-de-dades-amb-rawquery">Recuperaci&#xF3; de dades amb rawQuery</h4>
+
+<div style="display: flex; justify-content: space-between; margin-top: 15px">
+<div style="width: 65%">
+<p>Existeixen dues maneres de recuperar informaci&#xF3; (SELECT de la base de dades), encara que ambdues es recolzen en el concepte de <strong>cursor</strong>, que &#xE9;s en definitiva l&apos;objecte que recull els resultats de la consulta.Completarem l&apos;exercici anterior, perqu&#xE8; ens permeta anar inserint registres en la BD i visualitzant-los en un listView.</p>
+<p>La primera manera d&apos;obtindre dades &#xE9;s utilitzar el m&#xE8;tode rawQuery() de la classe SQLiteDatabase. Aquest m&#xE8;tode rep com a par&#xE0;metre la sent&#xE8;ncia SQL, on s&apos;indiquen els camps a recuperar i els criteris de selecci&#xF3;.</p>
+</div>
+<div style="width: auto">
+    <img height="250px" src="./imagenes/imagen12.png">
+</div>
+</div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">seleccionarDatosSelect</span><span class="token punctuation">(</span>sentencia<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> listaCliente<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span>
+        <span class="token keyword keyword-val">val</span> dbClientes <span class="token operator">=</span> clientes<span class="token punctuation">.</span>readableDatabase
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>dbClientes <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> cursor<span class="token operator">:</span> Cursor <span class="token operator">=</span> dbClientes<span class="token punctuation">.</span><span class="token function">rawQuery</span><span class="token punctuation">(</span>sentencia<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+            listaCliente <span class="token operator">=</span> <span class="token function">getClientes</span><span class="token punctuation">(</span>cursor<span class="token punctuation">)</span>
+            dbClientes<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>listaCliente <span class="token operator">==</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token boolean">false</span> <span class="token keyword keyword-else">else</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-return">return</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+</pre><p>Evidentment, ara haurem de rec&#xF3;rrer el cursor i visualitzar les dades retornades. Per a aix&#xF2; es disposa dels m&#xE8;todes <strong><code>moveToFirst()</code></strong>, <strong><code>moveToNext()</code></strong>, <strong><code>moveToLast()</code></strong>, <strong><code>moveToPrevius()</code></strong>, <strong><code>isFirst()</code></strong> i <strong><code>isLast()</code></strong>.<br>
+Existeixen m&#xE8;todes espec&#xED;fics per a la recuperaci&#xF3; de dades getXXX(indexe), on XXX indica el tipus de dada (String, Blob, Float,&#x2026;) i el par&#xE0;metre &#xED;ndex permet recuperar la columna indicada en aquest, tenint en compte que comen&#xE7;a en 0.</p>
+<p>El m&#xE8;tode getClientes (implementat per nosaltres) &#xE9;s el que ens permet llegir les dades existents en la BD i portar-los al arrayList:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">getClientes</span><span class="token punctuation">(</span>cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span><span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> clientes<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span>
+    <span class="token keyword keyword-var">var</span> cliente<span class="token operator">:</span> Clientes
+    cursor<span class="token punctuation">.</span><span class="token function">moveToFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>cursor<span class="token punctuation">.</span><span class="token function">isAfterLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        clientes <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>cursor<span class="token punctuation">.</span><span class="token function">isAfterLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            cliente <span class="token operator">=</span>
+              <span class="token function">Clientes</span><span class="token punctuation">(</span>cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            clientes<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>cliente<span class="token punctuation">)</span>
+            cursor<span class="token punctuation">.</span><span class="token function">moveToNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token keyword keyword-return">return</span> clientes
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="recuperaci%C3%B3-de-dades-amb-query">Recuperaci&#xF3; de dades amb query</h4>
+
+<p>La segona manera de recuperar informaci&#xF3; de la BD &#xE9;s utilitzar el m&#xE8;tode <strong><code>query()</code></strong>. Rep com a par&#xE0;metres el nom de la taula, un string amb els camps a recuperar, un string on especificar les condicions del WHERE, un altre per als arguments si n&apos;hi haguera, un altre per al GROUP BY, un altre per a HAVING i finalment un altre per a ORDER BY.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">seleccionarDatosCodigo</span><span class="token punctuation">(</span>
+        columnas<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">,</span>
+        <span class="token keyword keyword-where">where</span><span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+        valores<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">,</span>
+        orderBy<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span> 
+    <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> listaCliente<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> dbClientes <span class="token operator">=</span> clientes<span class="token punctuation">.</span>readableDatabase
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>dbClientes <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+            <span class="token keyword keyword-val">val</span> cursor<span class="token operator">:</span> Cursor <span class="token operator">=</span> 
+             dbClientes<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span><span class="token string">&quot;clientes&quot;</span><span class="token punctuation">,</span> columnas<span class="token punctuation">,</span> <span class="token keyword keyword-where">where</span><span class="token punctuation">,</span> valores<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> orderBy<span class="token punctuation">)</span>
+            listaCliente <span class="token operator">=</span> <span class="token function">getClientes</span><span class="token punctuation">(</span>cursor<span class="token punctuation">)</span>
+            dbClientes<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-return">return</span> listaCliente
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+    <span class="token punctuation">}</span>
+</pre><p>On l&apos;anomenada al m&#xE8;tode podria ser la seg&#xFC;ent:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token keyword keyword-val">val</span> listaCliente <span class="token operator">=</span> bdAdapter<span class="token punctuation">.</span><span class="token function">seleccionarDatosCodigo</span><span class="token punctuation">(</span>
+                    <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;dni&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+                    <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
+</pre><div style="page-break-after:always;"></div>
+<blockquote>
+<p><span style="color: DarkRed; font-weight: bold;
+">&#x2712;&#xFE0F;Crea un exercici ejemploBD en el qual proves el codi vist anteriorment: Recuperaci&#xF3; de les dades amb rawQuery i amb query. Per a aix&#xF2; crea l&apos;aplicaci&#xF3; com en la imatge, de manera que amb un bot&#xF3; es guarde la informaci&#xF3; en la BD i amb l&apos;altre s&apos;extraga i es mostre en una llista o en un recycler. Si utilitzareu una llista com es mostra en la imatge, deureu crear una classe adaptador com la de la seg&#xFC;ent imatge i associar-la a la llista amb el setAdapter:</span></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> binding<span class="token punctuation">.</span>listView<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>
+                   <span class="token function">AdaptadorClientes</span><span class="token punctuation">(</span>
+                       <span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span>
+                       R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>list_layout<span class="token punctuation">,</span>
+                       listaCliente<span class="token operator">!!</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>Classe Adaptador per a un ListView:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">AdaptadorClientes</span><span class="token punctuation">(</span><span class="token keyword keyword-var">var</span> activitycontext<span class="token operator">:</span> Activity<span class="token punctuation">,</span> 
+                           resource<span class="token operator">:</span> Int<span class="token punctuation">,</span> 
+                           objects<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span>
+                           <span class="token punctuation">)</span> <span class="token operator">:</span>
+   ArrayAdapter<span class="token operator">&lt;</span>Any<span class="token operator">&gt;</span><span class="token punctuation">(</span>activitycontext<span class="token punctuation">,</span> resource<span class="token punctuation">,</span> objects <span class="token keyword keyword-as">as</span> List<span class="token operator">&lt;</span>Any<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword keyword-var">var</span> objects<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>Clientes<span class="token operator">&gt;</span>
+   <span class="token keyword keyword-override">override</span>  <span class="token keyword keyword-fun">fun</span> <span class="token function">getView</span><span class="token punctuation">(</span>position<span class="token operator">:</span> Int<span class="token punctuation">,</span> 
+                         convertView<span class="token operator">:</span> View<span class="token operator">?</span><span class="token punctuation">,</span> 
+                         parent<span class="token operator">:</span> ViewGroup<span class="token punctuation">)</span><span class="token operator">:</span> View <span class="token punctuation">{</span>
+       <span class="token keyword keyword-var">var</span> vista<span class="token operator">:</span> View<span class="token operator">?</span><span class="token operator">=</span> convertView
+       <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>vista <span class="token operator">==</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token keyword keyword-val">val</span> inflater <span class="token operator">=</span> activitycontext<span class="token punctuation">.</span>layoutInflater
+           vista <span class="token operator">=</span> inflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>list_layout<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+           <span class="token punctuation">(</span>vista<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>apellidolist<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> TextView<span class="token punctuation">)</span>
+                                <span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>objects<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">.</span>apellidos<span class="token punctuation">)</span>
+           <span class="token punctuation">(</span>vista<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>nombrelist<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> TextView<span class="token punctuation">)</span>
+                                <span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>objects<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
+           <span class="token punctuation">(</span>vista<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>dnilist<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> TextView<span class="token punctuation">)</span>
+                                <span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>objects<span class="token punctuation">[</span>position<span class="token punctuation">]</span><span class="token punctuation">.</span>dni<span class="token punctuation">)</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword keyword-return">return</span> vista
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+       <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>objects <span class="token operator">=</span> objects
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Exercici Propost Rec&#xF3;rrer BD</span></p>
+<h3 class="mume-header" id="%C3%BAs-de-simplecursoradapter">&#xDA;s de SimpleCursorAdapter</h3>
+
+<p>S&apos;utilitza per a mapear les columnes d&apos;un cursor obert en una base de dades als diferents elements visuals continguts en el control de selecci&#xF3;. Aix&#xED; s&apos;evita el bolcat de tots els elements descarregats de la BD a una col&#xB7;lecci&#xF3;, amb l&apos;estalvi de mem&#xF2;ria que comporta.</p>
+<p>Ens trobem amb dos casos: quan usem <strong><code>Spinner</code></strong> o <strong><code>ListView</code></strong> senzills l&apos;adaptador que gestiona aquest bolcat ja est&#xE0; creat, si usem <strong><code>RecyclerView</code></strong> haurem de crear i gestionar l&apos;adaptador.<br>
+Programarem un exemple per a practicar aquest concepte, ser&#xE0; una senzilla activitat amb un <strong><code>Spinner</code></strong> que mostrar&#xE0; els cicles inform&#xE0;tics amb la categoria a la qual pertanyen:</p>
+<div style="display: flex; justify-content: space-between; margin-top: 15px">
+<div style="display: flex; justify-content: center; width: 50%">
+<div style="width: auto;">
+    <img height="200px" src="./imagenes/imagen13.png">
+</div>
+</div>
+<div style="display: flex; justify-content: center; width: 50%">
+    <img height="200px" src="./imagenes/imagen13.png">
+</div>
+</div>
+<p>Per a aix&#xF2; ens creem la base de dades i inserim elements com ja hem vist fins al moment:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">DBAdapter</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span>  <span class="token keyword keyword-var">var</span> ohCategoria<span class="token operator">:</span> OHCategoria
+    <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+        ohCategoria <span class="token operator">=</span> <span class="token function">OHCategoria</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">&quot;BBDCategorias&quot;</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">insertarDatosCodigo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword keyword-val">val</span> sqLiteDatabase <span class="token operator">=</span> ohCategoria<span class="token punctuation">.</span>writableDatabase
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>sqLiteDatabase <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> valores <span class="token operator">=</span> <span class="token function">ContentValues</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ASIR&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cate&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Superior&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;idcategoria&quot;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token string">&quot;categoria&quot;</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> valores<span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;DAM&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cate&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Superior&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;idcategoria&quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token string">&quot;categoria&quot;</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> valores<span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;SMR&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cate&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Medio&quot;</span><span class="token punctuation">)</span>
+            valores<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;idcategoria&quot;</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span><span class="token string">&quot;categoria&quot;</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> valores<span class="token punctuation">)</span>
+            sqLiteDatabase<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">leerDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>Cursor<span class="token operator">?</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> sqLiteDatabase <span class="token operator">=</span> ohCategoria<span class="token punctuation">.</span>readableDatabase
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>sqLiteDatabase <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-return">return</span> sqLiteDatabase<span class="token punctuation">.</span><span class="token function">rawQuery</span><span class="token punctuation">(</span>
+                <span class="token string">&quot;select  idcategoria as _id, nombre, cate from categoria&quot;</span><span class="token punctuation">,</span>
+                <span class="token keyword keyword-null">null</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-inner">inner</span> <span class="token keyword keyword-class">class</span> <span class="token function">OHCategoria</span><span class="token punctuation">(</span>
+         context<span class="token operator">:</span> Context<span class="token operator">?</span><span class="token punctuation">,</span> name<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+         factory<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">.</span>CursorFactory<span class="token operator">?</span><span class="token punctuation">,</span> 
+         version<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span><span class="token function">QLiteOpenHelper</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> name<span class="token punctuation">,</span> factory<span class="token punctuation">,</span> version<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> cadena <span class="token operator">=</span>
+            &quot;create table <span class="token keyword keyword-if">if</span> not exists <span class="token function">categoria</span><span class="token punctuation">(</span>idcategoria
+             INTEGER PRIMARY KEY NOT NULL<span class="token punctuation">,</span> nombre TEXT<span class="token punctuation">,</span> cate TEXT<span class="token punctuation">)</span><span class="token punctuation">;</span>&quot;
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>db<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            db<span class="token punctuation">.</span><span class="token function">execSQL</span><span class="token punctuation">(</span>cadena<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onUpgrade</span><span class="token punctuation">(</span>db<span class="token operator">:</span> SQLiteDatabase<span class="token punctuation">,</span> 
+                               oldVersion<span class="token operator">:</span> Int<span class="token punctuation">,</span> newVersion<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Posteriorment passem a crear el cursorAdapter, per&#xF2; per a aix&#xF2; usarem un Spinner per a mostrar la informaci&#xF3;, ho incloem en el layout principal.</p>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"> <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> from <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;cate&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> <span class="token keyword keyword-to">to</span> <span class="token operator">=</span> <span class="token function">intArrayOf</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>ciclo<span class="token punctuation">,</span> R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>cate<span class="token punctuation">)</span>
+        <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_my<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> dbAdapter<span class="token operator">=</span><span class="token function">DBAdapter</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+        dbAdapter<span class="token punctuation">.</span><span class="token function">insertarDatosCodigo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> desplegable <span class="token operator">=</span> findViewById<span class="token operator">&lt;</span>Spinner<span class="token operator">&gt;</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>spinner<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> cursor<span class="token operator">=</span>dbAdapter<span class="token punctuation">.</span><span class="token function">leerDatos</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> mAdapter <span class="token operator">=</span> <span class="token function">SimpleCursorAdapter</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>spinner_layout<span class="token punctuation">,</span> 
+                                           cursor<span class="token punctuation">,</span> from<span class="token punctuation">,</span> <span class="token keyword keyword-to">to</span><span class="token punctuation">,</span> <span class="token number">0x0</span><span class="token punctuation">)</span>
+        desplegable<span class="token punctuation">.</span><span class="token function">setAdapter</span><span class="token punctuation">(</span>mAdapter<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> En la <strong>L&#xED;nia 9</strong> es retorna el cursor amb la selecci&#xF3; de les dades de la BD (compte!! no s&apos;haur&#xE0; de tancar el cursor). <strong>L&#xED;nia 19</strong> per al funcionament del <strong><code>SimpleCursorAdapter</code></strong>, &#xE9;s necessari indicar en la seua definici&#xF3; els seg&#xFC;ents elements: el context, el layout sobre el qual es definir&#xE0; la vista, el cursor que ser&#xE0; origen de les dades, llista amb el nom de les columnes que es vol enlla&#xE7;ar, una llista amb els aneu de les vistes on es mostraran els camps (l&apos;ordre &#xE9;s important) i un flag (0 per defecte)</p>
+</blockquote>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Prova l&apos;aplicaci&#xF3; de l&apos;exemple anterior</span></p>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="cursors-amb-recyclerview">Cursors amb RecyclerView</h4>
+
+<p>Com era d&apos;esperar, no es pot aplicar directament un adaptador de tipus <strong><code>SimpleCursorAdapter</code></strong> a un tipus <strong><code>RecyclerView</code></strong>. Si volem aprofitar els beneficis dels cursors en els recyclers, haurem de fabricar-los a mesura. Els passos s&#xF3;n els seg&#xFC;ents:</p>
+<ol>
+<li>
+<p>Crear una classe <strong>Abstracta</strong> base que derive de <strong>RecyclerView.Adapter</strong> i en la qual implementarem els m&#xE8;todes sobreescrits derivats de RecyclerView.Adapter:</p>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"> <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> <span class="token function">CursorRecyclerAdapter</span><span class="token punctuation">(</span>cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> <span class="token operator">:</span>
+ RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword keyword-var">var</span> mCursor<span class="token operator">:</span> Cursor
+ <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token punctuation">,</span> 
+                               position<span class="token operator">:</span> Int<span class="token punctuation">)</span> 
+ <span class="token punctuation">{</span>
+     <span class="token function">checkNotNull</span><span class="token punctuation">(</span>mCursor<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token string">&quot;ERROR, cursos vacio&quot;</span> <span class="token punctuation">}</span>
+     <span class="token function">check</span><span class="token punctuation">(</span>mCursor<span class="token punctuation">.</span><span class="token function">moveToPosition</span><span class="token punctuation">(</span>position<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token string">&quot;ERROR, no se puede&quot;</span> <span class="token operator">+</span>
+             <span class="token string">&quot; encontrar la posicion:  <span class="token interpolation variable">$position</span>&quot;</span> <span class="token punctuation">}</span>
+     <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token punctuation">,</span> mCursor<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token punctuation">,</span> 
+                               cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span>
+ <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int
+ <span class="token punctuation">{</span>
+     <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>mCursor <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>    mCursor<span class="token punctuation">.</span><span class="token function">getCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-else">else</span> <span class="token number">0</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+     mCursor <span class="token operator">=</span> cursor
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong>  En heretar de <strong><code>RecyclerView.Adapter</code></strong> caldr&#xE0; implementar els m&#xE8;todes <strong><code>onBindViewHolder()</code></strong> al qual li arriba la posici&#xF3; de la l&#xED;nia del recycler que est&#xE0; activa en aqueix moment i <strong><code>getItemCount()</code></strong> que haur&#xE0; de retornar els elements que t&#xE9; el cursor <strong>L&#xED;nia 16</strong>, li arriba en el constructor. En el m&#xE8;tode onBindViewHolder es comprovar&#xE0; que el cursor no est&#xE0; vacio i que es pot accedir a la posici&#xF3; que arriba com a par&#xE0;metre <strong>L&#xED;nia 8</strong>, i en aqueix cas es dir&#xE0; al m&#xE8;tode <strong><code>onBindViewHolder(holder: RecyclerView.ViewHolder, cursor: Cursor)</code></strong> abstracte que hem de crear en aquesta classe <strong>L&#xED;nia 12</strong>, per&#xF2; aquesta vegada amb un <strong><code>Cursor</code></strong> com a par&#xE0;metre.</p>
+</blockquote>
+</li>
+<li>
+<p>Ara haurem de crear la nostra classe RecyclerView derivada de l&apos;anterior.</p>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token keyword keyword-class">class</span> <span class="token function">RecyclerAdapter</span><span class="token punctuation">(</span>c<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">CursorRecyclerAdapter</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreateViewHolder</span><span class="token punctuation">(</span>parent<span class="token operator">:</span> ViewGroup<span class="token punctuation">,</span> 
+                                 viewType<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span> 
+ <span class="token punctuation">{</span>
+     <span class="token keyword keyword-val">val</span> v<span class="token operator">:</span> View <span class="token operator">=</span> LayoutInflater<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>parent<span class="token punctuation">.</span>context<span class="token punctuation">)</span>
+         <span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>recycler_layout<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+     <span class="token keyword keyword-return">return</span> <span class="token function">SimpleViewHolder</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword keyword-override">override</span>  <span class="token keyword keyword-fun">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>ViewHolder<span class="token punctuation">,</span>
+                                cursor<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> 
+ <span class="token punctuation">{</span>
+     <span class="token punctuation">(</span>holder <span class="token keyword keyword-as">as</span> SimpleViewHolder<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>cursor<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword keyword-internal">internal</span> <span class="token keyword keyword-inner">inner</span> <span class="token keyword keyword-class">class</span> <span class="token function">SimpleViewHolder</span><span class="token punctuation">(</span>itemView<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span>
+                   RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>itemView<span class="token punctuation">)</span> 
+ <span class="token punctuation">{</span>
+     <span class="token keyword keyword-var">var</span> nombre<span class="token operator">:</span> TextView
+     <span class="token keyword keyword-var">var</span> cate<span class="token operator">:</span> TextView
+     <span class="token keyword keyword-var">var</span> imagen<span class="token operator">:</span> ImageView
+     <span class="token keyword keyword-fun">fun</span> <span class="token function">bind</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> Cursor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         nombre<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         cate<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         <span class="token keyword keyword-val">val</span> theImage<span class="token operator">:</span> Bitmap <span class="token operator">=</span> MainActivity<span class="token punctuation">.</span>
+                          <span class="token function">convertirStringBitmap</span><span class="token punctuation">(</span>dato<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+         imagen<span class="token punctuation">.</span><span class="token function">setImageBitmap</span><span class="token punctuation">(</span>theImage<span class="token punctuation">)</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword keyword-init">init</span> <span class="token punctuation">{</span>
+         nombre <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>ciclo<span class="token punctuation">)</span>
+         cate <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>cate<span class="token punctuation">)</span>
+         imagen <span class="token operator">=</span> itemView<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>imagen<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> ImageView
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> A aquesta classe li arribar&#xE0; el cursor pel constructor que al seu torn ser&#xE0; passat a la classe pare. En heretar de la classe abstracta, haurem d&apos;implementar el seu m&#xE8;tode abstracte i ser&#xE0; ac&#xED; on aprofitarem que el cursos s&apos;ha posicionat en l&apos;element correcte de la BD, per a cridar al m&#xE8;tode <strong><code>bind(cursor)</code></strong> <strong>L&#xED;nia 12</strong> del <strong><code>Holder</code></strong>, amb aqueix estat del cursor. En el <strong><code>Holder</code></strong> tractarem els elements que traiem del cursos de manera correcta.</p>
+</blockquote>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<div style="display: flex; justify-content: space-between; margin-top: 15px">
+<div style="width: 70%">
+<ol start="3">
+<li>Com aquesta App &#xE9;s una mica diferent de l&apos;anterior, s&apos;han incl&#xF2;s imatges per a donar m&#xE9;s funcionalitat, hi ha dos m&#xE8;todes que ens permeten passar imatges de Mapa de bits a String i viceversa per a poder-les guardar en la BD a trav&#xE9;s del cursor (En la BD es guardaran com Blob). Estan localitzats en MyActivity i s&#xF3;n est&#xE0;tics per a poder accedir a ells sense necessitat d&apos;objecte.</li>
+</ol>
+</div>
+<div style="width: auto">
+    <img height="200px" src="./imagenes/imagen15.png">
+</div>
+</div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> 
+<span class="token punctuation">{</span>
+  <span class="token keyword keyword-fun">fun</span> <span class="token function">convertirStringBitmap</span><span class="token punctuation">(</span>imagen<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Bitmap <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> decodedString<span class="token operator">:</span> ByteArray <span class="token operator">=</span> Base64<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>imagen<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span>
+    <span class="token keyword keyword-return">return</span> BitmapFactory<span class="token punctuation">.</span><span class="token function">decodeByteArray</span><span class="token punctuation">(</span>decodedString<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> decodedString<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword keyword-fun">fun</span> <span class="token function">ConvertirImagenString</span><span class="token punctuation">(</span>bitmap<span class="token operator">:</span> Bitmap<span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> stream <span class="token operator">=</span> <span class="token function">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    bitmap<span class="token punctuation">.</span><span class="token function">compress</span><span class="token punctuation">(</span>Bitmap<span class="token punctuation">.</span>CompressFormat<span class="token punctuation">.</span>PNG<span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">,</span> stream<span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> byte_arr<span class="token operator">:</span> ByteArray <span class="token operator">=</span> stream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-return">return</span> Base64<span class="token punctuation">.</span><span class="token function">encodeToString</span><span class="token punctuation">(</span>byte_arr<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Proba la aplicaci&#xF3; del exemple anterior<br>
+</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Exercici proposat cursor amb recycler</span></p>
+<div style="page-break-after:always;"></div>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
