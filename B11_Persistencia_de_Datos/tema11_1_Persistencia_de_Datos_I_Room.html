@@ -1,0 +1,571 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 11. Persistencia de Datos I Room</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview {
+  background-color: #FFFF;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
+
+<p>Descargar estos apuntes <a href="./tema11_1_Persistencia_de_Datos_I_Room.pdf">pdf</a> y <a href="./tema11_1_Persistencia_de_Datos_I_Room.html">html</a></p>
+<h1 class="mume-header undefined" id="tema-111-persistencia-de-datos-i-room">Tema 11.1. Persistencia de Datos I Room</h1>
+
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+<ol>
+<li><a href="#acceso-a-bases-de-datos-locales-sqlite-con-room">Acceso a bases de datos locales. SQLite con Room</a>
+<ol>
+<li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
+<li><a href="#componentes-de-room">Componentes de Room</a></li>
+<li><a href="#crear-las-entidades">Crear las Entidades</a>
+<ol>
+<li><a href="#m%C3%A9todos-de-conveniencia">M&#xE9;todos de conveniencia</a></li>
+<li><a href="#m%C3%A9todos-de-b%C3%BAsqueda">M&#xE9;todos de b&#xFA;squeda</a>
+<ol>
+<li><a href="#selecci%C3%B3n-de-un-subconjunto-de-columnas">Selecci&#xF3;n de un subconjunto de columnas</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#crear-la-base-de-datos-room">Crear la Base de Datos Room</a></li>
+<li><a href="#instanciar-la-roomdatabase-para-su-posterior-funcionamiento">Instanciar la RoomDatabase para su posterior funcionamiento</a></li>
+</ol>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="acceso-a-bases-de-datos-locales-sqlite-con-room">Acceso a bases de datos locales. SQLite con Room</h2>
+
+<h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
+
+<p>La plataforma Android proporciona dos herramientas principales para el almacenamiento y consulta de datos estructurados: la base de datos <strong>SQLite</strong> y <strong>Content Providers</strong> (lo trabajaremos en temas posteriores).</p>
+<p>Vamos a centrarnos en <a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a>, aunque no entraremos ni en el dise&#xF1;o de BBDD relacionales ni en el uso avanzado de la BBDD. Para conocer toda la funcionalidad de SQLite se recomienda usar la documentaci&#xF3;n oficial. El problema de trabajar directamente con esta API es que es un trabajo a bajo nivel que puede llevar a errores en tiempo de ejecuci&#xF3;n.</p>
+<p>Por este motivo Android Jetpack ha proporcionado una capa de abstracci&#xF3;n que facilita enormemente el proceso de codificaci&#xF3;n La biblioteca que nos va a permitir esta abstracci&#xF3;n se distribuye como <a href="https://developer.android.com/training/data-storage/room">Room</a>.</p>
+<h3 class="mume-header" id="componentes-de-room">Componentes de Room</h3>
+
+<p>Para trabajar con Room debemos familiarizarnos con su arquitectura que est&#xE1; compuesta por tres partes principales:</p>
+<div align="center">
+    <img height="300" src="imagenes/imagen1_room.png">
+</div>
+<ul>
+<li><strong>Entity</strong> (Entities), ser&#xE1;n las clases que definir&#xE1;n las entidades de nuestra Base de datos, que corresponden con cada tabla que la forman.</li>
+<li><strong>Daos</strong> (Data Access Objects), en este caso ser&#xE1;n las clases abstractas o interfaces donde estar&#xE1;n definidos los m&#xE9;todos que nos permitir&#xE1;n la operatividad (inserci&#xF3;n, consulta, etc) con cada una de las tablas de la Base de Datos.</li>
+<li><strong>RoomDatabase</strong> (Room Database ), contiene la Base de Datos y el acceso a esta, a la vez que une los dos anteriores conceptos.</li>
+</ul>
+<p>Una vez que se creen estos tres elementos, la app podr&#xE1; acceder a los Daos a trav&#xE9;s de las instancias de Room Database que creemos, de forma m&#xE1;s estable que con el acceso directo a la API de SQLite.</p>
+<p>El uso de Room se hace a trav&#xE9;s de <strong>Anotaciones</strong> a&#xF1;adidas a las clases e interfaces, las principales son:</p>
+<ul>
+<li><strong>@Entity</strong>, indica que la clase a la que se atribuye debe ser tratada como una entidad.</li>
+<li><strong>@Dao</strong>, debe de a&#xF1;adirse a las interfaces que queremos que sean nuestras Daos. Dentro de estas interfaces se utiliz&#xE1;n otras anotaciones que veremos m&#xE1;s adelante.</li>
+<li><strong>@Database</strong>, se a&#xF1;adir&#xE1; a las Room Database he indicar&#xE1; que es una Database, estas clases deben ser abstractas y heredar de RoomDatabase.</li>
+</ul>
+<blockquote>
+<p>&#x270B; <strong>Importante:</strong> para poder usar la funcionalidad de Room y las anotaciones, deberemos a&#xF1;adir una serie de dependencias a build.gradle del m&#xF3;dulo.<br>
+En los <strong>plugins</strong> deberemos a&#xF1;adir  <strong><code>id &apos;kotlin-kapt&apos;</code></strong> que nos permitir&#xE1; trabajar con la herramienta de anotaciones para Kotlin.<br>
+En las <strong>dependencias</strong>:</p>
+<ul>
+<li>para las anotaciones deberemos a&#xF1;adir<br>
+<strong><code>kapt(&quot;androidx.room:room-compiler:$room_version&quot;)</code></strong></li>
+<li>Para poder acceder a la funcionalidad de Room y enlazarla con las anotaciones<br>
+<strong><code>implementation &quot;androidx.room:room-ktx:$room_version&quot;</code></strong><br>
+<strong><code>implementation &quot;androidx.room:room-runtime:$room_version&quot;</code></strong><br>
+<strong><code>annotationProcessor &quot;androidx.room:room-compiler:$room_version&quot;</code></strong></li>
+</ul>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="crear-las-entidades">Crear las Entidades</h3>
+
+<p>El primer paso a realizar ser&#xE1; el de crear las distintas tablas que tendr&#xE1; nuestra base de datos. Cada tabla corresponder&#xE1; con una clase <a href="https://developer.android.com/training/data-storage/room/defining-data">Entity</a> etiquetada como <strong>@Entity</strong> en la que a&#xF1;adiremos los campos correspondiente a la tabla. Vamos a usar un ejemplo sencillo para entender el funcionamiento:</p>
+<ol>
+<li>
+<p>Crearemos una clase en Kotlin que etiquetaremos como <strong>data class</strong>. <em>Este tipo de clases est&#xE1;n formadas por el constructor con los atributos que se etiquetaran como <strong><code>val</code></strong> para los inmutables y <strong><code>var</code></strong> para los mutables. Este tipo de clases genera internamente las propiedades y m&#xE9;todos b&#xE1;sicos necesarios incluido el toString</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;CLIENTES&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
+   <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span>
+   <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+   <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">,</span>
+   <span class="token punctuation">)</span>
+</pre><p>A&#xF1;adiremos a la Anotaci&#xF3;n <strong>@Entity</strong> la propiedad <strong>tableName</strong> con el nombre de la tabla: <em><code>@Entity(tableName = &quot;CLIENTES&quot;)</code></em></p>
+</li>
+<li>
+<p>Deberemos decidir cual ser&#xE1; nuestra clave primaria para a&#xF1;adir la anotaci&#xF3;n correspondiente al  atributo que decidamos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@PrimaryKey</span>
+<span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span>
+</pre><p>Si necesitaramos una clave primaria compuesta por m&#xE1;s de un campo, tendr&#xED;amos que indicarlo con la propiedad <a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a> de la etiqueta @Entity<br>
+De igual manera lo hariamos en el caso de necesitar una clave ajena, pero en este caso con la propiedad <a href="https://developer.android.com/reference/kotlin/androidx/room/ForeignKey">foreignKeys</a>. <em>Por ejemplo, si tuvieramos otra tabla Compras en la que relacionaramos el dni de la tabla clientes con el dni de los registros de esta tabla, <strong><code>parentColumns</code></strong> se referir&#xED;a al dni de Clientes mientras que <strong><code>childColumns</code></strong> ser&#xED;a al de Compras.</em></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>
+    tableName <span class="token operator">=</span> <span class="token string">&quot;COMPRAS&quot;</span><span class="token punctuation">,</span>
+    foreignKeys <span class="token operator">=</span> <span class="token annotation builtin">@ForeignKey</span><span class="token punctuation">(</span>entity <span class="token operator">=</span> Cliente<span class="token punctuation">.</span>class<span class="token punctuation">,</span>
+                              parentColumns <span class="token operator">=</span> <span class="token string">&quot;dni&quot;</span><span class="token punctuation">,</span>
+                              childColumns <span class="token operator">=</span> <span class="token string">&quot;dni&quot;</span><span class="token punctuation">,</span>
+                              onDelete <span class="token operator">=</span> CASCADE<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Es muy buena pr&#xE1;ctica usar la etiqueta @ColumnInfo sirve para personalizar la columna de la base de datos del atributo asociado. Podemos indicar, entre otras cosas, un nombre para la columna diferente al del atributo. Esto nos permite hacer m&#xE1;s independiente la app de la BD. En nuestro ejemplo, al final la Entity quedar&#xED;a de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;CLIENTES&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
+    <span class="token annotation builtin">@PrimaryKey</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">&quot;dni&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">&quot;nombre&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">,</span>  
+    <span class="token punctuation">)</span>
+</pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3>Crear los Objetos de Acceso a la Base de Datos</h3>
+<p>Los <a href="https://developer.android.com/training/data-storage/room/accessing-data">DAO</a> ser&#xE1;n elementos de tipo Interfaz mayoritariament en los cuales incluiremos los m&#xE9;todos necesarios de acceso y gesti&#xF3;n a las entidades de la Base de Datos.  En tiempo de compilaci&#xF3;n, Room generar&#xE1; automaticamente la implementaciones de DAOs que hayamos definido.</p>
+<p>Es buena pr&#xE1;ctica, definir un DAO por cada entidad que tengamos, y en este definir las funcionalidades asociadas a esta entidad.</p>
+<p>Para que una interfaz sea gestionada como DAO, habr&#xE1; que etiquetarla de esta manera, siguiendo nuestro ejemplo tendriamos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
+<span class="token keyword keyword-interface">interface</span> ClienteDao 
+<span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</pre><p>Para poder operar con la funcionalidada de Room, se necesitar&#xE1; hacer las llamadas fuera del hilo principal ya que las instancias de RoomDatabase son costosas en cuanto a tiempo, por lo que ser&#xE1; necesario lanzar estas llamadas mediante corrutinas. <strong>La manera recomendada es la de crear los m&#xE9;todos de la interfaces DAO como m&#xE9;todos de suspensi&#xF3;n</strong>.</p>
+<p>Dentro de un Dao podemos crear dos tipos distintos de m&#xE9;todos, de conveniencia y de b&#xFA;squeda.</p>
+<h4 class="mume-header" id="m%C3%A9todos-de-conveniencia">M&#xE9;todos de conveniencia</h4>
+
+<p>Estos m&#xE9;todos nos permiten realizar las operaciones b&#xE1;sicas de inserci&#xF3;n, modificaci&#xF3;n y eliminaci&#xF3;n de registros en la BD sin tener que escribir ning&#xFA;n tipo de c&#xF3;digo SQL. A estos m&#xE9;todos se le pasa la entidad sobre la que se quiera trabajar y es la propia librer&#xED;a Room la encargada de crear la sentencia SQL usando la clave primaria para la identificaci&#xF3;n del registro sobre el que se quiere operar. Deber&#xE1;n ir precedidos por las anotaciones <strong>@Insert, @Delete o @Update</strong> dependiendo de la necesidad.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
+<span class="token keyword keyword-interface">interface</span> ClienteDao <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@Insert</span><span class="token punctuation">(</span>onConflict <span class="token operator">=</span> OnConflictStrategy<span class="token punctuation">.</span>REPLACE<span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>cliente<span class="token operator">:</span> ClienteEntity<span class="token punctuation">)</span>
+    <span class="token annotation builtin">@Delete</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">delete</span><span class="token punctuation">(</span>cliente<span class="token operator">:</span>ClienteEntity<span class="token punctuation">)</span>
+    <span class="token annotation builtin">@Update</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>cliente<span class="token operator">:</span>ClienteEntity<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Como se puede ver en el anterior c&#xF3;digo, es una manera muy sencilla de realizar las operaciones b&#xE1;sicas usando las anotaciones correspondientes y pasando como par&#xE1;metro al m&#xE9;todo la Entidad sobre la que queremos operar.<br>
+En el caso de la inserci&#xF3;n podemos ver que se puede utilizar la propiedad onConflict para indicar si queremos reemplazar el elemento existente por el nuevo en caso de que coincida la clave primaria (en este caso el dni).</p>
+</blockquote>
+<h4 class="mume-header" id="m%C3%A9todos-de-b%C3%BAsqueda">M&#xE9;todos de b&#xFA;squeda</h4>
+
+<p>Estos m&#xE9;todos ser&#xE1;n los que crearemos para realizar consultas sobre la BD y tendr&#xE1;n que ir precedidos por la anotaci&#xF3;n <strong>@Query</strong>. Esta anotaci&#xF3;n permite que se a&#xF1;ada como par&#xE1;metro una cadena con la sentencia SQL para la consulta.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
+<span class="token keyword keyword-interface">interface</span> ClienteDao <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM CLIENTES&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>ClienteEntity<span class="token operator">&gt;</span>
+
+    <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM CLIENTES WHERE dni IN (:clienteDni) &quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getFromDni</span><span class="token punctuation">(</span>clienteDni<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> ClienteEntity
+
+    <span class="token annotation builtin">@Insert</span><span class="token punctuation">(</span>onConflict <span class="token operator">=</span> OnConflictStrategy<span class="token punctuation">.</span>REPLACE<span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>cliente<span class="token operator">:</span> ClienteEntity<span class="token punctuation">)</span>
+    <span class="token annotation builtin">@Delete</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">delete</span><span class="token punctuation">(</span>cliente<span class="token operator">:</span>ClienteEntity<span class="token punctuation">)</span>
+    <span class="token annotation builtin">@Update</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>cliente<span class="token operator">:</span>ClienteEntity<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; Los dos primeros m&#xE9;todos de nuestro Dao, son dos m&#xE9;todos de consulta, el primero devuelve una lista de Clientes mientras que el segundo devuelve un solo cliente. Como se puede ver en el c&#xF3;digo, Room permite pasar un par&#xE1;metro o una lista de par&#xE1;metros dentro de la propia consulta siempre que lo precedamos con <strong><code>:</code></strong> y que coincida en nombre con el par&#xE1;metro que le llega al m&#xE9;todo.</p>
+</blockquote>
+<h5 class="mume-header" id="selecci%C3%B3n-de-un-subconjunto-de-columnas">Selecci&#xF3;n de un subconjunto de columnas</h5>
+
+<p>En muchas ocasiones no ser&#xE1; necesaria toda la informaci&#xF3;n de la tabla, sino que solo necesitaremos recuperar algunas de las columnas. Aunque se puede recuperar toda la informaci&#xF3; y posteriormente realizar un filtrado de esta, para ahorrar recursos es interesante consultar solamente los campos que se necesitan. Para ello necesitaremos crear un objeto del tipo de columnas que queramos devolver, esto se podr&#xE1; hacer usando una data class nueva para esos datos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">TuplaNombreApellido</span><span class="token punctuation">(</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;nombre&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String
+<span class="token punctuation">)</span>
+</pre><p>Y solamente se tendr&#xE1; que indicar en el Dao que el m&#xE9;todo correspondiente devolver&#xE1; los datos de este tipo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT nombre, apellidos FROM CLIENTES&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getNombreApellid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>TuplaNombreApellido<span class="token operator">&gt;</span>
+</pre><h3 class="mume-header" id="crear-la-base-de-datos-room">Crear la Base de Datos Room</h3>
+
+<p>El &#xFA;ltimo elemento que quedar&#xED;a por crear ser&#xED;a la <a href="https://developer.android.com/training/data-storage/room#database">RoomDatabase</a>. Este elemento es el que se encargar&#xE1; de crear la base de datos a partir de las Entities definidas y las operaciones que se realizar&#xE1;n sobre estas a partir de los Daos de nuestra app. Por tanto es el elemento que enlaza a los dos anteriores. Para ello crearemos una clase abstracta que deber&#xE1; de heredar de <strong><code>RoomDatabase</code></strong> y a la que etiquetaremos con la anotaci&#xF3;n <strong>@Database</strong> con las propiedades versi&#xF3;n y entities. La primera propiedad especificar&#xE1; la versi&#xF3;n de la BD, mientras que en entities indicaremos la entidad o entidades asociadas a esta.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
+    entities <span class="token operator">=</span> <span class="token punctuation">[</span>ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    version <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">)</span>
+<span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> ClienteDB<span class="token operator">:</span> <span class="token function">RoomDatabase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>ClienteDao
+<span class="token punctuation">}</span>
+</pre><p>Si quisieramos a&#xF1;adir m&#xE1;s de una tabla en la BD tendriamos que realizar algo como lo siguiente (ejemplo de developer):</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Song and Album are classes annotated with @Entity.</span>
+<span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>version <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> entities <span class="token operator">=</span> <span class="token punctuation">[</span>Song<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span> Album<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> MusicDatabase <span class="token operator">:</span> RoomDatabase <span class="token punctuation">{</span>
+  <span class="token comment">// SongDao is a class annotated with @Dao.</span>
+  <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getSongDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> SongDao
+  <span class="token comment">// AlbumDao is a class annotated with @Dao.</span>
+  <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getArtistDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ArtistDao
+  <span class="token comment">// SongAlbumDao is a class annotated with @Dao.</span>
+  <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getSongAlbumDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> SongAlbumDao
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; <strong>Importante:</strong>  Cada Database tendr&#xE1; un m&#xE9;todo abstracto  que devolver&#xE1; su tipo <strong><code>DAO</code></strong> correspondiente para posteriormente acceder a los m&#xE9;todos de este.</p>
+</blockquote>
+<h3 class="mume-header" id="instanciar-la-roomdatabase-para-su-posterior-funcionamiento">Instanciar la RoomDatabase para su posterior funcionamiento</h3>
+
+<p>Una vez creados todos los componentes necesarios para el funcionamiento de Room Database, podremos crear instancias en el lugar donde las necesitemos para la gesti&#xF3;n de la base de datos, para ello haremos lo siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-val">val</span> db <span class="token operator">=</span> Room<span class="token punctuation">.</span><span class="token function">databaseBuilder</span><span class="token punctuation">(</span>
+            applicationContext<span class="token punctuation">,</span>
+            ClienteDB<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span> <span class="token string">&quot;database-name&quot;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Un posible uso de este objeto para realizar una consulta con paso de par&#xE1;metro ser&#xED;a de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">  <span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>db<span class="token punctuation">.</span><span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFromDni</span><span class="token punctuation">(</span>cliente<span class="token punctuation">.</span>dni<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>dni<span class="token operator">!=</span>
+                                        cliente<span class="token punctuation">.</span>dni<span class="token punctuation">)</span>
+        db<span class="token punctuation">.</span><span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>cliente<span class="token punctuation">)</span>
+    <span class="token keyword keyword-else">else</span>
+        <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
+                            <span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span>
+                            <span class="token string">&quot;El registro ya existe&quot;</span><span class="token punctuation">,</span>
+                            Toast<span class="token punctuation">.</span>LENGTH_LONG
+                        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Comp&#xF3;n la aplicaci&#xF3;n de los ejemplos anteriores y prueba su suncionamiento<br>
+</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio propuesto cursor con recycler</span></p>
+<div style="page-break-after:always;"></div>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
