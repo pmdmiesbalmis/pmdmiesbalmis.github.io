@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 11. Persistencia de Datos I Room</title>
+      <title>PMDM 2&#xBA; DAM  Tema 11. Persistencia de Dades I Room</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -343,90 +343,90 @@ justo después del front matter
 </style>
 <h1 class="mume-header undefined" id="apuntes">Apuntes</h1>
 
-<p>Descargar estos apuntes <a href="./tema11_1_Persistencia_de_Datos_I_Room.pdf">pdf</a> y <a href="./tema11_1_Persistencia_de_Datos_I_Room.html">html</a></p>
-<h1 class="mume-header undefined" id="tema-111-persistencia-de-datos-i-room">Tema 11.1. Persistencia de Datos I Room</h1>
+<p>Descarregar aquests apunts <a href="./tema11_1_Persistencia_de_Datos_I_Room_val.pdf">pdf</a> y <a href="./tema11_1_Persistencia_de_Datos_I_Room_val.html">html</a></p>
+<h1 class="mume-header undefined" id="tema-111-persistencia-de-dades-i-room">Tema 11.1. Persistencia de Dades I Room</h1>
 
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 <ol>
-<li><a href="#acceso-a-bases-de-datos-locales-sqlite-con-room">Acceso a bases de datos locales. SQLite con Room</a>
+<li><a href="#acc%C3%A9s-a-bases-de-dades-locals-sqlite-amb-room">Acc&#xE9;s a bases de dades locals. SQLite amb Room</a>
 <ol>
-<li><a href="#introducci%C3%B3n">Introducci&#xF3;n</a></li>
-<li><a href="#componentes-de-room">Componentes de Room</a></li>
-<li><a href="#crear-las-entidades-que-definen-nuestro-modelo">Crear las entidades que definen nuestro modelo</a>
+<li><a href="#introducci%C3%B3">Introducci&#xF3;</a></li>
+<li><a href="#components-de-room">Components de Room</a></li>
+<li><a href="#crear-les-entitats-que-defineixen-el-nostre-model">Crear les entitats que defineixen el nostre model</a>
 <ol>
-<li><a href="#definiendo-relaciones-entre-objetos">Definiendo relaciones entre Objetos</a>
+<li><a href="#definint-relacions-entre-objectes">Definint relacions entre Objectes</a>
 <ol>
-<li><a href="#relaciones-uno-a-muchos-entre-objetos">Relaciones Uno a Muchos entre objetos</a></li>
+<li><a href="#relacions-un-a-molts-entre-objectes">Relacions Un a Molts entre objectes</a></li>
 </ol>
 </li>
 </ol>
 </li>
-<li><a href="#crear-los-objetos-de-acceso-a-la-base-de-datos">Crear los Objetos de Acceso a la Base de Datos</a>
+<li><a href="#crear-els-objectes-dacc%C3%A9s-a-la-base-de-dades">Crear els Objectes d&apos;Acc&#xE9;s a la Base de dades</a>
 <ol>
-<li><a href="#m%C3%A9todos-de-conveniencia">M&#xE9;todos de conveniencia</a></li>
-<li><a href="#m%C3%A9todos-de-b%C3%BAsqueda">M&#xE9;todos de b&#xFA;squeda</a>
+<li><a href="#m%C3%A8todes-de-conveni%C3%A8ncia">M&#xE8;todes de conveni&#xE8;ncia</a></li>
+<li><a href="#m%C3%A8todes-de-cerca">M&#xE8;todes de cerca</a>
 <ol>
-<li><a href="#selecci%C3%B3n-de-un-subconjunto-de-columnas">Selecci&#xF3;n de un subconjunto de columnas</a></li>
+<li><a href="#selecci%C3%B3-dun-subconjunt-de-columnes">Selecci&#xF3; d&apos;un subconjunt de columnes</a></li>
 </ol>
 </li>
 </ol>
 </li>
-<li><a href="#crear-la-base-de-datos-room-y-consumirla">Crear la Base de Datos Room y consumirla</a></li>
-<li><a href="#instanciar-la-roomdatabase-para-su-posterior-funcionamiento">Instanciar la RoomDatabase para su posterior funcionamiento</a></li>
+<li><a href="#crear-la-base-de-dades-room-i-consumir-la">Crear la Base de dades *Room i consumir-la</a></li>
+<li><a href="#instanciar-la-roomdatabase-per-al-seu-posterior-funcionament">Instanciar la RoomDatabase per al seu posterior funcionament</a></li>
 </ol>
 </li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="acceso-a-bases-de-datos-locales-sqlite-con-room">Acceso a bases de datos locales. SQLite con Room</h2>
+<h2 class="mume-header" id="acc%C3%A9s-a-bases-de-dades-locals-sqlite-amb-room">Acc&#xE9;s a bases de dades locals. SQLite amb Room</h2>
 
-<h3 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h3>
+<h3 class="mume-header" id="introducci%C3%B3">Introducci&#xF3;</h3>
 
-<p>La plataforma Android proporciona dos herramientas principales para el almacenamiento y consulta de datos estructurados: la base de datos <strong>SQLite</strong> y <strong>Content Providers</strong> (lo trabajaremos en temas posteriores).</p>
-<p>Vamos a centrarnos en <a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a>, aunque no entraremos ni en el dise&#xF1;o de BBDD relacionales ni en el uso avanzado de la BBDD. Para conocer toda la funcionalidad de SQLite se recomienda usar la documentaci&#xF3;n oficial. El problema de trabajar directamente con esta API es que es un trabajo a bajo nivel que puede llevar a errores en tiempo de ejecuci&#xF3;n.</p>
-<p>Por este motivo Android Jetpack ha proporcionado una capa de abstracci&#xF3;n que facilita enormemente el proceso de codificaci&#xF3;n La biblioteca que nos va a permitir esta abstracci&#xF3;n se distribuye como <a href="https://developer.android.com/training/data-storage/room">Room</a>.</p>
-<h3 class="mume-header" id="componentes-de-room">Componentes de Room</h3>
+<p>La plataforma Android proporciona dues eines principals per a l&apos;emmagatzematge i consulta de dades estructurades: la base de dades <strong>SQLite</strong> i <strong>Content Providers</strong> (ho treballarem en temes posteriors).</p>
+<p>Ens centrarem en <a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a>, encara que no entrarem ni en el disseny de BBDD relacionals ni en l&apos;&#xFA;s avan&#xE7;at de la BBDD. Per a con&#xE9;ixer tota la funcionalitat de SQLite es recomana usar la documentaci&#xF3; oficial. El problema de treballar directament amb aquesta API &#xE9;s que &#xE9;s un treball a baix nivell que pot portar a errors en temps d&apos;execuci&#xF3;.</p>
+<p>Per aquest motiu Android Jetpack ha proporcionat una capa d&apos;abstracci&#xF3; que facilita enormement el proc&#xE9;s de codificaci&#xF3; La biblioteca que ens permetr&#xE0; aquesta abstracci&#xF3; es distribueix com <a href="https://developer.android.com/training/data-storage/room">Room</a>.</p>
+<h3 class="mume-header" id="components-de-room">Components de Room</h3>
 
-<p>Para trabajar con Room debemos familiarizarnos con su arquitectura que est&#xE1; compuesta por tres partes principales:</p>
+<p>Per a treballar amb <strong>Room</strong> hem de familiaritzar-nos amb la seua arquitectura que est&#xE0; composta per tres parts principals:</p>
 <div align="center">
     <img height="300" src="imagenes/imagen1_room.png">
 </div>
 <ul>
-<li><strong>Entity</strong> (Entities), ser&#xE1;n las clases que definir&#xE1;n las entidades de nuestra Base de datos, que corresponden con cada tabla que la forman.</li>
-<li><strong>Daos</strong> (Data Access Objects), en este caso ser&#xE1;n las clases abstractas o interfaces donde estar&#xE1;n definidos los m&#xE9;todos que nos permitir&#xE1;n la operatividad (inserci&#xF3;n, consulta, etc) con cada una de las tablas de la Base de Datos.</li>
-<li><strong>RoomDatabase</strong> (Room Database ), contiene la Base de Datos y el acceso a esta, a la vez que une los dos anteriores conceptos.</li>
+<li><strong>Entity</strong> (Entities), seran les classes que definiran les entitats de la nostra Base de dades, que corresponen amb cada taula que la formen.</li>
+<li><strong>Daos</strong> (Data Access Objects), en aquest cas seran les classes abstractes o interf&#xED;cies on estaran definits els m&#xE8;todes que ens permetran l&apos;operativitat (inserci&#xF3;, consulta, etc) amb cadascuna de les taules de la Base de dades.</li>
+<li><strong>RoomDatabase</strong> (Room Database), cont&#xE9; la Base de dades i l&apos;acc&#xE9;s a aquesta, alhora que uneix els dos anteriors conceptes.</li>
 </ul>
-<p>Una vez que se creen estos tres elementos, la app podr&#xE1; acceder a los Daos a trav&#xE9;s de las instancias de Room Database que creemos, de forma m&#xE1;s estable que con el acceso directo a la API de SQLite.</p>
-<p>El uso de Room se hace a trav&#xE9;s de <strong>Anotaciones</strong> a&#xF1;adidas a las clases e interfaces, las principales son:</p>
+<p>Una vegada que es creuen aquests tres elements, l&apos;app podr&#xE0; accedir als Doneu-vos a trav&#xE9;s de les inst&#xE0;ncies de <strong>Room Database</strong> que creem, de forma m&#xE9;s estable que amb l&apos;acc&#xE9;s directe a la API de *QLite.</p>
+<p>L&apos;&#xFA;s de Room es fa a trav&#xE9;s de <strong>Anotacions</strong> afegides a les classes i interf&#xED;cies, les principals s&#xF3;n:</p>
 <ul>
-<li><strong><code>@Entity</code></strong>, indica que la clase a la que se atribuye debe ser tratada como una entidad.</li>
-<li><strong><code>@Dao</code></strong>, debe de a&#xF1;adirse a las interfaces que queremos que sean nuestras Daos. Dentro de estas interfaces se utiliz&#xE1;n otras anotaciones que veremos m&#xE1;s adelante.</li>
-<li><strong><code>@Database</code></strong>, se a&#xF1;adir&#xE1; a las Room Database he indicar&#xE1; que es una Database, estas clases deben ser abstractas y heredar de RoomDatabase.</li>
+<li><strong><code>@Entity</code></strong>, indica que la classe a la qual s&apos;atribueix ha de ser tractada com una entitat.</li>
+<li><strong><code>@Dao</code></strong>, ha d&apos;afegir-se a les interf&#xED;cies que volem que siguen nostres Doneu-vos. Dins d&apos;aquestes interf&#xED;cies es utilitzen altres anotacions que veurem m&#xE9;s endavant.</li>
+<li><strong><code>@Database</code></strong>, s&apos;afegir&#xE0; a les Room  Database he indicar&#xE0; que &#xE9;s una Database, aquestes classes han de ser abstractes i heretar de <strong><code>RoomDatabase</code></strong>.</li>
 </ul>
 <blockquote>
-<p>&#x270B; <strong>Importante:</strong> para poder usar la funcionalidad de Room y las anotaciones, deberemos a&#xF1;adir una serie de dependencias a build.gradle del m&#xF3;dulo.<br>
-En los <strong>plugins</strong> deberemos a&#xF1;adir  <strong><code>id &apos;kotlin-kapt&apos;</code></strong> que nos permitir&#xE1; trabajar con la herramienta de anotaciones para Kotlin.<br>
-En las <strong>dependencias</strong>:</p>
+<p>&#x270B; <strong>Important:</strong> per a poder usar la funcionalitat de Room i les anotacions, haurem d&apos;afegir una s&#xE8;rie de depend&#xE8;ncies a *build.*gradle del m&#xF2;dul.<br>
+En els <strong>plugins</strong> haurem d&apos;afegir <strong><code>id &apos;kotlin-kapt&apos;</code></strong> que ens permetr&#xE0; treballar amb l&apos;eina d&apos;anotacions per a Kotlin.<br>
+En les <strong>depend&#xE8;ncies</strong>:</p>
 <ul>
-<li>Para las anotaciones deberemos a&#xF1;adir<br>
+<li>Per a les anotacions deurem afegir<br>
 <strong><code>kapt(&quot;androidx.room:room-compiler:$room_version&quot;)</code></strong></li>
-<li>Para poder acceder a la funcionalidad de Room y enlazarla con las anotaciones<br>
+<li>Per a poder accedir a la funcionalitat de Room i enlla&#xE7;ar-la amb les anotacions<br>
 <strong><code>implementation &quot;androidx.room:room-ktx:$room_version&quot;</code></strong><br>
 <strong><code>implementation &quot;androidx.room:room-runtime:$room_version&quot;</code></strong><br>
 <strong><code>annotationProcessor &quot;androidx.room:room-compiler:$room_version&quot;</code></strong></li>
 </ul>
 </blockquote>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="crear-las-entidades-que-definen-nuestro-modelo">Crear las entidades que definen nuestro modelo</h3>
+<h3 class="mume-header" id="crear-les-entitats-que-defineixen-el-nostre-model">Crear les entitats que defineixen el nostre model</h3>
 
-<p>El primer paso a realizar ser&#xE1; el de crear las distintas tablas que tendr&#xE1; nuestra base de datos. Cada tabla corresponder&#xE1; con una clase <a href="https://developer.android.com/training/data-storage/room/defining-data">Entity</a> etiquetada como <strong>@Entity</strong> en la que a&#xF1;adiremos los campos correspondiente a la tabla. Vamos a usar un ejemplo sencillo para entender el funcionamiento:</p>
+<p>El primer passe a realitzar ser&#xE0; el de crear les diferents taules que tindr&#xE0; la nostra base de dades. Cada taula correspondr&#xE0; amb una classe <a href="https://developer.android.com/training/data-storage/room/defining-data">Entity</a> etiquetada com <strong><code>@Entity</code></strong> en la qual afegirem els camps corresponent a la taula. Usarem un exemple senzill per a entendre el funcionament:</p>
 <ol>
 <li>
-<p>Crearemos una clase en Kotlin que etiquetaremos como <strong>data class</strong>.</p>
+<p>Crearem una classe en Kotlin que etiquetarem com <strong>data class</strong>.</p>
 <blockquote>
-<p>&#x1F4CC; <strong>Nota:</strong> Recuerda que los eobjetos de este tipo de clases son inmutables y por tanto sus propiedades son de solo lectura o <strong><code>val</code></strong>. Adem&#xE1;s, generan autom&#xE1;ticamente los m&#xE9;todos <strong><code>copy</code></strong>, <strong><code>equals</code></strong> y <strong><code>toString</code></strong>.</p>
+<p>&#x1F4CC; <strong>Nota:</strong> Recorda que els objectes d&apos;aquesta mena de classes s&#xF3;n immutables i per tant les seues propietats s&#xF3;n de nom&#xE9;s lectura o <strong><code>val</code></strong>. A m&#xE9;s, generen autom&#xE0;ticament els m&#xE8;todes <strong><code>copy</code></strong>, <strong><code>equals</code></strong> i <strong><code>toString</code></strong>.</p>
 </blockquote>
-<p>A&#xF1;adiremos a la anotaci&#xF3;n <strong><code>@Entity</code></strong> la propiedad <strong><code>tableName</code></strong> con el nombre de la tabla: <strong><code>@Entity(tableName = &quot;idTabla&quot;)</code></strong>. Si no lo hicieramos, la tabla tomar&#xED;a el nombre de nuestra entidad.</p>
+<p>Afegirem a l&apos;anotaci&#xF3; <strong><code>@Entity</code></strong> la propietat <strong><code>tableName</code></strong> amb el nom de la taula: <strong><code>@Entity(tableName = &quot;idTabla&quot;)</code></strong>. Si no ho fem, la taula prendria el nom de la nostra entitat.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;clientes&quot;</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span>
@@ -434,26 +434,26 @@ En las <strong>dependencias</strong>:</p>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span>
 </pre></li>
 <li>
-<p>Deberemos decidir cual ser&#xE1; nuestra <strong>clave primaria</strong> para a&#xF1;adir la anotaci&#xF3;n <strong><code>@PrimaryKey</code></strong> a la propiedad que decidamos.</p>
+<p>Haurem de decidir com ser&#xE0; la nostra <strong>clau prim&#xE0;ria</strong> per a afegir l&apos;anotaci&#xF3; <strong><code>@PrimaryKey</code></strong> a la propietat que decidim.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;clientes&quot;</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
     <span class="token annotation builtin">@PrimaryKey</span> <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token comment">// Clava primaria</span>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span>
-</pre><p>Si necesitaramos una clave primaria compuesta por m&#xE1;s de un campo, tendr&#xED;amos que indicarlo con la propiedad <a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a> de la etiqueta <strong><code>@Entity</code></strong>.</p>
-<p>De igual manera lo hariamos en el caso de necesitar una <strong>clave ajena</strong>, pero en este caso con la propiedad <a href="https://developer.android.com/reference/kotlin/androidx/room/ForeignKey">foreignKeys</a>. Por ejemplo, si tuvieramos otra tabla <strong><code>pedidos</code></strong> en la que relacionaramos el <strong><code>dni</code></strong> de la tabla <strong><code>clientes</code></strong> con el <strong><code>dni</code></strong> ajeno de los registros de esta tabla, <strong><code>parentColumns</code></strong> se referir&#xED;a al <strong><code>dni</code></strong> de <strong><code>clientes</code></strong> mientras que <strong><code>dni_cliente</code></strong> en <strong><code>childColumns</code></strong> ser&#xED;a al de <strong><code>pedidos</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Expresariamos que un pedidos define una clave ajena dni en clientes.</span>
+</pre><p>Si necessitem una clau prim&#xE0;ria composta per m&#xE9;s d&apos;un camp, haur&#xED;em d&apos;indicar-ho amb la propietat <a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a> de l&apos;etiqueta <strong><code>@Entity</code></strong>.</p>
+<p>D&apos;igual manera ho far&#xED;em en el cas de necessitar una <strong>clau aliena</strong>, per&#xF2; en aquest cas amb la propietat <a href="https://developer.android.com/reference/kotlin/androidx/room/foreignkey">foreignKeys</a>. Per exemple, si tinguerem una altra taula <strong><code>pedidos</code></strong> en la qual relacionariem la columna <strong><code>dni</code></strong> de la taula <strong><code>clientes</code></strong> amb el <strong><code>dni</code></strong> alie dels registres d&apos;aquesta taula, <strong><code>parentColumns</code></strong> es referiria al <strong><code>dni</code></strong> de <strong><code>clientes</code></strong> i <strong><code>dni_cliente</code></strong> a <strong><code>childColumns</code></strong> seria el de <strong><code>pedidos</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Expressariem que un pedidos define una clave aliena dni en clientes.</span>
 <span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;pedidos&quot;</span><span class="token punctuation">,</span>
         foreignKeys <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token function">ForeignKey</span><span class="token punctuation">(</span>entity <span class="token operator">=</span> ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span>
                 parentColumns <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;dni&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                <span class="token comment">// Nombre de la columna en la tabla</span>
+                <span class="token comment">// Nom de la columna a la taula pedidos a la bd</span>
                 childColumns <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;dni_cliente&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
                 onDelete <span class="token operator">=</span> CASCADE<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">PedidoEntity</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
-</pre><p>No obstante m&#xE1;s adelante veremos como definir relaciones entre objetos en lugar de tablas. No obstante recuerda que la definici&#xF3;n correcta de &#xED;ndices nos va a proporcionar mucha velocidad.</p>
+</pre><p>No obstant aix&#xF2; m&#xE9;s endavant veurem com definir relacions entre objectes en lloc de taules. No obstant aix&#xF2; recorda que la definici&#xF3; correcta d&apos;&#xED;ndexs ens proporcionar&#xE0; molta velocitat.</p>
 </li>
 <li>
-<p>Es muy <strong>buena pr&#xE1;ctica</strong> usar la etiqueta <strong><code>@ColumnInfo</code></strong> para que futuras modificaciones en la BD no afecten a mis entidades. Esta propiedad sirve para personalizar la columna de la base de datos del atributo asociado. Podemos indicar, entre otras cosas, un nombre para la columna diferente al del atributo. Esto nos permite hacer m&#xE1;s independiente la app de la BD. En nuestro ejemplo, al final la <strong><code>Entity</code></strong> quedar&#xED;a de la siguiente manera:</p>
+<p>&#xC9;s molt <strong>bona pr&#xE0;ctica</strong> usar l&apos;etiqueta <strong><code>@*ColumnInfo</code></strong> perqu&#xE8; futures modificacions en la BD no afecten les meues entitats. Aquesta propietat serveix per a personalitzar la columna de la base de dades de l&apos;atribut associat. Podem indicar, entre altres coses, un nom per a la columna diferent del de l&apos;atribut. Aix&#xF2; ens permet fer m&#xE9;s independent l&apos;app de la BD. En el nostre exemple, al final la <strong><code>Entity</code></strong> quedaria de la seg&#xFC;ent manera:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;clientes&quot;</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
     <span class="token annotation builtin">@PrimaryKey</span>
@@ -465,11 +465,11 @@ En las <strong>dependencias</strong>:</p>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span>
 </pre></li>
 <li>
-<p>Es posible que, a veces, quieras expresar una entidad o un objeto de datos como un solo elemento integral en la l&#xF3;gica de la base de datos, incluso si el objeto contiene varios campos. En esas situaciones, puedes usar la anotaci&#xF3;n <strong><code>@Embedded</code></strong> para representar <strong>un objeto cuyos subcampos quieras desglosar en una tabla</strong>. Luego, puedes buscar los campos integrados tal como lo har&#xED;as con otras columnas individuales. A este tipo de objetos, los denominaremos &apos;<em><strong>objetos incorporados</strong></em>&apos;</p>
+<p>&#xC9;s possible que, a vegades, vulgues expressar una entitat o un objecte de dades com un sol element integral en la l&#xF2;gica de la base de dades, fins i tot si l&apos;objecte cont&#xE9; diversos camps. En aqueixes situacions, pots usar l&apos;anotaci&#xF3; <strong><code>@Embedded</code></strong> per a representar <strong>un objecte que els seus sub-camps vulgues desglossar en una taula</strong>. Despr&#xE9;s, pots buscar els camps integrats tal com ho faries amb altres columnes individuals. A aquesta mena d&apos;objectes, els denominarem &apos;<em><strong>objectes incorporats</strong></em>&apos;</p>
 <blockquote>
-<p>&#x1F4CC; <strong>Nota:</strong> Podemos hacer una analog&#xED;a entre los &apos;<em><strong>objetos incorporados</strong></em>&apos; con los que definimos en las BDOR (Bases de datos objetos relacionales)</p>
+<p>&#x1F4CC; <strong>Nota:</strong> Podem fer una analogia entre els &apos;<em><strong>objectes incorporats</strong></em>&apos; amb els quals definim en les BDOR (Bases de dades objectes relacionals)</p>
 </blockquote>
-<p>Por ejemplo, la clase <strong><code>ClienteEntity</code></strong> puede incluir un campo de tipo <strong><code>Direccion</code></strong>, que representa una composici&#xF3;n de propiedades llamadas <strong><code>calle</code></strong>, <strong><code>ciudad</code></strong>, <strong><code>pais</code></strong> y <strong><code>codigoPostal</code></strong>. Para almacenar las <strong>columnas compuestas por separado</strong> en la tabla, incluye un campo <strong><code>Direccion</code></strong> en la clase <strong><code>ClienteEntity</code></strong> con anotaciones <strong><code>@Embedded</code></strong>, como se muestra en el siguiente fragmento de c&#xF3;digo:</p>
+<p>Per exemple, la classe <strong><code>ClienteEntity</code></strong> pot incloure un camp de tipus <strong><code>Direccion</code></strong>, que representa una composici&#xF3; de propietats anomenades <strong><code>calle</code></strong>, <strong><code>ciudad</code></strong>, <strong><code>pais</code></strong> i <strong><code>codigoPostal</code></strong>. Per a emmagatzemar les <strong>columnes compostes per separat</strong> en la taula, inclou un camp <strong><code>Direccion</code></strong> en la classe <strong><code>ClienteEntity</code></strong> amb anotacions <strong><code>@Embedded</code></strong>, com es mostra en el seg&#xFC;ent fragment de codi:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Direccion</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-val">val</span> calle<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> ciudad<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
@@ -486,89 +486,87 @@ En las <strong>dependencias</strong>:</p>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">,</span>
-    <span class="token comment">// Marcamos como embebe @Embedded el campo a descomponer</span>
+    <span class="token comment">// Marquem com @Embedded el camp a descompondre</span>
     <span class="token annotation builtin">@Embedded</span> <span class="token keyword keyword-val">val</span> direccion<span class="token operator">:</span> Direccion<span class="token operator">?</span><span class="token punctuation">)</span> 
-</pre><p>La tabla que representa un objeto <strong><code>ClienteEntity</code></strong> contiene columnas con los siguientes nombres: <strong><code>dni</code></strong>, <strong><code>nombre</code></strong>, <strong><code>apellidos</code></strong>, <strong><code>calle</code></strong>, <strong><code>ciudad</code></strong>, <strong><code>pais</code></strong> y <strong><code>codigo_postal</code></strong>.</p>
+</pre><p>La taula que representa un objecte <strong><code>*ClienteEntity</code></strong> cont&#xE9; columnes amb els seg&#xFC;ents noms: <strong><code>dni</code></strong>, <strong><code>nombre</code></strong>, <strong><code>apellidos</code></strong>, <strong><code>calle</code></strong>, <strong><code>ciudat</code></strong>, <strong><code>pais</code></strong> i <strong><code>codigo_postal</code></strong>.</p>
 </li>
 <li>
-<p>A veces, necesitas que la app almacene un tipo de datos personalizados en una sola columna de base de datos. Para admitir tipos personalizados, debes proporcionar convertidores de tipo, que son m&#xE9;todos que indican a Room c&#xF3;mo convertir tipos personalizados en tipos conocidos y a partir de ellos que Room puede conservar. Para identificar los conversores de tipo, puedes usar la anotaci&#xF3;n <strong><code>@TypeConverter</code></strong>.</p>
-<p>Supongamos que necesitas conservar instancias del tipo <strong><code>Date</code></strong> de Kotlin para saber la <strong>fecha</strong> en que se hizo un pedido. Pero la base de datos para guardar fechas lo hace mediante un <strong><code>Long</code></strong> que representa el TIMESTAMP.</p>
-<p>Definiremos primero una clase con todos los m&#xE9;todos convertidores. Ojo, no importa el id del m&#xE9;todo si no su signatura (par&#xE1;metro de entrada y de salida) Por ejemplo para fecha podr&#xED;a ser:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Estamos presuponiendo que nuestras fechas nunca son nulas.</span>
+<p>A vegades, necessites que l&apos;app emmagatzeme un tipus de dades personalitzades en una sola columna de base de dades. Per a admetre tipus personalitzats, has de proporcionar convertidors de tipus, que s&#xF3;n m&#xE8;todes que indiquen a Room com convertir tipus personalitzats en tipus coneguts i a partir d&apos;ells que Room pot conservar. Per a identificar els convertidors de tipus, pots usar l&apos;anotaci&#xF3; <strong><code>@*TypeConverter</code></strong>.</p>
+<p>Suposem que necessites conservar inst&#xE0;ncies del tipus <strong><code>Date</code></strong> de Kotlin per a saber la <strong>data</strong> en qu&#xE8; es va fer una comanda. Per&#xF2; la base de dades per a guardar dates ho fa mitjan&#xE7;ant un <strong><code>Long</code></strong> que representa el TIMESTAMP.</p>
+<p>Definirem primer una classe amb tots els m&#xE8;todes convertidors. Ull, no importa l&apos;aneu del m&#xE8;tode si no la seua signatura (par&#xE0;metre d&apos;entrada i d&apos;eixida) Per exemple per a data podria ser:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Estem pressuposant que les nostres dates mai s&#xF3;n nul&#xB7;les.</span>
 <span class="token keyword keyword-class">class</span> Converters <span class="token punctuation">{</span>
     <span class="token annotation builtin">@TypeConverter</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">fromTimestamp</span><span class="token punctuation">(</span>value<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token operator">:</span> Date <span class="token punctuation">{</span>  <span class="token comment">// Convierte de Long a Date</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">fromTimestamp</span><span class="token punctuation">(</span>value<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token operator">:</span> Date <span class="token punctuation">{</span>  <span class="token comment">// Convertix de Long a Date</span>
         <span class="token keyword keyword-return">return</span> value<span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> <span class="token function">Date</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
     <span class="token annotation builtin">@TypeConverter</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">dateToTimestamp</span><span class="token punctuation">(</span>date<span class="token operator">:</span> Date<span class="token punctuation">)</span><span class="token operator">:</span> Long <span class="token punctuation">{</span>  <span class="token comment">// Convierte de Date a Long</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">dateToTimestamp</span><span class="token punctuation">(</span>date<span class="token operator">:</span> Date<span class="token punctuation">)</span><span class="token operator">:</span> Long <span class="token punctuation">{</span>  <span class="token comment">// Convertix de Date a Long</span>
         <span class="token keyword keyword-return">return</span> date<span class="token punctuation">.</span>time
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Ahora ya podemos definir nuestra clase <strong><code>PedidoEntity</code></strong> ...</p>
+</pre><p>Ara ja podem definir la nostra classe <strong><code>PedidoEntity</code></strong> ...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;pedidos&quot;</span><span class="token punctuation">,</span>
         foreignKeys <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token function">ForeignKey</span><span class="token punctuation">(</span>entity <span class="token operator">=</span> ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span>
                 parentColumns <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;dni&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                <span class="token comment">// Nombre de la columna en la tabla</span>
+                <span class="token comment">// Nom de la columna a la taula</span>
                 childColumns <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;dni_cliente&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
                 onDelete <span class="token operator">=</span> CASCADE<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">PedidoEntity</span><span class="token punctuation">(</span>
-    <span class="token annotation builtin">@PrimaryKey</span> <span class="token punctuation">(</span>autoGenerate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">// El id ser&#xE1; autogenerado.</span>
-    
+    <span class="token annotation builtin">@PrimaryKey</span> <span class="token punctuation">(</span>autoGenerate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">// El id ser&#xE0; auto-generat.        </span>
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> Int<span class="token punctuation">,</span>
     
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;dni_cliente&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> dniCliente<span class="token operator">:</span> Int<span class="token punctuation">,</span>
 
-    <span class="token comment">// Indicamos que siempre debe tener una fecha.</span>
     <span class="token annotation builtin">@NonNull</span>                 
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;fecha&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// Indiquem que sempre ha de tindre una data.</span>
     <span class="token keyword keyword-val">val</span> fecha<span class="token operator">:</span> Date<span class="token punctuation">)</span>
-
 </pre><blockquote>
 <p>&#x270B; <strong>Importante:</strong> Cuando definamos la BD ya veremos como indicarle que aplique todas las conversiones definidas.</p>
 </blockquote>
 </li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="definiendo-relaciones-entre-objetos">Definiendo relaciones entre Objetos</h4>
+<h4 class="mume-header" id="definint-relacions-entre-objectes">Definint relacions entre Objectes</h4>
 
-<p>Usando los &apos;<em><strong>objetos incorporados</strong></em>&apos; podremos hacerlo de forma sencilla.</p>
-<h5 class="mume-header" id="relaciones-uno-a-muchos-entre-objetos">Relaciones Uno a Muchos entre objetos</h5>
+<p>Usant els &apos;<em><strong>objectes incorporats</strong></em>&apos; podrem fer-ho de manera senzilla.</p>
+<h5 class="mume-header" id="relacions-un-a-molts-entre-objectes">Relacions Un a Molts entre objectes</h5>
 
-<p>Supongamos que queremos definir un nuevo objeto a recuparar que no es una entidad en la BD, pero quiero que contenga un cliente con todos sus pedidos. De forma an&#xE1;loga a los que tenemos en las entidades de JPA.</p>
-<p>Deberemos definir la clase que exprese la relaci&#xF3;n y que se completar&#xE1; <em>&apos;mapear&#xE1;&apos;</em> autom&#xE1;ticamente cuando la usemos en nuestro <strong>DAO</strong>.</p>
+<p>Suposem que volem definir un nou objecte a obtindre que no &#xE9;s una entitat a la BD, per&#xF2; vull que continga un client amb totes les seues comandes. An&#xE0;logament als que tenim en les entitats de JPA.</p>
+<p>Haurem de definir la classe que expresse la relaci&#xF3; i que es completar&#xE0; &apos;<em>mapejar&#xE0;</em>&apos; autom&#xE0;ticament quan la vaja&apos;m a usar en el nostre *<strong>DAO</strong>.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteConPedidos</span><span class="token punctuation">(</span>
-    <span class="token comment">// Sabe recuperar el objeto embebido.</span>
+    <span class="token comment">// Sap obtindre el objecte embegut</span>
     <span class="token annotation builtin">@Embedded</span> <span class="token keyword keyword-val">val</span> cliente<span class="token operator">:</span> ClienteEntity<span class="token punctuation">,</span>
     <span class="token annotation builtin">@Relation</span><span class="token punctuation">(</span>
           parentColumn <span class="token operator">=</span> <span class="token string">&quot;dni&quot;</span><span class="token punctuation">,</span>
-          <span class="token comment">// Nombre de la columna en la tabla</span>
+          <span class="token comment">// Nom de la columna a la taula</span>
           entityColumn <span class="token operator">=</span> <span class="token string">&quot;dni_cliente&quot;</span>
     <span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> pedidos<span class="token operator">:</span> List<span class="token operator">&lt;</span>PedidoEntity<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span>
 </pre><blockquote>
-<p>&#x270B; <strong>Importante:</strong> Puedes saber m&#xE1;s sobre como definir otros tipos de <strong>relaciones entre objetos</strong> con room en el siguiente <a href="https://developer.android.com/training/data-storage/room/relationships">enlace</a></p>
+<p>&#x270B; <strong>Important:</strong> Pots saber m&#xE9;s sobre com definir altres tipus de <strong>relacions entre objectes</strong> amb room en el seg&#xFC;ent <a href="https://developer.android.com/training/data-storage/room/relationships">enlla&#xE7;</a></p>
 </blockquote>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="crear-los-objetos-de-acceso-a-la-base-de-datos">Crear los Objetos de Acceso a la Base de Datos</h3>
+<h3 class="mume-header" id="crear-els-objectes-dacc%C3%A9s-a-la-base-de-dades">Crear els Objectes d&apos;Acc&#xE9;s a la Base de dades</h3>
 
-<p>Los <a href="https://developer.android.com/training/data-storage/room/accessing-data">DAO</a> ser&#xE1;n elementos de tipo Interfaz mayoritariament en los cuales incluiremos los m&#xE9;todos necesarios de acceso y gesti&#xF3;n a las entidades de la Base de Datos.  En tiempo de compilaci&#xF3;n, Room generar&#xE1; automaticamente la implementaciones de DAOs que hayamos definido.</p>
-<p>Es buena pr&#xE1;ctica, <strong>definir un DAO por cada entidad que tengamos</strong>, y en este definir las funcionalidades asociadas a esta entidad.</p>
-<p>Para que una interfaz sea gestionada como DAO, habr&#xE1; que etiquetarla de esta manera, siguiendo nuestro ejemplo tendriamos:</p>
+<p>Els <a href="https://developer.android.com/training/data-storage/room/accessing-data">DAO</a> seran elements de tipus Interf&#xED;cie majoritariament en els quals inclourem els m&#xE8;todes necessaris d&apos;acc&#xE9;s i gesti&#xF3; a les entitats de la Base de dades. En temps de compilaci&#xF3;, Room generar&#xE0; automaticament la implementacions de Doneu-vos que h&#xE0;gem definit.</p>
+<p>&#xC9;s bona pr&#xE0;ctica, <strong>definir un DAO per cada entitat que tinguem</strong>, i en aquest definir les funcionalitats associades a aquesta entitat.</p>
+<p>Perqu&#xE8; una interf&#xED;cie siga gestionada com DAO, caldr&#xE0; etiquetar-la d&apos;aquesta manera, seguint el nostre exemple tindriem:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
 <span class="token keyword keyword-interface">interface</span> ClienteDao 
 <span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</pre><p>Para poder operar con la funcionalidada de Room, se necesitar&#xE1; hacer las llamadas fuera del hilo principal ya que las instancias de <strong><code>RoomDatabase</code></strong> son costosas en cuanto a tiempo, por lo que ser&#xE1; necesario lanzar estas llamadas mediante corrutinas. <strong>La manera recomendada es la de crear los m&#xE9;todos de la interfaces DAO como m&#xE9;todos de suspensi&#xF3;n</strong>.</p>
-<p>Dentro de un DAO podemos crear dos tipos distintos de m&#xE9;todos, de conveniencia y de b&#xFA;squeda.</p>
-<h4 class="mume-header" id="m%C3%A9todos-de-conveniencia">M&#xE9;todos de conveniencia</h4>
+</pre><p>Per a poder operar amb la funcionalitat de Room, es necessitar&#xE0; fer les crides fora del fil principal ja que les inst&#xE0;ncies de <strong><code>RoomDatabase</code></strong> s&#xF3;n costoses quant a temps, per la qual cosa ser&#xE0; necessari llan&#xE7;ar aquestes crides mitjan&#xE7;ant &apos;<em>corrutines</em>&apos;. <strong>La manera recomanada &#xE9;s la de crear els m&#xE8;todes de la interf&#xED;cies DAO com a m&#xE8;todes de suspensi&#xF3;</strong>.</p>
+<p>Dins d&apos;un *DAO podem crear dos tipus diferents de m&#xE8;todes, de conveni&#xE8;ncia i de cerca.</p>
+<h4 class="mume-header" id="m%C3%A8todes-de-conveni%C3%A8ncia">M&#xE8;todes de conveni&#xE8;ncia</h4>
 
-<p>Estos m&#xE9;todos nos permiten realizar las operaciones b&#xE1;sicas de inserci&#xF3;n, modificaci&#xF3;n y eliminaci&#xF3;n de registros en la BD sin tener que escribir ning&#xFA;n tipo de c&#xF3;digo SQL. A estos m&#xE9;todos se le pasa la entidad sobre la que se quiera trabajar y es la propia librer&#xED;a Room la encargada de crear la sentencia SQL usando la clave primaria para la identificaci&#xF3;n del registro sobre el que se quiere operar. Deber&#xE1;n ir precedidos por las anotaciones <strong>@Insert, @Delete o @Update</strong> dependiendo de la necesidad.</p>
+<p>Aquests m&#xE8;todes ens permeten realitzar les operacions b&#xE0;siques d&apos;inserci&#xF3;, modificaci&#xF3; i eliminaci&#xF3; de registres en la BD sense haver d&apos;escriure cap mena de codi SQL. A aquests m&#xE8;todes se li passa l&apos;entitat sobre la qual es vulga treballar i &#xE9;s la pr&#xF2;pia llibreria Room l&apos;encarregada de crear la sent&#xE8;ncia SQL usant la clau prim&#xE0;ria per a la identificaci&#xF3; del registre sobre el qual es vol operar. Hauran d&apos;anar precedits per les anotacions <strong>@Insert, @Delete o @Update</strong> depenent de la necessitat.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
 <span class="token keyword keyword-interface">interface</span> ClienteDao <span class="token punctuation">{</span>
     <span class="token annotation builtin">@Insert</span><span class="token punctuation">(</span>onConflict <span class="token operator">=</span> OnConflictStrategy<span class="token punctuation">.</span>REPLACE<span class="token punctuation">)</span>
@@ -580,22 +578,22 @@ En las <strong>dependencias</strong>:</p>
     <span class="token annotation builtin">@Update</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>cliente <span class="token operator">:</span> ClienteEntity<span class="token punctuation">)</span>
 
-    <span class="token comment">// Si no pasamos la entidad y lo que tenemos </span>
-    <span class="token comment">// es la PK deberemos hacer una consulta con @Query</span>
+    <span class="token comment">// Sino passem l&apos;entitat i el que tenim </span>
+    <span class="token comment">// &#xE9;s la PK haurem de fer una consulta amb @Query</span>
     <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;DELETE FROM clientes WHERE dni = :dni&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">deleteByDni</span><span class="token punctuation">(</span>dni<span class="token operator">:</span> String<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x1F4CC; <strong>Nota:</strong> Como se puede ver en el anterior c&#xF3;digo, es una manera muy sencilla de realizar las operaciones b&#xE1;sicas usando las anotaciones correspondientes y pasando como par&#xE1;metro al m&#xE9;todo la Entidad sobre la que queremos operar.<br>
-En el caso de la inserci&#xF3;n podemos ver que se puede utilizar la propiedad <strong><code>onConflict</code></strong> para indicar si queremos reemplazar el elemento existente por el nuevo en caso de que coincida la clave primaria (en este caso el dni).</p>
+<p>&#x1F4CC; <strong>Nota:</strong> Com es pot veure en l&apos;anterior codi, &#xE9;s una manera molt senzilla de realitzar les operacions b&#xE0;siques usant les anotacions corresponents i passant com a par&#xE0;metre al m&#xE8;tode l&apos;Entitat sobre la qual volem operar.<br>
+En el cas de la inserci&#xF3; podem veure que es pot utilitzar la propietat <strong><code>onConflict</code></strong> per a indicar si volem reempla&#xE7;ar l&apos;element existent pel nou en cas que coincidisca la clau prim&#xE0;ria (en aquest cas el*dni).</p>
 </blockquote>
-<h4 class="mume-header" id="m%C3%A9todos-de-b%C3%BAsqueda">M&#xE9;todos de b&#xFA;squeda</h4>
+<h4 class="mume-header" id="m%C3%A8todes-de-cerca">M&#xE8;todes de cerca</h4>
 
-<p>Estos m&#xE9;todos ser&#xE1;n los que crearemos para realizar consultas sobre la BD y tendr&#xE1;n que ir precedidos por la anotaci&#xF3;n <strong>@Query</strong>. Esta anotaci&#xF3;n permite que se a&#xF1;ada como par&#xE1;metro una cadena con la sentencia SQL para la consulta.</p>
+<p>Aquests m&#xE8;todes seran els que crearem per a realitzar consultes sobre la BD i hauran d&apos;anar precedits per l&apos;anotaci&#xF3; <strong>@Query</strong>. Aquesta anotaci&#xF3; permet que s&apos;afija com a par&#xE0;metre una cadena amb la sent&#xE8;ncia SQL per a la consulta.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
 <span class="token keyword keyword-interface">interface</span> ClienteDao <span class="token punctuation">{</span>
 
-    <span class="token comment">// ... aqu&#xED; van los m&#xE9;todos de conveniencia CRUD</span>
+    <span class="token comment">// ... ac&#xED; van el m&#xE8;todes del CRUD</span>
 
     <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM clientes&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>ClienteEntity<span class="token operator">&gt;</span>
@@ -603,53 +601,53 @@ En el caso de la inserci&#xF3;n podemos ver que se puede utilizar la propiedad <
     <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM clientes WHERE dni IN (:dni)&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getFromDni</span><span class="token punctuation">(</span>dni <span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> ClienteEntity
 <span class="token punctuation">}</span>
-</pre><p>Los dos primeros m&#xE9;todos de nuestro DAO, son dos m&#xE9;todos de consulta, el primero devuelve una lista de Clientes mientras que el segundo devuelve un solo cliente. Como se puede ver en el c&#xF3;digo, Room permite pasar un par&#xE1;metro o una lista de par&#xE1;metros dentro de la propia consulta siempre que lo precedamos con <strong><code>:</code></strong> y que coincida en nombre con el par&#xE1;metro que le llega al m&#xE9;todo.</p>
-<h5 class="mume-header" id="selecci%C3%B3n-de-un-subconjunto-de-columnas">Selecci&#xF3;n de un subconjunto de columnas</h5>
+</pre><p>Els dos primers m&#xE8;todes del nostre DAO, s&#xF3;n dos m&#xE8;todes de consulta, el primer retorna una llista de Clients mentre que el segon retorna un sol client. Com es pot veure en el codi, Room permet passar un par&#xE0;metre o una llista de par&#xE0;metres dins de la pr&#xF2;pia consulta sempre que el precedim amb <strong><code>:</code></strong> i que coincidisca en nom amb el par&#xE0;metre que li arriba al m&#xE8;tode.</p>
+<h5 class="mume-header" id="selecci%C3%B3-dun-subconjunt-de-columnes">Selecci&#xF3; d&apos;un subconjunt de columnes</h5>
 
-<p>En muchas ocasiones no ser&#xE1; necesaria toda la informaci&#xF3;n de la tabla, sino que solo necesitaremos recuperar algunas de las columnas. Aunque se puede recuperar toda la informaci&#xF3; y posteriormente realizar un filtrado de esta, para ahorrar recursos es interesante consultar solamente los campos que se necesitan. Para ello necesitaremos crear un objeto del tipo de columnas que queramos devolver, esto se podr&#xE1; hacer usando una data class nueva para esos datos:</p>
+<p>En moltes ocasions no ser&#xE0; necess&#xE0;ria tota la informaci&#xF3; de la taula, sin&#xF3; que nom&#xE9;s necessitarem recuperar algunes de les columnes. Encara que es pot recuperar tota la informaci&#xF3; i posteriorment realitzar un filtrat d&apos;aquesta, per a estalviar recursos &#xE9;s interessant consultar solament els camps que es necessiten. Per a aix&#xF2; necessitarem crear un objecte del tipus de columnes que vulguem retornar, aix&#xF2; es podr&#xE0; fer usant una data class nova per a aqueixes dades:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">TuplaNombreApellido</span><span class="token punctuation">(</span>
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;nombre&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String
 <span class="token punctuation">)</span>
-</pre><p>Y solamente se tendr&#xE1; que indicar en el Dao que el m&#xE9;todo correspondiente devolver&#xE1; los datos de este tipo:</p>
+</pre><p>I solament s&apos;haur&#xE0; d&apos;indicar en el *Dao que el m&#xE8;tode corresponent retornar&#xE0; les dades d&apos;aquest tipus:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT nombre, apellidos FROM clientes&quot;</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getNombreApellido</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>TuplaNombreApellido<span class="token operator">&gt;</span>
-</pre><p>Por ejemplo, si quisieramos recuperar el mapeo de la clase <strong><code>ClienteConPedidos</code></strong> que definimos en la relaci&#xF3;n uno a muchos entre objetos. Deber&#xED;amos marcar el m&#xE9;todo con anotaci&#xF3;n <strong><code>@Transaction</code></strong>, pues en su interior hay una anotaci&#xF3;n <strong><code>@Relation</code></strong> que se deber&#xE1; completar antes de devolver la instancia del objetos.</p>
+</pre><p>Per exemple, si volgu&#xE9;rem recuperar el mapatge de la classe <strong><code>ClienteConPedidos</code></strong> que definim en la relaci&#xF3; un a molts entre objectes. Haur&#xED;em de marcar el m&#xE8;tode amb anotaci&#xF3; <strong><code>@Transaction</code></strong>, perqu&#xE8; en el seu interior hi ha una anotaci&#xF3; <strong><code>@Relation</code></strong> que es deur&#xE0; completar abans de retornar la inst&#xE0;ncia de l&apos;objectes.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Transaction</span>
-<span class="token comment">// F&#xED;jate que no indicamos la relaci&#xF3;n en la consulta ya est&#xE1; definida</span>
-<span class="token comment">// en el objeto a recuperar.</span>
+<span class="token comment">// Fixa&apos;t que no indiquem la relaci&#xF3; en la consulta ja est&#xE0; definida</span>
+<span class="token comment">// en l&apos;objecte a recuperar.</span>
 <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM clientes&quot;</span><span class="token punctuation">)</span>
-<span class="token comment">// F&#xED;jate que devuelve una lista de objetos ClienteConPedidos</span>
+<span class="token comment">// Fixa&apos;t que retorna una llista d&apos;objectes ClienteConPedidos</span>
 <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getPedidos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>ClienteConPedidos<span class="token operator">&gt;</span> 
 </pre><div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="crear-la-base-de-datos-room-y-consumirla">Crear la Base de Datos Room y consumirla</h3>
+<h3 class="mume-header" id="crear-la-base-de-dades-room-i-consumir-la">Crear la Base de dades *Room i consumir-la</h3>
 
-<p>El &#xFA;ltimo elemento que quedar&#xED;a por crear ser&#xED;a la <a href="https://developer.android.com/training/data-storage/room#database">RoomDatabase</a>. Este elemento es el que se encargar&#xE1; de crear la base de datos a partir de las Entities definidas y las operaciones que se realizar&#xE1;n sobre estas a partir de los Daos de nuestra app. Por tanto es el elemento que enlaza a los dos anteriores. Para ello crearemos una clase abstracta que deber&#xE1; de heredar de <strong><code>RoomDatabase</code></strong> y a la que etiquetaremos con la anotaci&#xF3;n <strong>@Database</strong> con las propiedades versi&#xF3;n y entities. La primera propiedad especificar&#xE1; la versi&#xF3;n de la BD, mientras que en entities indicaremos la entidad o entidades asociadas a esta.</p>
+<p>L&apos;&#xFA;ltim element que quedaria per crear seria la <a href="https://developer.android.com/training/data-storage/room#database">RoomDatabase</a>. Aquest element &#xE9;s el que s&apos;encarregar&#xE0; de crear la base de dades a partir de les <em>&apos;Entities&apos;</em> definides i les operacions que es realitzaran sobre aquestes a partir dels Doneu-vos de la nostra app. Per tant &#xE9;s l&apos;element que enlla&#xE7;a als dos anteriors. Per a aix&#xF2; crearem una classe abstracta que haur&#xE0; d&apos;heretar de <strong><code>RoomDatabase</code></strong> i a la qual etiquetarem amb l&apos;anotaci&#xF3; <strong>@Database</strong> amb les propietats versi&#xF3; i <em>entities</em>. La primera propietat especificar&#xE0; la versi&#xF3; de la BD, mentre que en <em>entities</em> indicarem l&apos;entitat o entitats associades a aquesta.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
     entities <span class="token operator">=</span> <span class="token punctuation">[</span>ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span> PedidoEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     version <span class="token operator">=</span> <span class="token number">1</span>
 <span class="token punctuation">)</span>
-<span class="token comment">// Indicaremos las conversiones de tipos que hemos definido para </span>
-<span class="token comment">// nuestra base de datos si las hay. Ej. Date &#x2194; Long o Bitmap &#x2194; byte[]</span>
+<span class="token comment">// Indicarem les conversions de tipus que hem definit per a </span>
+<span class="token comment">// la nostra base de dades si n&apos;hi ha. Ex. Dona&apos;t &#x2194; Long o Mapa de bits &#x2194; byte[]</span>
 <span class="token annotation builtin">@TypeConverters</span><span class="token punctuation">(</span>Converters<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> TiendaDB<span class="token operator">:</span> <span class="token function">RoomDatabase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ClienteDao
     <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">pedidoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> PedidoDao
 <span class="token punctuation">}</span>
 </pre><blockquote>
-<p>&#x270B; <strong>Importante:</strong>  Cada Database tendr&#xE1; un m&#xE9;todo abstracto  que devolver&#xE1; su tipo <strong><code>DAO</code></strong> correspondiente para posteriormente acceder a los m&#xE9;todos de este.</p>
+<p>&#x270B; <strong>Important:</strong> Cada Database tindr&#xE0; un m&#xE8;tode abstracte que retornar&#xE0; el seu tipus <strong><code>*DAO</code></strong> corresponent per a posteriorment accedir als m&#xE8;todes d&apos;aquest.</p>
 </blockquote>
-<h3 class="mume-header" id="instanciar-la-roomdatabase-para-su-posterior-funcionamiento">Instanciar la RoomDatabase para su posterior funcionamiento</h3>
+<h3 class="mume-header" id="instanciar-la-roomdatabase-per-al-seu-posterior-funcionament">Instanciar la RoomDatabase per al seu posterior funcionament</h3>
 
-<p>Una vez creados todos los componentes necesarios para el funcionamiento de Room Database, podremos crear instancias en el lugar donde las necesitemos para la gesti&#xF3;n de la base de datos, para ello haremos lo siguiente:</p>
+<p>Una vegada creats tots els components necessaris per al funcionament de Room Database, podrem crear inst&#xE0;ncies en el lloc on les necessitem per a la gesti&#xF3; de la base de dades, per a aix&#xF2; farem el seg&#xFC;ent:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> room <span class="token operator">=</span> Room<span class="token punctuation">.</span><span class="token function">databaseBuilder</span><span class="token punctuation">(</span>
-            applicationContext<span class="token punctuation">,</span> <span class="token comment">// Necesitamos un aplication context.</span>
+            applicationContext<span class="token punctuation">,</span> <span class="token comment">// Necessitem de aplication context.</span>
             TiendaDB<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span> 
-            <span class="token string">&quot;tienda&quot;</span>           <span class="token comment">// Aqu&#xED; definimos el nombre de la BD</span>
+            <span class="token string">&quot;tienda&quot;</span>           <span class="token comment">// Aqu&#xED; definirem el nom de la BD</span>
         <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p>Como necesitamos el contexto podr&#xED;amos hacerlo de forma global en alg&#xFA;n tipo de objeto donde tengamos el contexto o en una inst&#xE1;ncia del <strong><code>ViewModel</code></strong> creada en el <strong><code>MainActivity</code></strong> donde le hemos pasado el contexto de la aplicacion.</p>
+</pre><p>Com necessitem el context podr&#xED;em fer-lo de manera global en alguna mena d&apos;objecte on tinguem el context o en una inst&#xE0;ncia del <strong><code>*ViewModel</code></strong> creada en el <strong><code>MainActivity</code></strong> on li hem passat el context de la aplicaci&#xF3;.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> TiendaApp <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> instance <span class="token operator">:</span> TiendaApp
@@ -667,7 +665,7 @@ En el caso de la inserci&#xF3;n podemos ver que se puede utilizar la propiedad <
         instance <span class="token operator">=</span> <span class="token keyword keyword-this">this</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Un posible uso de este objeto para realizar una consulta con paso de par&#xE1;metro ser&#xED;a de la siguiente manera:</p>
+</pre><p>Un possible &#xFA;s d&apos;aquest objecte per a realitzar una consulta amb pas de par&#xE0;metre seria de la seg&#xFC;ent manera:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> clienteDao <span class="token operator">=</span> TiendaApp<span class="token punctuation">.</span>instance<span class="token punctuation">.</span>room<span class="token punctuation">.</span><span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
@@ -682,9 +680,9 @@ En el caso de la inserci&#xF3;n podemos ver que se puede utilizar la propiedad <
                         <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F;Comp&#xF3;n la aplicaci&#xF3;n de los ejemplos anteriores y prueba su suncionamiento<br>
+</pre><p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Compon l&apos;aplicaci&#xF3; dels exemples anteriors i prova el seua funcionament<br>
 </span></p>
-<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Ejercicio propuesto cursor con recycler</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Exercici proposat cursor amb recycler</span></p>
 <div style="page-break-after:always;"></div>
       </div>
       
