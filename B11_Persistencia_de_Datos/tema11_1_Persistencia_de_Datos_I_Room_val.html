@@ -404,18 +404,36 @@ justo después del front matter
 <li><strong><code>@Database</code></strong>, s&apos;afegir&#xE0; a les Room  Database he indicar&#xE0; que &#xE9;s una Database, aquestes classes han de ser abstractes i heretar de <strong><code>RoomDatabase</code></strong>.</li>
 </ul>
 <blockquote>
-<p>&#x270B; <strong>Important:</strong> per a poder usar la funcionalitat de Room i les anotacions, haurem d&apos;afegir una s&#xE8;rie de depend&#xE8;ncies a *build.*gradle del m&#xF2;dul.<br>
-En els <strong>plugins</strong> haurem d&apos;afegir <strong><code>id &apos;kotlin-kapt&apos;</code></strong> que ens permetr&#xE0; treballar amb l&apos;eina d&apos;anotacions per a Kotlin.<br>
+<p>&#x270B; <strong>Important:</strong> per a poder usar la funcionalitat de Room i les anotacions, haurem d&apos;afegir una s&#xE8;rie de depend&#xE8;ncies a <strong><code>build.gradle</code></strong> del m&#xF2;dul.<br>
 En les <strong>depend&#xE8;ncies</strong>:</p>
 <ul>
-<li>Per a les anotacions deurem afegir<br>
-<strong><code>kapt(&quot;androidx.room:room-compiler:$room_version&quot;)</code></strong></li>
-<li>Per a poder accedir a la funcionalitat de Room i enlla&#xE7;ar-la amb les anotacions<br>
+<li>Per a les anotacions haurem d&apos;afegir<br>
+<strong><code>kapt(&quot;androidx.room:room-compiler:$room_version&quot;)</code></strong><br>
+No podem oblidar afegir en *plugins <strong><code>id &apos;kotlin-kapt&apos;</code></strong></li>
+<li>Per a poder accedir a la funcionalitat de *Room i enlla&#xE7;ar-la amb les anotacions<br>
 <strong><code>implementation &quot;androidx.room:room-ktx:$room_version&quot;</code></strong><br>
-<strong><code>implementation &quot;androidx.room:room-runtime:$room_version&quot;</code></strong><br>
-<strong><code>annotationProcessor &quot;androidx.room:room-compiler:$room_version&quot;</code></strong></li>
+<strong><code>implementation &quot;androidx.room:room-runtime:$room_version&quot;</code></strong></li>
+<li>La versi&#xF3; en el moment en qu&#xE8; es van editar les anotacions era:<br>
+<strong><code>def room_version = &quot;2.4.3&quot; // Al script de Groovy</code></strong></li>
 </ul>
-</blockquote>
+<p>Per tant al <strong><code>build.gradle</code></strong> del m&#xF2;dul haurem d&apos;afegir una cosa similar a ...</p>
+<pre data-role="codeBlock" data-info="groovy" class="language-groovy">plugins <span class="token punctuation">{</span>
+    <span class="token punctuation">...</span>
+    id <span class="token string">&apos;kotlin-kapt&apos;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">...</span>
+
+dependencies <span class="token punctuation">{</span>
+    <span class="token punctuation">...</span>
+    <span class="token keyword keyword-def">def</span> room_version <span class="token operator">=</span> <span class="token string">&quot;2.4.3&quot;</span>
+    kapt <span class="token string">&quot;androidx.room:room-compiler:$room_version&quot;</span>
+    implementation <span class="token string">&quot;androidx.room:room-ktx:$room_version&quot;</span>
+    implementation <span class="token string">&quot;androidx.room:room-runtime:$room_version&quot;</span>
+    <span class="token punctuation">...</span>
+<span class="token punctuation">}</span>
+``
+</pre></blockquote>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="crear-les-entitats-que-defineixen-el-nostre-model">Crear les entitats que defineixen el nostre model</h3>
 
@@ -641,36 +659,50 @@ En el cas de la inserci&#xF3; podem veure que es pot utilitzar la propietat <str
 </blockquote>
 <h3 class="mume-header" id="instanciar-la-roomdatabase-per-al-seu-posterior-funcionament">Instanciar la RoomDatabase per al seu posterior funcionament</h3>
 
-<p>Una vegada creats tots els components necessaris per al funcionament de Room Database, podrem crear inst&#xE0;ncies en el lloc on les necessitem per a la gesti&#xF3; de la base de dades, per a aix&#xF2; farem el seg&#xFC;ent:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> room <span class="token operator">=</span> Room<span class="token punctuation">.</span><span class="token function">databaseBuilder</span><span class="token punctuation">(</span>
-            applicationContext<span class="token punctuation">,</span> <span class="token comment">// Necessitem de aplication context.</span>
-            TiendaDB<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span> 
-            <span class="token string">&quot;tienda&quot;</span>           <span class="token comment">// Aqu&#xED; definirem el nom de la BD</span>
-        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p>Com necessitem el context podr&#xED;em fer-lo de manera global en alguna mena d&apos;objecte on tinguem el context o en una inst&#xE0;ncia del <strong><code>*ViewModel</code></strong> creada en el <strong><code>MainActivity</code></strong> on li hem passat el context de la aplicaci&#xF3;.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> TiendaApp <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p>Una vegada creats tots els components necessaris per al funcionament de Room Database, podrem crear inst&#xE0;ncies en el lloc on les necessitem per a la gesti&#xF3; de la base de dades, per a aix&#xF2; crearem primer un m&#xE8;tode est&#xE0;tic <strong><code>fun getDatabase(context: Context): AgendaDb</code></strong> que em retornar&#xE0; una &#xFA;nica inst&#xE0;ncia de la BD de manera s&#xED;ncrona (com es veu de la l&#xED;nia 5 a la 19).</p>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token annotation builtin">@TypeConverters</span><span class="token punctuation">(</span>Converters<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> AgendaDb<span class="token operator">:</span> <span class="token function">RoomDatabase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">contactoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ContactoDao
+
     <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> instance <span class="token operator">:</span> TiendaApp
-            <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
-    <span class="token punctuation">}</span>
+        <span class="token annotation builtin">@Volatile</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-var">var</span> db<span class="token operator">:</span> AgendaDb<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
 
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> room <span class="token operator">:</span> TiendaDB
-
-    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        room <span class="token operator">=</span> Room<span class="token punctuation">.</span><span class="token function">databaseBuilder</span><span class="token punctuation">(</span>
-            applicationContext<span class="token punctuation">,</span>
-            TiendaDB<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span> <span class="token string">&quot;tienda&quot;</span>           
-        <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        instance <span class="token operator">=</span> <span class="token keyword keyword-this">this</span>
+        <span class="token keyword keyword-fun">fun</span> <span class="token function">getDatabase</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">)</span><span class="token operator">:</span> AgendaDb <span class="token punctuation">{</span>
+            <span class="token keyword keyword-return">return</span> db <span class="token operator">?:</span> <span class="token function">synchronized</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> instance <span class="token operator">=</span> Room<span class="token punctuation">.</span><span class="token function">databaseBuilder</span><span class="token punctuation">(</span>
+                        context<span class="token punctuation">,</span>
+                        AgendaDb<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span> <span class="token string">&quot;agenda&quot;</span>
+                <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                db <span class="token operator">=</span> instance
+                instance
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Un possible &#xFA;s d&apos;aquest objecte per a realitzar una consulta amb pas de par&#xE0;metre seria de la seg&#xFC;ent manera:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">CoroutineScope</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-val">val</span> clienteDao <span class="token operator">=</span> TiendaApp<span class="token punctuation">.</span>instance<span class="token punctuation">.</span>room<span class="token punctuation">.</span><span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>Com necessitem el context podem definir un objecte <strong><code>TiendaApp</code></strong> que herete de <strong><code>Application()</code></strong> per a crear la inst&#xE0;ncia de manera global i accessible des del <strong><code>MainActivity</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> TiendaApp <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> database<span class="token operator">:</span> AgendaDb <span class="token keyword keyword-by">by</span> lazy <span class="token punctuation">{</span> AgendaDb<span class="token punctuation">.</span><span class="token function">getDatabase</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Perqu&#xE8; es cree una instancia de l&apos;objecte <strong><code>TiendaApp</code></strong> deurem modificar el nostre <strong><code>AndroidManifest.xml</code></strong> per a indicar-li que est&#xE0; associat a la nostra App afegint el seg&#xFC;ent atribut a l&apos;etiqueta <strong><code>&lt;application&gt;</code></strong>.</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml">...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>paquet_a_on_este_definit.TiendaApp<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
 
-    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>clienteDao<span class="token punctuation">.</span><span class="token function">getFromDni</span><span class="token punctuation">(</span>cliente<span class="token punctuation">.</span>dni<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>dni <span class="token operator">!=</span> cliente<span class="token punctuation">.</span>dni<span class="token punctuation">)</span>
-        clienteDao<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>cliente<span class="token punctuation">)</span>
+...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
+</pre><p>Per a obtindre una instancia del DAO en algun punt de la nostra aplicaci&#xF3; podem fer.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Suposant que estam definint un ViewModel</span>
+
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao <span class="token operator">=</span> <span class="token punctuation">(</span>applicationInstance <span class="token keyword keyword-as">as</span> TiendaApp<span class="token punctuation">)</span><span class="token punctuation">.</span>database<span class="token punctuation">.</span><span class="token function">contactoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Un possible &#xFA;s d&apos;aquest objecte per a realitzar una </span>
+<span class="token comment">// consulta amb pas de par&#xE0;metre seria de la seg&#xFC;ent manera...</span>
+
+viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>    
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>dao<span class="token punctuation">.</span><span class="token function">getFromDni</span><span class="token punctuation">(</span>cliente<span class="token punctuation">.</span>dni<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>dni <span class="token operator">!=</span> cliente<span class="token punctuation">.</span>dni<span class="token punctuation">)</span>
+        dao<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>cliente<span class="token punctuation">)</span>
     <span class="token keyword keyword-else">else</span>
         <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Main<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span>
