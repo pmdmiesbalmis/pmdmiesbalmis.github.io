@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>Exercici Proposat Recycler Room</title>
+      <title>Exercici Proposat Tienda Room</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -264,21 +264,107 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="exercici-proposat-recycler-room">Exercici Proposat Recycler Room</h1>
+      <h1 class="mume-header" id="exercici-proposat-tienda-roomignoretrue">Exercici Proposat Tienda Room{ignore=true}</h1>
 
-<p><a href="./ejercicio_Propuesto_Recycler_Room_val.pdf">Descarregar estos apunts</a></p>
+<p><a href="./ejercicio_Propuesto_Tienda_Room_val.pdf">Descarregar estos apunts</a></p>
 <div style="display: flex; justify-content: space-between; margin-top: 15px">
 <div style="width: 70%">
-<p>Crea una aplicaci&#xF3;, seguint els coneixements adquirits en aquest tema, haur&#xE0;s de crear una carpeta anomenada <strong>database</strong> en la qual inclour&#xE0;s els tres components necessaris per a la funcionalitat de Room. L&apos;aparen&#xE7;a ser&#xE0; semblant a la de la seg&#xFC;ent imatge de la dreta.</p>
-<p>Podr&#xE0;s compondre l&apos;aplicaci&#xF3; utilitzant el codi d&apos;exemple que s&apos;ha usat en les anotacions per a explicar el tema. L&apos;entitat seriosa <strong><code>ClienteEntity</code></strong> de les anotacions, a la qual se li afegiria una imatge (no han de ser totes diferents) per a cada registre que s&apos;inserisca en la BD, pots triar-les entre dues o tres que tingues en la carpeta Drawable de recursos, usant algun criteri que decidisques.</p>
-<p>El bot&#xF3; + ens permetr&#xE0; afegir un registre nou a la base de dades de Clients. El de visualitzar (l&apos;ull), permetr&#xE0; mostrar una llista (listview o recyclerview) amb tots els elements de la BD. El bot&#xF3; <strong><code>&lt;</code></strong> o <strong><code>&gt;</code></strong>, ens permetr&#xE0; recuperar en la llista els registres de la BD que el seu dni siga respectivament <strong><code>&lt;</code></strong> o <strong><code>&gt;</code></strong> que un DNI introdu&#xEF;t en el camp DNI a buscar, es mostrar&#xE0; un toast advertint si aquest camp es deixa buit.</p>
+<p>Crearem una aplicaci&#xF3; per a aprofundir m&#xE9;s en la <strong>gesti&#xF3; de Bases de dades amb Room</strong>. Es tractar&#xE0; d&apos;implementar una mini botiga perqu&#xE8; els clients puguen fer comandes d&apos;una seria de articles que ofereix aquesta. En la seg&#xFC;ent imatge es mostrar&#xE0; l&apos;estructura de paquets que podeu seguir, perqu&#xE8; els components de l&apos;aplicaci&#xF3; estiguen m&#xE9;s organitzats:</p>
+<div align="center">
+    <img height="150" src="./imagenes/imagen1.png">
 </div>
-<div style="width: auto">
-    <img height="300px" src="./imagenes/imagen1room.png">
+<p>A m&#xE9;s per a no perdre temps en la implementaci&#xF3; de les vistes i els adaptadors, se us passen com a recursos adjunts tots els fitxers necessaris, encara que podeu personalitzar l&apos;aplicaci&#xF3; al vostre gust. <em>Important allotjar els adaptadors en la carpeta corresponent.</em></p>
+<blockquote>
+<p>&#x270B; <strong>Important:</strong> Per a millorar la independ&#xE8;ncia del codi, en el paquet *ViewModel s&apos;allotjar&#xE0;:</p>
+<ul>
+<li>una classe object que contindr&#xE0; la inicialitzaci&#xF3; dels articles (es comentar&#xE0; despr&#xE9;s de la primer &#xFA;s per a evitar duplicats).</li>
+<li>la instanciaci&#xF3; de la BD per a poder realitzar el seu &#xFA;s.</li>
+<li>a m&#xE9;s dels m&#xE8;todes necessaris per a comunicar-se amb les funcionalitats de Dao, de manera que est&#xE0; ser&#xE0; la classe que t&#xE9; relaci&#xF3; directa amb les incloses en el paquet de l&apos;arquitectura Room, database.</li>
+</ul>
+</blockquote>
+<h5 class="mume-header" id="fragmentcliente">FragmentCliente</h5>
+
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border-style:hidden">
+<td>
+<p>L&apos;aplicaci&#xF3; es presentar&#xE0; amb un fragment principal que permetr&#xE0; la gesti&#xF3; de clients: afegir, mostrar i eliminar. L&apos;eliminaci&#xF3; es far&#xE0; amb el clic llarg, afegir mitjan&#xE7;ant el FAB i els elements afegits es mostraran amb el recycler.</p>
+</td>
+<td style="border-style:hidden">
+<div align="center">
+     <img width="1000" src="./imagenes/imagen2.png" < div>
+</div></td>
+</tr>
+</tbody></table>
+</span>
+<p><em>Tots els fragments i les activitys s&apos;allotjaran en el paquet View.</em></p>
+<p>Per a la gesti&#xF3; anterior nom&#xE9;s necessitarem l&apos;entitat Client amb els camps que es visualitzen en la imatge i amb el dni com a clau prim&#xE0;ria.</p>
+<p>Si premem de manera curta en un dels elements del recycler, es mostrar&#xE0; un popup men&#xFA; amb el seg&#xFC;ent aspecte:</p>
+<div align="center">
+    <img height="100" src="./imagenes/imagen3.png">
 </div>
+<p>La selecci&#xF3; de cada opci&#xF3; del men&#xFA;, carregar&#xE0; el fragment corresponent.</p>
+<h5 class="mume-header" id="fragmentpedido">FragmentPedido</h5>
+
+<p>Servir&#xE0; per a realitzar la comanda del client premut, el primer que far&#xE0; aquest fragment &#xE9;s carregar en un spinner els articulos a la venda de la botiga. Aquests articles es carregaran de manera autom&#xE0;tica en crear l&apos;aplicaci&#xF3;. Podem usar una classe object allotjada en ViewModel que retorne la seg&#xFC;ent llista d&apos;articles, per exemple:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-object">object</span> InicializarArticulos <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">listaArticulos</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>MutableList<span class="token operator">&lt;</span>ArticuloEntity<span class="token operator">&gt;</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> lista<span class="token operator">=</span> mutableListOf<span class="token operator">&lt;</span>ArticuloEntity<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        lista<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ArticuloEntity</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;Macarrones&quot;</span><span class="token punctuation">,</span><span class="token number">1.25f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        lista<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ArticuloEntity</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;Queso&quot;</span><span class="token punctuation">,</span><span class="token number">5.25f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        lista<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ArticuloEntity</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;Tomate&quot;</span><span class="token punctuation">,</span><span class="token number">1.65f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        lista<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ArticuloEntity</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;Lechuga&quot;</span><span class="token punctuation">,</span><span class="token number">1.00f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> lista
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Els elements d&apos;aquesta llista s&apos;inseriran en l&apos;entitat Articulos per a posteriorment relacionar-los amb les comandes. L&apos;aneu de l&apos;article ser&#xE0; autoincrementable, per aix&#xF2; s&apos;insereix com 0 en el constructor.</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border-style:hidden">
+<td>
+<div align="center">
+     <img width="1000" src="./imagenes/imagen4.png" < div>
+</div></td>
+<td style="border-style:hidden">
+<div align="center">
+     <img width="1000" src="./imagenes/imagen5.png" < div>
+</div></td>
+</tr>
+</tbody></table>
+</span>
+<p>En seleccionar un article del Spinner es mostrar&#xE0; en el recycler inferior, podrem incrementar o decrementar la quantitat amb les icones corresponents, quan s&apos;arribe a 0 l&apos;article deixar&#xE0; de mostrar-se en el recycler. Per a aix&#xF2; utilitzarem una llista de ArticulosPedido, formada per una data classe amb els mateixos camps que la de articulos entity, m&#xE9;s la quantitat que nom&#xE9;s ser&#xE0; necesar&#xED;a a l&apos;hora de realitzar les comandes. <em>Aquesta data class s&apos;allotjar&#xE0; en el paquet model.</em>.</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen6.png">
 </div>
-<div style="display: flex; justify-content: space-between; margin-top: 15px">
-<div style="width: 70%">
+<p>En pr&#xE9;mer sobre el FAB es procedir&#xE0; a guardar les dades generals de la comanda en la taula Demanat, per a aix&#xF2; crearem una entitat com la seg&#xFC;ent:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">PedidoEntity</span><span class="token punctuation">(</span>
+    <span class="token annotation builtin">@PrimaryKey</span><span class="token punctuation">(</span>autoGenerate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">// El id ser&#xE1; autogenerado.</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;pedidoId&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> pedidoId<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;dniCliente&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> dniCliente<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;total&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> total<span class="token operator">:</span> Float<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@NonNull</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;fecha&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// Indicamos que siempre debe tener una fecha.</span>
+    <span class="token keyword keyword-val">val</span> fecha<span class="token operator">:</span> Long
+<span class="token punctuation">)</span>
+</pre><p>En aquesta taula no es guardaran els articles, aquest proc&#xE9;s el farem posteriorment, una vegada que ens funcione b&#xE9; la inserci&#xF3; de la comanda.</p>
+<p><strong>Entre Client i Comanda hi ha una relaci&#xF3; un a molts</strong> que haur&#xE0;s de crear, tens la informaci&#xF3; en les anotacions i en la p&#xE0;gina oficial. Pots comprovar que la BD est&#xE0; guardant les dades correctament usant App Inspection.</p>
+<p>Una vegada que tinguem les dades de la comanda guardada, passarem a guardar els articles que el componen. Per a aix&#xF2; haurem de crear una relaci&#xF3; <strong>molts a molts entre Comanda i Article</strong>, trobarem la informaci&#xF3; en la p&#xE0;gina principal. En aquest cas es crea una entitat intermitja ArticulosConPedido amb els dos aneu com a clau prim&#xE0;ria, i a m&#xE9;s afegirem el camp quantitat. Per tant, en pr&#xE9;mer sobre el FAB de guardar comanda, haurem d&apos;inserir les dades en la table Comanda i a m&#xE9;s inserir en la taula ArticulosConPedido l&apos;aneu dels Articulos de la llista de la compra amb les seues quantitats, juntament amb l&apos;aneu de la comanda.</p>
+<h5 class="mume-header" id="fragmentlistapedidos">FragmentListaPedidos</h5>
+
+<p>Aquest fragment es carregar&#xE0; amb l&apos;altra opci&#xF3; del men&#xFA; Popup, i en aquest cas es visualitzar&#xE0; la data i el cost de totes les comandes del client seleccionat.</p>
+<div align="center">
+    <img height="130" src="./imagenes/imagen7.png">
+</div>
+<p>En pr&#xE9;mer sobre una comanda, es mostrar&#xE0; un dialogue amb els articles (quantitat, nom i preu) que componien la comanda.</p>
+<p>En el dialogue es pot mostrar la informaci&#xF3; com una cadena en la descripci&#xF3;.</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen8.png">
+</div>
 </div></div>
       </div>
       
