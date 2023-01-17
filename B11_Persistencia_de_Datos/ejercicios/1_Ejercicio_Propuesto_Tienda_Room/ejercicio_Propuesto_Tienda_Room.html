@@ -269,16 +269,16 @@ pre[data-line] .line-highlight[data-end]:after {
 <p><a href="./ejercicio_Propuesto_Tienda_Room.pdf">Descargar estos apuntes</a></p>
 <div style="display: flex; justify-content: space-between; margin-top: 15px">
 <div style="width: 70%">
-<p>Vamos a crear una aplicaci&#xF3;n para profundizar m&#xE1;s en la <strong>gesti&#xF3;n de Bases de Datos con Room</strong>. Se tratar&#xE1; de implementar una mini tienda para que los clientes puedan hacer pedidos de una ser&#xED;e de articulos que ofrece esta. En la siguiente imagen se mostrar&#xE1; la estructura de paquetes que podeis seguir, para que los componentes de la aplicaci&#xF3;n est&#xE9;n m&#xE1;s organizados:</p>
+<p>Vamos a crear una aplicaci&#xF3;n para profundizar m&#xE1;s en la <strong>gesti&#xF3;n de Bases de Datos con Room</strong>. Se tratar&#xE1; de implementar una mini tienda para que los clientes puedan hacer pedidos de una serie de art&#xED;culos que ofrece esta. En la siguiente imagen se mostrar&#xE1; la estructura de paquetes que podeis seguir, para que los componentes de la aplicaci&#xF3;n est&#xE9;n m&#xE1;s organizados:</p>
 <div align="center">
     <img height="150" src="./imagenes/imagen1.png">
 </div>
-<p>Adem&#xE1;s para no perder tiempo en la implementaci&#xF3;n de las vistas y los adaptadores, se os pasan como recursos adjuntos todos los ficheros necesarios, aunque podeis personalizar la aplicaci&#xF3;n a vuestro gusto. <em>Importante alojar los adaptadores en la carpeta correspondiente.</em></p>
+<p>Adem&#xE1;s para no perder tiempo en la implementaci&#xF3;n de las vistas y los adaptadores, se os pasan como recursos adjuntos todos los ficheros necesarios, aunque pod&#xE9;is personalizar la aplicaci&#xF3;n a vuestro gusto. <em>Importante alojar los adaptadores en la carpeta correspondiente.</em></p>
 <blockquote>
 <p>&#x270B; <strong>Importante:</strong> Para mejorar la independencia del c&#xF3;digo, en el paquete ViewModel se alojar&#xE1;:</p>
 <ul>
-<li>una clase object que contendr&#xE1; la inicializaci&#xF3;n de los art&#xED;culos (se comentar&#xE1; despu&#xE9;s de la primer uso para evitar duplicados)</li>
-<li>la instanciaci&#xF3;n de la BD para poder realizar su uso</li>
+<li>una clase object que contendr&#xE1; la inicializaci&#xF3;n de los art&#xED;culos (se comentar&#xE1; despu&#xE9;s del primer uso para evitar duplicados)</li>
+<li>la instanciaci&#xF3;n de la BD para poder realizar su uso.</li>
 <li>adem&#xE1;s de los m&#xE9;todos necesarios para comunicarse con las funcionalidades de Dao, de forma que est&#xE1; ser&#xE1; la clase que tiene relaci&#xF3;n directa con las incluidas en el paquete de la arquitectura Room, database.</li>
 </ul>
 </blockquote>
@@ -288,7 +288,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <table align="center">
 <tbody><tr style="border-style:hidden">
 <td>
-La aplicaci&#xF3;n se presentar&#xE1; con un fragment principal que permitir&#xE1; la gesti&#xF3;n de clientes: a&#xF1;adir, mostrar y eliminar. La eliminaci&#xF3;n se har&#xE1; con el click largo, a&#xF1;adir mediante el FAB y los elementos a&#xF1;adidos se mostrar&#xE1;n con el recycler. 
+<p>La aplicaci&#xF3;n se presentar&#xE1; con un fragment principal que permitir&#xE1; la gesti&#xF3;n de clientes: a&#xF1;adir, mostrar y eliminar. La eliminaci&#xF3;n se har&#xE1; con el click largo, a&#xF1;adir mediante el FAB y los elementos a&#xF1;adidos se mostrar&#xE1;n con el recycler.</p>
 </td>
 <td style="border-style:hidden">
 <div align="center">
@@ -353,7 +353,7 @@ La aplicaci&#xF3;n se presentar&#xE1; con un fragment principal que permitir&#xE
 <span class="token punctuation">)</span>
 </pre><p>En esta tabla no se guardar&#xE1;n los art&#xED;culos, este proceso lo haremos posteriormente, una vez que nos funcione bien la inserci&#xF3;n del pedido.</p>
 <p><strong>Entre Cliente y Pedido hay una relaci&#xF3;n uno a muchos</strong> que deber&#xE1;s de crear, tienes la informaci&#xF3;n en los apuntes y en la p&#xE1;gina oficial. Puedes comprobar que la BD est&#xE1; guardando los datos correctamente usando App Inspection.</p>
-<p>Una vez que tengamos los datos del pedido guardado, pasaremos a guardar los art&#xED;culos que lo componen. Para ello deberemos crear una relaci&#xF3;n <strong>muchos a muchos entre Pedido y Art&#xED;culo</strong>, encontraremos la informaci&#xF3;n en la p&#xE1;gina principal. En este caso se crea una entidad interm&#xE9;dia ArticulosConPedido con los dos id como clave primaria, y adem&#xE1;s a&#xF1;adiremos el campo cantidad. Por tanto, al pulsar sobre el FAB de guardar pedido, tendremos que insertar los datos en la table Pedido y adem&#xE1;s insertar en la tabla ArticulosConPedido el id de los Articulos de la lista de la compra con sus cantidades, junto con el id del pedido.</p>
+<p>Una vez que tengamos los datos del pedido guardado, pasaremos a guardar los art&#xED;culos que lo componen. Para ello deberemos crear una relaci&#xF3;n <strong>muchos a muchos entre Pedido y Art&#xED;culo</strong>, encontraremos la informaci&#xF3;n en la p&#xE1;gina principal. En este caso se crea una entidad interm&#xE9;dia ArticulosConPedido con los dos id como clave primaria, y adem&#xE1;s a&#xF1;adiremos el campo cantidad. Por tanto, al pulsar sobre el FAB de guardar pedido, tendremos que insertar los datos en la tabla Pedido y adem&#xE1;s insertar en la tabla ArticulosConPedido el id de los Articulos de la lista de la compra con sus cantidades, junto con el id del pedido.</p>
 <h5 class="mume-header" id="fragmentlistapedidos">FragmentListaPedidos</h5>
 
 <p>Este fragment se cargar&#xE1; con la otra opci&#xF3;n del men&#xFA; Popup, y en este caso se visualizar&#xE1; la fecha y el coste de todos los pedidos del cliente seleccionado.</p>
