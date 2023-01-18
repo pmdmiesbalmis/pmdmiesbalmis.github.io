@@ -445,7 +445,7 @@ Veamos una ilustraci&#xF3;n que muestra el proceso de parseo que ser&#xE1; estud
 <li>
 <p><strong><code>.htaccess</code></strong> En este archivo se configuran las reglas de acceso, sobre una ruta que le indiquemos en RewriteBase (aqu&#xED; es donde tendremos que a&#xF1;adir la carpeta en la que habremos alojado nuestra API, comenzando y acabando con <em><code>/</code></em>).</p>
 <pre data-role="codeBlock" data-info="cmd" class="language-cmd"><code>RewriteEngine On
-RewriteBase &quot;/uaurios/&quot;
+RewriteBase &quot;/usuarios/&quot;
 RewriteRule ^([a-zA-Z0-9_-]*)$ index.php?action=$1&amp;%{QUERY_STRING}
 RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)$ index.php?action=$1&amp;value=$2&amp;%{QUERY_STRING} [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*) index.php?action=$1&amp;field=$2&amp;value=$3&amp;%{QUERY_STRING} [L,QSA]
@@ -459,7 +459,7 @@ RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*) index.php?action
     <span class="token variable">$password</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;&quot;</span><span class="token punctuation">;</span>
     
     <span class="token comment">// BASE DE DATOS</span>
-    <span class="token variable">$dbname</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;uruariosmensajes&quot;</span><span class="token punctuation">;</span>
+    <span class="token variable">$dbname</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;uruarios&quot;</span><span class="token punctuation">;</span>
     
     <span class="token comment">// TABLAS Y SU CLAVE</span>
     <span class="token variable">$tablas</span> <span class="token operator">=</span> <span class="token keyword keyword-array">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -470,7 +470,7 @@ RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*) index.php?action
 <p>El resto de archivos del ApiREst no tendr&#xE1;n que modificarse, ya que est&#xE1; construida de forma gen&#xE9;rica con las necesidades m&#xE1;s comunes para estos casos. Tendremos que crear la BD y alojar el ApiRest de forma local o en la nube, usando los conocimientos que se tienen del m&#xF3;dulo de Acceso a Datos.</p>
 <div style="display: flex; justify-content: space-between; margin-top: 15px">
 <div style="width: 70%">
-<p><em>Vamos a suponer un ejemplo muy sencillo de una base de datos Usuarios en el que tendremos solamente una tabla Usuarios con dos campos de tipo String (nick y nombre). La BD la habremos construido en el servidor con antelaci&#xF3;n (en este caso con tabla usarios de tres campos, nick y nombre de tipo cadena y _id de tipo num&#xE9;rico autoincrementable como clave). Tambi&#xE9;n crearemos una aplicaci&#xF3;n con dos campos de texto que nos permita insertar los datos del usuario y un bot&#xF3;n flotante de a&#xF1;adir, como se ve en la imagen siguiente:</em></p>
+<p><em>Vamos a suponer un ejemplo muy sencillo de una base de datos Usuarios en el que tendremos solamente una tabla Usuarios con dos campos de tipo String (nick y nombre). La BD la habremos construido en el servidor con antelaci&#xF3;n (en este caso con tabla usuarios de tres campos, nick y nombre de tipo cadena y _id de tipo num&#xE9;rico autoincrementable como clave). Tambi&#xE9;n crearemos una aplicaci&#xF3;n con dos campos de texto que nos permita insertar los datos del usuario y un bot&#xF3;n flotante de a&#xF1;adir, como se ve en la imagen siguiente:</em></p>
 </div>
 <div style="width: auto">
     <img height="200px" src="./imagenes/imagen7.png">

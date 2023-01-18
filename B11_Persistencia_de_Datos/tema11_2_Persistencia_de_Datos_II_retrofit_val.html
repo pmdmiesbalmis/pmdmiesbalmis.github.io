@@ -445,7 +445,7 @@ La part de creaci&#xF3; ja siga amb PHP, Java, o qualsevol dels altres llenguatg
 <li>
 <p><strong><code>.htaccess</code></strong> En aquest arxiu es configuren les regles d&apos;acc&#xE9;s, sobre una ruta que li indiquem en RewriteBase (ac&#xED; &#xE9;s on haurem d&apos;afegir la carpeta en la qual haurem allotjat nostra API, comen&#xE7;ant i acabant amb <em><code>/</code></em>).</p>
 <pre data-role="codeBlock" data-info="cmd" class="language-cmd"><code>RewriteEngine On
-RewriteBase &quot;/uaurios/&quot;
+RewriteBase &quot;/usuarios/&quot;
 RewriteRule ^([a-zA-Z0-9_-]*)$ index.php?action=$1&amp;%{QUERY_STRING}
 RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)$ index.php?action=$1&amp;value=$2&amp;%{QUERY_STRING} [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*) index.php?action=$1&amp;field=$2&amp;value=$3&amp;%{QUERY_STRING} [L,QSA]
@@ -459,7 +459,7 @@ RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*) index.php?action
     <span class="token variable">$password</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;&quot;</span><span class="token punctuation">;</span>
     
     <span class="token comment">// BASE DE DATOS</span>
-    <span class="token variable">$dbname</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;uruariosmensajes&quot;</span><span class="token punctuation">;</span>
+    <span class="token variable">$dbname</span> <span class="token operator">=</span> <span class="token string double-quoted-string">&quot;uruarios&quot;</span><span class="token punctuation">;</span>
     
     <span class="token comment">// TABLAS Y SU CLAVE</span>
     <span class="token variable">$tablas</span> <span class="token operator">=</span> <span class="token keyword keyword-array">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -470,7 +470,7 @@ RewriteRule ^([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*)/([a-zA-Z0-9_-]*) index.php?action
 <p>La resta d&apos;arxius del ApiREst no hauran de modificar-se, ja que est&#xE0; constru&#xEF;da de manera gen&#xE8;rica amb les necessitats m&#xE9;s comuns per a aquests casos. Haurem de crear la BD i allotjar el ApiRest de manera local o en el n&#xFA;vol, usant els coneixements que es tenen del m&#xF2;dul d&apos;Acc&#xE9;s a Dades.</p>
 <div style="display: flex; justify-content: space-between; margin-top: 15px">
 <div style="width: 70%">
-<p><em>Suposarem un exemple molt senzill d&apos;una base de dades Usuaris en el qual tindrem solament una taula Usuaris amb dos camps de tipus String (nick i nom). La BD l&apos;haurem constru&#xEF;da en el servidor amb antelaci&#xF3; (en aquest cas amb taula usuaris de tres camps, nick i nom de tipus cadena i _aneu de tipus num&#xE8;ric autoincrementable com a clau). Tamb&#xE9; crearem una aplicaci&#xF3; amb dos camps de text que ens permeta inserir les dades de l&apos;usuari i un bot&#xF3; flotant d&apos;afegir, com es veu en la imatge seg&#xFC;ent:</em></p>
+<p><em>Suposarem un exemple molt senzill d&apos;una base de dades Usuaris en el qual tindrem solament una taula Usuaris amb dos camps de tipus String (nick i nom). La BD l&apos;haurem constru&#xEF;da en el servidor amb antelaci&#xF3; (en aquest cas amb taula usuaris de tres camps, nick i nom de tipus cadena i _id de tipus num&#xE8;ric autoincrementable com a clau). Tamb&#xE9; crearem una aplicaci&#xF3; amb dos camps de text que ens permeta inserir les dades de l&apos;usuari i un bot&#xF3; flotant d&apos;afegir, com es veu en la imatge seg&#xFC;ent:</em></p>
 </div>
 <div style="width: auto">
     <img height="200px" src="./imagenes/imagen7.png">
@@ -486,7 +486,7 @@ implementation <span class="token string">&apos;com.squareup.retrofit2:retrofit:
 </pre><p>Podem dir que els passos a seguir seran els seg&#xFC;ents:</p>
 <ol>
 <li>
-<p>Creaci&#xF3; d&apos;un builder de Retrofit. Per a poder utilitzar Retrofit necessites crear un builder que et servir&#xE0; per a comunicar-te amb la * triada. Aquest builder el necessitar&#xE0;s per a fer les anomenades a la API, aix&#xED; que haurem d&apos;afegir aquest codi en una classe accessible a m&#xE9;s d&apos;assegurar-nos de construir una sola vegada el retrofit, podem seguir una estructura similar a la de Room.</p>
+<p>Creaci&#xF3; d&apos;un builder de Retrofit. Per a poder utilitzar Retrofit necessites crear un builder que et servir&#xE0; per a la comunicaci&#xF3;. Aquest builder el necessitar&#xE0;s per a fer les anomenades a la API, aix&#xED; que haurem d&apos;afegir aquest codi en una classe accessible a m&#xE9;s d&apos;assegurar-nos de construir una sola vegada el retrofit, podem seguir una estructura similar a la de Room.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearRetrofit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ProveedorServicio <span class="token punctuation">{</span>
     <span class="token comment">//val url = &quot;http://10.0.2.2/usuarios/&quot; //para el AVD de android</span>
     <span class="token keyword keyword-val">val</span> url<span class="token operator">=</span><span class="token string">&quot;http://xusa.iesdoctorbalmis.info/usuarios/&quot;</span> <span class="token comment">//para servidor del instituto</span>
@@ -515,7 +515,7 @@ implementation <span class="token string">&apos;com.squareup.retrofit2:retrofit:
 </pre></li>
 <li>
 <p>Un altre element imprescindible, &#xE9;s la gesti&#xF3; dels serveis que es vulguen utilitzar. Per a cadascun d&apos;ells s&apos;haur&#xE0; de fer una petici&#xF3; a la API. Necessitarem crear una interf&#xED;cie amb tots els serveis que vulgues utilitzar. Ac&#xED; tens uns exemples:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> ProveedorSersvicio <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> ProveedorServicio <span class="token punctuation">{</span>
     <span class="token annotation builtin">@GET</span><span class="token punctuation">(</span><span class="token string">&quot;usuarios&quot;</span><span class="token punctuation">)</span>
     <span class="token annotation builtin">@Headers</span><span class="token punctuation">(</span><span class="token string">&quot;Accept: application/json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type: application/json&quot;</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">usuarios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Response<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Usuario<span class="token operator">&gt;</span><span class="token operator">&gt;</span>
@@ -554,10 +554,10 @@ En el builder de Retrofit s&apos;inclou la url base del api acabada amb <strong>
 <p><strong><code>@Fields</code></strong>. Ens permet passar variables b&#xE0;siques en les peticions <em>Post i Put</em>.</p>
 </li>
 <li>
-<p><strong><code>@Bodi</code></strong>. &#xC9;s equivalent a Fields per&#xF2; per a variables objecte.</p>
+<p><strong><code>@Body</code></strong>. &#xC9;s equivalent a Fields per&#xF2; per a variables objecte.</p>
 </li>
 <li>
-<p><strong><code>@*Query</code></strong>. S&apos;usa quan la petici&#xF3; necessitar&#xE0; par&#xE0;metres (els valors que van despr&#xE9;s del <strong><code>?</code></strong> en una url).</p>
+<p><strong><code>@Query</code></strong>. S&apos;usa quan la petici&#xF3; necessite par&#xE0;metres (els valors que van despr&#xE9;s del <strong><code>?</code></strong> en una url).</p>
 </li>
 </ul>
 </blockquote>
