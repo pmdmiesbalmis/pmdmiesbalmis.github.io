@@ -1,0 +1,653 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 12. Notificacions</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview {
+  background-color: #FFFF;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v17/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<p><a href="./tema12_Notificaciones_val.pdf">Descarregar estos apunts</a></p>
+<h1 class="mume-header undefined" id="tema-12-notificacions">Tema 12. Notificacions</h1>
+
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+<ol>
+<li><a href="#introducci%C3%B3">Introducci&#xF3;</a></li>
+<li><a href="#elements-duna-notificaci%C3%B3">Elements d&apos;una notificaci&#xF3;</a></li>
+<li><a href="#canales-de-notificaci%C3%B3">Canales de notificaci&#xF3;</a></li>
+<li><a href="#crear-una-notificaci%C3%B3">Crear una notificaci&#xF3;</a></li>
+<li><a href="#estils-de-notifiacions">Estils de notifiacions</a></li>
+<li><a href="#botons">Botons</a></li>
+<li><a href="#alguns-extres-de-notificacions">Alguns extres de notificacions</a></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="introducci%C3%B3">Introducci&#xF3;</h4>
+
+<p>Les <a href="https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=es-419">notificacions</a> s&#xF3;n missatges que es mostren en el sistema per a proporcionar a l&apos;usuari informaci&#xF3; addicional de l&apos;app (missatges, avisos, etc). Els usuaris poden pressionar la notificaci&#xF3; per a obrir l&apos;app o realitzar una acci&#xF3; directament des de la notificaci&#xF3;.</p>
+<p>Les notificacions es mostren de diferents maneres:</p>
+<ul>
+<li>Icones en la barra d&apos;estat.</li>
+<li>Entrada m&#xE9;s detallada en el panell desplegable de notificacions.</li>
+<li>Notificacions emergents (normalment per a notificacions importants).</li>
+<li>Notificacions de pantalla de bloqueig.</li>
+<li>Distintiu en la icona de l&apos;app, en versions m&#xE9;s recents.</li>
+</ul>
+<h5 class="mume-header" id="notificaciones-en-la-barra-de-estado">Notificaciones en la Barra de Estado</h5>
+
+<p>La barra d&apos;estat d&apos;Android est&#xE0; situada en la part superior de la pantalla. La part esquerra d&apos;aquesta barra est&#xE0; reservada per a visualitzar notificacions. Quan es crea una nova notificaci&#xF3;, apareix un text despla&#xE7;ant-se en la barra, i a continuaci&#xF3;, una xicoteta icona romandr&#xE0; en la barra per a recordar a l&apos;usuari la notificaci&#xF3;.<br>
+L&apos;usuari pot arrossegar la barra de notificacions cap avall, per a mostrar el llistat de les notificacions per llegir.</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style="border:hidden">
+<td style="border:hidden">
+<div align="center">
+    <img height src="./imagenes/imagen1.png">
+</div>
+</td>
+<td>
+<div align="center">
+    <img height src="./imagenes/imagen2.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<h4 class="mume-header" id="elements-duna-notificaci%C3%B3">Elements d&apos;una notificaci&#xF3;</h4>
+
+<p>Les notificacions podem veure-les de dues formes diferents, la vista normal abans que l&apos;usuari la desplegue i la vista ampliada.</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr>
+<td>
+<div align="center">
+    <img height width="1500" src="./imagenes/imagen3.png">
+</div>
+</td>
+<td>
+<div align="left">
+1. Icona xicoteta: s&apos;estableix amb <i>setSmallIcon()</i>. <br> 
+2. Nom de l&apos;aplicaci&#xF3;: proporcionat pel sistema. <br> 
+3. Hora a la qual es va emetre la notificaci&#xF3;. Es pot establir un valor expl&#xED;cit amb <i>setWhen()</i> o ocultar-lo <i>setShowWhen(false)</i>; si no es fa es mostrar&#xE0; per defecte l&apos;hora del sistema en el moment de recepci&#xF3; de la notificaci&#xF3;.<br>
+4. Icona gran: &#xE9;s opcional (generalment s&apos;usa nom&#xE9;s per a fotos de contacte; no ho use per a la icona de la seua aplicaci&#xF3;) s&apos;estableix amb <i>setLargeIcon()</i>.<br> 
+5. T&#xED;tol: Aix&#xF2; &#xE9;s opcional i s&apos;estableix amb <i>setContentTitle()</i>. <br> 
+6. Text: aix&#xF2; &#xE9;s opcional i s&apos;estableix amb <i>setContentText()</i>.
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>La vista ampliada nom&#xE9;s apareix quan s&apos;expandeix la notificaci&#xF3;, la qual cosa succeeix quan la notificaci&#xF3; est&#xE0; en la part superior de la b&#xFA;stia de notificacions, o quan l&apos;usuari amplia la notificaci&#xF3; amb un gest.</p>
+<h4 class="mume-header" id="canales-de-notificaci%C3%B3">Canales de notificaci&#xF3;</h4>
+
+<p>A partir d&apos;Android 8.0 (nivell de API 26), totes les notificacions han d&apos;assignar-se a un canal o directament no seran visibles. <a href="https://developer.android.com/training/notify-user/channels?hl=es-419">Els canals</a> de notificaci&#xF3; permeten als desenvolupadors agrupar les notificacions en categories (canals). Aix&#xF2; permetr&#xE0; a l&apos;usuari l&apos;habilitat de modificar els ajustos de notificaci&#xF3; per al canal sencer alhora. Per exemple, per a cada canal, els usuaris poden bloquejar completament totes les notificacions, anul&#xB7;lar el nivell d&apos;import&#xE0;ncia, o permetre que la ins&#xED;gnia de la notificaci&#xF3; es mostre. Els usuaris tamb&#xE9; poden pressionar una notificaci&#xF3; per a canviar els comportaments del canal associat. Totes les notificacions publicades en el mateix canal de notificaci&#xF3; tenen el mateix comportament.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; la interf&#xED;cie d&apos;usuari es refereix als canals de notificaci&#xF3; com a &quot;categories&quot;.</p>
+</blockquote>
+<p>En els dispositius que executen Android 7.1 (nivell de API 25) i inferior, els usuaris poden administrar les notificacions nom&#xE9;s per aplicaci&#xF3; (de fet, cada aplicaci&#xF3; nom&#xE9;s t&#xE9; un canal). Per tant abans crear la notificaci&#xF3;, haurem de crear el canal o els canals als quals volem afegir les nostres notificacions.</p>
+<h5 class="mume-header" id="crear-canals-de-notificaci%C3%B3ns">Crear canals de notificaci&#xF3;ns</h5>
+
+<p>Abans de publicar una notificaci&#xF3; s&apos;ha de crear el canal, per la qual cosa &#xE9;s important que en iniciar-se l&apos;aplicaci&#xF3; o abans de crear la notificaci&#xF3; s&apos;execute el codi de creaci&#xF3;. Vegem un exemple per a crear dos canals de notificaci&#xF3;:</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[0]}" class="language-kotlin" data-line="0"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearCanal</span><span class="token punctuation">(</span>
+        idCanal<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        nombreCanal<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        descripcion<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        importancia<span class="token operator">:</span> Int
+    <span class="token punctuation">)</span><span class="token operator">:</span> NotificationChannel<span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION<span class="token punctuation">.</span>SDK_INT <span class="token operator">&gt;=</span> Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>O<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> canal <span class="token operator">=</span> <span class="token function">NotificationChannel</span><span class="token punctuation">(</span>idCanal<span class="token punctuation">,</span> nombreCanal<span class="token punctuation">,</span> importancia<span class="token punctuation">)</span>
+        canal<span class="token punctuation">.</span>description <span class="token operator">=</span> descripcion
+        <span class="token keyword keyword-return">return</span> canal
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">crearCananlesNotificacion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION<span class="token punctuation">.</span>SDK_INT <span class="token operator">&gt;=</span> Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>O<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> notificationManager <span class="token operator">=</span> <span class="token function">getSystemService</span><span class="token punctuation">(</span>
+                NotificationManager<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java
+            <span class="token punctuation">)</span>
+        <span class="token keyword keyword-var">var</span> canal <span class="token operator">=</span> <span class="token function">crearCanal</span><span class="token punctuation">(</span>
+                CHANNELAVISOS_ID<span class="token punctuation">,</span>
+                <span class="token string">&quot;Avisos&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;Avisos importantes&quot;</span><span class="token punctuation">,</span>
+                NotificationManager<span class="token punctuation">.</span>IMPORTANCE_HIGH
+            <span class="token punctuation">)</span>
+        canal<span class="token operator">!!</span><span class="token punctuation">.</span>vibrationPattern <span class="token operator">=</span> <span class="token function">longArrayOf</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+        <span class="token comment">// Registrando el canal en el sistema. Despu&#xE9;s de esto no se </span>
+        <span class="token comment">//podr&#xE1; cambiar las caracter&#xED;sticas del canal</span>
+        <span class="token comment">// (importancia u otras propiedadesdel)</span>
+        notificationManager<span class="token punctuation">.</span><span class="token function">createNotificationChannel</span><span class="token punctuation">(</span>canal<span class="token punctuation">)</span>
+        canal <span class="token operator">=</span> <span class="token function">crearCanal</span><span class="token punctuation">(</span>
+                CHANNELMENSAJES_ID<span class="token punctuation">,</span>
+                <span class="token string">&quot;Mensajes&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;Mensajes&quot;</span><span class="token punctuation">,</span>
+                NotificationManager<span class="token punctuation">.</span>IMPORTANCE_LOW
+            <span class="token punctuation">)</span>
+        notificationManager<span class="token punctuation">.</span><span class="token function">createNotificationChannel</span><span class="token punctuation">(</span>canal<span class="token operator">!!</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="0" data-start="0">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; Els passos a seguir s&#xF3;n:</p>
+<ol>
+<li>Construir un objecte del tipus <strong><code>NotificationChannel</code></strong>, amb un id de canal &#xFA;nic, un nom visible per a l&apos;usuari, una descripci&#xF3; i un nivell d&apos;import&#xE0;ncia.</li>
+<li>Si en el constructor no especifiquem la descripci&#xF3;, es pot especificar despr&#xE9;s amb setDescription().</li>
+<li>Podem aplicar altres comportaments visuals i sonors al nostre canal, en l&apos;exemple hem activat vibraci&#xF3; per al canal d&apos;Avisos.</li>
+<li>Finalment registrar el canal de notificaci&#xF3; passant-lo al sistema amb el m&#xE8;tode <strong><code>createNotificationChannel()</code></strong>.<br>
+En el nostre exemple definim un m&#xE8;tode que crea un canal i que &#xE9;s cridat pel m&#xE8;tode que assigna els canals creats a l&apos;aplicaci&#xF3;.</li>
+</ol>
+</blockquote>
+<p>La prioritat de les nostres notificacions s&apos;ajusta a les seg&#xFC;ents opcions:</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen4.png">
+</div>
+<p>Evidentment, a totes les notificacions per a un canal se&apos;ls donar&#xE0; el mateix nivell d&apos;import&#xE0;ncia.</p>
+<p>Les categories creades apareixeran en les opcions de configuraci&#xF3; del nostre dispositiu. <em>Anar a Ajustos-&gt;Notificacions-&gt;Seleccionem Aplicaci&#xF3; i ens apareixer&#xE0; la categoria creada. Tamb&#xE9; es mostrar&#xE0; si es prem llargament sobre la notificaci&#xF3; desplegada i despr&#xE9;s sobre la icona d&apos;informaci&#xF3;.</em></p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen5.png">
+</div>
+<p>Si entrem dins de la categoria veur&#xED;em la seua definici&#xF3; detallada:</p>
+<span style="align: center;">
+<table align="center">
+<tbody><tr style=" border:hidden;">
+<td style=" border:hidden;">
+<div align="center">
+    <img height="200" src="./imagenes/imagen6.png">
+</div>
+</td>
+<td>
+<div align="center">
+    <img height="200" src="./imagenes/imagen7.png">
+</div>
+</td>
+</tr>
+</tbody></table>
+</span>
+<p>&#xC9;s en aquest panell on l&apos;usuari activa o no les notificacions d&apos;una determinada categoria, tamb&#xE9; pot canviar l&apos;acci&#xF3; que ocorrer&#xE0; en llan&#xE7;ar-se la notificaci&#xF3; associada a la categoria.</p>
+<h4 class="mume-header" id="crear-una-notificaci%C3%B3">Crear una notificaci&#xF3;</h4>
+
+<p>Per a crear notificacions s&apos;utilitza la classe <strong><code>NotificationCompat.Builder</code></strong>. Per a crear una notificaci&#xF3; solament crearem un objecte d&apos;aquest tipus i li assignarem el context de l&apos;aplicaci&#xF3;.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notificacion<span class="token operator">:</span> NotificationCompat<span class="token punctuation">.</span>Builder
+notificacion <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> CHANNELMENSAJES_ID<span class="token punctuation">)</span>
+</pre><p>se usa como en el seg&#xFC;ent exemple:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notificacion<span class="token operator">:</span> NotificationCompat<span class="token punctuation">.</span>Builder
+notificacion <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">,</span> CHANNELMENSAJES_ID<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setContentText</span><span class="token punctuation">(</span><span class="token string">&quot;Este es el texto de mi notificaci&#xF3;n&quot;</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Mi notificaci&#xF3;n&quot;</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setSmallIcon</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>mipmap<span class="token punctuation">.</span>ic_launcher<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setLargeIcon</span><span class="token punctuation">(</span>
+            <span class="token punctuation">(</span>ContextCompat<span class="token punctuation">.</span><span class="token function">getDrawable</span><span class="token punctuation">(</span>
+                <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>sym_action_email
+            <span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> BitmapDrawable<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">!!</span><span class="token punctuation">.</span>bitmap
+        <span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setTicker</span><span class="token punctuation">(</span><span class="token string">&quot;Optional ticker&quot;</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setWhen</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setAutoCancel</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">//elimina notificaci&#xF3;n una vez visualizada</span>
+</pre><blockquote>
+<p>&#x1F4CC; Els m&#xE8;todes <strong><code>setContentTitle()</code></strong> i <strong><code>setContentText()</code></strong>, permeten col&#xB7;locar el t&#xED;tol i el text de la notificaci&#xF3;. Per a mostrar les icones s&apos;utilitzaran els m&#xE8;todes <strong><code>setSmallIcon()</code></strong> i <strong><code>setLargeIcon()</code></strong> que es corresponen amb les icones mostrades a la dreta i a l&apos;esquerra del contingut de la notificaci&#xF3; en versions recents d&apos;Android, en versions m&#xE9;s antigues tan sols es mostrar&#xE0; la icona xicoteta a l&apos;esquerra de la notificaci&#xF3;. A m&#xE9;s, la icona xicoteta tamb&#xE9; es mostrar&#xE0; en la barra d&apos;estat superior.<br>
+El *ticker (text que apareix per uns segons en la barra d&apos;estat en generar-se una nova notificaci&#xF3;) ho afegirem mitjan&#xE7;ant <strong><code>setTicker()</code></strong> i el text auxiliar (opcional) que apareixer&#xE0; a l&apos;esquerra de la icona xicoteta de la notificaci&#xF3; mitjan&#xE7;ant <strong><code>setContentInfo()</code></strong>.</p>
+</blockquote>
+<p>La data/hora associada a la nostra notificaci&#xF3; es prendr&#xE0; autom&#xE0;ticament de la data/hora actual si no s&apos;estableix res, o b&#xE9; pot utilitzar-se el m&#xE8;tode <strong><code>setWhen()</code></strong> per a indicar una altra marca de temps.</p>
+<p>El seg&#xFC;ent pas, una vegada tenim completament configurades les opcions de la nostra notificaci&#xF3;, ser&#xE0; el de generar-la cridant al m&#xE8;tode <strong><code>notify()</code></strong>. Per a aix&#xF2; ens crearem un objecte de tipus <strong><code>NotificationManagerCompat</code></strong> al qual li passarem el context, a trav&#xE9;s d&apos;aquest cridarem al m&#xE8;tode notify(). <strong><code>notify</code></strong> necessitar&#xE0; un enter que identifique la nostra notificaci&#xF3; i el resultat del builder que hem constru&#xEF;t abans.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> idNotificacion<span class="token operator">:</span>Int<span class="token operator">=</span><span class="token number">0</span>
+<span class="token keyword keyword-val">val</span> notificationManager <span class="token operator">=</span> NotificationManagerCompat<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span>idNotificacion<span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>L&apos;&#xFA;ltim pas ser&#xE0; establir l&apos;activitat a la qual hem de dirigir a l&apos;usuari autom&#xE0;ticament si aquest prem sobre la notificaci&#xF3;. Per a aix&#xF2; hem de construir un objecte <strong><code>PendingIntent</code></strong>, que ser&#xE0; el que continga la informaci&#xF3; de l&apos;activitat associada a la notificaci&#xF3; i que ser&#xE0; llan&#xE7;at en pr&#xE9;mer sobre ella. Per a aix&#xF2; definirem en primer lloc un objecte <strong><code>Intent</code></strong>, indicant la classe de l&apos;activitat a llan&#xE7;ar, que en el nostre cas ser&#xE0; una cerca per <strong><code>URL</code></strong>. Aquest intent ho utilitzarem per a construir el <strong><code>PendingIntent</code></strong> final mitjan&#xE7;ant el m&#xE8;tode <strong><code>PendingIntent.getActivity()</code></strong>. Finalment associarem aquest objecte a la notificaci&#xF3; mitjan&#xE7;ant el m&#xE8;tode <strong><code>setContentIntent()</code></strong> de la notificaci&#xF3; creada.<br>
+Vegem com quedaria aquesta &#xFA;ltima part comentada:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">)</span>
+intent<span class="token punctuation">.</span>data <span class="token operator">=</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">&quot;http://www.ua.es&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> intent2 <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> MainActivity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setContentIntent</span><span class="token punctuation">(</span>PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>intent<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setDeleteIntent</span><span class="token punctuation">(</span>PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>intent2<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x26A0;&#xFE0F; En aquest cas, a m&#xE9;s, hem afegit m&#xE9;s funcionalitat en llan&#xE7;ar un altre pendigintent una vegada esborrada la notificaci&#xF3;. Aquest pending ho afegirem amb el m&#xE8;tode <strong><code>setDeleteIntent()</code></strong> sobre la notificaci&#xF3;, i s&apos;executar&#xE0; en lliscar la notificaci&#xF3; per a eliminar-la.</p>
+</blockquote>
+<h4 class="mume-header" id="estils-de-notifiacions">Estils de notifiacions</h4>
+
+<p>Les notificacions ens permeten <a href="https://developer.android.com/training/notify-user/expanded?hl=es-419">personalitzar-les</a> creant layouts propis, per&#xF2; nosaltres ens centrarem en els 3 estils que venen de s&#xE8;rie. Recordeu que aquests estils s&apos;expandeixen i contrauen, per la qual cosa hem de definir unes dades per a la notificaci&#xF3; normal i altres per a l&apos;expandida. A m&#xE9;s, per defecte nom&#xE9;s apareixer&#xE0; expandida la primera notificaci&#xF3; de la safata, la resta estaran contretes i l&apos;usuari podr&#xE0; obrir-les manualment amb un gest. Els estils possibles s&#xF3;n:</p>
+<h5 class="mume-header" id="estil-bigtext">Estil BigText</h5>
+
+<p>S&apos;usa a partir d&apos;un objecte de tipus Builder, passant-ho com a par&#xE0;metre a la classe <strong><code>NotificationCompat.BigTextStyle</code></strong> per a poder aplicar-li alguns m&#xE8;todes opcionals. Queda m&#xE9;s clar amb un exemple:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">NotificationCompat<span class="token punctuation">.</span><span class="token function">BigTextStyle</span><span class="token punctuation">(</span>notificacion<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">bigText</span><span class="token punctuation">(</span>&quot;Lorem ipsum dolor sit amet<span class="token punctuation">,</span> consectetur adipiscing elit<span class="token punctuation">.</span>
+                    Donec id ex hendrerit<span class="token punctuation">,</span> ullamcorper lacus quis<span class="token punctuation">,</span> auctor odio<span class="token punctuation">.</span> 
+                    Curabitur <span class="token keyword keyword-in">in</span> feugiat elit<span class="token punctuation">,</span> ut laoreet ex<span class="token punctuation">.</span> Nunc <span class="token keyword keyword-in">in</span> tristique elit<span class="token punctuation">,</span> 
+                    at posuere magna<span class="token punctuation">.</span> Curabitur augue lectus<span class="token punctuation">,</span> tristique a consectetur 
+                    vitae<span class="token punctuation">,</span> luctus a nisi<span class="token punctuation">.</span> Quisque nec nulla neque<span class="token punctuation">.</span> Proin gravida lacinia
+                     lorem <span class="token keyword keyword-in">in</span> tempus<span class="token punctuation">.</span> Interdum et malesuada fames ac ante ipsum primis
+                    <span class="token keyword keyword-in">in</span> faucibus<span class="token punctuation">.</span>&quot;<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">setBigContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Expanded BigText title&quot;</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">setSummaryText</span><span class="token punctuation">(</span><span class="token string">&quot;Summary text&quot;</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; Com es pot suposar en crear l&apos;estil, el farem sobre una notificaci&#xF3; base creada amb anterioritat i que la passarem a l&apos;objecte <strong><code>BigTextStyle</code></strong>.<br>
+En crear el nou estil establirem el text llarg, com pot ser el contingut d&apos;un correu electr&#xF2;nic o d&apos;un SMS, el t&#xED;tol que portar&#xE0; en la seua forma expandida si volem que siga diferent, i un resum opcional que es mostrar&#xE0; en 1 l&#xED;nia al final del text. En la captura podeu veure un exemple de com quedaria la mateixa notificaci&#xF3; expandida i contreta (la imatge no coincideix exacta amb el codi).</p>
+</blockquote>
+<div align="center">
+    <img height="200" src="./imagenes/imagen8.png">
+</div>
+<h5 class="mume-header" id="estil-bigpicture">Estil BigPicture</h5>
+
+<p>Si la notificaci&#xF3; &#xE9;s relativa a una imatge tamb&#xE9; podem usar una notificaci&#xF3; expandida per a mostrar aquesta imatge en la safata gr&#xE0;cies a <strong><code>NotificationCompat.BigPictureStyle</code></strong>. El seu &#xFA;s &#xE9;s quasi id&#xE8;ntic a l&apos;anterior, canviant la classe i m&#xE8;todes de l&apos;estil.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">NotificationCompat<span class="token punctuation">.</span><span class="token function">BigPictureStyle</span><span class="token punctuation">(</span>notificacion<span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">bigPicture</span><span class="token punctuation">(</span>
+                        ContextCompat<span class="token punctuation">.</span><span class="token function">getDrawable</span><span class="token punctuation">(</span>
+                            <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_launcher_foreground
+                        <span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">toBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">bigLargeIcon</span><span class="token punctuation">(</span>
+                        ContextCompat<span class="token punctuation">.</span><span class="token function">getDrawable</span><span class="token punctuation">(</span>
+                            <span class="token keyword keyword-this">this</span><span class="token punctuation">,</span>
+                            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_launcher_foreground
+                        <span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">toBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">setBigContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Expanded BigPicture title&quot;</span><span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">setSummaryText</span><span class="token punctuation">(</span><span class="token string">&quot;Summary text&quot;</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; En aquest cas en comptes d&apos;un text, s&apos;afegir&#xE0; imatge gran que volem mostrar amb <strong><code>bigPicture()</code></strong> i si volem que la imatge &quot;xicoteta&quot; a l&apos;esquerra de la notificaci&#xF3; siga diferent en la forma expandida tamb&#xE9; la canviem amb <strong><code>bigLargeIcon()</code></strong>.</p>
+</blockquote>
+<div align="center">
+    <img height="200" src="./imagenes/imagen9.png">
+</div>
+<h5 class="mume-header" id="estil-inbox-l%C3%ADnia-a-l%C3%ADnia">Estil Inbox, l&#xED;nia a l&#xED;nia</h5>
+
+<p>L&apos;&#xFA;ltim estil que proporciona Android &#xE9;s el <strong><code>Notification.InboxStyle</code></strong>, que mostra una llista de text. Com diversos correus rebuts, o el que ens escriu alg&#xFA; per missatgeria instant&#xE0;nia. Molt similar tamb&#xE9; als anteriors.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notificacionInboxStyle <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span><span class="token function">InboxStyle</span><span class="token punctuation">(</span>notificacion<span class="token punctuation">)</span>
+                             <span class="token punctuation">.</span><span class="token function">setBigContentTitle</span><span class="token punctuation">(</span><span class="token string">&quot;Expanded Inbox title&quot;</span><span class="token punctuation">)</span>
+                             <span class="token punctuation">.</span><span class="token function">setSummaryText</span><span class="token punctuation">(</span><span class="token string">&quot;Summary text&quot;</span><span class="token punctuation">)</span>     
+notificacionInboxStyle<span class="token punctuation">.</span><span class="token function">addLine</span><span class="token punctuation">(</span><span class="token string">&quot;Mensaje 1&quot;</span><span class="token punctuation">)</span>
+notificacionInboxStyle<span class="token punctuation">.</span><span class="token function">addLine</span><span class="token punctuation">(</span><span class="token string">&quot;Mensaje 2&quot;</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> notificacionInboxStyle<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>En aquesta ocasi&#xF3; afegim les l&#xED;nies una a una amb addLine(), encara que ens aconsellen un m&#xE0;xim de 5. Ens quedaria una cosa aix&#xED; (codi i imatge no coincideixen).</p>
+<div align="center">
+    <img height="200" src="./imagenes/imagen10.png">
+</div>
+<h4 class="mume-header" id="botons">Botons</h4>
+
+<p>Una altra novetat introdu&#xEF;da en Jelly Bean &#xE9;s la possibilitat d&apos;afegir fins a 3 botons a les notificacions amb les seues accions associades. Es fa sobre l&apos;objecte de tipus <strong><code>Notification.Builder</code></strong> amb el m&#xE8;tode <strong><code>addAction()</code></strong>, aix&#xED; que &#xE9;s compatible amb qualsevol dels 4 tipus de notificacions anteriors. En la notificaci&#xF3; normal els botons es consideraran com a part &quot;expandida&quot;, per la qual cosa tindran el mateix comportament que aquestes.</p>
+<div align="center">
+    <img height="140" src="./imagenes/imagen11.png">
+</div>
+<p>En l&apos;exemple veiem un m&#xE8;tode que afig 2 botons a qualsevol builder que passem com a par&#xE0;metre.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> action <span class="token operator">=</span> NotificationCompat<span class="token punctuation">.</span>Action<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>
+                    android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_menu_delete<span class="token punctuation">,</span>
+                    <span class="token string">&quot;Delete&quot;</span><span class="token punctuation">,</span> PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">addAction</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">addAction</span><span class="token punctuation">(</span>
+                    android<span class="token punctuation">.</span>R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ic_menu_share<span class="token punctuation">,</span>
+                    <span class="token string">&quot;Share&quot;</span><span class="token punctuation">,</span>
+                    PendingIntent<span class="token punctuation">.</span><span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token label symbol">@MainActivity</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+notificationManager<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> notificacion<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; Li passem com a par&#xE0;metres un drawable de la icona que portar&#xE0; el bot&#xF3; a l&apos;esquerra del text, el text que portar&#xE0;, i un PendingIntent que s&apos;activar&#xE0; quan premem el bot&#xF3;.</p>
+</blockquote>
+<h4 class="mume-header" id="alguns-extres-de-notificacions">Alguns extres de notificacions</h4>
+
+<p>Ara com ara tot el que hem vist ha sigut per a crear la notificaci&#xF3;, per&#xF2; encara hem de mostrar-la i potser fer que el m&#xF2;bil sone i/o vibre. Tamb&#xE9; podem fer aquestes coses amb els m&#xE8;todes de la classe <strong><code>NotificationCompat.Builder</code></strong>. Vegem uns exemples:</p>
+<h5 class="mume-header" id="so">So</h5>
+
+<p>Podem reproduir un so en activar la notificaci&#xF3;. El la imatge es reprodueix el so per defecte, pot ser un altre.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> uri<span class="token operator">=</span>RingtoneManager<span class="token punctuation">.</span><span class="token function">getDefaultUri</span><span class="token punctuation">(</span>RingtoneManager<span class="token punctuation">.</span>TYPE_ALARM<span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setSound</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span>
+</pre><h5 class="mume-header" id="vibraci%C3%B3">Vibraci&#xF3;</h5>
+
+<p>Tamb&#xE9; podem fer que el tel&#xE8;fon vibre. Per a aix&#xF2; el primer que necessitem &#xE9;s declarar el perm&#xED;s de vibraci&#xF3; <strong><code>&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot; /&gt;</code></strong><br>
+Despr&#xE9;s creem un patr&#xF3; de vibraci&#xF3;. Consisteix en un array de long alternant el temps de vibraci&#xF3; i pausa en mil&#xB7;lisegons. I li ho assignem a la notificaci&#xF3;.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> pattern <span class="token operator">=</span> <span class="token function">longArrayOf</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+notificacion<span class="token punctuation">.</span><span class="token function">setVibrate</span><span class="token punctuation">(</span>pattern<span class="token punctuation">)</span>
+</pre><p>La vibraci&#xF3; per defecte la podem aconseguir de la seg&#xFC;ent manera:</p>
+<pre data-role="codeBlock" data-info="kolin" class="language-kolin"><code> notificacion.setDefaults(Notification.DEFAULT_VIBRATE)
+</code></pre><h5 class="mume-header" id="getactivenotifications">getActiveNotifications</h5>
+
+<p>A partir del Api 23 s&apos;ha agregat a la classe <strong><code>NotificationManager</code></strong> el m&#xE8;tode <strong><code>getActiveNotifications()</code></strong>. Molt &#xFA;til per a consultar l&apos;estat de les notificacions, aquest m&#xE8;tode retorna un *array amb l&apos;estat de totes les notificacions actives en el moment.</p>
+<p><strong>StatusBarNotification [] getActiveNotifications ()</strong></p>
+<p>Recupera una llista de notificacions actives: aquelles publicades per l&apos;aplicaci&#xF3; que encara no han sigut descartades per l&apos;usuari o cancel&#xB7;lades per l&apos;aplicaci&#xF3;. Es pot identificar la notificaci&#xF3; a partir del tag o del id subministrat al <strong><code>notify()</code></strong>, aix&#xED; com una c&#xF2;pia de l&apos;original Notification objecte a trav&#xE9;s <strong><code>getNotification()</code></strong>.</p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Exercici Resolt Notificaciones Expandibles</span></p>
+<p><span style="color: DarkRed; font-weight: bold;">&#x2712;&#xFE0F; Exercici Propost Temporizador Huevo</span></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
