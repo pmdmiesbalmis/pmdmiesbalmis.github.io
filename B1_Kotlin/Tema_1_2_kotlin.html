@@ -1,0 +1,1222 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 1.2 - Lenguaje Kotlin II</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview {
+  background-color: #FFFF;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v18/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-1-parte-2-lenguaje-kotlin-ii">Tema 1 parte 2 - Lenguaje Kotlin II</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_1_2_kotlin.pdf">pdf</a> o <a href="./Tema_1_2_kotlin.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+<ol>
+<li><a href="#colecciones">Colecciones</a>
+<ol>
+<li><a href="#arrays">Arrays</a>
+<ol>
+<li><a href="#array-bidimensional">Array Bidimensional</a></li>
+<li><a href="#listas-mutables">Listas Mutables</a></li>
+</ol>
+</li>
+<li><a href="#mapas-mutables">Mapas Mutables</a></li>
+</ol>
+</li>
+<li><a href="#programaci%C3%B3n-funcional">Programaci&#xF3;n Funcional</a>
+<ol>
+<li><a href="#lambdas">Lambdas</a>
+<ol>
+<li><a href="#definiendo-y-usando-funciones-de-orden-superior-hof">Definiendo y usando funciones de orden superior HOF</a></li>
+<li><a href="#clausuras">Clausuras</a></li>
+</ol>
+</li>
+<li><a href="#map-filter-fold">Map-Filter-Fold</a>
+<ol>
+<li><a href="#creando-objetos-an%C3%B3nimos-de-consultas-sobre-objetos-complejos">Creando objetos an&#xF3;nimos de consultas sobre objetos complejos</a></li>
+<li><a href="#tranformaciones-de-datos-usando-map">Tranformaciones de datos usando map</a></li>
+<li><a href="#haciendo-agrupaciones-con-groupby">Haciendo agrupaciones con groupBy</a></li>
+<li><a href="#obteniendo-secuencias-anidadas-con-flatmap">Obteniendo secuencias anidadas con flatMap</a></li>
+</ol>
+</li>
+<li><a href="#ejemplo-de-consulta-de-datos-mapeados-a-objetos-en-kolin">Ejemplo de consulta de datos mapeados a objetos en Kolin</a></li>
+</ol>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="colecciones">Colecciones</h2>
+
+<p>Ya las hemos usado en algunos de los diferentes ejemplos que hemos estado viendo en el tema. Sin embargo, en Kotlin hay diferentes formas de generar <strong>secuencias de objetos</strong>: <strong>arrays</strong>, <strong>listas inmutables</strong>, <strong>listas mutables</strong>, etc.</p>
+<blockquote>
+<p>&#x1F4E3; <strong>Resumen</strong>:Tabla resumen de las m&#xE1;s comunes y c&#xF3;mo inicializarlas por extensi&#xF3;n</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripci&#xF3;n</th>
+<th>Literales</th>
+<th>Mutabilidad</th>
+<th>Modificar tama&#xF1;o</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arrayOf</td>
+<td>Array de objectes tradicional</td>
+<td>Llista immutable</td>
+<td>s&#xED;</td>
+<td>no</td>
+</tr>
+<tr>
+<td>listOf</td>
+<td>Llista immutable</td>
+<td>listOf(1, 2)</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>arrayListOf</td>
+<td>Llista mutable</td>
+<td>arrayListOf(1, 2)</td>
+<td>s&#xED;</td>
+<td>s&#xED;</td>
+</tr>
+<tr>
+<td>mapOf</td>
+<td>HashMap immutable</td>
+<td>mapOf(1 to &quot;A&quot;, 2 to &quot;B&quot;)</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>mutableMapOf</td>
+<td>HashMap mutable</td>
+<td>...</td>
+<td>s&#xED;</td>
+<td>s&#xED;</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Debemos llevar cuidado, hay que distinguir la inmutabilidad de la colecci&#xF3;n de la inmutabilidad de la variable que la contiene.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="arrays">Arrays</h3>
+
+<p>Los <a href="https://kotlinlang.org/docs/basic-types.html#arrays">arrays</a> son mutable, es decir pueden cambiar el valor de sus elementos durante la ejecuci&#xF3;n, pero como ya conocemos por otro lenguajes, su tama&#xF1;o no se puede cambiar una vez est&#xE9; definido, existiendo otro tipo de colecciones para este uso.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: En Kotlin las declaraciones y acceso a las posiciones del array no suelen realizarse mediante corchetes, como en otros lenguajes, sino que se utilizan los m&#xE9;todos de la clase Array.</p>
+</blockquote>
+<p>En el siguiente ejemplo podemos ver diferentes formas de recorrer el array...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> weekDays <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;primavera&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;verano&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;oto&#xF1;o&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;invierno&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Similar al foreach de C#</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>dato <span class="token keyword keyword-in">in</span> weekDays<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span>
+
+    <span class="token comment">// Foreach con HOF</span>
+    weekDays<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// Acceso mediante &#xED;ndice</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> weekDays<span class="token punctuation">.</span>indices<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span>weekDays<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Acceso mediante &#xED;ndice con until</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">0</span> until weekDays<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span>weekDays<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Volcando ambos datos en una tupla</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>posicion<span class="token punctuation">,</span> valor<span class="token punctuation">)</span> <span class="token keyword keyword-in">in</span> weekDays<span class="token punctuation">.</span><span class="token function">withIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;La posici&#xF3;n <span class="token interpolation variable">$posicion</span> contiene el valor <span class="token interpolation variable">$valor</span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Adem&#xE1;s Kotlin distingue los arrays de primitivas usando clases propias: <strong><code>BooleanArray, ByteArray, CharArray, ShortArray, IntArray, FloatArray, DoubleArray</code></strong>, y la forma de construir literales es mediante: <strong><code>booleanArrayOf, byteArrayOf, charArrayOf, shortArrayOf, intArrayOf, floatArrayOf, doubleArrayOf</code></strong>.</p>
+<div style="page-break-after:always;"></div>
+<p>En el siguiente ejemplo se ha creado un array de float de tama&#xF1;o 4, el acceso est&#xE1; realizado mediante <strong><code>[]</code></strong> adem&#xE1;s la &#xFA;ltima l&#xED;nea produce excepci&#xF3;n al intentar realizar un acceso no permitido.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> arrayFloat <span class="token operator">=</span> <span class="token function">FloatArray</span><span class="token punctuation">(</span>size <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    arrayFloat<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2.5f</span><span class="token punctuation">;</span>
+    arrayFloat<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>arrayFloat<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    arrayFloat<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">8.9f</span> <span class="token comment">// Excepci&#xF3;n por acceso fuera l&#xED;mites</span>
+<span class="token punctuation">}</span>
+</pre><p>Si queremos crear un array de un tipo de objeto determinado, vamos a suponer un tipo <strong><code>Persona</code></strong> con el siguiente c&#xF3;digo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> edad<span class="token operator">:</span> Int<span class="token punctuation">)</span>
+</pre><p>El array de personas lo podremos inicializar en el momento de creaci&#xF3;n del array, de la siguiente manera (en este caso solo tendr&#xE1; un elemento):</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> personas <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token function">Persona</span><span class="token punctuation">(</span> nombre <span class="token operator">=</span> <span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> edad <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>personas<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Otra opci&#xF3;n es permitir que el array pueda tener valores nulos, para a&#xF1;adir posteriormente los elementos. En este caso tendremos que utilizar el operador de llamadas seguras <strong><code>?.</code></strong>, que solo llamar&#xE1; al m&#xE9;todo en el caso que el valor no sea nulo, evitando <strong><code>NullPointerException</code></strong>.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> personas <span class="token operator">=</span> arrayOfNulls<span class="token operator">&lt;</span>Persona<span class="token operator">&gt;</span><span class="token punctuation">(</span>size <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    personas<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Persona</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> edad <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>personas<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">?:</span> <span class="token string">&quot;No hay datos&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="array-bidimensional">Array Bidimensional</h4>
+
+<p>En kotlin los arrays de m&#xE1;s de una dimensi&#xF3;n se tratan como arrays de arrays (similar a las tablas dentadas de C#). Por lo que se pueden crear filas de distintos tama&#xF1;os. El siguiente c&#xF3;digo crea una matriz de enteros de 4 x 4 inicializada a valor 0 y en el elemento segunda fila y segunda columna a valor 3.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> matriz <span class="token operator">=</span> <span class="token function">Array</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">IntArray</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    matriz<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>e <span class="token keyword keyword-in">in</span> matriz<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">print</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">&quot;%3d&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Si no queremos inicializar cada una de las filas cuando creamos el array, se puede hacer posteriormente si se  crear la matriz anulable. En este ejemplo creamos una matriz de tres filas, cada una de ellas con tama&#xF1;o de columnas distinto (2, 3 y 4 respectivamente) e inicializamos toda la matriz a valor 3.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> dentada <span class="token operator">=</span> arrayOfNulls<span class="token operator">&lt;</span>IntArray<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+    dentada<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">IntArray</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    dentada<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">IntArray</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+    dentada<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">IntArray</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> dentada<span class="token punctuation">.</span>indices<span class="token punctuation">)</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>j <span class="token keyword keyword-in">in</span> <span class="token number">0</span> until dentada<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">!!</span><span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+            dentada<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">!!</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="listas-mutables">Listas Mutables</h4>
+
+<p>Las <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/">listas mutables</a> est&#xE1;n representadas por la clase <strong><code>ArrayList</code></strong> que implementa la interface MutableList y en el fondo es equivalente al tipo ArryList de Java.</p>
+<p>Dispondremos de m&#xE9;todos similares a otros lenguajes  <strong><code>remove</code></strong>, <strong><code>removeAt</code></strong>, <strong><code>indexOf</code></strong>, <strong><code>clear</code></strong>. As&#xED; como la posibilidad de obtener un <strong>iterador</strong> para iterar entre los elementos de la secuencia.</p>
+<p><strong>Formas de rellenar</strong> un lista mutable ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Definiendola por extensi&#xF3;n</span>
+    <span class="token keyword keyword-val">val</span> personas1 <span class="token operator">=</span> <span class="token function">mutableListOf</span><span class="token punctuation">(</span>
+        <span class="token function">Persona</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> edad <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Persona</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string">&quot;Pedro&quot;</span><span class="token punctuation">,</span> edad <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+    <span class="token comment">// Equivalente a Java </span>
+    <span class="token keyword keyword-val">val</span> personas2 <span class="token operator">=</span> ArrayList<span class="token operator">&lt;</span>Persona<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    personas2<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    personas2<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Pedro&quot;</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment">// Usando apply me permite aplicar las operaciones entre llaves al</span>
+    <span class="token comment">// objeto que acabo de crear. Es una forma de no repetir personas.</span>
+    <span class="token keyword keyword-val">val</span> personas3 <span class="token operator">=</span> ArrayList<span class="token operator">&lt;</span>Persona<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+        <span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">add</span><span class="token punctuation">(</span><span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Pedro&quot;</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><strong>Formas de recorrer</strong> un lista mutable ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Foreach tradicional</span>
+<span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>p <span class="token keyword keyword-in">in</span> personas1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Foreach funcional</span>
+personas2<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> p <span class="token operator">-&gt;</span> <span class="token function">println</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token comment">// Usando un indizador</span>
+<span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> personas3<span class="token punctuation">.</span>indices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>personas3<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Obtengo un iterador con sus operaciones t&#xED;picas.</span>
+<span class="token keyword keyword-val">val</span> it <span class="token operator">=</span> personas3<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="mapas-mutables">Mapas Mutables</h3>
+
+<p>Tambi&#xE9;n tendremos mapas <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/">MutableMap</a>  y mapas inmutables <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/">Map</a> en kotlin. El funcionamiento es similar, por lo que vamos a ver los ejemplos de los mapas mutables.</p>
+<p>Tendremos diferentes formas de a&#xF1;adir pares clave-valor como sucede en otros lenguajes pero, la clase <strong>Pair</strong>, de la que hablamos en las funciones y que representa una <strong>tupla con dos valores</strong>, nos permitir&#xE1; crear pares de valores que ayudar&#xE1;n a a&#xF1;adir elementos a una mapa o recorrerlo. Adem&#xE1;s, podemos usar el operador <strong><code>+=</code></strong> para agregar elementos.</p>
+<p><strong>Formas de rellenar</strong> un mapa mutable ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Defini&#xE9;ndolo por extensi&#xF3;n con el operador to</span>
+    <span class="token keyword keyword-val">val</span> personas1 <span class="token operator">=</span> <span class="token function">mutableMapOf</span><span class="token punctuation">(</span>
+        <span class="token string">&quot;21456874L&quot;</span> <span class="token keyword keyword-to">to</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;13232345K&quot;</span> <span class="token keyword keyword-to">to</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Luis&quot;</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token comment">// Tradicional con &#xED;ndices</span>
+    <span class="token keyword keyword-val">val</span> personas2 <span class="token operator">=</span> mutableMapOf<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Persona<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    personas2<span class="token punctuation">[</span><span class="token string">&quot;21456874L&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span>
+    personas2<span class="token punctuation">[</span><span class="token string">&quot;13232345K&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Luis&quot;</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Con put como en Java usando tuplas y apply</span>
+    <span class="token keyword keyword-val">val</span> personas3 <span class="token operator">=</span> mutableMapOf<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Persona<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+        <span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;21456874L&quot;</span><span class="token punctuation">,</span> <span class="token function">Persona</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> edad <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;13232345K&quot;</span><span class="token punctuation">,</span> <span class="token function">Persona</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string">&quot;Luis&quot;</span><span class="token punctuation">,</span> edad <span class="token operator">=</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Con el operador +=</span>
+    <span class="token keyword keyword-val">val</span> personas4 <span class="token operator">=</span> mutableMapOf<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Persona<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    personas3 <span class="token operator">+=</span> <span class="token function">Pair</span><span class="token punctuation">(</span><span class="token string">&quot;21456874L&quot;</span><span class="token punctuation">,</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Ana&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    personas3 <span class="token operator">+=</span> <span class="token function">Pair</span><span class="token punctuation">(</span><span class="token string">&quot;13232345K&quot;</span><span class="token punctuation">,</span> <span class="token function">Persona</span><span class="token punctuation">(</span><span class="token string">&quot;Luis&quot;</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p><strong>Formas de recorrer</strong> un mapa mutable ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Usando las claves y un indizador.</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>dni <span class="token keyword keyword-in">in</span> personas1<span class="token punctuation">.</span>keys<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$dni</span> -&gt; <span class="token interpolation"><span class="token delimiter variable">${</span>personas1<span class="token punctuation">[</span>dni<span class="token punctuation">]</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Usando tuplas clave - valor ...</span>
+    <span class="token comment">// Con un foreach tradicional</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>dni<span class="token punctuation">,</span> persona<span class="token punctuation">)</span> <span class="token keyword keyword-in">in</span> personas3<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$dni</span> -&gt; <span class="token interpolation variable">$persona</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// Con un iterador con sus operaciones t&#xED;picas.</span>
+    <span class="token keyword keyword-val">val</span> iterador <span class="token operator">=</span> personas3<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>iterador<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> <span class="token punctuation">(</span>dni<span class="token punctuation">,</span> persona<span class="token punctuation">)</span> <span class="token operator">=</span> iterador<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$dni</span> -&gt; <span class="token interpolation variable">$persona</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// Con un foreach funcional</span>
+    personas3<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>dni<span class="token punctuation">,</span> persona<span class="token punctuation">)</span> <span class="token operator">-&gt;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$dni</span> -&gt; <span class="token interpolation variable">$persona</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="programaci%C3%B3n-funcional">Programaci&#xF3;n Funcional</h2>
+
+<p>Vamos a ver algunas de las peculiaridades de la programaci&#xF3;n funcional en Kotlin a trav&#xE9;s de conceptos vistos en primer curso.</p>
+<h3 class="mume-header" id="lambdas">Lambdas</h3>
+
+<p>Son tipados como sucede en C# y se definen siempre entre llaves <strong><code>{ definici&#xF3;n }</code></strong> an&#xE1;logamente a otros lenguajes con el operador <strong><code>-&gt;</code></strong> por ejemplo <strong><code>{ v:Int -&gt; v % 2 == 0 }</code></strong>.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Debemos poner el tipo del par&#xE1;metro si no va impl&#xED;cito.</p>
+</blockquote>
+<p>Si es un procedimiento que no tiene ning&#xFA;n par&#xE1;metro de entrada no hace falta poner <strong><code>{ () -&gt; evaluaci&#xF3;n }</code></strong> sino directamente <strong><code>{ evaluaci&#xF3;n }</code></strong>. Por eso utilizamos las llaves.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: En ocasiones esta sintaxis entre llaves puede <strong>llevarnos a confusi&#xF3;n</strong> porque <strong><code>{ evaluaci&#xF3;n }</code></strong> puede confundirse con un <strong>bloque de c&#xF3;digo</strong> cuando realmente estamos definiendo una funci&#xF3;n lambda con <strong>los argumentos impl&#xED;citos</strong> o <strong>sin argumentos</strong>.</p>
+</blockquote>
+<p>El tipo de estas funciones puede definirse de <strong>tres formas</strong>:</p>
+<ol>
+<li>
+<p><strong>SAM</strong> (&apos;<em>Single Abstract Method</em>&apos;) interface o tambi&#xE9;n conocido como &apos;<strong>functional interface</strong>&apos;: Podemos ponerle nombre al tipo y tal y como sucede en Java, es una interfaz pero con una &#xFA;nica funci&#xF3;n abstracta. Por eso ponemos <strong><code>fun</code></strong> delante de la palabra reservada interface.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-interface">interface</span> Predicat<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">compleix</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> T<span class="token punctuation">)</span><span class="token operator">:</span> Boolean
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> esPar <span class="token operator">=</span> Predicat<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span> v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Es par 4 = <span class="token interpolation"><span class="token delimiter variable">${</span>esPar<span class="token punctuation">.</span><span class="token function">compleix</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Aunque es muy similar a Java en Kotlin es poco usada por ser muy verbosa y ser poco pr&#xE1;ctica al obligarnos a definir un tipo de forma expl&#xED;cita.</p>
+</blockquote>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<ol start="2">
+<li>
+<p>El tipo se deduce de la inicializaci&#xF3;n</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// F&#xED;jate que tenemos que indicar el tipo del par&#xE1;metro</span>
+    <span class="token comment">// o par&#xE1;metros de entrada.</span>
+    <span class="token keyword keyword-val">val</span> esPar <span class="token operator">=</span> <span class="token punctuation">{</span> v<span class="token operator">:</span> Int <span class="token operator">-&gt;</span> v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>        
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Es par 6 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">esPar</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-val">val</span> sumaDivisores <span class="token operator">=</span> <span class="token punctuation">{</span> n<span class="token operator">:</span> Int <span class="token operator">-&gt;</span>
+        <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">..</span>n <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> n <span class="token operator">%</span> it <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// Aqu&#xED; tenemos m&#xE1;s de un par&#xE1;metro de entrada.</span>
+    <span class="token comment">// F&#xEF;jate que no ponemos par&#xE9;ntesis.    </span>
+    <span class="token keyword keyword-val">val</span> sonAmigos <span class="token operator">=</span> <span class="token punctuation">{</span> n1<span class="token operator">:</span> Int<span class="token punctuation">,</span> n2<span class="token operator">:</span> Int <span class="token operator">-&gt;</span>
+        <span class="token function">sumaDivisores</span><span class="token punctuation">(</span>n1<span class="token punctuation">)</span> <span class="token operator">==</span> n2 <span class="token operator">&amp;&amp;</span> <span class="token function">sumaDivisores</span><span class="token punctuation">(</span>n2<span class="token punctuation">)</span> <span class="token operator">==</span> n1
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Amigos 234, 565 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">sonAmigos</span><span class="token punctuation">(</span><span class="token number">234</span><span class="token punctuation">,</span> <span class="token number">265</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>El <strong>tipo es an&#xF3;nimo</strong> y viene definido por la signatura de la funci&#xF3;n lambda.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> Solo tiene sentido si vamos a pasar la lambda como <strong>funci&#xF3;n de orden superior</strong> (HOF).</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Aqu&#xED; tiene poco sentido hacer esto.</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> esPar<span class="token operator">:</span> <span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Boolean
+    esPar <span class="token operator">=</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span> v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Es par 9 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">esPar</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="definiendo-y-usando-funciones-de-orden-superior-hof">Definiendo y usando funciones de orden superior HOF</h4>
+
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Este tipo de c&#xF3;digo y definiciones va aser muy com&#xFA;n encontrarlo en la programaci&#xF3;n con Android y difiera un poco con la sintaxis de C# vista en primer curso.</p>
+</blockquote>
+<p>Ppodemos utilizar un tipo con nombre o no como ya hemos indicado. Aunque lo m&#xE1;s com&#xFA;n es no usarlo.</p>
+<ol>
+<li>
+<p>Tipado con un SAM interface:</p>
+<p>Es m&#xE1;s similar a Java o a otros lenguajes como C#, pero no es muy com&#xFA;n usarla.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-interface">interface</span> Predicate<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">clumple</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> T<span class="token punctuation">)</span><span class="token operator">:</span> Boolean
+<span class="token punctuation">}</span>
+
+<span class="token comment">// El tipo del callback es Predicate&lt;T&gt;</span>
+<span class="token keyword keyword-fun">fun</span><span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token function">muestraPredicado</span><span class="token punctuation">(</span>nombre<span class="token operator">:</span> String<span class="token punctuation">,</span> dato<span class="token operator">:</span> T<span class="token punctuation">,</span> 
+                        predicadoCallback<span class="token operator">:</span> Predicate<span class="token operator">&lt;</span>T<span class="token operator">&gt;</span><span class="token punctuation">)</span>
+<span class="token operator">=</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>nombre<span class="token delimiter variable">}</span></span> <span class="token interpolation"><span class="token delimiter variable">${</span>dato<span class="token delimiter variable">}</span></span> = <span class="token interpolation"><span class="token delimiter variable">${</span>predicadoCallback<span class="token punctuation">.</span><span class="token function">clumple</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">esPar</span><span class="token punctuation">(</span>v<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span> v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Pasamos un identificador de funci&#xF3;n definido en el mismo &#xE1;mbito del main</span>
+    <span class="token function">muestraPredicado</span><span class="token punctuation">(</span><span class="token string">&quot;Es par&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token operator">::</span>esPar<span class="token punctuation">)</span>
+    <span class="token comment">// Pasamos un lambda como par&#xE1;metro.</span>
+    <span class="token function">muestraPredicado</span><span class="token punctuation">(</span><span class="token string">&quot;Es impar&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span> v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Tipado con un tipo an&#xF3;nimo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// En este caso el tipo del callback es an&#xF3;nimo y es (T) -&gt; Boolean</span>
+<span class="token comment">// Esto es lo m&#xE1;s habitual en Kotlin y lo recomendable.</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token operator">&lt;</span>T<span class="token operator">&gt;</span> <span class="token function">muestraPredicado</span><span class="token punctuation">(</span>
+    nombre<span class="token operator">:</span> String<span class="token punctuation">,</span> dato<span class="token operator">:</span> T<span class="token punctuation">,</span>
+    predicadoCallback<span class="token operator">:</span> <span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Boolean
+<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>nombre<span class="token delimiter variable">}</span></span> <span class="token interpolation"><span class="token delimiter variable">${</span>dato<span class="token delimiter variable">}</span></span> = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">predicadoCallback</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Pasamos un lambda como par&#xE1;metro con la misma signatura del tipo an&#xF3;nimo</span>
+    <span class="token function">muestraPredicado</span><span class="token punctuation">(</span><span class="token string">&quot;Es impar&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
+        v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<blockquote>
+<p>&#x270B; <strong>Muy importante</strong>: F&#xED;jate que al ir la funci&#xF3;n lambda como &#xFA;ltimo par&#xE1;metro podemos ponerla fuera de los par&#xE9;ntesis.</p>
+<ul>
+<li>
+<p>Es v&#xE1;lido pero no lo recomendable en Kotlin.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">muestraPredicado</span><span class="token punctuation">(</span><span class="token string">&quot;Es impar&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span> v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>&#x1F44D; Esta es la <strong>sintaxis recomendada en Kotlin</strong> y la que vamos usar durante los ejemplos del curso.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">muestraPredicado</span><span class="token punctuation">(</span><span class="token string">&quot;Es impar&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span>
+    v <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ul>
+</blockquote>
+<h4 class="mume-header" id="clausuras">Clausuras</h4>
+
+<p>Funcionan de la misma forma que en C#.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Es una HOF porque retorna una funci&#xF3;n</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">contador</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Int <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> i <span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// i es una variable clausurada.     </span>
+    <span class="token comment">// no ponemos el () -&gt; en la lambda de retorno.</span>
+    <span class="token keyword keyword-return">return</span> <span class="token punctuation">{</span> i<span class="token operator">++</span> <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> cuenta1 <span class="token operator">=</span> <span class="token function">contador</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-var">var</span> cuenta2 <span class="token operator">=</span> <span class="token function">contador</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;cuenta1 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">cuenta1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;cuenta1 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">cuenta1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;cuenta1 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">cuenta1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;cuenta2 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">cuenta2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;cuenta2 = <span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">cuenta2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="map-filter-fold">Map-Filter-Fold</h3>
+
+<p>Podemos aplicar los mismos conceptos de primer curso en CSharp.</p>
+<p>De hecho el c&#xF3;digo es muy similar y podremos hacer una analog&#xED;a f&#xE1;cilmente.</p>
+<ul>
+<li>
+<p>En <strong>C#</strong> pod&#xED;amos hacer:</p>
+<pre data-role="codeBlock" data-info="csharp" class="language-csharp"><span class="token class-name"><span class="token keyword keyword-double">double</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> notas <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">3.4</span><span class="token punctuation">,</span> <span class="token number">4.3</span><span class="token punctuation">,</span> <span class="token number">4.6</span><span class="token punctuation">,</span> <span class="token number">4.3</span><span class="token punctuation">,</span> <span class="token number">7.2</span><span class="token punctuation">,</span> <span class="token number">7.6</span><span class="token punctuation">,</span> <span class="token number">5.6</span><span class="token punctuation">,</span> <span class="token number">8.7</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Contamos aquellas notas redondeadas a entero que son mayores o iguales a 5.</span>
+<span class="token class-name"><span class="token keyword keyword-int">int</span></span> aprobados1 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">)</span>Math<span class="token punctuation">.</span><span class="token function">Round</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                      <span class="token punctuation">.</span><span class="token function">Where</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> n <span class="token operator">&gt;=</span> <span class="token number">5</span><span class="token punctuation">)</span>
+                      <span class="token punctuation">.</span><span class="token function">aggregate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>c<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> c <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Lo mismo pero usando la funci&#xF3;n de fold Count a la que le pasamos </span>
+<span class="token comment">// el predicado para filtrar los aprobados.</span>
+<span class="token class-name"><span class="token keyword keyword-int">int</span></span> aprobados2 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">)</span>Math<span class="token punctuation">.</span><span class="token function">Round</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Count</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> n <span class="token operator">&gt;=</span> <span class="token number">5</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Ordenamos por notas sin repeticiones y tras ordenar de forma</span>
+<span class="token comment">// descendente tomamos el primero.</span>
+<span class="token class-name"><span class="token keyword keyword-int">int</span></span> notaMayor1 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">)</span>Math<span class="token punctuation">.</span><span class="token function">Round</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                      <span class="token punctuation">.</span><span class="token function">Distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                      <span class="token punctuation">.</span><span class="token function">OrderByDescending</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> n<span class="token punctuation">)</span>
+                      <span class="token punctuation">.</span><span class="token function">First</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Lo mismo pero usando la funci&#xF3;n de fold Max </span>
+<span class="token class-name"><span class="token keyword keyword-int">int</span></span> notaMayor2 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>n <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">)</span>Math<span class="token punctuation">.</span><span class="token function">Round</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Max</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre></li>
+<li>
+<p>El c&#xF3;digo en <strong>Kotlin</strong> equivalente ser&#xED;a:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> notas <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">3.4</span><span class="token punctuation">,</span> <span class="token number">4.3</span><span class="token punctuation">,</span> <span class="token number">4.6</span><span class="token punctuation">,</span> <span class="token number">4.3</span><span class="token punctuation">,</span> <span class="token number">7.2</span><span class="token punctuation">,</span> <span class="token number">7.6</span><span class="token punctuation">,</span> <span class="token number">5.6</span><span class="token punctuation">,</span> <span class="token number">8.7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-val">val</span> aprobados1 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n<span class="token punctuation">.</span><span class="token function">roundToInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                      <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n <span class="token operator">&gt;=</span> <span class="token number">5</span> <span class="token punctuation">}</span>
+                      <span class="token punctuation">.</span><span class="token function">fold</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> c<span class="token punctuation">,</span> _ <span class="token operator">-&gt;</span> c <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+<span class="token keyword keyword-val">val</span> aprobados2 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n<span class="token punctuation">.</span><span class="token function">roundToInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">count</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n <span class="token operator">&gt;=</span> <span class="token number">5</span> <span class="token punctuation">}</span>
+
+<span class="token keyword keyword-val">val</span> notaMayor1 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n<span class="token punctuation">.</span><span class="token function">roundToInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                      <span class="token punctuation">.</span><span class="token function">distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                      <span class="token punctuation">.</span><span class="token function">sortedByDescending</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n <span class="token punctuation">}</span>
+                      <span class="token punctuation">.</span><span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> notaMayor2 <span class="token operator">=</span> notas<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n<span class="token punctuation">.</span><span class="token function">roundToInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">maxOf</span> <span class="token punctuation">{</span> n <span class="token operator">-&gt;</span> n <span class="token punctuation">}</span>
+</pre></li>
+</ul>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="creando-objetos-an%C3%B3nimos-de-consultas-sobre-objetos-complejos">Creando objetos an&#xF3;nimos de consultas sobre objetos complejos</h4>
+
+<p>Ya sabemos un poque que podemos aplicar los conceptos de Map-Filter-Fold a tipos secillos pero, &#xBF;y si queremos aplicarlos a tipos complejos?. Es m&#xE1;s, &#xBF;y si queremos crear objetos an&#xF3;nimos a partir de los resultados de las consultas?</p>
+<p>Supngamos la siguiente definici&#xF3;n de datos:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Empleado</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> edad<span class="token operator">:</span> Int<span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> ciudad<span class="token operator">:</span> Ciudad<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-enum">enum</span> <span class="token keyword keyword-class">class</span> <span class="token function">Ciudad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> Elche<span class="token punctuation">,</span> Alicante <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-object">object</span> Datos <span class="token punctuation">{</span>    
+    <span class="token keyword keyword-val">val</span> empleados <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+            <span class="token function">Empleado</span><span class="token punctuation">(</span><span class="token string">&quot;Xusa&quot;</span><span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> Empleado<span class="token punctuation">.</span>Ciudad<span class="token punctuation">.</span>Alicante<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Empleado</span><span class="token punctuation">(</span><span class="token string">&quot;Pepe&quot;</span><span class="token punctuation">,</span> <span class="token number">54</span><span class="token punctuation">,</span> Empleado<span class="token punctuation">.</span>Ciudad<span class="token punctuation">.</span>Alicante<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Empleado</span><span class="token punctuation">(</span><span class="token string">&quot;Juanjo&quot;</span><span class="token punctuation">,</span> <span class="token number">52</span><span class="token punctuation">,</span> Empleado<span class="token punctuation">.</span>Ciudad<span class="token punctuation">.</span>Elche<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Empleado</span><span class="token punctuation">(</span><span class="token string">&quot;Vicente&quot;</span><span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> Empleado<span class="token punctuation">.</span>Ciudad<span class="token punctuation">.</span>Elche<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>Queremos obtener una lista de objetos an&#xF3;nimos con el nombre y la ciudad de los empleados mayores de 45 a&#xF1;os sin repeticiones y ordenados por nombre.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> res <span class="token operator">=</span> Datos<span class="token punctuation">.</span>empleados
+    <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span> e<span class="token punctuation">.</span>edad <span class="token operator">&gt;</span> <span class="token number">45</span> <span class="token punctuation">}</span>    <span class="token comment">// Filtramos por edad</span>
+    <span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>                     <span class="token comment">// Proyectamos lo filtrado a un objeto an&#xF3;nimo</span>
+        <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> nombre <span class="token operator">=</span> e<span class="token punctuation">.</span>nombre
+            <span class="token keyword keyword-val">val</span> ciudad <span class="token operator">=</span> e<span class="token punctuation">.</span>ciudad
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token function">distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                     <span class="token comment">// Eliminamos repeticiones</span>
+    <span class="token punctuation">.</span><span class="token function">sortedBy</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span> d<span class="token punctuation">.</span>nombre <span class="token punctuation">}</span>     <span class="token comment">// Ordenamos por nombre</span>
+    <span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                       <span class="token comment">// Pasamos la secuencia a una lista</span>
+
+<span class="token comment">// Si quisi&#xE9;ramos retornar la lista</span>
+<span class="token comment">// deber&#xED;amos usar una data class en lugar de objetos an&#xF3;nimos.</span>
+<span class="token function">println</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">,</span> String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">&quot;%-10s%-10s\n&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Nombre&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Ciudad&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    d <span class="token operator">-&gt;</span> String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">&quot;%-10s%-10s&quot;</span><span class="token punctuation">,</span>d<span class="token punctuation">.</span>nombre<span class="token punctuation">,</span> d<span class="token punctuation">.</span>ciudad<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Nos interesar&#xE1; m&#xE1;s usar data class que objetos an&#xF3;nimos cuando queramos hacer consultas sobre objetos complejos y hacer agrupoaciones o recuperar los datos de la consulta en una lista.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="tranformaciones-de-datos-usando-map">Tranformaciones de datos usando map</h4>
+
+<p>En la programaci&#xF3;n con Android nos encontraremos con que tenemos que transformar objetos del <strong>modelo</strong> o dominio en objetos de <strong>presentaci&#xF3;n</strong> y viceversa. De esta forma evitamos acoplar la vista a los objetos del modelo y viceversa.</p>
+<p>Supongamos que guardamos en nuestro modelo de datos una ser&#xED;e de datos de contacto de agenda de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> telefono<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> listas<span class="token operator">:</span> EnumSet<span class="token operator">&lt;</span>Lista<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-enum">enum</span> <span class="token keyword keyword-class">class</span> Lista <span class="token punctuation">{</span>
+        Amigos<span class="token punctuation">,</span> Trabajo<span class="token punctuation">,</span> Familia
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Donde <strong><code>listas</code></strong> es un conjunto de valores del enumerado <strong><code>Lista</code></strong> que indica a qu&#xE9; <strong><code>lista o listas de contactos</code></strong> pertenece el registro.</p>
+<p>Supongamos una fuente de datos de contactos que nos devuelve una lista de objetos de tipo <strong><code>Contacto</code></strong>:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-object">object</span> ContactosRepository <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> datos <span class="token operator">=</span> <span class="token function">mutableListOf</span><span class="token punctuation">(</span>
+        <span class="token function">Contacto</span><span class="token punctuation">(</span>
+            <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;Xusa&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;111666666&quot;</span><span class="token punctuation">,</span>
+            listas <span class="token operator">=</span> EnumSet<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Trabajo<span class="token punctuation">,</span> Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Amigos<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Contacto</span><span class="token punctuation">(</span>
+            <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">&quot;Pepe&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;222666666&quot;</span><span class="token punctuation">,</span>
+            listas <span class="token operator">=</span> EnumSet<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Trabajo<span class="token punctuation">,</span> Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Familia<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Contacto</span><span class="token punctuation">(</span>
+            <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">&quot;Juanjo&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;333666666&quot;</span><span class="token punctuation">,</span>
+            listas <span class="token operator">=</span> EnumSet<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Amigos<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Contacto</span><span class="token punctuation">(</span>
+            <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&quot;Vicente&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;444666666&quot;</span><span class="token punctuation">,</span>
+            listas <span class="token operator">=</span> EnumSet<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Familia<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>A&#xF1;adimos un m&#xE9;todo <strong><code>Update</code></strong> para actualizar un contacto en la fuente de datos:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-object">object</span> ContactosRepository <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">Update</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> Contacto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> index <span class="token operator">=</span> datos<span class="token punctuation">.</span><span class="token function">indexOfFirst</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>id <span class="token operator">==</span> contacto<span class="token punctuation">.</span>id <span class="token punctuation">}</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>index <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            datos<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> contacto
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>En el interfaz de usuario queremos mostrar cada contacto en la lista con un icono que me idique a qu&#xE9; lista de contactos pertenece. Para ello,vamos a crear un tipo en la capa de presentaci&#xF3;n de tipo <strong><code>ContactoUiState</code></strong> con el estado de visualizaci&#xF3;n del interfaz de usuario (UI) que contenga una propiedad booleana para cada una de las posibles listas de contactos...</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ContactoUiState</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> telefono<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> trabajo<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> familia<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> amigos<span class="token operator">:</span> Boolean
+<span class="token punctuation">)</span>
+</pre><p>Para pasar de un objeto a otro usaremos el m&#xE9;todo <strong><code>map</code></strong> de las colecciones de Kotlin. Pero antes de nada, vamos a crear una funci&#xF3;n que nos ayude a crear objetos de tipo <strong><code>ContactoUiState</code></strong> a partir de objetos de tipo <strong><code>Contacto</code></strong>.</p>
+<p>Esta funci&#xF3;n la podemos crear como una <strong>funci&#xF3;n de extensi&#xF3;n</strong> de la clase <strong><code>Contacto</code></strong> para evitar acoplamientos y que la clase <strong><code>Contacto</code></strong> no tenga que conocer la clase <strong><code>ContactoUiState</code></strong>.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> Contacto<span class="token punctuation">.</span><span class="token function">toContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">ContactoUiState</span><span class="token punctuation">(</span>
+    id <span class="token operator">=</span> id<span class="token punctuation">,</span>
+    nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+    telefono <span class="token operator">=</span> telefono<span class="token punctuation">,</span>
+    trabajo <span class="token operator">=</span> listas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Trabajo<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    familia <span class="token operator">=</span> listas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Familia<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    amigos <span class="token operator">=</span> listas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Amigos<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</pre><div style="page-break-after:always;"></div>
+<p>De forma an&#xE1;loga podemos crear una funci&#xF3;n de extensi&#xF3;n para pasar de <strong><code>ContactoUiState</code></strong> a <strong><code>Contacto</code></strong>.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> ContactoUiState<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>
+    id <span class="token operator">=</span> id<span class="token punctuation">,</span>
+    nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+    telefono <span class="token operator">=</span> telefono<span class="token punctuation">,</span>
+    listas <span class="token operator">=</span> EnumSet<span class="token punctuation">.</span><span class="token function">noneOf</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>trabajo<span class="token punctuation">)</span> <span class="token function">add</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Trabajo<span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>familia<span class="token punctuation">)</span> <span class="token function">add</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Familia<span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>amigos<span class="token punctuation">)</span> <span class="token function">add</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Lista<span class="token punctuation">.</span>Amigos<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</pre><p>Ahora podemos usar el m&#xE9;todo <strong><code>map</code></strong> para transformar la lista de <strong><code>Contacto</code></strong> en una lista de <strong><code>ContactoUiState</code></strong> y viceversa de forma sencilla:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Mostramos los datos de la fuente de datos</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>ContactosRepository<span class="token punctuation">.</span>datos<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span>separator <span class="token operator">=</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Transformamos los datos de la fuente de datos a datos de presentaci&#xF3;n con map</span>
+    <span class="token keyword keyword-val">val</span> contactosEnUi <span class="token operator">=</span> ContactosRepository<span class="token punctuation">.</span>datos<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">toContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>contactosEnUi<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span>separator <span class="token operator">=</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Modificamos el primer contacto de la lista de presentaci&#xF3;n</span>
+    <span class="token comment">// para que no pertenezca a la lista de amigos</span>
+    contactosEnUi<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> contactosEnUi<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>amigos <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Actualizamos los datos de la fuente de datos con los datos de presentaci&#xF3;n </span>
+    <span class="token comment">// usando map. Aunque lo m&#xE1;s normal, ser&#xE1; actualizar solo un contacto haciendo</span>
+    <span class="token comment">// ContactosRepository.Update(contactosEnUi[0].toContacto())</span>
+    contactosEnUi<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> ContactosRepository<span class="token punctuation">.</span><span class="token function">Update</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span>ContactosRepository<span class="token punctuation">.</span>datos<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span>separator <span class="token operator">=</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="haciendo-agrupaciones-con-groupby">Haciendo agrupaciones con groupBy</h4>
+
+<p>Si quisieramos mostrar los empleados por ciudad ordenados por nombre podr&#xED;amos usar el m&#xE9;todo <strong><code>groupBy</code></strong> como en C#.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token comment">// F&#xED;jate que aunque no es necesario especificar el tipo de la variable</span>
+<span class="token comment">// nosotros lo hemos hecho para ver que la agrupaci&#xF3;n me</span>
+<span class="token comment">// devuelve un Map&lt;Ciudad, List&lt;Empleado&gt;&gt; donde la clave es la</span>
+<span class="token comment">// propiedad `pr la que agrupamos.</span>
+<span class="token keyword keyword-val">val</span> empleatsPerCiutat <span class="token operator">:</span> Map<span class="token operator">&lt;</span>Empleado<span class="token punctuation">.</span>Ciudad<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>Empleado<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token operator">=</span> 
+Datos<span class="token punctuation">.</span>empleados<span class="token punctuation">.</span><span class="token function">groupBy</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span> e<span class="token punctuation">.</span>ciudad <span class="token punctuation">}</span>
+
+<span class="token keyword keyword-var">var</span> salida <span class="token operator">:</span> StringBuilder <span class="token operator">=</span> <span class="token function">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>eXc <span class="token keyword keyword-in">in</span> empleatsPerCiutat<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    salida<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>eXc<span class="token punctuation">.</span>key<span class="token delimiter variable">}</span></span>:\n&quot;</span><span class="token punctuation">)</span>
+    eXc<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">sortedBy</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span> e<span class="token punctuation">.</span>edad <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span>
+        e <span class="token operator">-&gt;</span> salida<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot;\t<span class="token interpolation"><span class="token delimiter variable">${</span>e<span class="token delimiter variable">}</span></span>\n&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">println</span><span class="token punctuation">(</span>salida<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><h4 class="mume-header" id="obteniendo-secuencias-anidadas-con-flatmap">Obteniendo secuencias anidadas con flatMap</h4>
+
+<p>Supongamos la siguiente de representaci&#xF3;n donde tenemos el t&#xED;pico array de arrays o tabla dentada. En el fondo, podemos considerarlo como una secuencia de secuencias (sub-secuencias) de enteros:</p>
+<p align="center" style="zoom:0.7"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="680pt" height="231pt" viewBox="0.00 0.00 680.00 231.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 227)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-227 676,-227 676,4 -4,4"/>
+<!-- ot1 -->
+<g id="node1" class="node">
+<title>ot1</title>
+<polygon fill="none" stroke="#000000" points="42,-185 42,-219 76,-219 76,-185 42,-185"/>
+<polygon fill="none" stroke="#000000" points="76,-185 76,-219 110,-219 110,-185 76,-185"/>
+<polygon fill="none" stroke="#000000" points="110,-185 110,-219 144,-219 144,-185 110,-185"/>
+<polygon fill="none" stroke="#000000" points="144,-185 144,-219 178,-219 178,-185 144,-185"/>
+</g>
+<!-- ot11 -->
+<g id="node2" class="node">
+<title>ot11</title>
+<polygon fill="none" stroke="#000000" points="11,-72 11,-106 44,-106 44,-72 11,-72"/>
+<text text-anchor="start" x="19.7174" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000">11</text>
+<polygon fill="none" stroke="#000000" points="11,-38 11,-72 44,-72 44,-38 11,-38"/>
+<text text-anchor="start" x="19.7174" y="-50.4" font-family="Arial" font-size="14.00" fill="#000000">22</text>
+</g>
+<!-- ot1&#45;&gt;ot11 -->
+<g id="edge1" class="edge">
+<title>ot1:c-&gt;ot11:n</title>
+<path fill="none" stroke="#000000" d="M52.981,-184.6955C46.3185,-165.5407 35.8115,-135.3331 30.4284,-119.8565"/>
+<polygon fill="#000000" stroke="#000000" points="27,-110 34.5355,-117.9666 28.6426,-114.7225 30.2853,-119.445 30.2853,-119.445 30.2853,-119.445 28.6426,-114.7225 26.035,-120.9233 27,-110 27,-110"/>
+</g>
+<!-- ot12 -->
+<g id="node3" class="node">
+<title>ot12</title>
+<polygon fill="none" stroke="#000000" points="66,-89 66,-123 99,-123 99,-89 66,-89"/>
+<text text-anchor="start" x="74.7174" y="-101.4" font-family="Arial" font-size="14.00" fill="#000000">34</text>
+<polygon fill="none" stroke="#000000" points="66,-55 66,-89 99,-89 99,-55 66,-55"/>
+<text text-anchor="start" x="74.7174" y="-67.4" font-family="Arial" font-size="14.00" fill="#000000">35</text>
+<polygon fill="none" stroke="#000000" points="66,-21 66,-55 99,-55 99,-21 66,-21"/>
+<text text-anchor="start" x="74.7174" y="-33.4" font-family="Arial" font-size="14.00" fill="#000000">29</text>
+</g>
+<!-- ot1&#45;&gt;ot12 -->
+<g id="edge2" class="edge">
+<title>ot1:c-&gt;ot12:n</title>
+<path fill="none" stroke="#000000" d="M90.5039,-184.9813C88.3487,-170.2869 85.3059,-149.5399 83.5046,-137.2589"/>
+<polygon fill="#000000" stroke="#000000" points="82,-127 87.9036,-136.2411 82.7256,-131.9471 83.4512,-136.8942 83.4512,-136.8942 83.4512,-136.8942 82.7256,-131.9471 78.9989,-137.5472 82,-127 82,-127"/>
+</g>
+<!-- ot13 -->
+<g id="node4" class="node">
+<title>ot13</title>
+<polygon fill="none" stroke="#000000" points="121,-55 121,-89 154,-89 154,-55 121,-55"/>
+<text text-anchor="start" x="129.7174" y="-67.4" font-family="Arial" font-size="14.00" fill="#000000">10</text>
+</g>
+<!-- ot1&#45;&gt;ot13 -->
+<g id="edge3" class="edge">
+<title>ot1:c-&gt;ot13:n</title>
+<path fill="none" stroke="#000000" d="M128.5625,-184.9688C130.6719,-161.9766 134.3633,-121.7402 136.0771,-103.0591"/>
+<polygon fill="#000000" stroke="#000000" points="137,-93 140.5675,-103.3693 136.5432,-97.9791 136.0863,-102.9582 136.0863,-102.9582 136.0863,-102.9582 136.5432,-97.9791 131.6051,-102.547 137,-93 137,-93"/>
+</g>
+<!-- ot14 -->
+<g id="node5" class="node">
+<title>ot14</title>
+<polygon fill="none" stroke="#000000" points="176,-106 176,-140 209,-140 209,-106 176,-106"/>
+<text text-anchor="start" x="184.7174" y="-118.4" font-family="Arial" font-size="14.00" fill="#000000">17</text>
+<polygon fill="none" stroke="#000000" points="176,-72 176,-106 209,-106 209,-72 176,-72"/>
+<text text-anchor="start" x="184.7174" y="-84.4" font-family="Arial" font-size="14.00" fill="#000000">14</text>
+<polygon fill="none" stroke="#000000" points="176,-38 176,-72 209,-72 209,-38 176,-38"/>
+<text text-anchor="start" x="184.7174" y="-50.4" font-family="Arial" font-size="14.00" fill="#000000">30</text>
+<polygon fill="none" stroke="#000000" points="176,-4 176,-38 209,-38 209,-4 176,-4"/>
+<text text-anchor="start" x="184.7174" y="-16.4" font-family="Arial" font-size="14.00" fill="#000000">31</text>
+</g>
+<!-- ot1&#45;&gt;ot14 -->
+<g id="edge4" class="edge">
+<title>ot1:c-&gt;ot14:n</title>
+<path fill="none" stroke="#000000" d="M170.1334,-184.9118C175.7056,-174.4863 182.6066,-161.5747 187.1477,-153.0784"/>
+<polygon fill="#000000" stroke="#000000" points="192,-144 191.2549,-154.9405 189.6431,-148.4097 187.2862,-152.8193 187.2862,-152.8193 187.2862,-152.8193 189.6431,-148.4097 183.3175,-150.6981 192,-144 192,-144"/>
+</g>
+<!-- otFlat -->
+<g id="node6" class="node">
+<title>otFlat</title>
+<polygon fill="none" stroke="#000000" points="334,-185 334,-219 367,-219 367,-185 334,-185"/>
+<text text-anchor="start" x="342.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">11</text>
+<polygon fill="none" stroke="#000000" points="367,-185 367,-219 400,-219 400,-185 367,-185"/>
+<text text-anchor="start" x="375.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">22</text>
+<polygon fill="none" stroke="#000000" points="400,-185 400,-219 433,-219 433,-185 400,-185"/>
+<text text-anchor="start" x="408.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">34</text>
+<polygon fill="none" stroke="#000000" points="433,-185 433,-219 466,-219 466,-185 433,-185"/>
+<text text-anchor="start" x="441.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">35</text>
+<polygon fill="none" stroke="#000000" points="466,-185 466,-219 499,-219 499,-185 466,-185"/>
+<text text-anchor="start" x="474.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">29</text>
+<polygon fill="none" stroke="#000000" points="499,-185 499,-219 532,-219 532,-185 499,-185"/>
+<text text-anchor="start" x="507.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">10</text>
+<polygon fill="none" stroke="#000000" points="532,-185 532,-219 565,-219 565,-185 532,-185"/>
+<text text-anchor="start" x="540.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">17</text>
+<polygon fill="none" stroke="#000000" points="565,-185 565,-219 598,-219 598,-185 565,-185"/>
+<text text-anchor="start" x="573.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">14</text>
+<polygon fill="none" stroke="#000000" points="598,-185 598,-219 631,-219 631,-185 598,-185"/>
+<text text-anchor="start" x="606.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">30</text>
+<polygon fill="none" stroke="#000000" points="631,-185 631,-219 664,-219 664,-185 631,-185"/>
+<text text-anchor="start" x="639.7174" y="-197.4" font-family="Arial" font-size="14.00" fill="#000000">31</text>
+</g>
+<!-- ot1&#45;&gt;otFlat -->
+<g id="edge5" class="edge">
+<title>ot1-&gt;otFlat</title>
+<path fill="none" stroke="#0000ff" d="M186.3897,-202C223.5977,-202 270.0867,-202 315.7463,-202"/>
+<polygon fill="none" stroke="#0000ff" points="315.7799,-205.5001 325.7798,-202 315.7798,-198.5001 315.7799,-205.5001"/>
+<text text-anchor="middle" x="256" y="-209.2" font-family="Arial" font-size="14.00" fill="#0000ff">Flat o Aplanado</text>
+</g>
+</g>
+</svg>
+</p><p>Si te fijas en el diagrama podemos ver que la operaci&#xF3;n de flat consiste en generar una nueva secuencia con datos de las sub-secuencias de entrada. El efecto es como si estuvi&#xE9;ramos &apos;<em>aplanando</em>&apos; la tabla dentada.</p>
+<p>En <strong>Kotlin</strong> podemos usar el m&#xE9;todo <strong><code>flatMap</code></strong> para obtener la secuencia de enteros de la tabla dentada. El c&#xF3;digo ser&#xED;a el siguiente:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> jagged <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span>
+    <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">29</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// flatMap = Array&lt;Array&lt;Int&gt;&gt; &#x2192; (Array&lt;Int&gt; &#x2192; List&lt;Int&gt;) &#x2192; List&lt;Int&gt;</span>
+<span class="token keyword keyword-val">val</span> flat <span class="token operator">=</span> jagged<span class="token punctuation">.</span><span class="token function">flatMap</span> <span class="token punctuation">{</span> v <span class="token operator">-&gt;</span> v <span class="token operator">-&gt;</span> v<span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+<span class="token function">println</span><span class="token punctuation">(</span>flat<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span><span class="token string">&quot;, &quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// Mostrar&#xE1; por pantalla: 11, 22, 34, 25, 29, 10, 17, 14, 30, 31</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="ejemplo-de-consulta-de-datos-mapeados-a-objetos-en-kolin">Ejemplo de consulta de datos mapeados a objetos en Kolin</h3>
+
+<p>Supongamos las siguientes definiciones de a modo de DTOs:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Libro</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> titulo<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> a&#xF1;o<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> paginas<span class="token operator">:</span> Int
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token operator">=</span>
+        <span class="token string">&quot;Titulo: <span class="token interpolation"><span class="token delimiter variable">${</span>titulo<span class="token punctuation">.</span><span class="token function">padEnd</span><span class="token punctuation">(</span><span class="token number">37</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>  A&#xF1;o: <span class="token interpolation"><span class="token delimiter variable">${</span>a&#xF1;o<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">padEnd</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>  P&#xE1;ginas: <span class="token interpolation variable">$paginas</span>&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Autor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> nacionalidad<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> muerte<span class="token operator">:</span> LocalDate<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> libros<span class="token operator">:</span> List<span class="token operator">&lt;</span>Libro<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token operator">=</span>
+        <span class="token string">&quot;Nombre: <span class="token interpolation"><span class="token delimiter variable">${</span>nombre<span class="token punctuation">.</span><span class="token function">padEnd</span><span class="token punctuation">(</span><span class="token number">37</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>  Nacionalidad: <span class="token interpolation"><span class="token delimiter variable">${</span>nacionalidad<span class="token punctuation">.</span><span class="token function">padEnd</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span> &quot;</span> <span class="token operator">+</span>
+                <span class="token string">&quot;Muerte: ${muerte.format(DateTimeFormatter.ofPattern(&quot;</span>dd<span class="token operator">/</span>MM<span class="token operator">/</span>yyyy<span class="token string">&quot;))}\n&quot;</span> <span class="token operator">+</span>
+                <span class="token string">&quot;Libros:\n\t${libros.joinToString(&quot;</span>\n\t<span class="token string">&quot;)}&quot;</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>y los siguientes datos de prueba:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-object">object</span> Datos <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> autores<span class="token operator">:</span> List<span class="token operator">&lt;</span>Autor<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+        <span class="token function">Autor</span><span class="token punctuation">(</span>
+            <span class="token string">&quot;William Shakespeare&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;Inglesa&quot;</span><span class="token punctuation">,</span>
+            LocalDate<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">1616</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">listOf</span><span class="token punctuation">(</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;Macbeth&quot;</span><span class="token punctuation">,</span> <span class="token number">1623</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;La tempestad&quot;</span><span class="token punctuation">,</span> <span class="token number">1611</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Autor</span><span class="token punctuation">(</span>
+            <span class="token string">&quot;Miguel de Cervantes&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;Espa&#xF1;ola&quot;</span><span class="token punctuation">,</span>
+            LocalDate<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">1616</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">listOf</span><span class="token punctuation">(</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;Don Quijote de la Mancha&quot;</span><span class="token punctuation">,</span> <span class="token number">1605</span><span class="token punctuation">,</span> <span class="token number">1376</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;La Galatea&quot;</span><span class="token punctuation">,</span> <span class="token number">1585</span><span class="token punctuation">,</span> <span class="token number">664</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;Los trabajos de Persiles y Sigismunda&quot;</span><span class="token punctuation">,</span> <span class="token number">1617</span><span class="token punctuation">,</span> <span class="token number">888</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;Novelas ejemplares&quot;</span><span class="token punctuation">,</span> <span class="token number">1613</span><span class="token punctuation">,</span> <span class="token number">1160</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">Autor</span><span class="token punctuation">(</span>
+            <span class="token string">&quot;Fernando de Rojas&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;Espa&#xF1;ola&quot;</span><span class="token punctuation">,</span>
+            LocalDate<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">1541</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">listOf</span><span class="token punctuation">(</span>
+                <span class="token function">Libro</span><span class="token punctuation">(</span><span class="token string">&quot;La Celestina&quot;</span><span class="token punctuation">,</span> <span class="token number">1500</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">separadorDato</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token string">&quot;\n--------------------------------------------------------------------------------\n&quot;</span>
+
+</pre><div style="page-break-after:always;"></div>
+<p>Con estos datos de prueba podemos hacer consultas sobre los datos de los autores. Por ejemplo:</p>
+<ol>
+<li>
+<p>Si queremos obtener una lista de los autores que han escrito m&#xE1;s de un libro podr&#xED;amos hacer lo siguiente:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">autoresConMasDeUnLibro</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> snapshot <span class="token operator">=</span> Datos<span class="token punctuation">.</span>autores
+        <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>libros<span class="token punctuation">.</span>size <span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>snapshot<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span><span class="token function">separadorDato</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Si queremos obtener el total de libros escritos por autores espa&#xF1;oles podr&#xED;amos hacer lo siguiente:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> totalLibrosEscritosPorEspa&#xF1;<span class="token function">oles</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> totalLibros <span class="token operator">=</span> Datos<span class="token punctuation">.</span>autores
+        <span class="token comment">// Filtramos por nacionalidad</span>
+        <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>nacionalidad <span class="token operator">==</span> <span class="token string">&quot;Espa&#xF1;ola&quot;</span> <span class="token punctuation">}</span>
+        <span class="token comment">// Obtenemos el n&#xFA;mero de libros de cada autor</span>
+        <span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>libros<span class="token punctuation">.</span>size <span class="token punctuation">}</span>
+        <span class="token comment">// Sumamos los libros escritos por cada autor</span>
+        <span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Hay <span class="token interpolation variable">$totalLibros</span> escritos por espa&#xF1;oles&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<ol start="3">
+<li>
+<p>Si queremos obtener una lista de autores agrupados por siglo podr&#xED;amos hacer lo siguiente:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">autoresAgrupadosPorSiglo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Creamos un DTO para evitar usar objetos an&#xF3;nimos.</span>
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">AutorMuerte</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> muerte<span class="token operator">:</span> LocalDate<span class="token punctuation">)</span>
+    <span class="token comment">// Nota: Podr&#xED;amos haber usado un Pair&lt;String, LocalDate&gt; en</span>
+    <span class="token comment">// lugar de un DTO pero el c&#xF3;digo ser&#xED;a menos legible.</span>
+
+    <span class="token keyword keyword-val">val</span> snapshot <span class="token operator">=</span> Datos<span class="token punctuation">.</span>autores
+        <span class="token comment">// Mapeamos a un objeto tipado Autor</span>
+        <span class="token comment">// para hacer la consulta en este &#xE1;mbito</span>
+        <span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> a <span class="token operator">-&gt;</span> <span class="token function">Autor</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> a<span class="token punctuation">.</span>nombre<span class="token punctuation">,</span> muerte <span class="token operator">=</span> a<span class="token punctuation">.</span>muerte<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token comment">// Ordenamos por fecha de muerte</span>
+        <span class="token punctuation">.</span><span class="token function">sortedBy</span> <span class="token punctuation">{</span> a <span class="token operator">-&gt;</span> a<span class="token punctuation">.</span>muerte <span class="token punctuation">}</span>
+        <span class="token comment">// Agrupamos por siglo obteniendo un Map&lt;Int, List&lt;Autor&gt;&gt;</span>
+        <span class="token comment">// donde Int es el siglo y List&lt;AutorMuerte&gt; los autores</span>
+        <span class="token punctuation">.</span><span class="token function">groupBy</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>muerte<span class="token punctuation">.</span>year <span class="token operator">/</span> <span class="token number">100</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+
+    snapshot<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>siglo<span class="token punctuation">,</span> autores<span class="token punctuation">)</span> <span class="token operator">-&gt;</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">separadorDato</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Siglo <span class="token interpolation"><span class="token delimiter variable">${</span>siglo<span class="token delimiter variable">}</span></span>:\n\t&quot;</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span>autores<span class="token punctuation">.</span><span class="token function">joinToString</span><span class="token punctuation">(</span><span class="token string">&quot;\n\t&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> a <span class="token operator">-&gt;</span>
+            <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter variable">${</span>a<span class="token punctuation">.</span>nombre<span class="token delimiter variable">}</span></span> ${a.muerte.format(DateTimeFormatter.ofPattern(&quot;</span>dd<span class="token operator">/</span>MM<span class="token operator">/</span>yyyy<span class="token string">&quot;))}&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Calcular el total de p&#xE1;ginas publicadas por William Shakespeare:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">totalPaginasWilliamShakespeare</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> totalPaginas <span class="token operator">=</span> Datos<span class="token punctuation">.</span>autores
+        <span class="token comment">// Filtramos por nombre</span>
+        <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>nombre <span class="token operator">==</span> <span class="token string">&quot;William Shakespeare&quot;</span> <span class="token punctuation">}</span>
+        <span class="token comment">// De cada autor obtenemos la lista de libros</span>
+        <span class="token comment">// En este caso solo tendr&#xED;amos un autor.</span>
+        <span class="token punctuation">.</span><span class="token function">flatMap</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>libros <span class="token punctuation">}</span>
+        <span class="token comment">// De cada libro obtenemos el n&#xFA;mero de p&#xE1;ginas</span>
+        <span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>paginas <span class="token punctuation">}</span>
+        <span class="token comment">// Sumamos las p&#xE1;ginas de cada libro</span>
+        <span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;William Shakespeare ha escrito <span class="token interpolation variable">$totalPaginas</span> p&#xE1;ginas&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
