@@ -1,0 +1,683 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 2 - Arquitectura de una aplicaci&#xF3;n</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v18/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-2---arquitectura-de-una-aplicaci%C3%B3n">Tema 2 - Arquitectura de una aplicaci&#xF3;n</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_2_arquitectura_de_una_aplicacion.pdf">pdf</a> o <a href="./Tema_2_arquitectura_de_una_aplicacion.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducci&#xF3;n" class="md-toc-link">
+            <p>Introducci&#xF3;n</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#esquema-b&#xE1;sico-de-una-aplicaci&#xF3;n-android-propuesto-por-google" class="md-toc-link"><p>Esquema b&#xE1;sico de una aplicaci&#xF3;n Android propuesto por Google</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#capa-ui" class="md-toc-link">
+            <p>Capa UI</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#capa-de-datos" class="md-toc-link">
+            <p>Capa de Datos</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#capa-de-dominio" class="md-toc-link">
+            <p>Capa de Dominio</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#modelo-vista-vista-modelo-mvvm" class="md-toc-link">
+            <p>Modelo vista vista modelo MVVM</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#modelo-vista-vista-modelo-mvvm-1" class="md-toc-link">
+            <p>Modelo vista vista modelo MVVM</p>
+
+          </a></div>
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+
+<p>B&#xE1;sicamente una aquitectura software es la estructura de un sistema de software, los componentes del software, las propiedades externamente visibles de esos componentes y las relaciones entre ellos.</p>
+<p>La idea tras las arquitecturas es tener capas que separen las responsabilidades de cada una de ellas. De esta forma se consigue que el c&#xF3;digo sea m&#xE1;s mantenible, escalable y testeable. Adem&#xE1;s, podremos cambiar una capa sin que afecte a las dem&#xE1;s.</p>
+<p>Actualmente existen arquitecturas complejas de sistemas c&#xF3;mo por ejemplo <a href="https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)">Arquitectura Hexagonal</a>, <a href="https://en.wikipedia.org/wiki/Microservices">Microservicios</a>, <a href="https://en.wikipedia.org/wiki/Event-driven_architecture">Event-driven Architecture</a>, etc. Sin embargo, en el mundo del dise&#xF1;o dise&#xF1;o de aplicaciones para dispositivos m&#xF3;viles tenemos patrones arquitect&#xF3;nicos m&#xE1;s sencillas c&#xF3;mo MVC, MVP, MVVM, etc.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Puedes ver m&#xE1;s informaci&#xF3;n sobre la arquitectura propuesta por Google para Android en <a href="https://developer.android.com/jetpack/guide?hl=es-419">Gu&#xED;a de arquitectura de apps</a></p>
+</blockquote>
+<h2 class="mume-header" id="esquema-b%C3%A1sico-de-una-aplicaci%C3%B3n-android-propuesto-por-google">Esquema b&#xE1;sico de una aplicaci&#xF3;n Android propuesto por Google</h2>
+
+<p align="center" style="zoom:0.7"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="610pt" height="116pt" viewBox="0.00 0.00 610.47 116.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 606.47,-112 606.47,4 -4,4"/>
+<!-- UI -->
+<g id="node1" class="node">
+<title>UI</title>
+<path fill="#63b8ff" stroke="#63b8ff" d="M132,-108C132,-108 12,-108 12,-108 6,-108 0,-102 0,-96 0,-96 0,-12 0,-12 0,-6 6,0 12,0 12,0 132,0 132,0 138,0 144,-6 144,-12 144,-12 144,-96 144,-96 144,-102 138,-108 132,-108"/>
+<text text-anchor="middle" x="72" y="-48" font-family="Arial" font-size="20.00" fill="#ffffff">Capa UI</text>
+</g>
+<!-- Dominio -->
+<g id="node2" class="node">
+<title>Dominio</title>
+<path fill="#36648b" stroke="#36648b" d="M374.7056,-108C374.7056,-108 227.7644,-108 227.7644,-108 221.7644,-108 215.7644,-102 215.7644,-96 215.7644,-96 215.7644,-12 215.7644,-12 215.7644,-6 221.7644,0 227.7644,0 227.7644,0 374.7056,0 374.7056,0 380.7056,0 386.7056,-6 386.7056,-12 386.7056,-12 386.7056,-96 386.7056,-96 386.7056,-102 380.7056,-108 374.7056,-108"/>
+<text text-anchor="middle" x="301.235" y="-72" font-family="Arial" font-size="20.00" fill="#ffffff">Capa de Dominio</text>
+<text text-anchor="middle" x="301.235" y="-48" font-family="Arial" font-size="20.00" fill="#ffffff">o</text>
+<text text-anchor="middle" x="301.235" y="-24" font-family="Arial" font-size="20.00" fill="#ffffff">Modelo</text>
+</g>
+<!-- UI&#45;&gt;Dominio -->
+<g id="edge1" class="edge">
+<title>UI-&gt;Dominio</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M144.2167,-54C163.728,-54 185.1475,-54 205.7218,-54"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="205.7421,-57.5001 215.742,-54 205.742,-50.5001 205.7421,-57.5001"/>
+</g>
+<!-- Datos -->
+<g id="node3" class="node">
+<title>Datos</title>
+<path fill="#4f94cd" stroke="#4f94cd" d="M590.47,-108C590.47,-108 470.47,-108 470.47,-108 464.47,-108 458.47,-102 458.47,-96 458.47,-96 458.47,-12 458.47,-12 458.47,-6 464.47,0 470.47,0 470.47,0 590.47,0 590.47,0 596.47,0 602.47,-6 602.47,-12 602.47,-12 602.47,-96 602.47,-96 602.47,-102 596.47,-108 590.47,-108"/>
+<text text-anchor="middle" x="530.47" y="-48" font-family="Arial" font-size="20.00" fill="#ffffff">Capa Datos</text>
+</g>
+<!-- Dominio&#45;&gt;Datos -->
+<g id="edge2" class="edge">
+<title>Dominio-&gt;Datos</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M386.5937,-54C406.7395,-54 428.1778,-54 448.1846,-54"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="448.1894,-57.5001 458.1894,-54 448.1893,-50.5001 448.1894,-57.5001"/>
+</g>
+</g>
+</svg>
+</p><h3 class="mume-header" id="capa-ui">Capa UI</h3>
+
+<p>La funci&#xF3;n de la capa de la IU (o capa de presentaci&#xF3;n) consiste en mostrar los datos de la aplicaci&#xF3;n en la pantalla. Cuando los datos cambian, ya sea debido a la interacci&#xF3;n del usuario (como cuando presiona un bot&#xF3;n) o una entrada externa (como una respuesta de red), la IU debe actualizarse para reflejar los cambios.</p>
+<p>La capa de la IU consta de los siguientes dos elementos:</p>
+<ul>
+<li>
+<p>Elementos de la IU que renderizan los datos en la pantalla (puedes compilar estos elementos mediante las vistas XML o las funciones de <strong>Jetpack Compose</strong>)</p>
+</li>
+<li>
+<p>Contenedores de estados (como las clases <strong>ViewModel</strong>) que contienen datos, los exponen a la IU y controlan la l&#xF3;gica</p>
+</li>
+</ul>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Documentaci&#xF3;n oficial de Android sobre la <strong><a href="https://developer.android.com/jetpack/guide/ui-layer?hl=es-419">Capa de UI</a></strong> en la que m&#xE1;s adelante profundizaremos</p>
+</blockquote>
+<p align="center" style="zoom:0.7"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="926pt" height="204pt" viewBox="0.00 0.00 926.47 204.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 200)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-200 922.47,-200 922.47,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>clusterUI</title>
+<path fill="#63b8ff" stroke="#63b8ff" d="M20,-8C20,-8 468,-8 468,-8 474,-8 480,-14 480,-20 480,-20 480,-176 480,-176 480,-182 474,-188 468,-188 468,-188 20,-188 20,-188 14,-188 8,-182 8,-176 8,-176 8,-20 8,-20 8,-14 14,-8 20,-8"/>
+<text text-anchor="middle" x="244" y="-166" font-family="Arial" font-size="20.00" fill="#ffffff">Capa UI</text>
+</g>
+<!-- ComponentesUI -->
+<g id="node1" class="node">
+<title>ComponentesUI</title>
+<path fill="#b9d3ee" stroke="#b9d3ee" d="M196,-136C196,-136 40,-136 40,-136 34,-136 28,-130 28,-124 28,-124 28,-40 28,-40 28,-34 34,-28 40,-28 40,-28 196,-28 196,-28 202,-28 208,-34 208,-40 208,-40 208,-124 208,-124 208,-130 202,-136 196,-136"/>
+<text text-anchor="middle" x="118" y="-76" font-family="Arial" font-size="20.00" fill="#000000">Componentes UI</text>
+</g>
+<!-- Estado -->
+<g id="node2" class="node">
+<title>Estado</title>
+<path fill="#6c7b8b" stroke="#6c7b8b" d="M448,-136C448,-136 292,-136 292,-136 286,-136 280,-130 280,-124 280,-124 280,-40 280,-40 280,-34 286,-28 292,-28 292,-28 448,-28 448,-28 454,-28 460,-34 460,-40 460,-40 460,-124 460,-124 460,-130 454,-136 448,-136"/>
+<text text-anchor="middle" x="370" y="-88" font-family="Arial" font-size="20.00" fill="#ffffff">Contenedor de</text>
+<text text-anchor="middle" x="370" y="-64" font-family="Arial" font-size="20.00" fill="#ffffff">Estados</text>
+</g>
+<!-- ComponentesUI&#45;&gt;Estado -->
+<g id="edge1" class="edge">
+<title>ComponentesUI-&gt;Estado</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M208.266,-82C228.2007,-82 249.4362,-82 269.7403,-82"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="269.941,-85.5001 279.9409,-82 269.9409,-78.5001 269.941,-85.5001"/>
+</g>
+<!-- Dominio -->
+<g id="node3" class="node">
+<title>Dominio</title>
+<path fill="#36648b" stroke="#36648b" d="M690.7056,-136C690.7056,-136 543.7644,-136 543.7644,-136 537.7644,-136 531.7644,-130 531.7644,-124 531.7644,-124 531.7644,-40 531.7644,-40 531.7644,-34 537.7644,-28 543.7644,-28 543.7644,-28 690.7056,-28 690.7056,-28 696.7056,-28 702.7056,-34 702.7056,-40 702.7056,-40 702.7056,-124 702.7056,-124 702.7056,-130 696.7056,-136 690.7056,-136"/>
+<text text-anchor="middle" x="617.235" y="-100" font-family="Arial" font-size="20.00" fill="#ffffff">Capa de Dominio</text>
+<text text-anchor="middle" x="617.235" y="-76" font-family="Arial" font-size="20.00" fill="#ffffff">o</text>
+<text text-anchor="middle" x="617.235" y="-52" font-family="Arial" font-size="20.00" fill="#ffffff">Modelo</text>
+</g>
+<!-- Estado&#45;&gt;Dominio -->
+<g id="edge2" class="edge">
+<title>Estado-&gt;Dominio</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M460.307,-82C480.2498,-82 501.4424,-82 521.589,-82"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="521.6997,-85.5001 531.6997,-82 521.6996,-78.5001 521.6997,-85.5001"/>
+</g>
+<!-- Datos -->
+<g id="node4" class="node">
+<title>Datos</title>
+<path fill="#4f94cd" stroke="#4f94cd" d="M906.47,-136C906.47,-136 786.47,-136 786.47,-136 780.47,-136 774.47,-130 774.47,-124 774.47,-124 774.47,-40 774.47,-40 774.47,-34 780.47,-28 786.47,-28 786.47,-28 906.47,-28 906.47,-28 912.47,-28 918.47,-34 918.47,-40 918.47,-40 918.47,-124 918.47,-124 918.47,-130 912.47,-136 906.47,-136"/>
+<text text-anchor="middle" x="846.47" y="-76" font-family="Arial" font-size="20.00" fill="#ffffff">Capa Datos</text>
+</g>
+<!-- Dominio&#45;&gt;Datos -->
+<g id="edge3" class="edge">
+<title>Dominio-&gt;Datos</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M702.5937,-82C722.7395,-82 744.1778,-82 764.1846,-82"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="764.1894,-85.5001 774.1894,-82 764.1893,-78.5001 764.1894,-85.5001"/>
+</g>
+</g>
+</svg>
+</p><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="capa-de-datos">Capa de Datos</h3>
+
+<p>La capa de datos est&#xE1; formada por repositorios que pueden contener de <strong>cero a muchas fuentes de datos</strong>. A este tipo de dise&#xF1;o se le denomina <strong><a href="https://martinfowler.com/eaaCatalog/repository.html">Repository Pattern</a></strong> y es un patr&#xF3;n de dise&#xF1;o que se utiliza para separar la l&#xF3;gica empresarial de la l&#xF3;gica de acceso a los datos. El repositorio se encarga de obtener los datos de una fuente de datos y convertirlos en un formato con el que el resto de la aplicaci&#xF3;n pueda trabajar.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Este patr&#xF3;n fu&#xE9; introducido <strong>Martin Fowler</strong> en su libro <a href="https://www.amazon.es/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420">Patterns of Enterprise Application Architecture</a> en el a&#xF1;o <strong>2002</strong> y posteriormente desarrollado por <strong>Eric Evans</strong> en su libro <a href="https://www.amazon.es/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215">Domain-Driven Design</a> en el a&#xF1;o <strong>2003</strong>. Hoy en d&#xED;a es un patr&#xF3;n muy utilizado en el desarrollo de software y &#xE1;mpliamente utilizado en el desarrollo de aplicaciones m&#xF3;viles.</p>
+</blockquote>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Documentaci&#xF3;n oficial de Android sobre la <strong><a href="https://developer.android.com/jetpack/guide/data-layer?hl=es-419">Capa de datos</a></strong> en la que m&#xE1;s adelante profundizaremos</p>
+</blockquote>
+<p align="center" style="zoom:0.7"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="926pt" height="204pt" viewBox="0.00 0.00 926.47 204.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 200)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-200 922.47,-200 922.47,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>clusterD</title>
+<path fill="#4f94cd" stroke="#4f94cd" d="M450.47,-8C450.47,-8 898.47,-8 898.47,-8 904.47,-8 910.47,-14 910.47,-20 910.47,-20 910.47,-176 910.47,-176 910.47,-182 904.47,-188 898.47,-188 898.47,-188 450.47,-188 450.47,-188 444.47,-188 438.47,-182 438.47,-176 438.47,-176 438.47,-20 438.47,-20 438.47,-14 444.47,-8 450.47,-8"/>
+<text text-anchor="middle" x="674.47" y="-166" font-family="Arial" font-size="20.00" fill="#ffffff">Capa Datos</text>
+</g>
+<!-- Repositorio -->
+<g id="node1" class="node">
+<title>Repositorio</title>
+<path fill="#b9d3ee" stroke="#b9d3ee" d="M626.47,-136C626.47,-136 470.47,-136 470.47,-136 464.47,-136 458.47,-130 458.47,-124 458.47,-124 458.47,-40 458.47,-40 458.47,-34 464.47,-28 470.47,-28 470.47,-28 626.47,-28 626.47,-28 632.47,-28 638.47,-34 638.47,-40 638.47,-40 638.47,-124 638.47,-124 638.47,-130 632.47,-136 626.47,-136"/>
+<text text-anchor="middle" x="548.47" y="-76" font-family="Arial" font-size="20.00" fill="#000000">Repositorio/s</text>
+</g>
+<!-- FuenteDatos -->
+<g id="node2" class="node">
+<title>FuenteDatos</title>
+<path fill="#6c7b8b" stroke="#6c7b8b" d="M878.47,-136C878.47,-136 722.47,-136 722.47,-136 716.47,-136 710.47,-130 710.47,-124 710.47,-124 710.47,-40 710.47,-40 710.47,-34 716.47,-28 722.47,-28 722.47,-28 878.47,-28 878.47,-28 884.47,-28 890.47,-34 890.47,-40 890.47,-40 890.47,-124 890.47,-124 890.47,-130 884.47,-136 878.47,-136"/>
+<text text-anchor="middle" x="800.47" y="-76" font-family="Arial" font-size="20.00" fill="#ffffff">Fuente Datos</text>
+</g>
+<!-- Repositorio&#45;&gt;FuenteDatos -->
+<g id="edge1" class="edge">
+<title>Repositorio-&gt;FuenteDatos</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M638.736,-82C658.6707,-82 679.9062,-82 700.2103,-82"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="700.411,-85.5001 710.4109,-82 700.4109,-78.5001 700.411,-85.5001"/>
+</g>
+<!-- UI -->
+<g id="node3" class="node">
+<title>UI</title>
+<path fill="#63b8ff" stroke="#63b8ff" d="M132,-136C132,-136 12,-136 12,-136 6,-136 0,-130 0,-124 0,-124 0,-40 0,-40 0,-34 6,-28 12,-28 12,-28 132,-28 132,-28 138,-28 144,-34 144,-40 144,-40 144,-124 144,-124 144,-130 138,-136 132,-136"/>
+<text text-anchor="middle" x="72" y="-76" font-family="Arial" font-size="20.00" fill="#ffffff">Capa UI</text>
+</g>
+<!-- Dominio -->
+<g id="node4" class="node">
+<title>Dominio</title>
+<path fill="#36648b" stroke="#36648b" d="M374.7056,-136C374.7056,-136 227.7644,-136 227.7644,-136 221.7644,-136 215.7644,-130 215.7644,-124 215.7644,-124 215.7644,-40 215.7644,-40 215.7644,-34 221.7644,-28 227.7644,-28 227.7644,-28 374.7056,-28 374.7056,-28 380.7056,-28 386.7056,-34 386.7056,-40 386.7056,-40 386.7056,-124 386.7056,-124 386.7056,-130 380.7056,-136 374.7056,-136"/>
+<text text-anchor="middle" x="301.235" y="-100" font-family="Arial" font-size="20.00" fill="#ffffff">Capa de Dominio</text>
+<text text-anchor="middle" x="301.235" y="-76" font-family="Arial" font-size="20.00" fill="#ffffff">o</text>
+<text text-anchor="middle" x="301.235" y="-52" font-family="Arial" font-size="20.00" fill="#ffffff">Modelo</text>
+</g>
+<!-- UI&#45;&gt;Dominio -->
+<g id="edge2" class="edge">
+<title>UI-&gt;Dominio</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M144.2167,-82C163.728,-82 185.1475,-82 205.7218,-82"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="205.7421,-85.5001 215.742,-82 205.742,-78.5001 205.7421,-85.5001"/>
+</g>
+<!-- Dominio&#45;&gt;Repositorio -->
+<g id="edge3" class="edge">
+<title>Dominio-&gt;Repositorio</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M386.6655,-82C406.4861,-82 427.7592,-82 448.1543,-82"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="448.4051,-85.5001 458.4051,-82 448.4051,-78.5001 448.4051,-85.5001"/>
+</g>
+</g>
+</svg>
+</p><h3 class="mume-header" id="capa-de-dominio">Capa de Dominio</h3>
+
+<p>La capa de dominio es una <strong>capa opcional</strong> que se ubica entre la capa de la IU y la de datos.</p>
+<p>La capa de dominio es responsable de encapsular la l&#xF3;gica empresarial compleja o la l&#xF3;gica empresarial simple que varios ViewModels reutilizan. Esta capa es opcional porque no todas las apps tendr&#xE1;n estos requisitos. Solo debes usarla cuando sea necesario; por ejemplo, para administrar la complejidad o favorecer la reutilizaci&#xF3;n.</p>
+<p>Esta terminolog&#xED;a viene del <strong>DDD (Domain Driven Design)</strong> que es una metodolog&#xED;a de dise&#xF1;o de software que se centra en la l&#xF3;gica empresarial y en la comunicaci&#xF3;n entre los expertos en el dominio y los desarrolladores.</p>
+<p>Sin embargo, nosotros vamos a obviar esta capa y vamos a implementar una arquitectura m&#xE1;s sencilla basada en el patr&#xF3;n <strong>MVVM</strong> en el cual esta capa se denomina <strong>Modelo</strong> ya que representar&#xE1; el modelo de datos.</p>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="modelo-vista-vista-modelo-mvvm">Modelo vista vista modelo MVVM</h2>
+
+<p>MVVM es un patr&#xF3;n de dise&#xF1;o de software que facilita la separaci&#xF3;n de la l&#xF3;gica de presentaci&#xF3;n de la l&#xF3;gica de negocio.</p>
+<p>MVVM es una variante del patr&#xF3;n MVC (Modelo-Vista-Controlador) que se utiliza para la construcci&#xF3;n de interfaces de usuario. En MVVM, el ViewModel asume la funcionalidad del &quot;intermediario&quot;. En MVVM, toda la l&#xF3;gica de presentaci&#xF3;n se coloca en el ViewModel.</p>
+<p>El ViewModel es responsable de recuperar los datos de los modelos y exponerlos a la vista. El ViewModel tambi&#xE9;n se utiliza para manejar todas las interacciones del usuario. El ViewModel recupera los datos de los modelos, los formatea y los expone a la vista. El ViewModel tambi&#xE9;n acepta las entradas del usuario y las valida antes de actualizar los modelos.</p>
+<p>Implementaciones o aproximaciones a esta arquitectura hay muy diversas, pero b&#xE1;sicamente la que nosotros vamos a implementar un esquema similar al siguiente para aproximarnos a MVVM siguiendo las recomendaciones de Google.</p>
+<p align="center" style="zoom:0.7"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="1040pt" height="378pt" viewBox="0.00 0.00 1039.70 378.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 374)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-374 1035.698,-374 1035.698,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>clusterUI</title>
+<path fill="none" stroke="#000000" stroke-width="2" d="M20,-8C20,-8 710.039,-8 710.039,-8 716.039,-8 722.039,-14 722.039,-20 722.039,-20 722.039,-350 722.039,-350 722.039,-356 716.039,-362 710.039,-362 710.039,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-20 8,-20 8,-14 14,-8 20,-8"/>
+<text text-anchor="middle" x="365.0195" y="-340" font-family="Arial" font-size="20.00" fill="#000000">Capa UI</text>
+</g>
+<!-- View -->
+<g id="node1" class="node">
+<title>View</title>
+<path fill="#63b8ff" stroke="#63b8ff" d="M220,-214C220,-214 100,-214 100,-214 94,-214 88,-208 88,-202 88,-202 88,-118 88,-118 88,-112 94,-106 100,-106 100,-106 220,-106 220,-106 226,-106 232,-112 232,-118 232,-118 232,-202 232,-202 232,-208 226,-214 220,-214"/>
+<text text-anchor="middle" x="160" y="-154" font-family="Arial" font-size="20.00" fill="#ffffff">View</text>
+</g>
+<!-- ViewModel -->
+<g id="node2" class="node">
+<title>ViewModel</title>
+<path fill="#4f94cd" stroke="#4f94cd" d="M630.039,-214C630.039,-214 510.039,-214 510.039,-214 504.039,-214 498.039,-208 498.039,-202 498.039,-202 498.039,-118 498.039,-118 498.039,-112 504.039,-106 510.039,-106 510.039,-106 630.039,-106 630.039,-106 636.039,-106 642.039,-112 642.039,-118 642.039,-118 642.039,-202 642.039,-202 642.039,-208 636.039,-214 630.039,-214"/>
+<text text-anchor="middle" x="570.039" y="-154" font-family="Arial" font-size="20.00" fill="#ffffff">ViewModel</text>
+</g>
+<!-- View&#45;&gt;ViewModel -->
+<g id="edge1" class="edge">
+<title>View:ne-&gt;ViewModel:nw</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M232,-214C313.1585,-295.1585 408.6537,-297.5362 490.6522,-221.1331"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="493.2767,-223.4642 498.039,-214 488.4142,-218.4287 493.2767,-223.4642"/>
+<text text-anchor="middle" x="365.0195" y="-280.5" font-family="Arial" font-size="15.00" fill="#104e8b">Evento UI</text>
+</g>
+<!-- View&#45;&gt;ViewModel -->
+<g id="edge2" class="edge">
+<title>View-&gt;ViewModel</title>
+<path fill="none" stroke="#1e90ff" stroke-width="2" stroke-dasharray="5,2" d="M242.6746,-160C317.4152,-160 426.3591,-160 497.7111,-160"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="2" points="242.3629,-156.5001 232.3629,-160 242.3628,-163.5001 242.3629,-156.5001"/>
+<text text-anchor="middle" x="365.0195" y="-182.5" font-family="Arial" font-size="15.00" fill="#1874cd">Evento de cambio</text>
+<text text-anchor="middle" x="365.0195" y="-164.5" font-family="Arial" font-size="15.00" fill="#1874cd">de estado</text>
+</g>
+<!-- View&#45;&gt;ViewModel -->
+<g id="edge3" class="edge">
+<title>View:se-&gt;ViewModel:sw</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M239.3868,-98.8669C321.3853,-22.4638 416.8805,-24.8415 498.039,-106"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="236.7623,-96.5358 232,-106 241.6248,-101.5713 236.7623,-96.5358"/>
+<text text-anchor="middle" x="365.0195" y="-60.5" font-family="Arial" font-size="15.00" fill="#104e8b">Datos UI</text>
+</g>
+<!-- Model -->
+<g id="node3" class="node">
+<title>Model</title>
+<path fill="#36648b" stroke="#36648b" d="M1019.698,-214C1019.698,-214 899.698,-214 899.698,-214 893.698,-214 887.698,-208 887.698,-202 887.698,-202 887.698,-118 887.698,-118 887.698,-112 893.698,-106 899.698,-106 899.698,-106 1019.698,-106 1019.698,-106 1025.698,-106 1031.698,-112 1031.698,-118 1031.698,-118 1031.698,-202 1031.698,-202 1031.698,-208 1025.698,-214 1019.698,-214"/>
+<text text-anchor="middle" x="959.698" y="-154" font-family="Arial" font-size="20.00" fill="#ffffff">Model</text>
+</g>
+<!-- ViewModel&#45;&gt;Model -->
+<g id="edge4" class="edge">
+<title>ViewModel:ne-&gt;Model:nw</title>
+<path fill="none" stroke="#1e90ff" stroke-width="2" stroke-dasharray="5,2" d="M649.3171,-221.0116C724.9317,-291.1278 812.9074,-288.7906 887.698,-214"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="2" points="651.669,-218.4174 642.039,-214 646.8124,-223.4586 651.669,-218.4174"/>
+<text text-anchor="middle" x="790.8685" y="-293.5" font-family="Arial" font-size="15.00" fill="#1874cd">Evento de cambio</text>
+<text text-anchor="middle" x="790.8685" y="-275.5" font-family="Arial" font-size="15.00" fill="#1874cd">en el modelo</text>
+</g>
+<!-- ViewModel&#45;&gt;Model -->
+<g id="edge5" class="edge">
+<title>ViewModel:se-&gt;Model:sw</title>
+<path fill="none" stroke="#104e8b" stroke-width="2" d="M642.039,-106C716.8296,-31.2094 804.8053,-28.8722 880.4199,-98.9884"/>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="2" points="878.068,-101.5826 887.698,-106 882.9246,-96.5414 878.068,-101.5826"/>
+<text text-anchor="middle" x="790.8685" y="-79.5" font-family="Arial" font-size="15.00" fill="#104e8b">Operaci&#xF3;n CRUD</text>
+</g>
+</g>
+</svg>
+</p><p>Donde ...</p>
+<ul>
+<li><strong>View</strong> son los <strong>Componentes UI</strong> en nuestro caso los componentes de <strong>Jetpack Compose</strong> que renderizan los datos en la pantalla.</li>
+<li><strong>ViewModel</strong> es el <strong>Contenedor de estados</strong> que contiene datos, los exponen a la IU y controlan la l&#xF3;gica.</li>
+<li><strong>Model</strong> es una abstracci&#xF3;n de los datos de la aplicaci&#xF3;n. En nuestro caso ser&#xE1;n los <strong>Repositorios</strong> que se encargan de obtener los datos de una fuente de datos y convertirlos en un formato con el que el resto de la aplicaci&#xF3;n pueda trabajar.</li>
+</ul>
+<h2 class="mume-header" id="modelo-vista-vista-modelo-mvvm-1">Modelo vista vista modelo MVVM</h2>
+
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
