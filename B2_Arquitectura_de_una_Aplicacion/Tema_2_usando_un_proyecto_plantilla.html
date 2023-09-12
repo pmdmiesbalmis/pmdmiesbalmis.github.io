@@ -1,0 +1,507 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 2 - Usando un proyecto plantilla</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+      
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v18/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-2---usando-un-proyecto-plantilla">Tema 2 - Usando un proyecto plantilla</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_2_usando_un_proyecto_plantilla.pdf">pdf</a> o <a href="./Tema_2_usando_un_proyecto_plantilla.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducci&#xF3;n" class="md-toc-link">
+            <p>Introducci&#xF3;n</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#renombrando-un-proyecto-base" class="md-toc-link">
+            <p>Renombrando un proyecto base</p>
+
+          </a></div>
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+
+<h2 class="mume-header" id="renombrando-un-proyecto-base">Renombrando un proyecto base</h2>
+
+<p>Una vez hemos descargado el proyecto base y lo hemos descomprimido.</p>
+<p>Los pasos a realizar para renombrar correctamente el proyecto son los siguientes:</p>
+<ol>
+<li>
+<p>Copiamos el proyecto base en el lugar que deseemos.</p>
+</li>
+<li>
+<p>Cambiamos el <strong>nombre a la carpeta</strong> o <em>&apos;workspace&apos;</em> del proyecto base, si lo consideramos necesario.Por ejemplo, <strong><code>MiPrimerPrograma</code></strong> <i class="fa fa-folder" aria-hidden="true"></i>.</p>
+</li>
+<li>
+<p>Abrimos Android Studio y seleccionamos la carpeta que contiene nuestro proyecto base.</p>
+</li>
+</ol>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 65%">
+<ol start="4">
+<li>
+<p>Cuando Gradle finalice todo seleccionaremos la vista <strong><code>Android</code></strong>. En esta m&#xE1;s que carpeta lo que contendr&#xE1; una serie de unidades organizativas jer&#xE1;rquicas de los elementos del proyecto similar al esquema de la derecha.</p>
+<p>renombraremos el paquete de la aplicaci&#xF3;n, para ello haremos <strong>click derecho</strong> sobre el paquete <strong><code>com.cambiame</code></strong> y seleccionaremos <strong><code>Refactor -&gt; Rename</code></strong> o <strong><code>Ctrl + R, R</code></strong> si usamos el Keymap de Visual Studio.</p>
+<ul>
+<li>Seleccionaremos <strong><code>All Directories</code></strong></li>
+<li>Cambiaremos <strong><code>cambiame</code></strong> por el nombre de nuestra app en min&#xFA;sculas, sin espacios y sin caracteres especiales. Por ejemplo, <strong><code>miprimerprograma</code></strong> y pulsaremos <strong><code>Refactor</code></strong>. Si nos ofrece un preview de los cambios pulsaremos <strong><code>Do Refactor</code></strong>.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:0.9"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="365px" preserveAspectRatio="none" style="width:255px;height:365px;background:#FFFFFF;" version="1.1" viewBox="0 0 255 365" width="255px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="79" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="8" y="20.457">Andrioid</text><line style="stroke:#000000;stroke-width:1.0;" x1="74" x2="74" y1="6" y2="24.0938"/><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="26" y="39.5508">[app]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="61" x="36" y="54.6445">[manifests]</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="117" x="36" y="69.7383">AndroidManifest.xml</text><path d="M27,76.4688 L27,77.4688 L35,77.4688 L35,76.4688 L27,76.4688 M27,78.4688 L27,84.3788 C27,84.4288 27.04,84.4688 27.09,84.4688 L34.9,84.4688 C34.95,84.4688 34.99,84.4288 34.99,84.3788 L34.99,78.4688 L32.02,78.4688 L32.02,79.4988 L29.99,79.4988 L29.99,78.4688 L26.99,78.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="36" y="84.832">[java]</text><path d="M37,91.5625 L37,92.5625 L45,92.5625 L45,91.5625 L37,91.5625 M37,93.5625 L37,99.4725 C37,99.5225 37.04,99.5625 37.09,99.5625 L44.9,99.5625 C44.95,99.5625 44.99,99.5225 44.99,99.4725 L44.99,93.5625 L42.02,93.5625 L42.02,94.5925 L39.99,94.5925 L39.99,93.5625 L36.99,93.5625 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="96" x="46" y="99.9258">[com.cambiame]</text><path d="M47,106.6563 L47,107.6563 L55,107.6563 L55,106.6563 L47,106.6563 M47,108.6563 L47,114.5663 C47,114.6163 47.04,114.6563 47.09,114.6563 L54.9,114.6563 C54.95,114.6563 54.99,114.6163 54.99,114.5663 L54.99,108.6563 L52.02,108.6563 L52.02,109.6863 L49.99,109.6863 L49.99,108.6563 L46.99,108.6563 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="56" y="115.0195">[ui.theme]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="46" y="130.1133">MainActivity.kt</text><path d="M37,136.8438 L37,137.8438 L45,137.8438 L45,136.8438 L37,136.8438 M37,138.8438 L37,144.7538 C37,144.8038 37.04,144.8438 37.09,144.8438 L44.9,144.8438 C44.95,144.8438 44.99,144.8038 44.99,144.7538 L44.99,138.8438 L42.02,138.8438 L42.02,139.8738 L39.99,139.8738 L39.99,138.8438 L36.99,138.8438 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92" x="46" y="145.207">[com.cambiame]</text><text fill="#808080" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="141" y="145.207">(androidTest)</text><path d="M37,151.9375 L37,152.9375 L45,152.9375 L45,151.9375 L37,151.9375 M37,153.9375 L37,159.8475 C37,159.8975 37.04,159.9375 37.09,159.9375 L44.9,159.9375 C44.95,159.9375 44.99,159.8975 44.99,159.8475 L44.99,153.9375 L42.02,153.9375 L42.02,154.9675 L39.99,154.9675 L39.99,153.9375 L36.99,153.9375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92" x="46" y="160.3008">[com.cambiame]</text><text fill="#808080" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="141" y="160.3008">(test)</text><path d="M27,167.0313 L27,168.0313 L35,168.0313 L35,167.0313 L27,167.0313 M27,169.0313 L27,174.9413 C27,174.9913 27.04,175.0313 27.09,175.0313 L34.9,175.0313 C34.95,175.0313 34.99,174.9913 34.99,174.9413 L34.99,169.0313 L32.02,169.0313 L32.02,170.0613 L29.99,170.0613 L29.99,169.0313 L26.99,169.0313 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="36" y="175.3945">[res]</text><path d="M37,182.125 L37,183.125 L45,183.125 L45,182.125 L37,182.125 M37,184.125 L37,190.035 C37,190.085 37.04,190.125 37.09,190.125 L44.9,190.125 C44.95,190.125 44.99,190.085 44.99,190.035 L44.99,184.125 L42.02,184.125 L42.02,185.155 L39.99,185.155 L39.99,184.125 L36.99,184.125 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="46" y="190.4883">[drawable]</text><path d="M37,197.2188 L37,198.2188 L45,198.2188 L45,197.2188 L37,197.2188 M37,199.2188 L37,205.1288 C37,205.1788 37.04,205.2188 37.09,205.2188 L44.9,205.2188 C44.95,205.2188 44.99,205.1788 44.99,205.1288 L44.99,199.2188 L42.02,199.2188 L42.02,200.2488 L39.99,200.2488 L39.99,199.2188 L36.99,199.2188 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="46" y="205.582">[mipmap]</text><path d="M37,212.3125 L37,213.3125 L45,213.3125 L45,212.3125 L37,212.3125 M37,214.3125 L37,220.2225 C37,220.2725 37.04,220.3125 37.09,220.3125 L44.9,220.3125 C44.95,220.3125 44.99,220.2725 44.99,220.2225 L44.99,214.3125 L42.02,214.3125 L42.02,215.3425 L39.99,215.3425 L39.99,214.3125 L36.99,214.3125 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="46" y="220.6758">[values]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="46" y="235.7695">colors.xml</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="64" x="46" y="250.8633">strings.xml</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="46" y="265.957">themes.xml</text><path d="M37,272.6875 L37,273.6875 L45,273.6875 L45,272.6875 L37,272.6875 M37,274.6875 L37,280.5975 C37,280.6475 37.04,280.6875 37.09,280.6875 L44.9,280.6875 C44.95,280.6875 44.99,280.6475 44.99,280.5975 L44.99,274.6875 L42.02,274.6875 L42.02,275.7175 L39.99,275.7175 L39.99,274.6875 L36.99,274.6875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="46" y="281.0508">[values]</text><path d="M27,287.7813 L27,288.7813 L35,288.7813 L35,287.7813 L27,287.7813 M27,289.7813 L27,295.6913 C27,295.7413 27.04,295.7813 27.09,295.7813 L34.9,295.7813 C34.95,295.7813 34.99,295.7413 34.99,295.6913 L34.99,289.7813 L32.02,289.7813 L32.02,290.8113 L29.99,290.8113 L29.99,289.7813 L26.99,289.7813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="36" y="296.1445">[Gradle Scripts]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="36" y="311.2383">build.gradle.kts</text><text fill="#808080" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="125" x="123" y="311.2383">(Project:ProyectoBase)</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="87" x="36" y="326.332">build.gradle.kts</text><text fill="#808080" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="73" x="126" y="326.332">(Module:app)</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="9" x="36" y="341.4258">...</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="106" x="36" y="356.5195">settings.gradle.kts</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="64.8281" y2="64.8281"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="78.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="79.9219" y2="79.9219"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="94.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="81.9219" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="95.0156" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="97.0156" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="110.1094" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="97.0156" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="125.2031" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="81.9219" y2="140.2969"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="140.2969" y2="140.2969"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="81.9219" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="155.3906" y2="155.3906"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="169.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="170.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="170.4844" y2="170.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="172.4844" y2="185.5781"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="185.5781" y2="185.5781"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="172.4844" y2="200.6719"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="200.6719" y2="200.6719"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="214.7656"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="172.4844" y2="215.7656"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="215.7656" y2="215.7656"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="230.8594"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="230.8594" y2="230.8594"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="245.9531"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="245.9531" y2="245.9531"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="261.0469"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="261.0469" y2="261.0469"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="172.4844" y2="276.1406"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="276.1406" y2="276.1406"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="290.2344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="291.2344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="291.2344" y2="291.2344"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="293.2344" y2="306.3281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="306.3281" y2="306.3281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="293.2344" y2="321.4219"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="321.4219" y2="321.4219"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="293.2344" y2="336.5156"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="336.5156" y2="336.5156"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="293.2344" y2="351.6094"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="351.6094" y2="351.6094"/><!--SRC=[ZL9TQzj047o_Nx5FnPB8aQXfMaG8-N82haLDxUIbEB2IDkgbfpjn7sfCw7_lMPPh6qefUZXsRcOrixUNrg5n5gLZRumzNQdA22sg9yRU5Yo1ytU5VhtuXcsxP2pvKpUen3DPPvS1J22ErxeWomUSlpOoZlSLBzZXbZn0fMvuYKqXiA5bO2V9Zku5Tzyfu1iqHw6kIYSwuLRyXsDxp8CkS5vggKrM6rnTZ71ZQX4CHVyfSJrtpxUX8UDGLmP_OY7f06n4ss1x07Ke_I1DeF-3NGzbKyUnTKQesWvpwi4-xuRqjqPxdkuDLf9WNXhHRf-Wy49MlEvlmeJiOQoPqIzKkYoSgt3gQxGK3Q_nRsMkAoyf2miGROm2vtnGMdAkJx4J1ywl_hiaLVLRnMOIbNl8fz2HiK8hEE7fSVgUfwEvLt171QHdS7ASfH-oquzmCrx0-ZfYe_lP5ApsfYIen7fWXNT17x59s2NuwfKJ3MNmfIKrkVsy1M2iEc6qQaWvDddCTuIpqwDhuM1E9ZY1nvpTqZDwwOAYr5K8ai73ukxe4vkYgZtMeJTPTgD3NxFAO3p_3G00]--></g></svg></p></div>
+</div>
+<div style="page-break-after:always;"></div>
+<ol start="5">
+<li>
+<p>Aunque los paquetes se hayan renombrado, todav&#xED;a quedar&#xED;a por realizar alg&#xFA;n paso m&#xE1;s. Si abrimos el fichero <strong><code>app &#x2192; manidests &#x2192; AndroidManifest.xml</code></strong> veremos que se produce un error al no encontrar la activity de entrada, adem&#xE1;s de que todav&#xED;a aparece el nombre <strong><code>ProyectoBase</code></strong> en la etiqueta y en el <strong><code>Theme</code></strong>.   Para resolver estos problemas tendremos que hacer lo siguiente:</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[4-5, 11-12]}" class="language-xml" data-line="4-5,11-12"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+    ...
+    &lt;activity
+        // A&#xF1;adiremoos la ruta con el nuevo nombre del paquete
+        // para encontrar la clase MainActivity
+        android:name=&quot;com.holamundo.MainActivity&quot;
+
+        android:exported=&quot;true&quot;
+        android:label=&quot;@string/app_name&quot;
+
+        // Renombraremos el ProyectoBase a HolaMundo con
+        // la refactorizaci&#xF3;n del men&#xFA; contextual o Ctrl + R, R
+        android:theme=&quot;@style/Theme.HolaMundo&quot;&gt;
+        ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4-5" data-start="4" data-end="5">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11-12" data-start="11" data-end="12">
+
+</div></div></pre></li>
+<li>
+<p>Cambiaremos el nombre de la APP en <strong><code>app &#x2192; res &#x2192; values &#x2192; strings.xml</code></strong>. Por ejemplo, por <strong><code>HolaMundo</code></strong>.</p>
+<pre data-role="codeBlock" data-info="xml  {highlight=2}" class="language-xml" data-line="2"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>app_name<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>HolaMundo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre></li>
+<li>
+<p>Abriremos al archivo de configuraci&#xF3;n de Gradle <strong><code>app &#x2192; Gradle Scripts &#x2192; settings.gradle.kts</code></strong> y cambiaremos el nombre del proyecto <strong><code>ProyectoBase</code></strong> por el nuevo nombre que le queramos dar. Por ejemplo, <strong><code>HolaMundo</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=2}" class="language-kotlin" data-line="2"><span class="token operator">..</span><span class="token punctuation">.</span>
+rootProject<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">&quot;HolaMundo&quot;</span>
+<span class="token function">include</span><span class="token punctuation">(</span><span class="token string">&quot;:app&quot;</span><span class="token punctuation">)</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Este ser&#xE1; el nombre del proyecto que aparecer&#xE1; al abrir el proyecto con Android Studio independientemente del nombre que le hayamos puesto a la carpeta del <em>&apos;Workspace</em>&apos;.</p>
+</blockquote>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<ol start="8">
+<li>
+<p>Abriremos el archivo gradle del m&#xF3;dulo de la aplicaci&#xF3;n que se encuentra en <strong><code>app &#x2192; Gradle Scripts &#x2192; build.gradle.kts (Module:app)</code></strong></p>
+<p>Cambiaremos el nombre del <strong>paquete</strong> de nuestro programa principal <strong><code>com.cambiame</code></strong> por el que hayamos puesto en el paso 4. En nuetro ejemplo <strong><code>com.holamundo</code></strong>. F&#xED;jate en el siguiente script de ejemplo.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8, 13]}" class="language-kotlin" data-line="8,13">plugins <span class="token punctuation">{</span>
+    <span class="token function">id</span> <span class="token punctuation">(</span><span class="token string">&quot;com.android.application&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">id</span> <span class="token punctuation">(</span><span class="token string">&quot;org.jetbrains.kotlin.android&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+android <span class="token punctuation">{</span>
+    <span class="token comment">// Cambiamos com.cambiame por com.holamundo</span>
+    namespace <span class="token operator">=</span> <span class="token string">&quot;com.holamundo&quot;</span>
+    compileSdk <span class="token operator">=</span> <span class="token number">34</span>
+
+    defaultConfig <span class="token punctuation">{</span>
+        <span class="token comment">// Cambiamos com.cambiame por com.holamundo</span>
+        applicationId <span class="token operator">=</span> <span class="token string">&quot;com.holamundo&quot;</span>
+        minSdk <span class="token operator">=</span> <span class="token number">28</span>
+        targetSdk <span class="token operator">=</span> <span class="token number">34</span>
+        versionCode <span class="token operator">=</span> <span class="token number">1</span>
+        versionName <span class="token operator">=</span> <span class="token string">&quot;1.0&quot;</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div></pre></li>
+<li>
+<p>Por &#xFA;ltimo, sincronizaremos el proyecto con los los cambios en los scripts de Gradle con la opci&#xF3;n de men&#xFA; <strong><code>File &#x2192; Sync Project with Gradle Files</code></strong> o <strong><code>Ctrl + May&#xFA;s + O</code></strong>. Tambi&#xE9;n podemos pulsar el bot&#xF3;n de sincronizaci&#xF3;n de Gradle que aparece en la barra de herramientas arriba a la derecha con el icono del elefante de Gradle.</p>
+<p>Volveremos a abrir el archivo del <strong><code>AndroidManifest.xml</code></strong> y veremos que el error ha desaparecido al volver a sincronizar y ya podremos ejecutar la aplicaci&#xF3;n para ver si todo ha ido bien</p>
+</li>
+</ol>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
