@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 2 - Usando un proyecto plantilla</title>
+      <title>PMDM 2&#xBA; DAM  Tema 2.1 - Usando un proyecto plantilla</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -333,9 +333,9 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="tema-2---usando-un-proyecto-plantilla">Tema 2 - Usando un proyecto plantilla</h1>
+<h1 class="mume-header undefined" id="tema-21---usando-un-proyecto-plantilla">Tema 2.1 - Usando un proyecto plantilla</h1>
 
-<p>Descargar estos apuntes <a href="./Tema_2_usando_un_proyecto_plantilla.pdf">pdf</a> o <a href="./Tema_2_usando_un_proyecto_plantilla.html">html</a></p>
+<p>Descargar estos apuntes <a href="./Tema_2_1_usando_un_proyecto_plantilla.pdf">pdf</a> o <a href="./Tema_2_1_usando_un_proyecto_plantilla.html">html</a></p>
 <h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
 
 
@@ -344,15 +344,107 @@ justo después del front matter
           <a href="#introducci&#xF3;n" class="md-toc-link">
             <p>Introducci&#xF3;n</p>
 
-          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          </a></div><details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#proyecto-base" class="md-toc-link"><p>Proyecto base</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#caracter&#xED;sticas-del-proyecto-base" class="md-toc-link">
+            <p>Caracter&#xED;sticas del proyecto base</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
           <a href="#renombrando-un-proyecto-base" class="md-toc-link">
             <p>Renombrando un proyecto base</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#ampliando-la-plantilla-del-proyecto-base" class="md-toc-link">
+            <p>Ampliando la plantilla del proyecto base</p>
 
           </a></div>
 </div>
 <div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
 
+<p>Android Studio es un IDE que se est&#xE1; actualizando constantemente desde Google empez&#xF3; a adoptar Jetpack Compose como nueva forma de declarar Interfaces de Usuario. Es m&#xE1;s, las propias librer&#xED;as de Compose y Componentes de Material tambi&#xE9;n se actualizan muy a menudo.</p>
+<p>Cada versi&#xF3;n de Android Studio tiene sus propias plantillas para crear proyectos nuevos. Estas plantillas se actualizan con cada nueva versi&#xF3;n de Android Studio. Por lo tanto, esto supone que posiblemente los proyectos b&#xE1;sico que se crean en cada versi&#xF3;n utilicen versiones diferentes de las librer&#xED;as de Compose, Material, etc.</p>
+<p>Adem&#xE1;s, las plantillas que traen actualmente compose son muy b&#xE1;sicas y no incluyen muchas de las librer&#xED;as que se suelen utilizar en un proyecto real y el &apos;<em>scaffolding</em>&apos; o andamiaje b&#xE1;sico de un proyecto a veces es un poco complejo y laborioso de crear.</p>
+<p>Existen muchos repositorios en GitHub que contienen proyectos base para empezar a trabajar con Compose siguiendo las buenas pr&#xE1;cticas de arquitectura de Android y diferentes interpretaciones de patrones.</p>
+<p>De hecho, existe un repositorio oficial de Android en GitHub <strong><a href="https://github.com/android/architecture-templates">https://github.com/android/architecture-templates</a></strong>. Donde se est&#xE1; trabajando en diferentes plantillas para crear proyectos con diferentes arquitecturas y patrones de dise&#xF1;o que a&#xFA;n est&#xE1; en versi&#xF3;n beta y cuya idea es integrarlo en el futuro con Android Studio. Este tipo de proyectos incluyen scripts para renombrar de forma sencilla paquetes, nombres de clases, etc.</p>
+<h2 class="mume-header" id="proyecto-base">Proyecto base</h2>
+
+<p>Nosotros hemos incluido un proyecto base que incluye las librer&#xED;as principales a usar en el curso a modo de plantilla como si fuera una foto de las dependencias y versiones a la fecha 11/09/2023. Pudes descargar el proyecto base desde el siguiente enlace:</p>
+<ul>
+<li><strong><a href="./ProyectoBase_11_09_2023.zip">Proyecto base 11/09/2023</a></strong></li>
+</ul>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Lo ideal es que partas de esta proyecto base, copiando la carpeta del &apos;<em>workspace</em>&apos; y la renombres con el nombre de tu aplicaci&#xF3;n. A continuaci&#xF3;n, puedes seguir los pasos que se indican en el siguiente apartado para renombrar el proyecto base.</p>
+</blockquote>
+<h3 class="mume-header" id="caracter%C3%ADsticas-del-proyecto-base">Caracter&#xED;sticas del proyecto base</h3>
+
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Este apartado, se incluye a modo divulgativo para ser consultado m&#xE1;s adelante en el curso. No es necesario que lo leas ahora pues mucho de lo que pone a&#xFA;n carece de sentido para nosotros</p>
+</blockquote>
+<ol>
+<li>
+<p>Usa <strong>Kotlin</strong> como lenguaje para el DSL de Gradle en lugar de Groovy.</p>
+</li>
+<li>
+<p>Incluye como dependencias las siguientes librer&#xED;as que a lo largo del curso ir&#xE1;n <strong>tomando sentido</strong> para nosotros, muchas de ellas llevan el prefijo <strong><code>androidx</code></strong> indic&#xE1;ndonos que son extensiones oficilaes de la librer&#xED;a de soporte de Android y puede que en un futuro se incluyan en el propio SDK de Android:</p>
+<ul>
+<li>
+<p><strong>Librer&#xED;as de Kolin para Android</strong>:</p>
+<ul>
+<li>
+<p><strong><code>androidx.core:core-ktx:1.12.0</code></strong>: Esta librer&#xED;a es necesaria para usar las extensiones de Kotlin para Android.</p>
+</li>
+<li>
+<p><strong><code>androidx.lifecycle:lifecycle-runtime-ktx:2.6.2</code></strong>: Esta librer&#xED;a nos permite usar el ViewModelScope para lanzar corutinas desde un ViewModel.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Librer&#xED;as de compose para Android</strong>:</p>
+<ul>
+<li>
+<p><strong>Bill Of Materials (BOM)</strong>: <strong><a href="https://developer.android.com/jetpack/compose/bom">BOM</a></strong> nos permite usar las librer&#xED;as de Compose y Material de forma coherente y que todas las librer&#xED;as tengan la misma versi&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> billOfMaterialsVersion <span class="token operator">=</span> <span class="token string">&quot;2023.08.00&quot;</span>
+<span class="token function">implementation</span><span class="token punctuation">(</span>
+    <span class="token function">platform</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.compose:compose-bom:<span class="token interpolation variable">$billOfMaterialsVersion</span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</pre><p>Algunas de estas <strong><a href="https://developer.android.com/jetpack/compose/bom/bom-mapping">librer&#xED;as</a></strong> son:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>foundation<span class="token operator">:</span>foundation
+androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>ui<span class="token operator">:</span>ui
+androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>ui<span class="token operator">:</span>ui<span class="token operator">-</span>graphics
+androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>ui<span class="token operator">:</span>ui<span class="token operator">-</span>tooling<span class="token operator">-</span>preview
+androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>material3<span class="token operator">:</span>material3<span class="token operator">-</span>android<span class="token operator">:</span><span class="token number">1.2</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token operator">-</span>alpha07 
+androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>material<span class="token operator">:</span>material<span class="token operator">-</span>icons<span class="token operator">-</span>core
+androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>material<span class="token operator">:</span>material<span class="token operator">-</span>icons<span class="token operator">-</span>extended
+</pre></li>
+<li>
+<p><strong>Navegaci&#xF3;n</strong>:</p>
+<ul>
+<li><strong><code>androidx.navigation:navigation-compose:2.7.2</code></strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Relacionadas con el ciclo de vida de las Activities</strong>:</p>
+<ul>
+<li><strong><code>androidx.activity:activity-compose:1.7.2</code></strong></li>
+<li><strong><code>androidx.lifecycle:lifecycle-runtime-compose:2.6.2</code></strong></li>
+<li><strong><code>androidx.compose.runtime:runtime-livedata</code></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="renombrando-un-proyecto-base">Renombrando un proyecto base</h2>
 
 <p>Una vez hemos descargado el proyecto base y lo hemos descomprimido.</p>
@@ -491,6 +583,10 @@ android <span class="token punctuation">{</span>
 <p>Volveremos a abrir el archivo del <strong><code>AndroidManifest.xml</code></strong> y veremos que el error ha desaparecido al volver a sincronizar y ya podremos ejecutar la aplicaci&#xF3;n para ver si todo ha ido bien</p>
 </li>
 </ol>
+<h2 class="mume-header" id="ampliando-la-plantilla-del-proyecto-base">Ampliando la plantilla del proyecto base</h2>
+
+<p>Durante el curso iremos aplicando la arquitectura de una aplicaci&#xF3;n de Android propuesta por Google y que veremos en el siguiente tema. Para implementarla iremos a&#xF1;adiendo una organizaci&#xF3;n de paquetes, clases, nombres y diferentes librer&#xED;as seg&#xFA;n vayamos avanzando en el curso.</p>
+<p>Por tanto, a medida que vayamos avanzando en el curso podemos ir actualizando la plantilla o esqueleto de proyecto base con las nuevas librer&#xED;as y organizaci&#xF3;n de paquetes y clases que vayamos viendo y as&#xED; tener un &apos;<em>Template</em>&apos; personalizado para iniciar un proyecto de forma r&#xE1;pida.</p>
 
       </div>
       
