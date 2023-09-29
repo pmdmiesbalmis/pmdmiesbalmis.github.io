@@ -585,6 +585,22 @@ android <span class="token punctuation">{</span>
 <div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
 </div></div></pre></li>
 <li>
+<p>Adem&#xE1;s del nombre del <strong>tema de la MainActivity</strong> que hemos cambiado en el <em>&apos;manifest&apos;</em> deberemos cambiar el nombre del <strong>tema de compose</strong>. Para ello iremos <strong><code>app &#x2192; java &#x2192; com.holamundo.ui.theme &#x2192; Theme.kt</code></strong> y cambiaremos el nombre del tema <strong><code>ProyectoBaseTheme</code></strong> por <strong><code>HolaMundoTheme</code></strong> para seguir la nomenclatura de nuestro ejemplo.</p>
+<blockquote>
+<p>&#x1F4CC; <em><strong>Nota</strong></em>: Recuerda que es importante hacer un refactorizaci&#xF3;n del nombre del tema con <strong><code>Ctrl + R, R</code></strong> para que se cambie en todos los lugares donde se usa.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=2}" class="language-kotlin" data-line="2"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">HolaMundoTheme</span><span class="token punctuation">(</span>
+    darkTheme<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token function">isSystemInDarkTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    dynamicColor<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    content<span class="token operator">:</span> <span class="token annotation builtin">@Composable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre></li>
+<li>
 <p>Por &#xFA;ltimo, sincronizaremos el proyecto con los los cambios en los scripts de Gradle con la opci&#xF3;n de men&#xFA; <strong><code>File &#x2192; Sync Project with Gradle Files</code></strong> o <strong><code>Ctrl + May&#xFA;s + O</code></strong>. Tambi&#xE9;n podemos pulsar el bot&#xF3;n de sincronizaci&#xF3;n de Gradle que aparece en la barra de herramientas arriba a la derecha con el icono del elefante de Gradle.</p>
 <p>Volveremos a abrir el archivo del <strong><code>AndroidManifest.xml</code></strong> y veremos que el error ha desaparecido al volver a sincronizar y ya podremos ejecutar la aplicaci&#xF3;n para ver si todo ha ido bien</p>
 </li>
