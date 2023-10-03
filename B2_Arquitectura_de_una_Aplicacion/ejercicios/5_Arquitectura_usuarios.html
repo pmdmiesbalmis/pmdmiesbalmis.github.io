@@ -264,100 +264,103 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="proyecto-usuarios-con-arquitectura-ampliado">Proyecto Usuarios con Arquitectura Ampliado</h1>
+      <h1 class="mume-header undefined" id="proyecto-usuarios-con-arquitectura">Proyecto Usuarios con Arquitectura</h1>
 
-<p><a href="./4_Arquitectura_usuarios_ampliacion.pdf">Descargar estos apuntes</a></p>
+<p><a href="./5_Arquitectura_usuarios.pdf">Descargar estos apuntes</a></p>
 <h3 class="mume-header" id="ejercicio">Ejercicio</h3>
 
-<p>Vamos a realizar una ampliaci&#xF3;n del ejercicio de Usuarios, de forma que ahora se podr&#xE1; acceder, una vez nos hayamos logeado, a la publicaci&#xF3;n de recetas. Para ello deberemos a&#xF1;adir una opci&#xF3;n m&#xE1;s en el men&#xFA; que ya ten&#xED;amos, quedando de la siguiente forma:</p>
+<p>Para crear nuestro primer proyecto siguiendo la arquitectura explicada en los apuntes, vamos a realizar un ejercicio guiado que posteriormente ampliaremos. La app va a seguir siendo de consola Kotlin, y tratar&#xE1; de gestionar la entrada a una aplicaci&#xF3;n mediante las t&#xED;picas opciones para logearse.</p>
+<h4 class="mume-header" id="paquete-data">Paquete data</h4>
+
+<ul>
+<li>Vamos a comenzar creando los elementos necesarios para la manipulaci&#xF3;n de los datos, paquete <strong><code>data</code></strong>. Como todav&#xED;a no tenemos conocimiento de acceso a BD con Android, vamos a usar la simulaci&#xF3;n de esta mediante colecciones, y como ya se ha explicado en el tema, la simulaci&#xF3;n se crear&#xE1; dentro del paquete <strong><code>mocks</code></strong> de <strong><code>data</code></strong>:
+<ol>
+<li>Clase <strong>UsuarioMock</strong>, data class con login y password de tipo String</li>
+<li>Clase <strong>UsuarioDaoMock</strong>, clase en la que crearemos una lista mutable con los usuarios para pruebas y a la que ademas le a&#xF1;adiremos los m&#xE9;todos que nos permitan manipular estos datos:
+<ol>
+<li>get(): MutableList<usuariomock></usuariomock></li>
+<li>get(login: String): UsuarioMock?</li>
+<li>insert(usuarioRemoto: UsuarioMock)</li>
+<li>update(usuarioRemoto: UsuarioMock)</li>
+<li>delete(login: String)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h4 class="mume-header" id="paquete-models">Paquete models</h4>
+
+<p>Como hemos visto en el tema, en el paquete <strong><code>data</code></strong> deberemos tener una clase Repositorio que nos haga de puente entre UsuarioMock y el tipo modelo correspondiente por lo que antes de nada, pasaremos a crear en el paquete <strong><code>models</code></strong>, la data class <strong>Usuario</strong> con las mismas propiedades que UsuarioMock.</p>
+<h4 class="mume-header" id="paquete-data-1">Paquete data</h4>
+
+<p>Volvemos a <strong><code>data</code></strong> y:<br>
+1. Creamos la clase <strong>UsuarioRepository</strong>, que tendr&#xE1; una <em>variable inmutable</em> de tipo UsuarioDaoMock a trav&#xE9;s de la cual podremos acceder a los m&#xE9;todos del DAO creando los m&#xE9;todos paralelos, pero esta vez los datos de entrada y  salida ser&#xE1;n de tipo Usuario.<br>
+2. Archivo <strong>RepositoryConverter</strong> en este archivo crearemos todos los m&#xE9;todos que sirven para mapear ente <em>Usuario</em> y <em>UsuarioMock</em>, adem&#xE1;s de los de mapeo entre <em>Usuario</em> y <em>UsuarioUiState</em> que veremos despu&#xE9;s.</p>
+<h4 class="mume-header" id="paquete-uifeatures">Paquete ui.features</h4>
+
+<h5 class="mume-header" id="l%C3%B3gica-de-la-aplicaci%C3%B3n">L&#xF3;gica de la aplicaci&#xF3;n</h5>
+
+<p>Una vez terminada la parte de los datos y modelo, vamos a generar el c&#xF3;digo necesario de la UI. Como todav&#xED;a no estamos trabajando la parte de vistas con Compose, no tendremos que crearnos las carpetas de componentes, pero si crearemos el paquete <strong><code>features</code></strong>, en el cual meteremos los diferentes archivos de la vista de usuario, como puede que con posterioridad la aplicaci&#xF3;n crezca en contenido, vamos a crear un paquete  <strong><code>usuario</code></strong> dentro de features, donde tendremos lo refente a la parte de la aplicaci&#xF3;n que estamos resolviendo, y que constar&#xE1; de lo siguiente:</p>
+<ol>
+<li>La data class <strong>UsuarioUiState</strong>, que ser&#xE1; igual que Usuario pero con una propiedad m&#xE1;s <strong>estaLogeado</strong> de tipo Boolean, que servir&#xE1; para controlar si el usuario, en determinado momento, ha entrado correctamente al sistema.</li>
+<li>el archivo <strong>UsuarioEvent</strong>, que como hemos visto en temas anteriores, va a contener una <strong><code>interface sellada</code></strong> con los eventos que pueden ocurrir en la aplicaci&#xF3;n:<br>
+1. <strong>A&#xF1;adeUsuario</strong> al que le llega un login y password para posteriormente crear el usuario.<br>
+2. <strong>EntraSistema</strong> al que le llega un login y password  y si coinciden con alguno de los usuarios del sistema, cambiar&#xE1; el estado de esta Logeado del usuarioUiState.<br>
+3. <strong>SaleSistena</strong> que cambia la anterior variable a false.<br>
+4. <strong>MuestraUsuarios</strong> que se encargar&#xE1; de mostrar la lista de usuarios del sistema (esto no tiene sentido en una app, pero lo usamos a modo de comprobaci&#xF3;n de que todo est&#xE1; correcto).<br>
+5. <strong>ModificaUsuario</strong> al que le llega un password y si el usuario est&#xE1; logeado, se encargar&#xE1; de modificar el usuario con el nuevo password.</li>
+<li>La clase <strong>UsuarioViewModel</strong> encargada de toda la parte de la l&#xF3;gica de la aplicaci&#xF3;n, tendr&#xE1; dos variables una de tipo <em>UsuarioRepository</em> y otra de tipo <em>usuarioUiState</em>. Esta &#xFA;ltima ser&#xE1; la que guarde el valor del usuario logeado, mientras que <em>usuarioRepository</em> la utilizaremos para el tratamiento de los datos de los usuarios.<br>
+En esta clase tendremos la funci&#xF3;n <strong>onUsuarioEvent</strong> para gestionar los posibles eventos del tipo LoginEvent como se ha indicado en el punto anterior (intenta resolver esta parte, pide ayuda al profesor si no se te ocurre como).</li>
+</ol>
+<h5 class="mume-header" id="interfaz-de-usuario">Interfaz de usuario</h5>
+
+<p>Ahora nos quedar&#xED;a hacer la parte de la aplicaci&#xF3;n que se encarga de la interacci&#xF3;n con el usuario. Para ello crearemos un archivo <strong>UsuarioScreen</strong> donde alojaremos las siguientes funciones:</p>
+<ol>
+<li>
+<p><strong>usuarioScreen</strong> a la que le llegar&#xE1; una variable usuarioEvent de tipo  <em><code>(UsuarioEvent) -&gt; Unit</code></em> y que teniendo en cuenta el siguiente men&#xFA;:</p>
 <pre data-role="codeBlock" data-info="console" class="language-console"><code>1. Sign in
 2. Login
 3. Change password
 4. Logout
-5. Recetas
-6. Volver
-Introduce opci&#xF3;n:
-</code></pre><p>Si se selecciona la opci&#xF3;n 5 y no estamos logeados, se mostrar&#xE1; un mensaje indicando el problema. En caso de estar logeados se acceder&#xE1; a la screen de las recetas que mostrar&#xE1; el siguiente men&#xFA;:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console"><code>1. Seleccionar/Deseleccionar receta
-2. Imprimir selecci&#xF3;n
-3. Mostrar todas
-4. Volver
-Introduce opcion:
-</code></pre><ul>
-<li>
-<p>Con la primera opci&#xF3;n se podr&#xE1; a&#xF1;adir o quitar una receta, de una lista de RecetasUiState (tipo que adem&#xE1;s de lo tiene RecetaMock, que podemos ver m&#xE1;s abajo en el aviso, tendr&#xE1; un valor Boolean <em>seleccionada</em>) que habr&#xE1; en el ViewModel, la selecci&#xF3;n se har&#xE1; por el id de la receta.</p>
-</li>
-<li>
-<p>La opci&#xF3;n Imprimir selecci&#xF3;n mostrar&#xE1; las recetas que tenemos seleccionada, por ejemplo de la siguiente forma:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console"><code>Magdalenas de la abuela de Carlos Argui&#xF1;ano (40)
-Pan casero con tomates secos de Carlos Argui&#xF1;ano (120)
-</code></pre></li>
-<li>
-<p>Mostrar todas, mostrar&#xE1; la lista de todas las recetas del sistema, crea un formado de salida curioso, aunque no se muestren todos los datos.</p>
-</li>
-<li>
-<p>Volver nos devolver&#xE1; al programa principal, que tendr&#xE1; un bucle preguntando si queremos salir</p>
-<pre data-role="codeBlock" data-info="console" class="language-console"><code>...
-1. Volver
-Introduce opcion: 4
-Quiere Salir [S|s]?
-</code></pre><p>Si le decimos que S, saldremos de la aplicaci&#xF3;n. Cualquier otra tecla nos mantendr&#xE1; en la aplicaci&#xF3;n mostr&#xE1;ndose otra vez el men&#xFA; de login.</p>
-</li>
-</ul>
+5. List
+6. Exit
+</code></pre><p>Se encargar&#xE1; de gestionar los eventos posibles pidiendo los datos necesarios al usuario, por ejemplo, para el primer caso se podr&#xED;a codificar algo como los siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>opcion<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;1&quot;</span> <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Introduce login &quot;</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> login <span class="token operator">=</span> <span class="token function">readln</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Introduce la contrase&#xF1;a &quot;</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> password <span class="token operator">=</span> <span class="token function">readln</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token function">usuarioEvent</span><span class="token punctuation">(</span>UsuarioEvent<span class="token punctuation">.</span>A&#xF1;<span class="token function">adeUsuario</span><span class="token punctuation">(</span>login<span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token operator">..</span><span class="token punctuation">.</span>
+</pre></li>
+</ol>
 <blockquote>
-<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong> Deberemos crear los paquetes, clases, interfaces y funciones necesarias para a&#xF1;adir la parte de las recetas cumpliendo con la arquitectura ya explicada. La clase de las recetas tendr&#xE1; el siguiente c&#xF3;digo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">RecetaMock</span><span class="token punctuation">(</span>
-   <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span>Int<span class="token punctuation">,</span>
-   <span class="token keyword keyword-val">val</span> cookingTime<span class="token operator">:</span> Int<span class="token punctuation">,</span>
-   <span class="token keyword keyword-val">val</span> recipeName<span class="token operator">:</span> String<span class="token punctuation">,</span>
-   <span class="token keyword keyword-var">var</span> recipePicture<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
-   <span class="token keyword keyword-val">val</span> chefName<span class="token operator">:</span> String<span class="token punctuation">,</span>
-   <span class="token keyword keyword-val">val</span> chefMail<span class="token operator">:</span> String<span class="token punctuation">,</span>
-   <span class="token keyword keyword-var">var</span> chefPicture<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span>
-</pre><p>Puedes crear la lista de recetas en el lugar correspondiente, de la siguiente manera:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-var">var</span> receta <span class="token operator">=</span> mutableListOf<span class="token operator">&lt;</span>RecetaMock<span class="token operator">&gt;</span><span class="token punctuation">(</span>
-       <span class="token function">RecetaMock</span><span class="token punctuation">(</span>
-           id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>
-           cookingTime <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">,</span>
-           recipeName <span class="token operator">=</span> <span class="token string">&quot;Magdalenas de la abuela&quot;</span><span class="token punctuation">,</span>
-           recipePicture <span class="token operator">=</span> <span class="token string">&quot;imagen1.png&quot;</span><span class="token punctuation">,</span>
-           chefName <span class="token operator">=</span> <span class="token string">&quot;Carlos Argui&#xF1;ano&quot;</span><span class="token punctuation">,</span>
-           chefMail <span class="token operator">=</span> <span class="token string">&quot;carlos.argui&#xF1;ano@gmail.com&quot;</span><span class="token punctuation">,</span>
-           chefPicture <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
-       <span class="token punctuation">)</span><span class="token punctuation">,</span>
-       <span class="token function">RecetaMock</span><span class="token punctuation">(</span>
-           id<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
-           cookingTime <span class="token operator">=</span> <span class="token number">120</span><span class="token punctuation">,</span>
-           recipeName <span class="token operator">=</span> <span class="token string">&quot;Pan casero con tomates secos&quot;</span><span class="token punctuation">,</span>
-           recipePicture <span class="token operator">=</span> <span class="token string">&quot;imagen2.png&quot;</span><span class="token punctuation">,</span>
-           chefName <span class="token operator">=</span> <span class="token string">&quot;Carlos Argui&#xF1;ano&quot;</span><span class="token punctuation">,</span>
-           chefMail <span class="token operator">=</span> <span class="token string">&quot;carlos.argui&#xF1;ano@gmail.com&quot;</span><span class="token punctuation">,</span>
-           chefPicture <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
-       <span class="token punctuation">)</span><span class="token punctuation">,</span>
-</pre></blockquote>
-<div style="page-break-after:always;"></div>
-<blockquote>
-<pre class="language-text">   RecetaMock(
-       id=3,
-       cookingTime = 10,
-       recipeName = &quot;Ensalada multicolor con cacahuete&quot;,
-       recipePicture = &quot;imagen3.png&quot;,
-       chefName = &quot;Sonia de la Oz&quot;,
-       chefMail = &quot;soniaoz@gmail.com&quot;,
-       chefPicture = null
-   ),
-   RecetaMock(
-       id=4,
-       cookingTime = 35,
-       recipeName = &quot;Caldo de almendras pasas y calabaza&quot;,
-       recipePicture = &quot;imagen4.png&quot;,
-       chefName = &quot;Mohamed Aldalay&quot;,
-       chefMail = &quot;mohaaldala@gmail.com&quot;,
-       chefPicture = null
-   ),
-</pre>
-<p>)</p>
-<pre data-role="codeBlock" data-info class="language-"><code></code></pre></blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong>  Para hacer posible la l&#xF3;gica del programa sin usar las peculiaridades del Android, vamos a utilizar una serie de funciones y propiedades que en un caso real no ser&#xED;an necesarias. Dentro de UsuarioScreen.kt crearemos la funci&#xF3;n:<br>
+2. <strong>mostrarInformaci&#xF3;n</strong> a la que le llegar&#xE1; la lista de usuarios y mostrar&#xE1; la salida por pantalla, esta funci&#xF3;n ser&#xE1; llamada desde el evento correspondiente del viewModel.<br>
+3. <strong>actualizaEstado</strong> a la que le llega <em><code>estadoUsuarioUiState: UsuarioUiState</code></em> y se encargar&#xE1; de actualizar una variable global de este archivo y que nos servir&#xE1; para controlar si se ha logeado el usuario correctamente, a esta funci&#xF3;n la llamaremos desde la clase UsuarioViewModel en cada interacci&#xF3;n con los eventos (de forma que utilizaremos la propiedad usuarioUiState del viewModel para actualizar esta variable). Esto lo haremos porque la aplicaci&#xF3;n mostrar&#xE1; un mensaje antes de la salida del men&#xFA;, indicando que el usuario est&#xE1; logeado o no lo est&#xE1;. Solo podremos cambiar la contrase&#xF1;a de un usuario logeado.</p>
+<pre data-role="codeBlock" data-info="console" class="language-console"><code>Usted no est&#xE1; logeado
+1. Sign in
+2. Login
+...
+1. Sign in
+2. Login
+3. Change password
+4. Logout
+5. List
+6. Exit
+2
+Introduce login pepe
+Introduce la contrase&#xF1;a pepe1234
+
+Usuario: pepe logeado
+1. Sign in
+2. Login
+</code></pre></blockquote>
+<h4 class="mume-header" id="paquete-views">Paquete views</h4>
+
+<p>En este paquete solo tendremos la Main que contendr&#xE1; una variable inmutable de tipo viewModel y realizar&#xE1; la llamada a la funci&#xF3;n usuarioScreen.</p>
 
       </div>
       
