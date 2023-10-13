@@ -1,0 +1,1818 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 3.2 - Maquetando nuestra UI</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-32---maquetando-nuestra-ui">Tema 3.2 - Maquetando nuestra UI</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_3_2_maquetando_nuestra_UI.pdf">pdf</a> o <a href="./Tema_3_2_maquetando_nuestra_UI.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducci&#xF3;n" class="md-toc-link">
+            <p>Introducci&#xF3;n</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#conceptos-iniciales" class="md-toc-link">
+            <p>Conceptos iniciales</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#modificadores-de-compose" class="md-toc-link"><p>Modificadores de Compose</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#unidades-de-medida" class="md-toc-link">
+            <p>Unidades de medida</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#el-orden-de-los-modificadores-es-importante" class="md-toc-link">
+            <p>El orden de los modificadores es importante</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#combinando-modificadores" class="md-toc-link">
+            <p>Combinando modificadores</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#profundizando-en-el-trabajo-con-textos" class="md-toc-link"><p>Profundizando en el trabajo con Textos</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#creando-un-estilo-de-texto" class="md-toc-link">
+            <p>Creando un estilo de texto</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#establecer-varios-estilos-sobre-un-mismo-texto" class="md-toc-link">
+            <p>Establecer varios estilos sobre un mismo texto</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#brushes-pinceles" class="md-toc-link">
+            <p>Brushes (Pinceles)</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#layouts-b&#xE1;sicos" class="md-toc-link"><p>Layouts b&#xE1;sicos</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#surface" class="md-toc-link">
+            <p>Surface</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#box" class="md-toc-link">
+            <p>Box</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#column-y-row" class="md-toc-link"><p>Column y Row</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#pesos-en-column-y-row" class="md-toc-link">
+            <p>Pesos en Column y Row</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#flowcolumn-y-flowrow" class="md-toc-link">
+            <p>FlowColumn y FlowRow</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#im&#xE1;genes" class="md-toc-link"><p>Im&#xE1;genes</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#formas-de-manejar-un-recurso-imagen" class="md-toc-link">
+            <p>Formas de manejar un recurso imagen</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#par&#xE1;metros-m&#xE1;s-comunes" class="md-toc-link">
+            <p>Par&#xE1;metros m&#xE1;s comunes</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+
+<p>En el primer tema ya hemos hablado de <strong>algunos</strong> componentes b&#xE1;sicos de la <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary">capa de Runtime</a></strong> como son <strong><code>State</code></strong>, <strong><code>remember</code></strong>, <strong><code>@Composable</code></strong> etc.</p>
+<p>En este tema vamos a ver c&#xF3;mo maquetar nuestro UI utilizando diferentes componentes de compose definidos en las <strong><a href="https://developer.android.com/jetpack/compose/layering?hl=es-419">capas de la librer&#xED;a</a></strong> que hablamos en el anterior tema, como son la capa de UI, Fundation y Material.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota:</strong> Muchos de los elementos de dise&#xF1;o no se pueden ver aislados unos de otros. Por lo que en muchos ejemplos vamos a usar elementos que ser&#xE1;n explicados m&#xE1;s adelante en profundidad.</p>
+</blockquote>
+<h2 class="mume-header" id="conceptos-iniciales">Conceptos iniciales</h2>
+
+<p>Ya hemos visto que las funciones &apos;<em>Composables</em>&apos; pueden tener diferentes elementos, como por ejemplo dos textos.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=4}" class="language-kotlin" data-line="4"><span class="token annotation builtin">@Preview</span> <span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;CabeceraPreview&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Sin contenedor los componentes se superponen</span>
+    <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;IES Doctor Balmis&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;M&#xF3;dulo PMDM 2&#xBA; DAM&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div></pre><div align="center">
+    <img height="20" src="assets/imagenes//tema_3_2/ejemplo1.png">
+</div>
+<p>Necesitaremos, en primer lugar, de <strong>alg&#xFA;n tipo de layout</strong> que nos permita poner los elementos uno al lado de otro. Como por ejemplo el &apos;<em>composable</em>&apos; <strong><code>Column</code></strong> que los ir&#xE1; poniendo uno debajo de otro en vertical.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Preview</span> <span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;CabeceraPreview&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Column <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;IES Doctor Balmis&quot;</span><span class="token punctuation">)</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;M&#xF3;dulo PMDM 2&#xBA; DAM&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div align="center">
+    <img height="40" src="assets/imagenes//tema_3_2/ejemplo2.png">
+</div>
+<p>Adem&#xE1;s, muchos de los elementos de dise&#xF1;o tienen <strong>par&#xE1;metros</strong> que nos permiten modificar su comportamiento. Por ejemplo, en el componente <strong><code>Text</code></strong> podemos ver que son bastantes.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Text</span><span class="token punctuation">(</span>
+    text<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
+    color<span class="token operator">:</span> Color <span class="token operator">=</span> Color<span class="token punctuation">.</span>Unspecified<span class="token punctuation">,</span>
+    fontSize<span class="token operator">:</span> TextUnit <span class="token operator">=</span> TextUnit<span class="token punctuation">.</span>Unspecified<span class="token punctuation">,</span>
+    fontStyle<span class="token operator">:</span> FontStyle<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    fontWeight<span class="token operator">:</span> FontWeight<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    fontFamily<span class="token operator">:</span> FontFamily<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    style<span class="token operator">:</span> TextStyle <span class="token operator">=</span> LocalTextStyle<span class="token punctuation">.</span>current<span class="token punctuation">,</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">)</span>
+</pre><p>Sin embargo, la gran mayor&#xED;a de ellos no son obligatorios y tienen un valor por defecto asignado en la propia declaraci&#xF3;n. Adem&#xE1;s, en varios de estos componentes, para modificarlos <strong>deber&#xED;amos hacerlo a trav&#xE9;s del tema de la aplicaci&#xF3;n y sus estilos</strong>.</p>
+<p>Por ejemplo, si queremos cambiar el color y tama&#xF1;o del texto, deber&#xED;amos hacerlo a trav&#xE9;s del tema base.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4, 8, 9, 13, 14]}" class="language-kotlin" data-line="4,8,9,13,14"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;CabeceraPreview&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        Column <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                text <span class="token operator">=</span> <span class="token string">&quot;IES Doctor Balmis&quot;</span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleLarge<span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary
+            <span class="token punctuation">)</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                text <span class="token operator">=</span> <span class="token string">&quot;M&#xF3;dulo PMDM 2&#xBA; DAM&quot;</span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleSmall<span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>secondary
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div></pre><div align="center">
+    <img height="50" src="assets/imagenes//tema_3_2/ejemplo3.png">
+</div>
+<p>Al poner <strong><code>HolaMundoTheme</code></strong> como composable ra&#xED;z de la aplicaci&#xF3;n, todos los elementos que est&#xE9;n dentro de &#xE9;l, heredar&#xE1;n sus estilos. Por tanto, esto no deberemos hacerlo en cada componente, sino siempre en la ra&#xED;z de nuestro &#xE1;rbol de composables.</p>
+<p>Los estilos y colores los hemos puesto a trav&#xE9;s de las definiciones de <strong><code>MaterialTheme</code></strong>, a trav&#xE9;s de ella estaremos accediendo a las definiciones del tema de Material Design que es el que viene por defecto en Compose y define <strong><code>HolaMundoTheme</code></strong>.</p>
+<p>De esta manera, toda nuestra aplicaci&#xF3;n tendr&#xE1; un aspecto coherente y consistente y podremos cambiarlo f&#xE1;cilmente sin tener que ir componente a componente.</p>
+<p>Por &#xFA;ltimo, tendremos una serie de <strong>modificadores</strong> que nos permitir&#xE1;n modificar el espacio que ocupan los componentes, como el <strong><code>padding</code></strong> o la alineaci&#xF3;n, incluso comportamientos como el de <strong><code>clickable</code></strong>. No obstante, como veremos m&#xE1;s adelante, estos modificadores depender&#xE1;n del tipo de layout que estemos usando o las caracter&#xED;sticas de propio componente.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6-13, 21]}" class="language-kotlin" data-line="6-13,21"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;CabeceraPreview&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        <span class="token function">Column</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">border</span><span class="token punctuation">(</span>
+                    width <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+                    shape <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium
+                <span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                text <span class="token operator">=</span> <span class="token string">&quot;IES Doctor Balmis&quot;</span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleLarge<span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary
+            <span class="token punctuation">)</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>End<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                text <span class="token operator">=</span> <span class="token string">&quot;M&#xF3;dulo PMDM 2&#xBA; DAM&quot;</span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleSmall<span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>secondary
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-13" data-start="6" data-end="13">
+
+
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="21" data-start="21">
+</div></div></pre><div align="center">
+    <img height="70" src="assets/imagenes//tema_3_2/ejemplo4.png">
+</div>
+<p>En los siguiente puntos vamos a hablar un poco m&#xE1;s en profundidad de cada uno de estos conceptos: <strong>&apos;layouts&apos;</strong>, <em><strong>&apos;modifiers&apos;</strong></em> y ***&apos;Material Design&apos;***, este &#xFA;ltimo ya en el tema siguiente.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Vamos a suponer que previsualizamos los ejemplos siguientes con el proyecto <strong><code>HolaMundo</code></strong> que hemos creado anteriormente y usamos por tanto el tema <strong><code>HolaMundoTheme</code></strong>. Para no repetir el c&#xF3;digo de previsualizaci&#xF3;n en cada ejemplo, vamos a usar la siguiente plantilla:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;Test&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">TestPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        <span class="token comment">// Aqu&#xED; ir&#xE1; el componente a probar</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></blockquote>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="modificadores-de-compose">Modificadores de Compose</h2>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/modifiers?hl=es-419">Modificadores de Compose</a></strong></li>
+<li>V&#xED;deo Espa&#xF1;ol (<strong>DevExperto</strong>): <strong><a href="https://www.youtube.com/watch?v=jej6DiUAlvk">Modificadores de Compose</a></strong></li>
+</ul>
+<p>Estos est&#xE1;n definidos en la <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/package-summary">capa de UI</a></strong> y nos permiten modificar el comportamiento de otros componentes de capas superiores.</p>
+<p>Los modificadores <strong>te permiten decorar o aumentar un elemento <em>composable</em></strong>. Por ejemplo, puedes hacer todo esto:</p>
+<ul>
+<li><strong>Cambiar el tama&#xF1;o, el dise&#xF1;o y el aspecto del elemento <em>composable</em> e incluso como se debe comportar dentro de su contenedor o layout padre</strong>.</li>
+<li>Agregar interacciones de nivel superior, (p. ej., hacer que un elemento sea apto para <strong>hacer clic</strong>, <strong>desplazable</strong>, <strong>arrastrable</strong> o <strong>ampliable</strong>).</li>
+<li>Agregar informaci&#xF3;n (p. ej., etiquetas de accesibilidad)</li>
+<li>Procesar entradas del usuario.</li>
+</ul>
+<p>Existen muchos y adem&#xE1;s depender&#xE1;n, como hemos comentado, de nuestro contenedor o el scope en que nos encontremos. Por ese motivo los iremos viendo poco a poco a lo largo del curso. Sin embargo, podemos destacar los m&#xE1;s comunes:</p>
+<ul>
+<li><strong><code>background</code></strong> - Dibuja una forma de color s&#xF3;lido detr&#xE1;s del <em>composable</em>.</li>
+<li><strong><code>clickable</code></strong> - Especifica un controlador que se llamar&#xE1; cuando se haga clic en el <em>composable</em>. Tambi&#xE9;n causa un efecto de ondulaci&#xF3;n cuando se realiza el clic.</li>
+<li><strong><code>clip</code></strong> - Recorta el contenido <em>composable</em> a una forma especificada.</li>
+<li><strong><code>fillMaxHeight</code></strong> - El <em>composable</em> se dimensionar&#xE1; para ajustarse a la altura m&#xE1;xima permitida por su padre.</li>
+<li><strong><code>fillMaxSize</code></strong> - El <em>composable</em> se dimensionar&#xE1; para ajustarse a la altura y ancho m&#xE1;ximos permitidos por su padre.</li>
+<li><strong><code>fillMaxWidth</code></strong> - El <em>composable</em> se dimensionar&#xE1; para ajustarse al ancho m&#xE1;ximo permitido por su padre.</li>
+<li><strong><code>offset</code></strong> - Posiciona el <em>composable</em> a la distancia especificada desde su posici&#xF3;n actual a lo largo del eje x e y.</li>
+<li><strong><code>padding</code></strong> - Agrega espacio alrededor de un <em>composable</em>. Se pueden utilizar par&#xE1;metros para aplicar espaciado a los cuatro lados o para especificar un relleno diferente para cada lado.</li>
+<li><strong><code>rotate</code></strong> - Rota el <em>composable</em> en su punto central por un n&#xFA;mero especificado de grados.</li>
+<li><strong><code>scale</code></strong> - Aumenta o reduce el tama&#xF1;o del <em>composable</em> por el factor de escala especificado.</li>
+<li><strong><code>scrollable</code></strong> - Habilita el desplazamiento para un <em>composable</em> que se extiende m&#xE1;s all&#xE1; del &#xE1;rea visible del dise&#xF1;o en el que est&#xE1; contenido.</li>
+<li><strong><code>size</code></strong> - Se utiliza para especificar la altura y el ancho de un <em>composable</em>. En ausencia de una configuraci&#xF3;n de tama&#xF1;o, el <em>composable</em> se dimensionar&#xE1; para acomodar su contenido (denominado envoltura).</li>
+</ul>
+<h3 class="mume-header" id="unidades-de-medida">Unidades de medida</h3>
+
+<ul>
+<li>
+<p><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/Dp">dp</a></strong>: Este es un valor de <strong>dimensi&#xF3;n</strong> que <strong>representa p&#xED;xeles</strong> independientes de <strong><a href="https://developer.android.com/training/multiscreen/screendensities?hl=es-419">la densidad de p&#xED;xeles (dpi) del dispositivo</a></strong>. Por ejemplo:</p>
+<ul>
+<li><strong>1 p&#xED;xel</strong> en un dispositivo de densidad de pantalla de <strong>160 dpi</strong> es igual a <strong>1 dp</strong>.</li>
+<li><strong>1 p&#xED;xel</strong> en un dispositivo de densidad de pantalla de <strong>240 dpi</strong> es igual a <strong>1.5 dp</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>sp</strong>: Acr&#xF3;nimo de (Scaled Pixeles). Son como <strong>dp</strong> pero para fuentes. Adem&#xE1;s de tener en cuenta la densidad en dpi, tambi&#xE9;n son escalados en funci&#xF3;n de las preferencias de texto del usuario.</p>
+</li>
+</ul>
+<h3 class="mume-header" id="el-orden-de-los-modificadores-es-importante">El orden de los modificadores es importante</h3>
+
+<p>El <strong><a href="https://developer.android.com/jetpack/compose/modifiers?hl=es-419#order-modifier-matters">orden de las funciones de los modificadores es importante</a></strong>. Como cada funci&#xF3;n realiza cambios en el Modifier que muestra la funci&#xF3;n anterior, la secuencia afecta al resultado final.</p>
+<p>Supongamos el c&#xF3;digo anterior de la cabecera donde aplicabamos los modificadores en el siguiente orden:</p>
+<ol>
+<li><strong><code>fillMaxWidth</code></strong> - Ajustarse al <strong>ancho m&#xE1;ximo</strong> permitido por su padre.</li>
+<li><strong><code>border</code></strong> - Dibuja un borde alrededor del <em>composable</em> de un color y ancho especificados.</li>
+<li><strong><code>padding</code></strong> - Agrega espacio alrededor de un <em>composable</em> de <strong>12 dp</strong> .</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier
+            <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">border</span><span class="token punctuation">(</span>
+                width <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+                shape <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium
+            <span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Pero, &#xBF;Qu&#xE9; sucede si <strong>aplicamos el padding antes de dibujar el borde</strong>?</p>
+<p>Si te fijas en la imagen de resultado el borde se dibuja por encima del padding. Esto es porque el borde se dibuja en el borde del <em>composable</em> que en ese momento es el que tiene el tama&#xF1;o original. Por lo que el padding se aplica despu&#xE9;s y por tanto el borde se dibuja por encima.</p>
+<p><img src="assets/imagenes//tema_3_2/ejemplo5.png" alt="Alt text"></p>
+<p>Este es un aspecto a tener en cuenta si en alg&#xFA;n momento no obtenemos el resultado esperado.</p>
+<h3 class="mume-header" id="combinando-modificadores">Combinando modificadores</h3>
+
+<p>Los modificadores se pueden combinar para crear un &#xFA;nico modificador que se puede reutilizar en varios lugares. Por ejemplo, queremos a&#xF1;adir el borde y padding en varios lugares y no queremos <strong>repetir c&#xF3;digo</strong> de tal manera que al cambiarlo en un sitio se cambie en todos.</p>
+<p>Podemos definir una <strong>funci&#xF3;n de extensi&#xF3;n</strong> para el tipo <strong><code>Modifiers</code></strong> de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[1, 11]}" class="language-kotlin" data-line="1,11"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> Modifier<span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span>
+    color<span class="token operator">:</span> Color <span class="token operator">=</span> Color<span class="token punctuation">.</span>Transparent<span class="token punctuation">,</span>
+    shape<span class="token operator">:</span> Shape
+<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">border</span><span class="token punctuation">(</span>width <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> color <span class="token operator">=</span> color<span class="token punctuation">,</span> shape <span class="token operator">=</span> shape<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier
+            <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
+</div></div></pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: Si vamos a utilizar este modificador en varios sitios, lo mejor es definirlo en un <strong>archivo separado</strong> en alg&#xFA;n paquete de utilidades en la jerarqu&#xED;a de paquetes pero dentro el paquete de <strong><code>ui</code></strong>. Adem&#xE1;s, todas las funciones de extensi&#xF3;n sobre <strong><code>Modifiers</code></strong> deben permanecer c&#xF3;mo publicas para ser accesibles. Recuerda adem&#xE1;s, que cada vez que uses un modificador compuesto definido por t&#xED;, est&#xE1;s creando una <strong>dependencia fuerte</strong> entre el componente y el modificador fuera de las librer&#xED;as de la capa de <strong><code>compose.ui</code></strong>. Por lo que deber&#xED;as pensar si es necesario o no.</p>
+</blockquote>
+<p>Otra forma de hacerlo es con <strong><code>Modifier.then()</code></strong> que nos permite combinar modificadores de la siguiente manera.</p>
+<p>Imaginemos nuestro <em>&apos;composable&apos;</em> <strong><code>Cabecera</code></strong> que va a ser usado en varios sitios, pero va a tener un <strong>background diferente</strong> en cada uno de ellos.</p>
+<p>Podemos hacer lo siguiente ...</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6, 10]}" class="language-kotlin" data-line="6,10"><span class="token comment">// Le pasamos un modificador a nuestro componente </span>
+<span class="token comment">// un modificador que se aplicar&#xE1; antes que cualquier otro</span>
+<span class="token comment">// le pasaremos el valor por defecto Modifier si no queremos </span>
+<span class="token comment">// aplicar ning&#xFA;n modificador</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        <span class="token comment">// Asignamos el modificador y luego el operador then</span>
+        <span class="token comment">// para que se aplique despu&#xE9;s de los modificadores recibidos.</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+            Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>        
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+      <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div></pre><p>Si modificamos nuestro <em>&apos;preview&apos;</em> de la siguiente manera para probarlo...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;Test&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        Column <span class="token punctuation">{</span>
+            <span class="token comment">// Sin aplicar ning&#xFA;n modificador</span>
+            <span class="token function">Cabecera</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token comment">// Cambiando el color de nuestra cabecera a Cyan            </span>
+            <span class="token function">Cabecera</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Cyan<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token comment">// Escalando la cabecera a 0.75 (75% del tama&#xF1;o original)</span>
+            <span class="token comment">// y despu&#xE9;s aplicando el background Amarillo.</span>
+            <span class="token function">Cabecera</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier
+                    <span class="token punctuation">.</span><span class="token function">scale</span><span class="token punctuation">(</span><span class="token number">0.75f</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Yellow<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Obtendremos el siguiente resultado ....</p>
+<div align="center">
+    <img height="200px" src="assets/imagenes//tema_3_2/ejemplo6.png">
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="profundizando-en-el-trabajo-con-textos">Profundizando en el trabajo con Textos</h2>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/text?hl=es-419">Textos en Compose</a></strong></li>
+<li>Puedes bajar el c&#xF3;digo de los ejemplo de <strong><a href="assets/codigo/Textos.kt">Textos.kt</a></strong></li>
+</ul>
+<h3 class="mume-header" id="creando-un-estilo-de-texto">Creando un estilo de texto</h3>
+
+<p><strong>Aunque no es lo recomendado y no corresponde al trabajo de un desarrollador</strong>, puede darse el caso que al estar creando uno de nuestros componentes, queramos crear un estilo de texto fuera de los definidos por defecto en <strong><code>MaterialTheme</code></strong>. Incluso en las adaptaciones de los mismos que podamos hacer en <strong><code>com.holamundo.ui.theme &#x2192; Theme.kt</code></strong></p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: En este caso ya no podremos hacer una funci&#xF3;n de extensi&#xF3;n sobre <strong><code>TextStyle</code></strong> para modificar una de sus propiedades por que son objetos inmutables. Adem&#xE1;s, <strong>deberemos de llevar cuidado de aplicar sobre el objeto que modifique el estilo el calificativo <code>remember { objeto }</code> para que no se cree en cada composici&#xF3;n</strong>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[1-5, 16-22]}" class="language-kotlin" data-line="1-5,16-22"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">sombra</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Shadow</span><span class="token punctuation">(</span>
+    color <span class="token operator">=</span> Color<span class="token punctuation">.</span>Gray<span class="token punctuation">,</span>
+    offset <span class="token operator">=</span> <span class="token function">Offset</span><span class="token punctuation">(</span><span class="token number">4f</span><span class="token punctuation">,</span> <span class="token number">4f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    blurRadius <span class="token operator">=</span> <span class="token number">4f</span>
+<span class="token punctuation">)</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+            Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            text <span class="token operator">=</span> <span class="token string">&quot;IES Doctor Balmis&quot;</span><span class="token punctuation">,</span>
+            <span class="token comment">// Copiamos (por ser inmutable) del estilo que aplic&#xE1;bamos de MaterialTheme</span>
+            <span class="token comment">// y le asignamos un nuevo valor a la propiedad sombra.</span>
+            style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleLarge<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                <span class="token comment">// OJO!! Para no crear el objeto sombra en cada composici&#xF3;n le</span>
+                <span class="token comment">// aplicaremos el modificador remember.</span>
+                shadow <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">sombra</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary
+        <span class="token punctuation">)</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1-5" data-start="1" data-end="5">
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16-22" data-start="16" data-end="22">
+
+
+
+
+
+
+</div></div></pre><div align="center">
+    <img height="70" src="assets/imagenes//tema_3_2/ejemplo7.png">
+</div>
+<h3 class="mume-header" id="establecer-varios-estilos-sobre-un-mismo-texto">Establecer varios estilos sobre un mismo texto</h3>
+
+<p>En ocasiones querremos que partes de un mismo texto tengan diferentes estilos sin tener que crear varios textos dentro de un layout <strong><code>Row</code></strong>. Para ello podemos usar la funci&#xF3;n <strong><code>AnnotatedString</code></strong> que nos permite establecer diferentes estilos a diferentes partes de un mismo texto.</p>
+<p><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString">AnnotatedString</a></strong> es una clase de datos que contiene lo siguiente:</p>
+<ul>
+<li>Un valor <strong><code>Text</code></strong></li>
+<li>Una List de <strong><code>SpanStyleRange</code></strong>, equivalente al estilo intercalado con el rango de posici&#xF3;n dentro del valor de texto</li>
+<li>Una List de <strong><code>ParagraphStyleRange</code></strong> que especifica la alineaci&#xF3;n del texto, la direcci&#xF3;n del texto, la altura de la l&#xED;nea y el estilo de sangr&#xED;a del texto.</li>
+</ul>
+<p><strong><code>TextStyle</code></strong> ya lo hemos usado y es para uso en el elemento componible Text, mientras que <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/text/SpanStyle">SpanStyle</a></strong> y <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/text/ParagraphStyle">ParagraphStyle</a></strong> se usan en AnnotatedString.</p>
+<blockquote>
+<p>&#x270B; <strong>Importente</strong>: Adem&#xE1;s siempre vamos a poder convertir un <strong><code>TextStyle</code></strong> en un <strong><code>SpanStyle</code></strong> y un <strong><code>ParagraphStyle</code></strong> con la funciones <strong><code>toSpanStyle()</code></strong> y <strong><code>toParagraphStyle()</code></strong> respectivamente.</p>
+</blockquote>
+<p>La diferencia entre <strong><code>SpanStyle</code></strong> y <strong><code>ParagraphStyle</code></strong> es que ParagraphStyle se puede aplicar a un p&#xE1;rrafo completo, mientras que SpanStyle puede aplicarse a nivel de car&#xE1;cter. Una vez que una parte del texto se marca con un ParagraphStyle, esa parte queda separada del resto como si tuviera feeds de l&#xED;neas al principio y al final. Por poner un s&#xED;mil, es como si aplic&#xE1;ramos a ese texto las etiquetas <strong><code>&lt;p&gt;...&lt;/p&gt;</code></strong> de HTML.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: No vamos a ver todas las combinaciones y usos por su complejidad. Pero puedes visitar este enlace a la <strong><a href="(https://developer.android.com/jetpack/compose/text?hl=es-419#multiple-styles)">documentaci&#xF3;n oficial</a></strong>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[18-29]}" class="language-kotlin" data-line="18-29"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+            Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+                    shape <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium
+                <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>End<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleSmall<span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>secondary<span class="token punctuation">,</span>
+            text <span class="token operator">=</span> buildAnnotatedString <span class="token punctuation">{</span>
+                <span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot;M&#xF3;dulo &quot;</span><span class="token punctuation">)</span>
+                <span class="token function">withStyle</span><span class="token punctuation">(</span>
+                    style <span class="token operator">=</span> <span class="token function">SpanStyle</span><span class="token punctuation">(</span>
+                        fontSize <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleMedium<span class="token punctuation">.</span>fontSize<span class="token punctuation">,</span>
+                        color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot;PMDM&quot;</span><span class="token punctuation">)</span> <span class="token comment">// Aplicamos el estilo solo a PMDM</span>
+                <span class="token punctuation">}</span>
+                <span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&quot; 2&#xBA; DAM&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="18-29" data-start="18" data-end="29">
+
+
+
+
+
+
+
+
+
+
+
+</div></div></pre><div align="center">
+    <img height="70" src="assets/imagenes//tema_3_2/ejemplo8.png">
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="brushes-pinceles">Brushes (Pinceles)</h2>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/graphics/draw/brush?hl=es-419">Pinceles en Compose</a></strong></li>
+</ul>
+<p>Aunque este tambi&#xE9;n es un <strong>tema m&#xE1;s avanzado y espec&#xED;fico de dise&#xF1;adores</strong> gr&#xE1;ficos. <strong>Vamos a verlo por encima</strong> para que sepas que existe y puedas usarlo en caso de que tengas alg&#xFA;n pincel definido en el tema que quieras usar.</p>
+<p>En Compose, los pinceles se utilizan para pintar formas y trazos en un lienzo o canvas. Pero tambi&#xE9;n <strong>los podemos usar para pintar el fondo de un <em>composable</em> como un layout a trav&#xE9;s del modificador <code>background</code></strong>.</p>
+<p>Por ejemplo, si a&#xF1;adimos un pincel a nuestra cabecera.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[3-6, 10-12]}" class="language-kotlin" data-line="3-6,10-12"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Creamos el objeto pincel con remember para que no se cree en cada composici&#xF3;n.</span>
+    <span class="token keyword keyword-val">val</span> colorI <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primaryContainer
+    <span class="token keyword keyword-val">val</span> colorF <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiaryContainer
+    <span class="token keyword keyword-val">val</span> pincel <span class="token operator">=</span> remember <span class="token punctuation">{</span> Brush<span class="token punctuation">.</span><span class="token function">horizontalGradient</span><span class="token punctuation">(</span><span class="token function">listOf</span><span class="token punctuation">(</span>colorI<span class="token punctuation">,</span> colorF<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+            Modifier
+                <span class="token comment">// Aplicamos el pincel al background al principio del modificador.</span>
+                <span class="token comment">// Recuerda que el orden importa.</span>
+                <span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span>pincel<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+                    shape <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium
+                <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-6" data-start="3" data-end="6">
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10-12" data-start="10" data-end="12">
+
+
+</div></div></pre><p>Obtendremos el siguiente resultado ...</p>
+<div align="center">
+    <img height="70" src="assets/imagenes//tema_3_2/ejemplo9.png">
+</div>
+<div style="page-break-after:always;"></div>
+<p>Supongamos que queremos pintar un fondo de un texto o un layout con una imagen a modo de pincel. Podemos hacerlo de la siguiente manera...</p>
+<ol>
+<li>Descarga la imagen <strong><a href="assets/imagenes/balmis.png">balmis.png</a></strong> y ponla en la carpeta <strong><code>res/drawable</code></strong> de tu proyecto.</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// En este caso no podemos usar remember porque imageResource</span>
+    <span class="token comment">// es una funci&#xF3;n composable y no puede ser llamada desde una funci&#xF3;n remember.</span>
+    <span class="token keyword keyword-val">val</span> pincel <span class="token operator">=</span> <span class="token function">ShaderBrush</span><span class="token punctuation">(</span><span class="token function">ImageShader</span><span class="token punctuation">(</span>ImageBitmap<span class="token punctuation">.</span><span class="token function">imageResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>balmis<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+            Modifier
+                <span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span>pincel<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">miBordeYPadding</span><span class="token punctuation">(</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+                    shape <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium
+                <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// C&#xF3;digo omitido por abreviar</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Obtendremos el siguiente resultado ...</p>
+<div align="center" style="margin-bottom: 10px;">
+    <img height="70" src="assets/imagenes//tema_3_2/ejemplo10.png">
+</div>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: El usar una imagen como pincel es <strong>m&#xE1;s util para pintar textos</strong> que para pintar layouts. Ya que en el caso de los layouts, la imagen se repite en el eje x e y. Por lo que si el layout es m&#xE1;s grande que la imagen, se ver&#xE1; la imagen repetida. En el caso de querer que el layout tenga un fondo con una imagen, lo mejor es usar un layout <strong><code>Box</code></strong> y asignarle un componente <strong><code>Image</code></strong> de fondo, sobre el que tendremos un mejor control de visualizaci&#xF3;n como veremos en el siguiente tema.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="layouts-b%C3%A1sicos">Layouts b&#xE1;sicos</h2>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/layouts/basics?hl=es-419">Conceptos b&#xE1;sicos de dise&#xF1;o</a></strong></li>
+<li>&#x2B50;&#xFE0F; V&#xED;deo en Ingl&#xE9;s (Android Developers): <strong><a href="https://www.youtube.com/watch?v=LjeHsvPIdpY&amp;list=PLWz5rJ2EKKc94tpHND8pW8Qt8ZfT1a4cq">Lista de reproducci&#xF3;n</a></strong></li>
+<li>V&#xED;deo en Ingl&#xE9;s (Android Developers): <strong><a href="https://www.youtube.com/watch?v=kyH01Lg4G1E">Workshop about basic layouts in Compose</a></strong></li>
+<li>V&#xED;deo en Espa&#xF1;ol (DevExperto): <strong><a href="https://www.youtube.com/watch?v=xyBkLS5OPtk">Box, Column y Row en Jetpack Compose</a></strong></li>
+</ul>
+<p>Los layouts son los encargados de <strong>distribuir</strong> los elementos de nuestra UI. En Compose, los layouts son tambi&#xE9;n <strong>composables</strong> y por tanto, podemos anidarlos unos dentro de otros.</p>
+<p>Los b&#xE1;sicos est&#xE1;n definidos en la <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary">capa de Fundation</a></strong> y son los siguientes:</p>
+<h3 class="mume-header" id="surface">Surface</h3>
+
+<p><strong><a href="https://developer.android.com/reference/kotlin/android/view/Surface">Surface</a></strong> es un <strong>layout</strong> que nos permite a&#xF1;adir una <strong>forma</strong>, <strong>color de fondo</strong> y <strong>elevaci&#xF3;n</strong> a un <em>composable</em> que no los tenga. Es decir, que podemos aplicarle un <strong>sombreado</strong> y una <strong>elevaci&#xF3;n</strong> como si fuera un <strong><code>CardView</code></strong> de XML.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Pero lo m&#xE1;s importante es que <strong>nos permite establecer un tema diferente</strong> al que tengamos en el resto de la aplicaci&#xF3;n. Ya que este se aplica autom&#xE1;ticamente a todos su contenido. Por eso veremos que si le asignamos un color, el color de los textos cambia en funci&#xF3;n del tema.</p>
+</blockquote>
+<p>Por esta raz&#xF3;n, vamos a usarlo para definir un componente <strong><code>TextoConForma</code></strong> que de ahora en adelante usaremos para probar los diferentes layouts de los ejemplos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
+    texto <span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;Hola Mundo&quot;</span><span class="token punctuation">,</span>
+    color <span class="token operator">:</span> Color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Surface</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        color <span class="token operator">=</span> color<span class="token punctuation">,</span>
+        shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            textAlign <span class="token operator">=</span> TextAlign<span class="token punctuation">.</span>Center<span class="token punctuation">,</span>
+            text <span class="token operator">=</span> texto<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>Si usamos el siguiente <em><code>preview</code></em> para probarlo ...</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8-14]}" class="language-kotlin" data-line="8-14"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;Test&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        Row <span class="token punctuation">{</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">)</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string">&quot;Doctor&quot;</span><span class="token punctuation">)</span>
+            <span class="token comment">// F&#xED;jate en este caso como el color del texto se adapta al color de fondo.</span>
+            <span class="token comment">// Esto no suceder&#xE1; en otros layouts como Box o Column.</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+                <span class="token comment">// Intentar&#xE1; ocupar el ancho que quede libre.</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8-14" data-start="8" data-end="14">
+
+
+
+
+
+
+</div></div></pre><p>Obtendremos el siguiente resultado ...</p>
+<div align="center">
+    <img height="70" src="assets/imagenes//tema_3_2/ejemplo11.png">
+</div>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="box">Box</h3>
+
+<ul>
+<li>Documentaci&#xF3;n oficial (capa <strong>fundation</strong>): <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#Box(androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)">Box</a></strong></li>
+<li>V&#xED;deo en Ingl&#xE9;s (<strong>Stevdza-San</strong>): <strong><a href="https://www.youtube.com/watch?v=8XVtGK2P2mE">Box Layout</a></strong></li>
+<li>Descarga el c&#xF3;digo de los ejemplos: <strong><a href="assets/codigo/Box.kt">Box.kt</a></strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">Box</span><span class="token punctuation">(</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
+    contentAlignment<span class="token operator">:</span> Alignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>TopStart<span class="token punctuation">,</span>
+    propagateMinConstraints<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    content<span class="token operator">:</span> <span class="token annotation builtin">@Composable</span> BoxScope<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span><span class="token operator">:</span> Unit
+</pre><p><strong><code>Box</code></strong> se dimensionar&#xE1; para ajustarse al contenido, sujeto a las restricciones de su contenedor.</p>
+<p>Cuando los hijos son m&#xE1;s peque&#xF1;os que el padre, por defecto se posicionar&#xE1;n dentro del Box, seg&#xFA;n la alineaci&#xF3;n de contenido. Para especificar individualmente las alineaciones de los dise&#xF1;os secundarios, use el modificador <strong><code>BoxScope.align</code></strong>.</p>
+<p>Por defecto, el contenido se medir&#xE1; sin las restricciones m&#xED;nimas entrantes de la Box, a menos que <strong><code>propagateMinConstraints</code></strong> sea <strong><code>true</code></strong>. Si <strong><code>propagateMinConstraints</code></strong> se establece en <strong><code>true</code></strong>, el tama&#xF1;o m&#xED;nimo establecido en la Box tambi&#xE9;n se aplicar&#xE1; al contenido, mientras que de lo contrario el tama&#xF1;o m&#xED;nimo solo se aplicar&#xE1; al <strong><code>Box</code></strong>.</p>
+<p><strong>Ejemplo</strong>: Se puede establecer <strong><code>propagateMinConstraints</code></strong> a <strong><code>true</code></strong> cuando el Box tiene contenido en el que no se pueden especificar modificadores directamente y <strong>se necesita establecer un tama&#xF1;o m&#xED;nimo en el contenido del <code>Box</code></strong>.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Cuando el <strong><code>Box</code></strong> tiene m&#xE1;s de un hijo, estos <strong>se apilar&#xE1;n uno encima del otro</strong> (posicionados como se explica arriba) en el orden de composici&#xF3;n.</p>
+</blockquote>
+<p>En el siguiente ejemplo todos los <em>composables</em> <strong><code>TextoConForma</code></strong> se apilar&#xE1;n uno encima del otro en el centro porque hemos indicado <strong><code>contentAlignment = Alignment.Center</code></strong> y como hemos comentado el tama&#xF1;o del <strong><code>Box</code></strong> se ajustar&#xE1; al m&#xE1;s grande en la pila.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Cuidado</strong>: Si pusi&#xE9;ramos el <strong><code>TextoConForma</code></strong> de mayor dimensi&#xF3;n al final. <strong>este tapar&#xED;a a todos los dem&#xE1;s</strong>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=5}" class="language-kotlin" data-line="5"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">BoxApiladoAlCento</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Box</span> <span class="token punctuation">(</span>contentAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>Center<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">150</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary<span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Doctor&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary<span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><div align="center">
+    <img height="200" src="assets/imagenes/tema_3_2/box1.png">
+</div>
+<p>En el siguiente ejemplo, hemos ajustado de forma independiente la alineaci&#xF3;n de cada uno de los <em>composables</em> <strong><code>TextoConForma</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin  {highlight=[5, 10, 14]}" class="language-kotlin" data-line="5,10,14"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">BoxConAlineacionesIndependientes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Box <span class="token punctuation">{</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>Center<span class="token punctuation">)</span>
+                               <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">150</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary<span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>CenterStart<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Doctor&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary<span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>BottomEnd<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div></pre><div align="center">
+    <img height="200" src="assets/imagenes/tema_3_2/box2.png">
+</div>
+<p>Esto es posible, porque dentro del Composable <strong><code>Box</code></strong> tenemos acceso a un <strong><code>BoxScope</code></strong> (<strong>&#xE1;mbito o alcance del Box</strong>) que nos permite aplicar modificadores a cada uno de los hijos de forma independiente. Estos modificadores adicionales que aparecen son...</p>
+<ul>
+<li>
+<p><strong><code>align()</code></strong>: Alinea el hijo dentro del &#xE1;rea de contenido de la Box utilizando el valor de alineaci&#xF3;n especificado.</p>
+</li>
+<li>
+<p><strong><code>matchParentSize()</code></strong>: Dimensiona el hijo al que se aplica el modificador para que coincida con el tama&#xF1;o de la Box principal.</p>
+</li>
+</ul>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Pi&#xE9;nsalo, &#xBF;Qu&#xE9; sentido tendr&#xED;a aplicar un modificador <strong><code>align()</code></strong> a nuestro <strong><code>TextoConForma</code></strong> si no estuviera dentro de algo que lo contuviera?. Adem&#xE1;s, tenemos que saber como dispone nuestro contenedor a su continente para saber de que formas podemos alinear.<br>
+Esto nos va asuceder tambi&#xE9;n con otros layouts como <strong><code>Column</code></strong> o <strong><code>Row</code></strong> que veremos a continuaci&#xF3;n.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="column-y-row">Column y Row</h3>
+
+<ul>
+<li>Documentaci&#xF3;n oficial (capa <strong>fundation</strong>): <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1)">Column</a></strong></li>
+<li>Documentaci&#xF3;n oficial (capa <strong>fundation</strong>): <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#Row(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function1)">Row</a></strong></li>
+<li>V&#xED;deo en Ingl&#xE9;s (<strong>Stevdza-San</strong>): <strong><a href="https://www.youtube.com/watch?v=kg7EWKOberk">Rows and Columns</a></strong></li>
+<li>V&#xED;deo en Ingl&#xE9;s (<strong>Philipp Lackner</strong>): <strong><a href="https://www.youtube.com/watch?v=rHKeRWK3zL4">Rows and Columns</a></strong></li>
+<li>Descarga el c&#xF3;digo de los ejemplos: <strong><a href="assets/codigo/ColumnYRow.kt">ColumnYRow.kt</a></strong></li>
+</ul>
+<p><strong><code>Column</code></strong> y <strong><code>Row</code></strong> son layouts <em>composables</em> que colocan a sus <em>hijos</em> en una secuencia <strong>vertical y horizontal respectivamente</strong>.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Al igual que sucede con el <strong><code>Box</code></strong> los hijos dentro de un <strong><code>Column</code></strong> o un <strong><code>Row</code></strong> estar&#xE1;n dentro de un &#xE1;mbito o alcance determinado por el <strong><code>ColumnScope</code></strong> o el <strong><code>RowScope</code></strong> respectivamente. Esto permitir&#xE1; que sus hijos puedan aplicar modificadores adicionales como <strong><code>weight</code></strong> o <strong><code>align</code></strong> relacionados con su contenedor respectivo.</p>
+</blockquote>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Ten en cuenta que, por defecto, los elementos no se desplazan. Consulta los modificadores <strong><code>Modifier.verticalScroll</code></strong> y <strong><code>Modifier.horizontalScroll</code></strong> para obtener este comportamiento</p>
+</blockquote>
+<p><strong>Cuando el tama&#xF1;o de la columna o fila es mayor que la suma de los tama&#xF1;os de sus elementos hijos</strong>, se puede especificar un <strong><code>verticalArrangement</code></strong> o <strong><code>horizontalArrangement</code></strong> para definir la posici&#xF3;n de los elementos hijos dentro.</p>
+<p>Veamos un ejemplo de disposiciones en un <strong><code>Row</code></strong>.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Todo lo aplicado en este ejemplo se puede aplicar tambi&#xE9;n a un <strong><code>Column</code></strong> de forma an&#xE1;loga pues su comportamiento es id&#xE9;ntico pero en el <strong><code>eje y</code></strong>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Definimos un componente Row con una propiedad horizontalArrangement</span>
+<span class="token comment">// y otra verticalAlignment para definir la disposici&#xF3;n de los elementos</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">MyRow</span><span class="token punctuation">(</span>
+    horizontalArrangement<span class="token operator">:</span> Arrangement<span class="token punctuation">.</span>Horizontal<span class="token punctuation">,</span>
+    verticalAlignment <span class="token operator">:</span> Alignment<span class="token punctuation">.</span>Vertical
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>
+        <span class="token comment">// Aplicamos un modificador para que se ajuste al ancho m&#xE1;ximo</span>
+        <span class="token comment">// y le aplicamos un borde para que se vea el tama&#xF1;o que ocupa.</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">border</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> Color<span class="token punctuation">.</span>Gray<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> horizontalArrangement<span class="token punctuation">,</span>
+        verticalAlignment <span class="token operator">=</span> verticalAlignment
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// La primera caja en la fila me indicar&#xE1; la disposici&#xF3;n </span>
+        <span class="token comment">// que se ha aplicado a todo el Row.</span>
+        <span class="token keyword keyword-val">val</span> disposicion <span class="token operator">=</span> horizontalArrangement<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Disposici&#xF3;n\n&quot;</span> <span class="token operator">+</span> disposicion<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>
+                disposicion<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&apos;#&apos;</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> Color<span class="token punctuation">.</span>LightGray
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Ignorar&#xE1; la alineaci&#xF3;n vertical general del Row y se alinear&#xE1;</span>
+        <span class="token comment">// en la parte baja del row siempre.</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>Bottom<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Si no indico nada la alineaci&#xF3;n vertical ser&#xE1; la general del Row</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Doctor&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary
+        <span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>Vamos a usar el <em>composable</em> <strong><code>MyRow</code></strong> para probar las diferentes disposiciones que podemos aplicar a un <strong><code>Row</code></strong>. Para ell, definimos un <em>composable</em> <strong><code>RowsWithColumns</code></strong> que contendr&#xE1; un <strong><code>Column</code></strong> con varios hijos <strong><code>MyRow</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ColumnsWithRows</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Todos se disponen en horizontal al final del Row (Derecha)</span>
+        <span class="token comment">// Todos se alinean en vertical arriba del Row salvo lo que</span>
+        <span class="token comment">// tengan una alineaci&#xF3;n personalizada.</span>
+        <span class="token function">MyRow</span><span class="token punctuation">(</span>
+            horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>End<span class="token punctuation">,</span>
+            verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>Top
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Todos se disponen en horizontal espaciados de forma equitativa</span>
+        <span class="token comment">// salvo el primero y el &#xFA;ltimo que se ajustar&#xE1;n a los extremos.</span>
+        <span class="token comment">// Todos se alinean en vertical centrados del Row salvo lo que</span>
+        <span class="token comment">// tengan una alineaci&#xF3;n personalizada.</span>
+        <span class="token function">MyRow</span><span class="token punctuation">(</span>
+            horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>SpaceBetween<span class="token punctuation">,</span>
+            verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Todos se disponen en horizontal espaciados de forma equitativa.</span>
+        <span class="token comment">// Todos se alinean en vertical abajo del Row salvo lo que</span>
+        <span class="token comment">// tengan una alineaci&#xF3;n personalizada.</span>
+        <span class="token function">MyRow</span><span class="token punctuation">(</span>
+            horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>SpaceEvenly<span class="token punctuation">,</span>
+            verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>Bottom
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div align="center" style="margin-bottom: 10px;">
+    <img height="250" src="assets/imagenes/tema_3_2/ColumnYRow1.png">
+</div>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="pesos-en-column-y-row">Pesos en Column y Row</h4>
+
+<p>El dise&#xF1;o <strong><code>Column</code></strong> es capaz de <strong>asignar alturas m&#xE1;ximas respecto al alto total del Column</strong> a los hijos, seg&#xFA;n sus pesos proporcionados mediante el modificador <strong><code>ColumnScope.weight</code></strong> lo mismo suceder&#xE1; con <strong><code>Row</code></strong> pero con <strong><code>RowScope.weight</code></strong> para <strong>asignar anchos m&#xE1;ximos respecto al ancho total del Row</strong>.</p>
+<p>En el siguiente ejemplo vamos a definir <em>composable</em> <strong><code>RowConPesosIguales</code></strong> para probar los pesos que podemos asignar a los hijos de un <strong><code>Row</code></strong>. A todos los hijos les asignaremos el mismo peso para que se repartan el espacio disponible de forma equitativa y al ser <strong>3</strong> cada uno ocupar&#xE1; <strong>1/3</strong> del espacio disponible. Adem&#xE1;s, f&#xED;jate que todas las cajas tienen el modificador <strong><code>fillMaxWidth()</code></strong> para intentar expandirse al m&#xE1;ximo dentro del espacio que le corresponda seg&#xFA;n el peso.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[9,14,19]}" class="language-kotlin" data-line="9,14,19"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">RowConPesosIguales</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">border</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> Color<span class="token punctuation">.</span>Gray<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>SpaceEvenly<span class="token punctuation">,</span>
+        verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">3f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Pesos\nIguales&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> Color<span class="token punctuation">.</span>LightGray
+        <span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">3f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary
+        <span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span><span class="token number">3f</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>Top<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="19" data-start="19">
+</div></div></pre><div align="center" style="margin-bottom: 10px;">
+    <img height="75" src="assets/imagenes/tema_3_2/ColumnYRow2.png">
+</div>
+<div style="page-break-after:always;"></div>
+<p>Realmente el valor que le pasa al modificador <strong><code>weight</code></strong> es un <strong><code>Float</code></strong> que representa el porcentaje o tanto por uno del espacio disponible que ocupar&#xE1; el hijo.</p>
+<p>En el siguiente ejemplo, las dos primeras cajas ocupar&#xE1;n el <strong>0.4f o el 40%</strong> del espacio disponible y la tercera el <strong>0.2f o el 20%</strong>. Todos los valores deben sumar <strong>1.0f o 100%</strong> del espacio disponible.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[8,13,18]}" class="language-kotlin" data-line="8,13,18"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">RowConPesosDistintos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">border</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> Color<span class="token punctuation">.</span>Gray<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>SpaceEvenly
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">0.40f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Pesos Distintos\n40%&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> Color<span class="token punctuation">.</span>LightGray
+        <span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">0.40f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Balmis\n40%&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary
+        <span class="token punctuation">)</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">0.20f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;IES\n20%&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="18" data-start="18">
+</div></div></pre><div align="center" style="margin-bottom: 10px;">
+    <img height="75" src="assets/imagenes/tema_3_2/ColumnYRow3.png">
+</div>
+<blockquote>
+<p>&#x270B; <strong>Importente</strong>: Si un hijo no <strong>tiene un peso asignado</strong>, se le pedir&#xE1; su altura o ancho preferido antes de que se calculen los tama&#xF1;os de los hijos con pesos proporcionalmente a su peso en funci&#xF3;n del espacio disponible restante.</p>
+</blockquote>
+<p>Ten en cuenta que, si el <strong><code>Column</code></strong> o el <strong><code>Row</code></strong> tienen aplicado su modificador de <strong>scroll</strong>, se <strong>ignorar&#xE1;n los pesos proporcionados</strong>, ya que el espacio disponible restante ser&#xE1; infinito.</p>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="flowcolumn-y-flowrow">FlowColumn y FlowRow</h3>
+
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Aunque en esta secci&#xF3;n solo vamos a hablar de <strong><code>FlowRow</code></strong> por no extendernos. Todo lo que se diga es aplicable a <strong><code>FlowColumn</code></strong> de forma an&#xE1;loga. Adem&#xE1;s, en la versi&#xF3;n <strong>1.5.0 de Compose</strong> a&#xFA;n est&#xE1; con la anotaci&#xF3;n <strong>experimental</strong> en su definici&#xF3;n. Por lo que puede cambiar el API en futuras versiones de la Capa Foundation de Compose</p>
+</blockquote>
+<ul>
+<li>Documentaci&#xF3;n oficial (capa <strong>fundation</strong>): <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#FlowRow(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.foundation.layout.Arrangement.Vertical,kotlin.Int,kotlin.Function1)">FlowRow</a></strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin {highlight=2}" class="language-kotlin" data-line="2"><span class="token annotation builtin">@Composable</span>
+<span class="token annotation builtin">@ExperimentalLayoutApi</span>
+<span class="token keyword keyword-inline">inline</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">FlowRow</span><span class="token punctuation">(</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
+    horizontalArrangement<span class="token operator">:</span> Arrangement<span class="token punctuation">.</span>Horizontal <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Start<span class="token punctuation">,</span>
+    verticalArrangement<span class="token operator">:</span> Arrangement<span class="token punctuation">.</span>Vertical <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Top<span class="token punctuation">,</span>
+    maxItemsInEachRow<span class="token operator">:</span> Int <span class="token operator">=</span> Int<span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">,</span>
+    content<span class="token operator">:</span> <span class="token annotation builtin">@Composable</span> FlowRowScope<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span><span class="token operator">:</span> Unit
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre><p><strong><code>FlowRow</code></strong> es un dise&#xF1;o que rellena elementos <strong>de izquierda a derecha</strong> (ltr) en dise&#xF1;os LTR o de derecha a izquierda (rtl) en dise&#xF1;os RTL y <strong>cuando se queda sin espacio</strong>, se mueve a la siguiente &quot;fila&quot; o &quot;l&#xED;nea&quot; colocada en la parte inferior y, a continuaci&#xF3;n, contin&#xFA;a rellenando elementos hasta que se agotan los elementos. Por hacer un s&#xED;mil con <strong>css</strong> podr&#xED;a equivaler a un <strong><code>display: flex; flex-wrap: wrap;</code></strong>.</p>
+<p>Si especificamos un <strong><code>maxItemsInEachRow</code></strong> al <strong><code>FlowRow</code></strong>, este se rellenar&#xE1; la fila hasta que se acaben los elementos o se llegue al n&#xFA;mero m&#xE1;ximo de elementos por fila que hemos especificado y saltar&#xE1; a la siguiente si queda alguno.</p>
+<p>Si especificamos un <strong><code>RowScope.weight</code></strong> a sus elementos, este peso se aplicar&#xE1; en funci&#xF3;n de los elementos que le acompa&#xF1;en en la misma fila.</p>
+<p>Por ejemplo, supongamos las siguientes condiciones:</p>
+<ul>
+<li>A&#xF1;adimos <strong>12 elementos</strong> a nuestro <strong><code>FlowRow</code></strong>.</li>
+<li>Todos tienen un <strong>peso de <code>0.5f</code></strong>.</li>
+<li>El <strong><code>m&#xE1;ximo de elementos por fila es de 5</code></strong>.</li>
+<li>&#x1F441; Nuestro <strong><code>FlowRow</code></strong> <strong>tiene el suficiente ancho</strong> para albergar 5 elementos.</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<p>entonces...</p>
+<ul>
+<li>En las <strong>dos primeras filas</strong> se colocar&#xE1;n <strong>5 elementos</strong> cada una el peso total ser&#xE1; de <strong><code>0.5 x 5 = 2.5</code></strong>. Por tanto, el anch&#xF3; de cada elemento ocupar&#xE1; <strong><code>0.5 / 2.5 = 0.2</code></strong> esto es un <strong>20%</strong> del ancho de la fila.</li>
+<li>En la <strong>&#xFA;ltima fila</strong> se colocar&#xE1;n <strong>2 elementos</strong>, que son los que quedan. Por tanto, el peso total ser&#xE1; de <strong><code>0.5 x 2 = 1</code></strong> por lo que el anch&#xF3; de cada elemento ocupar&#xE1; <strong><code>0.5 / 1 = 0.5</code></strong> esto es un <strong>50%</strong> del ancho de la fila.</li>
+</ul>
+<p>Esta es solo una de los <strong>cientos de casu&#xED;sticas</strong> que se pueden dar. Por lo que te recomiendo que pruebes y experimentes con este layout.</p>
+<p><strong>Ejemplo</strong>: Vamos a ver algunas combinaciones que puedes descargar del siguiente fuente <strong><a href="assets/codigo/FlowRow.kt">FlowRow.kt</a></strong>.</p>
+<p>En este caso mostraremos la pantalla de previsualizaci&#xF3;n que nos ha devuelto el c&#xF3;digo de ejemplo.</p>
+<div align="center" style="margin-bottom: 10px;">
+    <img height src="assets/imagenes/tema_3_2/FlowRow.png">
+</div>
+<p>Para crear esta composici&#xF3;n hemos usado el siguiente c&#xF3;digo de <strong>Preview</strong> con un <strong>&#xE1;rea de 900 dp x 600 dp</strong>. Adem&#xE1;s, los <strong>FlowRow q la izquierda</strong> tienen un &#xE1;rea de <strong>500 dp x 300 dp</strong> y <strong>los a la derecha</strong> de <strong>400 dp X 300 dp</strong>.</p>
+<div style="page-break-after:always;"></div>
+<p>El c&#xF3;digo del preview ser&#xED;a ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+    showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;FlowColumnYRowPreview&quot;</span><span class="token punctuation">,</span>
+    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=900dp,height=600dp,dpi=480&quot;</span>
+<span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FlowColumnYRowPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        <span class="token function">Column</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Row</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">FlowRowConPesos</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+                <span class="token function">FlowRowConPesos</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">Row</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">FlowRowSinPesos</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+                <span class="token function">FlowRowSinPesos</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>En los <strong><code>FlowRow</code></strong> <strong>con pesos de la parte superior</strong> tendremos:</p>
+<ol>
+<li><strong><code>maxItemsInEachRow = 5</code></strong></li>
+<li><strong><code>horizontalArrangement = Arrangement.Start</code></strong> Sin efectos al intentar todos los elementos expandirse al m&#xE1;ximo ancho.</li>
+<li><strong><code>verticalArrangement = Arrangement.SpaceEvenly</code></strong> Rellena el espacio verticalmente entre las filas de elementos de forma equitativa.</li>
+<li><strong><code>verticalAlignment = Alignment.CenterVertically</code></strong> De cada elemento de forma personalizada al centro verticalmente en la fila que le corresponde.</li>
+<li>Todos los elementos intentan expandirse al m&#xE1;ximo en el eje X con <strong><code>fillMaxWidth()</code></strong>.</li>
+<li>Todos los elementos tienen un peso de <strong><code>1 / 10 = 0.1f</code></strong> por lo que si hay 5 elementos en la fila cada uno ocupar&#xE1; <strong><code>0.1 / 0.5 = 0.2</code></strong> esto es un <strong>20%</strong> del ancho de la fila.</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<p>El c&#xF3;digo que genera los <strong>FlowRow</strong> con pesos de la parte superior ser&#xED;a ...</p>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalLayoutApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FlowRowConPesos</span><span class="token punctuation">(</span>ancho<span class="token operator">:</span> Dp<span class="token punctuation">,</span> alto<span class="token operator">:</span> Dp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> maxHijosPorFila <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword keyword-val">val</span> filas <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token keyword keyword-val">val</span> hijos <span class="token operator">=</span> maxHijosPorFila <span class="token operator">*</span> filas
+    <span class="token function">FlowRow</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span>ancho<span class="token punctuation">,</span> alto<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Start<span class="token punctuation">,</span>
+        verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>SpaceEvenly<span class="token punctuation">,</span>
+        maxItemsInEachRow <span class="token operator">=</span> maxHijosPorFila
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Pesos iguales evenly\n&quot;</span>
+                    <span class="token operator">+</span> <span class="token string">&quot;Ancho = <span class="token interpolation"><span class="token delimiter variable">${</span>ancho<span class="token delimiter variable">}</span></span> <span class="token interpolation"><span class="token delimiter variable">${</span>maxHijosPorFila<span class="token delimiter variable">}</span></span> items x fila&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> Color<span class="token punctuation">.</span>LightGray
+        <span class="token punctuation">)</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token function">ceil</span><span class="token punctuation">(</span>hijos <span class="token operator">/</span> <span class="token number">2f</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier
+                    <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> hijos<span class="token punctuation">.</span><span class="token function">toFloat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>CenterVertically<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary
+            <span class="token punctuation">)</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier
+                    <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> hijos<span class="token punctuation">.</span><span class="token function">toFloat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>En los <strong><code>FlowRow</code></strong> <strong>sin pesos de la parte inferior</strong> tendremos:</p>
+<ol>
+<li><strong><code>maxItemsInEachRow = 7</code></strong></li>
+<li><strong><code>horizontalArrangement = Arrangement.Start</code></strong> Ahora s&#xED; tiene efectos.</li>
+<li><strong><code>verticalArrangement = Arrangement.spacedBy(5.dp)</code></strong> Rellena el espacio verticalmente entre las filas de elementos con un espacio de <strong>5 dp</strong>.</li>
+<li>Al ser 7 elementos en el <strong><code>FlowRow</code></strong> inferior-izquierdo le caben los 7 y los alinea a Start. Pero en el <strong><code>FlowRow</code></strong> inferior-derecho solo caben 6 elementos por lo que hay una fila m&#xE1;s donde coloca los 2 que le quedan.</li>
+</ol>
+<p>El c&#xF3;digo que genera los <strong>FlowRow</strong> con pesos de la parte superior ser&#xED;a ...</p>
+<pre data-role="codeBlock" data-info="kotlin {class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalLayoutApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FlowRowSinPesos</span><span class="token punctuation">(</span>ancho<span class="token operator">:</span> Dp<span class="token punctuation">,</span> alto<span class="token operator">:</span> Dp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> maxHijosPorFila <span class="token operator">=</span> <span class="token number">7</span>
+    <span class="token keyword keyword-val">val</span> filas <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token keyword keyword-val">val</span> hijos <span class="token operator">=</span> maxHijosPorFila <span class="token operator">*</span> filas
+    <span class="token function">FlowRow</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span>ancho<span class="token punctuation">,</span> alto<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Start<span class="token punctuation">,</span>
+        verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span><span class="token function">spacedBy</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        maxItemsInEachRow <span class="token operator">=</span> maxHijosPorFila
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string">&quot;Sin pesos spaced by 5dp\n&quot;</span>
+                    <span class="token operator">+</span> <span class="token string">&quot;Ancho = <span class="token interpolation"><span class="token delimiter variable">${</span>ancho<span class="token delimiter variable">}</span></span> <span class="token interpolation"><span class="token delimiter variable">${</span>maxHijosPorFila<span class="token delimiter variable">}</span></span> items x fila&quot;</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> Color<span class="token punctuation">.</span>LightGray
+        <span class="token punctuation">)</span>
+        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token function">ceil</span><span class="token punctuation">(</span>hijos <span class="token operator">/</span> <span class="token number">2f</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+                texto <span class="token operator">=</span> <span class="token string">&quot;IES&quot;</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>tertiary
+            <span class="token punctuation">)</span>
+            <span class="token function">TextoConForma</span><span class="token punctuation">(</span>
+                texto <span class="token operator">=</span> <span class="token string">&quot;Balmis&quot;</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>inversePrimary
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><blockquote>
+<p>&#x1F4E3; <strong>Consideraciones importantes</strong>:</p>
+<ul>
+<li>&#x270B; <strong><code>FlowRow</code></strong> y <strong><code>FlowColumn</code></strong>  <strong>no est&#xE1;n pensados para representar datos de una fuente de datos</strong>. Para eso tenemos <strong><code>LazyColumn</code></strong>, <strong><code>LazyRow</code></strong> y <strong><code>LazyGrid</code></strong> que trataremos en temas posteriores.</li>
+<li>Su uso est&#xE1; pensado para <strong>dise&#xF1;os din&#xE1;micos o responsive</strong>, esto es, que se ajusten a las dimensiones de la pantalla de forma fluida. Por ejemplo: Queremos que ciertos elementos se distribuyan al girar la pantalla sin hacer un dise&#xF1;o espec&#xED;fico o nuestro dise&#xF1;o tiene que adaptarse a M&#xF3;vil, Android Tv o Desktop.</li>
+<li>En ocasiones los c&#xE1;lculos pueden ser complejos y <strong>no se obtiene el resultado esperado</strong>. Por lo que es recomendable <strong>probar y experimentar</strong> con los diferentes par&#xE1;metros que nos ofrece.</li>
+</ul>
+</blockquote>
+<h2 class="mume-header" id="im%C3%A1genes">Im&#xE1;genes</h2>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/graphics/images">Im&#xE1;genes en Jetpack Compose</a></strong></li>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/package-summary#Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Component Image Fundation Layer</a></strong></li>
+</ul>
+<p>Usaremos el elemento composable <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/package-summary#Image(androidx.compose.ui.graphics.vector.ImageVector,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)">Image</a></strong> para mostrar un gr&#xE1;fico en la pantalla.</p>
+<p>Encontraremos diferentes sobrecargas del <em>composable</em> <strong><code>Image</code></strong> que nos permitir&#xE1;n cargar diferentes formas de declarar las im&#xE1;genes.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Image</span><span class="token punctuation">(</span>imageVector<span class="token operator">:</span> ImageVector<span class="token punctuation">,</span> <span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Image</span><span class="token punctuation">(</span>bitmap<span class="token operator">:</span> ImageBitmap<span class="token punctuation">,</span> <span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Image</span><span class="token punctuation">(</span>painter<span class="token operator">:</span> Painter<span class="token punctuation">,</span> <span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+
+<span class="token operator">..</span><span class="token punctuation">.</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="formas-de-manejar-un-recurso-imagen">Formas de manejar un recurso imagen</h3>
+
+<ol>
+<li>
+<p><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/painter/Painter">Painter</a></strong><br>
+<strong>Abstracci&#xF3;n para algo que se puede dibujar</strong>. Dibuja en un &#xE1;rea delimitada especificada y ofrece algunos mecanismos de alto nivel que los usuarios pueden utilizar para configurar c&#xF3;mo se dibuja el contenido.</p>
+<p>Para cargar una imagen (por ejemplo: PNG, JPEG, WEBP) o un recurso vectorial del disco, usa la API de <strong><code>painterResource</code></strong> con tu imagen de referencia.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// La opci&#xF3;n m&#xE1;s adecuada para obtener un recurso dibujable en Compose</span>
+<span class="token keyword keyword-val">val</span> painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>balmis<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap">ImageBitmap</a></strong><br>
+Representa un mapa de bits de imagen. Para cargar una imagen (por ejemplo: PNG, JPEG, WEBP) del disco, usa la API de <strong><code>imageResource</code></strong> definida en <strong><code>ImageBitmap</code></strong>. Podemos usar el constructor <strong><code>BitmapPainter</code></strong> para obtener un <strong><code>Painter</code></strong> a partir de un <strong><code>ImageBitmap</code></strong> y as&#xED; asignarla a la abstracci&#xF3;n <strong><code>Painter</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> imageBitmap <span class="token operator">:</span> ImageBitmap <span class="token operator">=</span> ImageBitmap<span class="token punctuation">.</span><span class="token function">imageResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>balmis<span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> painterBitmap <span class="token operator">=</span> <span class="token function">remember</span><span class="token punctuation">(</span>imageBitmap<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">BitmapPainter</span><span class="token punctuation">(</span>imageBitmap<span class="token punctuation">)</span> <span class="token punctuation">}</span>    
+</pre><p>Pasar de <strong><code>Bitmap</code></strong> de Android a <strong><code>ImageBitmap</code></strong> podemos usar el m&#xE9;todo asociado <strong><code>asImageBitmap()</code></strong>.<br>
+Pasar de <strong><code>ImageBitmap</code></strong> de Compose a <strong><code>Bitmap</code></strong> de Android podemos usar el m&#xE9;todo asociado <strong><code>asAndroidBitmap()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> bitmap <span class="token operator">:</span> Bitmap <span class="token operator">=</span> <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-val">val</span> imageBitmap <span class="token operator">:</span> ImageBitmap <span class="token operator">=</span> bitmap<span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector">ImageVector</a></strong><br>
+Representa un vector de imagen. Para cargar un recurso vectorial del disco, usa la API de <strong><code>vectorResource</code></strong> definida en <strong><code>ImageVector</code></strong>. Adem&#xE1;s, podemos usar la funci&#xF3;n <strong><code>rememberVectorPainter</code></strong> para obtener un <strong><code>PainterVector</code></strong> a partir de un <strong><code>ImageVector</code></strong> y as&#xED; asignarla a la abstracci&#xF3;n <strong><code>Painter</code></strong> adem&#xE1;s de <strong>recordarla</strong> en la recomposici&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> imageVector <span class="token operator">:</span> ImageVector <span class="token operator">=</span> ImageVector<span class="token punctuation">.</span><span class="token function">vectorResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>balmis<span class="token punctuation">)</span>
+<span class="token keyword keyword-val">val</span> painterVector <span class="token operator">:</span> PainterVector <span class="token operator">=</span> <span class="token function">rememberVectorPainter</span><span class="token punctuation">(</span>imageVector<span class="token punctuation">)</span>
+</pre><p>Podemos tambi&#xE9;n cargar un icono de los proporcionados por Material como imagen vectorial.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> painterFavorite <span class="token operator">=</span> <span class="token function">rememberVectorPainter</span><span class="token punctuation">(</span>image <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Filled<span class="token punctuation">.</span>Favorite<span class="token punctuation">)</span>
+</pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="par%C3%A1metros-m%C3%A1s-comunes">Par&#xE1;metros m&#xE1;s comunes</h3>
+
+<p>Tendremos m&#xE1;s par&#xE1;metros seg&#xFA;n la sobrecarga de la funci&#xF3;n <em>composable</em> <strong><code>Image</code></strong> entre los que podemos destacar:</p>
+<ul>
+<li>
+<p>Un texto <strong><code>contentDescription</code></strong> que se mostrar&#xE1; si no se puede cargar la imagen. La herramienta de accesibilidad <strong><code>TalkBack</code></strong> lee la descripci&#xF3;n del contenido, por lo que debes asegurarte de que el texto sea significativo si se lee en voz alta y se traduce.</p>
+</li>
+<li>
+<p>Modificadores con <strong><code>Modifier</code></strong>. (Veremos alguno de utilidad en los ejemplos)</p>
+</li>
+<li>
+<p>Un <strong><code>Alignment</code></strong> que especifica c&#xF3;mo se alinea la imagen dentro de su espacio asignado.</p>
+</li>
+<li>
+<p>Un <strong><code>alpha</code></strong> que especifica la transparencia de la imagen. Es un valor entre <code>0.0f</code> y <code>1.0f</code>.</p>
+</li>
+<li>
+<p>Un <strong><code>ColorFilter</code></strong> que especifica un filtro de color para aplicar a la imagen.</p>
+</li>
+<li>
+<p>Un <strong><code>ContentScale</code></strong> que especifica c&#xF3;mo se escala la imagen dentro de su espacio asignado. Sus valores pueden ser...</p>
+<ul>
+<li><strong><code>Crop</code></strong>: Escala la imagen para que llene el espacio asignado, recortando la imagen si es necesario.</li>
+<li><strong><code>FillBounds</code></strong>: Escala la imagen para que llene el espacio asignado, sin recortar la imagen.</li>
+<li><strong><code>Fit</code></strong>: Escala la imagen para que quepa dentro del espacio asignado, sin recortar la imagen.</li>
+<li><strong><code>FillHeight</code></strong>: Escala la imagen para que llene la altura del espacio asignado, sin recortar la imagen.</li>
+<li><strong><code>FillWidth</code></strong>: Escala la imagen para que llene el ancho del espacio asignado, sin recortar la imagen.</li>
+<li><strong><code>Inside</code></strong>: Escala la imagen para que quepa dentro del espacio asignado, recortando la imagen si es necesario.</li>
+<li><strong><code>None</code></strong>: No escala la imagen.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Ejemplo</strong>: Vamos a redibujar nuestra cabecera, pero esta vez en lugar de dibujar la imagen de fondo con un <strong><code>Brush</code></strong>, vamos a usar un componente <strong><code>Image</code></strong> que ser&#xED;a m&#xE1;s adecuado. Para seguir los siguientes ejemplos necesitaremos descargar el siguientes recursos y arrastrarlos a <strong><code>res/drawable</code></strong>: <strong><a href="assets/imagenes/balmis.png">balmis.png</a></strong> que ya hemos usado y <strong><a href="assets/imagenes/logo.png">logo.png</a></strong> que usaremos en los ejemplos. Tambi&#xE9;n, pudes descargarte el c&#xF3;digo de los ejemplos en <strong><a href="assets/codigo/Imagenes.kt">Imagenes.kt</a></strong>.</p>
+<p>La imagen de nuestro ejemplo ser&#xE1; la siguiente ...</p>
+<div align="center">
+    <img height="100" src="assets/imagenes/tema_3_2/CabeceraImagenes.png">
+</div>
+<div style="page-break-after:always;"></div>
+<p>Definimos una funci&#xF3;n <strong><code>sombra</code></strong> que ya hemos usado en este tema.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=6}" class="language-kotlin" data-line="6"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">sombra</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Shadow</span><span class="token punctuation">(</span>
+    color <span class="token operator">=</span> Color<span class="token punctuation">.</span>Gray<span class="token punctuation">,</span>
+    offset <span class="token operator">=</span> <span class="token function">Offset</span><span class="token punctuation">(</span><span class="token number">4f</span><span class="token punctuation">,</span> <span class="token number">4f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    blurRadius <span class="token operator">=</span> <span class="token number">4f</span>
+<span class="token punctuation">)</span>
+</pre><p>Voy modularizar el UI en varios composables y de paso vamos a pasar el lambda de un composable como par&#xE1;metro.</p>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token annotation builtin">@Composable</span>
+<span class="token comment">// Pasamos un lambda como par&#xE1;metro con el composable que</span>
+<span class="token comment">// renderizar&#xE1; el contenido de la cabecera</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Cabecera5</span><span class="token punctuation">(</span>contenido<span class="token operator">:</span> <span class="token annotation builtin">@Composable</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Definimos una caja donde superponderemos la</span>
+    <span class="token comment">// imagen de fondo y el contenido alineados al centro.</span>
+    <span class="token function">Box</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        contentAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>Center
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Ponemos la imagen de fondo de la fachada del Balmis</span>
+        <span class="token function">Image</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">border</span><span class="token punctuation">(</span>
+                    width <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+                    shape <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium
+                <span class="token punctuation">)</span>
+                <span class="token comment">// Recortamos la iamagen con el shape definido en Tema (Material).</span>
+                <span class="token punctuation">.</span><span class="token function">clip</span><span class="token punctuation">(</span>MaterialTheme<span class="token punctuation">.</span>shapes<span class="token punctuation">.</span>medium<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment">// Obtenemos Painter del recurso de imagen de la fachada.</span>
+            painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>balmis<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            contentDescription <span class="token operator">=</span> <span class="token string">&quot;Fachada del IES Balmis&quot;</span><span class="token punctuation">,</span>
+            <span class="token comment">// La imagen se escala para que ocupe todo el espacio recort&#xE1;ndose</span>
+            contentScale <span class="token operator">=</span> ContentScale<span class="token punctuation">.</span>Crop
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Superponemos el contenido de la cabecera a la imagen.</span>
+        <span class="token function">contenido</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>A continuaci&#xF3;n definimos un composable <strong><code>Contenido</code></strong> que ser&#xE1; el contenido de la cabecera que pasaremos por par&#xE1;metro. En este caso, ser&#xE1; una fila con el logo y el texto del IES Balmis de ejemplos anteriores.</p>
+<div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">Contenido</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// El c&#xF3;ntenido ir&#xE1; en una fila con el logo 20% y el texto 80%.</span>
+    <span class="token comment">// Adem&#xE1;s, lo alinearemos verticalmente al centro.</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>
+        <span class="token comment">// Debemos intentar ocupar todo el espacio en ancho.</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Start<span class="token punctuation">,</span>
+        verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Image</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">0.2f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// Ocupa en ancho el 20% de la fila</span>
+            painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>logo<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            contentDescription <span class="token operator">=</span> <span class="token string">&quot;Logo IES Balmis&quot;</span><span class="token punctuation">,</span>
+            <span class="token comment">// Cambiamos el color de la imagen para usar el color primario</span>
+            <span class="token comment">// de nuestro tema de Material.</span>
+            colorFilter <span class="token operator">=</span> ColorFilter<span class="token punctuation">.</span><span class="token function">tint</span><span class="token punctuation">(</span>
+                MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token comment">// La imagen se escala para que ocupe todo el espacio recort&#xE1;ndose.</span>
+            <span class="token comment">// Esto es, El alto de la imagen de fondo y el ancho del 20% de la fila.</span>
+            contentScale <span class="token operator">=</span> ContentScale<span class="token punctuation">.</span>Crop
+        <span class="token punctuation">)</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            text <span class="token operator">=</span> <span class="token string">&quot;IES Doctor Balmis&quot;</span><span class="token punctuation">,</span>
+            modifier <span class="token operator">=</span> Modifier
+                <span class="token punctuation">.</span><span class="token function">scale</span><span class="token punctuation">(</span><span class="token number">1.5f</span><span class="token punctuation">)</span>    <span class="token comment">// Escalamos el texto al 150%</span>
+                <span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">0.8f</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// Ocupa en ancho el 80% de la fila</span>
+            style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleLarge<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                shadow <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">sombra</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">,</span>
+            <span class="token comment">// Alienamos el texto al centro del 80% que ocupa en la fila.</span>
+            textAlign <span class="token operator">=</span> TextAlign<span class="token punctuation">.</span>Center
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>Por &#xFA;ltimo, en nuestro @Preview definimos el contenido de la cabecera con el composable <strong><code>Contenido</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{class=&quot;line-numbers&quot;}" class="language-kotlin line-numbers"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">&quot;ImagenesPreview&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ImagenesPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        Cabecera5 <span class="token punctuation">{</span> <span class="token function">Contenido</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

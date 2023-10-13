@@ -1,0 +1,1170 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 3.1 - Conceptos de Jetpack Compose</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview {
+  background-color: #FFFF;
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-31---conceptos-de-jetpack-compose">Tema 3.1 - Conceptos de Jetpack Compose</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_3_1_conceptos_de_jetpack_compose.pdf">pdf</a> o <a href="./Tema_3_1_conceptos_de_jetpack_compose.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducci&#xF3;n" class="md-toc-link">
+            <p>Introducci&#xF3;n</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#conceptos-b&#xE1;sicos-de-compose" class="md-toc-link"><p>Conceptos b&#xE1;sicos de Compose</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#composable-functions" class="md-toc-link">
+            <p>Composable functions</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#arquitectura-de-compose" class="md-toc-link">
+            <p>Arquitectura de Compose</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#el-estado-y-jetpack-compose-state" class="md-toc-link"><p>El estado y Jetpack Compose <strong><code>State</code></strong></p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#recomposici&#xF3;n" class="md-toc-link">
+            <p>Recomposici&#xF3;n</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#el-objeto-statet" class="md-toc-link">
+            <p>El objeto <code>State&lt;T&gt;</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#stateful-vs-stateless" class="md-toc-link">
+            <p>Stateful vs Stateless</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#elevaci&#xF3;n-de-estado-state-hoisting" class="md-toc-link">
+            <p>Elevaci&#xF3;n de estado (<strong><code>state-hoisting</code></strong>)</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#restableciendo-el-estado-en-compose" class="md-toc-link">
+            <p>Restableciendo el estado en Compose</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#depurando-nuestra-composici&#xF3;n" class="md-toc-link">
+            <p>Depurando nuestra composici&#xF3;n</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#estado-derivado-de-otros-estados" class="md-toc-link">
+            <p>Estado derivado de otros estados</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#previsualizar-dise&#xF1;o-de-mis-composables" class="md-toc-link">
+            <p>Previsualizar dise&#xF1;o de mis &apos;<em>Composables</em>&apos;</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+
+<p>Antes de la introducci&#xF3;n de Compose, las aplicaciones de Android se constru&#xED;an completamente utilizando Android Studio junto con una colecci&#xF3;n de frameworks asociados que conforman el <strong>Android Development Kit</strong>.</p>
+<p>Para ayudar en el dise&#xF1;o de las interfaces de usuario, Android Studio <strong>incluye</strong> una herramienta llamada <strong>Layout Editor</strong>, que permite crear <strong>archivos XML</strong> que contienen los componentes individuales que conforman una pantalla de la aplicaci&#xF3;n.</p>
+<p>La disposici&#xF3;n de la pantalla se dise&#xF1;a arrastrando componentes desde una paleta de widgets a la ubicaci&#xF3;n deseada en el lienzo de dise&#xF1;o. Esto es, usando una herramienta de dise&#xF1;o visual RAD (Rapid Application Development) que genera el c&#xF3;digo XML.</p>
+<p>Finalmente, los componentes que necesitan responder a eventos del usuario, se conectan a m&#xE9;todos en el c&#xF3;digo fuente de la aplicaci&#xF3;n donde se maneja el evento.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: A lo largo del proceso de desarrollo, es necesario compilar y ejecutar la aplicaci&#xF3;n en un simulador o dispositivo para probar que todo funciona como se espera.</p>
+</blockquote>
+<p>En contraposici&#xF3;n, <strong>Compose</strong> introduce una <strong>sintaxis declarativa</strong> que simplifica la creaci&#xF3;n de dise&#xF1;os de interfaz de usuario en Android. En lugar de dise&#xF1;ar manualmente los detalles de dise&#xF1;o, Compose permite <strong>describir c&#xF3;mo debe verse la interfaz sin preocuparse por la complejidad de su construcci&#xF3;n</strong>. Se declaran componentes, se especifica el tipo de dise&#xF1;o y se aplican atributos mediante modificadores.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Ejemplo</strong>: Puedes declarar &quot;<em>Quiero una lista con estos elementos en ella</em>&quot; en lugar de &quot;<em>Quiero un RecyclerView con un adaptador y un ViewHolder que se vea as&#xED; y que se comporte as&#xED;</em>&quot;.</p>
+</blockquote>
+<p>Compose se encarga autom&#xE1;ticamente de la disposici&#xF3;n y renderizaci&#xF3;n.Adem&#xE1;s, Android Studio ofrece <strong>vista previa en tiempo real</strong> y un <strong>modo interactivo</strong> para probar la aplicaci&#xF3;n sin necesidad de compilar y ejecutar en un dispositivo o simulador.</p>
+<p>Compose es <strong>data-driven</strong> (<em>orientado a datos</em>), esto no significa que ya no debamos manejar eventos generados por el usuario en la interfaz. La caracter&#xED;stica <strong>data-driven</strong> se refiere, m&#xE1;s bien, a c&#xF3;mo Compose gestiona la relaci&#xF3;n entre los datos de la aplicaci&#xF3;n y su interfaz y l&#xF3;gica.</p>
+<p>Antes de Compose, las aplicaciones de Android requer&#xED;an c&#xF3;digo para verificar constantemente los cambios en los datos y actualizar la interfaz de usuario en consecuencia. Esto complicaba el desarrollo cuando varios componentes de la aplicaci&#xF3;n depend&#xED;an de los mismos datos. Compose simplifica esto al basarse en el <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419">state</a></strong> (<em>estado</em>), lo que significa que los <strong>cambios en el estado de los datos se reflejan autom&#xE1;ticamente en la interfaz</strong>. Los componentes de la interfaz que utilizan este estado se actualizan autom&#xE1;ticamente cuando cambian los datos, en un proceso llamado <strong><a href="https://developer.android.com/jetpack/compose/mental-model?hl=es-419#recomposition">recomposition</a></strong> (<em>recomposici&#xF3;n</em>).</p>
+<p>Otras ventajas principales de Jetpack Compose:</p>
+<ul>
+<li>Menos c&#xF3;digo para construir interfaces.</li>
+<li>C&#xF3;digo mucho m&#xE1;s intuitivo.</li>
+<li>Facilidad a la hora de reutilizar componentes.</li>
+<li>Programaci&#xF3;n de vistas en Kotlin.</li>
+</ul>
+<blockquote>
+<p>&#x1F4E3; <strong>Reumen</strong>: Jetpack Compose es una nueva herramienta de Android para crear interfaces de usuario. Con <strong>Jetpack Compose</strong> (a.k.a. Compose), puedes definir tu <strong>interfaz de usuario (UI) de forma declarativa</strong>, es decir, describiendo c&#xF3;mo deber&#xED;a ser la interfaz de usuario en lugar de escribir el c&#xF3;digo que la crea.<br>
+Adem&#xE1;s, Compose es <strong>orientado a datos</strong> porque actualiza autom&#xE1;ticamente la interfaz de usuario cuando cambian los datos.</p>
+</blockquote>
+<ul>
+<li><strong>Recursos adicionales</strong>:
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/mental-model?hl=es-419#paradigm">El paradigma de programaci&#xF3;n declarativa</a></strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="conceptos-b%C3%A1sicos-de-compose">Conceptos b&#xE1;sicos de Compose</h2>
+
+<h3 class="mume-header" id="composable-functions">Composable functions</h3>
+
+<p>En Compose, las interfaces de usuario se crean con <strong>funciones anotadas con @Composable</strong>. Estas funciones son funciones especiales de Kotlin que se utilizan para crear interfaces de usuario al trabajar con Compose.</p>
+<p>Podemos decir que las funciones componibles transforman los datos en elementos de la interfaz de usuario.</p>
+<p>Sintaxis de una funci&#xF3;n <em>composable</em>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Greeting</span><span class="token punctuation">(</span>name<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Hello <span class="token interpolation variable">$name</span>!&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: F&#xED;jate que el identificador va en <strong>PascalCasing</strong>.</p>
+</blockquote>
+<p>Adem&#xE1;s tienen otra serie de caracter&#xED;sticas que las diferencian de las funciones &apos;<em>normales</em>&apos; de Kolin:</p>
+<ul>
+<li>
+<p><strong>No retornan valores</strong> en el sentido tradicional de la funci&#xF3;n de Kotlin, sino que <strong>emiten elementos de la interfaz de usuario</strong> al sistema de tiempo de ejecuci&#xF3;n de Compose para su representaci&#xF3;n.</p>
+</li>
+<li>
+<p><strong>No pueden ser llamadas desde funciones <em>normales</em></strong>. Anunque las funciones &apos;<em>composables</em>&apos; pueden llamar a otras funciones &apos;<em>composables</em>&apos; para <strong>crear una jerarqu&#xED;a de componentes</strong> el proceso inverso no es posible.</p>
+</li>
+<li>
+<p><strong><a href="https://es.wikipedia.org/wiki/Idempotencia_(inform%C3%A1tica)">Idempotencia</a></strong></p>
+<ul>
+<li>Se comporta de la misma manera cuando se la llama varias veces con el mismo argumento y no usa otros valores como variables globales o llamadas a <strong><code>random()</code></strong>.</li>
+<li><strong>No pueden tener efectos secundarios</strong>. Esto significa que no pueden <strong>modificar variables fuera de su alcance</strong>. Por ejemplo, no pueden modificar variables globales, ni modificar el estado de un ViewModel, ni modificar el estado de un Fragment o Activity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pueden aceptar par&#xE1;metros</strong>, lo que permite que la l&#xF3;gica de la app describa la IU</p>
+</li>
+<li>
+<p><strong>Pueden ejecutar en cualquier orden</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ButtonRow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    MyFancyNavigation <span class="token punctuation">{</span>
+        <span class="token function">StartScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">MiddleScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">EndScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Las llamadas a <strong><code>StartScreen</code></strong>, <strong><code>MiddleScreen</code></strong> y <strong><code>EndScreen</code></strong> pueden ocurrir en cualquier orden. Eso significa que no puedes, por ejemplo, hacer que StartScreen() establezca alguna variable global (un efecto secundario) y que MiddleScreen() aproveche ese cambio. Esto es porque Compose tiene la opci&#xF3;n de reconocer que algunos elementos de la IU tienen mayor prioridad que otros, y los dibuja primero.</p>
+</li>
+<li>
+<p><strong>Se pueden ejecutar en paralelo</strong> y eso es una de las razones de no producir efectos secundarios que hemos mencionado.</p>
+</li>
+<li>
+<p><strong>No pueden lanzar excepciones</strong>.</p>
+</li>
+<li>
+<p><strong>No pueden ser recursivas</strong>.</p>
+</li>
+<li>
+<p><strong>No pueden ser privadas</strong>.</p>
+</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="arquitectura-de-compose">Arquitectura de Compose</h3>
+
+<p>Extra&#xED;do de Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/layering?hl=es-419">Arquitectura de Compose</a></strong>.</p>
+<p>Jetpack Compose no es un proyecto monol&#xED;tico &#xFA;nico, sino que se crea a partir de varios m&#xF3;dulos que se ensamblan para formar un &apos;<em><strong>stack</strong></em>&apos;. Si comprendes los diferentes m&#xF3;dulos que componen Jetpack Compose podr&#xE1;s:</p>
+<ul>
+<li>Usar el nivel adecuado de abstracci&#xF3;n para compilar tu app o biblioteca.</li>
+<li>Comprender cu&#xE1;ndo puedes &quot;bajar&quot; a un nivel inferior para tener m&#xE1;s control o personalizaci&#xF3;n.</li>
+<li>Minimizar tus dependencias.</li>
+</ul>
+<p>Cada capa se compila sobre los niveles inferiores y se combinan las funcionalidades para crear componentes de nivel superior. Cada una de ellas toma como fundamento las API p&#xFA;blicas de las capas inferiores para verificar los l&#xED;mites del m&#xF3;dulo y permitirte reemplazar cualquiera de ellas si es necesario. Examinemos estas capas desde abajo hacia arriba.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
+<ol>
+<li><strong>RunTime</strong>: En este m&#xF3;dulo se presentan los <strong>aspectos b&#xE1;sicos del entorno de ejecuci&#xF3;n de Compose</strong>, por ejemplo, <strong><code>remember</code></strong>, <strong><code>mutableStateOf</code></strong>, la anotaci&#xF3;n <strong><code>@Composable</code></strong> y <strong><code>SideEffect</code></strong>.</li>
+<li><strong>UI</strong>: La capa de la IU consta de varios m&#xF3;dulos (ui-text, ui-graphics, ui-tooling, etc.). Estos m&#xF3;dulos implementan los aspectos b&#xE1;sicos del <strong>kit de herramientas de la IU</strong>, como LayoutNode, <strong><code>Modifier</code></strong>, controladores de entrada, dise&#xF1;os personalizados y dibujos.</li>
+<li><strong>Foundation</strong>: En este m&#xF3;dulo se proporcionan bloques de compilaci&#xF3;n agn&#xF3;stica del sistema de dise&#xF1;o para la IU de Compose, como <strong><code>Row</code></strong> y <strong><code>Column</code></strong>, <strong><code>LazyColumn</code></strong>, el reconocimiento de gestos determinados, etc.</li>
+<li><strong>Material</strong>: En este m&#xF3;dulo se proporciona una implementaci&#xF3;n del sistema <strong>Material Design para la IU</strong> de Compose y un <strong>sistema de temas</strong>, componentes de dise&#xF1;o, indicadores de ondas e &#xED;conos.</li>
+</ol>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:0.7"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="260pt" height="332pt" viewBox="0.00 0.00 260.00 332.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 328)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-328 256,-328 256,4 -4,4"/>
+<!-- Material -->
+<g id="node1" class="node">
+<title>Material</title>
+<path fill="none" stroke="#5cacee" stroke-width="4" d="M240,-324C240,-324 12,-324 12,-324 6,-324 0,-318 0,-312 0,-312 0,-282 0,-282 0,-276 6,-270 12,-270 12,-270 240,-270 240,-270 246,-270 252,-276 252,-282 252,-282 252,-312 252,-312 252,-318 246,-324 240,-324"/>
+<text text-anchor="middle" x="126" y="-291" font-family="Arial" font-size="20.00" fill="#000000">Material</text>
+</g>
+<!-- Foundation -->
+<g id="node2" class="node">
+<title>Foundation</title>
+<path fill="none" stroke="#5cacee" stroke-width="4" d="M240,-234C240,-234 12,-234 12,-234 6,-234 0,-228 0,-222 0,-222 0,-192 0,-192 0,-186 6,-180 12,-180 12,-180 240,-180 240,-180 246,-180 252,-186 252,-192 252,-192 252,-222 252,-222 252,-228 246,-234 240,-234"/>
+<text text-anchor="middle" x="126" y="-201" font-family="Arial" font-size="20.00" fill="#000000">Foundation</text>
+</g>
+<!-- Material&#45;&gt;Foundation -->
+<g id="edge1" class="edge">
+<title>Material-&gt;Foundation</title>
+<path fill="none" stroke="#5cacee" stroke-width="2" d="M126,-269.997C126,-261.9723 126,-253.0335 126,-244.4691"/>
+<polygon fill="#5cacee" stroke="#5cacee" stroke-width="2" points="129.5001,-244.2949 126,-234.295 122.5001,-244.295 129.5001,-244.2949"/>
+</g>
+<!-- UI -->
+<g id="node3" class="node">
+<title>UI</title>
+<path fill="none" stroke="#5cacee" stroke-width="4" d="M240,-144C240,-144 12,-144 12,-144 6,-144 0,-138 0,-132 0,-132 0,-102 0,-102 0,-96 6,-90 12,-90 12,-90 240,-90 240,-90 246,-90 252,-96 252,-102 252,-102 252,-132 252,-132 252,-138 246,-144 240,-144"/>
+<text text-anchor="middle" x="126" y="-111" font-family="Arial" font-size="20.00" fill="#000000">UI</text>
+</g>
+<!-- Foundation&#45;&gt;UI -->
+<g id="edge2" class="edge">
+<title>Foundation-&gt;UI</title>
+<path fill="none" stroke="#5cacee" stroke-width="2" d="M126,-179.997C126,-171.9723 126,-163.0335 126,-154.4691"/>
+<polygon fill="#5cacee" stroke="#5cacee" stroke-width="2" points="129.5001,-154.2949 126,-144.295 122.5001,-154.295 129.5001,-154.2949"/>
+</g>
+<!-- Runtime -->
+<g id="node4" class="node">
+<title>Runtime</title>
+<path fill="none" stroke="#5cacee" stroke-width="4" d="M240,-54C240,-54 12,-54 12,-54 6,-54 0,-48 0,-42 0,-42 0,-12 0,-12 0,-6 6,0 12,0 12,0 240,0 240,0 246,0 252,-6 252,-12 252,-12 252,-42 252,-42 252,-48 246,-54 240,-54"/>
+<text text-anchor="middle" x="126" y="-21" font-family="Arial" font-size="20.00" fill="#000000">Runtime</text>
+</g>
+<!-- UI&#45;&gt;Runtime -->
+<g id="edge3" class="edge">
+<title>UI-&gt;Runtime</title>
+<path fill="none" stroke="#5cacee" stroke-width="2" d="M126,-89.997C126,-81.9723 126,-73.0335 126,-64.4691"/>
+<polygon fill="#5cacee" stroke="#5cacee" stroke-width="2" points="129.5001,-64.2949 126,-54.295 122.5001,-64.295 129.5001,-64.2949"/>
+</g>
+</g>
+</svg>
+</p></div>
+</div>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="el-estado-y-jetpack-compose-state">El estado y Jetpack Compose <strong><code>State</code></strong></h3>
+
+<p>Recursos adicionales:</p>
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419">El estado en Jetpack Compose</a></strong>.</li>
+<li>Android Developers: V&#xED;deo <strong><a href="https://www.youtube.com/watch?v=mymWGMy9pYI">Jetpack Compose: State</a></strong>.</li>
+<li>DevExperto: V&#xED;deo <strong><a href="https://www.youtube.com/watch?v=x9bQW8V1WPA">El estado en Jetpack Compose</a></strong>.</li>
+<li>Martin Kiperszmid: V&#xED;deo <strong><a href="https://www.youtube.com/watch?v=yekzpEbvu5g">&#xBF;C&#xF3;mo funciona el Estado en Jetpack Compose?</a></strong>.</li>
+<li>AristiDevs: V&#xED;deo <strong><a href="https://www.youtube.com/watch?v=CwR1VUeRjvs">Estados en Jetpack Compose</a></strong>.</li>
+<li>Stvedza-San: V&#xED;deo <strong><a href="https://www.youtube.com/watch?v=gQWrP8YGzWE&amp;list=PLSrm9z4zp4mEWwyiuYgVMWcDFdsebhM-r&amp;index=3">States - Jetpack Compose</a></strong>.</li>
+</ul>
+<p>El estado es un <strong>concepto fundamental</strong> en Jetpack Compose. Een lenguajes declarativos como Compose, el estado se refiere generalmente como <em><strong>&quot;un valor que puede cambiar con el tiempo</strong></em>&quot;.<br>
+Es por eso que rl estado es la <strong>fuente &#xFA;nica de verdad</strong> (<em>single source of truth</em>) de la interfaz de usuario. Cuando el estado cambia, la interfaz de usuario se actualiza autom&#xE1;ticamente para reflejar el nuevo estado.</p>
+<p>El estado <strong>difiere de una variable est&#xE1;ndar en dos formas significativas</strong>.</p>
+<ol>
+<li>
+<p>El valor asignado a una variable de estado en una funci&#xF3;n <em>composable</em> debe ser <strong>recordado</strong> a la hora de redibujar. Esto es diferente de una variable est&#xE1;ndar que se volver&#xED;a a inicializar cada vez que se hace una llamada a la funci&#xF3;n en la que se declara por lo que tomar&#xED;a siempre el valor inicial asignado al redibujar</p>
+</li>
+<li>
+<p>La segunda diferencia clave es que un cambio en cualquier variable de estado tiene implicaciones de gran alcance para todo el &#xE1;rbol jer&#xE1;rquico de funciones <em>composables</em> que conforman una interfaz de usuario. Para entender por qu&#xE9; esto es as&#xED;, ahora necesitamos hablar sobre la <strong>recomposici&#xF3;n</strong>.</p>
+</li>
+</ol>
+<h4 class="mume-header" id="recomposici%C3%B3n">Recomposici&#xF3;n</h4>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/mental-model?hl=es-419#recomposition">Recomposici&#xF3;n en Jetpack Compose</a></strong>.</li>
+<li>Stvedza-San: V&#xED;deo <strong><a href="https://www.youtube.com/watch?v=O6zNcV3PaJE&amp;list=PLSrm9z4zp4mEWwyiuYgVMWcDFdsebhM-r&amp;index=2">Recomposition - Jetpack Compose</a></strong>.</li>
+</ul>
+<p>Al desarrollar con Compose, construimos aplicaciones creando <strong>jerarqu&#xED;as de funciones <em>&apos;composables&apos;</em></strong>. En la mayor&#xED;a de los casos, los datos pasados de una funci&#xF3;n <em>composable</em> a otra se habr&#xE1;n declarado como una variable de estado en una funci&#xF3;n principal. Esto significa que cualquier cambio en el valor de estado en una funci&#xF3;n componible principal deber&#xE1; reflejarse en cualquier funci&#xF3;n componible secundaria a la que se haya pasado el estado.</p>
+<p>Compose aborda esto realizando una operaci&#xF3;n denominada recomposici&#xF3;n y por tanto esta ocurre cada vez que cambia un valor de estado dentro de una jerarqu&#xED;a de funciones componibles.</p>
+<p>La recomposici&#xF3;n simplemente significa que la funci&#xF3;n <em>composable</em> que recibe el estado se llama de nuevo y se le pasa su nuevo valor que ser&#xE1; recordado en futuras recomposiciones.</p>
+<p>Volver a componer todo el &#xE1;rbol componible para una interfaz de usuario cada vez que cambia un valor de estado ser&#xED;a un enfoque altamente ineficiente para representar y actualizar una interfaz de usuario. Compose evita esta sobrecarga utilizando una t&#xE9;cnica llamada recomposici&#xF3;n inteligente que implica recomponer solo aquellas funciones directamente afectadas por el cambio de estado. En otras palabras, solo las funciones que leen el valor de estado se recompondr&#xE1;n cuando cambie el valor.</p>
+<blockquote>
+<p>&#x1F4E3; <strong>Resumen</strong>: La recomposici&#xF3;n es el proceso de volver a ejecutar una funci&#xF3;n <em>composable</em> para actualizar la interfaz de usuario. Esta se produce cuando el estado cambia. Si esto sucede, el sistema de tiempo de ejecuci&#xF3;n de Compose vuelve a ejecutar la funci&#xF3;n <em>composable</em> que usa el estado. La funci&#xF3;n <em>composable</em> vuelve a calcular la interfaz de usuario y el sistema de tiempo de ejecuci&#xF3;n de Compose actualiza la interfaz de usuario para reflejar el nuevo estado.</p>
+</blockquote>
+<h4 class="mume-header" id="el-objeto-statet">El objeto <code>State&lt;T&gt;</code></h4>
+
+<p>El <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/State">objeto estado</a></strong> <strong><code>State&lt;T&gt;</code></strong> es un <strong>objeto observable</strong> que se puede observar desde el sistema de tiempo de ejecuci&#xF3;n de Compose. Como hemos comentado al explicar la recomposici&#xF3;n, cuando el estado cambia, el sistema de tiempo de ejecuci&#xF3;n de Compose <strong>vuelve a ejecutar la funci&#xF3;n <em>&apos;composable&apos;</em></strong> que lo usa. Si queremos que el valor del estado pueda cambiar usaremos <strong><code>MutableState&lt;T&gt;</code></strong></p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Las funciones <em>&apos;composables&apos;</em> pueden usar la API de <strong><code>remember</code></strong> para almacenar un objeto en la memoria. Un valor calculado por remember se almacena en la composici&#xF3;n durante la composici&#xF3;n inicial, y <strong>el valor almacenado se muestra durante la recomposici&#xF3;n</strong>.</p>
+</blockquote>
+<p>Existen varias formas de declarar un objeto <strong><code>MutableState&lt;T&gt;</code></strong> en un elemento que admite composici&#xF3;n pero nosotros b&#xE1;sicamente usaremos dos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> mutableState <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>default<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+</pre><p><strong>Ejemplo</strong>: El siguiente c&#xF3;digo muestra un bot&#xF3;n que cuenta el n&#xFA;mero de veces que se ha pulsado.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Contador</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// cuenta es un MutableState&lt;Int&gt; con valor inicial 0</span>
+    <span class="token keyword keyword-val">val</span> cuenta <span class="token operator">:</span> MutableState<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span> <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token comment">// Para acceder al valor de cuenta usamos la propiedad value</span>
+    <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> cuenta<span class="token punctuation">.</span>value<span class="token operator">++</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;Llevas <span class="token interpolation variable">$cuenta</span> Clicks&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>La forma que vamos a usar en la mayor&#xED;a de los casos es usando la sintaxis de delegaci&#xF3;n <strong><code>by</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> value <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>default<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+</pre><p>Si reescribimos el ejemplo anterior quedar&#xED;a as&#xED;:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Contador</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// cuenta ahora es un Int con valor inicial 0</span>
+    <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token comment">// Ya no necesitamos acceder a value</span>
+    <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;Llevas <span class="token interpolation variable">$cuentaState</span> Clicks&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Aunque usemos un <strong><code>Int</code></strong> en el fondo es un estado que cuando estamos cambiando su valor se llama al delegado <strong><code>setValue()</code></strong> es por ese que hemos puesto el sufijo <strong><code>State</code></strong> para tener claro que es un estado aunque sea de tipo Int.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Cuidado el uso del by me obligar&#xE1; a tener los siguiente imports.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-import">import</span> androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>runtime<span class="token punctuation">.</span>getValue
+<span class="token keyword keyword-import">import</span> androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>runtime<span class="token punctuation">.</span>setValue
+</pre></blockquote>
+<h4 class="mume-header" id="stateful-vs-stateless">Stateful vs Stateless</h4>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419#stateful-vs-stateless">stateful vs. stateless composables</a></strong>.</li>
+</ul>
+<p>Podemos resumir que un <strong>composable stateful</strong> es aquel que <strong>almacena un estado</strong> y un <strong>composable stateless</strong> es aquel que <strong>no almacena un estado</strong>. En el ejemplo del punto anterior el composable <strong><code>Contador</code></strong> es stateful porque almacena el estado de la cuenta.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Podemos resumir que salvo ciertos casos en los que necesitemos almacenar un estado, <strong>la mayor&#xED;a de los <em>&apos;composables&apos;</em> ser&#xE1;n stateless</strong>.</p>
+</blockquote>
+<p>Para conseguir que nuestras funciones composables sean stateless debemos usar el concepto de <strong>elevaci&#xF3;n de estado</strong>.</p>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="elevaci%C3%B3n-de-estado-state-hoisting">Elevaci&#xF3;n de estado (<strong><code>state-hoisting</code></strong>)</h4>
+
+<ul>
+<li>Recursos adicionales:
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419#state-hoisting">Introducci&#xF3;n</a></strong>.</li>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/state-hoisting?hl=es-419g">Elevaci&#xF3;n de estado en Jetpack Compose</a></strong>.</li>
+</ul>
+</li>
+</ul>
+<p>La elevaci&#xF3;n de estado o state-hoisting es un patr&#xF3;n de dise&#xF1;o que consiste en <strong>mover el estado de un <em>composable</em> a su padre</strong>. Esto se hace para que el estado pueda ser compartido por varios &apos;<em>composables</em>&apos;.</p>
+<p>Adem&#xE1;s de compartir el estado, el padre tambi&#xE9;n se encarga de actualizar<br>
+el estado y para ello debe pasar tambi&#xE9;n una <strong>funci&#xF3;n de actualizaci&#xF3;n al hijo</strong> o &apos;<em>event handler</em>&apos;. Esta funci&#xF3;n de actualizaci&#xF3;n se ejecutar&#xE1; cuando el hijo necesite actualizar el estado y deber&#xE1; declararse o definirse en el mismo nivel que el estado.</p>
+<p>El estado elevado de esta manera tiene algunas propiedades importantes:</p>
+<ul>
+<li><strong>Fuente &#xFA;nica de informaci&#xF3;n</strong>: Mover el estado en lugar de duplicarlo garantizar&#xE1; que exista solo una fuente de informaci&#xF3;n. Eso ayuda a evitar errores.</li>
+<li><strong>Capacidad de compartir</strong>: El estado elevado puede compartirse con varios elementos que admiten composici&#xF3;n.</li>
+<li><strong>Capacidad de interceptar</strong>: Los llamadores a los elementos componibles sin estado pueden decidir ignorar o modificar eventos antes de cambiar el estado.</li>
+<li><strong>Reutilizaci&#xF3;n</strong>: Los elementos componibles sin estado pueden reutilizarse en diferentes contextos sin tener que preocuparse por el estado. Estamos aplicando el principio de <strong>bajo acoplamiento</strong> donde un elemento componible no necesita saber nada sobre donde es usado o en que jerarqu&#xED;a se est&#xE1; componiendo.</li>
+<li><strong>Pruebas</strong>: Los elementos componibles sin estado son m&#xE1;s <strong>f&#xE1;ciles de testear</strong> porque no tienen estado.</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<h5 class="mume-header" id="ejemplo-1-de-elevaci%C3%B3n-de-estado">Ejemplo 1 de elevaci&#xF3;n de estado</h5>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 80%">
+<p>Veamos un ejemplo sencillo de elevaci&#xF3;n de estado y el concepto de Stateful vs Stateless con nuestra aplicaci&#xF3;n que cuenta <em>&apos;clicks&apos;</em> de un bot&#xF3;n.</p>
+<p>Para ello en nuestro proyecto <strong><code>HolaMundo</code></strong> hemos creado la jerarqu&#xED;a de paquetes propuesta en nuestra arquitectura y dento un fuente denominado <strong><a href="assets/codigo/ContadorScreen.kt">ContadorScreen.kt</a></strong>.</p>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="108px" preserveAspectRatio="none" style="width:170px;height:108px;background:#FFFFFF;" version="1.1" viewBox="0 0 170 108" width="170px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"/><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96" x="26" y="39.5508">[com.holamundo]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="59" x="56" y="84.832">[contador]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="107" x="56" y="99.9258">ContadorScreen.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="63.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="64.8281" y2="64.8281"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="78.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="66.8281" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="79.9219" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="95.0156" y2="95.0156"/><!--SRC=[LOvVQy904CJVxrFiKz68GLDhIoXYQsEB690c-b8KpjngZrvko_qHHFhTUrQbo3xj_6QO6Lh7ZRDSESOERFMaXI4fLknGiXOytcn82JI3Zuhg-9CKhxqMj6Ij5aJHF_Lo6KL1l5Oto9qtQC_i6bQa7HTaBZ2KLQJ8f8RsNAsLnq4KZSwceZA8ElvomVmJReXQd2RF5DTkdazXXyPAqj2Daqvo6oUDmciOungIFdGxQNANzkvXb9Lmn4tMU9rDmP8t5OAGrXcvzYxacsp2TnpUlNQonXIENwFCcr1a5n4olPE6T8tQiSaYFvdWZLpnJUxFtE-rdwM30asO1OkSlU26U-L2j28XzJQ5UJbkFx0frrlFjw48BHjHA33x5BBY5m00]--></g></svg></p></div>
+</div>
+<p>EL c&#xF3;digo propuesto es el siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorStateful</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Definimos el estado y el manejador del evento click</span>
+    <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// Pasamos el estado y el manejador al composable ContadorStateless</span>
+    <span class="token function">ContadorStateless</span><span class="token punctuation">(</span>
+        cuentaState <span class="token operator">=</span> cuentaState<span class="token punctuation">,</span>
+        onAumentarCuenta <span class="token operator">=</span> onAumentarCuenta
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorStateless</span><span class="token punctuation">(</span>
+    cuentaState<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token operator">=</span>
+    Column <span class="token punctuation">{</span>
+        <span class="token comment">// El bot&#xF3;n llama al manejar del evento click</span>
+        <span class="token comment">// enviado por el padre</span>
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> onAumentarCuenta<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;Cuenta Clicks&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// El texto muestra el estado enviado por el padre</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Llevas <span class="token interpolation variable">$cuentaState</span> Clicks&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><p>Donde podemos ver que el <strong><code>ContadorStateful</code></strong> es el padre y el <strong><code>ContadorStateless</code></strong> es el hijo. El padre es stateful porque almacena el estado de la cuenta y el hijo es stateless porque no almacena el estado. Adem&#xE1;s, el hijo no puede modificar el estado, solo puede enviar un evento al padre para que este lo modifique.</p>
+<p align="center" style="zoom:0.8"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="224pt" height="166pt" viewBox="0.00 0.00 224.00 166.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 162)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-162 220,-162 220,4 -4,4"/>
+<!-- ContadorStateful -->
+<g id="node1" class="node">
+<title>ContadorStateful</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M204,-158C204,-158 12,-158 12,-158 6,-158 0,-152 0,-146 0,-146 0,-116 0,-116 0,-110 6,-104 12,-104 12,-104 204,-104 204,-104 210,-104 216,-110 216,-116 216,-116 216,-146 216,-146 216,-152 210,-158 204,-158"/>
+<text text-anchor="middle" x="108" y="-125" font-family="Arial" font-size="20.00" fill="#36648b">ContadorStateful</text>
+</g>
+<!-- ContadorStateless -->
+<g id="node2" class="node">
+<title>ContadorStateless</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M204,-54C204,-54 12,-54 12,-54 6,-54 0,-48 0,-42 0,-42 0,-12 0,-12 0,-6 6,0 12,0 12,0 204,0 204,0 210,0 216,-6 216,-12 216,-12 216,-42 216,-42 216,-48 210,-54 204,-54"/>
+<text text-anchor="middle" x="108" y="-21" font-family="Arial" font-size="20.00" fill="#36648b">ContadorStateless</text>
+</g>
+<!-- ContadorStateful&#45;&gt;ContadorStateless -->
+<g id="edge1" class="edge">
+<title>ContadorStateful-&gt;ContadorStateless</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M72,-103.9467C72,-103.9467 72,-64.2791 72,-64.2791"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="3" points="75.5001,-64.2791 72,-54.2791 68.5001,-64.2792 75.5001,-64.2791"/>
+<text text-anchor="middle" x="72" y="-39.7791" font-family="Arial" font-size="15.00" fill="#1e90ff">estado</text>
+</g>
+<!-- ContadorStateful&#45;&gt;ContadorStateless -->
+<g id="edge2" class="edge">
+<title>ContadorStateful-&gt;ContadorStateless</title>
+<path fill="none" stroke="#ff6347" stroke-width="2" stroke-dasharray="5,2" d="M144,-93.9467C144,-93.9467 144,-54.2791 144,-54.2791"/>
+<polygon fill="#ff6347" stroke="#ff6347" stroke-width="2" points="140.5001,-93.9467 144,-103.9467 147.5001,-93.9468 140.5001,-93.9467"/>
+<text text-anchor="middle" x="144" y="-109.4467" font-family="Arial" font-size="15.00" fill="#ff6347">evento</text>
+</g>
+</g>
+</svg>
+</p><h5 class="mume-header" id="ejemplo-2-de-elevaci%C3%B3n-de-estado">Ejemplo 2 de elevaci&#xF3;n de estado</h5>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width:50%">
+<p>En este ejemplo vamos a crear una aplicaci&#xF3;n que nos permita introducir un nombre y nos salude. Adem&#xE1;s, vamos a a&#xF1;adir un bot&#xF3;n para borrar el nombre introducido asign&#xE1;ndole la cadena vac&#xED;a. Esto es, mientras escribimos el nombre en el campo de texto, el texto del saludo se actualiza autom&#xE1;ticamente, ya que ambos &apos;<em>composables</em>&apos; comparten el estado.</p>
+</div>
+<div style="width: auto">
+    <img height="150px" src="assets/imagenes/tema_3_1/SaludaScreen.png">
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 80%">
+<p>Para ello vamos a dise&#xF1;ar la una jerarqu&#xED;a de &apos;<em>composables</em>&apos; donde el estado lo tiene <strong><code>SaludaScreen</code></strong> y se va pasando a trav&#xE9;s de la jerarqu&#xED;a de composici&#xF3;n.</p>
+<p>Vamos a a&#xF1;adir a nuestro proyecto <strong><code>HolaMundo</code></strong> como en el ejemplo anterior un nuevo <strong><code>feature</code></strong> en el paquete <strong><code>saludo</code></strong> con el nombre <strong><a href="assets/codigo/SaludaScreen.kt">SaludaScreen.kt</a></strong>.</p>
+<p>Puedes ver la jerarqu&#xED;a de composici&#xF3;n en el siguiente diagrama. De ella, deducimos que en cada recomposici&#xF3;n se van a volver a redibujar la gran mayor&#xED;a de los &apos;<em>composables</em>&apos; que la componen.</p>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="138px" preserveAspectRatio="none" style="width:165px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 165 138" width="165px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"/><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96" x="26" y="39.5508">[com.holamundo]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="59" x="56" y="84.832">[contador]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="102" x="56" y="99.9258">ContadorScreen.kt</text><path d="M47,106.6563 L47,108.6563 L55,108.6563 L55,107.6563 L50,107.6563 L50,106.6563 L47,106.6563 M47,109.6563 L47,114.1563 C47,114.4363 47.22,114.6563 47.5,114.6563 L54.5,114.6563 C54.78,114.6563 55,114.4363 55,114.1563 L55,109.6563 L47,109.6563 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="46" x="56" y="115.0195">[saludo]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="94" x="56" y="130.1133">SaludaScreen.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="63.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="64.8281" y2="64.8281"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="78.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="66.8281" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="79.9219" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="95.0156" y2="95.0156"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="109.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="66.8281" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="110.1094" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="112.1094" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="125.2031" y2="125.2031"/><!--SRC=[POzVQy8m5CNVyodkqz2AHJldHX5nStL3BCXQVHaAiRcwi3Htf8aWik- -EFyC6VSfvtVEFJU3od9ZAwuiOtksVDJ2a1HBjizP0tetQr82JV-ze3By8CLBfmKjMAC1GV17dLm4WHUlrJLowmnM9tOD2zAM2p9ds83XISaAWwZ3J_i_vCzqlluIwHMaoCI6TbojbCD-46G72x_iyDPlFmFKulZ7gUBQpj89RD5KaZIqmwWLtOPHBNCQHhY2g0ljLXpTnPrx62Ov772TrLwc4wZ8cG91oCeQkNBMv-jipBSStfosiiGO3gzQdjOXIyuY97eh3UaIjMNZUNeqmIlPx8lihxdRQJv92naQVnRCK_QCQ-wKzT62XDIR66RvgFd09bnl7D_u8gpOa7o1sSMGP3y0]--></g></svg></p></div>
+</div>
+<p align="center" style="zoom:0.6"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="963pt" height="424pt" viewBox="0.00 0.00 963.00 424.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 420)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-420 959,-420 959,4 -4,4"/>
+<!-- SaludaScreen -->
+<g id="node1" class="node">
+<title>SaludaScreen</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M624,-416C624,-416 432,-416 432,-416 426,-416 420,-410 420,-404 420,-404 420,-372 420,-372 420,-366 426,-360 432,-360 432,-360 624,-360 624,-360 630,-360 636,-366 636,-372 636,-372 636,-404 636,-404 636,-410 630,-416 624,-416"/>
+<text text-anchor="middle" x="528" y="-394" font-family="Arial" font-size="20.00" fill="#36648b">SaludaScreen</text>
+<text text-anchor="middle" x="528" y="-370" font-family="Arial" font-size="20.00" fill="#36648b">(Stateful)</text>
+</g>
+<!-- IntroduceNombre -->
+<g id="node2" class="node">
+<title>IntroduceNombre</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M230,-234C230,-234 38,-234 38,-234 32,-234 26,-228 26,-222 26,-222 26,-192 26,-192 26,-186 32,-180 38,-180 38,-180 230,-180 230,-180 236,-180 242,-186 242,-192 242,-192 242,-222 242,-222 242,-228 236,-234 230,-234"/>
+<text text-anchor="middle" x="134" y="-201" font-family="Arial" font-size="20.00" fill="#36648b">IntroduceNombre</text>
+</g>
+<!-- SaludaScreen&#45;&gt;IntroduceNombre -->
+<g id="edge1" class="edge">
+<title>SaludaScreen-&gt;IntroduceNombre</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M419.6887,-375.3936C341.2106,-364.5807 243.1851,-347.0892 209.326,-324 180.6175,-304.4231 160.39,-269.9099 148.176,-243.4247"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="3" points="151.285,-241.8012 144.0378,-234.0728 144.8837,-244.6338 151.285,-241.8012"/>
+<text text-anchor="middle" x="270.837" y="-310.5" font-family="Arial" font-size="15.00" fill="#1e90ff">nombreState</text>
+<text text-anchor="middle" x="270.837" y="-292.5" font-family="Arial" font-size="15.00" fill="#1e90ff">+</text>
+<text text-anchor="middle" x="270.837" y="-274.5" font-family="Arial" font-size="15.00" fill="#1e90ff">onCambioNombre</text>
+</g>
+<!-- Saluda -->
+<g id="node3" class="node">
+<title>Saluda</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M767,-234C767,-234 575,-234 575,-234 569,-234 563,-228 563,-222 563,-222 563,-192 563,-192 563,-186 569,-180 575,-180 575,-180 767,-180 767,-180 773,-180 779,-186 779,-192 779,-192 779,-222 779,-222 779,-228 773,-234 767,-234"/>
+<text text-anchor="middle" x="671" y="-201" font-family="Arial" font-size="20.00" fill="#36648b">Saluda</text>
+</g>
+<!-- SaludaScreen&#45;&gt;Saluda -->
+<g id="edge4" class="edge">
+<title>SaludaScreen-&gt;Saluda</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M550.3438,-359.7188C575.4329,-327.9625 616.1731,-276.3963 643.2742,-242.0935"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="3" points="646.0611,-244.2118 649.5141,-234.1954 640.5685,-239.8723 646.0611,-244.2118"/>
+<text text-anchor="middle" x="666.4118" y="-310.5" font-family="Arial" font-size="15.00" fill="#1e90ff">nombreState</text>
+<text text-anchor="middle" x="666.4118" y="-292.5" font-family="Arial" font-size="15.00" fill="#1e90ff">+</text>
+<text text-anchor="middle" x="666.4118" y="-274.5" font-family="Arial" font-size="15.00" fill="#1e90ff">onClickBorrar</text>
+</g>
+<!-- TextField -->
+<g id="node6" class="node">
+<title>TextField</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M433,-54C433,-54 313,-54 313,-54 307,-54 301,-48 301,-42 301,-42 301,-12 301,-12 301,-6 307,0 313,0 313,0 433,0 433,0 439,0 445,-6 445,-12 445,-12 445,-42 445,-42 445,-48 439,-54 433,-54"/>
+<text text-anchor="middle" x="373" y="-21" font-family="Arial" font-size="20.00" fill="#36648b">TextField</text>
+</g>
+<!-- SaludaScreen&#45;&gt;TextField -->
+<g id="edge8" class="edge">
+<title>SaludaScreen-&gt;TextField</title>
+<path fill="none" stroke="#ff6347" stroke-width="2" stroke-dasharray="5,2" d="M497.3199,-351.8371C473.5042,-322.0144 441.3767,-277.6597 422.003,-234 394.8906,-172.9007 381.6206,-94.7217 376.1722,-54.1579"/>
+<polygon fill="#ff6347" stroke="#ff6347" stroke-width="2" points="494.7902,-354.2751 503.7993,-359.8506 500.2335,-349.8739 494.7902,-354.2751"/>
+<text text-anchor="middle" x="475.4985" y="-211.5" font-family="Arial" font-size="15.00" fill="#ff6347">EVENTO</text>
+<text text-anchor="middle" x="475.4985" y="-193.5" font-family="Arial" font-size="15.00" fill="#ff6347">CambioNombre</text>
+</g>
+<!-- Button -->
+<g id="node7" class="node">
+<title>Button</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M943,-54C943,-54 823,-54 823,-54 817,-54 811,-48 811,-42 811,-42 811,-12 811,-12 811,-6 817,0 823,0 823,0 943,0 943,0 949,0 955,-6 955,-12 955,-12 955,-42 955,-42 955,-48 949,-54 943,-54"/>
+<text text-anchor="middle" x="883" y="-21" font-family="Arial" font-size="20.00" fill="#36648b">Button</text>
+</g>
+<!-- SaludaScreen&#45;&gt;Button -->
+<g id="edge7" class="edge">
+<title>SaludaScreen-&gt;Button</title>
+<path fill="none" stroke="#ff6347" stroke-width="2" stroke-dasharray="5,2" d="M645.9442,-361.6312C674.7169,-352.2894 704.5237,-339.9864 730,-324 818.6924,-268.3456 848.6411,-243.2519 882,-144 891.9015,-114.5402 890.3248,-78.5025 887.4532,-54.2724"/>
+<polygon fill="#ff6347" stroke="#ff6347" stroke-width="2" points="644.7222,-358.3465 636.2339,-364.6868 646.8234,-365.0237 644.7222,-358.3465"/>
+<text text-anchor="middle" x="905.0733" y="-211.5" font-family="Arial" font-size="15.00" fill="#ff6347">EVENTO</text>
+<text text-anchor="middle" x="905.0733" y="-193.5" font-family="Arial" font-size="15.00" fill="#ff6347">ClickBorrar</text>
+</g>
+<!-- Text1 -->
+<g id="node4" class="node">
+<title>Text1</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M204,-54C204,-54 12,-54 12,-54 6,-54 0,-48 0,-42 0,-42 0,-12 0,-12 0,-6 6,0 12,0 12,0 204,0 204,0 210,0 216,-6 216,-12 216,-12 216,-42 216,-42 216,-48 210,-54 204,-54"/>
+<text text-anchor="middle" x="108" y="-21" font-family="Arial" font-size="20.00" fill="#36648b">Text</text>
+</g>
+<!-- IntroduceNombre&#45;&gt;Text1 -->
+<g id="edge2" class="edge">
+<title>IntroduceNombre-&gt;Text1</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M130.0512,-179.6619C125.1359,-145.6333 116.7936,-87.8788 111.9008,-54.0056"/>
+</g>
+<!-- IntroduceNombre&#45;&gt;TextField -->
+<g id="edge3" class="edge">
+<title>IntroduceNombre-&gt;TextField</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M145.4163,-179.7792C157.6913,-153.5072 179.5335,-114.2456 209.326,-90 232.8805,-70.831 262.926,-57.0357 290.829,-47.3366"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="3" points="292.219,-50.5625 300.5951,-44.0747 290.0014,-43.923 292.219,-50.5625"/>
+<text text-anchor="middle" x="270.837" y="-130.5" font-family="Arial" font-size="15.00" fill="#1e90ff">nombreState</text>
+<text text-anchor="middle" x="270.837" y="-112.5" font-family="Arial" font-size="15.00" fill="#1e90ff">+</text>
+<text text-anchor="middle" x="270.837" y="-94.5" font-family="Arial" font-size="15.00" fill="#1e90ff">onCambioNombre</text>
+</g>
+<!-- Text2 -->
+<g id="node5" class="node">
+<title>Text2</title>
+<path fill="none" stroke="#36648b" stroke-width="4" d="M687,-54C687,-54 567,-54 567,-54 561,-54 555,-48 555,-42 555,-42 555,-12 555,-12 555,-6 561,0 567,0 567,0 687,0 687,0 693,0 699,-6 699,-12 699,-12 699,-42 699,-42 699,-48 693,-54 687,-54"/>
+<text text-anchor="middle" x="627" y="-21" font-family="Arial" font-size="20.00" fill="#36648b">Text</text>
+</g>
+<!-- Saluda&#45;&gt;Text2 -->
+<g id="edge5" class="edge">
+<title>Saluda-&gt;Text2</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M638.3809,-179.7174C628.6763,-169.6146 619.2708,-157.3391 614.1415,-144 604.3666,-118.5797 608.2547,-87.9161 614.229,-64.3586"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="3" points="617.6889,-64.9784 616.9808,-54.4072 610.9421,-63.1127 617.6889,-64.9784"/>
+<text text-anchor="middle" x="657.9293" y="-112.5" font-family="Arial" font-size="15.00" fill="#1e90ff">nombreState</text>
+</g>
+<!-- Saluda&#45;&gt;Button -->
+<g id="edge6" class="edge">
+<title>Saluda-&gt;Button</title>
+<path fill="none" stroke="#1e90ff" stroke-width="3" d="M691.7825,-179.7882C711.8692,-154.6076 744.0502,-117.0862 777.1765,-90 790.8058,-78.8558 806.6153,-68.363 821.7926,-59.2554"/>
+<polygon fill="#1e90ff" stroke="#1e90ff" stroke-width="3" points="823.7868,-62.1431 830.6344,-54.0586 820.2398,-56.1083 823.7868,-62.1431"/>
+<text text-anchor="middle" x="823.4118" y="-112.5" font-family="Arial" font-size="15.00" fill="#1e90ff">onClickBorrar</text>
+</g>
+</g>
+</svg>
+</p><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Con el fin de que el ejemplo sea algo m&#xE1;s realista.En el c&#xF3;digo propuesto a continuaci&#xF3;n hemos usado layouts, modificadores y algunos componentes de Material Design que veremos en el siguiente tema.  Nosotros <strong>nos vamos a centrar en el concepto de elevaci&#xF3;n de estado</strong>. Esto es, la jerarqu&#xED;a de componentes usada y como se va propagando el estado y los manejadores de eventos.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Definimos el estado y los manejadores</span>
+    <span class="token keyword keyword-var">var</span> nombreState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onCambioNombre <span class="token operator">=</span> <span class="token punctuation">{</span> nombre<span class="token operator">:</span> String <span class="token operator">-&gt;</span> nombreState <span class="token operator">=</span> nombre <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onClickBorrar <span class="token operator">=</span> <span class="token punctuation">{</span> nombreState <span class="token operator">=</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">}</span>
+
+    <span class="token function">Column</span><span class="token punctuation">(</span>horizontalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterHorizontally<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Pasamos el estado y manejadores necesarios a los componentes</span>
+        <span class="token function">IntroduceNombre</span><span class="token punctuation">(</span>
+            nombreState <span class="token operator">=</span> nombreState<span class="token punctuation">,</span>
+            onCambioNombre <span class="token operator">=</span> onCambioNombre
+        <span class="token punctuation">)</span>
+        <span class="token function">Saluda</span><span class="token punctuation">(</span>
+            nombreState <span class="token operator">=</span> nombreState<span class="token punctuation">,</span>
+            onClickBorrar <span class="token operator">=</span> onClickBorrar
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalLayoutApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Saluda</span><span class="token punctuation">(</span>
+    nombreState<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    onClickBorrar<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">FlowRow</span><span class="token punctuation">(</span>
+        Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>SpaceBetween
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            text <span class="token operator">=</span> <span class="token string">&quot;Hola <span class="token interpolation"><span class="token delimiter variable">${</span>nombreState<span class="token delimiter variable">}</span></span>&quot;</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Elevamos el evento borrar</span>
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> onClickBorrar<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Borrar&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">IntroduceNombre</span><span class="token punctuation">(</span>
+    nombreState<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    onCambioNombre<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            text <span class="token operator">=</span> <span class="token string">&quot;Nombre:&quot;</span>
+        <span class="token punctuation">)</span>
+        <span class="token function">TextField</span><span class="token punctuation">(</span>
+            value <span class="token operator">=</span> nombreState<span class="token punctuation">,</span>
+            <span class="token comment">// Elevamos el evento cambio en Nombre</span>
+            onValueChange <span class="token operator">=</span> onCambioNombre 
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="restableciendo-el-estado-en-compose">Restableciendo el estado en Compose</h4>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419#restore-ui-state">C&#xF3;mo restablecer el estado en Compose</a></strong>.</li>
+</ul>
+<p>Aunque &quot;remember&quot; se puede utilizar para guardar valores de estado a trav&#xE9;s de recomposiciones. Sin embargo, esta t&#xE9;cnica no retiene el estado entre <strong>cambios de configuraci&#xF3;n</strong>.</p>
+<p><strong>Cambiaremos la configuraci&#xF3;n</strong> cuando alg&#xFA;n aspecto del dispositivo cambia de manera que altera la apariencia de una actividad (como rotar la orientaci&#xF3;n del dispositivo entre vertical y horizontal o cambiar la configuraci&#xF3;n de fuente en todo el sistema).</p>
+<p>Estos cambios har&#xE1;n que toda la <strong>actividad se destruya</strong> y se vuelva a crear. El resultado es una actividad reci&#xE9;n inicializada que ha perdido los valores de estado de la anterior configuraci&#xF3;n y estos volver&#xE1;n a tomar sus valores iniciales.</p>
+<p>Por ejemplo, si ejecutemos en un dispositivo virtual nuestro programa del <strong>contador</strong> tend&#xED;amos una vista similar a la siguiente:</p>
+<div align="center">
+    <img src="assets/imagenes/tema_3_1/CambioConfiguracion.png">
+</div>
+<p>Si nos fijamos, al girar el dispositivo virtual, tras <em>&apos;confirmar el giro&apos;</em>, el contador se ha reiniciado a cero. Esto es porque se ha destruido la actividad y se ha vuelto a crear el &#xE1;rbol de composici&#xF3;n.</p>
+<p>Para evitar esto, podemos usar la API <strong><code>rememberSaveable</code></strong> que nos permite guardar el estado de un objeto en el sistema de tiempo de ejecuci&#xF3;n de Compose y restaurarlo cuando sea necesario.</p>
+<div style="page-break-after:always;"></div>
+<p>Por tanto, reescribiremos nuestro ejemplo del contador usando <strong><code>rememberSaveable</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight= 3}" class="language-kotlin" data-line="3"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorStateful</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span>
+
+    <span class="token function">ContadorStateless</span><span class="token punctuation">(</span>
+        cuentaState <span class="token operator">=</span> cuentaState<span class="token punctuation">,</span>
+        onAumentarCuenta <span class="token operator">=</span> onAumentarCuenta
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div></pre><p>Sin embargo, esto solo funciona para los tipos simples. &#xBF;Qu&#xE9; suceder&#xED;a si el estado un objeto compuesto?. En ese caso, debemos usar la API <strong><code>rememberSaveable</code></strong> con un <strong><code>Saver</code></strong> personalizado tal y como se indica en la <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419#restore-ui-state">documentaci&#xF3;n oficial</a></strong>.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: De todas formas, esto no nos tiene que preocupar salvo en los casos en que tengamos un &apos;<em>composable stateful</em>&apos; usado por otro composable. Esto se va a dar en muy pocos casos puesto que el estado como ya veremos se almacena en los ViewModels como veremos m&#xE1;s adelante y aunque esto no suceda en la mayor&#xED;a de casos se tratar&#xE1; de un tipo simple o uno ya definido por las librer&#xED;as de Compose que ya es compatible con este API de persistencia.</p>
+</blockquote>
+<h4 class="mume-header" id="depurando-nuestra-composici%C3%B3n">Depurando nuestra composici&#xF3;n</h4>
+
+<p>En ocasiones nos va a interesar depurar nuestra composici&#xF3;n. Para ello podemos usar la herramienta <strong><a href="https://developer.android.com/jetpack/compose/tooling/layout-inspector">Layout Inspector</a></strong> de Android Studio.</p>
+<p>Como ser&#xED;a un poco largo incluir aqu&#xED; la explicaci&#xF3;n de como usarla, os dejo un <strong><a href="https://developer.android.com/studio/debug/layout-inspector?hl=es-419">enlace a la documentaci&#xF3;n oficial</a></strong> donde se explica como usarla.</p>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="estado-derivado-de-otros-estados">Estado derivado de otros estados</h4>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary#derivedStateOf(kotlin.Function0)">dereivedStateOf</a></strong>.</li>
+</ul>
+<p>Aunque esta forma de tratar estados es un poco m&#xE1;s avanzada. Puede sernos interesante conocerla para optimizar composiciones o en alg&#xFA;n caso.</p>
+<p>La funci&#xF3;n <strong><code>derivedStateOf</code></strong> nos permite crear un estado derivado de otros estados. Esto es, un <strong>estado calculado</strong> que depende del valor de otros estados.</p>
+<p><strong>Ejemplo</strong>: Vamos rehacer ejemplo del contador sea m&#xFA;ltiplo de 3. En  una primera aproximaci&#xF3;n podr&#xED;amos usar dos estados &apos;<em>normales</em>&apos; para el contador y el booleano que me indica si es m&#xFA;ltiplo de tres o no.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Esta vez por simplificar no hemos utilizado <em>&apos;state hoisting&apos;</em>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[3,7,14]}" class="language-kotlin" data-line="3,7,14"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorMultiploTres</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> esMultiploDeTresState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span>
+            cuentaState<span class="token operator">++</span>
+            esMultiploDeTresState <span class="token operator">=</span> cuentaState <span class="token operator">%</span> <span class="token number">3</span> <span class="token operator">==</span> <span class="token number">0</span>
+        <span class="token punctuation">}</span>
+    Column <span class="token punctuation">{</span>
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> onAumentarCuenta<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string">&quot;Cuenta Clicks&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Llevas <span class="token interpolation variable">$cuentaState</span> Clicks&quot;</span><span class="token punctuation">)</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>esMultiploDeTresState<span class="token punctuation">)</span> <span class="token string">&quot;Es&quot;</span> <span class="token keyword keyword-else">else</span> <span class="token string">&quot;No es&quot;</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot; m&#xFA;ltiplo de 3&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div></pre><p>Aunque el c&#xF3;digo anterior es funcional y correcto. Adem&#xE1;s, el segundo <strong><code>Text</code></strong> no se recompone a no ser que cambie el valor de <strong><code>esMultiploDeTresState</code></strong>. En manejador de <strong><code>onAumentarCuenta</code></strong> hace algo m&#xE1;s de la <em>&apos;responsabilidad&apos;</em> que realmente tiene. Adem&#xE1;s, estamos almacenando un estado ante un cambio de configuraci&#xF3;n que no es necesario, pues podemos calcular al recuperar el valor del otro.</p>
+<p>Si usamos <strong><code>derivedStateOf</code></strong> podemos reescribir el c&#xF3;digo anterior de la siguiente forma...</p>
+<pre data-role="codeBlock" data-info="kotlin  {highlight=5}" class="language-kotlin" data-line="5"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorMultiploTres</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> esMultiploDeTresState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> 
+        derivedStateOf <span class="token punctuation">{</span> cuentaState <span class="token operator">%</span> <span class="token number">3</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="previsualizar-dise%C3%B1o-de-mis-composables">Previsualizar dise&#xF1;o de mis &apos;<em>Composables</em>&apos;</h3>
+
+<p>En Android Studio Disponemos de <strong><a href="https://developer.android.com/jetpack/compose/tooling#preview">diferentes herramientas</a></strong> para asistirnos en el dise&#xF1;o de nuestros componentes de Compose. Una de ellas es la posibilidad de <strong>previsualizar</strong> el dise&#xF1;o de nuestros &apos;<em>composables</em>&apos; en diferentes dispositivos y orientaciones.</p>
+<p>Es f&#xE1;cil de configurar a trav&#xE9;s de un dialogo de configuraci&#xF3;n y tienes la gu&#xED;a oficial de uso actualizada en el <strong><a href="https://developer.android.com/jetpack/compose/tooling/previews">aqu&#xED;</a></strong>.</p>
+<p>Pero vamos hacer una peque&#xF1;as gu&#xED;as de uso a continuaci&#xF3;n...</p>
+<p>Vamos a partir del ejemplo <strong><a href="assets/codigo/SaludaScreen.kt">SaludaScreen.kt</a></strong> que hemos usado en el ejemplo de elevaci&#xF3;n de estado.</p>
+<ol>
+<li>
+<p>La primera idea es que esta previsualizaci&#xF3;n nos puede servir de <strong>&apos;<em>test</em>&apos;</strong> previo de nuestras vistas con <strong>diferentes dispositivos</strong> y <strong>configuraciones de pantalla</strong>.</p>
+<p>A&#xF1;adiremos la anotaci&#xF3;n <strong><code>@Preview</code></strong> sobre el componente <strong><code>composable</code></strong> que queramos visualizar. Si es una <strong>pantalla completa</strong>, lo haremos sobre el componente que la contiene. En nuestro caso, sobre <strong><code>SaludaScreen</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=1}" class="language-kotlin" data-line="1"><span class="token annotation builtin">@Preview</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreenPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// A&#xF1;adimos el Tema de la aplicaci&#xF3;n</span>
+    HolaMundoTheme <span class="token punctuation">{</span>
+        <span class="token function">SaludaScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
+</div></div></pre></li>
+</ol>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
+<ol start="2">
+<li>
+<p>Al a&#xF1;adir la anotaci&#xF3;n nos aparecer&#xE1; el s&#xED;mbolo &#x2699;&#xFE0F; en la parte izquierda y al pulsarlo nos aparecer&#xE1; un dialogo de configuraci&#xF3;n. Como el de la imagen a la derecha. En el que podemos seleccionar el dispositivo, su orientaci&#xF3;n, su densidad de pantalla, si queremos que se muestre el marco del mismo, se active el modo nocturno o incluso si queremos seleccionar un idioma para ver las traducciones.</p>
+<p>Podemos tambi&#xE9;n en la opci&#xF3;n <strong><code>Device</code></strong>, en lugar de <strong><code>Custom (Personalizado)</code></strong>, podemos elegir un dispositivo en concreto y nos configurar&#xE1; opciones de resoluci&#xF3;n y densidad de pantalla seg&#xFA;n sus caracter&#xED;sticas concretas.</p>
+<p>Por ejemplo, la configuraci&#xF3;n del di&#xE1;logo me a&#xF1;adir&#xED;a los siguientes par&#xE1;metros a la anotaci&#xF3;n <strong><code>@Preview</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+    name <span class="token operator">=</span> <span class="token string">&quot;PORTRAIT&quot;</span><span class="token punctuation">,</span>
+    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=360dp,height=800dp,dpi=480&quot;</span><span class="token punctuation">,</span>
+    showBackground <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">)</span>
+</pre></li>
+</ol>
+</div>
+<div style="width: auto">
+<img height="350px" src="assets/imagenes/tema_3_1/Preview.png">
+</div>
+</div>
+<div style="page-break-after:always;"></div>
+<ol start="3">
+<li>
+<p>Para futuros <strong>test</strong> del interfaz y su integraci&#xF3;n en MVVM es conveniente hace un <strong><code>state hoisting</code></strong> de todos mis estados hasta <strong><code>SaludaScreenPreview</code></strong> que deber&#xED;a ser el &apos;<em>&#xFA;nico</em>&apos; componente stateful.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreen</span><span class="token punctuation">(</span>
+    nombreState<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    onCambioNombre<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onClickBorrar<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// c&#xF3;digo omitido por abreviar</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+    name <span class="token operator">=</span> <span class="token string">&quot;PORTRAIT&quot;</span><span class="token punctuation">,</span>
+    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=360dp,height=800dp,dpi=480&quot;</span><span class="token punctuation">,</span>
+    showBackground <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreenPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> nombreState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onCambioNombre <span class="token operator">=</span> <span class="token punctuation">{</span> nombre<span class="token operator">:</span> String <span class="token operator">-&gt;</span> nombreState <span class="token operator">=</span> nombre <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onClickBorrar <span class="token operator">=</span> <span class="token punctuation">{</span> nombreState <span class="token operator">=</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">}</span>
+
+    HolaMundoTheme <span class="token punctuation">{</span>
+        <span class="token function">SaludaScreen</span><span class="token punctuation">(</span>
+            nombreState <span class="token operator">=</span> nombreState<span class="token punctuation">,</span>
+            onCambioNombre <span class="token operator">=</span> onCambioNombre<span class="token punctuation">,</span>
+            onClickBorrar <span class="token operator">=</span> onClickBorrar
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Podemos <strong>a&#xF1;adir tantos &apos;<em>previews</em>&apos; como queramos</strong>. Por ejemplo, podemos a&#xF1;adir un preview para la orientaci&#xF3;n <strong>horizontal</strong> o LANDSCAPE y <strong>modo nocturno</strong>. De esta manera de una sola vez podremos ver todos los comportamientos de nuestra vista de una sola vez durante el dise&#xF1;o.</p>
+<pre data-role="codeBlock" data-info="kotlin  {highlight=[6-11]}" class="language-kotlin" data-line="6-11"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+    name <span class="token operator">=</span> <span class="token string">&quot;PORTRAIT&quot;</span><span class="token punctuation">,</span>
+    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=360dp,height=800dp,dpi=480&quot;</span><span class="token punctuation">,</span>
+    showBackground <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">)</span>
+<span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+    name <span class="token operator">=</span> <span class="token string">&quot;LANDSCAPE&quot;</span><span class="token punctuation">,</span>
+    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=360dp,height=800dp,dpi=480,orientation=landscape&quot;</span><span class="token punctuation">,</span>
+    uiMode <span class="token operator">=</span> Configuration<span class="token punctuation">.</span>UI_MODE_NIGHT_YES<span class="token punctuation">,</span>
+    showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> fontScale <span class="token operator">=</span> <span class="token number">1.0f</span>
+<span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreenPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-11" data-start="6" data-end="11">
+
+
+
+
+
+</div></div></pre></li>
+</ol>
+<p>Puedes descargar el c&#xF3;digo de este ejemplo de este enlace <strong><a href="assets/codigo/SaludaScreenPreview.kt">SaludaScreenPreview.kt</a></strong>.</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
