@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
       
       
       
@@ -264,13 +264,13 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="proyecto-usuarios-con-arquitectura">Proyecto Usuarios con Arquitectura</h1>
+      <h1 class="mume-header undefined" id="-proyecto-usuarios-con-arquitectura">Proyecto Usuarios con Arquitectura</h1>
 
 <p><a href="./5_Arquitectura_usuarios.pdf">Descargar estos apuntes</a></p>
-<h3 class="mume-header" id="ejercicio">Ejercicio</h3>
+<h3 class="mume-header" id="-ejercicio--">Ejercicio</h3>
 
 <p>Para crear nuestro primer proyecto siguiendo la arquitectura explicada en los apuntes, vamos a realizar un ejercicio guiado que posteriormente ampliaremos. La app va a seguir siendo de consola Kotlin, y tratar&#xE1; de gestionar la entrada a una aplicaci&#xF3;n mediante las t&#xED;picas opciones para logearse.</p>
-<h4 class="mume-header" id="paquete-data">Paquete data</h4>
+<h4 class="mume-header" id="-paquete-data-">Paquete data</h4>
 
 <ul>
 <li>Vamos a comenzar creando los elementos necesarios para la manipulaci&#xF3;n de los datos, paquete <strong><code>data</code></strong>. Como todav&#xED;a no tenemos conocimiento de acceso a BD con Android, vamos a usar la simulaci&#xF3;n de esta mediante colecciones, y como ya se ha explicado en el tema, la simulaci&#xF3;n se crear&#xE1; dentro del paquete <strong><code>mocks</code></strong> de <strong><code>data</code></strong>:
@@ -288,17 +288,17 @@ pre[data-line] .line-highlight[data-end]:after {
 </ol>
 </li>
 </ul>
-<h4 class="mume-header" id="paquete-models">Paquete models</h4>
+<h4 class="mume-header" id="-paquete-models-">Paquete models</h4>
 
-<p>Como hemos visto en el tema, en el paquete <strong><code>data</code></strong> deberemos tener una clase Repositorio que nos haga de puente entre UsuarioMock y el tipo modelo correspondiente por lo que antes de nada, pasaremos a crear en el paquete <strong><code>models</code></strong>, la data class <strong>Usuario</strong> con las mismas propiedades que UsuarioMock.</p>
-<h4 class="mume-header" id="paquete-data-1">Paquete data</h4>
+<p>Como hemos visto en el tema, en el paquete <strong><code>data</code></strong> deberemos tener una clase Repositorio que nos haga de puente entre UsuarioMock y el tipo modelo correspondiente, por lo que antes de nada pasaremos a crear en el paquete <strong><code>models</code></strong>, la data class <strong>Usuario</strong> con las mismas propiedades que UsuarioMock.</p>
+<h4 class="mume-header" id="-paquete-data--1">Paquete data</h4>
 
 <p>Volvemos a <strong><code>data</code></strong> y:<br>
 1. Creamos la clase <strong>UsuarioRepository</strong>, que tendr&#xE1; una <em>variable inmutable</em> de tipo UsuarioDaoMock a trav&#xE9;s de la cual podremos acceder a los m&#xE9;todos del DAO creando los m&#xE9;todos paralelos, pero esta vez los datos de entrada y  salida ser&#xE1;n de tipo Usuario.<br>
 2. Archivo <strong>RepositoryConverter</strong> en este archivo crearemos todos los m&#xE9;todos que sirven para mapear ente <em>Usuario</em> y <em>UsuarioMock</em>, adem&#xE1;s de los de mapeo entre <em>Usuario</em> y <em>UsuarioUiState</em> que veremos despu&#xE9;s.</p>
-<h4 class="mume-header" id="paquete-uifeatures">Paquete ui.features</h4>
+<h4 class="mume-header" id="-paquete-uifeatures-">Paquete ui.features</h4>
 
-<h5 class="mume-header" id="l%C3%B3gica-de-la-aplicaci%C3%B3n">L&#xF3;gica de la aplicaci&#xF3;n</h5>
+<h5 class="mume-header" id="-l%C3%B3gica-de-la-aplicaci%C3%B3n-">L&#xF3;gica de la aplicaci&#xF3;n</h5>
 
 <p>Una vez terminada la parte de los datos y modelo, vamos a generar el c&#xF3;digo necesario de la UI. Como todav&#xED;a no estamos trabajando la parte de vistas con Compose, no tendremos que crearnos las carpetas de componentes, pero si crearemos el paquete <strong><code>features</code></strong>, en el cual meteremos los diferentes archivos de la vista de usuario, como puede que con posterioridad la aplicaci&#xF3;n crezca en contenido, vamos a crear un paquete  <strong><code>usuario</code></strong> dentro de features, donde tendremos lo refente a la parte de la aplicaci&#xF3;n que estamos resolviendo, y que constar&#xE1; de lo siguiente:</p>
 <ol>
@@ -312,7 +312,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>La clase <strong>UsuarioViewModel</strong> encargada de toda la parte de la l&#xF3;gica de la aplicaci&#xF3;n, tendr&#xE1; dos variables una de tipo <em>UsuarioRepository</em> y otra de tipo <em>usuarioUiState</em>. Esta &#xFA;ltima ser&#xE1; la que guarde el valor del usuario logeado, mientras que <em>usuarioRepository</em> la utilizaremos para el tratamiento de los datos de los usuarios.<br>
 En esta clase tendremos la funci&#xF3;n <strong>onUsuarioEvent</strong> para gestionar los posibles eventos del tipo LoginEvent como se ha indicado en el punto anterior (intenta resolver esta parte, pide ayuda al profesor si no se te ocurre como).</li>
 </ol>
-<h5 class="mume-header" id="interfaz-de-usuario">Interfaz de usuario</h5>
+<h5 class="mume-header" id="-interfaz-de-usuario-">Interfaz de usuario</h5>
 
 <p>Ahora nos quedar&#xED;a hacer la parte de la aplicaci&#xF3;n que se encarga de la interacci&#xF3;n con el usuario. Para ello crearemos un archivo <strong>UsuarioScreen</strong> donde alojaremos las siguientes funciones:</p>
 <ol>
@@ -358,7 +358,7 @@ Usuario: pepe logeado
 1. Sign in
 2. Login
 </code></pre></blockquote>
-<h4 class="mume-header" id="paquete-views">Paquete views</h4>
+<h4 class="mume-header" id="-paquete-views-">Paquete views</h4>
 
 <p>En este paquete solo tendremos la Main que contendr&#xE1; una variable inmutable de tipo viewModel y realizar&#xE1; la llamada a la funci&#xF3;n usuarioScreen.</p>
 

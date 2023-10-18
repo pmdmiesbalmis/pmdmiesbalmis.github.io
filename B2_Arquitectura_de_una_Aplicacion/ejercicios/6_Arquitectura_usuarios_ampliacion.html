@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
       
       
       
@@ -264,10 +264,10 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="proyecto-usuarios-con-arquitectura-ampliado">Proyecto Usuarios con Arquitectura Ampliado</h1>
+      <h1 class="mume-header undefined" id="-proyecto-usuarios-con-arquitectura-ampliado">Proyecto Usuarios con Arquitectura Ampliado</h1>
 
 <p><a href="./6_Arquitectura_usuarios_ampliacion.pdf">Descargar estos apuntes</a></p>
-<h3 class="mume-header" id="ejercicio">Ejercicio</h3>
+<h3 class="mume-header" id="-ejercicio--">Ejercicio</h3>
 
 <p>Vamos a realizar una ampliaci&#xF3;n del ejercicio de Usuarios, de forma que ahora se podr&#xE1; acceder, una vez nos hayamos logeado, a la publicaci&#xF3;n de recetas. Para ello deberemos a&#xF1;adir una opci&#xF3;n m&#xE1;s en el men&#xFA; que ya ten&#xED;amos, quedando de la siguiente forma:</p>
 <pre data-role="codeBlock" data-info="console" class="language-console"><code>1. Sign in
@@ -285,7 +285,7 @@ Introduce opci&#xF3;n:
 Introduce opcion:
 </code></pre><ul>
 <li>
-<p>Con la primera opci&#xF3;n se podr&#xE1; a&#xF1;adir o quitar una receta, de una lista de RecetasUiState (tipo que adem&#xE1;s de lo tiene RecetaMock, que podemos ver m&#xE1;s abajo en el aviso, tendr&#xE1; un valor Boolean <em>seleccionada</em>) que habr&#xE1; en el ViewModel, la selecci&#xF3;n se har&#xE1; por el id de la receta.</p>
+<p>Con la primera opci&#xF3;n se podr&#xE1; a&#xF1;adir o quitar una receta, de una lista de RecetasUiState (tipo que adem&#xE1;s de lo que tiene RecetaMock, que podemos ver m&#xE1;s abajo en el aviso, tendr&#xE1; un valor Boolean <em>seleccionada</em>) que habr&#xE1; en el ViewModel, la selecci&#xF3;n se har&#xE1; por el id de la receta.</p>
 </li>
 <li>
 <p>La opci&#xF3;n Imprimir selecci&#xF3;n mostrar&#xE1; las recetas que tenemos seleccionada, por ejemplo de la siguiente forma:</p>
@@ -337,27 +337,26 @@ Quiere Salir [S|s]?
 </pre></blockquote>
 <div style="page-break-after:always;"></div>
 <blockquote>
-<pre class="language-text">   RecetaMock(
-       id=3,
-       cookingTime = 10,
-       recipeName = &quot;Ensalada multicolor con cacahuete&quot;,
-       recipePicture = &quot;imagen3.png&quot;,
-       chefName = &quot;Sonia de la Oz&quot;,
-       chefMail = &quot;soniaoz@gmail.com&quot;,
-       chefPicture = null
-   ),
-   RecetaMock(
-       id=4,
-       cookingTime = 35,
-       recipeName = &quot;Caldo de almendras pasas y calabaza&quot;,
-       recipePicture = &quot;imagen4.png&quot;,
-       chefName = &quot;Mohamed Aldalay&quot;,
-       chefMail = &quot;mohaaldala@gmail.com&quot;,
-       chefPicture = null
-   ),
-</pre>
-<p>)</p>
-<pre data-role="codeBlock" data-info class="language-"><code></code></pre></blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">       <span class="token function">RecetaMock</span><span class="token punctuation">(</span>
+           id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span>
+           cookingTime <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>
+           recipeName <span class="token operator">=</span> <span class="token string">&quot;Ensalada multicolor con cacahuete&quot;</span><span class="token punctuation">,</span>
+           recipePicture <span class="token operator">=</span> <span class="token string">&quot;imagen3.png&quot;</span><span class="token punctuation">,</span>
+           chefName <span class="token operator">=</span> <span class="token string">&quot;Sonia de la Oz&quot;</span><span class="token punctuation">,</span>
+           chefMail <span class="token operator">=</span> <span class="token string">&quot;soniaoz@gmail.com&quot;</span><span class="token punctuation">,</span>
+           chefPicture <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+       <span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token function">RecetaMock</span><span class="token punctuation">(</span>
+           id<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span>
+           cookingTime <span class="token operator">=</span> <span class="token number">35</span><span class="token punctuation">,</span>
+           recipeName <span class="token operator">=</span> <span class="token string">&quot;Caldo de almendras pasas y calabaza&quot;</span><span class="token punctuation">,</span>
+           recipePicture <span class="token operator">=</span> <span class="token string">&quot;imagen4.png&quot;</span><span class="token punctuation">,</span>
+           chefName <span class="token operator">=</span> <span class="token string">&quot;Mohamed Aldalay&quot;</span><span class="token punctuation">,</span>
+           chefMail <span class="token operator">=</span> <span class="token string">&quot;mohaaldala@gmail.com&quot;</span><span class="token punctuation">,</span>
+           chefPicture <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+       <span class="token punctuation">)</span><span class="token punctuation">,</span>
+   <span class="token punctuation">)</span>
+</pre></blockquote>
 
       </div>
       
