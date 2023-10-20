@@ -346,9 +346,26 @@ justo después del front matter
 </a>
           </summary>
         <div>
+          <details style="padding:0;;padding-left:24px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#alcance-de-un-viewmodel-viewmodel-scope" class="md-toc-link"><p>Alcance de un ViewModel (ViewModel Scope)</p>
+</a>
+          </summary>
+        <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#alcance-de-un-viewmodel-viewmodel-scope" class="md-toc-link">
-            <p>Alcance de un ViewModel (ViewModel Scope)</p>
+          <a href="#ciclo-de-vida-de-un-viewmodel" class="md-toc-link">
+            <p>Ciclo de vida de un ViewModel</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#instanciando-un-viewmodel" class="md-toc-link">
+            <p>Instanciando un ViewModel</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#ejemplo-de-uso-y-definici&#xF3;n-de-un-viewmodel" class="md-toc-link">
+            <p>Ejemplo de uso y definici&#xF3;n de un ViewModel</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
           <a href="#hand-pr&#xE1;cticas-no-recomendadas" class="md-toc-link">
@@ -386,6 +403,120 @@ justo después del front matter
 <p>&#x1F4CC; <strong>Nota</strong>: Cuando se defini&#xF3; la clase <strong><code>ViewModel</code></strong> en la primera versi&#xF3;n de <strong>Jetpack</strong>, a&#xFA;n no existia <strong>Compose</strong> y se usaba asociado a una vista como un <strong><code>Activity</code></strong> o a un <strong><code>Fragment</code></strong>. Nuestras aplicaciones de Android se compon&#xED;an de una o m&#xE1;s <strong><code>Activity</code></strong> o <strong><code>Fragment</code></strong> y cada uno de ellos ten&#xED;a su propio <strong><code>ViewModel</code></strong> que se creaba como una <strong>instancia &#xFA;nica</strong>. <strong><code>ViewModel</code></strong> se usaba para almacenar datos que se necesitaban en la interfaz de usuario de la <strong><code>Activity/Fragment</code></strong> o el <strong><code>Fragment</code></strong> y quer&#xED;amos que sobrevivieran a los cambios de configuraci&#xF3;n o quer&#xED;amos compartir datos entre ellos.</p>
 <p>Con la llegada de <strong>Jetpack Compose</strong> este enfoque ha cambiado y Google ahora <strong>recomienda aplicaciones de actividad &#xFA;nica</strong> donde las diferentes pantallas se cargan como contenido dentro de la misma actividad. Por tanto, un ViewModel utilizado por una actividad permanece en memoria hasta que la actividad finalice esto es hasta que la aplicaci&#xF3;n finalice.</p>
 </blockquote>
+<h4 class="mume-header" id="ciclo-de-vida-de-un-viewmodel">Ciclo de vida de un ViewModel</h4>
+
+<ul>
+<li>En el caso de una <strong><code>Activity</code></strong>, hasta que termina. (<strong>El m&#xE1;s com&#xFA;n</strong>)</li>
+<li><s>En el caso de un <strong><code>Fragment</code></strong>, cuando se desvincula.</s> (No se usa en Compose)</li>
+<li>En el caso de un <strong><code>NavBackStackEntry</code></strong>, hasta volvemos atr&#xE1;s en el grafo.</li>
+</ul>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 65%">
+<p>En la imagen de la derecha vemos que el objeto <strong><code>ViewModel</code></strong> cuyo <strong>&apos;<em>propietario</em>&apos;</strong> (el <strong><code>ViewModelStoreOwner</code></strong>) es una <strong><code>Activity</code></strong> que tiene un cambio de configuraci&#xF3;n (rotaci&#xF3;n de pantalla) y por tanto se destruye y vuelve a crearse su vista asociada.</p>
+<ol>
+<li>
+<p>Se crea al llamarse al m&#xE9;todo <strong><code>onCreate()</code></strong> de la <strong><code>Activity</code></strong> <strong>solo la primera vez</strong> y aunque se vuelva a llamar a <strong><code>onCreate()</code></strong> por un cambio de configuraci&#xF3;n, <strong>no se vuelve a crear</strong> permanece el mismo objeto <strong><code>ViewModel</code></strong> que se cre&#xF3; en la primera llamada.</p>
+</li>
+<li>
+<p><strong>No se destruye</strong> aunque la <strong><code>Activity</code></strong>, destruya su vista y permanece en memoria hasta la finalizaci&#xF3;n de la <strong><code>Activity</code></strong>. En ese momento se llama al m&#xE9;todo <strong><code>onCleared()</code></strong> del <strong><code>ViewModel</code></strong> para que realice las tareas de limpieza necesarias.</p>
+</li>
+</ol>
+</div>
+<div style="width: auto">
+    <img height="350px" src="assets/imagenes/tema_3_4/viewmodel-lifecycle.png">
+</div>
+</div>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="instanciando-un-viewmodel">Instanciando un ViewModel</h3>
+
+<p>Hay muchas formas de instanciarlo y eso nos puede llevar a confusi&#xF3;n. Pero nosotros vamos a usar la m&#xE1;s sencilla y recomendada por Google. De todas formas, si quieres profundizar puedes ver el siguiente <em><strong><a href="https://developer.android.com/static/images/topic/libraries/architecture/viewmodel-apis-cheatsheet.png?hl=es-419">&apos;cheatsheet&apos;</a></strong></em> creado por los desarrolladores de Google.</p>
+<ol>
+<li>
+<p>Para definirlo deberemos crear una clase que herede de <strong><code>ViewModel</code></strong> y que implemente la l&#xF3;gica de negocio que necesitemos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MiViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>&#x274C; <strong>No debemos hacer jam&#xE1;s una instancia direcra</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> <span class="token function">MiViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//&#x1F480;&#x1F480;</span>
+</pre><p>Ya queel ciclo de vida de un ViewModel est&#xE1; asociado a un <strong><code>ViewModelStoreOwner</code></strong> y por tanto es la clase <strong><code>ViewModelProvider</code></strong> la que se encarga de crearlo y mantenerlo en memoria.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// activity es el objeto que implementa ViewModelStoreOwner</span>
+<span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> <span class="token function">ViewModelProvider</span><span class="token punctuation">(</span>activity<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>MiViewModel<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: Sin embargo nosotros <strong>no tendremos que crearlo as&#xED; nunca</strong> pues <strong>Jetpack</strong> nos proporciona formas m&#xE1;s sencillas de hacerlo.</p>
+</blockquote>
+</li>
+<li>
+<p>&#x26A0;&#xFE0F; Como en el fondo deber&#xED;a ser <strong><code>ViewModelProvider</code></strong> quien lo cree, <strong>si pasamos par&#xE1;metros al constructor</strong> de la clase <strong><code>MiViewModel</code></strong>, no podremos tendremos forma m&#xE1;s sencilla de crearlo. Por tanto, de momento, no deber&#xED;amos pasar par&#xE1;metros al constructor.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">MiViewModel</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> param<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>  <span class="token comment">//&#x1F480;&#x1F480;</span>
+</pre><p>Si necesit&#xE1;ramos pasar par&#xE1;metros al constructor, deberemos crear una clase que implemente <strong><code>ViewModelProvider.Factory</code></strong> y que se encargue de crear el objeto <strong><code>MiViewModel</code></strong> como se indica en la <strong><a href="https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-factories?hl=es-419">documentaci&#xF3;n oficial</a></strong>.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Ya veremos m&#xE1;s adelante que la librer&#xED;a <strong>Hilt</strong> (Jetpack) para inyecci&#xF3;n de dependencias me facilita mucho esta tarea. As&#xED; pues, no tendremos nunca que crear una clase que implemente <strong><code>ViewModelProvider.Factory</code></strong> cuando pasemos par&#xE1;metros.</p>
+</blockquote>
+ <div style="page-break-after:always;"></div>
+</li>
+<li>
+<p>Delegado  de creaci&#xF3;n <strong><code>by viewModels()</code></strong>, si el propietario es una <strong><code>Activity</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[2-7,12-16]}" class="language-kotlin" data-line="2-7,12-16"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Opci&#xF3;n 1</span>
+    <span class="token comment">// Lo defino como propiedad de la clase y delego su creaci&#xF3;n que ser&#xE1; al ser usado por </span>
+    <span class="token comment">// primera vez despu&#xE9;s de llamarse el m&#xE9;todo onCreate() de la Activity y puede ser </span>
+    <span class="token comment">// accedido desde cualquier m&#xE9;todo de la Activity que usemos despu&#xE9;s del onCreate()</span>
+    <span class="token comment">// El delegado internamente llama a ViewModelProvider</span>
+    <span class="token keyword keyword-val">val</span> miVm<span class="token operator">:</span> MiViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+
+        <span class="token comment">// Opci&#xF3;n 2</span>
+        <span class="token comment">// Lo defino en el m&#xE9;todo onCreate() y lo clausuramos al definir el &#xE1;rbol de composici&#xF3;n.</span>
+        <span class="token comment">// seguir&#xE1; siendo destruido por ViewModelProvider al destruirse la </span>
+        <span class="token comment">// Activity que es el ViewModelStoreOwner</span>
+        <span class="token keyword keyword-val">val</span> miVm<span class="token operator">:</span> MiViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        setContent <span class="token punctuation">{</span>
+            <span class="token comment">// Clausura de miVm</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2-7" data-start="2" data-end="7">
+
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12-16" data-start="12" data-end="16">
+
+
+
+
+</div></div></pre></li>
+<li>
+<p>Creaci&#xF3;n con <strong><code>viewModel()</code></strong>, si estamos dentro de una funci&#xF3;n <strong><code>@Composable</code></strong></p>
+<p>El <strong><code>ViewModelStoreOwner</code></strong> ser&#xE1; la <strong><code>Activity</code></strong> que renderiza la composici&#xF3;n. No importa que <strong><code>viewModel()</code></strong> sea llamado m&#xE1;s veces a lo largo de las recomposiciones pues solo se instanciar&#xE1; en la primera llamada.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">MiScreen</span><span class="token punctuation">(</span>miVm<span class="token operator">:</span> MiViewModel <span class="token operator">=</span> <span class="token function">viewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Existen m&#xE1;s formas de crear un <strong><code>ViewModel</code></strong> que veremos m&#xE1;s adelante.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="ejemplo-de-uso-y-definici%C3%B3n-de-un-viewmodel">Ejemplo de uso y definici&#xF3;n de un ViewModel</h3>
+
+<p><mark><strong>TODO: AQUI VA AHORCADO EXPLICADO</strong></mark></p>
+<div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="hand-pr%C3%A1cticas-no-recomendadas">&#x270B; Pr&#xE1;cticas no recomendadas</h3>
 
 <p>Las siguientes son varias pr&#xE1;cticas recomendadas clave que debes seguir cuando implementes <strong><code>ViewModel</code></strong>:</p>
