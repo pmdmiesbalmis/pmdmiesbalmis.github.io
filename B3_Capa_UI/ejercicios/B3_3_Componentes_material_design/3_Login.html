@@ -269,7 +269,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p><a href="./3_Login.pdf">Descargar estos apuntes</a></p>
 <h3 class="mume-header" id="-ejercicio-">Ejercicio</h3>
 
-<p>Vamos a crear una aplicaci&#xF3;n con el siguiente aspecto, usaremos los <strong>TexField</strong> explicados en el tema con el tipo <strong>Validacion</strong>, ser&#xE1; necesario crear un TextField propio para el password que permita visualizar o no la contrase&#xF1;a (ser&#xE1; sencillo encontrarlo en la web).</p>
+<p>Vamos a crear una aplicaci&#xF3;n con aspecto similar al siguiente, usaremos los <strong>TexField</strong> explicados en el tema con el tipo <strong>Validacion</strong>, ser&#xE1; necesario crear un TextField propio para el password que permita visualizar o no la contrase&#xF1;a (ser&#xE1; sencillo encontrarlo en la web). La pantalla de la imagen, la crearemos a partir de la funci&#xF3;n <strong>LoginScreen</strong> que deberemos situar en el lugar correcto, seg&#xFA;n la arquitectura explicada en temas anteriores.</p>
 <div align="center">
     <img height="350" src="../../assets/imagenes/ejercicios3_3/ejercicio3/imagen1.png">
 </div>
@@ -297,6 +297,39 @@ pre[data-line] .line-highlight[data-end]:after {
 <img height="200px" src="../../assets/imagenes/ejercicios3_3/ejercicio3/imagen6.png">
 </div>
 </div>
+<blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong> como en ejercicios anteriores, la l&#xF3;gica de la app se manejar&#xE1; fuera de los Composables que forman la screen (Preview o Activity), por lo que toda la parte de las validaciones tendr&#xE1;n que ir fuera de la funci&#xF3;n LoginScreen, necesitando pasar como variables de tipo State <strong>validacionLogin</strong> y <strong>validacionPassword</strong> adem&#xE1;s de las necesarias para los TextField.</p>
+</blockquote>
+<blockquote>
+<p>&#x1F4A1; <strong>Tips:</strong> Los componentes que debemos definir (algunos ya est&#xE1;n en el tema) son:</p>
+<div style="display: flex; justify-content: space-evenly; align-items: center; margin-top: 15px; margin-bottom: 15px">
+<div style="width: 70%">
+<img width src="../../assets/imagenes/ejercicios3_3/ejercicio3/imagen8.png">
+</div>
+<div style="width: 30%">
+<img height="200px" src="../../assets/imagenes/ejercicios3_3/ejercicio3/imagen7.png">
+</div>
+</div>
+<ul>
+<li>
+<p>Definidos en <strong>FieldTextCommon.kt</strong><br>
+<strong><code>OutlinedTextFieldMail</code></strong> se basa en un <strong><code>OutlinedTextFieldWithErrorState</code></strong><br>
+<strong><code>OutlinedTextFilePassword</code></strong> basado en <strong><code>OutlinedTextField</code></strong></p>
+</li>
+<li>
+<p>Definidos en <strong>TextCommon.kt</strong><br>
+<strong><code>TextNewAccount</code></strong> que lo crearemos con la siguiente funci&#xF3;n:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-fun">fun</span> <span class="token function">TextNewAccount</span><span class="token punctuation">(</span> onClick<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span> 
+                 color<span class="token operator">:</span> Color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary
+                <span class="token punctuation">)</span>
+</pre><p>Que incluir&#xE1; un Row con dos Text.</p>
+</li>
+<li>
+<p>Definidos en <strong>ImageCommon.kt</strong><br>
+<strong><code>CircularImageFromResource</code></strong> que  incluir&#xE1; un <strong><code>Image</code></strong></p>
+</li>
+</ul>
+</blockquote>
 
       </div>
       

@@ -269,7 +269,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p><a href="./5_Arquitectura_usuarios.pdf">Descargar estos apuntes</a></p>
 <h3 class="mume-header" id="-ejercicio--">Ejercicio</h3>
 
-<p>Para crear nuestro primer proyecto siguiendo la arquitectura explicada en los apuntes, vamos a realizar un ejercicio guiado que posteriormente ampliaremos. La app va a seguir siendo de consola Kotlin, y tratar&#xE1; de gestionar la entrada a una aplicaci&#xF3;n mediante las t&#xED;picas opciones para logearse.</p>
+<p>Para crear nuestro primer proyecto siguiendo la arquitectura explicada en los apuntes, vamos a realizar un ejercicio guiado que posteriormente ampliaremos. <strong>La app va a seguir siendo de CONSOLA Kotlin</strong>, y tratar&#xE1; de gestionar la entrada a una aplicaci&#xF3;n mediante las t&#xED;picas opciones para logearse.</p>
 <h4 class="mume-header" id="-paquete-data-">Paquete data</h4>
 
 <ul>
@@ -290,7 +290,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 <h4 class="mume-header" id="-paquete-models-">Paquete models</h4>
 
-<p>Como hemos visto en el tema, en el paquete <strong><code>data</code></strong> deberemos tener una clase Repositorio que nos haga de puente entre UsuarioMock y el tipo modelo correspondiente, por lo que antes de nada pasaremos a crear en el paquete <strong><code>models</code></strong>, la data class <strong>Usuario</strong> con las mismas propiedades que UsuarioMock.</p>
+<p>Como hemos visto en el tema, en el paquete <strong><code>data</code></strong> deberemos tener una clase Repositorio que nos haga de puente entre UsuarioMock y el tipo modelo correspondiente, por lo que antes de nada pasaremos a crear en el paquete <strong><code>models</code></strong> (a nivel de <strong><code>data</code></strong> cumpliendo la arquitectura de usuario) la data class <strong>Usuario</strong> con las mismas propiedades que UsuarioMock.</p>
 <h4 class="mume-header" id="-paquete-data--1">Paquete data</h4>
 
 <p>Volvemos a <strong><code>data</code></strong> y:<br>
@@ -309,7 +309,7 @@ pre[data-line] .line-highlight[data-end]:after {
 3. <strong>SaleSistena</strong> que cambia la anterior variable a false.<br>
 4. <strong>MuestraUsuarios</strong> que se encargar&#xE1; de mostrar la lista de usuarios del sistema (esto no tiene sentido en una app, pero lo usamos a modo de comprobaci&#xF3;n de que todo est&#xE1; correcto).<br>
 5. <strong>ModificaUsuario</strong> al que le llega un password y si el usuario est&#xE1; logeado, se encargar&#xE1; de modificar el usuario con el nuevo password.</li>
-<li>La clase <strong>UsuarioViewModel</strong> encargada de toda la parte de la l&#xF3;gica de la aplicaci&#xF3;n, tendr&#xE1; dos variables una de tipo <em>UsuarioRepository</em> y otra de tipo <em>usuarioUiState</em>. Esta &#xFA;ltima ser&#xE1; la que guarde el valor del usuario logeado, mientras que <em>usuarioRepository</em> la utilizaremos para el tratamiento de los datos de los usuarios.<br>
+<li>La clase <strong>UsuarioViewModel</strong> encargada de toda la parte de la l&#xF3;gica de la aplicaci&#xF3;n, tendr&#xE1; dos variables una de tipo <em>UsuarioRepository</em> y otra de tipo <em>usuarioUiState</em>. Esta &#xFA;ltima ser&#xE1; la que guarde el valor del usuario logeado (si se logea un usuario satisfactoriamente, se guardar&#xE1; en esta variable. Si todav&#xED;a no se ha logeado o se realiza logout, esta variable pasar&#xE1; a ser null). Mientras que <em>usuarioRepository</em> la utilizaremos para el tratamiento de los datos de los usuarios.<br>
 En esta clase tendremos la funci&#xF3;n <strong>onUsuarioEvent</strong> para gestionar los posibles eventos del tipo LoginEvent como se ha indicado en el punto anterior (intenta resolver esta parte, pide ayuda al profesor si no se te ocurre como).</li>
 </ol>
 <h5 class="mume-header" id="-interfaz-de-usuario-">Interfaz de usuario</h5>
