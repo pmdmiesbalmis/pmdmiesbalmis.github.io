@@ -363,11 +363,36 @@ justo después del front matter
           <a href="#instanciando-un-viewmodel" class="md-toc-link">
             <p>Instanciando un ViewModel</p>
 
-          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#ejemplo-de-uso-y-definici&#xF3;n-de-un-viewmodel" class="md-toc-link">
-            <p>Ejemplo de uso y definici&#xF3;n de un ViewModel</p>
+          </a></div><details style="padding:0;;padding-left:24px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#ejemplo-de-uso-y-definici&#xF3;n-de-un-viewmodel" class="md-toc-link"><p>Ejemplo de uso y definici&#xF3;n de un ViewModel</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#ahorcadouistatekt" class="md-toc-link">
+            <p>AhorcadoUiState.kt</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#ahorcadoeventkt" class="md-toc-link">
+            <p>AhorcadoEvent.kt</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#ahorcadoscreenkt" class="md-toc-link">
+            <p>AhorcadoScreen.kt</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#ahorcadoviewmodelkt" class="md-toc-link">
+            <p>AhorcadoViewModel.kt</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#asociando-el-viewmodel-a-la-ui-en-mainactivitykt" class="md-toc-link">
+            <p>Asociando el ViewModel a la UI en MainActivity.kt</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
           <a href="#hand-pr&#xE1;cticas-no-recomendadas" class="md-toc-link">
             <p>&#x270B; Pr&#xE1;cticas no recomendadas</p>
 
@@ -515,7 +540,424 @@ justo después del front matter
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="ejemplo-de-uso-y-definici%C3%B3n-de-un-viewmodel">Ejemplo de uso y definici&#xF3;n de un ViewModel</h3>
 
-<p><mark><strong>TODO: AQUI VA AHORCADO EXPLICADO</strong></mark></p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 80%">
+<p>Vamos a crear un simple juego del ahorcado para ver c&#xF3;mo se implementa un <strong><code>ViewModel</code></strong>. Para ello vamos a partir de un proyecto donde ya hemos dise&#xF1;ado una UI con <strong>Jetpack Compose</strong>.</p>
+<ul>
+<li>Puedes descargar el proyecto de partida de este enlace <strong><a href="assets/codigo/tema_3_4/Ahorcado_recurso.zip">Ahorcado.zip</a></strong>.</li>
+</ul>
+<p>Vamos a explicar la implementaci&#xF3;n del interfaz de usuario antes de ver la implementaci&#xF3;n del <strong><code>ViewModel</code></strong>. Para ello, partimos de la estructura del proyecto que se muestra en la imagen de la derecha donde tenemos un <strong><code>AhorcadoScreen.kt</code></strong>, un <strong><code>AhorcadoUiState.kt</code></strong> que guardar&#xE1; el &apos;<em>State</em>&apos; del UI y un <strong><code>AhorcadoEvent.kt</code></strong> que gestionar&#xE1; los eventos que se produzcan en el UI.</p>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="183px" preserveAspectRatio="none" style="width:173px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 173 183" width="173px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"/><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85" x="26" y="39.5508">[com.ahorcado]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="56" y="84.832">[juego]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="100" x="56" y="99.9258">AhorcadoEvent.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110" x="56" y="115.0195">AhorcadoScreen.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110" x="56" y="130.1133">AhorcadoUiState.kt</text><path d="M37,136.8438 L37,138.8438 L45,138.8438 L45,137.8438 L40,137.8438 L40,136.8438 L37,136.8438 M37,139.8438 L37,144.3438 C37,144.6238 37.22,144.8438 37.5,144.8438 L44.5,144.8438 C44.78,144.8438 45,144.6238 45,144.3438 L45,139.8438 L37,139.8438 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="46" y="145.207">[theme]</text><path d="M37,151.9375 L37,153.9375 L45,153.9375 L45,152.9375 L40,152.9375 L40,151.9375 L37,151.9375 M37,154.9375 L37,159.4375 C37,159.7175 37.22,159.9375 37.5,159.9375 L44.5,159.9375 C44.78,159.9375 45,159.7175 45,159.4375 L45,154.9375 L37,154.9375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="46" y="160.3008">[views]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="46" y="175.3945">MainActivity.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="63.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="64.8281" y2="64.8281"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="78.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="66.8281" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="79.9219" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="95.0156" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="110.1094" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="125.2031" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="140.2969"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="140.2969" y2="140.2969"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="154.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="155.3906" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="157.3906" y2="170.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="170.4844" y2="170.4844"/><!--SRC=[ZP1FJy904CNl-odcPA241YgYQGm1ePWWZSG25rEIfHtAQjarszaQGlpkhW54F96vlT-RDt-w1N5D1S-9iHrRz6IgbKWNR3TbDRY_MgayHTrvJTJ6vMkb4vwgcDLgu3WdQ4JiE5OyLrV8oMWi3kmSlXdCr97OGOdAbVQrsl9ycHliE4xlC2qeKPBxJfTueqGZoWlDCn4H9_nr_xcMrhZ1-9zO2lmiulqf8HUobv0e1Mrj06DVjheeq_qZ9pcND0l7KA8kX9BGTBs6T-rwbSX86E8Il3Oq6xvtuxTkeHzCuGTNMULnCeP26PqWfA8WBPQ6R7-LZNZ9uSL84XlquVa3vMZmT1GWaANGIcxifzXe7fuCxLRzGH14gEqcC0_P05VSv6Gx4fKAcVamcmxhTspCPMPuPhEnO7rbS_NMXo3w1W00]--></g></svg></p></div>
+</div>
+<h4 class="mume-header" id="ahorcadouistatekt">AhorcadoUiState.kt</h4>
+
+<p>Como hemos comentado guardar&#xE1; el &apos;<em>State</em>&apos; del UI definido en <strong><code>AhorcadoScreen.kt</code></strong> y que b&#xE1;sicamente ser&#xE1; el estado del conocido juego del ahorcado.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span>
+    <span class="token comment">// &#xDA;ltima letra introducida por el usuario, es una cadena de una sola letra.    </span>
+    <span class="token keyword keyword-val">val</span> letraIntroducida<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// Palabra que se tiene que adivinar, proceder&#xE1; de alguna fuente de datos.</span>
+    <span class="token keyword keyword-val">val</span> palabra<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// Cadena que lleva las letras que se han fallado en el juego.</span>
+    <span class="token keyword keyword-val">val</span> letrasFalladas<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// Cadena que lleva las letras que se han acertado de la palabra a adivinar.</span>
+    <span class="token keyword keyword-val">val</span> letrasAcertadas<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// Valor enumerado que guarda en que momento del juego estoy.</span>
+    <span class="token keyword keyword-val">val</span> estado<span class="token operator">:</span> EstadoJuego <span class="token operator">=</span> EstadoJuego<span class="token punctuation">.</span>EMPEZAR
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-enum">enum</span> <span class="token keyword keyword-class">class</span> EstadoJuego <span class="token punctuation">{</span> 
+        EMPEZAR<span class="token punctuation">,</span> <span class="token comment">// El juego a&#xFA;n no ha empezado y no se ha generado la palabra a adivinar.</span>
+        JUGANDO<span class="token punctuation">,</span> <span class="token comment">// Estamos ya jugando y ya hay una palabra a adivinar.</span>
+        GANADO<span class="token punctuation">,</span>  <span class="token comment">// El juego ha terminado ya y se ha ganado o se ha perdido. El usuario debe ve</span>
+        PERDIDO  <span class="token comment">// el resultado y debe aceptarlo para poder volver al estado EMPEZAR.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="ahorcadoeventkt">AhorcadoEvent.kt</h4>
+
+<p>Lo eventos posibles que vamos a manejar en el UI y que se producir&#xE1;n al interactuar con el mismo los agrupamos en el siguiente <strong><code>sealed interface</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> AhorcadoEvent <span class="token punctuation">{</span>
+    <span class="token comment">// Estamos en estado EMPEZAR y pasamos a JUGANDO.</span>
+    <span class="token keyword keyword-object">object</span> OnEmpezarJuego <span class="token operator">:</span> AhorcadoEvent
+    <span class="token comment">// Ha finalizado el juego, estamos en estado GANADO y PERDIDO y pasamos al estado EMPEZAR.</span>
+    <span class="token keyword keyword-object">object</span> OnAceptarResultadoFinalJuego <span class="token operator">:</span> AhorcadoEvent
+    <span class="token comment">// Estamos JUGANDO hay una **`letraIntroducida`** y la enviamos para que se compruebe.</span>
+    <span class="token keyword keyword-object">object</span> OnLetraEnviada <span class="token operator">:</span> AhorcadoEvent
+    <span class="token comment">// El usuario introduce una letra y tenemos que comprobarla para ver si pertenece al</span>
+    <span class="token comment">// alfabeto castellano (sin tildes) y no est&#xE1; entre las acertadas y falladas. </span>
+    <span class="token comment">// De esta manera despu&#xE9;s podremos jugar con ella.s</span>
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnCambiaLetraIntroducida</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> letra<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> AhorcadoEvent
+<span class="token punctuation">}</span>
+</pre><h4 class="mume-header" id="ahorcadoscreenkt">AhorcadoScreen.kt</h4>
+
+<p>Definimos el UI usando <strong><code>Jetpack Compose</code></strong> y aplicando &apos;<em>State Hoisting</em> &apos; con funciones <em>composables</em> sin estado o &apos;<em>stateless</em>&apos;. Es la parte m&#xE1;s extensa y vamos a describir los <strong>componentes m&#xE1;s importantes</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Recibe el n&#xFA;mero de fallos y los representa con una </span>
+<span class="token comment">// de la im&#xE1;genes del ahorcado definidas en los recursos.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">MuestraAhorcado</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span> fallos<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> idRecurso <span class="token operator">=</span> <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>fallos<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token number">0</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado0   <span class="token comment">// No hay fallos</span>
+        <span class="token number">1</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado1   <span class="token comment">// 1 fallo</span>
+        <span class="token number">2</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado2   <span class="token comment">// 2 fallos</span>
+        <span class="token number">3</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado3   <span class="token comment">// ...</span>
+        <span class="token number">4</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado4
+        <span class="token number">5</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado5
+        <span class="token number">6</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado6
+        <span class="token keyword keyword-else">else</span> <span class="token operator">-&gt;</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">Exception</span><span class="token punctuation">(</span><span class="token string">&quot;N&#xFA;mero de fallos incorrecto&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">Image</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>idRecurso<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        contentDescription <span class="token operator">=</span> <span class="token string">&quot;Dibujo del ahorcado&quot;</span><span class="token punctuation">,</span>
+        colorFilter <span class="token operator">=</span> ColorFilter<span class="token punctuation">.</span><span class="token function">tint</span><span class="token punctuation">(</span>MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Recibe la palabra a adivinar y las letras acertadas y muestra las letras acertadas y </span>
+<span class="token comment">// las que faltan por acertar representadas por &apos;_&apos;. Tenemos pues un Row con Text para cada letra.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Palabra</span><span class="token punctuation">(</span>palabra<span class="token operator">:</span> String<span class="token punctuation">,</span> letrasAcertadas<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Row</span><span class="token punctuation">(</span>
+    modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Center
+<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// Muestras las letras falladas en un Row con Text para cada letra.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Fallos</span><span class="token punctuation">(</span>letrasFalladas<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Row</span><span class="token punctuation">(</span>
+    modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Start
+<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// Muestra el estado del juego mientras estoy JUGANDO, esto es,</span>
+<span class="token comment">// la palabra parcialmente adivinada y las letras falladas.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">EstadoJuego</span><span class="token punctuation">(</span>
+    palabra<span class="token operator">:</span> String<span class="token punctuation">,</span> letrasAcertadas<span class="token operator">:</span> String<span class="token punctuation">,</span> letrasFalladas<span class="token operator">:</span> String
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Top<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Spacer</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">Palabra</span><span class="token punctuation">(</span>palabra<span class="token punctuation">,</span> letrasAcertadas<span class="token punctuation">)</span>
+        <span class="token function">Spacer</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">Fallos</span><span class="token punctuation">(</span>letrasFalladas<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// TextField encargado de introducir una letra. Su estado est&#xE1; representado por letraState.</span>
+<span class="token comment">// Si hay letra parra jugar se muestra un Button para enviarla. </span>
+<span class="token comment">// Por esa raz&#xF3;n elevamos dos eventos como la introducci&#xF3;n de una letra y el env&#xED;o de la misma.</span>
+<span class="token comment">// Esto solo se podr&#xE1; hacer si hay una letra v&#xE1;lida para jugar.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">JuegaLetra</span><span class="token punctuation">(</span>    
+    letraState<span class="token operator">:</span> String<span class="token punctuation">,</span> onCambiaLetraIntroducida<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span> onLetraEnviada<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Hace que el foco recaiga sobre el OutlinedTextField</span>
+        <span class="token keyword keyword-val">val</span> focusRequester <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">FocusRequester</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token function">OutlinedTextField</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">width</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+                               <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span>start <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> end <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+                               <span class="token punctuation">.</span><span class="token function">focusRequester</span><span class="token punctuation">(</span>focusRequester<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            value <span class="token operator">=</span> letraState<span class="token punctuation">,</span>
+            singleLine <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">onCambiaLetraIntroducida</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">uppercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            label <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Letra&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment">// Hace que el foco recaiga sobre el OutlinedTextField</span>
+        <span class="token function">LaunchedEffect</span><span class="token punctuation">(</span>Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span> focusRequester<span class="token punctuation">.</span><span class="token function">requestFocus</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token comment">// Si hay letra para jugar se muestra el Button para enviarla.</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>letraState<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> controller <span class="token operator">=</span> LocalSoftwareKeyboardController<span class="token punctuation">.</span>current
+            <span class="token function">Button</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span>start <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> end <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                onClick <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// Ocultamos el teclado si est&#xE1; visible antes de enviar la letra.</span>
+                    controller<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token function">onLetraEnviada</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Jugar&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Componente que se muestra si el juego ha terminado y el estado es GANADO o PERDIDO.</span>
+<span class="token comment">// Mostramos el aviso correspondiente y un Button para aceptar el resultado y volver al estado EMPEZAR.</span>
+<span class="token comment">// Podr&#xED;a ser una AlertDialog.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ResultadoFinalJuego</span><span class="token punctuation">(</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
+    estadoJuego<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">,</span>
+    onAceptarResultadoFinalJuego<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Gesti&#xF3;n de los estados de juego y su composici&#xF3;n de la UI.</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">MuestraInterface</span><span class="token punctuation">(</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
+    ahorcadoState<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">,</span>
+    onEventSent<span class="token operator">:</span> <span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>estado <span class="token operator">==</span> AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>EMPEZAR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">BotonEmpezar</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> modifier<span class="token punctuation">,</span>
+            onClick <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">onEventSent</span><span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">.</span>OnEmpezarJuego<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> scrollState<span class="token operator">:</span> ScrollState <span class="token operator">=</span> <span class="token function">rememberScrollState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">Column</span><span class="token punctuation">(</span>
+            verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Top<span class="token punctuation">,</span>
+            modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
+                Modifier
+                    <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">verticalScroll</span><span class="token punctuation">(</span>scrollState<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">EstadoJuego</span><span class="token punctuation">(</span>
+                palabra <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>palabra<span class="token punctuation">,</span>
+                letrasAcertadas <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letrasAcertadas<span class="token punctuation">,</span>
+                letrasFalladas <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letrasFalladas
+            <span class="token punctuation">)</span>
+            <span class="token function">Spacer</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>estado <span class="token operator">==</span> AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>JUGANDO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">JuegaLetra</span><span class="token punctuation">(</span>
+                    letraState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letraIntroducida<span class="token punctuation">,</span>
+                    onCambiaLetraIntroducida <span class="token operator">=</span> <span class="token punctuation">{</span> letra <span class="token operator">-&gt;</span>
+                        <span class="token function">onEventSent</span><span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">.</span><span class="token function">OnCambiaLetraIntroducida</span><span class="token punctuation">(</span>letra<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    onLetraEnviada <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">onEventSent</span><span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">.</span>OnLetraEnviada<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token function">ResultadoFinalJuego</span><span class="token punctuation">(</span>
+                    estadoJuego <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>estado<span class="token punctuation">,</span>
+                    onAceptarResultadoFinalJuego <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">onEventSent</span><span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">.</span>OnAceptarResultadoFinalJuego<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>Layouts principales del juego y que gestionan la visualizaci&#xF3;n de su estado en funci&#xF3;n de la orientaci&#xF3;n del dispositivo. Vamos a permitir el cambio de orientaci&#xF3;n para probar qu&#xE9; sucede con el estado del juego guardado en <strong><code>ArhorcadoUiState</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">AhorcadoPortrait</span><span class="token punctuation">(</span>ahorcadoState<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">,</span> onEventSent<span class="token operator">:</span> <span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">AhorcadoLandsacape</span><span class="token punctuation">(</span>ahorcadoState<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">,</span> onEventSent<span class="token operator">:</span> <span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
+    ahorcadoState<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">,</span>
+    onEventSent<span class="token operator">:</span> <span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Este es el layout principal que permite accder al tama&#xF1;o del ViewPort de la aplicaci&#xF3;n</span>
+    <span class="token comment">// maxWidth y maxHeight. En funci&#xF3;n de estos valores se decide como se distribuyen los componentes.</span>
+    <span class="token function">BoxWithConstraints</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier
+            <span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span>MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surface<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Query que decide c&#xF3;mo se pinta el UI en funci&#xF3;n del ancho del ViewPort.</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>maxWidth <span class="token operator">&lt;</span> <span class="token number">600</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">AhorcadoPortrait</span><span class="token punctuation">(</span>
+                ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">,</span>
+                onEventSent <span class="token operator">=</span> onEventSent
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+            <span class="token function">AhorcadoLandsacape</span><span class="token punctuation">(</span>
+                ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">,</span>
+                onEventSent <span class="token operator">=</span> onEventSent
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="ahorcadoviewmodelkt">AhorcadoViewModel.kt</h4>
+
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Este c&#xF3;digo na no est&#xE1; en el proyecto <strong><code>Ahorcado</code></strong> que hemos descargado al principio del ejemplo.</p>
+</blockquote>
+<p>Esta definici&#xF3;n ir&#xE1; dentro del paquete <strong><code>com.ahorcado.ui.features.juego</code></strong>. Aqu&#xED; definiremos el estado del UI y la l&#xF3;gica de negocio del juego. Hasta aqu&#xED; llegar&#xE1;n todos los eventos que se produzcan en la UI.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> AhorcadoViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// En esta secci&#xF3;n definimos todas las propiedades y m&#xE9;todos de clase que necesitemos.</span>
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> MAXIMO_FALLOS <span class="token operator">=</span> <span class="token number">6</span>
+
+        <span class="token comment">// Comprueba si ya hemos acertado todas las letras de la palabra buscada.</span>
+        <span class="token keyword keyword-fun">fun</span> <span class="token function">palabraAcertada</span><span class="token punctuation">(</span>palabra<span class="token operator">:</span> String<span class="token punctuation">,</span> letrasAcertadas<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token punctuation">{</span>
+            <span class="token keyword keyword-var">var</span> acertada <span class="token operator">=</span> <span class="token boolean">true</span>
+            <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>letra <span class="token keyword keyword-in">in</span> palabra<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>letrasAcertadas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>letra<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    acertada <span class="token operator">=</span> <span class="token boolean">false</span>
+                    <span class="token keyword keyword-break">break</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-return">return</span> acertada
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Definimos el estado del UI</span>
+    <span class="token comment">// No podemos usar el API remenber pues no estamos dentro de un @Composable y adem&#xE1;s  </span>
+    <span class="token comment">// al estar un ViewModel permanace en memoria hasta que se destruya la Activity.</span>
+    <span class="token keyword keyword-var">var</span> ahorcadoState <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+</pre><p>Definiremos lo m&#xE9;todos que gestionan los cambios del estado de la UI</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">empiezaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Podr&#xED;a ser una fuente de datos.</span>
+        <span class="token keyword keyword-val">val</span> palabras <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string">&quot;XUSA&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;JUANJO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;PEPE&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;COMPOSABLE&quot;</span><span class="token punctuation">)</span>
+        ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+            <span class="token comment">// Tomamos una palabra aleatoria a adivinar.</span>
+            palabra <span class="token operator">=</span> palabras<span class="token punctuation">[</span>Random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> palabras<span class="token punctuation">.</span>size<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token comment">// El juego pasa a estado JUGANDO.</span>
+            estado <span class="token operator">=</span> AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>JUGANDO
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">reiniciaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ahorcadoState <span class="token operator">=</span> <span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// M&#xE9;todo encargado de ver si la letra introducida en el TextField de la</span>
+    <span class="token comment">// UI es v&#xE1;lida para jugar y si es as&#xED;, guardar su estado para reflejarlo en el mismo.</span>
+    <span class="token comment">// Aunque est&#xE9; relacionado con dicho elemento de la UI, f&#xED;jate que en ning&#xFA;n </span>
+    <span class="token comment">// indicarlo en los nombres, ya que el ViewModel debe permanecer &apos;agn&#xF3;stico&apos; de </span>
+    <span class="token comment">// momento debemos c&#xF3;mo es la implementaci&#xF3;n en la UI.</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">gestionaLetraIntroducida</span><span class="token punctuation">(</span>letra<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment">// Si solo hay una letra, no est&#xE1; entre las acertadas </span>
+        <span class="token comment">// ni entre las falladas y est&#xE1; entre la A-Z incluida &#xD1;</span>
+        ahorcadoState <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>letra<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">1</span>
+            <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>ahorcadoState<span class="token punctuation">.</span>letrasAcertadas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>letra<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>ahorcadoState<span class="token punctuation">.</span>letrasFalladas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>letra<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token operator">&amp;&amp;</span> <span class="token function">Regex</span><span class="token punctuation">(</span><span class="token string">&quot;^[A-Z&#xD1;]$&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span>letra<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+            ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>letraIntroducida <span class="token operator">=</span> letra<span class="token punctuation">)</span>
+        <span class="token keyword keyword-else">else</span>
+            ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>letraIntroducida <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// M&#xE9;todo encargado de jugar la letra introducida</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">juegaLetraIntroducida</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>palabra<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>letraIntroducida<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> letrasAcertadas <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letrasAcertadas 
+                                <span class="token operator">+</span> ahorcadoState<span class="token punctuation">.</span>letraIntroducida
+            ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                letraIntroducida <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                letrasAcertadas <span class="token operator">=</span> letrasAcertadas<span class="token punctuation">,</span>
+                estado <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">palabraAcertada</span><span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>palabra<span class="token punctuation">,</span> letrasAcertadas<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>GANADO
+                <span class="token keyword keyword-else">else</span>
+                    AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>JUGANDO
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> letrasFalladas <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letrasFalladas 
+                               <span class="token operator">+</span> ahorcadoState<span class="token punctuation">.</span>letraIntroducida
+            ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                letraIntroducida <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                letrasFalladas <span class="token operator">=</span> letrasFalladas<span class="token punctuation">,</span>
+                estado <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>letrasFalladas<span class="token punctuation">.</span>length <span class="token operator">==</span> MAXIMO_FALLOS<span class="token punctuation">)</span>
+                    AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>PERDIDO
+                <span class="token keyword keyword-else">else</span>
+                    AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>JUGANDO
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token comment">// M&#xE9;todo encargado de gestionar los eventos que se produzcan en la UI.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">onEventoAhorcado</span><span class="token punctuation">(</span>evento <span class="token operator">:</span> AhorcadoEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>evento<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-is">is</span> AhorcadoEvent<span class="token punctuation">.</span>OnEmpezarJuego <span class="token operator">-&gt;</span> <span class="token function">empiezaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-is">is</span> AhorcadoEvent<span class="token punctuation">.</span>OnAceptarResultadoFinalJuego <span class="token operator">-&gt;</span> <span class="token function">reiniciaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-is">is</span> AhorcadoEvent<span class="token punctuation">.</span>OnCambiaLetraIntroducida <span class="token operator">-&gt;</span> <span class="token function">gestionaLetraIntroducida</span><span class="token punctuation">(</span>evento<span class="token punctuation">.</span>letra<span class="token punctuation">)</span>
+            <span class="token keyword keyword-is">is</span> AhorcadoEvent<span class="token punctuation">.</span>OnLetraEnviada <span class="token operator">-&gt;</span> <span class="token function">juegaLetraIntroducida</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token comment">// Fin de la clase AhorcadoViewModel</span>
+</pre><h4 class="mume-header" id="asociando-el-viewmodel-a-la-ui-en-mainactivitykt">Asociando el ViewModel a la UI en MainActivity.kt</h4>
+
+<p>Vamos ahora a usar nuestro <strong><code>ViewModel</code></strong>...</p>
+<ol>
+<li>
+<p>&#x274C; Supongamos que cramos el objeto <strong><code>ViewModel</code></strong> sin m&#xE1;s en el <strong><code>onCreate()</code></strong> sin usar ning&#xFA;n tipo de <strong><code>ViewModelProvider</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[2, 5]}" class="language-kotlin" data-line="2,5"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        ahorcadoViewModel <span class="token operator">=</span> <span class="token function">AhorcadoViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x1F480;&#x1F480;</span>
+        setContent <span class="token punctuation">{</span>
+            AhorcadoTheme <span class="token punctuation">{</span>
+                <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
+                    ahorcadoViewModel<span class="token punctuation">.</span>ahorcadoState<span class="token punctuation">,</span>
+                    ahorcadoViewModel<span class="token operator">::</span>onEventoAhorcado
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div></pre><p>Si empezamos a jugar y giramos el movil se vuelve a llamar a <strong><code>onCreate()</code></strong> y el estado se pierde.</p>
+ <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 20px;">
+     <img height="200" src="assets/imagenes/tema_3_4/VMError.png">
+ </div>
+</li>
+<li>
+<p>Lo hacemos correctamente u asignaremos el <strong><code>ViewModel</code></strong> a la <strong><code>Activity</code></strong> que es el <strong><code>ViewModelStoreOwner</code></strong> primero usando <strong><code>VieModelProvider</code></strong> con el delegado <strong><code>viewModels()</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=4}" class="language-kotlin" data-line="4"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x2705;</span>
+        setContent <span class="token punctuation">{</span>
+            AhorcadoTheme <span class="token punctuation">{</span>
+                <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
+                    ahorcadoViewModel<span class="token punctuation">.</span>ahorcadoState<span class="token punctuation">,</span>
+                    ahorcadoViewModel<span class="token operator">::</span>onEventoAhorcado
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>     
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div></pre><p>Ahora si volvemos a jugar y giramos el movil el <strong><code>ViewModel</code></strong> permanece y el estado se redibuja.</p>
+ <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 20px;">
+     <img height="200" src="assets/imagenes/tema_3_4/VMok.png">
+ </div>
+</li>
+<li>
+<p>Por &#xFA;ltimo, vamos a probar a crear el <strong><code>ViewModel</code></strong> dentro de una funci&#xF3;n <strong><code>@Composable</code></strong> usando la funci&#xF3;n <em>composable</em> <strong><code>viewModel()</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=6}" class="language-kotlin" data-line="6"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        setContent <span class="token punctuation">{</span>
+            AhorcadoTheme <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel <span class="token operator">=</span> <span class="token function">viewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x2705;</span>
+                <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
+                    ahorcadoViewModel<span class="token punctuation">.</span>ahorcadoState<span class="token punctuation">,</span>
+                    ahorcadoViewModel<span class="token operator">::</span>onEventoAhorcado
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div></pre></li>
+</ol>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="hand-pr%C3%A1cticas-no-recomendadas">&#x270B; Pr&#xE1;cticas no recomendadas</h3>
 
