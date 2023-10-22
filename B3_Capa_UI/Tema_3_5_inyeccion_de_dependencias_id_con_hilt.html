@@ -624,9 +624,26 @@ justo después del front matter
           </a></div>
         </div>
       </details>
+    <details style="padding:0;;padding-left:24px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#exponer-dependencias-y-preparar-m&#xF3;dulos-con-hilt" class="md-toc-link"><p>Exponer dependencias y preparar m&#xF3;dulos con Hilt</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#viewmodels-con-hilt" class="md-toc-link">
+            <p>ViewModels con Hilt</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#preparando-modulos" class="md-toc-link">
+            <p>Preparando Modulos</p>
+
+          </a></div>
+        </div>
+      </details>
     <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#exponer-dependencias-y-preparar-m&#xF3;dulos-con-hilt" class="md-toc-link">
-            <p>Exponer dependencias y preparar m&#xF3;dulos con Hilt</p>
+          <a href="#mega-resumen" class="md-toc-link">
+            <p>&#x1F4E3; Resumen</p>
 
           </a></div>
         </div>
@@ -636,8 +653,13 @@ justo después del front matter
 <div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
 
+<p>Enlaces de inter&#xE9;s:</p>
 <ul>
 <li>Documentaci&#xF3;n oficial de Android: <strong><a href="https://developer.android.com/training/dependency-injection">Inyecci&#xF3;n de dependencias</a></strong></li>
+<li>V&#xED;deo tutorial Divulgativo (Castellano): <strong><a href="https://www.youtube.com/watch?v=eefQelCqA-E">DevExperto</a></strong></li>
+<li>Codelab Google: <strong><a href="https://developer.android.com/codelabs/android-hilt?hl=es-419#0">Inyecci&#xF3;n de dependencias</a></strong></li>
+<li>Lista de reproducci&#xF3;n: <strong><a href="https://www.youtube.com/watch?v=mnMCgjuMJPA&amp;list=PLWz5rJ2EKKc_9Qo-RBRYhVmME1iR4oeTK">Andorid Developers</a></strong></li>
+<li>V&#xED;deo tutorial (Ingl&#xE9;s): <strong><a href="https://www.youtube.com/watch?v=bbMsuI2p1DQ">Philipp Lackner</a></strong></li>
 </ul>
 <p>La <strong>inyecci&#xF3;n de dependencias (DI)</strong> es una t&#xE9;cnica muy utilizada en programaci&#xF3;n y adecuada para el desarrollo de Android. Si sigues los principios de la DI, sentar&#xE1;s las bases para una buena arquitectura de apps.</p>
 <p>Implementar la inyecci&#xF3;n de dependencias te proporciona las siguientes ventajas:</p>
@@ -734,14 +756,18 @@ dependencies <span class="token punctuation">{</span>
 </pre><p>Tras ello pulsamos &apos;<em>Sync Now</em>&apos; para sincronizar los cambios en Gradle.</p>
 <h3 class="mume-header" id="preparando-los-componentes-de-android-para-la-inyecci%C3%B3n-de-dependencias">Preparando los componentes de Android para la inyecci&#xF3;n de dependencias</h3>
 
+<ul>
+<li>Puedes descargar una chuleta con todas las anotaciones que vamos a ver <strong><a href="./hilt-annotations_cheat-sheet.pdf">en este enlace</a></strong>.</li>
+</ul>
 <p>En el paquete ra&#xED;z creamos una clase que extienda de <strong><code>Application</code></strong> y le a&#xF1;adimos la anotaci&#xF3;n <strong><code>@HiltAndroidApp</code></strong> para indicar que es la clase principal de la aplicaci&#xF3;n:</p>
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/application">HiltAndroidApp</a></strong></li>
+</ul>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Indicamos que es la clase principal de la aplicaci&#xF3;n</span>
 <span class="token comment">// Esta clase se ejecutar&#xE1; antes que cualquier otra clase de la aplicaci&#xF3;n</span>
 <span class="token comment">// y se encargar&#xE1; de proveer las dependencias a los m&#xF3;dulos que las requieran</span>
 <span class="token annotation builtin">@HiltAndroidApp</span>
-<span class="token keyword keyword-class">class</span> MiApplication <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token operator">..</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span>
+<span class="token keyword keyword-class">class</span> MiApplication <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
 </pre><p>Recuerda a continuaci&#xF3;n, en el <strong><code>AndroidManifest.xml</code></strong> a&#xF1;adir la clase que acabamos de crear como la clase principal de la aplicaci&#xF3;n si no la hab&#xED;as hecho ya:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
   <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MiApplication<span class="token punctuation">&quot;</span></span>
@@ -751,61 +777,73 @@ dependencies <span class="token punctuation">{</span>
   ...
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
-</pre><p>Aunque no es necesario, es recomendable a&#xF1;adir la anotaci&#xF3;n <strong><code>@AndroidEntryPoint</code></strong> a la MainActivity para que Hilt pueda inyectar dependencias en ella:</p>
+</pre><p>Es recomendable a&#xF1;adir la anotaci&#xF3;n <strong><code>@AndroidEntryPoint</code></strong> a la MainActivity para que Hilt pueda inyectar dependencias en ella:</p>
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/android-entry-point.html">AndroidEntryPoint</a></strong></li>
+</ul>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@AndroidEntryPoint</span>
-<span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token operator">..</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span>
+<span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+
 </pre><h4 class="mume-header" id="c%C3%B3mo-insertar-objetos-viewmodel-con-hilt-en-compose">C&#xF3;mo insertar objetos ViewModel con Hilt en Compose</h4>
 
 <blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Recuerda que para usar Hilt en Compose estamos usando la dependencia <code>implementation &quot;androidx.hilt:hilt-navigation-compose:1.0.0&quot;</code> en el <strong><code>build.gradle.kts</code></strong> del m&#xF3;dulo de la aplicaci&#xF3;n.</p>
+<p>&#x1F4CC; <strong>Nota</strong>: Recuerda que para usar Hilt en Compose estamos usando la dependencia <code>implementation &quot;androidx.hilt:hilt-navigation-compose&quot;</code> en el <strong><code>build.gradle.kts</code></strong> del m&#xF3;dulo de la aplicaci&#xF3;n.</p>
 </blockquote>
 <ul>
 <li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/libraries#hilt">Hilt en Compose</a></strong></li>
 </ul>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Inyectamos el contexto de la aplicaci&#xF3;n</span>
 <span class="token annotation builtin">@HiltViewModel</span>
-<span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token operator">..</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span>
-</pre><p><strong>TODO: <mark>AQUIIIIIIII</mark></strong></p>
-<p>Todos los <strong><code>ViewModels</code></strong> de Hilt los proporciona el <strong><code>ViewModelComponent</code></strong> que sigue el mismo ciclo de vida que un ViewModel y, por lo tanto, <strong>puede conservar los cambios de configuraci&#xF3;n</strong>. Para definir el alcance de una dependencia a un ViewModel, usa la anotaci&#xF3;n <strong><code>@ViewModelScoped</code></strong>.</p>
-<p>Un tipo @ViewModelScoped har&#xE1; que se proporcione una sola instancia del tipo con alcance en todas las dependencias insertadas en ViewModel. Otras instancias de un ViewModel que soliciten la instancia con alcance recibir&#xE1;n una instancia diferente.</p>
-<p>Si se debe compartir una sola instancia entre varios ViewModels, se debe definir el alcance con @ActivityRetainedScoped o @Singleton.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Posteriormente cuando queramos usar el ViewModel haremos ...</span>
-<span class="token keyword keyword-val">val</span> miViewModel <span class="token operator">:</span> MiViewModel <span class="token operator">=</span> <span class="token function">hiltViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</pre><p>Para acceder al <strong><code>ViewModel</code></strong> dentro de una <strong><code>Activity</code></strong> seguiremos usando el delegado <strong><code>by viewModels()</code></strong></p>
+<p>Para usar un <strong><code>ViewModel</code></strong> con Hilt dentro de una funci&#xF3;n <strong><code>@Composable</code></strong> usaremos ahora <strong><code>hiltViewModel()</code></strong> ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">MiScreen</span><span class="token punctuation">(</span>miVm<span class="token operator">:</span> MiViewModel <span class="token operator">=</span> <span class="token function">hiltViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</pre><p>Tambi&#xE9;n es posible usarlo en la navegaci&#xF3;n como veremos m&#xE1;s adelante con ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>MiViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span>navBackStackEntry<span class="token punctuation">)</span>
+</pre><p>de esta manera el <strong><code>ViewModelStoreOwner</code></strong> ser&#xE1; una determinada ruta de navegaci&#xF3;n y no la <strong><code>Activity</code></strong>.</p>
+<h3 class="mume-header" id="exponer-dependencias-y-preparar-m%C3%B3dulos-con-hilt">Exponer dependencias y preparar m&#xF3;dulos con Hilt</h3>
 
-<span class="token comment">// o tambi&#xE9;n </span>
-<span class="token keyword keyword-val">val</span> miViewModel <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>MiViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<ul>
+<li><strong><a href="https://dagger.dev/hilt/entry-points">Entry Points</a></strong></li>
+</ul>
+<p>Realmente ya lo hemos hecho al usar el <strong><code>ViewModel</code></strong>, y es a trav&#xE9;s de la anotaci&#xF3;n <strong><code>@Inject</code></strong>. Con esta anotaci&#xF3;n <strong>indicamos que queremos inyectar una dependencia en el constructor</strong> de una clase. En otras palabras, le estamos diciendo a Hilt que queremos que nos provea una instancia de memoria de una dependencia que necesitamos. Nos ser&#xE1; &#xFA;til para indicar que necesitamos instancias de otros m&#xF3;dulos tales como <strong>repositorios</strong>, <strong>servicios</strong>, etc.</p>
+<p>Pero tambi&#xE9;n deberemos <strong>preparar los m&#xF3;dulos</strong> que queramos inyectar con Hilt. Para ello, debemos a&#xF1;adir la anotaci&#xF3;n <strong><code>@Module</code></strong> a la clase que queramos inyectar. En otras palabras, deberemos anotar aquellas clases que queramos que Hilt provea instancias de memoria de ellas.</p>
+<h4 class="mume-header" id="viewmodels-con-hilt">ViewModels con Hilt</h4>
 
-<span class="token comment">// Tambi&#xE9;n podemos obtener un ViewModel con alcance o Scope e una ruta de navegaci&#xF3;n de Compose</span>
-<span class="token comment">// Veremos m&#xE1;s adelante c&#xF3;mo funciona la navegaci&#xF3;n en Compose y c&#xF3;mo hacer este tipo de inyecci&#xF3;n</span>
-<span class="token comment">// de forma m&#xE1;s concreta.</span>
-<span class="token keyword keyword-val">val</span> miViewModel <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>ViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span>navBackStackEntry<span class="token punctuation">)</span>
-</pre><h3 class="mume-header" id="exponer-dependencias-y-preparar-m%C3%B3dulos-con-hilt">Exponer dependencias y preparar m&#xF3;dulos con Hilt</h3>
-
-<p>Realmente ya lo hemos hecho al usar el viewmodel, y es a trav&#xE9;s de la anotaci&#xF3;n <strong><code>@Inject</code></strong>. Con esta anotaci&#xF3;n indicamos que queremos inyectar una dependencia en el constructor de una clase. En otras palabras, le estamos diciendo a Hilt que queremos que nos provea una instancia de memoria de una dependencia que necesitamos. Nos ser&#xE1; &#xFA;til para indicar que necesitamos instancias de otros m&#xF3;dulos tales como repositorios, servicios, etc.</p>
-<p>Pero tambi&#xE9;n deberemos preparar los m&#xF3;dulos que queramos inyectar con Hilt. Para ello, debemos a&#xF1;adir la anotaci&#xF3;n <strong><code>@Module</code></strong> a la clase que queramos inyectar. En otras palabras, deberemos anotar aquellas clases que queramos que Hilt provea instancias de memoria de ellas.</p>
-<p>Por ejemplo, un colaborador t&#xED;pico o agregaci&#xF3;n que genera una dependencia en el viewmodel es el repositorio o repositorios de datos a los que accedemos.</p>
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/view-model">Hilt ViewModels</a></strong></li>
+</ul>
+<p>Por ejemplo, un colaborador t&#xED;pico o agregaci&#xF3;n que genera una dependencia en el <strong><code>ViewModel</code></strong> es el repositorio o repositorios de datos a los que accedemos.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
 <span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
   <span class="token comment">// Dependencia que queremos inyectar</span>
-  <span class="token comment">// En este caso creamos una instancia de MiRepositorio cada vez que se crea un MiViewModel</span>
-  <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">=</span> <span class="token function">MiRepositorio</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment">// Creamos una instancia de MiRepositorio cada vez que se crea un MiViewModel </span>
+  <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">=</span> <span class="token function">MiRepositorio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x1F480;</span>
   <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</pre><p>Realizaremos una inversi&#xF3;n de dependencias <strong>exponiendo</strong> en el constructor la instancia del objeto agregado o colaborados que queremos que nos inyecte Hilt.</p>
+</pre><p>Realizaremos una <strong>inversi&#xF3;n de dependencia</strong> (Principio SOLID) por la cual <strong>exponemos</strong> en el constructor la instancia del <strong>objeto colaborador</strong> que queremos que nos inyecte Hilt.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
 <span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
-  <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">:</span> MiRepository
+  <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">:</span> MiRepository <span class="token comment">// Sigue siendo una propiedad privada</span>
 <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</pre><p>Ahora deberemos <strong>preparar el m&#xF3;dulo</strong> o la clase <strong><code>MiRepositorio</code></strong> para poder ser inyectado. Para ello, definiremos una clase que definir&#xE1; los m&#xE9;todos proveedores de las instancias de las clases que queremos inyectar.</p>
+</pre><h4 class="mume-header" id="preparando-modulos">Preparando Modulos</h4>
+
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/modules">Modules</a></strong></li>
+</ul>
+<p>Ahora deberemos <strong>preparar el m&#xF3;dulo</strong> o la clase <strong><code>MiRepositorio</code></strong> para poder ser inyectado. Para ello, definiremos una clase que definir&#xE1; los m&#xE9;todos proveedores de las instancias de las clases que queremos inyectar. A esta clase le denominaremos <strong><a href="https://dagger.dev/hilt/components.html">Componente de Hilt</a></strong></p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 80%">
 <p>Esta clase deber&#xE1; tener la anotaci&#xF3;n <strong><code>@Module</code></strong> y la anotaci&#xF3;n <strong><code>@InstallIn</code></strong> que indicar&#xE1; el alcance o Scope de la clase que se provee. En este caso, la clase se proveer&#xE1; en el <strong><code>SingletonComponent</code></strong> que es el alcance por defecto.</p>
-<p>La clase que define los proveedores la podemos llamar <strong><code>AppModule</code></strong> y la a&#xF1;adiremos el paquete <strong><code>di</code></strong> al paquete ra&#xED;z de nuestro proyecto ya que centralizar&#xE1; todos proveedores de dependencias de la aplicaci&#xF3;n.</p>
+<p>Para seguir los convenios de nomenclatura propuesta en el curso al ver la arquitectura de una app de Android. La clase que define los proveedores la podemos llamar <strong><code>AppModule</code></strong> y la a&#xF1;adiremos el paquete <strong><code>di</code></strong> (<em>dependency injection</em>) al paquete ra&#xED;z de nuestro proyecto ya que centralizar&#xE1; todos proveedores de dependencias de la aplicaci&#xF3;n.</p>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="123px" preserveAspectRatio="none" style="width:179px;height:123px;background:#FFFFFF;" version="1.1" viewBox="0 0 179 123" width="179px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"/><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="146" x="26" y="39.5508">[com.pmdm.miapplication]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="36" y="54.6445">[data]</text><path d="M27,61.375 L27,63.375 L35,63.375 L35,62.375 L30,62.375 L30,61.375 L27,61.375 M27,64.375 L27,68.875 C27,69.155 27.22,69.375 27.5,69.375 L34.5,69.375 C34.78,69.375 35,69.155 35,68.875 L35,64.375 L27,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="36" y="69.7383">[models]</text><path d="M27,76.4688 L27,78.4688 L35,78.4688 L35,77.4688 L30,77.4688 L30,76.4688 L27,76.4688 M27,79.4688 L27,83.9688 C27,84.2488 27.22,84.4688 27.5,84.4688 L34.5,84.4688 C34.78,84.4688 35,84.2488 35,83.9688 L35,79.4688 L27,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="16" x="36" y="84.832">[ui]</text><path d="M27,91.5625 L27,93.5625 L35,93.5625 L35,92.5625 L30,92.5625 L30,91.5625 L27,91.5625 M27,94.5625 L27,99.0625 C27,99.3425 27.22,99.5625 27.5,99.5625 L34.5,99.5625 C34.78,99.5625 35,99.3425 35,99.0625 L35,94.5625 L27,94.5625 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="99.9258">[di]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="77" x="36" y="115.0195">AppModule.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="64.8281" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="79.9219" y2="79.9219"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="94.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="95.0156" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="97.0156" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="110.1094" y2="110.1094"/><!--SRC=[NO_RQW8n48RlynHpLNIBYswjBKiHhOU2TQdKmqrHY9jHGfFCaeCWqdTlR2aLcRjlld_uf-SyjzvnvHaxiKtV24jIRDXfmMxXwMP7Ig3jVfIaqqeBdMh9gqh9adj9PirkBoN1FRz2cWGgTmM3_059SX6LwoI9C6ebARAvfIDNMnMmcoJzgYf818NffuyM-uhJGoD-MyyKDtvPJE60riLIq4gpPdQNPhLvC336BMGTQ3Npx3vlFy1Wj83pkivgBxCfE0gsH13IUIktuVnKdKtuWSDxC5vgpE6jGZCPllu169c3j6Gq6iycg-9VwBGRpzB376ri0gk23N77W_8nKPAGPf_3SZ5kFB8fD_l0z_4sEZQWUDSUSnZDlm40]--></g></svg></p></div>
+</div>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-package">package</span> com<span class="token punctuation">.</span>pmdm<span class="token punctuation">.</span>miapplication<span class="token punctuation">.</span>di
 
 <span class="token annotation builtin">@Module</span>
@@ -823,17 +861,41 @@ dependencies <span class="token punctuation">{</span>
 </pre><p>Anotaciones:</p>
 <ul>
 <li><strong><code>@Provides</code></strong>: Indica que el m&#xE9;todo provee una instancia de la clase que se indica en el tipo de retorno del m&#xE9;todo.</li>
-<li><strong><code>@Singleton</code></strong>: Indica que la instancia de la clase que se provee es &#xFA;nica y que se reutilizar&#xE1; en todas las clases que la necesiten.</li>
-<li><strong><code>@InstallIn</code></strong>: Indica el alcance o Scope de la clase que se provee. En este caso, la clase se proveer&#xE1; en el <strong><code>SingletonComponent</code></strong> que es el alcance m&#xE1;s alto que existe.</li>
+<li><strong><code>@Singleton</code></strong>: Indica que la instancia de la clase que se provee es &#xFA;nica y que se reutilizar&#xE1; en todas las clases que la necesiten. <strong>Cuidado no siempre una instancia &#xFA;nica es una buena opci&#xF3;n</strong>.</li>
+<li><strong><code>@InstallIn</code></strong>: Indica el <strong>alcance o Scope de la clase que se provee</strong>. En este caso, la clase se proveer&#xE1; en el <strong><code>SingletonComponent</code></strong> que es el alcance m&#xE1;s alto que existe.</li>
 </ul>
-<p>Puede darse el caso de que se produzca una &apos;<em>cadena</em>&apos; de dependencias a inyectar. Por ejemplo, puede ser que nuestro repositorio necesite de una DAO (Data Access Object) para acceder a la fuente de datos. Expondremos la inyecci&#xF3;n de la dependencia en el constructor a Hilt.</p>
+<p>Puede darse el caso de que se produzca una <strong>&apos;<em>cadena</em>&apos; de dependencias</strong> a inyectar. Por ejemplo, puede ser que nuestro repositorio necesite de una DAO (Data Access Object) para acceder a la fuente de datos.</p>
+<ol>
+<li>
+<p>Expondremos la inyecci&#xF3;n de la dependencia en el <strong>constructor del repositorio</strong> a Hilt y de los objetos que se inyecten.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MiRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
-    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ModeloDaoMock
-<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ModeloDaoMock <span class="token comment">// Como se inyecta tambi&#xE9;n tendremos que exponerlo</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span>  <span class="token punctuation">}</span>
+
+<span class="token keyword keyword-class">class</span> ModeloDaoMock <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span>  <span class="token punctuation">}</span>
+</pre> <div style="page-break-after:always;"></div>
+</li>
+<li>
+<p>Definiremos el m&#xE9;todo proveedor de las instancias de <strong><code>ModeloDaoMock</code></strong> hemos marcado como <strong><code>@Inject</code></strong> en <strong><code>MiRepository</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=7}" class="language-kotlin" data-line="7"><span class="token annotation builtin">@Module</span>
+<span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
+
+  <span class="token annotation builtin">@Provides</span>
+  <span class="token annotation builtin">@Singleton</span>
+  <span class="token keyword keyword-fun">fun</span> <span class="token function">provideModeloDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ModeloDaoMock <span class="token operator">=</span> <span class="token function">ModeloDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</pre><p>definiremos el m&#xE9;todo proveedor de las instancias de <strong><code>ModeloDaoMock</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Module</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div></pre></li>
+<li>
+<p>Por &#xFA;ltimo, <strong><code>modeloDaoMock</code></strong> es inyectado por <strong><code>provideModeloDaoMock()</code></strong> en el proveedor de <strong><code>MiRepository</code></strong> y por tanto resuelto autom&#xE1;ticamente por Hilt.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=12}" class="language-kotlin" data-line="12"><span class="token annotation builtin">@Module</span>
 <span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
 
@@ -841,21 +903,59 @@ dependencies <span class="token punctuation">{</span>
   <span class="token annotation builtin">@Singleton</span>
   <span class="token keyword keyword-fun">fun</span> <span class="token function">provideModeloDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ModeloDaoMock <span class="token operator">=</span> <span class="token function">ModeloDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-  <span class="token comment">// El modeloDaoMock es inyectado por provideModeloDaoMock() en el proveedor</span>
-  <span class="token comment">// y por tanto resuelto autom&#xE1;ticamente por Hilt.</span>
   <span class="token annotation builtin">@Provides</span>
   <span class="token annotation builtin">@Singleton</span>
   <span class="token keyword keyword-fun">fun</span> <span class="token function">provideMiRepositorio</span><span class="token punctuation">(</span>
-    modeloDaoMock <span class="token operator">:</span> ModeloDaoMock
+    modeloDaoMock <span class="token operator">:</span> ModeloDaoMock <span class="token comment">// Es inyectado por provideModeloDaoMock()</span>
   <span class="token punctuation">)</span> <span class="token operator">:</span> MiRepository <span class="token operator">=</span> <span class="token function">MiRepository</span><span class="token punctuation">(</span>modeloDaoMock<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</pre><p>Otras anotaciones que podemos usar en los m&#xE9;todos &apos;<em>proveedores</em>&apos; son:</p>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
+</div></div></pre></li>
+</ol>
+<p>Otras anotaciones que podemos usar en los m&#xE9;todos &apos;<em>proveedores</em>&apos; son:</p>
 <ul>
 <li><strong><code>@Binds</code></strong>: Indica que la clase que se provee es una interfaz y que se debe enlazar con una clase concreta que implemente dicha interfaz. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
 <li><strong><code>@IntoMap</code></strong>: Indica que la clase que se provee es un mapa y que se debe a&#xF1;adir a un mapa concreto. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
 <li><strong><code>@IntoSet</code></strong>: Indica que la clase que se provee es un conjunto y que se debe a&#xF1;adir a un conjunto concreto. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
 </ul>
-<p><a href="https://developer.android.com/codelabs/android-hilt?hl=es-419#6">https://developer.android.com/codelabs/android-hilt?hl=es-419#6</a></p>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="mega-resumen">&#x1F4E3; Resumen</h3>
+
+<ol>
+<li>
+<p>Definir loa <strong>Entry Points</strong> de la aplicaci&#xF3;n:</p>
+<ul>
+<li><strong><code>@HiltAndroidApp</code></strong> en la clase <strong><code>Application</code></strong>.</li>
+<li><strong><code>@AndroidEntryPoint</code></strong> en la clase <strong><code>MainActivity</code></strong>.</li>
+</ul>
+</li>
+<li>
+<p>Exponer las dependencias en los constructores de las clases que queramos inyectar con <strong><code>@Inject</code></strong> de forma &apos;<em>recursiva</em>&apos;.</p>
+</li>
+<li>
+<p>Preparar aquellos m&#xF3;dulos que hemos expuesto con la anotaci&#xF3;n <strong><code>@Inject</code></strong>. Por tanto, a la clase <strong><code>AppModule</code></strong> dentro del paquete <strong><code>di</code></strong>.</p>
+<ul>
+<li>La anotaremos con:
+<ul>
+<li><strong><code>@Module</code></strong></li>
+<li><strong><code>@InstallIn(SingletonComponent::class)</code></strong></li>
+</ul>
+</li>
+<li><strong><code>@Provides</code></strong> en los m&#xE9;todos proveedores de las instancias de las clases que queramos inyectar que empiezan por <strong><code>fun provide...</code></strong>.</li>
+</ul>
+</li>
+</ol>
 
       </div>
       
