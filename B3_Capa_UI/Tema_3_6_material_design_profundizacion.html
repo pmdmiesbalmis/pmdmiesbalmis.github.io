@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM Tema 4</title>
+      <title>PMDM 2&#xBA; DAM  Tema 3.6 - Material Design (Profundizaci&#xF3;n)</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -261,118 +261,94 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="ejercicio-resuelto-3-botones">Ejercicio resuelto 3 Botones</h1>
+      <style>/* 
+Añade 
 
-<p><a href="./tres_botones.pdf">Descargar estos apuntes</a></p>
-<h3 class="mume-header" id="creando-el-proyecto">Creando el proyecto</h3>
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
 
-<p>Queremo definir una funci&#xF3;n que nos permita visualizar tres botones en nuestra pantalla. Tal y como se ve en la siguiente imagen.</p>
-<div align="center">
-    <img height="150" src="./imagenes/tresBotones.png">
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-36---material-design-profundizaci%C3%B3n">Tema 3.6 - Material Design (Profundizaci&#xF3;n)</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_3_6_material_design_profundizacion.pdf">pdf</a> o <a href="./Tema_3_6_material_design_profundizacion.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducci&#xF3;n" class="md-toc-link">
+            <p>Introducci&#xF3;n</p>
+
+          </a></div>
 </div>
-<p>Como podemos observar existen tres botones, situdos en el centro de la pantalla. El primero tiene un tama&#xF1;o que es la mitad de la pantalla y los otros dos son la mitad que el primero, o ocupan cada uno la mitad del resto del tam&#xF1;o de pantalla que queda libre.</p>
-<p>Para poder crear una vista como la que se nos pide, es necesario comprender y saber utilizar la colecci&#xF3;n de contenedores de dise&#xF1;o b&#xE1;sicos que ofrece <strong><code>Compose</code></strong> para organizar y controlar el dise&#xF1;o de tus elementos en pantalla: <em>Column,Row y Box</em>.</p>
-<div align="center">
-    <img height="150" src="./imagenes/tiposLayouts.png">
-</div>
-<p><strong><code>Column</code></strong> y <strong><code>Row</code></strong> son contenedores que organizan autom&#xE1;ticamente sus elementos hijos en una direcci&#xF3;n vertical u horizonta, mientras que <strong><code>Box</code></strong> es un contenedor que permite distribuir a los hijos en cualquier posici&#xF3;n dentro de la pantalla.</p>
-<p>&#xBF;Qu&#xE9; contenedor utilzaremos nosotros para nuestro ejemplo?</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">TresBotones</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">Row</span><span class="token punctuation">(</span>
-        modifier <span class="token operator">=</span> Modifier
-            <span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
-       verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
 
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">//Vista</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><blockquote>
-<p>&#x1F4CC; Aclaraciones:</p>
-<ul>
-<li><em>.fillMaxSize</em> ajusta el tama&#xF1;o de <strong><code>Row</code></strong> al ancho y alto del contenedor padre, que es nuestra pantalla.</li>
-<li><em>.padding</em> aplica un  <strong><code>padding</code></strong> a la fila, desplazando su contenido respecto al borde del contenedor, el n&#xFA;mero de pixeles indicado.</li>
-<li><em>verticalAlignment</em>, permite definir la alineaci&#xF3;n vertical de <strong><code>Row</code></strong> respecto a a su contenedor, con el valor <em>Alignment.CenterVertically</em> alineamos verticalmente los elementos dentro de la fila en el centro de la pantalla</li>
-</ul>
-</blockquote>
-<p>A&#xF1;adimos el primer bot&#xF3;n, para ello utilizaremos la funci&#xF3;n <strong><code>Button</code></strong> que nos ofrece <strong><code>Jetpack compose</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">TresBotones</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">Row</span><span class="token punctuation">(</span>
-        modifier <span class="token operator">=</span> Modifier
-            <span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
-       verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
-
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">Button</span><span class="token punctuation">(</span>
-            onClick <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token comment">/* acci&#xF3;n al hacer clic */</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token number">0.5f</span><span class="token punctuation">)</span>
-        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;B1&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><blockquote>
-<p>&#x1F4CC; Aclaraciones:</p>
-<ul>
-<li><em>.fillMaxWidth(0.5f)</em> ajusta el tama&#xF1;o de <strong><code>Button</code></strong> para que su ancho sea la mitad del tama&#xF1;o disponible.</li>
-<li>El par&#xE1;metro <strong><code>onClick</code></strong> se utiliza para definir la acci&#xF3;n que se realizar&#xE1; cuando se haga clic en el bot&#xF3;n.</li>
-<li>A&#xF1;adimos el contenido del bot&#xF3;n entre las llaves (funci&#xF3;n lamda), podemos usar <strong><code>Text(),Image()...</code></strong>.</li>
-</ul>
-</blockquote>
-<p>A&#xF1;adimos el segundo <strong><code>Button</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">TresBotones</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">Row</span><span class="token punctuation">(</span>
-        modifier <span class="token operator">=</span> Modifier
-            <span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
-       verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
-
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token operator">..</span><span class="token punctuation">.</span>
-        <span class="token function">Button</span><span class="token punctuation">(</span>
-            onClick <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token comment">/* acci&#xF3;n al hacer clic */</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            modifier <span class="token operator">=</span> Modifier
-                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token number">0.5f</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
-        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;B2&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><blockquote>
-<p>&#x1F4CC; Aclaraciones:</p>
-<ul>
-<li><em>.fillMaxWidth(0.5f)</em> ajusta el tama&#xF1;o de <strong><code>Button</code></strong> para que su ancho sea la mitad del tama&#xF1;o disponible, es decir, de la mitad del espacio que queda, coge la mitad.</li>
-<li>Colocamos un <strong><code>padding</code></strong> para separar los botones.</li>
-</ul>
-</blockquote>
-<p>Finalmente definimos el tercer <strong><code>Button</code></strong>:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">TresBotones</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">Row</span><span class="token punctuation">(</span>
-        modifier <span class="token operator">=</span> Modifier
-            <span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
-       verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
-
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token operator">..</span><span class="token punctuation">.</span>
-        <span class="token function">Button</span><span class="token punctuation">(</span>
-            onClick <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token comment">/* acci&#xF3;n al hacer clic */</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token number">1.0f</span><span class="token punctuation">)</span>
-        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;B3&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><blockquote>
-<p>&#x1F4CC; <strong>NOTA:</strong> Estos contenedores se pueden combinar para logar dise&#xF1;os m&#xE1;s complejos y personalizados. Veremos m&#xE1;s adelante ejemplos de <strong><code>Column</code></strong>, <strong><code>Box</code></strong> y combinaciones entre ellos.</p>
-</blockquote>
 
       </div>
       
