@@ -264,73 +264,22 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="aplicando-hilt-a-login">Aplicando Hilt a Login</h1>
+      <h1 class="mume-header undefined" id="lista-de-art%C3%ADculos">Lista de Art&#xED;culos</h1>
 
-<p><a href="./1_login.pdf">Descargar estos apuntes</a></p>
-<p>Vamos a aplicar la Inyecci&#xF3;n de dependencia explicada en el tema, al ejercicio de Login de la entrega de ejercicios anterior. <strong>Debes tener en cuenta que si no has usado el proyecto base como base de Login, es posible que ocurran errores al a&#xF1;adir las dependencias y los plugins.</strong></p>
-<p>Como se ve en los apuntes tendremos que a&#xF1;adir los plugins necesarios tanto a gradle del proyecto como al de aplicaci&#xF3;n. De forma que:</p>
-<p>En el <strong><code>build.gradle.kts</code></strong> ra&#xED;z del proyecto:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">plugins <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.devtools.ksp&quot;</span><span class="token punctuation">)</span> version <span class="token string">&quot;1.9.0-1.0.12&quot;</span> apply <span class="token boolean">false</span>
-    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger.hilt.android&quot;</span><span class="token punctuation">)</span> version <span class="token string">&quot;2.48&quot;</span> apply <span class="token boolean">false</span>
-<span class="token punctuation">}</span>
-</pre><p>En el <strong><code>build.gradle.kts</code></strong> del  la app:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">plugins <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.devtools.ksp&quot;</span><span class="token punctuation">)</span>
-    <span class="token function">id</span> <span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger.hilt.android&quot;</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-</pre><p>En las dependencias de <strong><code>build.gradle.kts</code></strong> del  la app:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">android <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-dependencies <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger:hilt-android:2.44&quot;</span><span class="token punctuation">)</span>
-    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.hilt:hilt-navigation-compose:1.0.0&quot;</span><span class="token punctuation">)</span>
-    <span class="token function">ksp</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger:hilt-compiler:2.48&quot;</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-
-</pre><p>IMPORTANTE!! <strong>No olvides sincronizar</strong></p>
-<p>A partir de ah&#xED; tendremos que seguir los siguientes pasos:</p>
-<ol>
-<li>
-<p>Deberemos a&#xF1;adir la clase <strong><code>Application</code></strong> como ya hemos hecho en otras ocasiones, pero esta vez le tendremos que agregar la anotaci&#xF3;n <strong><code>@HiltAndroidApp</code></strong></p>
-</li>
-<li>
-<p>A&#xF1;adiremos la anotaci&#xF3;n <strong><code>@AndroidEntryPoint</code></strong> a la MainActivity.</p>
-</li>
-<li>
-<p>El siguiente paso ser&#xED;a <strong>exponer la inyecci&#xF3;n de dependencia</strong> en el constructor del repositorio  y de los objetos que se le inyectan, en nuestro caso en UsuarioDaoMock.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> UsuarioRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> proveedorUsuarios<span class="token operator">:</span> UsuarioDaoMock<span class="token punctuation">)</span>
-</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> UsuarioDaoMock <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-</pre></li>
-<li>
-<p>Ahora pasaremos a definir la clase con los m&#xE9;todos proveedores de las instancias, para ello crearemos el paquete <strong>di</strong> en la raiz de nuestro proyecto y dentro crearemos la clase <strong>AppModule</strong>, como se explica en los apuntes, no olvides etiquetarla como  <strong><code>@Module InstallIn(SingletonComponent::class)</code></strong>:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token annotation builtin">@Module</span>
- <span class="token function">InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
- <span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
-     <span class="token operator">..</span><span class="token punctuation">.</span>
- <span class="token punctuation">}</span>
-</pre><p>Dentro de esta clase crearemos los <strong>m&#xE9;todos proveedores de dependencias</strong>, en nuestro caso solo tenemos un repositorio que debe ser inyectado con un UsuarioDaoMock, por lo que definiremos el m&#xE9;todo que provee la instancia a inyectar. Y el proveedor de repositorio al que se le inyecta la instancia del UsuarioDaoMock</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token annotation builtin">@Provides</span>
-    <span class="token annotation builtin">@Singleton</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideUsuarioDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>UsuarioDaoMock<span class="token operator">=</span> <span class="token function">UsuarioDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-    <span class="token annotation builtin">@Provides</span>
-    <span class="token annotation builtin">@Singleton</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideUsuarioRepository</span><span class="token punctuation">(</span>
-            usuarioDaoMock<span class="token operator">:</span> UsuarioDaoMock
-        <span class="token punctuation">)</span><span class="token operator">:</span> UsuarioRepository <span class="token operator">=</span>
-            <span class="token function">UsuarioRepository</span><span class="token punctuation">(</span>usuarioDaoMock<span class="token punctuation">)</span>
-</pre></li>
-<li>
-<p>Para finalizar nos faltar&#xED;a etiquetar con <strong><code>@HiltViewModel</code></strong> los ViewModel y en el constructor de estos inyectaremos mediante Hilt las instancias de los <strong>objetos colaboradores</strong> (repositorios), <em>ya <strong>no</strong> crearemos las instancias de los repositorios dentro del ViewModel</em>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token annotation builtin">@HiltViewModel</span>
- <span class="token keyword keyword-class">class</span> LoginViewModel  <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token keyword keyword-private">private</span>  <span class="token keyword keyword-val">val</span> usuarioRepository<span class="token operator">:</span> UsuarioRepository<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre></li>
-</ol>
+<p><a href="./X_lista_articulos.pdf">Descargar estos apuntes</a></p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
+<p>En este ejercicio se va a codificar una aplicaci&#xF3;n que muestre una lista de art&#xED;culos pertenecientes a un determinado pedido. La lista se crear&#xE1; con <strong><code>LazyColumn</code></strong> y tendr&#xE1; el aspecto que se muestra en la imagen. Crearemos un componente <strong>CardPedido</strong> como vemos en las l&#xED;neas del pedido y que ser&#xE1; llamado desde <strong>PedidoScreen</strong> con el <strong><code>LazyColumn</code></strong>. Para ello se pasar&#xE1; el siguiente <a href="../../assets/codigo/ejercicios3_6/contenidolistapedidos.rar">fichero</a> con el contenido completo del paquete data, model y el fichero correspondiente al UiState.<br>
+Como pod&#xE9;is ver en las clases que se os han pasado, tenemos por un lado los art&#xED;culos, por otro los pedidos y por otro la clase que representa la relaci&#xF3;n muchos a muchos entre art&#xED;culos y pedidos (ArticuloConPedidoMock). La informaci&#xF3;n que se muestra corresponde al primer p&#xE9;dido (pedido 1) del cliente con dni 22222222L que ya est&#xE1; creado en PedidoDaoMock.</p>
+<p>Las im&#xE1;genes las descargaremos en la <a href="../../assets/codigo/ejercicios3_6/imageneslistapedidos.rar">siguiente direcci&#xF3;n</a></p>
+</div>
+<div style="auto">
+<img width="200px" src="../../assets/imagenes/ejercicios3_6/ejercicioXLista/imagen1.png">
+</div>
+</div>
+<blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong> A lo largo de todo el ejercicio deberemos seguir la arquitectura propuesta en anteriores temas, adem&#xE1;s de crear el  ViewModel con los tipos repository necesarios (en este caso dos) que deberemos inyectar con Hilt.</p>
+</blockquote>
 
       </div>
       
