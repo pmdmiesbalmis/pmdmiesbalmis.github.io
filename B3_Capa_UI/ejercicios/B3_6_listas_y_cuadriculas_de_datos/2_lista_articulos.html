@@ -264,48 +264,22 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="iniciandonos-con-viewmodel-con-ejercicio-mosaico">Iniciandonos con ViewModel con ejercicio Mosaico</h1>
+      <h1 class="mume-header undefined" id="lista-de-art%C3%ADculos">Lista de Art&#xED;culos</h1>
 
-<p><a href="./1_Mosaico.pdf">Descargar estos apuntes</a></p>
-<h3 class="mume-header" id="ejercicio">Ejercicio</h3>
-
+<p><a href="./2_lista_articulos.pdf">Descargar estos apuntes</a></p>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 60%">
-<p>Vamos a crear un ejercicio sencillo que nos sirva para iniciarnos con el concepto de ViewModel a la vez que practicamos <a href="https://developer.android.com/jetpack/compose/layouts/flow">FlowRow</a> y <a href="https://developer.android.com/jetpack/compose/components/slider">Slider</a>. Para ello nos descargaremos las siguientes <a href="../../assets/codigo/ejercicios3_4/ejercicio1/mosaico_recurso.zip">imagenes</a> que a&#xF1;adiremos a la carpeta drawable de recursos.<br>
-El ejercicio trata de crear un composable <strong>MosaicoScreen</strong> que muestre la disposici&#xF3;n de las im&#xE1;genes usando un layout <strong>FlowRow</strong>, este tipo de contenedor permite distribuir el contenido de forma fluida dependiendo del ancho de la pantalla  o de la  disposici&#xF3;n del dispositivo (giraremos el dispositivo para ver su comportamiento con diferentes anchos), hasta un m&#xE1;ximo de elementos establecidos. Para fingir los distintos tama&#xF1;os de ancho,  vamos a disponer de un <strong>Slider</strong> que modificar&#xE1; la variable del m&#xE1;ximo elementos por fila.</p>
+<div style="width: 70%">
+<p>En este ejercicio se va a codificar una aplicaci&#xF3;n que muestre una lista de art&#xED;culos pertenecientes a un determinado pedido. La lista se crear&#xE1; con <strong><code>LazyColumn</code></strong> y tendr&#xE1; el aspecto que se muestra en la imagen. Crearemos un componente <strong>CardPedido</strong> como vemos en las l&#xED;neas del pedido y que ser&#xE1; llamado desde <strong>PedidoScreen</strong> con el <strong><code>LazyColumn</code></strong>. Para ello se pasar&#xE1; el siguiente <a href="../../assets/codigo/ejercicios3_6/2_lista_articulos/contenidolistapedidos_recurso.zip">fichero</a> con el contenido completo del paquete data, model y el fichero correspondiente al UiState.<br>
+Como pod&#xE9;is ver en las clases que se os han pasado, tenemos por un lado los art&#xED;culos, por otro los pedidos y por otro la clase que representa la relaci&#xF3;n muchos a muchos entre art&#xED;culos y pedidos (ArticuloConPedidoMock). La informaci&#xF3;n que se muestra corresponde al primer p&#xE9;dido (pedido 1) del cliente con dni 22222222L que ya est&#xE1; creado en PedidoDaoMock.</p>
+<p>Las im&#xE1;genes las descargaremos en la <a href="../../assets/codigo/ejercicios3_6/2_lista_articulos/imageneslistapedidos_recurso.zip">siguiente direcci&#xF3;n</a></p>
 </div>
-<div style="width: auto">
-<img height="250px" src="../../assets/imagenes/ejercicios3_4/ejercicio1/imagen1.png">
+<div style="auto">
+<img width="200px" src="../../assets/imagenes/ejercicios3_6/2_lista_articulos/imagen1.png">
 </div>
 </div>
-El siguiente c&#xF3;digo permitir&#xE1; crear una lista con el nombre de las im&#xE1;genes que tendremos en drawable y que se deber&#xE1;n mostrar el el FlowRow.
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> mosaico <span class="token operator">=</span> mutableListOf<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>i <span class="token keyword keyword-in">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>j <span class="token keyword keyword-in">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            mosaico<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;fila_<span class="token interpolation"><span class="token delimiter variable">${</span>i<span class="token delimiter variable">}</span></span>_columna_<span class="token interpolation"><span class="token delimiter variable">${</span>j<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre><p>Recuerda que para convertir el nombre en recurso tendremos que usar el siguiente c&#xF3;digo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> contexto <span class="token operator">=</span> LocalContext<span class="token punctuation">.</span>current
-<span class="token keyword keyword-val">val</span> imageResource <span class="token operator">=</span>
-        contexto<span class="token punctuation">.</span>resources<span class="token punctuation">.</span><span class="token function">getIdentifier</span><span class="token punctuation">(</span>urlImagen<span class="token punctuation">,</span> <span class="token string">&quot;drawable&quot;</span><span class="token punctuation">,</span> contexto<span class="token punctuation">.</span>packageName<span class="token punctuation">)</span>
-<span class="token operator">..</span><span class="token punctuation">.</span>
-<span class="token function">Image</span><span class="token punctuation">(</span> <span class="token operator">..</span><span class="token punctuation">.</span>
- painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> imageResource<span class="token punctuation">)</span><span class="token punctuation">,</span> contentDescription <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
- <span class="token punctuation">)</span>
-</pre><p>Para el Slider usaremos un m&#xED;nimo de 1 y un m&#xE1;ximo de ocho y convertiremos el float a int para poder usarlo en el FloRow.</p>
-<p>Los estados deber&#xE1;n estar contenidos en el ViewModel y MosaicoScreen ser&#xE1; llamada de dos formas para ver el alcance del ViewModel desde las dos perspectivas.</p>
-<ul>
-<li>Desde la Activity</li>
-<li>Desde un Preview</li>
-</ul>
-<p>Para ver la diferencia, establece una cantidad de columnas y gira la pantalla en las dos formas de ejecuci&#xF3;n.</p>
-
-<div style="width: auto">
-<img height="250px" src="../../assets/imagenes/ejercicios3_4/ejercicio1/imagen2.png">
-</div>
-
+<blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong> A lo largo de todo el ejercicio deberemos seguir la arquitectura propuesta en anteriores temas, adem&#xE1;s de crear el  ViewModel con los tipos repository necesarios (en este caso dos) que deberemos inyectar con Hilt.</p>
+</blockquote>
 
       </div>
       
