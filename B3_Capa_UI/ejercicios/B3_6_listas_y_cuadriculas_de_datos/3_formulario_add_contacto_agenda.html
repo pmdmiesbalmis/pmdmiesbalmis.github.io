@@ -267,7 +267,53 @@ pre[data-line] .line-highlight[data-end]:after {
 <h2 class="mume-header" id="codelab-guiado-para-crear-un-formulario-de-acta-de-un-contacto">&apos;<em>Codelab</em>&apos; guiado para crear un formulario de acta de un contacto.</h2>
 
 <p>En el siguiente ejercicio partiremos del <strong>ejercicio 1</strong> del <strong>Tema 3.6</strong> donde <strong>a&#xF1;adimos la lista de contactos</strong>. La idea del mismo es poder a&#xF1;adir o editar un contacto.</p>
-<h4 class="mume-header" id="paso-1--a%C3%B1adiendo-clases-de-utilidad-para-introducir-campos-de-texto">Paso 1.- A&#xF1;adiendo clases de utilidad para introducir campos de texto</h4>
+<h4 class="mume-header" id="paso-1--a%C3%B1adiendo-di-con-hilt-a-nuestro-proyecto">Paso 1.- A&#xF1;adiendo DI con Hilt a nuestro proyecto</h4>
+
+<p>En primer lugar vamos a a&#xF1;adir el soporte para la inyecci&#xF3;n de dependencias y as&#xED; poder gestionar el ciclo de vida los objetos que necesitemos en nuestra aplicaci&#xF3;n y de paso practicar un poco m&#xE1;s su uso. Para ello, vamos a recordar alguno de los pasos descritos en el tema:</p>
+<ol>
+<li>
+<p>A&#xF1;ade todos los plugins y librer&#xED;as en Gradle, descritas en el Tame 3.5 y sincroniza el proyecto de Gradle.</p>
+</li>
+<li>
+<p>A&#xF1;adimos la anotaci&#xF3;n <strong><code>@HiltAndroidApp</code></strong> en <strong><code>AgendaApplication</code></strong></p>
+</li>
+<li>
+<p>A&#xF1;adimos la anotaci&#xF3;n <strong><code>@AndroidEntryPoint</code></strong> en <strong><code>MainActivity</code></strong>.</p>
+</li>
+<li>
+<p>Vamos a marcar para inyecci&#xF3;n los siguientes constructores:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> ContactoDaoMock <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+
+<span class="token keyword keyword-class">class</span> ContactoRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ContactoDaoMock
+<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Vamos a definir el paquete <strong><code>com.pmdm.agenda.di</code></strong> y en &#xE9;l el m&#xF3;dulo <strong><code>AppModule.kt</code></strong> donde vamos a definir los servicios que vamos a inyectar en nuestra aplicaci&#xF3;n. En este caso, solo tenemos el repositorio de contactos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Module</span>
+<span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideContactoDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ContactoDaoMock <span class="token operator">=</span> <span class="token function">ContactoDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideContactoRepository</span><span class="token punctuation">(</span>
+        contactoDaoMock<span class="token operator">:</span> ContactoDaoMock
+    <span class="token punctuation">)</span> <span class="token operator">:</span> ContactoRepository <span class="token operator">=</span> <span class="token function">ContactoRepository</span><span class="token punctuation">(</span>contactoDaoMock<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>    
+</pre></li>
+<li>
+<p>Ahora en <strong><code>ListaContactosViewModel</code></strong> vamos inyectar el repositorio y a indicarle a Hilt que hay un <strong><code>@HiltViewModel</code></strong> que cuando inst&#xE1;ncie lo asocie al ciclo de vida oportuno.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> ListaContactosViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> repository<span class="token operator">:</span> ContactoRepository
+<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<h4 class="mume-header" id="paso-2--a%C3%B1adiendo-clases-de-utilidad-para-introducir-campos-de-texto">Paso 2.- A&#xF1;adiendo clases de utilidad para introducir campos de texto</h4>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 80%">
@@ -337,7 +383,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token punctuation">}</span>
 </pre><p>As&#xED; vamos a tener validadores para validar que un campo de texto es un correo, un tel&#xE9;fono, un n&#xFA;mero entero, un n&#xFA;mero real, etc.</p>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="paso-2--definiendo-composables-reutilizables">Paso 2.- Definiendo composables reutilizables</h4>
+<h4 class="mume-header" id="paso-3--definiendo-composables-reutilizables">Paso 3.- Definiendo composables reutilizables</h4>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 80%">
@@ -382,7 +428,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </div>
 <p>Estos <em>composables</em> junto a <strong><code>ImagenContacto.kt</code></strong> que ya deber&#xED;a estar incluido en el proyecto, los usaremos en el siguiente paso para crear el formulario de contacto.</p>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="paso-3--creando-componente-de-seleccion-de-categor%C3%ADas">Paso 3.- Creando componente de seleccion de categor&#xED;as</h4>
+<h4 class="mume-header" id="paso-4--creando-componente-de-seleccion-de-categor%C3%ADas">Paso 4.- Creando componente de seleccion de categor&#xED;as</h4>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 80%">
@@ -481,7 +527,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <img height="125px" src="../../assets/imagenes/ejercicios3_6/3_formulario_add_contacto_agenda/seleccion_categorias_landscape.png">
 </div>
 <div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="paso-4--creando-el-formulario-de-contacto">Paso 4.- Creando el formulario de contacto</h4>
+<h4 class="mume-header" id="paso-5--creando-el-formulario-de-contacto">Paso 5.- Creando el formulario de contacto</h4>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 70%">
@@ -507,7 +553,247 @@ pre[data-line] .line-highlight[data-end]:after {
 </div>
 </div>
 <p>Sin embargo, antes de empezar a definir el interfaz. Vamos a concretar las clases de estado que vamos a necesitar para el formulario y de gesti&#xF3;n de eventos sobre el mismo.</p>
-<p>TODO: Aqu&#xED; COmentar que hay que cambiar de ubicaci&#xF3;n <strong><code>ContactoUiState.kt</code></strong></p>
+<ol>
+<li>
+<p><strong><code>ContactoUiState.kt</code></strong> que guardaba el estado de un contacto en la lista y que ten&#xED;amos en el paquete <strong><code>ui.features.vercontactos</code></strong>. La reutilizaremos ahora para guardar los datos del contacto en el formulario por tanto la moveremos a <strong><code>ui.features</code></strong> junto a <strong><code>CatergoriaUiState.kt</code></strong></p>
+</li>
+<li>
+<p>Adem&#xE1;s del estado de un estado de los datos del contacto, vamos a necesitar un estado que gestione la validaci&#xF3;n de los mismos. Para segregar responsabilidades, vamos a definirlo en una clase de estado propia denominada <strong><a href="../../assets/codigo/ejercicios3_6/3_formulario_add_contacto_agenda/ValidacionContactoUiState.kt">ValidacionContactoUiState.kt</a></strong> la cual va a contener el estado del objeto <strong><code>Validacion</code></strong> para los diferentes datos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ValidacionContactoUiState</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> validacionNombre<span class="token operator">:</span> Validacion <span class="token operator">=</span> <span class="token function">Validacion</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> validacionApellidos<span class="token operator">:</span> Validacion <span class="token operator">=</span> <span class="token function">Validacion</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> validacionCorreo<span class="token operator">:</span> Validacion <span class="token operator">=</span> <span class="token function">Validacion</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> validacionTelefono<span class="token operator">:</span> Validacion <span class="token operator">=</span> <span class="token function">Validacion</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> validacionContacto<span class="token operator">:</span> Validacion <span class="token operator">=</span> <span class="token function">Validacion</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Vamos a definir otra clase denominada <strong><a href="../../assets/codigo/ejercicios3_6/3_formulario_add_contacto_agenda/ValidadorContacto.kt">ValidadorContacto.kt</a></strong> que encapsule la l&#xF3;gica de validaci&#xF3;n de los datos del contacto. Para ello, vamos a definir los <em><strong>&apos;Validadores&apos;</strong></em> que necesitamos para cada campo de texto y un m&#xE9;todo <strong><code>valida</code></strong> que nos devuelva una instancia de la clase de utilidad que definimos al principio del ejercicio <strong><code>ValidacionCompuesta</code></strong> con el resultado de la validaci&#xF3;n de todos los campos.</p>
+<p>Aqu&#xED; tenemos pues, toda la l&#xF3;gica de validaci&#xF3;n de los campos de texto que podremos usar tanto el <em>&apos;preview&apos;</em> del formulario como el el propio ViewModel que gestione el <em>&apos;screen&apos;</em>. Esta l&#xF3;gica en aplicaciones m&#xE1;s complejas deber&#xED;a ir en la <strong>capa de dominio</strong>.</p>
+<p>Por ejemplo, para el texto introducido en el <strong>TextField</strong> de <strong>tel&#xE9;fono</strong> vamos a tener la siguiente <em>&apos;validador&apos;</em>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> validadorTelefono <span class="token operator">=</span> <span class="token function">ValidadorCompuesto</span><span class="token punctuation">(</span><span class="token function">ValidaTextoVacio</span><span class="token punctuation">(</span><span class="token string">&quot;No puede estar vac&#xED;o&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ValidaLongitudMinimaTexto</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token string">&quot;El tel&#xE9;fono debe tener 9 caracteres&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ValidaLongitudMaximaTexto</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">&quot;El tel&#xE9;fono debe tener 18 caracteres&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">ValidaTelefono</span><span class="token punctuation">(</span><span class="token string">&quot;El tel&#xE9;fono no es v&#xE1;lido&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>Porteriormente en el ViewModel que gestione el formulario, podremos usarlo de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> validacionContactoState <span class="token operator">=</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">ValidacionContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-var">var</span> validadorContacto <span class="token operator">=</span> <span class="token function">ValidadorContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Ser&#xE1; inyectado</span>
+
+validacionContactoState <span class="token operator">=</span> validacionContactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+    validacionTelefono <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span>validadorTelefono<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>telefono<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</pre></li>
+<li>
+<p>Definiremos un interfaz sellado <strong><a href="../../assets/codigo/ejercicios3_6/3_formulario_add_contacto_agenda/ContactoEvent.kt">ContactoEvent.kt</a></strong> dentro de <strong><code>ui.features.formcontacto</code></strong>, que abstraiga los eventos que se pueden producir en el formulario.</p>
+<p>Vamos a tener en cuenta los siguientes eventos. Aunque ahora mismo no los vamos a gestionar todos de momento.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> ContactoEvent <span class="token punctuation">{</span>
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnChangeCategoria</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> categoria<span class="token operator">:</span> CatergoriaUiState<span class="token punctuation">)</span> <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnChangeNombre</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnChangeApellidos</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnChangeCorreo</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> correo<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnChangeTelefono</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> telefono<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnChangeFoto</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> foto<span class="token operator">:</span> ImageBitmap<span class="token punctuation">)</span> <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnSaveContacto</span><span class="token punctuation">(</span>
+        <span class="token keyword keyword-val">val</span> onNavigateTrasFormContacto<span class="token operator">:</span> <span class="token punctuation">(</span>actualizaContactos <span class="token operator">:</span> Boolean<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> 
+    <span class="token operator">:</span> ContactoEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-object">object</span> OnDismissError <span class="token operator">:</span> ContactoEvent
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<p>Con todo esto ya podemos definir el interfaz de usuario del formulario de contacto. Para ello, vamos a crear el componente <strong><code>FormContactoScreen</code></strong> dentro del paquete <strong><code>ui.features.formcontacto</code></strong>.</p>
+<p>El interfaz de usuario del mismo es el siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FormContactoScreen</span><span class="token punctuation">(</span>
+    contactoState<span class="token operator">:</span> ContactoUiState<span class="token punctuation">,</span>
+    validacionContactoState<span class="token operator">:</span> ValidacionContactoUiState<span class="token punctuation">,</span>
+    onContactoEvent<span class="token operator">:</span> <span class="token punctuation">(</span>ContactoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onNavigateTrasFormContacto<span class="token operator">:</span> <span class="token punctuation">(</span>actualizaContactos<span class="token operator">:</span> Boolean<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span>
+</pre><p>Como ves, hemos agrupado estados relacionados y hemos intentado separar la gesti&#xF3;n de los eventos. Por &#xFA;ltimo, recibiremos una funci&#xF3;n <strong><code>onNavigateTrasFormContacto</code></strong> que nos permitir&#xE1; navegar a la pantalla de lista de contactos una vez guardado el contacto y que de momento no vamos a darle funcionalidad.</p>
+<p>Puedes descargarte del siguiente enlace el c&#xF3;digo de este componente y a&#xF1;adirlo a tu proyecto. <strong><a href="../../assets/codigo/ejercicios3_6/3_formulario_add_contacto_agenda/FormContactoScreen.kt">FormContactoScreen.kt &#x1F517;</a></strong> y a continuaci&#xF3;n vamos a describir su funcionamiento antes de integrarlo en con su <strong>ViewModel</strong>.</p>
+<p>Hemos dividido el componente en dos partes principales. Una es la Cabecera y otra el Cuerpo del formulario. Que distribuiremos dependiendo de la orientaci&#xF3;n del dispositivo con <strong><code>BoxWithConstraints</code></strong>. Adem&#xE1;s, <strong>cada componente descompone el estado, pasando solo los datos que necesita y los eventos que gestiona</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FormContactoScreenVertical</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Column <span class="token punctuation">{</span>
+        <span class="token function">CabeceraFoto</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+        <span class="token function">CuerpoFormulario</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><strong><code>CuerpoFormulario</code></strong> es un <strong>box</strong> que contiene:</p>
+<ol>
+<li>Un column con scroll vertical que contendr&#xE1; el componente de selecci&#xF3;n de categor&#xED;as y los <strong><code>OutlinedTextField</code></strong> para introducir los datos del contacto.</li>
+<li>Un <strong>pie</strong> que mostrar&#xE1; superpuesto al column un <strong><code>FAB</code></strong> que nos permitir&#xE1; guardar los cambios o un <strong><code>SnackBar</code></strong> que nos indicar&#xE1; si tenemos alg&#xFA;n error de validaci&#xF3;n a resolver.</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">CuerpoFormulario</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Box <span class="token punctuation">{</span>        
+        <span class="token function">Column</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+        <span class="token function">Pie</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: Se presenta un problema y es que los componentes que contiene <strong><code>Pie</code></strong> pueden tener una alineaci&#xF3;n diferente dentro del BoxScope del <strong><code>Box</code></strong> que contiene a <strong><code>Pie</code></strong>, pero si definimos <strong><code>Pie</code></strong> como un composable <em>&apos;<strong>normal</strong>&apos;</em> no podemos acceder al <strong><code>BoxScope</code></strong> del <strong><code>Box</code></strong> que lo contiene. Es por eso que haremos que <strong><code>Pie</code></strong> sea una funci&#xF3;n de extensi&#xF3;n (composable) de <strong><code>BoxScope</code></strong>. Esto, me permitir&#xE1; acceder al <strong><code>BoxScope</code></strong> del <strong><code>Box</code></strong> que lo contiene y por tanto alinear los componentes que contiene de la forma que queramos. Eso s&#xED;, es f&#xE1;cil de deducir que <strong>nuestro componente <code>Pie</code> solo podr&#xE1; ser usado dentro de un <code>Box</code></strong>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5,9]}" class="language-kotlin" data-line="5,9"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> BoxScope<span class="token punctuation">.</span><span class="token function">Pie</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>validacionContactoState<span class="token punctuation">.</span>validacionContacto<span class="token punctuation">.</span>hayError<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Snackbar</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>BottomCenter<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+        <span class="token function">ExtendedFloatingActionButton</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">align</span><span class="token punctuation">(</span>Alignment<span class="token punctuation">.</span>BottomEnd<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div></pre><p>Termina de echarle un vistazo al c&#xF3;digo y ver&#xE1;s que el resto es f&#xE1;cil de entender. Adem&#xE1;s se ha incorporado el componente de M3 <strong><code>OutlinedIconButton</code></strong> para cambiar la imagen del contacto. Sin embargo, de momento no tienen funcionalidad.</p>
+<div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="paso-6--creando-el-viewmodel-del-formulario-de-contacto">Paso 6.- Creando el ViewModel del formulario de contacto</h4>
+
+<p>B&#xE1;sicamente deberemos pasar la funcionalidad del <em>&apos;preview&apos;</em> de test promocionado <strong><code>FormContactoScreenTest</code></strong> al mismo. Vemos</p>
+<p>Crearemos la clase pues <strong><a href="../../assets/codigo/ejercicios3_6/3_formulario_add_contacto_agenda/ContactoViewModel.kt">ContactoViewModel.kt &#x1F517;</a></strong> junto a su screen en el paquete <strong><code>ui.features.formcontacto</code></strong>. Veamos el c&#xF3;digo comentado...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> ContactoViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token comment">// Inyectamos el repositorio y el validador de contactos</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> contactoRepository<span class="token operator">:</span> ContactoRepository<span class="token punctuation">,</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> validadorContacto<span class="token operator">:</span> ValidadorContacto
+<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-class">class</span> <span class="token function">ContactoViewModelException</span><span class="token punctuation">(</span>message<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Exception</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+
+    <span class="token comment">// Este estado me indicar&#xE1; si estoy editando un contacto existente o creando uno nuevo</span>
+    <span class="token keyword keyword-var">var</span> editandoContactoExistenteState<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token boolean">false</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+    <span class="token comment">// Estados para el contacto y su validaci&#xF3;n. Solo son modificables desde el ViewModel</span>
+    <span class="token keyword keyword-var">var</span> contactoState <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">ContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+    <span class="token keyword keyword-var">var</span> validacionContactoState <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">ValidacionContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+    <span class="token comment">// Este m&#xE9;todo se llamar&#xE1; cuando queramos editar un contacto ya existente</span>
+    <span class="token comment">// justo antes de navegar o cargar el formulario FormContactoScreen.</span>
+    <span class="token comment">// Recibimos el id del contacto a editar y lo buscamos en el repositorio.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">setContactoState</span><span class="token punctuation">(</span>idContacto<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Indicamos que estamos editando un contacto existente, para hacer un update al guardar.</span>
+        editandoContactoExistenteState <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token keyword keyword-val">val</span> c<span class="token operator">:</span> Contacto <span class="token operator">=</span> contactoRepository<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>idContacto<span class="token punctuation">)</span>
+            <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">ContactoViewModelException</span><span class="token punctuation">(</span><span class="token string">&quot;El id <span class="token interpolation variable">$idContacto</span> no existe en la base de datos&quot;</span><span class="token punctuation">)</span>
+        <span class="token comment">// Tras buscarlo en el repositorio, lo convertimos a ContactoUiState y lo asignamos al estado.</span>
+        contactoState <span class="token operator">=</span> c<span class="token punctuation">.</span><span class="token function">toContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// Se actualiza el estado de validaci&#xF3;n, aunque no deber&#xED;a haber errores.</span>
+        validacionContactoState <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>contactoState<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Este m&#xE9;todo se llamar&#xE1; cuando queramos crear un nuevo contacto.</span>
+    <span class="token comment">// O borrar su estado.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">clearContactoState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        editandoContactoExistenteState <span class="token operator">=</span> <span class="token boolean">false</span>
+        contactoState <span class="token operator">=</span> <span class="token function">ContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        validacionContactoState <span class="token operator">=</span> <span class="token function">ValidacionContactoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+</pre><p>Por &#xFA;ltimo vamos a definir el m&#xE9;todo que gestiona los eventos que se producen en el formulario. Para ello, vamos a definir el m&#xE9;todo <strong><code>onContactoEvent</code></strong> que recibe un evento de tipo <strong><code>ContactoEvent</code></strong> y que se encarga de gestionarlo.</p>
+<div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-fun">fun</span> <span class="token function">onContactoEvent</span><span class="token punctuation">(</span>e<span class="token operator">:</span> ContactoEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnChangeCategoria <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                contactoState <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>categorias <span class="token operator">=</span> e<span class="token punctuation">.</span>categoria<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnChangeNombre <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                contactoState <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> e<span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
+                validacionContactoState <span class="token operator">=</span> validacionContactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                    validacionNombre <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span>validadorNombre<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>nombre<span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnChangeApellidos <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                contactoState <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>apellidos <span class="token operator">=</span> e<span class="token punctuation">.</span>apellidos<span class="token punctuation">)</span>
+                validacionContactoState <span class="token operator">=</span> validacionContactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                    validacionApellidos <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span>validadorApellidos<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>apellidos<span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnChangeCorreo <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                contactoState <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>correo <span class="token operator">=</span> e<span class="token punctuation">.</span>correo<span class="token punctuation">)</span>
+                validacionContactoState <span class="token operator">=</span> validacionContactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                    validacionCorreo <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span>validadorCorreo<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>correo<span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnChangeTelefono <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                contactoState <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>telefono <span class="token operator">=</span> e<span class="token punctuation">.</span>telefono<span class="token punctuation">)</span>
+                validacionContactoState <span class="token operator">=</span> validacionContactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                    validacionTelefono <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span>validadorTelefono<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>telefono<span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnChangeFoto <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                contactoState <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>foto <span class="token operator">=</span> e<span class="token punctuation">.</span>foto<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnDismissError <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                validacionContactoState <span class="token operator">=</span>
+                    validacionContactoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>validacionContacto <span class="token operator">=</span> <span class="token function">Validacion</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-is">is</span> ContactoEvent<span class="token punctuation">.</span>OnSaveContacto <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token comment">// Validamos todo el contacto</span>
+                validacionContactoState <span class="token operator">=</span> validadorContacto<span class="token punctuation">.</span><span class="token function">valida</span><span class="token punctuation">(</span>contactoState<span class="token punctuation">)</span>
+                <span class="token comment">// Si no hay errores, lo guardamos o actualizamos en el repositorio</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>validacionContactoState<span class="token punctuation">.</span>validacionContacto<span class="token punctuation">.</span>hayError<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword keyword-val">val</span> c<span class="token operator">:</span> Contacto <span class="token operator">=</span> contactoState<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>editandoContactoExistenteState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        contactoRepository<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                        contactoRepository<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token comment">// Tras guardar seguiremos iremos a la pantalla correspondiente</span>
+                    <span class="token comment">// por ahora no hacemos nada</span>
+                    e<span class="token punctuation">.</span><span class="token function">onNavigateTrasFormContacto</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="paso-7--sustituyendo-en-el-mainactivity-la-lista-por-el-formulario">Paso 7.- Sustituyendo en el MainActivity la Lista por el Formulario</h4>
+
+<p>Cambiamos la creaci&#xF3;n del vm por el del <strong><code>ContactoViewModel</code></strong> y le indicamos que queremos editar un contacto existente con id 1.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 75%">
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> vm <span class="token operator">:</span> ContactoViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Creamos el ViewModel</span>
+    <span class="token comment">// Le indicamos que queremos editar un contacto existente con id 1</span>
+    vm<span class="token punctuation">.</span><span class="token function">setContactoState</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    setContent <span class="token punctuation">{</span>
+        AgendaTheme <span class="token punctuation">{</span>
+            <span class="token function">Surface</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>background
+            <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">FormContactoScreen</span><span class="token punctuation">(</span>
+                    contactoState <span class="token operator">=</span> vm<span class="token punctuation">.</span>contactoState<span class="token punctuation">,</span>
+                    validacionContactoState <span class="token operator">=</span> vm<span class="token punctuation">.</span>validacionContactoState<span class="token punctuation">,</span>
+                    onContactoEvent <span class="token operator">=</span> vm<span class="token operator">::</span>onContactoEvent<span class="token punctuation">,</span>
+                    onNavigateTrasFormContacto <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></div>
+<div style="width: auto">
+<img height="400px" src="../../assets/imagenes/ejercicios3_6/3_formulario_add_contacto_agenda/form_contacto_editar.png">
+</div>
+</div>
 
       </div>
       
