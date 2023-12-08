@@ -1,0 +1,1467 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2º DAM  Tema 3.6 - Corrutinas</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<p><style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style></p>
+<h1 id="tema-37---corrutinas">Tema 3.7 - Corrutinas </h1>
+<p>Descargar estos apuntes <a href="./Tema_3_7_corrutinas.pdf">pdf</a> o <a href="./Tema_3_7_corrutinas.html">html</a></p>
+<h2 id="índice">Índice </h2>
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducción" class="md-toc-link">
+            <p>Introducción</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#corrutinas-en-kotlin" class="md-toc-link"><p>Corrutinas en Kotlin</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#anatomía-de-una-corrutina" class="md-toc-link">
+            <p>Anatomía de una corrutina</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#primer-ejemplo-básico" class="md-toc-link">
+            <p>Primer ejemplo básico</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#concurrencia-estructurada" class="md-toc-link">
+            <p>Concurrencia estructurada</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#funciones-de-suspensión-con-suspend" class="md-toc-link">
+            <p>Funciones de suspensión con <strong><code>suspend</code></strong></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#profundizando-en-el-constructor-de-alcance-coroutinescope" class="md-toc-link">
+            <p>Profundizando en el constructor de alcance <strong><code>CoroutineScope</code></strong></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#controlando-el-estado-de-una-corrutina-con-job" class="md-toc-link">
+            <p>Controlando el estado de una corrutina con <strong><code>Job</code></strong></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#jobs-asíncronos-que-devuelven-un-resultado-asyncawait" class="md-toc-link">
+            <p>Jobs asíncronos que devuelven un resultado <strong><code>async/await</code></strong></p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#dispatchers-e-hilos" class="md-toc-link"><p>Dispatchers e hilos</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#cambiando-el-contexto-de-una-corrutina-con-withcontext" class="md-toc-link">
+            <p>Cambiando el contexto de una corrutina con <strong><code>withContext</code></strong></p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#corrutinas-en-android" class="md-toc-link"><p>Corrutinas en Android</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#coroutinescopes-más-comunes-en-android" class="md-toc-link">
+            <p>CoroutineScopes más comunes en Android</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#side-effects-y-corrutinas-en-compose" class="md-toc-link"><p>Side-effects y corrutinas en Compose</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#launchedeffect" class="md-toc-link">
+            <p>LaunchedEffect</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#cargando-imágenes-de-forma-asíncrona-coil" class="md-toc-link">
+            <p>Cargando Imágenes de forma asíncrona (Coil)</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#ejemplo-de-uso-de-corrutinas-en-android" class="md-toc-link">
+            <p>Ejemplo de uso de corrutinas en Android</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+<div style="page-break-after:always;"></div>
+<h2 id="introducción">Introducción </h2>
+<ul>
+<li>Documentación oficial: <strong><a href="https://kotlinlang.org/docs/coroutines-guide.html">Lenguaje Kotlin</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/kotlin/coroutines?hl=es-419">Android</a></strong></li>
+<li>Vídeo: <strong><a href="https://www.youtube.com/watch?v=ZTDXo0-SKuU">Android Developers</a></strong></li>
+<li>Vídeo: <strong><a href="https://www.youtube.com/watch?v=56yLoJNCa2I">Martin Kiperszmid</a></strong></li>
+<li>Lista de reproducción: <strong><a href="https://www.youtube.com/watch?v=2QInrEaXyMo&amp;list=PLSrm9z4zp4mE-o3sPq-PqzGHoFAIsQFI6">Stevdza-San (Inglés)</a></strong></li>
+<li>Lista de reproducción: <strong><a href="https://www.youtube.com/watch?v=ShNhJ3wMpvQ&amp;list=PLQkwcJG4YTCQcFEPuYGuv54nYai_lwil_">Philipp Lackner (Inglés)</a></strong></li>
+</ul>
+<p>En primer lugar comentar que las corrutinas no son un concepto exclusivo de Kotlin, ya que existen en otros lenguajes como C#, Python, Go, JavaScript, etc. En Kotlin, las corrutinas son una característica del lenguaje que implementa un patrón que <strong>nos permite escribir código asíncrono de manera secuencial</strong>. Esto significa que podemos escribir <strong>código asíncrono como si fuera código síncrono</strong>, sin tener que preocuparnos por los callbacks, los hilos, etc. Esto hace que el código sea más fácil de leer y de mantener.</p>
+<p>¿Quiere decir esto que no podamos gestionar la concurrencia como lo hacemos en Java?. No, podemos seguir usando hilos tal cual lo hacemos en Java a través del paquete <strong><code>kotlin.concurrent</code></strong>. Sin embargo, las corrutinas nos permiten gestionar la concurrencia de una manera más sencilla y segura ya no están vinculada a ningún hilo en particular. Puede suspender su ejecución en un hilo y reanudarse en otro.</p>
+<p>Serán útiles para tener:</p>
+<ul>
+<li>
+<p><strong>Ligereza</strong>: Puedes ejecutar muchas corrutinas de forma concurrente en un solo hilo debido a la compatibilidad con la suspensión, que no bloquea el hilo en el que se ejecuta la corrutina.</p>
+</li>
+<li>
+<p><strong>Menos fugas de memoria</strong>: Puedo ejecutar un proceso dentro de un determinado '<strong>scope</strong>' o alcance, y cuando el alcance se cierra, todas las corrutinas que se ejecutan dentro de ese alcance se cancelan automáticamente. Esto significa que no hay fugas de memoria.</p>
+</li>
+<li>
+<p><strong>Compatibilidad con cancelación incorporada</strong>: Se propaga automáticamente la cancelación a través de la jerarquía de corrutinas en ejecución.</p>
+</li>
+<li>
+<p><strong>Integración con Jetpack</strong>: Muchas bibliotecas de Jetpack incluida Compose. Estas bibliotecas incluyen extensiones que proporcionan compatibilidad total con corrutinas.</p>
+</li>
+</ul>
+<p>Las corrutinas forman parte de la librería estándar de Kotlin. No obstante para usarlas necesitamos añadir como dependencia dependencia la librería de extensión (<strong><code>kotlinx.coroutines</code></strong>) donde se implementan en el fichero <strong><code>build.gradle.kts</code></strong> del módulo app:</p>
+<blockquote>
+<p>📌 <strong>Nota</strong>: Podemos ver las versión actual de corrutinas en el siguiente <strong><a href="https://github.com/Kotlin/kotlinx.coroutines">repositorio de Kotlin</a></strong>. <strong>Además, debemos fijarnos cual es la versíon de Kotlin mínima asociada a la versión de corrutinas que queremos usar</strong>.</p>
+</blockquote>
+<p>Por ejemplo si usáramos un <strong>programa de consola</strong> tendríamos que añadir:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token comment">// Gradle (Kotlin DSL)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"</span></span><span class="token punctuation">)</span>
+</code></pre><p>En un <strong>proyecto Android</strong> posiblemente no necesitemos añadirla porque ya estará incluida la librería a través de alguna otra dependencia. Pero si no fuera así, tendríamos que añadir mínimo la implementación específica para Android:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token comment">// Gradle (Kotlin DSL)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"</span></span><span class="token punctuation">)</span>
+</code></pre><div style="page-break-after:always;"></div>
+<h2 id="corrutinas-en-kotlin">Corrutinas en Kotlin </h2>
+<blockquote>
+<p>✋ para probar el código, puedes crear un <strong>proyecto de consola</strong> en Kotlin o usar el <strong><a href="https://play.kotlinlang.org/">playground</a></strong></p>
+</blockquote>
+<h3 id="anatomía-de-una-corrutina">Anatomía de una corrutina </h3>
+<p>Estará formada por las siguientes partes del esquema:</p>
+<p></p><p align="center" style="zoom:0.7" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 9.0.0 (20230911.1827)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="472pt" height="336pt" viewBox="0.00 0.00 471.57 336.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 332)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-332 467.57,-332 467.57,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>clusterScope</title>
+<path fill="none" stroke="#36648b" d="M20,-8C20,-8 443.57,-8 443.57,-8 449.57,-8 455.57,-14 455.57,-20 455.57,-20 455.57,-308 455.57,-308 455.57,-314 449.57,-320 443.57,-320 443.57,-320 20,-320 20,-320 14,-320 8,-314 8,-308 8,-308 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="231.79" y="-298" font-family="Arial" font-size="20.00" fill="#36648b">CoroutineScope</text>
+</g>
+<g id="clust4" class="cluster">
+<title>clusterChildScope2</title>
+<path fill="none" stroke="#36648b" d="M151.84,-28C151.84,-28 211.86,-28 211.86,-28 217.86,-28 223.86,-34 223.86,-40 223.86,-40 223.86,-92 223.86,-92 223.86,-98 217.86,-104 211.86,-104 211.86,-104 151.84,-104 151.84,-104 145.84,-104 139.84,-98 139.84,-92 139.84,-92 139.84,-40 139.84,-40 139.84,-34 145.84,-28 151.84,-28"></path>
+<text text-anchor="middle" x="181.85" y="-91" font-family="Arial" font-size="10.00" fill="#36648b">ChildScope</text>
+</g>
+<g id="clust2" class="cluster">
+<title>clusterContext</title>
+<path fill="none" stroke="#4f94cd" d="M40,-124C40,-124 423.57,-124 423.57,-124 429.57,-124 435.57,-130 435.57,-136 435.57,-136 435.57,-256 435.57,-256 435.57,-262 429.57,-268 423.57,-268 423.57,-268 40,-268 40,-268 34,-268 28,-262 28,-256 28,-256 28,-136 28,-136 28,-130 34,-124 40,-124"></path>
+<text text-anchor="middle" x="231.79" y="-246" font-family="Arial" font-size="20.00" fill="#4f94cd">CoroutineContext</text>
+</g>
+<g id="clust3" class="cluster">
+<title>clusterChildScope1</title>
+<path fill="none" stroke="#36648b" d="M53.99,-28C53.99,-28 114.01,-28 114.01,-28 120.01,-28 126.01,-34 126.01,-40 126.01,-40 126.01,-92 126.01,-92 126.01,-98 120.01,-104 114.01,-104 114.01,-104 53.99,-104 53.99,-104 47.99,-104 41.99,-98 41.99,-92 41.99,-92 41.99,-40 41.99,-40 41.99,-34 47.99,-28 53.99,-28"></path>
+<text text-anchor="middle" x="84" y="-91" font-family="Arial" font-size="10.00" fill="#36648b">ChildScope</text>
+</g>
+<!-- Job -->
+<g id="node1" class="node">
+<title>Job</title>
+<path fill="#104e8b" stroke="#104e8b" d="M108,-216C108,-216 60,-216 60,-216 54,-216 48,-210 48,-204 48,-204 48,-156 48,-156 48,-150 54,-144 60,-144 60,-144 108,-144 108,-144 114,-144 120,-150 120,-156 120,-156 120,-204 120,-204 120,-210 114,-216 108,-216"></path>
+<text text-anchor="middle" x="84" y="-175.5" font-family="Arial" font-size="15.00" fill="white">Job</text>
+</g>
+<!-- Dispatcher -->
+<g id="node2" class="node">
+<title>Dispatcher</title>
+<path fill="#104e8b" stroke="#104e8b" d="M213.7,-216C213.7,-216 150,-216 150,-216 144,-216 138,-210 138,-204 138,-204 138,-156 138,-156 138,-150 144,-144 150,-144 150,-144 213.7,-144 213.7,-144 219.7,-144 225.7,-150 225.7,-156 225.7,-156 225.7,-204 225.7,-204 225.7,-210 219.7,-216 213.7,-216"></path>
+<text text-anchor="middle" x="181.85" y="-175.5" font-family="Arial" font-size="15.00" fill="white">Dispatcher</text>
+</g>
+<!-- Job&#45;&gt;Dispatcher -->
+<!-- Exception -->
+<g id="node3" class="node">
+<title>Exception</title>
+<path fill="#104e8b" stroke="#104e8b" d="M313.57,-216C313.57,-216 255.7,-216 255.7,-216 249.7,-216 243.7,-210 243.7,-204 243.7,-204 243.7,-156 243.7,-156 243.7,-150 249.7,-144 255.7,-144 255.7,-144 313.57,-144 313.57,-144 319.57,-144 325.57,-150 325.57,-156 325.57,-156 325.57,-204 325.57,-204 325.57,-210 319.57,-216 313.57,-216"></path>
+<text text-anchor="middle" x="284.63" y="-184.5" font-family="Arial" font-size="15.00" fill="white">Exception</text>
+<text text-anchor="middle" x="284.63" y="-166.5" font-family="Arial" font-size="15.00" fill="white">handler</text>
+</g>
+<!-- Dispatcher&#45;&gt;Exception -->
+<!-- Other -->
+<g id="node4" class="node">
+<title>Other</title>
+<path fill="#104e8b" stroke="#104e8b" d="M403.57,-216C403.57,-216 355.57,-216 355.57,-216 349.57,-216 343.57,-210 343.57,-204 343.57,-204 343.57,-156 343.57,-156 343.57,-150 349.57,-144 355.57,-144 355.57,-144 403.57,-144 403.57,-144 409.57,-144 415.57,-150 415.57,-156 415.57,-156 415.57,-204 415.57,-204 415.57,-210 409.57,-216 403.57,-216"></path>
+<text text-anchor="middle" x="379.57" y="-175.5" font-family="Arial" font-size="15.00" fill="white">...</text>
+</g>
+<!-- Exception&#45;&gt;Other -->
+<!-- ChildContext1 -->
+<g id="node5" class="node">
+<title>ChildContext1</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M104.01,-74C104.01,-74 63.99,-74 63.99,-74 57.99,-74 51.99,-68 51.99,-62 51.99,-62 51.99,-50 51.99,-50 51.99,-44 57.99,-38 63.99,-38 63.99,-38 104.01,-38 104.01,-38 110.01,-38 116.01,-44 116.01,-50 116.01,-50 116.01,-62 116.01,-62 116.01,-68 110.01,-74 104.01,-74"></path>
+<text text-anchor="middle" x="84" y="-53.6" font-family="Arial" font-size="8.00" fill="#104e8b">Child Context</text>
+</g>
+<!-- ChildContext2 -->
+<g id="node6" class="node">
+<title>ChildContext2</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M201.86,-74C201.86,-74 161.84,-74 161.84,-74 155.84,-74 149.84,-68 149.84,-62 149.84,-62 149.84,-50 149.84,-50 149.84,-44 155.84,-38 161.84,-38 161.84,-38 201.86,-38 201.86,-38 207.86,-38 213.86,-44 213.86,-50 213.86,-50 213.86,-62 213.86,-62 213.86,-68 207.86,-74 201.86,-74"></path>
+<text text-anchor="middle" x="181.85" y="-53.6" font-family="Arial" font-size="8.00" fill="#104e8b">Child Context</text>
+</g>
+<!-- ChildContext1&#45;&gt;ChildContext2 -->
+</g>
+</svg>
+</p><p></p>
+<p>Definiciones básicas:</p>
+<ul>
+<li>
+<p><strong>CoroutinesScope</strong>: Es el <strong>ámbito</strong> en el que se ejecuta la corrutina. Por ejemplo, si lanzamos una corrutina desde una actividad, el ámbito de la corrutina será la actividad. Cuando la actividad se destruya, la corrutina se cancelará automáticamente.</p>
+</li>
+<li>
+<p><strong>CoroutineContext</strong>: Es el <strong>contexto</strong> en el que se ejecuta la corrutina y está forma por un conjunto de elementos que definen el comportamiento de la corrutina</p>
+<ul>
+<li>
+<p><strong>Job</strong>: Objeto que representa la tarea concurrente que se está ejecutando. Podemos usar este objeto para controlar el estado de la corrutina, por ejemplo, para esperarla o cancelarla. El ciclo de vida del trabajo asociado a una corrutina lo puedes ver en el siguiente diagrama.</p>
+<p></p><p align="center" style="zoom:0.7" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 9.0.0 (20230911.1827)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="562pt" height="240pt" viewBox="0.00 0.00 561.72 240.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 236)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-236 557.72,-236 557.72,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>clusterJonCycle</title>
+<path fill="none" stroke="#36648b" d="M20,-8C20,-8 533.72,-8 533.72,-8 539.72,-8 545.72,-14 545.72,-20 545.72,-20 545.72,-212 545.72,-212 545.72,-218 539.72,-224 533.72,-224 533.72,-224 20,-224 20,-224 14,-224 8,-218 8,-212 8,-212 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="276.86" y="-202" font-family="Arial" font-size="20.00" fill="#36648b">Job Lifecycle</text>
+</g>
+<!-- New -->
+<g id="node1" class="node">
+<title>New</title>
+<path fill="#104e8b" stroke="#104e8b" d="M88,-64C88,-64 40,-64 40,-64 34,-64 28,-58 28,-52 28,-52 28,-40 28,-40 28,-34 34,-28 40,-28 40,-28 88,-28 88,-28 94,-28 100,-34 100,-40 100,-40 100,-52 100,-52 100,-58 94,-64 88,-64"></path>
+<text text-anchor="middle" x="64" y="-43" font-family="Arial" font-size="10.00" fill="white">New</text>
+</g>
+<!-- Active -->
+<g id="node2" class="node">
+<title>Active</title>
+<path fill="#1874cd" stroke="#1874cd" d="M217.45,-64C217.45,-64 169.45,-64 169.45,-64 163.45,-64 157.45,-58 157.45,-52 157.45,-52 157.45,-40 157.45,-40 157.45,-34 163.45,-28 169.45,-28 169.45,-28 217.45,-28 217.45,-28 223.45,-28 229.45,-34 229.45,-40 229.45,-40 229.45,-52 229.45,-52 229.45,-58 223.45,-64 217.45,-64"></path>
+<text text-anchor="middle" x="193.45" y="-43" font-family="Arial" font-size="10.00" fill="white">Active</text>
+</g>
+<!-- New&#45;&gt;Active -->
+<g id="edge1" class="edge">
+<title>New-&gt;Active</title>
+<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M100.16,-46C113.98,-46 130.05,-46 144.88,-46"></path>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="144.69,-49.5 154.69,-46 144.69,-42.5 144.69,-49.5"></polygon>
+<text text-anchor="middle" x="128.72" y="-49" font-family="Arial" font-size="10.00" fill="#104e8b">start</text>
+</g>
+<!-- Completing -->
+<g id="node3" class="node">
+<title>Completing</title>
+<path fill="#1e90ff" stroke="#1e90ff" d="M380.38,-91C380.38,-91 326.14,-91 326.14,-91 320.14,-91 314.14,-85 314.14,-79 314.14,-79 314.14,-67 314.14,-67 314.14,-61 320.14,-55 326.14,-55 326.14,-55 380.38,-55 380.38,-55 386.38,-55 392.38,-61 392.38,-67 392.38,-67 392.38,-79 392.38,-79 392.38,-85 386.38,-91 380.38,-91"></path>
+<text text-anchor="middle" x="353.26" y="-76" font-family="Arial" font-size="10.00" fill="white">Completing</text>
+<text text-anchor="middle" x="353.26" y="-64" font-family="Arial" font-size="10.00" fill="white">(wait children)</text>
+</g>
+<!-- Active&#45;&gt;Completing -->
+<g id="edge2" class="edge">
+<title>Active-&gt;Completing</title>
+<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M229.86,-52.06C251.07,-55.69 278.36,-60.36 301.8,-64.37"></path>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="300.96,-67.77 311.41,-66.01 302.14,-60.87 300.96,-67.77"></polygon>
+<text text-anchor="middle" x="271.79" y="-66" font-family="Arial" font-size="10.00" fill="#104e8b">complete</text>
+</g>
+<!-- Cancelling -->
+<g id="node5" class="node">
+<title>Cancelling</title>
+<path fill="orangered" stroke="orangered" d="M217.45,-172C217.45,-172 169.45,-172 169.45,-172 163.45,-172 157.45,-166 157.45,-160 157.45,-160 157.45,-148 157.45,-148 157.45,-142 163.45,-136 169.45,-136 169.45,-136 217.45,-136 217.45,-136 223.45,-136 229.45,-142 229.45,-148 229.45,-148 229.45,-160 229.45,-160 229.45,-166 223.45,-172 217.45,-172"></path>
+<text text-anchor="middle" x="193.45" y="-151" font-family="Arial" font-size="10.00" fill="white">Cancelling</text>
+</g>
+<!-- Active&#45;&gt;Cancelling -->
+<g id="edge4" class="edge">
+<title>Active-&gt;Cancelling</title>
+<path fill="none" stroke="red" stroke-width="1.5" d="M193.45,-64.32C193.45,-80.46 193.45,-104.29 193.45,-123.33"></path>
+<polygon fill="red" stroke="red" stroke-width="1.5" points="189.95,-123.32 193.45,-133.32 196.95,-123.32 189.95,-123.32"></polygon>
+<text text-anchor="middle" x="184.45" y="-97" font-family="Arial" font-size="10.00" fill="red">cancel/falil</text>
+</g>
+<!-- Completed -->
+<g id="node4" class="node">
+<title>Completed</title>
+<path fill="darkgreen" stroke="darkgreen" d="M513.72,-91C513.72,-91 465.72,-91 465.72,-91 459.72,-91 453.72,-85 453.72,-79 453.72,-79 453.72,-67 453.72,-67 453.72,-61 459.72,-55 465.72,-55 465.72,-55 513.72,-55 513.72,-55 519.72,-55 525.72,-61 525.72,-67 525.72,-67 525.72,-79 525.72,-79 525.72,-85 519.72,-91 513.72,-91"></path>
+<text text-anchor="middle" x="489.72" y="-70" font-family="Arial" font-size="10.00" fill="white">Completed</text>
+</g>
+<!-- Completing&#45;&gt;Completed -->
+<g id="edge3" class="edge">
+<title>Completing-&gt;Completed</title>
+<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M392.79,-73C408,-73 425.63,-73 441.59,-73"></path>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="441.14,-76.5 451.14,-73 441.14,-69.5 441.14,-76.5"></polygon>
+<text text-anchor="middle" x="423.05" y="-76" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
+</g>
+<!-- Completing&#45;&gt;Cancelling -->
+<g id="edge5" class="edge">
+<title>Completing-&gt;Cancelling</title>
+<path fill="none" stroke="red" stroke-width="1.5" d="M316.41,-91.4C293.95,-102.93 264.77,-117.91 240.58,-130.32"></path>
+<polygon fill="red" stroke="red" stroke-width="1.5" points="239.18,-127.11 231.88,-134.79 242.38,-133.33 239.18,-127.11"></polygon>
+<text text-anchor="middle" x="271.79" y="-129" font-family="Arial" font-size="10.00" fill="red">cancel/falil</text>
+</g>
+<!-- Cancelled -->
+<g id="node6" class="node">
+<title>Cancelled</title>
+<path fill="red" stroke="red" d="M513.72,-172C513.72,-172 465.72,-172 465.72,-172 459.72,-172 453.72,-166 453.72,-160 453.72,-160 453.72,-148 453.72,-148 453.72,-142 459.72,-136 465.72,-136 465.72,-136 513.72,-136 513.72,-136 519.72,-136 525.72,-142 525.72,-148 525.72,-148 525.72,-160 525.72,-160 525.72,-166 519.72,-172 513.72,-172"></path>
+<text text-anchor="middle" x="489.72" y="-151" font-family="Arial" font-size="10.00" fill="white">Cancelled</text>
+</g>
+<!-- Cancelling&#45;&gt;Cancelled -->
+<g id="edge6" class="edge">
+<title>Cancelling-&gt;Cancelled</title>
+<path fill="none" stroke="red" stroke-width="1.5" d="M229.8,-154C242.7,-154 257.41,-154 270.79,-154 270.79,-154 270.79,-154 424.05,-154 429.72,-154 435.66,-154 441.56,-154"></path>
+<polygon fill="red" stroke="red" stroke-width="1.5" points="441.21,-157.5 451.21,-154 441.21,-150.5 441.21,-157.5"></polygon>
+<text text-anchor="middle" x="353.26" y="-157" font-family="Arial" font-size="10.00" fill="red">finish</text>
+</g>
+</g>
+</svg>
+</p><p></p>
+</li>
+<li>
+<p><strong>Dispatcher</strong>: Podemos decir que es el <strong>hilo</strong> en el que se ejecuta la corrutina. Por defecto, las corrutinas se ejecutan en el hilo de la corrutina que las lanza. Pero <strong>podemos cambiar el hilo de ejecución de una en el contexto de la misma</strong>.</p>
+</li>
+<li>
+<p><strong>CoroutineExceptionHandler</strong>: Permite que la corrutina tenga un <strong>manejo de excepciones personalizado en su contexto</strong>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Corrutinas '<em>Hijas</em>'</strong>: Dentro de una corrutina podemos lanzar otras corrutinas. El ámbito de estas corrutinas secundarias (<strong><code>ChildScope</code></strong>) se ejecutarán dentro ámbito o (<strong><code>CoroutinesScope</code></strong>) que la corrutina principal. Esto significa que si la corrutina principal se cancela, también se cancelarán las corrutinas secundarias. Es por eso que Job o Tarea del contexto de la corrutina espare a que todas las corrutinas secundarias finalicen antes de finalizar en su ciclo de vida.</p>
+</li>
+</ul>
+<p>Vamos a ir adentrándonos con ejemplos en las anteriores definiciones...</p>
+<h3 id="primer-ejemplo-básico">Primer ejemplo básico </h3>
+<p>Veamos el siguiente ejemplo extraído de la documentación oficial de Kotlin:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-import">import</span> kotlinx<span class="token punctuation">.</span>coroutines<span class="token punctuation">.</span><span class="token operator">*</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span> <span class="token comment">// Corrutina 1</span>
+    launch <span class="token punctuation">{</span>  <span class="token comment">// Corrutina 2</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo!"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+</code></pre><p>Mostrará por pantalla:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>Hola
+Mundo!
+</code></pre><p>Vamos a desglosar lo que hace este código....</p>
+<ul>
+<li>
+<p><strong><code>runBlocking</code></strong> es un constructor de corrutinas, esto es, define un bloque de código que se ejecuta como una corrutina. En este caso, el bloque de código <strong>se ejecuta en el hilo principal</strong> (será el Dispatcher por defecto de su contexto si no especificamos otro). <strong><code>runBlocking</code></strong> es una función de suspensión que <strong>bloquea el hilo donde se ejecuta</strong> mientras se ejecuta el bloque de código. <strong>Esto se hace para evitar que el programa finalice antes de que se ejecute la corrutina</strong>.</p>
+</li>
+<li>
+<p><strong><code>launch</code></strong> es un constructor de corrutinas. Lanza una nueva corrutina en paralelo con el resto del código, que continúa funcionando de forma independiente. Es por eso que se ha muestra primero '<em>Hola</em>'</p>
+</li>
+<li>
+<p><strong><code>delay</code></strong> es una función de suspensión especial. Suspende la corrutina durante un tiempo específico.</p>
+</li>
+</ul>
+<p></p><p align="center" style="zoom:1" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 9.0.0 (20230911.1827)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="699pt" height="348pt" viewBox="0.00 0.00 699.00 348.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 344)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-344 695,-344 695,4 -4,4"></polygon>
+<g id="clust1" class="cluster">
+<title>clusterMainThread</title>
+<path fill="#daeeff" stroke="#daeeff" d="M20,-8C20,-8 671,-8 671,-8 677,-8 683,-14 683,-20 683,-20 683,-320 683,-320 683,-326 677,-332 671,-332 671,-332 20,-332 20,-332 14,-332 8,-326 8,-320 8,-320 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
+<text text-anchor="middle" x="345.5" y="-310" font-family="Arial" font-size="20.00" fill="#36648b">Main Thread / Hilo Principal</text>
+</g>
+<!-- pmain -->
+<!-- main -->
+<g id="node2" class="node">
+<title>main</title>
+<path fill="#1e90ff" stroke="#1e90ff" d="M124,-270C124,-270 76,-270 76,-270 70,-270 64,-264 64,-258 64,-258 64,-246 64,-246 64,-240 70,-234 76,-234 76,-234 124,-234 124,-234 130,-234 136,-240 136,-246 136,-246 136,-258 136,-258 136,-264 130,-270 124,-270"></path>
+<text text-anchor="middle" x="100" y="-255" font-family="Arial" font-size="10.00" fill="white">main()</text>
+<text text-anchor="middle" x="100" y="-243" font-family="Arial" font-size="10.00" fill="white">ACTIVE</text>
+</g>
+<!-- pmain&#45;&gt;main -->
+<g id="edge1" class="edge">
+<title>pmain-&gt;main</title>
+<path fill="none" stroke="#104e8b" d="M28.28,-252C36.28,-252 44.28,-252 52.27,-252"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="52.07,-255.5 62.07,-252 52.07,-248.5 52.07,-255.5"></polygon>
+</g>
+<!-- mainb -->
+<g id="node3" class="node">
+<title>mainb</title>
+<path fill="#1e90ff" stroke="#1e90ff" d="M500.98,-280C500.98,-280 435.02,-280 435.02,-280 429.02,-280 423.02,-274 423.02,-268 423.02,-268 423.02,-236 423.02,-236 423.02,-230 429.02,-224 435.02,-224 435.02,-224 500.98,-224 500.98,-224 506.98,-224 512.98,-230 512.98,-236 512.98,-236 512.98,-268 512.98,-268 512.98,-274 506.98,-280 500.98,-280"></path>
+<text text-anchor="middle" x="468" y="-267" font-family="Arial" font-size="10.00" fill="white">main()</text>
+<text text-anchor="middle" x="468" y="-255" font-family="Arial" font-size="10.00" fill="white">bloqueado hasta</text>
+<text text-anchor="middle" x="468" y="-243" font-family="Arial" font-size="10.00" fill="white">fin Corrutina 1</text>
+<text text-anchor="middle" x="468" y="-231" font-family="Arial" font-size="10.00" fill="white">COMPLETING</text>
+</g>
+<!-- main&#45;&gt;mainb -->
+<g id="edge8" class="edge">
+<title>main-&gt;mainb</title>
+<path fill="none" stroke="#104e8b" stroke-dasharray="1,5" d="M136.29,-252C200.54,-252 334.72,-252 411.27,-252"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="411.07,-255.5 421.07,-252 411.07,-248.5 411.07,-255.5"></polygon>
+<text text-anchor="middle" x="279.51" y="-270" font-family="Arial" font-size="10.00" fill="#104e8b">Hilo Principal</text>
+<text text-anchor="middle" x="279.51" y="-258" font-family="Arial" font-size="10.00" fill="#104e8b">Bloquedao</text>
+</g>
+<!-- rb -->
+<g id="node4" class="node">
+<title>rb</title>
+<path fill="#1874cd" stroke="#1874cd" d="M195,-170C195,-170 147,-170 147,-170 141,-170 135,-164 135,-158 135,-158 135,-138 135,-138 135,-132 141,-126 147,-126 147,-126 195,-126 195,-126 201,-126 207,-132 207,-138 207,-138 207,-158 207,-158 207,-164 201,-170 195,-170"></path>
+<text text-anchor="middle" x="171" y="-157" font-family="Arial" font-size="10.00" fill="white">Corrutina 1</text>
+<text text-anchor="middle" x="171" y="-145" font-family="Arial" font-size="10.00" fill="white">runBlocking</text>
+<text text-anchor="middle" x="171" y="-133" font-family="Arial" font-size="10.00" fill="white">ACTIVE</text>
+</g>
+<!-- main&#45;&gt;rb -->
+<g id="edge2" class="edge">
+<title>main-&gt;rb</title>
+<path fill="none" stroke="#104e8b" d="M112.04,-233.7C122.33,-218.93 137.36,-197.33 149.67,-179.64"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="152.48,-181.73 155.32,-171.53 146.73,-177.74 152.48,-181.73"></polygon>
+<text text-anchor="middle" x="185.58" y="-206" font-family="Arial" font-size="10.00" fill="#104e8b">start</text>
+<text text-anchor="middle" x="185.58" y="-194" font-family="Arial" font-size="10.00" fill="#104e8b">corrutina 1</text>
+<text text-anchor="middle" x="185.58" y="-182" font-family="Arial" font-size="10.00" fill="#104e8b">con runBlocking</text>
+</g>
+<!-- fmain -->
+<g id="node9" class="node">
+<title>fmain</title>
+<path fill="darkgreen" stroke="darkgreen" d="M651.12,-270C651.12,-270 596.88,-270 596.88,-270 590.88,-270 584.88,-264 584.88,-258 584.88,-258 584.88,-246 584.88,-246 584.88,-240 590.88,-234 596.88,-234 596.88,-234 651.12,-234 651.12,-234 657.12,-234 663.12,-240 663.12,-246 663.12,-246 663.12,-258 663.12,-258 663.12,-264 657.12,-270 651.12,-270"></path>
+<text text-anchor="middle" x="624" y="-255" font-family="Arial" font-size="10.00" fill="white">main()</text>
+<text text-anchor="middle" x="624" y="-243" font-family="Arial" font-size="10.00" fill="white">COMPLETED</text>
+</g>
+<!-- mainb&#45;&gt;fmain -->
+<g id="edge10" class="edge">
+<title>mainb-&gt;fmain</title>
+<path fill="none" stroke="#104e8b" d="M513.12,-252C531.91,-252 553.82,-252 573.18,-252"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="573.03,-255.5 583.03,-252 573.03,-248.5 573.03,-255.5"></polygon>
+<text text-anchor="middle" x="548.93" y="-258" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
+</g>
+<!-- hola -->
+<g id="node5" class="node">
+<title>hola</title>
+<path fill="#1874cd" stroke="#1874cd" d="M307.78,-166C307.78,-166 254.22,-166 254.22,-166 248.22,-166 242.22,-160 242.22,-154 242.22,-154 242.22,-142 242.22,-142 242.22,-136 248.22,-130 254.22,-130 254.22,-130 307.78,-130 307.78,-130 313.78,-130 319.78,-136 319.78,-142 319.78,-142 319.78,-154 319.78,-154 319.78,-160 313.78,-166 307.78,-166"></path>
+<text text-anchor="middle" x="281" y="-151" font-family="Arial" font-size="10.00" fill="white">prinln ("Hola")</text>
+<text text-anchor="middle" x="281" y="-139" font-family="Arial" font-size="10.00" fill="white">ACTIVE</text>
+</g>
+<!-- rb&#45;&gt;hola -->
+<g id="edge4" class="edge">
+<title>rb-&gt;hola</title>
+<path fill="none" stroke="#104e8b" d="M207.09,-148C214.85,-148 222.61,-148 230.37,-148"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="230.22,-151.5 240.22,-148 230.22,-144.5 230.22,-151.5"></polygon>
+</g>
+<!-- launch -->
+<g id="node7" class="node">
+<title>launch</title>
+<path fill="#104e8b" stroke="#104e8b" d="M283,-72C283,-72 235,-72 235,-72 229,-72 223,-66 223,-60 223,-60 223,-40 223,-40 223,-34 229,-28 235,-28 235,-28 283,-28 283,-28 289,-28 295,-34 295,-40 295,-40 295,-60 295,-60 295,-66 289,-72 283,-72"></path>
+<text text-anchor="middle" x="259" y="-59" font-family="Arial" font-size="10.00" fill="white">Corrutina 2</text>
+<text text-anchor="middle" x="259" y="-47" font-family="Arial" font-size="10.00" fill="white">launch</text>
+<text text-anchor="middle" x="259" y="-35" font-family="Arial" font-size="10.00" fill="white">ACTIVE</text>
+</g>
+<!-- rb&#45;&gt;launch -->
+<g id="edge3" class="edge">
+<title>rb-&gt;launch</title>
+<path fill="none" stroke="#104e8b" d="M190.53,-125.69C202.72,-112.4 218.59,-95.09 231.97,-80.48"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="234.32,-83.1 238.5,-73.36 229.16,-78.37 234.32,-83.1"></polygon>
+<text text-anchor="middle" x="254.18" y="-108" font-family="Arial" font-size="10.00" fill="#104e8b">start</text>
+<text text-anchor="middle" x="254.18" y="-96" font-family="Arial" font-size="10.00" fill="#104e8b">corrutina 2</text>
+<text text-anchor="middle" x="254.18" y="-84" font-family="Arial" font-size="10.00" fill="#104e8b">con launch</text>
+</g>
+<!-- frb -->
+<g id="node6" class="node">
+<title>frb</title>
+<path fill="#1874cd" stroke="#1874cd" d="M489.48,-170C489.48,-170 398.52,-170 398.52,-170 392.52,-170 386.52,-164 386.52,-158 386.52,-158 386.52,-138 386.52,-138 386.52,-132 392.52,-126 398.52,-126 398.52,-126 489.48,-126 489.48,-126 495.48,-126 501.48,-132 501.48,-138 501.48,-138 501.48,-158 501.48,-158 501.48,-164 495.48,-170 489.48,-170"></path>
+<text text-anchor="middle" x="444" y="-157" font-family="Arial" font-size="10.00" fill="white">Corrutina 1 bloqueada</text>
+<text text-anchor="middle" x="444" y="-145" font-family="Arial" font-size="10.00" fill="white">hasta fin Corrutina 2</text>
+<text text-anchor="middle" x="444" y="-133" font-family="Arial" font-size="10.00" fill="white">COMPLETING</text>
+</g>
+<!-- hola&#45;&gt;frb -->
+<g id="edge5" class="edge">
+<title>hola-&gt;frb</title>
+<path fill="none" stroke="#104e8b" stroke-dasharray="1,5" d="M320.04,-148C336.42,-148 355.98,-148 374.66,-148"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="374.63,-151.5 384.63,-148 374.63,-144.5 374.63,-151.5"></polygon>
+<text text-anchor="middle" x="353.15" y="-166" font-family="Arial" font-size="10.00" fill="#104e8b">Corrutina 1</text>
+<text text-anchor="middle" x="353.15" y="-154" font-family="Arial" font-size="10.00" fill="#104e8b">Bloqueada</text>
+</g>
+<!-- frb&#45;&gt;mainb -->
+<g id="edge9" class="edge">
+<title>frb-&gt;mainb</title>
+<path fill="none" stroke="#104e8b" d="M449,-170.26C451.88,-182.5 455.59,-198.24 458.96,-212.57"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="455.52,-213.26 461.22,-222.19 462.34,-211.66 455.52,-213.26"></polygon>
+<text text-anchor="middle" x="469.67" y="-194" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
+</g>
+<!-- mundo -->
+<g id="node8" class="node">
+<title>mundo</title>
+<path fill="#104e8b" stroke="#104e8b" d="M448.18,-72C448.18,-72 381.82,-72 381.82,-72 375.82,-72 369.82,-66 369.82,-60 369.82,-60 369.82,-40 369.82,-40 369.82,-34 375.82,-28 381.82,-28 381.82,-28 448.18,-28 448.18,-28 454.18,-28 460.18,-34 460.18,-40 460.18,-40 460.18,-60 460.18,-60 460.18,-66 454.18,-72 448.18,-72"></path>
+<text text-anchor="middle" x="415" y="-59" font-family="Arial" font-size="10.00" fill="white">delay (1000L)</text>
+<text text-anchor="middle" x="415" y="-47" font-family="Arial" font-size="10.00" fill="white">prinln ("Mundo!")</text>
+<text text-anchor="middle" x="415" y="-35" font-family="Arial" font-size="10.00" fill="white">ACTIVE</text>
+</g>
+<!-- launch&#45;&gt;mundo -->
+<g id="edge6" class="edge">
+<title>launch-&gt;mundo</title>
+<path fill="none" stroke="#104e8b" d="M295.26,-50C316.27,-50 337.29,-50 358.3,-50"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="358.12,-53.5 368.12,-50 358.12,-46.5 358.12,-53.5"></polygon>
+</g>
+<!-- mundo&#45;&gt;frb -->
+<g id="edge7" class="edge">
+<title>mundo-&gt;frb</title>
+<path fill="none" stroke="#104e8b" d="M421.42,-72.25C425.21,-84.79 430.08,-100.91 434.32,-114.97"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="430.88,-115.68 437.13,-124.25 437.58,-113.66 430.88,-115.68"></polygon>
+<text text-anchor="middle" x="445.67" y="-96" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
+</g>
+</g>
+</svg>
+</p><p></p>
+<p>Tanto el código de la <strong>corrutina 1</strong> (bloque <strong><code>runBlocking</code></strong>) y el código de la <strong>corrutina 2</strong> (bloque <strong><code>launch</code></strong>) <strong>se ejecutan en el hilo principal de forma concurrente</strong>.</p>
+<ol>
+<li>Tras el primer <strong><code>runBlocking</code></strong>, el <strong><code>main</code></strong> se queda esperando a que termine la <strong>corrutina 1</strong>, por lo que se <strong>bloquea el hilo principal</strong>.</li>
+<li>La <strong>corrutina 1</strong> lanza la <strong>corrutina 2</strong> y sigue ejecutando su código <strong><code>println ("Hola")</code></strong>.</li>
+<li>La <strong>corrutina 2</strong> se suspende durante 1 segundo y luego imprime <strong><code>println ("Mundo!")</code></strong> pero la corrutina 1 ya habrá terminado y se habrá unido al hilo principal bloqueado que continúa con la ejecución del <strong><code>main</code></strong>.</li>
+</ol>
+<h3 id="concurrencia-estructurada">Concurrencia estructurada </h3>
+<p>Las corrutinas siguen un principio de concurrencia estructurada, lo que significa que solo se pueden lanzar nuevas corrutinas en un <strong><code>CoroutineScope</code></strong> específico que <strong>delimita la vida útil de la corrutina</strong> como ya hemos comentado.</p>
+<p>El ejemplo anterior muestra que <strong><code>runBlocking</code></strong> establece el alcance correspondiente y es por eso que el ejemplo anterior espera hasta que <strong><code>Mundo!</code></strong> se imprime después de un segundo de retraso y solo entonces sale.</p>
+<p>En una aplicación real, lanzarás muchas corrutinas. La concurrencia estructurada garantiza que no se pierdan. Un ámbito externo no puede completarse hasta que se completen todas sus rutinas secundarias. La simultaneidad estructurada también garantiza que cualquier error en el código se informe correctamente y nunca se pierda.</p>
+<h3 id="funciones-de-suspensión-con-suspend">Funciones de suspensión con <strong><code>suspend</code></strong> </h3>
+<p>El código de ejemplo está escrito en un solo bloque. <strong>¿Cómo podríamos separar em diferentes funciones el bloque de las corrutinas?</strong>.</p>
+<p>Si extraemos el bloque de código interno de la <strong>corrutina 2</strong> <strong><code>launch { ... }</code></strong> una función separada. Cuando se realiza la refactorización '<em>Extraer función</em>' en este código, obtiene una nueva función con el modificador <strong><code>suspend</code></strong>. Esta es nuestra primera <strong>función de suspensión</strong>.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 50%">
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    launch <span class="token punctuation">{</span> 
+        <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hello"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo!"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<div style="width: auto">
+<img height="275px" src="assets/imagenes/tema_3_7/ejemplo1_refactorizado.png">
+</div>
+</div>
+<p>Las <strong>funciones de suspensión</strong> se pueden usar dentro de las corrutinas al igual que las funciones normales, pero su característica adicional es que, a su vez, pueden usar otras funciones de suspensión (como <strong><code>delay</code></strong> este ejemplo) para suspender la ejecución de una corrutina.</p>
+<p>Fíjate que en el código del editor, las funciones de suspensión se muestran con un icono de <em>'flecha suspendida'</em>. Esto es una ayuda visual para distinguir las funciones de suspensión de las funciones normales indicándome que el la corrutina se suspenderá en ese punto y continuará con la ejecución cuando finalice dicha función.</p>
+<blockquote>
+<p>✋ <strong>Importante</strong>: Una función de suspensión (<strong><code>suspend</code></strong>), solo puede llamarse dentro de otra función de suspensión o dentro de una corrutina. Si intentas llamar a una función de suspensión desde una función normal, el compilador te dará un error.</p>
+</blockquote>
+<blockquote>
+<p>📣 Podemos resumir diciendo que una función modificada con <strong><code>suspend</code></strong> (función de suspensión) es una función que <strong>solo puede ser ejecutada de doma asíncrona</strong> dentro de una corrutina o dentro de otra función de suspensión.</p>
+</blockquote>
+<h3 id="profundizando-en-el-constructor-de-alcance-coroutinescope">Profundizando en el constructor de alcance <strong><code>CoroutineScope</code></strong> </h3>
+<p>Al usar <strong><code>runBlocking</code></strong> o <strong><code>launch</code></strong> dentro de un bloque de código, se crea un <strong><code>CoroutineScope</code></strong>. <strong><code>CoroutineScope</code></strong> es una interfaz que representa un ámbito de corrutina. <strong>El ámbito de corrutina es responsable de cancelar todas las corrutinas que se ejecutan en él cuando se cierra</strong>.</p>
+<p>Además de los alcances definidos por los constructores que ya hemos definido. Es posible declarar nuestro propio alcance utilizando el constructor <strong><code>coroutineScope</code></strong>. Este crea un alcance de rutina y no se finaliza hasta que todos las corrutinas lanzadas dentro de él no finalicen.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> coroutineScope <span class="token punctuation">{</span>
+    launch <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo!"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Los constructores <strong><code>runBlocking</code></strong> y <strong><code>coroutineScope</code></strong> pueden parecer similares porque ambos esperan a que se completen su bloque y todos sus corrutinas secundarias. La principal diferencia es que <strong><code>runBlocking</code></strong> <strong>bloquea el hilo actual</strong> en espera, mientras que <strong><code>coroutineScope</code></strong> suspende la corrutina actual liberando el hilo subyacente para otros usos. Por tanto, <strong><code>coroutineScope</code> es una función de suspensión</strong> y solo puede ser llamado dentro de otra función de suspensión o dentro de una corrutina.</p>
+<p>Además, todas las corrutinas que se ejecuten dentro del mismo <strong><code>CorrutineScope</code></strong> se ejecutarán de forma <strong>concurrente</strong> en el mismo hilo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> coroutineScope <span class="token punctuation">{</span>
+    launch <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo 2"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    launch <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo 1"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<h3 id="controlando-el-estado-de-una-corrutina-con-job">Controlando el estado de una corrutina con <strong><code>Job</code></strong> </h3>
+<p>Cuando lanzamos una corrutina con <strong><code>launch</code></strong>, se devuelve un objeto <strong><code>Job</code></strong> que representa la tarea que se está ejecutando en el contexto de la corrutina. Como ya hemos comentado, podemos usar este objeto para controlar el estado de la corrutina, por ejemplo, para esperarla o cancelarla.</p>
+<ul>
+<li>
+<p><strong><code>job.join()</code></strong>: función de suspensión que espera a que la corrutina termine;</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> job <span class="token operator">:</span> Job <span class="token operator">=</span> launch <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo!"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span>
+    job<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Fin"</span></span><span class="token punctuation">)</span> 
+<span class="token punctuation">}</span>
+</code></pre></li>
+<li>
+<p><strong><code>job.cancelAndJoin()</code></strong>: Notifica al trabajo su cancelación y espera a que termine ordenadamente. El trabajo internamente debe verificar periódicamente el estado de cancelación usando la propiedad de solo acceso de del <strong><code>CorrutineScope</code></strong> <strong><code>isActive</code></strong>. Además, las funciones de suspensión cancelables producen <strong><code>CancellationException</code></strong> en la cancelación, que se puede controlar de la manera habitual por ejemplo con un finally para realizar las acciones de limpieza necesarias.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> startTime <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> job <span class="token operator">:</span> Job <span class="token operator">=</span> launch <span class="token punctuation">{</span>
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-var">var</span> nextPrintTime <span class="token operator">=</span> startTime
+            <span class="token keyword keyword-var">var</span> i <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>isActive<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// cancellable computation loop</span>
+                <span class="token comment">// print a message twice a second</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span> nextPrintTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"job: I'm sleeping </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">i<span class="token operator">++</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> ..."</span></span><span class="token punctuation">)</span>
+                    nextPrintTime <span class="token operator">+=</span> <span class="token number">500L</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-finally">finally</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"job: I'm resuming the execution"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1300L</span><span class="token punctuation">)</span> <span class="token comment">// Espera un rato</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"main: I'm tired of waiting!"</span></span><span class="token punctuation">)</span>
+    job<span class="token punctuation">.</span><span class="token function">cancelAndJoin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Cancela el trabajo y espera a que termine</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"main: Now I can quit."</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Mostrará ...</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>job: I'm sleeping 0 ...
+job: I'm sleeping 1 ...
+job: I'm sleeping 2 ...
+main: I'm tired of waiting!
+job: I'm resuming the execution
+main: Now I can quit.
+</code></pre></li>
+<li>
+<p><strong><code>withTimeout(timeout: Long) { }</code></strong> Para generar un <strong>contexto de corrutina</strong> que expira después de un tiempo determinado generando un evento de cancelación y la excepción <strong><code>TimeoutCancellationException</code></strong>.</p>
+<p><strong><code>withTimeout</code></strong> es una <strong>función de suspensión</strong>. Por ejemplo, podemos reescribir el código anterior de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=1}" class="language-kotlin kotlin" data-line="1"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">trabajoBloqueante</span><span class="token punctuation">(</span>timeout<span class="token operator">:</span> Long<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">withTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> startTime <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> nextPrintTime <span class="token operator">=</span> startTime
+        <span class="token keyword keyword-var">var</span> i <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token comment">// Se ejecuta hasta que se cumple el timeout</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>isActive<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span> nextPrintTime<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"job: I'm sleeping </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">i<span class="token operator">++</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> ..."</span></span><span class="token punctuation">)</span>
+                nextPrintTime <span class="token operator">+=</span> <span class="token number">500L</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-finally">finally</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"job: I'm resuming the execution"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"main: Waiting for job 1.3 secs."</span></span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> job <span class="token operator">=</span> launch <span class="token punctuation">{</span>
+        <span class="token function">trabajoBloqueante</span><span class="token punctuation">(</span><span class="token number">1300L</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    job<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Espera a que termine o expire el trabajo</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"main: Now I can quit."</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
+</div></div></pre><p>Mostrará ...</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>main: Waiting for job 1.3 secs.
+job: I'm sleeping 0 ...
+job: I'm sleeping 1 ...
+job: I'm sleeping 2 ...
+job: I'm resuming the execution
+main: Now I can quit.
+</code></pre></li>
+</ul>
+<div style="page-break-after:always;"></div>
+<h3 id="jobs-asíncronos-que-devuelven-un-resultado-asyncawait">Jobs asíncronos que devuelven un resultado <strong><code>async/await</code></strong> </h3>
+<p>Hasta ahora hemos visto que las corrutinas se ejecutan de forma concurrente, pero no hemos visto cómo obtener un resultado de una corrutina. Para ello, podemos usar el constructor <strong><code>async</code></strong>. Este constructor es similar a <strong><code>launch</code></strong>, pero devuelve un objeto <strong><code>Deferred</code></strong> que representa un resultado futuro.</p>
+<p><strong><code>Deferred</code></strong> es una <strong>subclase</strong> de <strong><code>Job</code></strong> y, por lo tanto, también se puede cancelar. Además, tiene una función de suspensión <strong><code>await()</code></strong> que devuelve el resultado cuando está listo.</p>
+<p>Veamos un ejemplo donde tenemos la función asíncrona <strong><code>esPrimo(n: Long)</code></strong> que devuelve un booleano indicando si el número pasado como parámetro es primo o no.</p>
+<p>Puesto que <strong><code>async</code></strong> debe ejecutarse dentro de un <strong><code>CoroutineScope</code></strong>, lo lanzamos dentro del <strong><code>GlobalScope</code></strong>. <strong><code>GlobalScope</code></strong> es un <strong>alcance global</strong> que no está vinculado a ningún hilo en particular y, por lo tanto, no bloquea el hilo principal.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Aunque en este ehemplo hemos usado <strong><code>GlobalScope</code></strong> para lanzar la corrutina, <strong>no es recomendable usarlo</strong> y solo se ha usado para simplificar el ejemplo. Puedes ver más información en <a href="https://kotlinlang.org/docs/composing-suspending-functions.html#async-style-functions">https://kotlinlang.org/docs/composing-suspending-functions.html#async-style-functions</a></p>
+</div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">esPirmo</span><span class="token punctuation">(</span>n<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token operator">:</span> Deferred<span class="token operator">&lt;</span>Boolean<span class="token operator">&gt;</span> <span class="token operator">=</span> GlobalScope<span class="token punctuation">.</span><span class="token function">async</span> <span class="token punctuation">{</span>
+    n <span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token number">2</span> until n<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">none</span> <span class="token punctuation">{</span> n <span class="token operator">%</span> it <span class="token operator">==</span> <span class="token number">0L</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> n <span class="token operator">=</span> <span class="token number">1000000007L</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Viendo si es primo el núumero </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">n</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> job <span class="token operator">:</span> Deferred<span class="token operator">&lt;</span>Boolean<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token function">esPirmo</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Esperando cálculo "</span></span><span class="token punctuation">)</span>
+    <span class="token comment">// Vamos a mostrar un punto cada 100 ms mientras vemos</span>
+    <span class="token comment">// si el número es primo o no </span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>job<span class="token punctuation">.</span>isCompleted<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"."</span></span><span class="token punctuation">)</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    job<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"\nEl numero </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">n</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token string-literal singleline"><span class="token string">"es"</span></span> <span class="token keyword keyword-else">else</span> <span class="token string-literal singleline"><span class="token string">"no es"</span></span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> primo"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Mostrará ...</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>Viendo si es primo el número 1000000007
+Esperando cálculo ....................
+El numero 1000000007 es primo
+</code></pre><h3 id="dispatchers-e-hilos">Dispatchers e hilos </h3>
+<p>Como hemos comentado, el contexto de corrutina incluye un CoroutineDispatcher o <em>'despachador'</em> de corrutina que determina qué subproceso utiliza la corrutina correspondiente para su ejecución.</p>
+<p>Todos los constructores de corrutinas, como <strong><code>launch</code></strong> y <strong><code>async</code></strong> , aceptan un parámetro <strong><code>CoroutineContext</code></strong> <strong>opcional</strong> que se puede usar para especificar explícitamente el despachador de la nueva rutina y otros elementos de contexto.</p>
+<p>Hay 5 tipos de Dispatchers:</p>
+<ul>
+<li><strong><code>Dispatchers.Main</code></strong>, este es el hilo principal. A diferencia de los demás, a veces tenemos que definirlo explícitamente (por ejemplo, en el entorno de prueba).</li>
+<li><strong><code>Dispatchers.IO</code></strong>, esto para el proceso de Redes y Discos. Cualquier cosa que tenga que ver con la <strong>extracción o envío de datos</strong>.</li>
+<li><strong><code>Dispatchers.Default</code></strong>, esto es para cualquier otro subproceso de trabajo que no sea principal (es decir, en segundo plano) y se asigna automáticamente.</li>
+<li><strong><code>Dispatcher.Unconfined</code></strong>, este es un despachador especial que permite que la tarea cambie sus procesos específicos cuando suspende y reanuda su tarea.</li>
+<li><strong><code>newSingleThreadContex</code></strong>, permite al usuario definir sus propios procesos.</li>
+</ul>
+<p>Cuando <strong><code>launch { ... }</code></strong> se usa sin parámetros, hereda el contexto (y por lo tanto el despachador) del CoroutineScope desde el que se inicia. En este caso, hereda el contexto de la corrutina principal que se ejecuta en el hilo principal <strong><code>Dispatchers.Main</code></strong>.</p>
+<p>Vamos a definir la siguiente función de extensión para obtener información de nuestro contexto:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> CoroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> 
+<span class="token string-literal singleline"><span class="token string">"\nCorrutina: {\n\tContexto: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-this">this</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, \n\tProceso: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n}"</span></span>
+</code></pre><p>Si volvemos a ejecutar el ejemplo inicial...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    launch <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo! </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Mostrará ...</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>Hola
+Corrutina: {
+	Contexto: [BlockingCoroutine{Active}@7d4793a8, BlockingEventLoop@449b2d27], 
+	Proceso: main 
+}
+Mundo! 
+Corrutina: {
+	Contexto: [StandaloneCoroutine{Active}@1ae369b7, BlockingEventLoop@449b2d27], 
+	Proceso: main 
+}
+</code></pre><p>Ahora modificamos el contexto de la corrutina 2 para que se ejecute en el hilo <strong><code>Dispatchers.Default</code></strong> y además le asignamos un nombre ambas corrutinas para poder identificarlas:</p>
+<pre data-role="codeBlock" data-info="kotlin  {highlight=2}" class="language-kotlin kotlin" data-line="2"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">runBlocking</span><span class="token punctuation">(</span><span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CORRUTINA 1"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">launch</span> <span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default <span class="token operator">+</span> <span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CORRUTINA 2"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo! </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre><p>Ahora la salida nos mostrará el nombre de la corrutina y el proceso en el que se ejecuta:</p>
+<pre data-role="codeBlock" data-info="cmd {code_chunk_offset=0, highlight=[4,9]}" class="language-cmd cmd" data-line="4,9"><code>Hola 
+Corrutina: {
+	Contexto: [CoroutineName(CORRUTINA 1), BlockingCoroutine{Active}@1bc6a36e, BlockingEventLoop@1ff8b8f], 
+	Proceso: main
+}
+Mundo! 
+Corrutina: {
+	Contexto: [CoroutineName(CORRUTINA 2), StandaloneCoroutine{Active}@f4e4ec0, Dispatchers.Default], 
+	Proceso: DefaultDispatcher-worker-2
+}
+</code><div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div></pre><div style="page-break-after:always;"></div>
+<h4 id="cambiando-el-contexto-de-una-corrutina-con-withcontext">Cambiando el contexto de una corrutina con <strong><code>withContext</code></strong> </h4>
+<p>Podemos cambiar el contexto de una corrutina en cualquier momento usando la función de suspensión <strong><code>withContext</code></strong>. Esta <strong>función de suspensión</strong> crea un nuevo contexto de corrutina con el <em>'dispatcher'</em> especificado y ejecuta el bloque de código en él. Cuando el bloque de código finaliza, la corrutina vuelve al contexto anterior.</p>
+<p>Normalmente, <strong><code>withContext</code></strong> se utiliza en situaciones en las que desea cambiar temporalmente a un contexto de ejecución diferente para realizar una operación que sea más apropiada para ese contexto, como realizar una solicitud de red, E/S de disco o cálculos que requieren un uso intensivo de la CPU.</p>
+<p>Por ejemplo ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">peticionREST</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Dato <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">getDato</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">realizaProcesoPesado</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Unit <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">proceso</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+</code></pre><p>Volvamos al cálculo de números primos. Pero esta vez vamos a implementarlo de forma más adecuada sin usar <strong><code>GlobalScope</code></strong>. Pasando el proceso de ver si un número es primo o no a un contexto diferente con el <strong><code>Dispatcher.Default</code></strong>. Además, ahora tanto calcular si un número es primo como mostrar el progreso del cálculo se ejecutarán de forma asíncrona en procesos diferentes.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> CoroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"\nCorrutina: {\n\tContexto: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-this">this</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, \n\tProceso: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n}"</span></span>
+
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">esPirmo</span><span class="token punctuation">(</span>n<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token operator">:</span> Boolean
+<span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default <span class="token operator">+</span> <span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"ESPRIMO"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    n <span class="token operator">&gt;</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token number">2</span> until n<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">none</span> <span class="token punctuation">{</span> n <span class="token operator">%</span> it <span class="token operator">==</span> <span class="token number">0L</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">muestraProgreso</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> coroutineScope<span class="token punctuation">{</span>
+    <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span>coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Esperando cálculo "</span></span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"."</span></span><span class="token punctuation">)</span>
+            <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> CancellationException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"\nProgreso cancelado </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> n <span class="token operator">=</span> <span class="token number">1000000007L</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Viendo si es primo el núumero </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">n</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> jobPrimo <span class="token operator">=</span> async <span class="token punctuation">{</span> <span class="token function">esPirmo</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> jobProgreso <span class="token operator">=</span> <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default <span class="token operator">+</span> <span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"PROGRESO"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">muestraProgreso</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"En main esperando a esPrimio() </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    jobPrimo<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"\nEl numero </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">n</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token string-literal singleline"><span class="token string">"es"</span></span> <span class="token keyword keyword-else">else</span> <span class="token string-literal singleline"><span class="token string">"no es"</span></span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> primo"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    jobProgreso<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Mostrará ...</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>Viendo si es primo el núumero 1000000007
+En main esperando a esPrimio() 
+Corrutina: {
+	Contexto: [BlockingCoroutine{Active}@47fd17e3, BlockingEventLoop@7cdbc5d3], 
+	Proceso: main
+}
+
+Corrutina: {
+	Contexto: [CoroutineName(ESPRIMO), DispatchedCoroutine{Active}@472bb070, Dispatchers.Default], 
+	Proceso: DefaultDispatcher-worker-2
+}
+
+Corrutina: {
+	Contexto: [CoroutineName(PROGRESO), ScopeCoroutine{Active}@5931574c, Dispatchers.Default], 
+	Proceso: DefaultDispatcher-worker-1
+}
+Esperando cálculo ..................
+El numero 1000000007 es primo
+
+Progreso cancelado 
+Corrutina: {
+	Contexto: [CoroutineName(PROGRESO), ScopeCoroutine{Cancelling}@5931574c, Dispatchers.Default], 
+	Proceso: DefaultDispatcher-worker-2
+}
+</code></pre><div style="page-break-after:always;"></div>
+<h2 id="corrutinas-en-android">Corrutinas en Android </h2>
+<p>Utilizaremos los conceptos ya vistos pero adaptados a Android. Alguna de las cosas que deberemos tener en cuenta son:</p>
+<ol>
+<li>
+<p>❌ No debemos usar <strong><code>runBlocking</code></strong> en el hilo principal porque lo bloqueará.En su lugar, podemos usar <strong><code>runBlocking</code></strong> en un hilo secundario.</p>
+</li>
+<li>
+<p>❌ No deberíamos lanzar corrutinas en el <strong><a href="https://developer.android.com/kotlin/coroutines/coroutines-best-practices#global-scope">GlobalScope</a></strong> porque no se cancelarán automáticamente cuando se destruya el componente de Android.</p>
+</li>
+<li>
+<p>Las funciones de suspensión deberían ser seguras para su llamada desde el subproceso principal. Por ejemplo, cambiando el contexto de ejecución para realizar una solicitud de red con <strong><code>withContext(Dispatchers.IO)</code></strong>.</p>
+</li>
+<li>
+<p>❌ No debemos actualizar la UI desde una corrutina que se ejecute en un contexto diferente al del hilo principal. Deberemos usar <strong><code>withContext(Dispatchers.Main)</code></strong> para cambiar al contexto del hilo principal y actualizar la UI.</p>
+</li>
+<li>
+<p>❌ No debemos lanzar una corrutina que modifique un estado antes de finalizar la composición de la UI.</p>
+</li>
+<li>
+<p>Si la aplicación entra en segundo plano. En aquellos alcances de corrutina que estén vinculados al ciclo de vida de un componente de Android, se cancelarán automáticamente solo cuando el componente se destruya. Pero si no es así, <strong>deberemos cancelar manualmente</strong> las corrutinas que se estén ejecutando en segundo plano si queremos que se paren.</p>
+</li>
+<li>
+<p>❌ No debemos exponer métodos de suspensión públicos en el ViewModel. Pero sí puede lanzar corrutinas en su alcance o mejor exponer flujos de datos que se puedan observar desde la UI.</p>
+</li>
+</ol>
+<h3 id="coroutinescopes-más-comunes-en-android">CoroutineScopes más comunes en Android </h3>
+<p>Los alcances (<strong><code>CoroutineScope</code></strong>) de las corrutinas se pueden vincular a los ciclos de vida de los componentes de Android.</p>
+<ul>
+<li>
+<p><strong><code>rememberCoroutineScope()</code></strong> Vinculado al ciclo de vida de un componente de Android como un <strong>Composable</strong>. Se cancela cuando el componente se destruye.</p>
+<p><strong>Lo vamos a usar solo cuando queramos ejecutar una acción sobre un componente tras un evento.</strong> Ejemplo extraído de <strong><a href="https://developer.android.com/jetpack/compose/side-effects?hl=es-419#remembercoroutinescope">documentación oficial de Android</a></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[3-5,12-17]}" class="language-kotlin kotlin" data-line="3-5,12-17"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">MoviesScreen</span><span class="token punctuation">(</span>scaffoldState<span class="token operator">:</span> ScaffoldState <span class="token operator">=</span> <span class="token function">rememberScaffoldState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Crea un CoroutineScope vinculado al ciclo de vida de MoviesScreen</span>
+    <span class="token comment">// este alcance es recordado en la recomposición.</span>
+    <span class="token keyword keyword-val">val</span> scope <span class="token operator">=</span> <span class="token function">rememberCoroutineScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token function">Scaffold</span><span class="token punctuation">(</span>scaffoldState <span class="token operator">=</span> scaffoldState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Column <span class="token punctuation">{</span>
+            <span class="token comment">/* ... */</span>
+            <span class="token function">Button</span><span class="token punctuation">(</span>
+                onClick <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// Crea una nueva corrutina en el manejador del </span>
+                    <span class="token comment">// evento del botón para mostrar el snackbar asociado al Scaffold</span>
+                    scope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+                        <span class="token comment">// showSnackbar es una función de suspensión</span>
+                        scaffoldState<span class="token punctuation">.</span>snackbarHostState<span class="token punctuation">.</span><span class="token function">showSnackbar</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Something happened!"</span></span><span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Press me"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-5" data-start="3" data-end="5">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12-17" data-start="12" data-end="17">
+
+
+
+
+
+</div></div></pre></li>
+</ul>
+<div style="page-break-after:always;"></div>
+<ul>
+<li>
+<p><strong><code>viewModelScope</code></strong>: Vinculado al ciclo de vida del <strong>ViewModel</strong>. Se cancela cuando el ViewModel se destruye.</p>
+<p>Dentro de cualquier clase que herede de <strong><code>ViewModel</code></strong> dispondremos de la propiedad <strong><code>viewModelScope</code></strong> que será un CorourineScope vinculado al ciclo de vida del mismo. Crear una corrutina de las formas que hemos visto es tan simple como hacer...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+<span class="token keyword keyword-val">val</span> deferredJob <span class="token operator">=</span> viewModelScope<span class="token punctuation">.</span><span class="token function">async</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</code></pre><p>Recuerda poara crear una corrutina hija dentro de otra corrutina, debemos usar el <strong><code>CoroutineScope</code></strong> de la corrutina padre. Por ejemplo, si queremos lanzar una corrutina desde un <strong>ViewModel</strong> que se ejecute en el hilo principal y que se cancele cuando el ViewModel se destruya, podemos hacerlo de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Corrutina hija en el alcance del padre, con su contexto específico.</span>
+    <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>ce<span class="token operator">:</span> CancellationException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// Manejo de la cancelación</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// Esperará a que termine la corrutina hija</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Para finaliar cualquier corrutina que se esté ejecutando en el <strong><code>viewModelScope</code></strong> podemos usar la función <strong><code>viewModelScope.cancel()</code></strong> o <strong><code>viewModelScope.coroutineContext.cancelChildren()</code></strong>. Por ejemplo...</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin Kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">paraProceso</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Cancelará las corrutinas hijas creados dentro de su contexto.</span>
+    <span class="token comment">// Provocará la excepción CancellationException en las corrutinas hijas</span>
+    viewModelScope<span class="token punctuation">.</span>coroutineContext<span class="token punctuation">.</span><span class="token function">cancelChildren</span><span class="token punctuation">(</span><span class="token punctuation">)</span>        
+<span class="token punctuation">}</span>
+</code></pre></li>
+<li>
+<p><strong><code>lifecycleScope</code></strong>: Vinculado al ciclo de vida de un componente de Android como una <strong>Activity</strong>. Se cancela cuando el componente se destruye.<br>
+Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es una Actividad o Fragment.</p>
+</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<h3 id="side-effects-y-corrutinas-en-compose">Side-effects y corrutinas en Compose </h3>
+<p>Un efecto lateral o side-effect de Compose es un cambio en el estado de la app que ocurre fuera del alcance de una función de componibilidad. Puesto que no podemos realizar ningún proceso bloqueante durante la composición de la UI y además no tenemos ningún control sobre el momento, orden y finalización de la misma. En el ejemplo anterior donde hemos visto como podemos usar <strong><code>rememberCoroutineScope()</code></strong> para mostrar una notificación en un <strong>Scaffold</strong> tras un evento de click en un botón. Esto sería un efecto lateral fuera de la composición de la UI. <strong>Por resumir, cuando un cambio de estado en la UI no lo controla la composición, sino que necesitemos que sea predecible y asínncrono, estaremos ante un efecto lateral</strong>.</p>
+<h4 id="launchedeffect">LaunchedEffect </h4>
+<p>Ejecuta funciones de suspensión en el alcance de un elemento componible.</p>
+<p>Por ejemplo, para ejecutar una función de suspensión ante uno o varios cambios de estado.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6-17]}" class="language-kotlin kotlin" data-line="6-17"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FlechaRotable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> rotationZAnimationSatate <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">Animatable</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> rotado <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// Indico el estado o los estados que provocarán la ejecución de </span>
+    <span class="token comment">// la o las funciones de suspensión</span>
+    <span class="token function">LaunchedEffect</span><span class="token punctuation">(</span>rotado<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Estamos dentro de un CorourineScope</span>
+        <span class="token comment">// esto se ejecuta de forma asíncrona con la composición de la UI</span>
+        <span class="token comment">// por tanto las funcionen de suspensión no la bloquean.</span>
+
+        <span class="token comment">// Función de suspensión </span>
+        rotationZAnimationSatate<span class="token punctuation">.</span><span class="token function">animateTo</span><span class="token punctuation">(</span>
+            targetValue <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>rotado<span class="token punctuation">)</span> <span class="token number">180f</span> <span class="token keyword keyword-else">else</span> <span class="token number">0f</span><span class="token punctuation">,</span>
+            animationSpec <span class="token operator">=</span> <span class="token function">tween</span><span class="token punctuation">(</span>durationMillis <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">,</span> easing <span class="token operator">=</span> FastOutSlowInEasing<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">Icon</span><span class="token punctuation">(</span>
+        painter <span class="token operator">=</span> <span class="token function">rememberVectorPainter</span><span class="token punctuation">(</span>image <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Filled<span class="token punctuation">.</span>ArrowCircleUp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        contentDescription <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> Modifier
+            <span class="token punctuation">.</span><span class="token function">clickable</span> <span class="token punctuation">{</span> rotado <span class="token operator">=</span> <span class="token operator">!</span>rotado <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">graphicsLayer</span> <span class="token punctuation">{</span> rotationZ <span class="token operator">=</span> rotationZAnimationSatate<span class="token punctuation">.</span>value <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-17" data-start="6" data-end="17">
+
+
+
+
+
+
+
+
+
+
+
+</div></div></pre><blockquote>
+<p>📌 <strong>Nota</strong>: Si especificamos <strong><code>LaunchedEffect(Unit) { ... }</code></strong> la corrutina se ejecutará solo en la primera composición del componente.</p>
+</blockquote>
+<p>Podríamos reescribir el código de la función StateFul anterior gestionando el Side-effect en el manejador del evento con <strong><code>rememberCoroutineScope()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5,13-17]}" class="language-kotlin kotlin" data-line="5,13-17"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">FlechaRotable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> rotationZAnimationSatate <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">Animatable</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> rotado <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> coroutineScope <span class="token operator">=</span> <span class="token function">rememberCoroutineScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token function">Icon</span><span class="token punctuation">(</span>
+        painter <span class="token operator">=</span> <span class="token function">rememberVectorPainter</span><span class="token punctuation">(</span>image <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Filled<span class="token punctuation">.</span>ArrowCircleUp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        contentDescription <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> Modifier
+            <span class="token punctuation">.</span><span class="token function">clickable</span> <span class="token punctuation">{</span>
+                rotado <span class="token operator">=</span> <span class="token operator">!</span>rotado
+                coroutineScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+                    rotationZAnimationSatate<span class="token punctuation">.</span><span class="token function">animateTo</span><span class="token punctuation">(</span>
+                        targetValue <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>rotado<span class="token punctuation">)</span> <span class="token number">180f</span> <span class="token keyword keyword-else">else</span> <span class="token number">0f</span><span class="token punctuation">,</span>
+                        animationSpec <span class="token operator">=</span> <span class="token function">tween</span><span class="token punctuation">(</span>durationMillis <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">,</span> easing <span class="token operator">=</span> FastOutSlowInEasing<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">graphicsLayer</span> <span class="token punctuation">{</span> rotationZ <span class="token operator">=</span> rotationZAnimationSatate<span class="token punctuation">.</span>value <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13-17" data-start="13" data-end="17">
+
+
+
+
+</div></div></pre><div style="page-break-after:always;"></div>
+<h4 id="cargando-imágenes-de-forma-asíncrona-coil">Cargando Imágenes de forma asíncrona (Coil) </h4>
+<blockquote>
+<p>📌 <strong>Nota</strong>: Coil es la librería recomendada por Google para cargar imágenes en Android con Jetpack Compose. Puedes ver más información en <strong><a href="https://coil-kt.github.io/coil/compose/">https://coil-kt.github.io/coil/compose/</a></strong></p>
+</blockquote>
+<p>Para cargar imágenes de forma <strong>asíncrona</strong> podemos usar la librería <strong><a href="https://coil-kt.github.io/coil/compose/">Coil</a></strong>. Esta librería nos permite cargar imágenes desde una URL, un archivo o un recurso de Android. Además, nos permite transformar la imagen antes de mostrarla, por ejemplo, para redimensionarla o aplicarle un filtro. Además, tambien nos permite <strong>cachear las imágenes</strong> para que no tengamos que volver a descargarlas.</p>
+<p>Veamos un ejemplo de como cargar una imagen desde una URL:</p>
+<ol>
+<li>
+<p>Añadimos la dependencia de Coil al módulo App de nuestro proyecto:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>dependencies <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"io.coil-kt:coil-compose:2.5.0"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></li>
+<li>
+<p>Puesto que vamos a cargar una imagen desde una URL, debemos añadir el permiso de acceso a Internet en el <strong>AndroidManifest.xml</strong>:</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[4-6]}" class="language-xml xml" data-line="4-6"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_NETWORK_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_WIFI_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.INTERNET<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span><span class="token punctuation">&gt;</span></span>
+        ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
+</code><div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4-6" data-start="4" data-end="6">
+
+
+</div></div></pre></li>
+<li>
+<p>Ahora ya simplemente deberemos usar el composable <strong><code>AsyncImage</code></strong> que pos proporciona <strong>Coil</strong> con unas propiedades muy similares a las de <strong><code>Image</code></strong> por ejemplo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">Imagen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">AsyncImage</span><span class="token punctuation">(</span>
+    model <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"https://www.sportslab.com.au/wp-content/uploads/2023/07/resilientrunner3-wlogoweb.png"</span></span><span class="token punctuation">,</span>
+    contentDescription <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    contentScale <span class="token operator">=</span> ContentScale<span class="token punctuation">.</span>Crop<span class="token punctuation">,</span>
+    modifier <span class="token operator">=</span> Modifier
+        <span class="token punctuation">.</span><span class="token function">clip</span><span class="token punctuation">(</span>CircleShape<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre><p>Fíjate que donde pone model es donde especificamos la URL de la imagen. Pero también podríamos hacer <strong><code>model = R.drawable.imagen</code></strong> o <strong><code>model = File("ruta de la imagen")</code></strong>, etc. (<strong><a href="https://coil-kt.github.io/coil/getting_started/#supported-data-types">Ver documentación</a></strong>).</p>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 id="ejemplo-de-uso-de-corrutinas-en-android">Ejemplo de uso de corrutinas en Android </h3>
+<blockquote>
+<p>🔗 <strong>Dercarga</strong>: El proyecto con el código del ejemplo que vamos a ver lo puedes descargar de este <strong><a href="assets/codigo/tema_3_7/corrutinas_android_ejemplo.zip">enlace</a></strong></p>
+</blockquote>
+<p>Es la típica aplicación donde vamos a tener dos corrutinas a modo de corredores. Cada corredor se ejecutará en un hilo diferente y se mostrará su progreso en la UI. Además, tendremos un botón para <strong>Empezar</strong> y <strong>Parar</strong> la carrera y otro que <strong>Reiniciará</strong> la carrera y estará activo solo cuando la carrera esté parada. Además, al llegar ambos correderos al final del progreso la carrera parará automáticamente. También parará automáticamente si la aplicación pasa a segundo plano.</p>
+<div style="display: flex; justify-content: space-around; align-items: center; margin-top: 15px; margin-bottom: 15px">
+<img height="330px" src="assets/imagenes/tema_3_7/ejemplo_inicio.png">
+<img height="330px" src="assets/imagenes/tema_3_7/ejemplo_corriendo.png">
+<img height="330px" src="assets/imagenes/tema_3_7/ejemplo_pausa.png">
+<img height="330px" src="assets/imagenes/tema_3_7/ejemplo_fin_carrera.png">
+</div>
+<p>En primer lugar en el paquete <strong><code>com.ejemplo_corrutinas.utilities</code></strong> hemos definido el fuente CoroutinesDebug.kt que nos permitirá mostrar información de las corrutinas en el Logcat. Para ello, hemos definido la siguiente función de extensión a usar en un contexto de corrutina:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> CoroutineContext<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
+    corrutina<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Corrutina"</span></span><span class="token punctuation">,</span>
+    accion<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"No especificada"</span></span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Log<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>
+        Log<span class="token punctuation">.</span>DEBUG<span class="token punctuation">,</span> corrutina<span class="token punctuation">,</span>
+        <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">corrutina</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">: {\n\tAccion: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">accion</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, \n\tContexto: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-this">this</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n}"</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>En el paquete <strong><code>com.ejemplo_corrutinas.ui.features.seguimientocarrera</code></strong> defiuniremos la pantalla de prueba de nuestra aplicación. El interfaz del componente de la pantalla será el siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">SeguimientoCarreraScreen</span><span class="token punctuation">(</span>
+    corredor1<span class="token operator">:</span> CorredorUiState<span class="token punctuation">,</span>
+    corredor2<span class="token operator">:</span> CorredorUiState<span class="token punctuation">,</span>
+    enCarrera<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    onSeguimientoCarreraEvent<span class="token operator">:</span> <span class="token punctuation">(</span>SeguimientoCarreraEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span>
+</code></pre><div style="page-break-after:always;"></div>
+<p>Donde el estado de cada corredor se representará por la siguiente clase:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=7}" class="language-kotlin kotlin" data-line="7"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">CorredorUiState</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> porcentajeProgreso <span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Función de suspensión que simula el avance del corredor en la</span>
+    <span class="token comment">// carrera bloquerá la corrutina con una espera entre 5 y 300 ms</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">avanza</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> CorredorUiState <span class="token punctuation">{</span>
+        <span class="token function">delay</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5L</span><span class="token operator">..</span><span class="token number">300L</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> nuevoPorcentaje <span class="token operator">=</span> porcentajeProgreso <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword keyword-return">return</span> <span class="token function">copy</span><span class="token punctuation">(</span>porcentajeProgreso <span class="token operator">=</span> nuevoPorcentaje<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">reinicia</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> CorredorUiState <span class="token operator">=</span> <span class="token function">copy</span><span class="token punctuation">(</span>porcentajeProgreso <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div></pre><p>Además, dispondremos de un <em>'State'</em> <strong><code>enCarrera</code></strong> que me indicará si se está corriendo la carrera o no. Y un <strong><code>onSeguimientoCarreraEvent</code></strong> que será el manejador de eventos de la pantalla y donde se controla la pulsación de ambos botones.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> SeguimientoCarreraEvent <span class="token punctuation">{</span>
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-object">object</span> OnEmpezarPararClick <span class="token operator">:</span> SeguimientoCarreraEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-object">object</span> OnReiniciarClick <span class="token operator">:</span> SeguimientoCarreraEvent
+<span class="token punctuation">}</span>
+</code></pre><p>Podemos crear un <strong><code>@Preview</code></strong> de test simular la carrera con corrutinas. Pero como se trata de un composable deberemos usar <strong><code>LaunchesEffect</code></strong> para ejecutar la simulación de la carrera en un <strong><code>CoroutineScope</code></strong> dentro de la composición de dicho <em>preview</em> de prueba</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Preview</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">SeguimientoCarreraScreenPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Creamos los estados a usar en la UI</span>
+    <span class="token keyword keyword-var">var</span> corredor1 <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span>
+        <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">CorredorUiState</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Corredor 1"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> corredor2 <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span>
+        <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">CorredorUiState</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Corredor 2"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> enCarrera <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Cada vez que ha un cambio en uno de estos estados se recompone la UI</span>
+    <span class="token comment">// y se lanza el LaunchedEffect con las corrutinas de simulación de la carrera</span>
+    <span class="token function">LaunchedEffect</span><span class="token punctuation">(</span>
+        key1 <span class="token operator">=</span> enCarrera<span class="token punctuation">,</span>
+        key2 <span class="token operator">=</span> corredor1<span class="token punctuation">.</span>porcentajeProgreso<span class="token punctuation">,</span>
+        key3 <span class="token operator">=</span> corredor2<span class="token punctuation">.</span>porcentajeProgreso
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Cada corrutina hara que avance el corredor cambiando su estado</span>
+        <span class="token comment">// y por tanto recomponinedo la UI y relanzando el LaunchedEffect</span>
+        <span class="token comment">// Ambos procesos se ejecutan en un contexto de corrutina diferente</span>
+        <span class="token comment">// con Dispatchers.Default para que el sistema decida el hilo más adecuado para el preview</span>
+        <span class="token keyword keyword-val">val</span> jobCorredor1 <span class="token operator">=</span> <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>enCarrera <span class="token operator">&amp;&amp;</span> corredor1<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">)</span>
+                corredor1 <span class="token operator">=</span> corredor1<span class="token punctuation">.</span><span class="token function">avanza</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-val">val</span> jobCorredor2 <span class="token operator">=</span> <span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>enCarrera <span class="token operator">&amp;&amp;</span> corredor2<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">)</span>
+                corredor2 <span class="token operator">=</span> corredor2<span class="token punctuation">.</span><span class="token function">avanza</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// Esperamos a que los dos correodres avancen si lo tienen que hacer</span>
+        <span class="token function">joinAll</span><span class="token punctuation">(</span>jobCorredor1<span class="token punctuation">,</span> jobCorredor2<span class="token punctuation">)</span>
+        <span class="token comment">// Si ambos corredores han llegado al 100% paramos la carrera</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>corredor1<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">==</span> <span class="token number">100</span> <span class="token operator">&amp;&amp;</span> corredor2<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">==</span> <span class="token number">100</span><span class="token punctuation">)</span>
+            enCarrera <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+</code></pre><p>Por úiltimo, definimos el componente de nuestra pantalla...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token operator">..</span><span class="token punctuation">.</span>
+    EjemploCorrutinasTheme <span class="token punctuation">{</span>
+        Surface <span class="token punctuation">{</span>
+            <span class="token function">SeguimientoCarreraScreen</span><span class="token punctuation">(</span>
+                corredor1 <span class="token operator">=</span> corredor1<span class="token punctuation">,</span> 
+                corredor2 <span class="token operator">=</span> corredor2<span class="token punctuation">,</span>
+                enCarrera <span class="token operator">=</span> enCarrera<span class="token punctuation">,</span>
+                onSeguimientoCarreraEvent <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        SeguimientoCarreraEvent<span class="token punctuation">.</span>OnEmpezarPararClick <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                            enCarrera <span class="token operator">=</span> <span class="token operator">!</span>enCarrera
+                        <span class="token punctuation">}</span>
+                        SeguimientoCarreraEvent<span class="token punctuation">.</span>OnReiniciarClick <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                            corredor1 <span class="token operator">=</span> corredor1<span class="token punctuation">.</span><span class="token function">reinicia</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                            corredor2 <span class="token operator">=</span> corredor2<span class="token punctuation">.</span><span class="token function">reinicia</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<p>Bien, ahora vamos a definir un <strong>ViewModel</strong> para nuestro Screen y realizar el proceso de la carrera en el mismo. La cosa va a cambiar '<em>un poco</em>' puesto que las corrutinas se lanzarán desde ahora desde un <strong><code>CoroutineScope</code></strong> distinto al de la composición.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> SeguimientoCarreraViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Definimos los estados de la UI</span>
+    <span class="token keyword keyword-var">var</span> corredor1 <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>
+        <span class="token function">CorredorUiState</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Corredor 1"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+    <span class="token keyword keyword-var">var</span> corredor2 <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>
+        <span class="token function">CorredorUiState</span><span class="token punctuation">(</span>nombre <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Corredor 2"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+    <span class="token keyword keyword-var">var</span> enCarrera <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+
+    <span class="token comment">// Gestión de los eventos del Screen</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">onSeguimientoCarreraEvent</span><span class="token punctuation">(</span>event<span class="token operator">:</span> SeguimientoCarreraEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            SeguimientoCarreraEvent<span class="token punctuation">.</span>OnEmpezarPararClick <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>enCarrera<span class="token punctuation">)</span>
+                    <span class="token comment">// Cambiamos el estado de enCarrera = false</span>
+                    <span class="token comment">// y paramos las corrutinas que avanzan cambiando </span>
+                    <span class="token comment">// el valor del estado del progreso</span>
+                    <span class="token function">pararDeCorrer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-else">else</span>
+                    <span class="token comment">// Cambiamos el estado de enCarrera = false</span>
+                    <span class="token comment">// e iniciamos las corrutinas que avanzan cambiando </span>
+                    <span class="token comment">// el valor del estado del progreso</span>
+                    <span class="token function">empezarACarrer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            SeguimientoCarreraEvent<span class="token punctuation">.</span>OnReiniciarClick <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token comment">// Ojo no debería llamar a Reiniciar si estoy en carrera</span>
+                <span class="token comment">// ya que una corrutina suspendida en delay puede actualizar</span>
+                <span class="token comment">// el estado de la UI tras el reset. Esto es porque guarda un</span>
+                <span class="token comment">// el valor de un estado inmutable de la UI anterior.</span>
+                corredor1 <span class="token operator">=</span> corredor1<span class="token punctuation">.</span><span class="token function">reinicia</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                corredor2 <span class="token operator">=</span> corredor2<span class="token punctuation">.</span><span class="token function">reinicia</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">pararDeCorrer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Cancelo las corrutinas hijas que se estén ejecutando</span>
+        <span class="token comment">// en el contexto del viewModelScope que en mi caso son</span>
+        <span class="token comment">// los dos corredores.</span>
+        <span class="token comment">// Si tuviera más corrutinas, tendrá que guardarme los trabajos</span>
+        <span class="token comment">// como propiedades privadas en el ViewModel y bucarlos en el</span>
+        <span class="token comment">// contexto para cancelarlos de forma específica.</span>
+        viewModelScope<span class="token punctuation">.</span>coroutineContext<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CARRERA"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Parando corredores..."</span></span><span class="token punctuation">)</span>
+        viewModelScope<span class="token punctuation">.</span>coroutineContext<span class="token punctuation">.</span><span class="token function">cancelChildren</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+</code></pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Lanza una corrutina que simula el avance de un corredor</span>
+    <span class="token comment">// para ello recibe el estado inicial del corredor que se guarda en el VM</span>
+    <span class="token comment">// una función que actualiza el estado de la UI</span>
+    <span class="token comment">// Devolverá un Job que se puede usar para cancelar la corrutina o esperar a que termine</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> CoroutineScope<span class="token punctuation">.</span><span class="token function">lanzaCorredor</span><span class="token punctuation">(</span>
+        estadoInicialCorredor<span class="token operator">:</span> CorredorUiState<span class="token punctuation">,</span>
+        actualizaEstadoUi<span class="token operator">:</span> <span class="token punctuation">(</span>CorredorUiState<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+    <span class="token punctuation">)</span><span class="token operator">:</span> Job <span class="token operator">=</span> launch <span class="token punctuation">{</span>
+        <span class="token comment">// Guardamos el estado inicial del corredor en una variable mutable</span>
+        <span class="token comment">// donde se irá actualizando el estado del corredor de forma local</span>
+        <span class="token comment">// este estado servirá para actualizar el estado de la UI del corredor correspondiente</span>
+        <span class="token keyword keyword-var">var</span> estadoCorredorLocal <span class="token operator">=</span> estadoInicialCorredor
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            coroutineContext<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CARRERA"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Corredor </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">estadoCorredorLocal<span class="token punctuation">.</span>nombre</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> corriendo"</span></span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>estadoCorredorLocal<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                estadoCorredorLocal <span class="token operator">=</span> estadoCorredorLocal<span class="token punctuation">.</span><span class="token function">avanza</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// SUSPEND FUN</span>
+                <span class="token function">actualizaEstadoUi</span><span class="token punctuation">(</span>estadoCorredorLocal<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            coroutineContext<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CARRERA"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">estadoCorredorLocal<span class="token punctuation">.</span>nombre</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> está en meta"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>ce<span class="token operator">:</span> CancellationException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            coroutineContext<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CARRERA"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">estadoCorredorLocal<span class="token punctuation">.</span>nombre</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> se para"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">empezarACarrer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span>
+        <span class="token comment">// Lanzo una corrutina con el alcance en el que se encuentra el ViewModel</span>
+        <span class="token comment">// y con el contexto de Dispatchers.Default</span>
+        viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// Si alguno de los corredores no ha llegado a la meta, sigo en carrera</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>corredor1<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">!=</span> <span class="token number">100</span> <span class="token operator">||</span> corredor2<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">!=</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                enCarrera <span class="token operator">=</span> <span class="token boolean">true</span>
+                <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+                    <span class="token keyword keyword-val">val</span> jobCorredor1 <span class="token operator">=</span> <span class="token function">lanzaCorredor</span><span class="token punctuation">(</span>corredor1<span class="token punctuation">)</span> <span class="token punctuation">{</span> corredor1 <span class="token operator">=</span> it <span class="token punctuation">}</span>
+                    <span class="token keyword keyword-val">val</span> jobCorredor2 <span class="token operator">=</span> <span class="token function">lanzaCorredor</span><span class="token punctuation">(</span>corredor2<span class="token punctuation">)</span> <span class="token punctuation">{</span> corredor2 <span class="token operator">=</span> it <span class="token punctuation">}</span>
+                    <span class="token comment">// Espero a que terminen las dos corrutinas o bien</span>
+                    <span class="token comment">// porque alguno de los corredores ha llagado a la meta</span>
+                    <span class="token comment">// o bien porque se han cancelado las corrutinas</span>
+                    <span class="token function">joinAll</span><span class="token punctuation">(</span>jobCorredor1<span class="token punctuation">,</span> jobCorredor2<span class="token punctuation">)</span> <span class="token comment">// SUSPEND FUN</span>
+                    <span class="token comment">// Si los dos corredores han llegado a la meta, termino la carrera</span>
+                    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>corredor1<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">==</span> <span class="token number">100</span> <span class="token operator">&amp;&amp;</span> corredor2<span class="token punctuation">.</span>porcentajeProgreso <span class="token operator">==</span> <span class="token number">100</span><span class="token punctuation">)</span>
+                        enCarrera <span class="token operator">=</span> <span class="token boolean">false</span>
+                <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>ce<span class="token operator">:</span> CancellationException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    enCarrera <span class="token operator">=</span> <span class="token boolean">false</span>
+                <span class="token punctuation">}</span>
+                viewModelScope<span class="token punctuation">.</span>coroutineContext<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CARRERA"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Corredores parados"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<p>Por último, vamos a examinar el código en la MainActivity.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Definimos el ViewModel como propiedad delegada y así usarla en</span>
+    <span class="token comment">// los métodos del ciclo de vida de la actividad</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> vm <span class="token keyword keyword-by">by</span> viewModels<span class="token operator">&lt;</span>SeguimientoCarreraViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        setContent <span class="token punctuation">{</span>
+            EjemploCorrutinasTheme <span class="token punctuation">{</span>
+                <span class="token function">Surface</span><span class="token punctuation">(</span>
+                    modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>background
+                <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">SeguimientoCarreraScreen</span><span class="token punctuation">(</span>
+                        corredor1 <span class="token operator">=</span> vm<span class="token punctuation">.</span>corredor1<span class="token punctuation">,</span>
+                        corredor2 <span class="token operator">=</span> vm<span class="token punctuation">.</span>corredor2<span class="token punctuation">,</span>
+                        enCarrera <span class="token operator">=</span> vm<span class="token punctuation">.</span>enCarrera<span class="token punctuation">,</span>
+                        onSeguimientoCarreraEvent <span class="token operator">=</span> vm<span class="token operator">::</span>onSeguimientoCarreraEvent
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Al pausar la actividad por cualquier motivo, paramos la carrera</span>
+    <span class="token comment">// a través del ViewModel que es quine gestiona las corrutinas de la misma</span>
+    <span class="token comment">// Ten en cuenta que el Accance del ViewModel sigue vivo aunque la actividad</span>
+    <span class="token comment">// esté pausada y por tanto los corredores seguirán corriendo</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onPause</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onPause</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        vm<span class="token punctuation">.</span><span class="token function">pararDeCorrer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Si quisieramos que la carrera empezara nama más iniciarse la actividad, podríamos hacerlo en el método <strong><code>onStart</code></strong> de la actividad. Donde ya sabemos que se ha creado la UI y por tanto podemos modificar el estado de la misma.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onStart</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    vm<span class="token punctuation">.</span><span class="token function">empezarACarrer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
