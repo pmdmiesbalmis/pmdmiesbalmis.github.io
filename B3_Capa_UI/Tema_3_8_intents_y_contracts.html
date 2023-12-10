@@ -105,19 +105,259 @@ justo después del front matter
           <a href="#introducción" class="md-toc-link">
             <p>Introducción</p>
 
+          </a></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#tipos-de-intents" class="md-toc-link"><p>Tipos de Intents</p>
+</a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#intents-explícitos" class="md-toc-link"><p>Intents Explícitos</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#abriendo-otra-aplicación-desde-nuestra-aplicación" class="md-toc-link">
+            <p>Abriendo otra aplicación desde nuestra aplicación</p>
+
           </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#intents-implícitos" class="md-toc-link"><p>Intents Implícitos</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#enviar-un-correo-electrónico-escogiendo-la-aplicación" class="md-toc-link">
+            <p>Enviar un correo electrónico escogiendo la aplicación</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#abrir-una-localización-en-google-maps" class="md-toc-link">
+            <p>Abrir una localización en Google Maps</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    
 </div>
 <div style="page-break-after:always;"></div>
 <h2 id="introducción">Introducción </h2>
 <ul>
-<li>Documentación oficial: <strong><a href="https://kotlinlang.org/docs/coroutines-guide.html">Lenguaje Kotlin</a></strong></li>
-<li>Documentación oficial: <strong><a href="https://developer.android.com/kotlin/coroutines?hl=es-419">Android</a></strong></li>
-<li>Vídeo: <strong><a href="https://www.youtube.com/watch?v=ZTDXo0-SKuU">Android Developers</a></strong></li>
-<li>Vídeo: <strong><a href="https://www.youtube.com/watch?v=56yLoJNCa2I">Martin Kiperszmid</a></strong></li>
-<li>Lista de reproducción: <strong><a href="https://www.youtube.com/watch?v=2QInrEaXyMo&amp;list=PLSrm9z4zp4mE-o3sPq-PqzGHoFAIsQFI6">Stevdza-San (Inglés)</a></strong></li>
-<li>Lista de reproducción: <strong><a href="https://www.youtube.com/watch?v=ShNhJ3wMpvQ&amp;list=PLQkwcJG4YTCQcFEPuYGuv54nYai_lwil_">Philipp Lackner (Inglés)</a></strong></li>
+<li>
+<p><strong>Intents</strong></p>
+<ul>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/guide/components/intents-filters?hl=es-419">Intents</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/training/basics/intents?hl=es-419">Interactuando con otras Apps</a></strong></li>
+<li>Vídeo Intents: <strong><a href="https://www.youtube.com/watch?v=2hIY1xuImuQ">Philipp Lackner (Inglés)</a></strong></li>
 </ul>
+</li>
+<li>
+<p><strong>Permissions</strong></p>
+<ul>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/guide/topics/permissions/overview?hl=es-419">Permisos</a></strong></li>
+<li>Vídeo Permisos 1: <strong><a href="https://www.youtube.com/watch?v=zCAx4WZ98rs">Android Developers</a></strong></li>
+<li>Vídeo Permisos 2: <strong><a href="https://www.youtube.com/watch?v=x38dYUm7tCY">Android Developers</a></strong></li>
+<li>Vídeo Permisos: <strong><a href="https://www.youtube.com/watch?v=D3JCtaK8LSU">Philipp Lackner (Inglés)</a></strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Permissions in Compose con Accompanist Library</strong> (Experimental)</p>
+<ul>
+<li>Vídeo: <strong><a href="https://www.youtube.com/watch?v=imFJZ4Kbv_g">Martin Kiperszmid (Castellano)</a></strong></li>
+<li>Vídeo: <strong><a href="https://www.youtube.com/watch?v=uO6igFsa5y0">Stevdza-San (Inglés)</a></strong></li>
+<li>Documentación librería: <strong><a href="https://google.github.io/accompanist/permissions/">Accompanist</a></strong></li>
+</ul>
+</li>
+</ul>
+<p>Una <strong>Intent</strong> es un objeto de mensajería que puedes usar para solicitar una acción de otro componente de una app. Si bien las intents facilitan la comunicación entre componentes de varias formas, existen tres casos de uso principales:</p>
+<ol>
+<li>Iniciar una actividad.</li>
+<li>Iniciar un servicio.</li>
+<li>Transmitir una emisión o broadcast.</li>
+</ol>
+<p>Nosotros en este tema vamos a centrarnos en el primer caso de uso que es, <strong>Iniciar una actividad</strong>. Como se puede deducir es una funcionalidad del API de Android que nos permite iniciar una actividad desde otra actividad incluso si la actividad pertenece a otra aplicación diferente como por ejemplos hacer una llamada telefónica, enviar un correo electrónico, abrir una página web, etc.</p>
+<blockquote>
+<p>🔗 <strong>Dercarga</strong>: El proyecto con el código delos ejemplos de este tema en el siguiente <strong><a href="assets/codigo/tema_3_8/intents_ejemplo.zip">enlace</a></strong></p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<h2 id="tipos-de-intents">Tipos de Intents </h2>
+<h3 id="intents-explícitos">Intents Explícitos </h3>
+<p>Especifican qué aplicación las administrará, ya sea incluyendo el <strong>nombre del paquete de la app de destino</strong> o el nombre de clase del componente completamente calificado. Normalmente, el usuario usa una intent explícita para iniciar un componente en su propia aplicación porque conoce el nombre de clase de la actividad o el servicio que desea iniciar. Por ejemplo, puedes utilizarla para iniciar una actividad nueva en respuesta a una acción del usuario o iniciar un servicio para descargar un archivo en segundo plano.</p>
+<h4 id="abriendo-otra-aplicación-desde-nuestra-aplicación">Abriendo otra aplicación desde nuestra aplicación </h4>
+<p>Para abrir otra aplicación desde nuestra aplicación, debemos crear un objeto <strong>Intent</strong> y especificar el <strong>nombre del paquete de la aplicación de destino</strong>. Por ejemplo, si queremos abrir la aplicación de <strong>Chrome</strong> desde nuestra aplicación, debemos crear un objeto <strong>Intent</strong> y especificar el nombre del paquete de la aplicación de destino que en este caso es <strong><code>com.android.chrome</code></strong>. Para ello usaremos el método <strong><code>setPackage()</code></strong> del objeto <strong>Intent</strong>. Una vez creado el objeto <strong>Intent</strong> lo pasaremos como parámetro al método <strong><code>startActivity()</code></strong>. Como el método <strong><code>startActivity()</code></strong> es un método de la clase <strong>Context</strong>, necesitamos un objeto de esta clase para poder llamar al método. Para ello usaremos el <strong><code>LocalContext.current</code></strong> que nos proporciona <strong>Jetpack Compose</strong>. El código sería el siguiente...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// IntentExplicito.kt</span>
 
+<span class="token keyword keyword-fun">fun</span> Context<span class="token punctuation">.</span><span class="token function">openChrome</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Creamos un Intent con la acción ACTION_MAIN</span>
+    <span class="token comment">// que es abrir una actividad principal de la aplicación Chrome.</span>
+    <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_MAIN<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">also</span> <span class="token punctuation">{</span>
+        it<span class="token punctuation">.</span>`<span class="token keyword keyword-package">package</span>` <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.android.chrome"</span></span>
+        <span class="token comment">// Lanza ActivityNotFoundException si no está instalada la aplicación.</span>
+        <span class="token function">startActivity</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">IntentOpenChrome</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> context <span class="token operator">=</span> LocalContext<span class="token punctuation">.</span>current
+    <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        contentAlignment <span class="token operator">=</span> androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>ui<span class="token punctuation">.</span>Alignment<span class="token punctuation">.</span>Center<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> context<span class="token punctuation">.</span><span class="token function">openChrome</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Open Chrome"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h5 id="saber-el-nombre-del-paquete-de-la-app-de-destino">Saber el nombre del paquete de la app de destino </h5>
+<p>Para saber el nombre del paquete de la app de destino, podemos usar la herramienta <strong>adb.exe</strong> (<a href="https://developer.android.com/studio/command-line/adb?hl=es-419">Android Debug Bridge</a>) instalada junto al SDK de Android. Para ello debemos abrir una consola de comandos e ir a la carpeta <strong><code>platform-tools</code></strong> donde esté instalado el SDK para nuestro usuario. (Ej: <strong><code>C:\Users\alumno\AppData\Local\Android\Sdk\platform-tools&gt;</code></strong>). Otras opción es añadir esta carpeta al <strong>Path</strong> de nuestro usuario para que podamos ejecutar los comandos desde cualquier ubicación, incluso desde la ventana del terminal de AndroidStudio.<br>
+Una vez tenemos acceso a la herramienta <strong>adb.exe</strong> seguiremos estos pasos:</p>
+<ol>
+<li>
+<p>Arrancaremos la máquina virtual de nuestro emulador de Android <strong>desde el mismo Android Studio</strong> o desde un terminal si sabemos el nombre de la máquina. Por ejemplo, si nuestro emulador se llama <strong>Pixel_3a_API_33</strong> ejecutaremos el comando:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>alumno<span class="token punctuation">\</span>AppData<span class="token punctuation">\</span>Local<span class="token punctuation">\</span>Android<span class="token punctuation">\</span>Sdk<span class="token punctuation">\</span>tools<span class="token punctuation">\</span>emulator.exe <span class="token parameter variable">-avd</span> Pixel_3a_API_33
+</code></pre></li>
+<li>
+<p>Con el emulador arrancado, ejecutaremos el comando <strong><code>adb shell</code></strong> para acceder a la consola del emulador. Por ejemplo:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>alumno<span class="token punctuation">\</span>AppData<span class="token punctuation">\</span>Local<span class="token punctuation">\</span>Android<span class="token punctuation">\</span>Sdk<span class="token punctuation">\</span>platform-tools<span class="token operator">&gt;</span>adb shell
+emu64x:/ $
+</code></pre></li>
+<li>
+<p>Ahora ejecutaremos el comando <strong><code>pm list packages</code></strong> para listar todos los paquetes de aplicaciones instaladas en el emulador y si queremos buscar una aplicación en concreto podemos usar el comando <strong><code>grep</code></strong>. Por ejemplo, si queremos saber el nombre del paquete de la app de <strong>Chrome</strong>, ejecutaremos el comando:</p>
+<pre data-role="codeBlock" data-info="bash {highlight=2}" class="language-bash bash" data-line="2"><code>emu64x:/ $ pm list packages <span class="token operator">|</span> <span class="token function">grep</span> chrome
+package:com.android.chrome
+emu64x:/ $
+</code><div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre></li>
+</ol>
+<div style="display: flex; justify-content: space-between; align-items: top; margin-top: 15px">
+<div style="width: 50%">
+<p>Otra forma más sencilla es a través de <strong>Android Studio</strong>. Una vez arrancado el emulador, abriremos la ventana <strong>Device File Explorer</strong> situado a la derecha como se muestra en la imagen de ejemplo y navegaremos hasta la carpeta <strong><code>data/data</code></strong> donde se encuentran todas las aplicaciones instaladas en el emulador. Ahora solo tenemos que buscar la carpeta de la aplicación que nos interese que se corresponde con el nombre del paquete de la aplicación.</p>
+</div>
+<div style="width: auto">
+<img height="600px" src="assets/imagenes/tema_3_8/ubicacion_aplicaciones.png">
+</div>
+</div>
+<div style="page-break-after:always;"></div>
+<h3 id="intents-implícitos">Intents Implícitos </h3>
+<p>Son los que más interesantes para nosotros. Puesto que no siempre sabemos que aplicaciones vamos a tener instaladas.</p>
+<p>No nombran el componente específico, pero, en cambio, declaran una acción general para realizar, lo cual permite que un componente de otra aplicación la maneje. Por ejemplo, si quieres enviar un correo electrónico, no necesitas saber qué aplicación de correo electrónico tiene el usuario instalada; simplemente debes enviar una intent implícita para que cualquier aplicación de correo electrónico pueda responderla. Es más, puedes preguntarle al sistema si existe una actividad que pueda responder a tu intent antes de iniciarla y ofrecerle la posibilidad al usuario de elegir qué aplicación usar.</p>
+<h4 id="enviar-un-correo-electrónico-escogiendo-la-aplicación">Enviar un correo electrónico escogiendo la aplicación </h4>
+<p>Veamos un ejemplo de un <strong>Intent implícito</strong> para solicitar al sistema enviar un correo electrónico con un texto plano. Además, al Intent le pasaremos una serie de parámetros como el asunto, el texto del correo y los destinatarios. Para ello usaremos el método <strong><code>putExtra()</code></strong> del objeto <strong>Intent</strong>. El código sería el siguiente...</p>
+<p><strong>Aunque no es necesario</strong>, podemos indicar a Android que tipo de intents vamos a usar en nuestra aplicación al final de Manifest de la aplicación con la etiqueta <strong><code>&lt;queries&gt;</code></strong>.</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+    ...
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>queries</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.intent.action.SEND<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/plain<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>queries</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// IntentsImplicitos.kt</span>
+
+<span class="token keyword keyword-fun">fun</span> Context<span class="token punctuation">.</span><span class="token function">sendMail</span><span class="token punctuation">(</span>
+    correos<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    asunto<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    texto<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    forzarEleccion<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token boolean">false</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_SEND<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+        type <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"text/plain"</span></span>
+        <span class="token comment">// Añadimos los datos del correo.</span>
+        <span class="token function">putExtra</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>EXTRA_EMAIL<span class="token punctuation">,</span> correos<span class="token punctuation">)</span>
+        <span class="token function">putExtra</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>EXTRA_SUBJECT<span class="token punctuation">,</span> asunto<span class="token punctuation">)</span>
+        <span class="token function">putExtra</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>EXTRA_TEXT<span class="token punctuation">,</span> texto<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> chooser <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>forzarEleccion<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> title<span class="token operator">:</span> String <span class="token operator">=</span> resources<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>enviar_correo<span class="token punctuation">)</span>
+        Intent<span class="token punctuation">.</span><span class="token function">createChooser</span><span class="token punctuation">(</span>intent<span class="token punctuation">,</span> title<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-else">else</span> <span class="token keyword keyword-null">null</span>
+
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>intent<span class="token punctuation">.</span><span class="token function">resolveActivity</span><span class="token punctuation">(</span>packageManager<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">startActivity</span><span class="token punctuation">(</span>chooser <span class="token operator">?:</span> intent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">IntentSendMail</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> context <span class="token operator">=</span> LocalContext<span class="token punctuation">.</span>current
+    <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        contentAlignment <span class="token operator">=</span> androidx<span class="token punctuation">.</span>compose<span class="token punctuation">.</span>ui<span class="token punctuation">.</span>Alignment<span class="token punctuation">.</span>Center<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> context<span class="token punctuation">.</span><span class="token function">sendMail</span><span class="token punctuation">(</span>
+            correos <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"correo@alu.edu.gva.es"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            asunto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Asunto del correo"</span></span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Texto del correo"</span></span>
+        <span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Send Mail"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
+<p>Al usar <strong><code>ACTION_SEND</code></strong> con esos parámetros. <strong><code>Android</code></strong> nos ofrecerá varias opciones para enviar el correo. Si seleccionamos <strong><code>Gmail</code></strong> + <strong><code>Always</code></strong> la siguiente vez que queramos enviar un correo, <strong>no nos preguntará</strong>.</p>
+<p>Realmente el sistema <strong>Android busca el componente apropiado</strong> para iniciar comparando el contenido de la intent con los <strong><a href="https://developer.android.com/guide/topics/manifest/intent-filter-element?hl=es-419">filtros de intents</a></strong> declarados en el archivo de manifiesto de otras aplicaciones en el dispositivo. Si la intent coincide con un filtro de intents, el sistema inicia ese componente y le entrega el objeto Intent. <strong>Si varios filtros de intents son compatibles</strong>, el sistema muestra un cuadro de diálogo para que el usuario pueda elegir la aplicación que se debe usar.</p>
+</div>
+<div style="width: auto">
+<img height="200px" src="assets/imagenes/tema_3_8/email_opciones.png">
+</div>
+</div>
+<p>En nuestro caso, la App debe tener una actividad que acepte los parámetros que le pasamos y tener un filtro similar al siguiente:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activity</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>.ClaseQueDefineLaActividad<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    &lt;android:exported="true"&gt; <span class="token comment">&lt;!-- Necesario para que otras apps puedan usarla --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>action</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.intent.action.SEND<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>category</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.intent.category.DEFAULT<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/plain<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>   
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>Puedes consultar la <strong><a href="https://developer.android.com/guide/components/intents-filters?hl=es-419#Receiving">documentación oficial</a></strong> para más información.</p>
+<blockquote>
+<p>📌 <strong>Nota</strong>: Si no declaras ningún filtro de intent para una actividad, esta solo se puede iniciar con un intent explícito.</p>
+</blockquote>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
+<p>Si queremos que el sistema nos pregunte siempre que aplicación queremos usar para enviar el correo independientemente de si la hemos predeterminado o no. Deberemos usar el método <strong><code>createChooser()</code></strong> del objeto <strong>Intent</strong> como se ve en el código de ejemplo.</p>
+</div>
+<div style="width: auto">
+<img height="200px" src="assets/imagenes/tema_3_8/email_forzado.png">
+</div>
+</div>
+<div style="page-break-after:always;"></div>
+<h4 id="abrir-una-localización-en-google-maps">Abrir una localización en Google Maps </h4>
+<p>Veamos algunos ejemplos más de <strong>Intents implícitos</strong> extraídos de la documentación oficial <strong><a href="https://developer.android.com/guide/components/intents-common?hl=es-419">aquí</a></strong> o <strong><a href="https://developer.android.com/training/basics/intents/sending?hl=es-419">aquí</a></strong> ...</p>
+<p>En este caso vamos a visualizar una geolocalización y la aplicación de <strong><code>Maps</code></strong> tiene un filtro que acepta este tipo de intents. Fíjate que en este caso hemos controlado la excepción <strong><code>ActivityNotFoundException</code></strong> que se lanza si no tenemos instalada la aplicación de <strong><code>Maps</code></strong> mostrando un mensaje temporal.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> Context<span class="token punctuation">.</span><span class="token function">buscaEnMaps</span><span class="token punctuation">(</span>lugar<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_VIEW<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-data">data</span> <span class="token operator">=</span> Uri<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"geo:0,0?q=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">lugar</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+        <span class="token function">startActivity</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> ActivityNotFoundException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Toast<span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"No se puede abrir Maps"</span></span><span class="token punctuation">,</span> Toast<span class="token punctuation">.</span>LENGTH_SHORT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">IntentBuscaEnMaps</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> context <span class="token operator">=</span> LocalContext<span class="token punctuation">.</span>current
+    <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span>
+        context<span class="token punctuation">.</span><span class="token function">buscaEnMaps</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"I.E.S Doctor Balmis, +Alicante"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Ver Balmis en Maps"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
       </div>
       
       
