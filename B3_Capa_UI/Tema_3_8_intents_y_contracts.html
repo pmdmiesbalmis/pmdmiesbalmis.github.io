@@ -922,10 +922,10 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 </code></pre></li>
 <li>
 <p>Ya solo nos queda definir el contrato <strong><code>ActivityResultContracts.TakePicture()</code></strong> cuyo callback, a través del <strong><code>FileProvider</code></strong> definido nos permitirá obtener la ruta de la foto en la caché.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">androidBitmapFromURI</span><span class="token punctuation">(</span>uri<span class="token operator">:</span> Uri<span class="token punctuation">,</span> context<span class="token operator">:</span> Context<span class="token punctuation">)</span><span class="token operator">:</span> Bitmap <span class="token punctuation">{</span>
-    <span class="token keyword keyword-val">val</span> contextResolver <span class="token operator">=</span> context<span class="token punctuation">.</span>contentResolver
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> Context<span class="token punctuation">.</span><span class="token function">toImageBitmap</span><span class="token punctuation">(</span>uri<span class="token operator">:</span> Uri<span class="token punctuation">)</span><span class="token operator">:</span> ImageBitmap <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> contextResolver <span class="token operator">=</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>contentResolver
     <span class="token keyword keyword-val">val</span> source <span class="token operator">=</span> ImageDecoder<span class="token punctuation">.</span><span class="token function">createSource</span><span class="token punctuation">(</span>contextResolver<span class="token punctuation">,</span> uri<span class="token punctuation">)</span>
-    <span class="token keyword keyword-return">return</span> ImageDecoder<span class="token punctuation">.</span><span class="token function">decodeBitmap</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span>
+    <span class="token keyword keyword-return">return</span> ImageDecoder<span class="token punctuation">.</span><span class="token function">decodeBitmap</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
 <span class="token annotation builtin">@Composable</span>
@@ -948,7 +948,7 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
         <span class="token function">rememberLauncherForActivityResult</span><span class="token punctuation">(</span>
             ActivityResultContracts<span class="token punctuation">.</span><span class="token function">TakePicture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> success <span class="token operator">-&gt;</span>
             <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token function">onFotoCambiada</span><span class="token punctuation">(</span><span class="token function">androidBitmapFromURI</span><span class="token punctuation">(</span>uri<span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token function">onFotoCambiada</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">toImageBitmap</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span><span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token keyword keyword-return">return</span> <span class="token function">rememberLauncherForActivityResult</span><span class="token punctuation">(</span>
@@ -975,7 +975,7 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
     <span class="token keyword keyword-return">return</span> <span class="token function">rememberLauncherForActivityResult</span><span class="token punctuation">(</span>
         ActivityResultContracts<span class="token punctuation">.</span><span class="token function">GetContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> uri <span class="token operator">-&gt;</span>
         uri<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span>
-            <span class="token function">onFotoCambiada</span><span class="token punctuation">(</span><span class="token function">androidBitmapFromURI</span><span class="token punctuation">(</span>uri<span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token function">onFotoCambiada</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">toImageBitmap</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -998,6 +998,7 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <div style="page-break-after:always;"></div>
 <h2 id="conclusión">Conclusión </h2>
 <p>Como has podido observar gestionar permisos y lanzar intents es un proceso que puede ser complejo y que requiere de un conocimiento profundo de la API de Android. Por ello, en ocasiones es recomendable utilizar librerías de terceros que nos faciliten el trabajo. Por ejemplo dispones de la librería <strong><a href="https://google.github.io/accompanist/permissions/">accompanist</a></strong> que ofrece compatibilidad con Compose para gestionar permisos y lanzar intents.</p>
+<p>Puedes descargarte alguna de las funciones a modo de utilidad de <strong><a href="assets/codigo/tema_3_8/RegistroContratosCompose.kt">RegistroContratosCompose.kt</a></strong> para utilizar en tus proyectos incluyendo el fuente en un nuevo paquete denominado <strong><code>.utilities.devices</code></strong> de tu proyecto.</p>
 
       </div>
       
