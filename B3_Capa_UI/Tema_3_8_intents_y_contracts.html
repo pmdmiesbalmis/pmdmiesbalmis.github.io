@@ -220,7 +220,11 @@ justo después del front matter
 </ol>
 <p>Nosotros en este tema vamos a centrarnos en el primer caso de uso que es, <strong>Iniciar una actividad</strong>. Como se puede deducir es una funcionalidad del API de Android que nos permite iniciar una actividad desde otra actividad incluso si la actividad pertenece a otra aplicación diferente como por ejemplos hacer una llamada telefónica, enviar un correo electrónico, abrir una página web, etc.</p>
 <blockquote>
+<<<<<<< HEAD
+<p>&#x1F4E3; <strong>Resumen</strong>: Por expresarlo con otras palabras, podemos decir que una <strong>Intent</strong> es un objeto que proporciona en su interior una descripci&#xF3;n de la operaci&#xF3;n que queremos &apos;intentar&apos; ya sea de forma impl&#xED;cita o expl&#xED;cita y adem&#xE1;s podemos pasarle datos que se usar&#xE1;n en la operaci&#xF3;n. Cuidado puede parecernos que es la intent la que lanza una actividad pero no es as&#xED;, contiene solo la descripci&#xF3;n de la operaci&#xF3;n y los datos necesarios para realizarla.</p>
+=======
 <p>📣 <strong>Resumen</strong>: Por expresarlo con otras palabras, podemos decir que un <strong>Intent</strong> es un objeto que proporciona en su interior una descripción de la operación que queremos 'intentar' ya sea de forma implícita o explícita y además podemos pasarle datos que se usarán en la operación. Cuidado puede parecernos que es el intent el que lanza una actividad pero no es así, contiene solo la descripción de la operación y los datos necesarios para realizarla.</p>
+>>>>>>> origin
 </blockquote>
 <blockquote>
 <p>🔗 <strong>Dercarga</strong>: El proyecto con el código delos ejemplos de este tema en el siguiente <strong><a href="assets/codigo/tema_3_8/intents_ejemplo.zip">enlace</a></strong></p>
@@ -262,7 +266,11 @@ Una vez tenemos acceso a la herramienta <strong>adb.exe</strong> seguiremos esto
 </code></pre></li>
 <li>
 <p><strong>Con el emulador arrancado</strong>, ejecutaremos el comando <strong><code>adb shell</code></strong> para acceder a la consola del emulador. Por ejemplo:</p>
+<<<<<<< HEAD
+<pre data-role="codeBlock" data-info="bash" class="language-bash">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>alumno<span class="token punctuation">\</span>AppData<span class="token punctuation">\</span>Local<span class="token punctuation">\</span>Android<span class="token punctuation">\</span>Sdk<span class="token punctuation">\</span>platform-tools<span class="token operator">&gt;</span>adb shell
+=======
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>alumno<span class="token punctuation">\</span>AppData<span class="token punctuation">\</span>Local<span class="token punctuation">\</span>Android<span class="token punctuation">\</span>Sdk<span class="token punctuation">\</span>platform-tools<span class="token operator">&gt;</span>adb shell
+>>>>>>> origin
 emu64x:/ $
 </code></pre></li>
 <li>
@@ -283,6 +291,19 @@ emu64x:/ $
 </div>
 </div>
 <div style="page-break-after:always;"></div>
+<<<<<<< HEAD
+<h3 class="mume-header" id="intents-impl%C3%ADcitos">Intents Impl&#xED;citos</h3>
+
+<p>Son los que m&#xE1;s interesantes para nosotros. Puesto que no siempre sabemos que aplicaciones vamos a tener instaladas.</p>
+<p>No nombran el componente espec&#xED;fico, pero en cambio declaran una acci&#xF3;n general para realizar, lo cual permite que un componente de otra aplicaci&#xF3;n la maneje. Por ejemplo, si quieres enviar un correo electr&#xF3;nico no necesitas saber qu&#xE9; aplicaci&#xF3;n de correo electr&#xF3;nico tiene el usuario instalada, simplemente debes enviar una intent impl&#xED;cita para que cualquier aplicaci&#xF3;n de correo electr&#xF3;nico pueda responderla. Es m&#xE1;s, puedes preguntarle al sistema si existe una actividad que pueda responder a tu intent antes de iniciarla y <strong>ofrecerle la posibilidad al usuario de elegir qu&#xE9; aplicaci&#xF3;n usar</strong>.</p>
+<h4 class="mume-header" id="enviar-un-correo-electr%C3%B3nico-escogiendo-la-aplicaci%C3%B3n">Enviar un correo electr&#xF3;nico escogiendo la aplicaci&#xF3;n</h4>
+
+<p>Veamos un ejemplo de un <strong>Intent impl&#xED;cito</strong> para solicitar al sistema enviar un correo electr&#xF3;nico con un texto plano. Adem&#xE1;s, al Intent le pasaremos una serie de par&#xE1;metros como el asunto, el texto del correo y los destinatarios. Para ello usaremos el m&#xE9;todo <strong><code>putExtra()</code></strong> del objeto <strong>Intent</strong>. El c&#xF3;digo ser&#xED;a el siguiente...</p>
+<p><strong>Aunque no es necesario</strong>, podemos indicar a Android que tipo de intents vamos a usar en nuestra aplicaci&#xF3;n al final de Manifest de la aplicaci&#xF3;n con la etiqueta <strong><code>&lt;queries&gt;</code></strong>.</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/apk/res/android<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://schemas.android.com/tools<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+=======
 <h3 id="intents-implícitos">Intents Implícitos </h3>
 <p>Son los que más interesantes para nosotros. Puesto que no siempre sabemos que aplicaciones vamos a tener instaladas.</p>
 <p>No nombran el componente específico, pero, en cambio, declaran una acción general para realizar, lo cual permite que un componente de otra aplicación la maneje. Por ejemplo, si quieres enviar un correo electrónico, no necesitas saber qué aplicación de correo electrónico tiene el usuario instalada; simplemente debes enviar una intent implícita para que cualquier aplicación de correo electrónico pueda responderla. Es más, puedes preguntarle al sistema si existe una actividad que pueda responder a tu intent antes de iniciarla y <strong>ofrecerle la posibilidad al usuario de elegir qué aplicación usar</strong>.</p>
@@ -292,6 +313,7 @@ emu64x:/ $
 <pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
     <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+>>>>>>> origin
 
     ...
 
@@ -363,7 +385,11 @@ emu64x:/ $
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span>
 </code></pre><p>Puedes consultar la <strong><a href="https://developer.android.com/guide/components/intents-filters?hl=es-419#Receiving">documentación oficial</a></strong> para más información.</p>
 <blockquote>
+<<<<<<< HEAD
+<p>&#x1F4CC; <strong>Nota</strong>: Si no declaras ning&#xFA;n filtro de intent para una actividad, esta solo se puede iniciar con un <strong>intent expl&#xED;cito</strong>.</p>
+=======
 <p>📌 <strong>Nota</strong>: Si no declaras ningún filtro de intent para una actividad, esta solo se puede iniciar con un <strong>intent explícito</strong>.</p>
+>>>>>>> origin
 </blockquote>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 70%">
@@ -397,22 +423,39 @@ emu64x:/ $
         <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Ver Balmis en Maps"</span></span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+<<<<<<< HEAD
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="obtener-el-resultado-de-un-intent-registrando-un-contrato">Obtener el resultado de un Intent registrando un &apos;<em>contrato</em>&apos;</h4>
+
+<p>Iniciar otra actividad, ya sea dentro de tu app o desde otra, no tiene por qu&#xE9; ser una operaci&#xF3;n unidireccional, tambi&#xE9;n puedes iniciar una actividad y recibir un resultado. Por ejemplo, tu app puede iniciar una app de c&#xE1;mara y <strong>recibir la foto tomada como resultado</strong>. Tambi&#xE9;n puedes iniciar la app de Contactos para que el usuario <strong>seleccione un contacto y, luego, recibir los detalles correspondientes</strong> como resultado.</p>
+=======
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="obtener-el-resultado-de-un-intent-registrando-un-contrato">Obtener el resultado de un Intent registrando un '<em>contrato</em>' </h4>
 <p>Iniciar otra actividad, ya sea dentro de tu app o desde otra, no tiene por qué ser una operación unidireccional. También puedes iniciar una actividad y recibir un resultado. Por ejemplo, tu app puede iniciar una app de cámara y <strong>recibir la foto tomada como resultado</strong>. También puedes iniciar la app de Contactos para que el usuario <strong>seleccione un contacto y, luego, recibir los detalles correspondientes</strong> como resultado.</p>
+>>>>>>> origin
 <p>Deberemos tener en cuenta que:</p>
 <ul>
 <li>El resultado no es inmediato y <strong>deberemos definir algún tipo de callback para recibirlo</strong>.</li>
 <li>La gestión de ese callback deberá ser <strong>asíncrona</strong> y no bloquear la UI.</li>
 <li>Este callback debe estar ligado al ciclo de vida de la actividad que lo recibe. Esto es, si lanzamos un Intent con respuesta desde una actividad, el callback no se debe gestionar si esta ha finalizado.</li>
 </ul>
+<<<<<<< HEAD
+<p>Para gestionar todo esto Android ha definido una <strong><a href="https://developer.android.com/training/basics/intents/result?hl=es-419#launch">serie de clases</a></strong>.</p>
+<p>Para simplificar, vamos a realizar este proceso creando un <strong>Intent</strong> para lanzar otra <strong>Activity</strong> de nuestra propia aplicaci&#xF3;n de ejemplo <strong>que recibir&#xE1; un texto y adem&#xE1;s nos devolver&#xE1; otro intent con el texto introducido</strong>.</p>
+=======
 <p>Para gestionar todo esto Android ha definido una <strong><a href="https://developer.android.com/training/basics/intents/result?hl=es-419#launch">serie de clases</a></strong> que me permiten gestionar esto.</p>
 <p>Para simplificar, vamos a realizar este proceso creando un <strong>Intent</strong> lanzar otra <strong>Activity</strong> de nuestra propia aplicación de ejemplo <strong>que recibirá un texto y además nos devolverá otro intent con el texto introducido</strong>.</p>
+>>>>>>> origin
 <blockquote>
 <p>✋ <strong>Importante</strong>: Si el intent lo hiciéramos sobre <strong>una actividad de otra aplicación</strong> el proceso de comunicación será el mismo de nuestro ejemplo.</p>
 </blockquote>
+<<<<<<< HEAD
+<p>Para ello, nos situamos sobre el paquete <strong><code>views</code></strong> seleccionamos bot&#xF3;n derecho y crear una nueva clase que represente una actividad llamada <strong><code>ActivityQueProduceUnTexto</code></strong>. Recuerda que para usar compose debe heredar de la clase <strong><code>ComponentActivity</code></strong>. El c&#xF3;digo ser&#xED;a el siguiente...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> ActivityQueProduceUnTexto <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+=======
 <p>Para ello, nos situamos sobre el paquete <strong><code>views</code></strong> seleccionamos botón derecho y crear una nueva clase que represente una actividad llamada <strong><code>ActivityQueProduceUnTexto</code></strong>. Recuerda que para usar compose debe heredar de la clase <strong><code>ComponentActivity</code></strong>. El código sería el siguiente...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> ActivityQueProduceUnTexto <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+>>>>>>> origin
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         setContent <span class="token punctuation">{</span>
@@ -442,11 +485,19 @@ emu64x:/ $
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>data</span> <span class="token attr-name"><span class="token namespace">android:</span>mimeType</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/plain<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>intent-filter</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activity</span><span class="token punctuation">&gt;</span></span>
+<<<<<<< HEAD
+</pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: F&#xED;jate adem&#xE1;s, que hemos a&#xF1;adido el atributo <strong><code>android:exported=&quot;true&quot;</code></strong>. Esto es necesario para que <strong>otras aplicaciones</strong> puedan usar esta actividad y adem&#xE1;s hemos expuesto a Android que podemos recibir intents de tipo <strong><code>SEND</code></strong> con datos de tipo <strong><code>text/plain</code></strong> para que nos ofrezca a otras Apps en ese caso.</p>
+</blockquote>
+<p>Podemos ahora definir la siguiente UI con Compose para <strong><code>ActivityQueProduceUnTexto</code></strong> en la cual mostramos el dato de texto recibido desde el <strong><code>MainActivity</code></strong> y adem&#xE1;s tenemos un campo de texto para que el usuario introduzca un texto y lo devuelva al <strong><code>MainActivity</code></strong> a trav&#xE9;s del manejador <strong><code>onClickDevolver</code></strong>. El c&#xF3;digo puede ser el siguiente...</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=25}" class="language-kotlin" data-line="25"><span class="token annotation builtin">@Composable</span>
+=======
 </code></pre><blockquote>
 <p>✋ <strong>Importante</strong>: Fíjate además, que hemos añadido el atributo <strong><code>android:exported="true"</code></strong>. Esto es necesario para que <strong>otras aplicaciones</strong> puedan usar esta actividad y además hemos expuesto a Android que podemos recibir intents de tipo <strong><code>SEND</code></strong> con datos de tipo <strong><code>text/plain</code></strong> para que nos ofrezca a otras Apps en ese caso.</p>
 </blockquote>
 <p>Podemos ahora definir la siguiente UI con Compose para <strong><code>ActivityQueProduceUnTexto</code></strong> en la cual mostramos el dato de texto recibido desde el <strong><code>MainActivity</code></strong> y además tenemos un campo de texto para que el usuario introduzca un texto y lo devuelva al <strong><code>MainActivity</code></strong> a través del manejador <strong><code>onClickDevolver</code></strong>. El código puede ser el siguiente...</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=25}" class="language-kotlin kotlin" data-line="25"><code><span class="token annotation builtin">@Composable</span>
+>>>>>>> origin
 <span class="token keyword keyword-fun">fun</span> <span class="token function">PideTexto</span><span class="token punctuation">(</span>
     textoRecibidoPorLlamador<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Sin llamador"</span></span><span class="token punctuation">,</span>
     onClickDevolver<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
@@ -475,7 +526,11 @@ emu64x:/ $
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+<<<<<<< HEAD
+<div class="line-highlight-wrapper">
+=======
 </code><div class="line-highlight-wrapper">
+>>>>>>> origin
 
 
 
@@ -500,9 +555,13 @@ emu64x:/ $
 
 
 <div aria-hidden="true" class="line-highlight" data-range="25" data-start="25">
-</div></div></pre><p>Veamos ahora cómo quedaría el código definitivo de <strong><code>ActivityQueProduceUnTexto</code></strong>.</p>
+</div></div></pre><p>Veamos ahora c&#xF3;mo quedar&#xED;a el c&#xF3;digo definitivo de <strong><code>ActivityQueProduceUnTexto</code></strong>.</p>
 <div style="page-break-after:always;"></div>
+<<<<<<< HEAD
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4-10, 13-22]}" class="language-kotlin" data-line="4-10,13-22"><span class="token keyword keyword-class">class</span> ActivityQueProduceUnTexto <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+=======
 <pre data-role="codeBlock" data-info="kotlin {highlight=[4-10, 13-22]}" class="language-kotlin kotlin" data-line="4-10,13-22"><code><span class="token keyword keyword-class">class</span> ActivityQueProduceUnTexto <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+>>>>>>> origin
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         <span class="token comment">// Recuperamos el texto que nos ha pasado el llamador y que está en</span>
@@ -515,9 +574,15 @@ emu64x:/ $
 
         <span class="token keyword keyword-val">val</span> onClickDevolver<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> texto <span class="token operator">-&gt;</span>
             <span class="token comment">// Para devolver datos al llamador, los empaquetamos en un </span>
+<<<<<<< HEAD
+            <span class="token comment">// Intent le a&#xF1;adimos los datos y lo pasamos como par&#xE1;metro </span>
+            <span class="token comment">// al m&#xE9;todo setResult, que crea un objeto ActivityResult que</span>
+            <span class="token comment">// es lo que espera recibir el llamador en su &apos;contrato&apos;. </span>
+=======
             <span class="token comment">// Intent le añadimos los datos y lo pasamos como parámetro </span>
             <span class="token comment">// al método setResult, que crea un objeto ActivityResult que</span>
             <span class="token comment">// es lo que espera recibir el llamador en su 'contrato'. </span>
+>>>>>>> origin
             <span class="token function">Intent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">also</span> <span class="token punctuation">{</span>intento <span class="token operator">-&gt;</span>
                 intento<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"TEXTODEVUELTO"</span></span><span class="token punctuation">,</span> texto<span class="token punctuation">)</span>
                 <span class="token function">setResult</span><span class="token punctuation">(</span>RESULT_OK<span class="token punctuation">,</span> intento<span class="token punctuation">)</span>
@@ -573,11 +638,19 @@ emu64x:/ $
 
 
 
+<<<<<<< HEAD
+</div></div></pre><p>Veamos ahora c&#xF3;mo ser&#xED;a el proceso de llamar a <strong><code>ActivityQueProduceUnTexto</code></strong> con un Intent expl&#xED;cito con un texto y recibir el resultado en otro intent envuelto en un <strong><code>ActivityResult</code></strong>.</p>
+=======
 </div></div></pre><p>Veamos ahora cómo sería el proceso de llamar a <strong><code>ActivityQueProduceUnTexto</code></strong> con un Intent explícito con un texto y recibir el resultado en otro intent envuelto en un <strong><code>ActivityResult</code></strong>.</p>
+>>>>>>> origin
 <p>En primer lugar definimos una interfaz <strong><code>@Composable</code></strong> en <strong><code>MainActivity</code></strong> (fuera de la clase) que nos permita lanzar la actividad y gestionar su respuesta denominado <strong><code>InterfaceParaLanzarActivityQueProduceUnTexto</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">InterfaceParaLanzarActivityQueProduceUnTexto</span><span class="token punctuation">(</span>
+<<<<<<< HEAD
+    textoDevueltoPorIntent<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;No has llamado a&#xFA;n&quot;</span><span class="token punctuation">,</span>
+=======
     textoDevueltoPorIntent<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"No has llamado aún"</span></span><span class="token punctuation">,</span>
+>>>>>>> origin
     onClickLanzar<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">Column</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -661,11 +734,19 @@ emu64x:/ $
 </code></pre><p>Donde ...</p>
 <ul>
 <li>
+<<<<<<< HEAD
+<p><strong><code>ActivityResultContract</code></strong> es un &apos;contrato&apos; que especifica que una actividad se puede llamar con una entrada de tipo I y producir una salida de tipo O. Aunque se pueden crear contratos personalizados, la API proporciona contratos predeterminados para acciones de intent b&#xE1;sicas, como tomar una foto, solicitar permisos, etc.</p>
+<p>Por ejemplo, <strong><code>ActivityResultContracts.StartActivityForResult()</code></strong> es una contrato que especifica que una actividad se puede llamar con una <strong>entrada de tipo <code>Intent</code></strong> y producir una <strong>salida de tipo <code>ActivityResult</code></strong>.</p>
+</li>
+<li>
+<p><strong><code>ActivityResultCallback</code></strong> es un <em>callback</em> al que le llega un objeto de tipo O, para nuestro contrato un <strong><code>ActivityResult</code></strong> y hace una determinada acci&#xF3;n sin retornar o &apos;<em>producir</em>&apos; nada. <strong><code>result : ActivityResult -&gt; void</code></strong></p>
+=======
 <p><strong><code>ActivityResultContract</code></strong> es un 'contrato' que especifica que una actividad se puede llamar con una entrada de tipo I y producir una salida de tipo O. Aunque se pueden crear contratos personalizados, la API proporciona contratos predeterminados para acciones de intent básicas, como tomar una foto, solicitar permisos, etc.</p>
 <p>Por ejemplo, <strong><code>ActivityResultContracts.StartActivityForResult()</code></strong> es una contrato que especifica que una actividad se puede llamar con una <strong>entrada de tipo <code>Intent</code></strong> y producir una <strong>salida de tipo <code>ActivityResult</code></strong>.</p>
 </li>
 <li>
 <p><strong><code>ActivityResultCallback</code></strong> es un <em>callback</em> al que le llega un objeto de tipo O, para nuestro contrato un <strong><code>ActivityResult</code></strong> y hace una determinada acción sin retornar o '<em>producir</em>' nada. <strong><code>result : ActivityResult -&gt; void</code></strong></p>
+>>>>>>> origin
 <div class="admonition warning">
 <p class="admonition-title">Aviso</p>
 <p>Los <strong><code>registerForActivityResult</code></strong> deben hacerse en el <strong><code>onCreate</code></strong> de la actividad.</p>
@@ -691,6 +772,18 @@ emu64x:/ $
         imageUri <span class="token operator">=</span> uri
     <span class="token punctuation">}</span>
     Column <span class="token punctuation">{</span>
+<<<<<<< HEAD
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> launcher<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token string">&quot;image\*&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Load Image&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Image</span><span class="token punctuation">(</span>
+            painter <span class="token operator">=</span> <span class="token function">rememberImagePainter</span><span class="token punctuation">(</span>imageUri<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            contentDescription <span class="token operator">=</span> <span class="token string">&quot;My Image&quot;</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p><strong><code>GetContent()</code></strong> es un contrato que especifica que que se puede llamar a una actividad de selecci&#xF3;n de im&#xE1;genes con una entrada de tipo <strong><code>String</code></strong> que es la ruta de donde escogerlas y producir una salida de tipo <strong><code>Uri</code></strong> que es ruta a ella.</p>
+=======
         <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> launcher<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"image\*"</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Load Image"</span></span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
@@ -701,6 +794,7 @@ emu64x:/ $
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre><p><strong><code>GetContent()</code></strong> es un contrato que especifica que que se puede llamar a una actividad de selección de imágenes con una entrada de tipo <strong><code>String</code></strong> que es la ruta de donde escogerlas y producir una salida de tipo <strong><code>Uri</code></strong> que es ruta a ella.</p>
+>>>>>>> origin
 <div style="page-break-after:always;"></div>
 <h2 id="gestion-de-permisos">Gestion de Permisos </h2>
 <p>Para realizar lanzar algunos intents sobre actividades y servicios del sistema necesitaremos de ciertos permisos. Por ejemplo, para abrir la cámara, para leer la agenda de contactos, etc.</p>
@@ -712,8 +806,13 @@ emu64x:/ $
 <p>Definiremos los requerimientos de permisos en el <strong><code>AndroidManifest.xml</code></strong> de la aplicación.</p>
 </li>
 <li>
+<<<<<<< HEAD
+<p>Registraremos un contrato de solicitud de permisos <strong><code>ActivityResultContracts.RequestPermission()</code></strong> con el m&#xE9;todo <strong><code>registerForActivityResult</code></strong> o <strong><code>rememberLauncherForActivityResult</code></strong> de la clase <strong><code>ComponentActivity</code></strong>.</p>
+<p>El manejador del resultado de los permisos crear&#xE1; el intent para el servicio o activity y se pueden dar dos casos:</p>
+=======
 <p>Registraremos un contrato de solicitud de permisos <strong><code>ActivityResultContracts.RequestPermission()</code></strong> con el método <strong><code>registerForActivityResult</code></strong> o <strong><code>rememberLauncherForActivityResult</code></strong> de la clase <strong><code>ComponentActivity</code></strong>.</p>
 <p>El manejador del resultado de los permisos creará el intent para el servicio o activity y se pueden dar dos casos:</p>
+>>>>>>> origin
 <ol>
 <li>Que el servicio no retorne nada por ejemplo una llamada telefónica.<br>
 En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el intent de llamada con el método <strong><code>startActivity()</code></strong> como ya hemos visto.</li>
@@ -726,6 +825,17 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <h3 id="gestionar-intent-implícito-de-llamada-telefónica">Gestionar intent implícito de llamada telefónica </h3>
 <ol>
 <li>
+<<<<<<< HEAD
+<p>A&#xF1;adimos en el <strong><code>AndroidManifest.xml</code></strong> el permiso <strong><code>CALL_PHONE</code></strong>. Estas etiquetas ir&#xE1;n dentro de la etiqueta <strong><code>&lt;manifest&gt;</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-feature</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.hardware.telephony<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>required</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.CALL_PHONE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+</pre></li>
+<li>
+<p>Por ejemplo, si queremos que el m&#xE9;todo de registro sea <strong><code>@Composable</code></strong> haremos.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6-7, 10]}" class="language-kotlin" data-line="6-7,10"><span class="token annotation builtin">@Composable</span>
+=======
 <p>Añadimos en el <strong><code>AndroidManifest.xml</code></strong> el permiso <strong><code>CALL_PHONE</code></strong>. Estas etiquetas irán dentro de la etiqueta <strong><code>&lt;manifest&gt;</code></strong>:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-feature</span>
     <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.hardware.telephony<span class="token punctuation">"</span></span>
@@ -735,6 +845,7 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <li>
 <p>Por ejemplo, si queremos que el método de registro sea <strong><code>@Composable</code></strong> haremos.</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[6-7, 10]}" class="language-kotlin kotlin" data-line="6-7,10"><code><span class="token annotation builtin">@Composable</span>
+>>>>>>> origin
 <span class="token keyword keyword-fun">fun</span> <span class="token function">registroLlamarPorTelefonoIntent</span><span class="token punctuation">(</span>
     telefono<span class="token operator">:</span> String
 <span class="token punctuation">)</span><span class="token operator">:</span> ManagedActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Boolean<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
@@ -792,6 +903,17 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <h3 id="gestionar-intent-implícito-para-hacer-un-foto">Gestionar intent implícito para hacer un foto </h3>
 <ol>
 <li>
+<<<<<<< HEAD
+<p>A&#xF1;adimos en el <strong><code>AndroidManifest.xml</code></strong> el permiso <strong><code>CAMERA</code></strong>. Estas etiquetas ir&#xE1;n dentro de la etiqueta <strong><code>&lt;manifest&gt;</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-feature</span>
+    <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.hardware.camera.any<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name"><span class="token namespace">android:</span>required</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.CAMERA<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+</pre></li>
+<li>
+<p>Por ejemplo, si queremos que el m&#xE9;todo de registro sea <strong><code>@Composable</code></strong> haremos.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6-12, 14-21]}" class="language-kotlin" data-line="6-12,14-21"><span class="token annotation builtin">@Composable</span>
+=======
 <p>Añadimos en el <strong><code>AndroidManifest.xml</code></strong> el permiso <strong><code>CAMERA</code></strong>. Estas etiquetas irán dentro de la etiqueta <strong><code>&lt;manifest&gt;</code></strong>:</p>
 <pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-feature</span>
     <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.hardware.camera.any<span class="token punctuation">"</span></span>
@@ -801,6 +923,7 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <li>
 <p>Por ejemplo, si queremos que el método de registro sea <strong><code>@Composable</code></strong> haremos.</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[6-12, 14-21]}" class="language-kotlin kotlin" data-line="6-12,14-21"><code><span class="token annotation builtin">@Composable</span>
+>>>>>>> origin
 <span class="token keyword keyword-fun">fun</span> <span class="token function">registroHacerFotoConIntent</span><span class="token punctuation">(</span>
     onFotoCambiada<span class="token operator">:</span> <span class="token punctuation">(</span>ImageBitmap<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span><span class="token operator">:</span> ManagedActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Boolean<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
@@ -921,8 +1044,13 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>paths</span><span class="token punctuation">&gt;</span></span>
 </code></pre></li>
 <li>
+<<<<<<< HEAD
+<p>Ya solo nos queda definir el contrato <strong><code>ActivityResultContracts.TakePicture()</code></strong> cuyo callback, a trav&#xE9;s del <strong><code>FileProvider</code></strong> definido nos permitir&#xE1; obtener la ruta de la foto en la cach&#xE9;.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> Context<span class="token punctuation">.</span><span class="token function">toImageBitmap</span><span class="token punctuation">(</span>uri<span class="token operator">:</span> Uri<span class="token punctuation">)</span><span class="token operator">:</span> ImageBitmap <span class="token punctuation">{</span>
+=======
 <p>Ya solo nos queda definir el contrato <strong><code>ActivityResultContracts.TakePicture()</code></strong> cuyo callback, a través del <strong><code>FileProvider</code></strong> definido nos permitirá obtener la ruta de la foto en la caché.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> Context<span class="token punctuation">.</span><span class="token function">toImageBitmap</span><span class="token punctuation">(</span>uri<span class="token operator">:</span> Uri<span class="token punctuation">)</span><span class="token operator">:</span> ImageBitmap <span class="token punctuation">{</span>
+>>>>>>> origin
     <span class="token keyword keyword-val">val</span> contextResolver <span class="token operator">=</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>contentResolver
     <span class="token keyword keyword-val">val</span> source <span class="token operator">=</span> ImageDecoder<span class="token punctuation">.</span><span class="token function">createSource</span><span class="token punctuation">(</span>contextResolver<span class="token punctuation">,</span> uri<span class="token punctuation">)</span>
     <span class="token keyword keyword-return">return</span> ImageDecoder<span class="token punctuation">.</span><span class="token function">decodeBitmap</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -966,8 +1094,13 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <p>En el punto Registrando contratos dentro de un <code>@Composable</code> ya hemos visto un ejemplo de como hacerlo. Veamos como concretarlo para seguir el mismo esquema que hemos seguido en los ejemplos anteriores.</p>
 <ol>
 <li>
+<<<<<<< HEAD
+<p>Definimos el contrato <strong><code>ActivityResultContracts.GetContent()</code></strong> que especifica que que se puede llamar a una actividad de selecci&#xF3;n de im&#xE1;genes con una entrada de tipo <strong><code>String</code></strong> que es la ruta de donde escogerlas y producir una salida de tipo <strong><code>Uri</code></strong> que es ruta a ella.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+=======
 <p>Definimos el contrato <strong><code>ActivityResultContracts.GetContent()</code></strong> que especifica que que se puede llamar a una actividad de selección de imágenes con una entrada de tipo <strong><code>String</code></strong> que es la ruta de donde escogerlas y producir una salida de tipo <strong><code>Uri</code></strong> que es ruta a ella.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+>>>>>>> origin
 <span class="token keyword keyword-fun">fun</span> <span class="token function">registroSelectorDeImagenesConGetContent</span><span class="token punctuation">(</span>
     onFotoCambiada<span class="token operator">:</span> <span class="token punctuation">(</span>ImageBitmap<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span><span class="token operator">:</span> ManagedActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Uri<span class="token operator">?</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
@@ -996,8 +1129,14 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 </span></code></pre></li>
 </ol>
 <div style="page-break-after:always;"></div>
+<<<<<<< HEAD
+<h2 class="mume-header" id="conclusi%C3%B3n">Conclusi&#xF3;n</h2>
+
+<p>Como has podido observar gestionar permisos y lanzar intents es un proceso que puede ser complejo y que requiere de un conocimiento profundo de la API de Android. Por ello, en ocasiones es recomendable utilizar librer&#xED;as de terceros que nos faciliten el trabajo. Por ejemplo dispones de la librer&#xED;a <strong><a href="https://google.github.io/accompanist/permissions/">accompanist</a></strong> que ofrece compatibilidad con Compose para gestionar permisos y lanzar intents.</p>
+=======
 <h2 id="conclusión">Conclusión </h2>
 <p>Como has podido observar gestionar permisos y lanzar intents es un proceso que puede ser complejo y que requiere de un conocimiento profundo de la API de Android. Por ello, en ocasiones es recomendable utilizar librerías de terceros que nos faciliten el trabajo. Por ejemplo dispones de la librería <strong><a href="https://google.github.io/accompanist/permissions/">accompanist</a></strong> que ofrece compatibilidad con Compose para gestionar permisos y lanzar intents.</p>
+>>>>>>> origin
 <p>Puedes descargarte alguna de las funciones a modo de utilidad de <strong><a href="assets/codigo/tema_3_8/RegistroContratosCompose.kt">RegistroContratosCompose.kt</a></strong> para utilizar en tus proyectos incluyendo el fuente en un nuevo paquete denominado <strong><code>.utilities.devices</code></strong> de tu proyecto.</p>
 
       </div>
