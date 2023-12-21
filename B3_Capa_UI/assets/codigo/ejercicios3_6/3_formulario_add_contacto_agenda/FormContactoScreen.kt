@@ -51,7 +51,6 @@ import com.pmdm.agenda.ui.features.ContactoUiState
 import com.pmdm.agenda.ui.features.components.ImagenContacto
 import com.pmdm.agenda.ui.features.formcontacto.seleccioncategorias.SeleccionCategoriasConCheckBox
 import com.pmdm.agenda.ui.theme.AgendaTheme
-import com.pmdm.agenda.utilities.validacion.Validacion
 
 @Composable
 private fun CabeceraFoto(
@@ -112,6 +111,7 @@ private fun CuerpoFormulario(
     modifier: Modifier = Modifier,
     contactoState: ContactoUiState,
     validacionContactoState: ValidacionContactoUiState,
+    verSnackBarState: Boolean = false,
     onContactoEvent: (ContactoEvent) -> Unit,
     onNavigateTrasFormContacto: (actualizaContactos: Boolean) -> Unit
 ) {
@@ -160,6 +160,7 @@ private fun CuerpoFormulario(
         }
         Pie(
             validacionContactoState = validacionContactoState,
+            verSnackBarState = verSnackBarState,
             onContactoEvent = onContactoEvent,
             onNavigateTrasFormContacto = onNavigateTrasFormContacto
         )
@@ -169,10 +170,11 @@ private fun CuerpoFormulario(
 @Composable
 private fun BoxScope.Pie(
     validacionContactoState: ValidacionContactoUiState,
+    verSnackBarState: Boolean = false,
     onContactoEvent: (ContactoEvent) -> Unit,
     onNavigateTrasFormContacto: (actualizaContactos: Boolean) -> Unit
 ) {
-    if (validacionContactoState.validacionContacto.hayError) {
+    if (verSnackBarState) {
         Snackbar(
             modifier = Modifier
                 .fillMaxWidth()
@@ -190,7 +192,7 @@ private fun BoxScope.Pie(
                 }
             }
         ) {
-            Text(text = validacionContactoState.validacionContacto.mensajeError!!)
+            Text(text = validacionContactoState.mensajeError!!)
         }
     } else {
         ExtendedFloatingActionButton(
@@ -214,6 +216,7 @@ private fun BoxScope.Pie(
 fun FormContactoScreenHorizontal(
     contactoState: ContactoUiState,
     validacionContactoState: ValidacionContactoUiState,
+    verSnackBarState: Boolean = false,
     onContactoEvent: (ContactoEvent) -> Unit,
     onNavigateTrasFormContacto: (actualizaContactos: Boolean) -> Unit
 ) {
@@ -231,6 +234,7 @@ fun FormContactoScreenHorizontal(
         CuerpoFormulario(
             contactoState = contactoState,
             validacionContactoState = validacionContactoState,
+            verSnackBarState = verSnackBarState,
             onContactoEvent = onContactoEvent,
             onNavigateTrasFormContacto = onNavigateTrasFormContacto,
         )
@@ -241,6 +245,7 @@ fun FormContactoScreenHorizontal(
 fun FormContactoScreenVertical(
     contactoState: ContactoUiState,
     validacionContactoState: ValidacionContactoUiState,
+    verSnackBarState: Boolean = false,
     onContactoEvent: (ContactoEvent) -> Unit,
     onNavigateTrasFormContacto: (actualizaContactos: Boolean) -> Unit
 ) {
@@ -257,6 +262,7 @@ fun FormContactoScreenVertical(
             modifier = Modifier.fillMaxHeight(),
             contactoState = contactoState,
             validacionContactoState = validacionContactoState,
+            verSnackBarState = verSnackBarState,
             onContactoEvent = onContactoEvent,
             onNavigateTrasFormContacto = onNavigateTrasFormContacto,
         )
@@ -267,6 +273,7 @@ fun FormContactoScreenVertical(
 fun FormContactoScreen(
     contactoState: ContactoUiState,
     validacionContactoState: ValidacionContactoUiState,
+    verSnackBarState: Boolean = false,
     onContactoEvent: (ContactoEvent) -> Unit,
     onNavigateTrasFormContacto: (actualizaContactos: Boolean) -> Unit
 ) {
@@ -279,6 +286,7 @@ fun FormContactoScreen(
             FormContactoScreenVertical(
                 contactoState = contactoState,
                 validacionContactoState = validacionContactoState,
+                verSnackBarState = verSnackBarState,
                 onContactoEvent = onContactoEvent,
                 onNavigateTrasFormContacto = onNavigateTrasFormContacto
             )
@@ -286,6 +294,7 @@ fun FormContactoScreen(
             FormContactoScreenHorizontal(
                 contactoState = contactoState,
                 validacionContactoState = validacionContactoState,
+                verSnackBarState = verSnackBarState,
                 onContactoEvent = onContactoEvent,
                 onNavigateTrasFormContacto = onNavigateTrasFormContacto
             )
@@ -309,12 +318,14 @@ fun FormContactoScreenTest(){
     var contactoState by remember { mutableStateOf(ContactoUiState()) }
     var validacionContactoState by remember { mutableStateOf(ValidacionContactoUiState()) }
     var validadorContacto = remember { ValidadorContacto() }
+    var verSnackBarState by remember { mutableStateOf(false) }
 
     AgendaTheme {
         Surface {
             FormContactoScreen(
                 contactoState = contactoState,
                 validacionContactoState = validacionContactoState,
+                verSnackBarState = verSnackBarState,
                 onContactoEvent = { e ->
                     when (e) {
                         is ContactoEvent.OnChangeCategoria -> {
@@ -354,16 +365,18 @@ fun FormContactoScreenTest(){
                         }
 
                         is ContactoEvent.OnDismissError -> {
-                            validacionContactoState =
-                                validacionContactoState.copy(validacionContacto = Validacion(false))
+                            verSnackBarState = false
                         }
 
                         is ContactoEvent.OnSaveContacto -> {
                             validacionContactoState = validadorContacto.valida(contactoState)
-                            if (!validacionContactoState.validacionContacto.hayError) {
+                            if (!validacionContactoState.hayError) {
                                 contactoState = ContactoUiState()
+                            } else {
+                                verSnackBarState = true
                             }
                         }
+
                     }
                 },
                 onNavigateTrasFormContacto = {}

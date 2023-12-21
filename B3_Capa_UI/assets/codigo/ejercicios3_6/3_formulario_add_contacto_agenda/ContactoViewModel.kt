@@ -9,7 +9,6 @@ import com.pmdm.agenda.models.Contacto
 import com.pmdm.agenda.ui.features.ContactoUiState
 import com.pmdm.agenda.ui.features.toContacto
 import com.pmdm.agenda.ui.features.toContactoUiState
-import com.pmdm.agenda.utilities.validacion.Validacion
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -24,10 +23,13 @@ class ContactoViewModel @Inject constructor(
     // Este estado me indicará si estoy editando un contacto existente o creando uno nuevo
     var editandoContactoExistenteState: Boolean = false
         private set
+
     // Estados para el contacto y su validación. Solo son modificables desde el ViewModel
     var contactoState by mutableStateOf(ContactoUiState())
         private set
     var validacionContactoState by mutableStateOf(ValidacionContactoUiState())
+        private set
+    var verSnackBarState by mutableStateOf(false)
         private set
 
     // Este método se llamará cuando queramos editar un contacto ya existente
@@ -57,42 +59,48 @@ class ContactoViewModel @Inject constructor(
             is ContactoEvent.OnChangeCategoria -> {
                 contactoState = contactoState.copy(categorias = e.categoria)
             }
+
             is ContactoEvent.OnChangeNombre -> {
                 contactoState = contactoState.copy(nombre = e.nombre)
                 validacionContactoState = validacionContactoState.copy(
                     validacionNombre = validadorContacto.validadorNombre.valida(e.nombre)
                 )
             }
+
             is ContactoEvent.OnChangeApellidos -> {
                 contactoState = contactoState.copy(apellidos = e.apellidos)
                 validacionContactoState = validacionContactoState.copy(
                     validacionApellidos = validadorContacto.validadorApellidos.valida(e.apellidos)
                 )
             }
+
             is ContactoEvent.OnChangeCorreo -> {
                 contactoState = contactoState.copy(correo = e.correo)
                 validacionContactoState = validacionContactoState.copy(
                     validacionCorreo = validadorContacto.validadorCorreo.valida(e.correo)
                 )
             }
+
             is ContactoEvent.OnChangeTelefono -> {
                 contactoState = contactoState.copy(telefono = e.telefono)
                 validacionContactoState = validacionContactoState.copy(
                     validacionTelefono = validadorContacto.validadorTelefono.valida(e.telefono)
                 )
             }
+
             is ContactoEvent.OnChangeFoto -> {
                 contactoState = contactoState.copy(foto = e.foto)
             }
+
             is ContactoEvent.OnDismissError -> {
-                validacionContactoState =
-                    validacionContactoState.copy(validacionContacto = Validacion(false))
+                verSnackBarState = false
             }
+
             is ContactoEvent.OnSaveContacto -> {
                 // Validamos todo el contacto
                 validacionContactoState = validadorContacto.valida(contactoState)
                 // Si no hay errores, lo guardamos o actualizamos en el repositorio
-                if (!validacionContactoState.validacionContacto.hayError) {
+                if (!validacionContactoState.hayError) {
                     val c: Contacto = contactoState.toContacto()
                     if (editandoContactoExistenteState) {
                         contactoRepository.update(c)
@@ -102,6 +110,9 @@ class ContactoViewModel @Inject constructor(
                     // Tras guardar seguiremos iremos a la pantalla correspondiente
                     // por ahora no hacemos nada
                     e.onNavigateTrasFormContacto(true)
+                } else {
+                    // Si hay errores, mostramos el snackbar
+                    verSnackBarState = true
                 }
             }
         }
