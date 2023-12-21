@@ -266,8 +266,8 @@ pre[data-line] .line-highlight[data-end]:after {
       <div class="mume markdown-preview  ">
       <h1 class="mume-header undefined" id="ejercicio-lee-fichero">Ejercicio Lee Fichero</h1>
 
-<p><a href="./X_lee_fichero.pdf">Descargar estos apuntes</a></p>
-<p>Vamos a crear un ejercicio que permita practicar el concepto de <strong>Intent Implicito con resultado</strong> a la vez que usamos <strong>corrutinas</strong>. Lo que queremos conseguir es la carga de un archivo <strong>.txt</strong> seleccionado desde el almacenamiento del dispositivo y mostrarlos caracter a caracter en la aplicaci&#xF2;n, mientras se muestra una barra de desplazamiento con el progreso de la carga. Para ello se deber&#xE1; realizar lo siguiente:</p>
+<p><a href="./1_lee_fichero.pdf">Descargar estos apuntes</a></p>
+<p>Vamos a crear un ejercicio que permita practicar el concepto de <strong>Intent Implicito con resultado</strong> a la vez que usamos <strong>corrutinas</strong>. Lo que queremos conseguir es la carga de un archivo <strong>.txt</strong> seleccionado desde el almacenamiento del dispositivo y mostrarlo car&#xE1;cter a car&#xE1;cter en la aplicaci&#xF3;n, mientras se muestra una barra de desplazamiento con el progreso de la carga. Para ello se deber&#xE1; realizar lo siguiente:</p>
 <ol>
 <li>Al iniciar se mostrar&#xE1; un bot&#xF3;n con el texto de Cargar</li>
 <li>Al pulsar sobre el bot&#xF3;n se abrir&#xE1; la app administrador de archivos (Files) instalada por defecto en el sistema, para que podamos seleccionar un <a href="../../assets/codigo/ejercicios3_8/ejerciciox/textolargo_recurso.zip">archivo de texto largo</a>. Previamente subido mediante el <strong>Device Explorer</strong> en la carpeta Documents de la memoria interna del dispositivo:</li>
@@ -284,7 +284,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>&#x1F4A1; <strong>Tips:</strong> Para que se inicie la aplicaci&#xF3;n se lanzar&#xE1; un Intent que deberemos gestionar como hemos visto en el tema, para ello crearemos el m&#xE9;todo <strong>ResgitroSelectorDeFicheroConGetContent</strong> en el paquete <strong>utilities.device</strong>, la url ser&#xED;a <strong><code>*/*</code></strong></p>
 </blockquote>
 <ol start="3">
-<li>Una vez seleccionado el archivo, se pasar&#xE1; a la lectura de este y a su carga en una cadena, para ello utilizaremos el siguiente c&#xF3;digo:</li>
+<li>Una vez seleccionado el archivo, desde una funci&#xF3;n del ViewModel se pasar&#xE1; a la lectura de este y a su carga en una cadena, para ello utilizaremos el siguiente c&#xF3;digo:</li>
 </ol>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"> <span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IOException<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">leeFichero</span><span class="token punctuation">(</span>uri<span class="token operator">:</span> Uri<span class="token punctuation">)</span><span class="token operator">:</span> String<span class="token operator">?</span> <span class="token punctuation">{</span>
@@ -303,6 +303,9 @@ pre[data-line] .line-highlight[data-end]:after {
 <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 15px">
     <img height="450px" src="../../assets/imagenes/ejercicios3_8/x_lee_fichero/imagen3.png">
 </div>
+<blockquote>
+<p>&#x1F4A1; <strong>Tips:</strong> Usa un StringBuilder como State para el texto que vamos cargando, a&#xF1;adiendo un car&#xE1;cter con un retardo de un milisegundo.</p>
+</blockquote>
 <p>Si visualizas el video aclarativo, podr&#xE1;s ver que el scroll se realiza de abajo hacia arriba, para ello tendr&#xE1;s que asignar a la propiedad <strong><code>reverseScrolling = true</code></strong></p>
 <p>En este <a href="(../../assets/codigo/ejercicios3_8/ejerciciox/video_recurso.zip)">enlace</a> encontrar&#xE9;is un video aclarativo con el funcionamiento.</p>
 
