@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
+import android.provider.ContactsContract
 import android.provider.MediaStore
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -18,7 +19,6 @@ import androidx.core.content.FileProvider
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
-
 
 private fun Context.toImageBitmap(uri: Uri): ImageBitmap {
     val contextResolver = this.contentResolver
@@ -172,5 +172,54 @@ fun Context.enviarMail(
 
     if (intent.resolveActivity(packageManager) != null) {
         startActivity(chooser ?: intent)
+    }
+}
+
+// Para hacer llamadas telefónicas, hay que añadir en el manifest:
+// <uses-permission android:name="android.permission.READ_CONTACTS/>
+// Uso:
+//      val registroSeleccionContacto 
+//          = registroSelectorTelefonoContacto { telefono ->
+//              ...
+//      }
+//      ...
+//      registroSeleccionContacto.launch(android.Manifest.permission.READ_CONTACTS)
+
+@Composable
+fun registroSelectorTelefonoContacto(
+    onSeleccionNumeroContacto: (String) -> Unit
+): ManagedActivityResultLauncher<String, Boolean> {
+
+    val contexto = LocalContext.current
+    val registroObtenerTelefono = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val contactUri: Uri? = result.data?.data
+                val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                if (contactUri != null) {
+                    contexto.contentResolver.query(contactUri, projection, null, null, null)
+                        .use { cursor ->
+                            if (cursor != null && cursor.moveToFirst()) {
+                                val numberIndex =
+                                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                                val number =
+                                    if (numberIndex >= 0) cursor.getString(numberIndex) else "NO NUMBER"
+                                onSeleccionNumeroContacto(number)
+                            }
+                        }
+                }
+            }
+        })
+
+    return rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { success ->
+        if (success) {
+            val intent = Intent(Intent.ACTION_PICK).apply {
+                type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
+            }
+            registroObtenerTelefono.launch(intent)
+        }
     }
 }

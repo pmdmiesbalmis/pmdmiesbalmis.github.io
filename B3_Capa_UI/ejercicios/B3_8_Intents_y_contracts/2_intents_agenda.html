@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>Ejercicio Lee Fichero</title>
+      <title>Ejercicio Intents Agenda</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -25,61 +25,8 @@
       <div class="crossnote markdown-preview  ">
       
 <h1 id="ejercicio-lee-fichero">Ejercicio Lee Fichero </h1>
-<p><a href="./1_lee_fichero.pdf">Descargar estos apuntes</a></p>
-<p>Vamos a crear un ejercicio que permita practicar el concepto de <strong>Intent Implicito con resultado</strong> a la vez que usamos <strong>corrutinas</strong>. Lo que queremos conseguir es la carga de un archivo <strong>.txt</strong> seleccionado desde el almacenamiento del dispositivo y mostrarlo carácter a carácter en la aplicación, mientras se muestra una barra de desplazamiento con el progreso de la carga. Para ello se deberá realizar lo siguiente:</p>
-<ol>
-<li>
-<p>Al iniciar se mostrará un botón con el texto de Cargar</p>
-</li>
-<li>
-<p>Al pulsar sobre el botón se abrirá la app administrador de archivos (Files) instalada por defecto en el sistema, para que podamos seleccionar un <a href="../../assets/codigo/ejercicios3_8/ejercicio1/textolargo_recurso.zip">archivo de texto largo</a>. Previamente subido mediante el <strong>Device Explorer</strong> en la carpeta Documents de la memoria interna del dispositivo:</p>
- <div style="display: flex; justify-content: space-evenly; align-items: center; margin-top: 15px; margin-bottom: 15px">
- <div style="width: auto">
- <img width="300px" src="../../assets/imagenes/ejercicios3_8/x_lee_fichero/imagen2.png">
- </div>
- <div style="width: auto">
- <img width="300px" src="../../assets/imagenes/ejercicios3_8/x_lee_fichero/imagen1.png">
- </div>
- </div>
-<blockquote>
-<p>💡 <strong>Tip:</strong> Para que se inicie la aplicación se lanzará un Intent que deberemos gestionar como hemos visto en el tema, para ello crearemos el método <strong>resgitroSelectorDeFicheroConGetContent</strong> en el paquete <strong>utilities.device</strong>, la url sería <strong><code>*/*</code></strong></p>
-</blockquote>
-</li>
-</ol>
-<div style="page-break-after:always;"></div>
-<ol start="3">
-<li>
-<p>Una vez seleccionado el archivo, desde una función del ViewModel se pasará a la lectura de este y a su carga en una cadena, para ello utilizaremos el siguiente código:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IOException<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">leeFichero</span><span class="token punctuation">(</span>uri<span class="token operator">:</span> Uri<span class="token punctuation">)</span><span class="token operator">:</span> String<span class="token operator">?</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-val">val</span> contentResolver <span class="token operator">=</span> getApplication<span class="token operator">&lt;</span>Application<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>contentResolver
-    contentResolver<span class="token punctuation">.</span><span class="token function">openInputStream</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">use</span> <span class="token punctuation">{</span> inputStream <span class="token operator">-&gt;</span>
-        <span class="token keyword keyword-return">return</span> <span class="token function">BufferedReader</span><span class="token punctuation">(</span><span class="token function">InputStreamReader</span><span class="token punctuation">(</span>inputStream<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">readText</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-null">null</span>
-<span class="token punctuation">}</span>
-</code></pre><blockquote>
-<p>⚠️ <strong>Aviso:</strong> Vamos a necesitar usar la propiedad <strong><code>contentResolver</code></strong> definida dentro del <strong><code>Context</code></strong>. Por tanto, para poder acceder al mismo desde un <strong>ViewModel</strong> sin inyectarlo con Hilt. Tendremos que heredar nuestro <strong>ViewModel</strong> de <strong>AndroidViewModel</strong> en lugar de <strong><code>ViewModel</code></strong> y pasar <strong><code>Application</code></strong> en ambos constructores. De esta manera dentro de nuestro <strong>ViewModel</strong> dispondremos el método <strong><code>getApplication&lt;Application&gt;()</code></strong></p>
-</blockquote>
-</li>
-</ol>
-<div style="display: flex; justify-content: space-between; align-items: top; margin-top: 15px">
-<div style="width: 65%">
-<ol start="4">
-<li>
-<p>El siguiente paso será añadir a la pantalla de la aplicación un texto con scroll y una barra de progreso, para relacionar el movimiento de esta con la carga del texto podemos usar la longitud de este. El aspecto durante la carga sería algo como la imagen a la derecha.</p>
-<blockquote>
-<p>💡 <strong>Tip:</strong> Usa un <strong><code>StringBuilder</code></strong> como <strong><code>State</code></strong> para el texto que vamos cargando, añadiendo un carácter con un retardo de un milisegundo.</p>
-</blockquote>
-</li>
-</ol>
-<p>Si visualizas el video aclarativo, podrás ver que el scroll se realiza de abajo hacia arriba, para ello tendrás que asignar a la propiedad <strong><code>reverseScrolling = true</code></strong></p>
-<p>En este <strong><a href="../../assets/codigo/ejercicios3_8/ejercicio1/video_recurso.zip">enlace</a></strong> encontraréis un video aclarando con el funcionamiento.</p>
-</div>
-<div style="width: auto">
-    <img height="450px" src="../../assets/imagenes/ejercicios3_8/x_lee_fichero/imagen3.png">
-</div>
-</div>
+<p><a href="./2_intents_agenda.pdf">Descargar estos apuntes</a></p>
+<p>ds</p>
 
       </div>
       
