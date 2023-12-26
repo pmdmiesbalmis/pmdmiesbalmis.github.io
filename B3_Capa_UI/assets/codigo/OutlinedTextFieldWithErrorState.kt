@@ -19,12 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+
 import com.holamundo.ui.theme.HolaMundoTheme
 
-data class Validacion(
-    val hayError: Boolean,              // Si hay error o no.
-    val mensajeError: String? = null    // EL mensaje asociado al error.
-)
+
+interface Validacion {
+    val hayError: Boolean      // Si hay error o no.
+        get() = false
+    val mensajeError: String? // EL mensaje asociado al error.
+        get() = null
+}
 
 @Composable
 fun OutlinedTextFieldWithErrorState(
@@ -107,10 +111,10 @@ fun OutlinedTextFieldEmail(
 @Composable
 fun TextFiledPreview() {
     var nombreState by remember { mutableStateOf("") }
-    var validacionNombre by remember { mutableStateOf(Validacion(false)) }
+    var validacionNombre by remember { mutableStateOf(object : Validacion {} as Validacion) }
 
     var emailState by remember { mutableStateOf("") }
-    var validacionEmail by remember { mutableStateOf(Validacion(false)) }
+    var validacionEmail by remember { mutableStateOf(object : Validacion {} as Validacion) }
 
     HolaMundoTheme {
         Column {
@@ -121,10 +125,12 @@ fun TextFiledPreview() {
                 validacionState = validacionNombre,
                 onValueChange = {
                     nombreState = it
-                    validacionNombre = Validacion(
-                        it.isEmpty(),
-                        "El nombre no puede estar vacío"
-                    )
+                    validacionNombre = object : Validacion {
+                        override val hayError: Boolean
+                            get() = it.isEmpty()
+                        override val mensajeError: String?
+                            get() = "El nombre no puede estar vacío"
+                    }
                 }
             )
             OutlinedTextFieldEmail(
@@ -133,12 +139,14 @@ fun TextFiledPreview() {
                 validacionState = validacionEmail,
                 onValueChange = {
                     emailState = it
-                    validacionEmail = Validacion(
-                        it.isEmpty()
-                                || !Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})$")
-                                    .matches(it),
-                        "El email no es válido"
-                    )
+                    validacionEmail = object : Validacion {
+                        override val hayError: Boolean
+                            get() = it.isEmpty()
+                                    || !Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})$")
+                                .matches(it)
+                        override val mensajeError: String?
+                            get() = "El email no es válido"
+                    }
                 }
             )
         }
