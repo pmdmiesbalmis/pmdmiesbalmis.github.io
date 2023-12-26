@@ -271,15 +271,27 @@ pre[data-line] .line-highlight[data-end]:after {
 Adem&#xE1;s a&#xF1;adiremos un paquete m&#xE1;s dentro de mocks, llamado cliente, al que le a&#xF1;adiremos la clase <a href="../../assets/codigo/ejercicios3_6/4_login_nuevo_cliente/data_recurso.zip">ClienteMock</a> que se pasa como recurso y los respectivos ClienteDaoMock, RepositoryConverter y ClienteRepository que tendremos que construir para que nos permita a&#xF1;adir un cliente a la lista de clientes (La lista se pasa como recurso en el comprimido anterior), y comprobar si un cliente existe en la lista.</p>
 <p>En el paquete <strong>features</strong> deberemos crear el paquete <strong>newuser</strong> al que le a&#xF1;adiremos tres paquetes m&#xE1;s correspondientes a los tres componentes que forman la pantalla para crear nuevo usuario, <a href="../../assets/codigo/ejercicios3_6/4_login_nuevo_cliente/componentesscreen_recurso.zip">el c&#xF3;digo</a> de estos tres paquetes se pasa como recurso.<br>
 En esta parte del proyecto vamos a practicar la validaci&#xF3;n de la entrada de datos, por lo que tendremos que a&#xF1;adir dentro de <strong>utilitites.validacion</strong> los validadores y las clases de Validaci&#xF3;n necesarias explicadas en el ejercicio anterior, <em>si lo consideras necesario podr&#xE1;s a&#xF1;adir alg&#xFA;n validador m&#xE1;s a tu paquete validadores</em>.</p>
-<p>Para terminar el proyecto, tendremos que crear los ficheros <strong>NewUserUiState, NewUserScreen y NewUserViewModel</strong> de forma que las validaciones se controlen en el ViewModel usando las clases valida del paquete validadores.</p>
+<p>Para terminar el proyecto, tendremos que crear los ficheros <strong>NewUserUiState, NewUserScreen, ValidacionNewUserUiState, ValidadorNewUser y NewUserViewModel</strong> de forma que las validaciones se controlen usando las clases valida del paquete validadores y siguiendo las pautas de los anteriores ejercicios.</p>
+<blockquote>
+<p>&#x26A0;&#xFE0F; <strong>Aviso:</strong> En el c&#xF3;digo que se pasa como base, pod&#xE9;is ver como se implementa las clases Validacion y las clases Validador de Login y de los paquetes parciales, para que lo pod&#xE1;is extender a NewUser.</p>
+</blockquote>
 <p>La clase NewUserUiState estar&#xE1; formada por las propiedades:</p>
 <ul>
 <li>DatosPersonalesUiState</li>
 <li>DireccionUiState</li>
 <li>NewUserPasswordUiState</li>
-<li>ValidadosDatosPersonalesUiState</li>
-<li>ValidadorDireccionUiState</li>
-<li>ValidadorNewUserUiState</li>
+</ul>
+<p>La clase ValidacionNewUserUiState est&#xE1; constituida por:</p>
+<ul>
+<li>ValidacionDatosPersonalesUiState</li>
+<li>ValidacionDireccionUiState</li>
+<li>ValidacionLoginPasswordUiState</li>
+</ul>
+<p>Por su parte el ValidadorNewUser tiene las propiedades:</p>
+<ul>
+<li>ValidadorDatosPersonales</li>
+<li>ValidadorDireccion</li>
+<li>ValidadorLoginPassword</li>
 </ul>
 <p>En la pantalla principal de la aplicaci&#xF3;n cargaremos los tres componentes que os hemos pasado como recurso mediante un HorizontalPager.</p>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
@@ -317,7 +329,7 @@ scope<span class="token punctuation">.</span><span class="token function">launch
 <img width="130px" src="../../assets/imagenes/ejercicios3_6/4_login_con_nuevo_cliente/imagen6.png">
 </div>
 </div>
-Se podr&#xE1; mover entre paginas aunque los datos no est&#xE9;n correctos, pero en ese caso se mostrar&#xE1; un mensaje indicando que datos no son correctos (puedes usar un SnackBar). Si lo que queremos es movernos con el bot&#xF3;n, solo pasar&#xE1; de p&#xE1;gina si los datos est&#xE1;n correctos, tambi&#xE9;n se mostrar&#xE1; el mensaje indicando el error.
+Se podr&#xE1; mover entre paginas deslizando, aunque los datos no est&#xE9;n correctos. Si lo que queremos es movernos con el bot&#xF3;n, solo pasar&#xE1; de p&#xE1;gina si los datos est&#xE1;n correctos mostrar&#xE1; un mensaje indicando el primer dato no correcto (puedes usar un SnackBar).
 <p>Al pulsar sobre Crear Cuenta, se validar&#xE1; que todos los datos son correctos, mostrando el error en caso contrario. Si no hay error  y ese usuario no existe en el sistema se a&#xF1;adir&#xE1; el usuario a la lista de usuarios y el cliente a la lista de clientes.</p>
 <blockquote>
 <p>&#x26A0;&#xFE0F; <strong>Aviso:</strong> No olvides seguir la arquitectura aprendida y aplicar la inyecci&#xF3;n de dependencia con Hilt.</p>
