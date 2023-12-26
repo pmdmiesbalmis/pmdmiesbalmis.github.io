@@ -181,6 +181,10 @@ justo después del front matter
           <a href="#conclusión" class="md-toc-link">
             <p>Conclusión</p>
 
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#mortar_board-caso-de-estudio-obtener-el-teléfono-de-un-contacto" class="md-toc-link">
+            <p>🎓 Caso de estudio: Obtener el teléfono de un contacto</p>
+
           </a></div>
 </div>
 <div style="page-break-after:always;"></div>
@@ -997,7 +1001,142 @@ En este caso, desde el manejador si el permiso ha sido concedido lanzaremos el <
 <h2 id="conclusión">Conclusión </h2>
 <p>Como has podido observar gestionar permisos y lanzar intents es un proceso que puede ser complejo y que requiere de un conocimiento profundo de la API de Android. Por ello, en ocasiones es recomendable utilizar librerías de terceros que nos faciliten el trabajo. Por ejemplo dispones de la librería <strong><a href="https://google.github.io/accompanist/permissions/">accompanist</a></strong> que ofrece compatibilidad con Compose para gestionar permisos y lanzar intents.</p>
 <p>Puedes descargarte alguna de las funciones a modo de utilidad de <strong><a href="assets/codigo/tema_3_8/RegistroContratosCompose.kt">RegistroContratosCompose.kt</a></strong> para utilizar en tus proyectos incluyendo el fuente en un nuevo paquete denominado <strong><code>.utilities.devices</code></strong> de tu proyecto.</p>
+<h2 id="mortar_board-caso-de-estudio-obtener-el-teléfono-de-un-contacto">🎓 Caso de estudio: Obtener el teléfono de un contacto </h2>
+<p>Partiendo de la <strong><a href="assets/codigo/tema_3_8/RegistroContratosCompose.kt">RegistroContratosCompose.kt</a></strong> que situaremos en <strong><code>.utilities.devices</code></strong><br>
+vamos a añadir un caso más que nos permita <strong>obtener el teléfono de un contacto</strong> de la agenda del dispositivo.</p>
+<blockquote>
+<p>🔗 <strong>Descarga</strong>: Si no consigues hacerlo, puedes descargar el código de este caso de estudio en el siguiente enlace: <strong><a href="assets/codigo/tema_3_8/intents_permisos_caso_estudio_recurso.zip">intents_permisos_caso_estudio</a></strong></p>
+</blockquote>
+<p>Para ello vamos a adaptar el tutorial de la documentación oficial:<br>
+<strong><a href="https://developer.android.com/guide/components/intents-common?hl=es-419#PickContactDat">Seleccionar datos de un contacto específico</a></strong> para hacerlo.</p>
+<p><strong>Paso 1</strong>: Puesto que vamos a usar la agenda de contactos, debemos añadir el permiso <strong><code>READ_CONTACTS</code></strong> en el <strong><code>AndroidManifest.xml</code></strong>. Estas etiquetas irán dentro de la etiqueta <strong><code>&lt;manifest&gt;</code></strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.READ_CONTACTS<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+</code></pre><div style="page-break-after:always;"></div>
+<p><strong>Paso 2</strong>: En el <strong><code>RegistroContratosCompose.kt</code></strong> añadimos el siguiente código:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">registroSelectorTelefonoContacto</span><span class="token punctuation">(</span>
+    onSeleccionNumeroContacto<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span><span class="token operator">:</span> ManagedActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Boolean<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
 
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+
+    <span class="token keyword keyword-return">return</span> <span class="token function">rememberLauncherForActivityResult</span><span class="token punctuation">(</span>
+        ActivityResultContracts<span class="token punctuation">.</span><span class="token function">RequestPermission</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> success <span class="token operator">-&gt;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>success<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> intent <span class="token operator">=</span> <span class="token function">Intent</span><span class="token punctuation">(</span>Intent<span class="token punctuation">.</span>ACTION_PICK<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+                type <span class="token operator">=</span> ContactsContract<span class="token punctuation">.</span>CommonDataKinds<span class="token punctuation">.</span>Phone<span class="token punctuation">.</span>CONTENT_TYPE
+            <span class="token punctuation">}</span>
+            registroObtenerTelefono<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>intent<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>La función composable <strong><code>registroSelectorTelefonoContacto</code></strong> recibe un callback que se ejecutará cuando se seleccione un contacto de la agenda y recibirá como parámetro una cadena con el teléfono el mismo.ç</p>
+<p>Para ello, registramos y devolveremos el contrato de permisos <strong><code>ActivityResultContracts.RequestPermission()</code></strong> que nos permitirá lanzar un intent de selección de contactos <strong><code>Intent.ACTION_PICK</code></strong> y que nos devolverá un <strong><code>Uri</code></strong> con el contacto seleccionado. Para ello le pasamos el tipo de MIME <strong><code>CommonDataKinds.Phone.CONTENT_TYPE</code></strong> que nos devolverá un contacto con un <strong>teléfono</strong>.</p>
+<blockquote>
+<p>📌 <strong>Nota</strong>: Como se indica en la documentación, tenemos otros tipos de MIME para obtener contactos con un <strong>correo electrónico</strong> como <strong><code>CommonDataKinds.Email.CONTENT_TYPE</code></strong> o una <strong>dirección postal</strong> como <strong><code>CommonDataKinds.StructuredPostal.CONTENT_TYPE</code></strong>.</p>
+</blockquote>
+<div style="page-break-after:always;"></div>
+<p><strong>Paso 3</strong>: Puesto que el Intent me retorna información deberemos registrar el contrato <strong><code>registroObtenerTelefono</code></strong> que me gestionará el resultado de dicho Intent. El código adaptado del ejemplo en la documentación sera:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">registroSelectorTelefonoContacto</span><span class="token punctuation">(</span>
+    onSeleccionNumeroContacto<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span><span class="token operator">:</span> ManagedActivityResultLauncher<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Boolean<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+
+ <span class="token keyword keyword-val">val</span> contexto <span class="token operator">=</span> LocalContext<span class="token punctuation">.</span>current
+    <span class="token keyword keyword-val">val</span> registroObtenerTelefono <span class="token operator">=</span> <span class="token function">rememberLauncherForActivityResult</span><span class="token punctuation">(</span>
+        contract <span class="token operator">=</span> ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        onResult <span class="token operator">=</span> <span class="token punctuation">{</span> result <span class="token operator">-&gt;</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> contactUri<span class="token operator">:</span> Uri<span class="token operator">?</span> <span class="token operator">=</span> result<span class="token punctuation">.</span>data<span class="token operator">?</span><span class="token punctuation">.</span>data
+                <span class="token keyword keyword-val">val</span> projection <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span>ContactsContract<span class="token punctuation">.</span>CommonDataKinds<span class="token punctuation">.</span>Phone<span class="token punctuation">.</span>NUMBER<span class="token punctuation">)</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>contactUri <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    contexto<span class="token punctuation">.</span>contentResolver
+                            <span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>contactUri<span class="token punctuation">,</span> projection<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">use</span> <span class="token punctuation">{</span> cursor <span class="token operator">-&gt;</span>
+                            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>cursor <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span> <span class="token operator">&amp;&amp;</span> cursor<span class="token punctuation">.</span><span class="token function">moveToFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                                <span class="token keyword keyword-val">val</span> numberIndex <span class="token operator">=</span>
+                                    cursor<span class="token punctuation">.</span><span class="token function">getColumnIndex</span><span class="token punctuation">(</span>ContactsContract<span class="token punctuation">.</span>CommonDataKinds
+                                    <span class="token punctuation">.</span>Phone<span class="token punctuation">.</span>NUMBER<span class="token punctuation">)</span>
+                                <span class="token keyword keyword-val">val</span> number <span class="token operator">=</span>
+                                    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>numberIndex <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> 
+                                        cursor<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>numberIndex<span class="token punctuation">)</span> 
+                                    <span class="token keyword keyword-else">else</span> <span class="token string-literal singleline"><span class="token string">"NO NUMBER"</span></span>
+                                <span class="token function">onSeleccionNumeroContacto</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+    <span class="token keyword keyword-return">return</span> <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<p><strong>Paso 4</strong>: Por último, podemos usar la función composable <strong><code>registroSelectorTelefonoContacto</code></strong> para obtener el teléfono de un contacto. En el <strong>mismo nivel que definamos el estado del teléfono</strong>, definiremos el registro del contrato y la llamada al mismo. El código sería el siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6-9,15-16]}" class="language-kotlin kotlin" data-line="6-9,15-16"><code><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        setContent <span class="token punctuation">{</span>
+            EjemploIntentsTheme <span class="token punctuation">{</span>
+                <span class="token keyword keyword-var">var</span> telefono <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+                <span class="token keyword keyword-val">val</span> registroSeleccionContacto <span class="token operator">=</span> registroSelectorTelefonoContacto <span class="token punctuation">{</span> 
+                    telefono <span class="token operator">=</span> it 
+                <span class="token punctuation">}</span>
+                <span class="token function">Surface</span><span class="token punctuation">(</span>
+                    modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>background
+                <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">PruebaIntentsScreen</span><span class="token punctuation">(</span>telefono<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        registroSeleccionContacto<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span>
+                            android<span class="token punctuation">.</span>Manifest<span class="token punctuation">.</span>permission<span class="token punctuation">.</span>READ_CONTACTS<span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">PruebaIntentsScreen</span><span class="token punctuation">(</span>
+    telefono<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    onSeleccionContacto<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span>Center<span class="token punctuation">,</span>
+        horizontalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterHorizontally
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> onSeleccionContacto<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Seleccionar contacto"</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>telefono<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-9" data-start="6" data-end="9">
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15-16" data-start="15" data-end="16">
+
+</div></div></pre>
       </div>
       
       
