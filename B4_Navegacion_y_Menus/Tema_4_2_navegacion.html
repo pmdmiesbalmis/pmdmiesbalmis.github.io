@@ -1,0 +1,1613 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2&#xBA; DAM  Tema 4.2 - Navegaci&#xF3;n</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Juanjo\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.8\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>/* 
+Añade 
+
+@import "../EstilosPersonalizadosMarkdownEnhanced.less"
+
+justo después del front matter 
+*/
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+</style>
+<h1 class="mume-header undefined" id="tema-42---navegaci%C3%B3n">Tema 4.2 - Navegaci&#xF3;n</h1>
+
+<p>Descargar estos apuntes <a href="./Tema_4_2_navegacion.pdf">pdf</a> o <a href="./Tema_4_2_navegacion.html">html</a></p>
+<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducci&#xF3;n" class="md-toc-link">
+            <p>Introducci&#xF3;n</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#conceptos-b&#xE1;sicos" class="md-toc-link"><p>Conceptos B&#xE1;sicos</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#dependencias-necesarias" class="md-toc-link">
+            <p>Dependencias necesarias</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#navcontroller" class="md-toc-link">
+            <p>NavController</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#navhost" class="md-toc-link">
+            <p>NavHost</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#ejemplo-b&#xE1;sico-de-navegaci&#xF3;n" class="md-toc-link"><p>Ejemplo b&#xE1;sico de navegaci&#xF3;n</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#implementaci&#xF3;n-m&#xED;nima" class="md-toc-link">
+            <p>Implementaci&#xF3;n m&#xED;nima</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#refactorizando-con-buenas-pr&#xE1;cticas" class="md-toc-link">
+            <p>Refactorizando con buenas pr&#xE1;cticas</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#pasando-datos-entre-pantallas" class="md-toc-link"><p>Pasando datos entre pantallas</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#estrategias-para-pasar-datos-entre-pantallas" class="md-toc-link">
+            <p>Estrategias para pasar datos entre pantallas</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#paso-de-argumentos-de-navegaci&#xF3;n" class="md-toc-link">
+            <p>Paso de argumentos de navegaci&#xF3;n</p>
+
+          </a></div>
+        </div>
+      </details>
+    <details style="padding:0;;padding-left:0px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#integrando-hilt--viewmodel--animaciones" class="md-toc-link"><p>Integrando Hilt + ViewModel + Animaciones</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#cambiando-las-transiciones-entre-pantallas" class="md-toc-link">
+            <p>Cambiando las transiciones entre pantallas</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#integrando-los-viewmodels-en-la-navegaci&#xF3;n" class="md-toc-link">
+            <p>Integrando los ViewModels en la navegaci&#xF3;n</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#integrado-navegaci&#xF3;n-y-navigationbar" class="md-toc-link">
+            <p>Integrado navegaci&#xF3;n y NavigationBar</p>
+
+          </a></div>
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+
+<ul>
+<li>
+<p><strong>Navegaci&#xF3;n con Jetpack Compose</strong></p>
+<ul>
+<li>Documentaci&#xF3;n oficial general tanto con XML como Compose UI: <strong><a href="https://developer.android.com/guide/navigation/principles">Principles of navigation</a></strong></li>
+<li>Documentaci&#xF3;n oficial compose: <strong><a href="https://developer.android.com/jetpack/compose/navigation">Navigation with Compose</a></strong></li>
+<li>Codelab B&#xE1;sico Oficial de Google: <strong><a href="https://developer.android.com/codelabs/basic-android-kotlin-compose-navigation#0">Navigation with Compose</a></strong></li>
+<li>Codelab Avanzado Oficial de Google: <strong><a href="https://developer.android.com/codelabs/jetpack-compose-navigation#0">Navigation with Compose</a></strong></li>
+<li>Mejores pr&#xE1;cticas de uso de la Navegaci&#xF3;n en Jetpack Compose (V&#xED;deo Ingl&#xE9;s) <strong><a href="https://www.youtube.com/watch?v=goFpG25uoc8">Android Developers</a></strong></li>
+<li>Navegaci&#xF3;n en Jetpack Compose (Lista de Reproducci&#xF3;n): <strong><a href="https://www.youtube.com/watch?v=glyqjzkc4fk&amp;list=PLSrm9z4zp4mFYcmFGcJmdsps_lpsaWvKM">Stevdza-San</a></strong></li>
+<li>Compartir datos entre pantallas (V&#xED;deo Ingl&#xE9;s): <strong><a href="https://www.youtube.com/watch?v=h61Wqy3qcKg&amp;t=596s">Philipp Lackner</a></strong></li>
+<li>Navegaci&#xF3;n en Jetpack Compose (V&#xED;deo Castellano): <strong><a href="https://www.youtube.com/watch?v=eNuaMn4ukdo">Brais Moure</a></strong></li>
+</ul>
+</li>
+</ul>
+<p>La necesidad de navegar entre pantallas es una de las caracter&#xED;sticas m&#xE1;s importantes de cualquier aplicaci&#xF3;n. Android Jetpack Compose proporciona una biblioteca de navegaci&#xF3;n que le permite navegar entre pantallas, pasar datos, administrar el historial de navegaci&#xF3;n y mucho m&#xE1;s.</p>
+<p>Esta biblioteca, <strong>inicialmente</strong> se implement&#xF3; para las aplicaciones de Android basadas en vistas XML (Activities y Fragments), incluso dispone de una herramienta visual para dise&#xF1;ar la navegaci&#xF3;n de la aplicaci&#xF3;n.</p>
+<p>Ahora, la biblioteca de navegaci&#xF3;n tambi&#xE9;n se puede usar con aplicaciones de <strong>Android Jetpack Compose</strong>. La biblioteca de navegaci&#xF3;n de Compose proporciona una API declarativa para definir la navegaci&#xF3;n, y una API de navegaci&#xF3;n para navegar entre pantallas. Pero sin embargo no dispone de una herramienta visual para dise&#xF1;ar la navegaci&#xF3;n de la aplicaci&#xF3;n.</p>
+<p>Como la mayor&#xED;a de clases y el sistema de navegaci&#xF3;n es com&#xFA;n a las aplicaciones basadas en vistas XML y a las basadas en Compose, <strong><a href="https://developer.android.com/guide/navigation/principles">la documentaci&#xF3;n oficial</a></strong> de la biblioteca de navegaci&#xF3;n <strong>es com&#xFA;n para ambas</strong>. Por lo que en la documentaci&#xF3;n oficial, en la mayor&#xED;a de ejemplos, se muestra la implementaci&#xF3;n con vistas XML y no con Compose. Esto puede llevarnos a confusi&#xF3;n y a pensar que la biblioteca de navegaci&#xF3;n no es compatible con Compose, pero no es as&#xED;, simplemente hay que saber interpretar los ejemplos y adaptarlos a Compose. De todas formas, tienes una entrada espec&#xED;fica para Compose en ente <strong><a href="https://developer.android.com/jetpack/compose/navigation">enlace</a></strong></p>
+<p>Desde sus inicios, la biblioteca de navegaci&#xF3;n para Compose ha tenido criticas por parte de la comunidad de desarrolladores, debido a su complejidad, falta de documentaci&#xF3;n y constantes cambios en su API. Es por eso que han surgido <em>multitud</em> de <strong>librer&#xED;as de terceros</strong> que en principio facilitan la implementaci&#xF3;n evitando excesivo c&#xF3;digo &quot;<em>bolierplate</em>&quot; o incluso algunas son multiplataforma (Android, iOS, Desktop y Web)</p>
+<p>Algunas de estas librer&#xED;as son: <strong><a href="https://composedestinations.rafaelcosta.xyz/">Compose Destinations</a></strong>, <strong><a href="https://bumble-tech.github.io/appyx/">Appyx</a></strong>, <strong><a href="https://voyager.adriel.cafe/">Voyager</a></strong>, <strong><a href="https://olshevski.github.io/compose-navigation-reimagined/">Reimagined</a></strong>, <strong><a href="https://xxfast.github.io/Decompose-Router/overview.html">Decompose</a></strong>.</p>
+<p>Al final muchas de estas librer&#xED;as son una capa de abstracci&#xF3;n sobre la biblioteca de navegaci&#xF3;n oficial, por lo que es recomendable conocer la biblioteca oficial. Este <strong><a href="https://www.youtube.com/watch?v=JAGLOaWztBc">v&#xED;deo en ingl&#xE9;s</a></strong>, Philipp Lackner nos hace una reflexi&#xF3;n sobre este tema y el porqu&#xE9; conocer la biblioteca oficial de Google y en todo caso hacernos nosotros mismos nuestra propia abstracci&#xF3;n de navegaci&#xF3;n.</p>
+<p>Incluso utilizando la biblioteca oficial, hay muchas formas de implementar la navegaci&#xF3;n y podr&#xE1;n ver en los diferentes tutoriales y v&#xED;deos que hay en la red, que cada sigue diferentes patrones de dise&#xF1;o.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Nosotros en este tema vamos a seguir las recomendaciones de uso y mejores pr&#xE1;cticas de implementaci&#xF3;n que en la actualidad recomienda Google y que pueden encontrar en el siguiente <strong><a href="https://developer.android.com/guide/navigation/design/type-safety">enlace</a></strong> que <strong>recomendamos que visites y leas</strong> tras ver el tema.</p>
+</blockquote>
+<h2 class="mume-header" id="conceptos-b%C3%A1sicos">Conceptos B&#xE1;sicos</h2>
+
+<h3 class="mume-header" id="dependencias-necesarias">Dependencias necesarias</h3>
+
+<p>Para poder utilizar la biblioteca de navegaci&#xF3;n en Compose, debemos a&#xF1;adir las siguientes dependencias en el fichero <strong>build.gradle.kts</strong> del m&#xF3;dulo <strong>app</strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.navigation:navigation-compose:2.7.6&quot;</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Recuerda que la versi&#xF3;n puede cambiar en el futuro, por lo que es recomendable que consultes la &#xFA;ltima versi&#xF3;n en el <strong><a href="https://developer.android.com/jetpack/androidx/releases/navigation">enlace</a></strong>. Tambi&#xE9;n debes tener en cuanta que un cambio en el primer n&#xFA;mero de la versi&#xF3;n, puede implicar cambios en la API que describiremos a continuaci&#xF3;n.</p>
+</blockquote>
+<h3 class="mume-header" id="navcontroller">NavController</h3>
+
+<p>El <strong><code>NavController</code></strong> es el <strong>encargado de gestionar la navegaci&#xF3;n entre destinos</strong>. El controlador <strong>ofrece m&#xE9;todos para navegar</strong> entre destinos, manejar enlaces profundos, <strong>administrar la pila de retroceso</strong> y m&#xE1;s.</p>
+<p>Para crear un <strong><code>NavController</code></strong> en Jetpack Compose haremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> navController <span class="token operator">=</span> <span class="token function">rememberNavController</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>Puesto que <strong><code>rememberNavController</code></strong> es una funci&#xF3;n <strong><code>@Composable</code></strong> NO puede ser creado en un <strong><code>ViewModel</code></strong>. As&#xED; pues, si quieres que la mayor&#xED;a de tus componentes puedan acceder a la navegaci&#xF3;n, debes crear el  objeto <strong><code>NavController</code></strong> en el componente m&#xE1;s alto de la jerarqu&#xED;a a de composici&#xF3;n esto es junto al <strong><code>NavHost</code></strong> del que hablaremos a continuaci&#xF3;n.</p>
+<h3 class="mume-header" id="navhost">NavHost</h3>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 50%">
+<p>Para poder navegar entre pantallas, debemos tener <strong>un contenedor donde se muestren las pantallas</strong>. En las <strong>aplicaciones basadas compose</strong> este contenedor <strong>es un <em>&apos;composable&apos;</em></strong> llamado <strong><code>NavHost</code></strong>. Al ser un contenedor, puede ocupar todo la pantalla o solo una parte de ella como se muestra en las im&#xE1;genes a la derecha. Dentro del mismo.</p>
+<p><strong><code>NavHost</code></strong> recibir&#xE1; un <strong><code>NavController</code></strong> y ir&#xE1; definiendo los destinos de navegaci&#xF3;n a trav&#xE9;s de un <strong><code>NavGraph</code></strong> que o recibe al definirse o crear&#xE1; y gestionar&#xE1; el propio <strong><code>NavHost</code></strong> de forma interna si no se le pasa. El <strong><code>NavGraph</code></strong> es b&#xE1;sicamente por tanto, una colecci&#xF3;n de destinos recuperables.</p>
+</div>
+<div style="width: auto">
+<img height="300px" src="assets/imagenes/tema_4_2/navhost_1.png">
+</div>
+<div style="width: auto">
+<img height="300px" src="assets/imagenes/tema_4_2/navhost_2.png">
+</div>
+</div>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="ejemplo-b%C3%A1sico-de-navegaci%C3%B3n">Ejemplo b&#xE1;sico de navegaci&#xF3;n</h2>
+
+<h3 class="mume-header" id="implementaci%C3%B3n-m%C3%ADnima">Implementaci&#xF3;n m&#xED;nima</h3>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 50%">
+<p>Vamos a aplicar los conceptos anteriores a un ejemplo b&#xE1;sico de navegaci&#xF3;n entre dos pantallas <strong>A</strong> y <strong>B</strong>.</p>
+<p>Tal y como se muestra en la imagen de ejemplo. La pantalla <strong>A</strong> ser&#xE1; la pantalla principal y tendr&#xE1; un <strong><code>Scaffold</code></strong> con un <strong><code>TopAppBar</code></strong> y un bot&#xF3;n que nos permitir&#xE1; navegar a la pantalla <strong>B</strong>. La pantalla <strong>B</strong> tendr&#xE1; un <strong><code>Scaffold</code></strong> con un <strong><code>TopAppBar</code></strong> y en ella tendr&#xE1; un <strong><code>IconButton</code></strong> de vuelta a la pantalla anterior que solo puede ser pantalla <strong>A</strong>.</p>
+<p>Descarga proyecto de <strong>ejemplo 1</strong>: <strong><a href="assets/codigo/tema_4_2/EjemploNavegacionBasico1_recurso.zip">EjemploNavegacionBasico1.zip</a></strong></p>
+</div>
+<div style="width: auto">
+    <img height="300px" src="assets/imagenes/tema_4_2/EjemploBasicoAtoB1.png">
+</div>
+</div>
+<p>Los pasos ser&#xED;an los siguientes:</p>
+<ol>
+<li>
+<p>Primero definiremos las pantallas en el paquete <strong><code>ui.features</code></strong><br>
+Crearemos el fichero <strong><a href="assets/codigo/tema_4_2/ejemplo_navegacion_basico1/PantallaAScreen.kt">PantallaAScreen.kt</a></strong> que puedes descargar y cuya funci&#xF3;n encargada de emitir la pantalla en Compose es la siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">PantallaAScreen</span><span class="token punctuation">(</span>onNavigatePantallaB<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span>
+</pre><p>Crearemos el fichero <strong><a href="assets/codigo/tema_4_2/ejemplo_navegacion_basico1/PantallaBScreen.kt">PantallaAScreen.kt</a></strong> que puedes descargary cuya funci&#xF3;n encargada de emitir la pantalla en Compose es la siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>onNavegarAtras<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: Como ves en ambos casos pasamos callbacks que ser&#xE1;n llamados cuando se pulse el bot&#xF3;n de navegaci&#xF3;n y as&#xED; evitamos dependencias con el <strong><code>NavController</code></strong> y tendremos centralizadas todas las acciones de navegaci&#xF3;n en el <strong><code>NavHost</code></strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>Decidimos en que punto vamos atener nuestro <strong><code>NavHost</code></strong> y como ya hemos comentado tendremos varias opciones. Para este ejemplo lo normal es que est&#xE9; lo m&#xE1;s alto en la jerarqu&#xED;a de composici&#xF3;n, por lo que lo pondremos en el <strong><code>setContent</code></strong> de la <strong><code>MainActivity</code></strong> y es en este punto donde crearemos al <strong><code>NavController</code></strong>. Decargar <strong><a href="assets/codigo/tema_4_2/ejemplo_navegacion_basico1/MainActivity.kt">MainActivity.kt</a></strong></p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8,9]}" class="language-kotlin" data-line="8,9"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+        setContent <span class="token punctuation">{</span>
+            EjemploNavegacionTheme <span class="token punctuation">{</span>
+                EjemploNavegacionTheme <span class="token punctuation">{</span>
+                    <span class="token function">Surface</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword keyword-val">val</span> navController <span class="token operator">=</span> <span class="token function">rememberNavController</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                        <span class="token function">NavHostEjemploBasicoInicial</span><span class="token punctuation">(</span>navController <span class="token operator">=</span> navController<span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div></pre></li>
+<li>
+<p>Para ello hemos definido la funci&#xF3;n composable <strong><code>NavHostEjemploBasico</code></strong> que recibe una instancia del <strong><code>NavHostController</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">NavHostEjemploBasicoInicial</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span> 
+        startDestination <span class="token operator">=</span> <span class="token string">&quot;pantalla_A&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">composable</span><span class="token punctuation">(</span>route <span class="token operator">=</span> <span class="token string">&quot;pantalla_A&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+            PantallaAScreen <span class="token punctuation">{</span>
+                navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">&quot;pantalla_B&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">composable</span><span class="token punctuation">(</span>route <span class="token operator">=</span> <span class="token string">&quot;pantalla_B&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+            PantallaBScreen <span class="token punctuation">{</span>
+                navController<span class="token punctuation">.</span><span class="token function">navigateUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<p>Vamos a comentar m&#xE1;s detalladamente el c&#xF3;digo del punto anterior:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[7-9]}" class="language-kotlin" data-line="7-9"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">NavHostEjemploBasicoInicial</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>  <span class="token comment">// Pasamos el NavController</span>
+        startDestination <span class="token operator">=</span> <span class="token string">&quot;pantalla_A&quot;</span> <span class="token comment">// Indicamos el destino inicial</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// En este contexto estamos definiendo un objeto NavGraphBuilder</span>
+        <span class="token comment">// encargado de crear el grafo de navegaci&#xF3;n.</span>
+        <span class="token comment">// Por lo que solo podemos usar m&#xE9;todos de esta clase. </span>
+
+        <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7-9" data-start="7" data-end="9">
+
+
+</div></div></pre><pre data-role="codeBlock" data-info="kotlin {highlight=[5-9, 12-13, 16-18]}" class="language-kotlin" data-line="5-9,12-13,16-18"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">NavHostEjemploBasicoInicial</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>        
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>navController <span class="token operator">=</span> navController<span class="token punctuation">,</span> startDestination <span class="token operator">=</span> <span class="token string">&quot;pantalla_A&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token comment">// composable es uno de los m&#xE9;todos de NavGraphBuilder y crea un o </span>
+        <span class="token comment">// destin de navegaci&#xF3;n en el grafo.</span>
+        <span class="token comment">// Como par&#xE1;metro obligatorio recibe la ruta del destino que ser&#xE1;  </span>
+        <span class="token comment">// una cadena de texto similar a una URL de consumo de un API REST.</span>
+        <span class="token comment">// M&#xE1;s adelante comentaremos otros par&#xE1;metros opcionales.</span>
+        <span class="token function">composable</span><span class="token punctuation">(</span>route <span class="token operator">=</span> <span class="token string">&quot;pantalla_A&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+
+            <span class="token comment">// Aqu&#xED; ir&#xE1; el composable con la pantalla o Screen que se </span>
+            <span class="token comment">// emite en el NavHost en esta ruta del grafo.</span>
+            PantallaAScreen <span class="token punctuation">{</span>
+
+                <span class="token comment">// Callback que ser&#xE1; llamado cuando se pulse el bot&#xF3;n de navegaci&#xF3;n</span>
+                <span class="token comment">// de ir a pantalla B. Si la ruta especificada no existe en el grafo</span>
+                <span class="token comment">// obtendremos una excepci&#xF3;n en tiempo de ejecuci&#xF3;n.</span>
+                navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">&quot;pantalla_B&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token operator">..</span><span class="token punctuation">.</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5-9" data-start="5" data-end="9">
+
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="12-13" data-start="12" data-end="13">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16-18" data-start="16" data-end="18">
+
+
+</div></div></pre><p>Por &#xFA;ltimo, al definir el callback de navegaci&#xF3;n en la pantalla <strong>B</strong> hemos usado el m&#xE9;todo <strong><code>navigateUp</code></strong> que nos permite volver a la pantalla anterior, que en este caso es la pantalla <strong>A</strong>.</p>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="refactorizando-con-buenas-pr%C3%A1cticas">Refactorizando con buenas pr&#xE1;cticas</h3>
+
+<p>En este punto ya tenemos un ejemplo b&#xE1;sico de navegaci&#xF3;n, pero en una aplicaci&#xF3;n real donde los destinos de navegaci&#xF3;n pueden ser muchos, podremos pasar par&#xE1;metros entre pantallas, definir transiciones, usaremos ViewModel para acceder a la l&#xF3;gica de negocio, etc. El c&#xF3;digo se puede volver muy complejo y poco modularizado. Esto har&#xE1; que se f&#xE1;cil cometer errores. Adem&#xE1;s consecuentemente tambi&#xE9;n ser&#xE1; dif&#xED;cil de mantener o ampliar, testear y depurar.</p>
+<p>Por para solucionar esto, como comentamos en la introducci&#xF3;n del tema, vamos a seguir las recomendaciones de uso y mejores pr&#xE1;cticas de implementaci&#xF3;n que en la actualidad recomienda Google y que pueden encontrar en el siguiente <strong><a href="https://developer.android.com/guide/navigation/design/type-safety">enlace</a></strong>. Por lo que vamos a refactorizar el c&#xF3;digo siguiendo los siguientes pasos:</p>
+<ol>
+<li>
+<p>Crearemos un paquete <strong><code>ui.navigation</code></strong> donde definiremos los destinos de y el grafo de navegaci&#xF3;n.</p>
+</li>
+<li>
+<p>Por cada destino de navegaci&#xF3;n crearemos un fichero <strong><code>&lt;PantallaDestino&gt;Route.kt</code></strong> donde definiremos la gestion de la <strong>ruta o rutas</strong> que nos lleven a esa pantalla de destino.</p>
+<p>Crearemos primero el fichero <strong><a href="assets/codigo/tema_4_2/ejemplo_navegacion_basico1/PantallaARoute.kt">PantallaARoute.kt</a></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> PantallaARoute <span class="token operator">=</span> <span class="token string">&quot;pantalla_A&quot;</span>
+
+<span class="token comment">// Definimos un m&#xE9;todo de extensi&#xF3;n de NavGraphBuilder para poder</span>
+<span class="token comment">// usarlo en el contexto de nuestro NavHost</span>
+<span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantallaAScreen</span><span class="token punctuation">(</span>
+    onNavigatePantallaB<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// En el definimos el destino de navegaci&#xF3;n sin usar como ruta</span>
+    <span class="token comment">// un literal de cadena. En su lugar usamos la constante.</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaARoute</span>&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+        <span class="token function">PantallaAScreen</span><span class="token punctuation">(</span>onNavigatePantallaB<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Aunque aqu&#xED; hemos usado una constante de cadena es muy com&#xFA;n el uso de enumerados, interfaces o clases selladas para definir las rutas. Por ejemplo:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-class">class</span> <span class="token function">Rutas</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> ruta<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-object">object</span> PantallaA <span class="token operator">:</span> <span class="token function">Ruta</span><span class="token punctuation">(</span><span class="token string">&quot;pantalla_A&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Posteriormente haremos</span>
+<span class="token function">composable</span><span class="token punctuation">(</span>route <span class="token operator">=</span> Rutas<span class="token punctuation">.</span>PantallaA<span class="token punctuation">.</span>ruta<span class="token punctuation">)</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Nosotros vamos a utilizar constantes de cadena por ser los que recomida Google en el enlace mencionado.</p>
+</blockquote>
+<p>Ahora crearemos el fichero <strong><a href="assets/codigo/tema_4_2/ejemplo_navegacion_basico1/PantallaBRoute.kt">PantallaBRoute.kt</a></strong> donde haremos lo mismo que antes pero tambi&#xE9;n definiremos <strong>un m&#xE9;todo de extensi&#xF3;n de <code>NavController</code> denominado <code>navigateToPantallaB</code></strong> para poder navegar a esta pantalla desde cualquier punto de la aplicaci&#xF3;n. Crear&#xED;amos m&#xE1;s m&#xE9;todos de extensi&#xF3;n de este tipo si hubi&#xE9;ramos definido m&#xE1;s rutas que naveguen a esta pantalla.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> PantallaBRoute <span class="token operator">=</span> <span class="token string">&quot;pantalla_B&quot;</span>
+
+<span class="token keyword keyword-fun">fun</span> NavController<span class="token punctuation">.</span><span class="token function">navigateToPantallaB</span><span class="token punctuation">(</span>navOptions<span class="token operator">:</span> NavOptions<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> ruta <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>&quot;</span>
+    Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;Navegacion&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Navegando a <span class="token interpolation variable">$ruta</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>ruta<span class="token punctuation">,</span> navOptions<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantallaBScreen</span><span class="token punctuation">(</span>
+    onNavegarAtras<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+        <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>onNavegarAtras<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: Si tuvi&#xE9;ramos que pasar par&#xE1;metros a la pantalla destino, tendr&#xED;amos seguridad de tipos pues, el m&#xE9;todo extensor de <strong><code>NavController</code></strong> recibir&#xED;a estos par&#xE1;metros fuertemente tipados y los compondr&#xED;a en la ruta de destino.</p>
+</blockquote>
+</li>
+<li>
+<p>Por &#xFA;ltimo crearemos el fichero <strong><a href="assets/codigo/tema_4_2/ejemplo_navegacion_basico1/NavHostEjemploBasico.kt">NavHostEjemploBasico.kt</a></strong> donde definiremos el <em>composable</em> con el <strong><code>NavHost</code></strong> usando los m&#xE9;todos de extensi&#xF3;n que hemos definido en los ficheros anteriores y que usaremos en el m&#xE9;todo <strong><code>setContent</code></strong> de la <strong><code>MainActivity</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">NavHostEjemploBasico</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+        startDestination <span class="token operator">=</span> PantallaARoute
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        pantallaAScreen <span class="token punctuation">{</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantallaB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        pantallaBScreen <span class="token punctuation">{</span> navController<span class="token punctuation">.</span><span class="token function">navigateUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Como vemos el c&#xF3;digo queda mucho m&#xE1;s limpio y modularizado. Adem&#xE1;s, no usamos literales de cadena y tendremos una metodolog&#xED;a de definici&#xF3;n.</p>
+</li>
+</ol>
+<h2 class="mume-header" id="pasando-datos-entre-pantallas">Pasando datos entre pantallas</h2>
+
+<ul>
+<li>
+<p><strong>Pasando datos entre pantallas</strong></p>
+<ul>
+<li>Documentaci&#xF3;n oficial general: <strong><a href="https://developer.android.com/guide/navigation/use-graph/pass-data">Pass data between destinations</a></strong></li>
+<li>Documentaci&#xF3;n oficial compose: <strong><a href="https://developer.android.com/jetpack/compose/navigation?optional-args#nav-with-args">Navigate with arguments</a></strong></li>
+<li>V&#xED;deo Tutorial (Ingl&#xE9;s): <strong><a href="https://www.youtube.com/watch?v=doGsRC2J1Fc">Stevdza-San</a></strong></li>
+</ul>
+</li>
+</ul>
+<p>En el ejemplo anterior hemos visto como navegar entre pantallas, pero en una aplicaci&#xF3;n real, es muy probable que necesitemos pasar datos entre pantallas.</p>
+<h3 class="mume-header" id="estrategias-para-pasar-datos-entre-pantallas">Estrategias para pasar datos entre pantallas</h3>
+
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: En el siguiente <strong><a href="https://www.youtube.com/watch?v=h61Wqy3qcKg">v&#xED;deo tutorial</a></strong> de <strong>Philipp Lackner</strong> se explica las diferentes estrategias de c&#xF3;mo pasar datos entre pantallas y las ventajas e inconvenientes de cada una de ellas. Es interesante que le eches un vistazo antes y despu&#xE9;s de ver este tema.</p>
+</blockquote>
+<p>Der entre las estrategias posibles vamos a destacar las siguientes:</p>
+<ol>
+<li>
+<p><strong>Pasar argumentos de navegaci&#xF3;n</strong>: La m&#xE1;s adecuadas si queremos evitar acoplamiento entre pantallas y de esta manera usar una misma pantalla en diferentes contextos. La librer&#xED;a de navegaci&#xF3;n de Jetpack Compose para Android nos permite pasar argumentos de navegaci&#xF3;n entre pantallas.</p>
+<p>Estos argumentos <strong>se pasan en la ruta de navegaci&#xF3;n</strong> soporta el paso de <strong>argumentos de tipo primitivo</strong> y objetos parcelables o serializables.</p>
+<p>Lo m&#xE1;s com&#xFA;n es pasar un argumento de tipo primitivo que sea la <strong>clave primaria</strong> de un objeto que queremos recuperar en el ViewModel de la pantalla destino. Por ejemplo, si queremos recuperar un objeto de tipo <strong><code>Usuario</code></strong> en la pantalla destino, pasaremos como argumento de navegaci&#xF3;n el <strong><code>id</code></strong> del usuario y en la pantalla destino recuperaremos el objeto de nuestros repositorios a partir de ese <strong><code>id</code></strong>.</p>
+</li>
+<li>
+<p><strong>Compartir un ViewModel</strong>: B&#xE1;sicamente consiste en tener el dato en un ViewModel que sea compartido por ambas pantallas. Para ello debemos asegurarnos que le <strong><code>ViewModelOwner</code></strong> sobreviva a ambas pantallas como por ejemplo el <strong><code>ViewModelOwner</code></strong> de la <strong><code>MainActivity</code></strong>. <strong>Aunque tambi&#xE9;n hay otras estrategias como usar un <code>ViewModel</code> donde el <code>ViewModelOwner</code> sea un <code>NavGraph</code></strong>.</p>
+</li>
+<li>
+<p><strong>Compartir una dependencia con estado</strong>: B&#xE1;sicamente consiste en usar Hilt para definir una clase que se pueda <strong>inyectar</strong> en los ViewModels que necesiten compartir datos y est&#xE9; marcada como <strong><code>@Singleton</code></strong>. De esta manera tendremos una &#xFA;nica instancia de la clase y por tanto los datos que almacene ser&#xE1;n compartidos por todos los ViewModels que la inyecten. Las propiedades de dicha clase deben ser <strong><code>MutableState</code></strong> para que los cambios sean observables por los ViewModels que la inyecten.</p>
+</li>
+</ol>
+<h3 class="mume-header" id="paso-de-argumentos-de-navegaci%C3%B3n">Paso de argumentos de navegaci&#xF3;n</h3>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 50%">
+<p>Veamos el proceso de paso de argumentos de navegaci&#xF3;n entre pantallas completando el ejemplo anterior donde naveg&#xE1;bamos entre las pantallas <strong>A</strong> y <strong>B</strong>.</p>
+<p>Vamos ha realizar una <strong>paso simple de datos</strong> entre pantallas. Como puedes ver en la imagen de ejemplo, en la pantalla <strong>A</strong> tendremos un <strong><code>TextField</code></strong> donde el usuario introducir&#xE1; su nombre y en la pantalla <strong>B</strong> mostraremos un <strong><code>Text</code></strong> con el nombre introducido.</p>
+<p>Descarga proyecto de <strong>ejemplo 2</strong>: <strong><a href="assets/codigo/tema_4_2/EjemploNavegacionBasico2_recurso.zip">EjemploNavegacionBasico2.zip</a></strong></p>
+</div>
+<div style="width: auto">
+    <img height="300px" src="assets/imagenes/tema_4_2/EjemploBasicoAtoB2.png">
+</div>
+</div>
+<p>Vamos los pasos l&#xF3;gicos que debemos seguir:</p>
+<ol>
+<li>
+<p>Modificamos <strong><code>PantallaBScreen.kt</code></strong> para gestionar el argumento de navegaci&#xF3;n:</p>
+<p>PantallaBScreen recibe ahora un par&#xE1;metro de tipo <strong><code>String?</code></strong> que si es distinto de <strong><code>null</code></strong> mostrar&#xE1; el nombre un el <strong><code>Text</code></strong> justo debajo del r&#xF3;tulo <strong>B</strong></p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=3 }" class="language-kotlin" data-line="3"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>
+    nombre<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    onNavegarAtras<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span>
+
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
+</div></div></pre></li>
+</ol>
+<div style="page-break-after:always;"></div>
+<ol start="2">
+<li>
+<p>Modificamos <strong><code>PantallaAScreen.kt</code></strong> para enviar el argumento de navegaci&#xF3;n:</p>
+<p>F&#xED;jate que <strong><code>onNavigatePantallaB</code></strong> ahora recibe un par&#xE1;metro de tipo <strong><code>String</code></strong> que ser&#xE1; el estado con el nombre introducido por el usuario.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4, 7, 8, 16, 18, 22]}" class="language-kotlin" data-line="4,7,8,16,18,22"><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalMaterial3Api<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">PantallaAScreen</span><span class="token punctuation">(</span>
+    onNavigatePantallaB<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> comportamientoAnteScroll <span class="token operator">=</span> TopAppBarDefaults<span class="token punctuation">.</span><span class="token function">pinnedScrollBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-var">var</span> nombreState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token string">&quot;an&#xF3;nimo&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> onNombreChange<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> nombreState <span class="token operator">=</span> it <span class="token punctuation">}</span>
+    <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        content <span class="token operator">=</span> <span class="token punctuation">{</span> innerPadding <span class="token operator">-&gt;</span><span class="token function">ContenidoPantalla</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">ContenidoPantalla</span><span class="token punctuation">(</span>
+    nombreState<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    onNombreChange<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onNavigatePantallaB<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token function">Button</span><span class="token punctuation">(</span>onClick <span class="token operator">=</span> <span class="token punctuation">{</span> 
+        <span class="token function">onNavigatePantallaB</span><span class="token punctuation">(</span>nombreState<span class="token punctuation">)</span> 
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Ir a pantalla B&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="18" data-start="18">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="22" data-start="22">
+</div></div></pre></li>
+<li>
+<p>Modificamos <strong><code>PantallaBRoute.kt</code></strong> para definir una nueva entada en nuestro <strong><code>NavGraphBuilder</code></strong> con el par&#xE1;metro de entrada y modificar <strong><code>navigateToPantallaB</code></strong>. Veamos el c&#xF3;digo comentado.</p>
+<pre data-role="codeBlock" data-info="kotlin { highlight=[2, 6, 10] }" class="language-kotlin" data-line="2,6,10"><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> PantallaBRoute <span class="token operator">=</span> <span class="token string">&quot;pantalla_B&quot;</span>
+<span class="token comment">// Definimos una constante privada para el nombre del par&#xE1;metro de entrada</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> NombreParam <span class="token operator">=</span> <span class="token string">&quot;nombre&quot;</span>
+
+<span class="token keyword keyword-fun">fun</span> NavController<span class="token punctuation">.</span><span class="token function">navigateToPantallaB</span><span class="token punctuation">(</span>
+    <span class="token comment">// Pasamos el par&#xE1;metro tipado al m&#xE9;todo de extensi&#xF3;n de navegaci&#xF3;n</span>
+    nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    navOptions<span class="token operator">:</span> NavOptions<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Componemos la ruta de navegaci&#xF3;n con el par&#xE1;metro de entrada</span>
+    <span class="token keyword keyword-val">val</span> ruta <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>/<span class="token interpolation variable">$nombre</span>&quot;</span>
+    Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;Navegacion&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Navegando a <span class="token interpolation variable">$ruta</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>ruta<span class="token punctuation">,</span> navOptions<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div></pre><pre data-role="codeBlock" data-info="kotlin { highlight=[4, 13, 15-16, 18-19, 24-25, 29] }" class="language-kotlin" data-line="4,13,15-16,18-19,24-25,29"><span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantallaBScreen</span><span class="token punctuation">(</span>
+    onNavegarAtras<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Dejamos la ruta de navegaci&#xF3;n sin el par&#xE1;metro de entrada</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+        <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>
+            onNavegarAtras <span class="token operator">=</span> onNavegarAtras
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// A&#xF1;adimos una nueva ruta de navegaci&#xF3;n con el par&#xE1;metro de entrada</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        <span class="token comment">// f&#xED;jate que para indicar que es un par&#xE1;metro de entrada lo ponemos</span>
+        <span class="token comment">// entre llaves como n las rutas de consumo de un API REST</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>/{<span class="token interpolation variable">$NombreParam</span>}&quot;</span><span class="token punctuation">,</span>
+        <span class="token comment">// Indicamos el tipo o tipos, si hubiera m&#xE1;s de uno, de los par&#xE1;metros</span>
+        <span class="token comment">// de entrada</span>
+        arguments <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+            <span class="token function">navArgument</span><span class="token punctuation">(</span>NombreParam<span class="token punctuation">)</span> <span class="token punctuation">{</span> type <span class="token operator">=</span> NavType<span class="token punctuation">.</span>StringType <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+        <span class="token comment">// Al recuperar el par&#xE1;metro de entrada, debemos indicar el tipo.</span>
+        <span class="token comment">// Al ser arguments nullable, el tipo ser&#xE1; String?</span>
+        <span class="token keyword keyword-val">val</span> nombre <span class="token operator">:</span>String<span class="token operator">?</span> <span class="token operator">=</span> backStackEntry<span class="token punctuation">.</span>arguments<span class="token operator">?</span>
+                                            <span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>NombreParam<span class="token punctuation">,</span> <span class="token string">&quot;anonimo&quot;</span><span class="token punctuation">)</span>
+        <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>
+            <span class="token comment">// Finalmente pasamos el par&#xE1;metro de entrada a la pantalla</span>
+            nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+            onNavegarAtras <span class="token operator">=</span> onNavegarAtras
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="15-16" data-start="15" data-end="16">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="18-19" data-start="18" data-end="19">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="24-25" data-start="24" data-end="25">
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="29" data-start="29">
+</div></div></pre></li>
+<li>
+<p>Modificamos <strong><code>NavHostEjemploBasico.kt</code></strong> para usar el nuevo m&#xE9;todo de navegaci&#xF3;n con par&#xE1;metro en el callback de navegaci&#xF3;n que pasamos a la pantalla <strong>A</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=6}" class="language-kotlin" data-line="6"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">NavHostEjemploBasico</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">pantallaAScreen</span><span class="token punctuation">(</span>
+            onNavigatePantallaB <span class="token operator">=</span> <span class="token punctuation">{</span> nombre <span class="token operator">-&gt;</span>
+                navController<span class="token punctuation">.</span><span class="token function">navigateToPantallaB</span><span class="token punctuation">(</span>nombre<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div></pre></li>
+</ol>
+<h2 class="mume-header" id="integrando-hilt--viewmodel--animaciones">Integrando Hilt + ViewModel + Animaciones</h2>
+
+<p>Si nos fijamos en el ejemplo anterior, al volver de la pantalla <strong>B</strong> a la pantalla <strong>A</strong> el texto introducido en el <strong><code>TextField</code></strong> se pierde. Esto es debido a que la pantalla <strong>A</strong> se vuelve a crear y por tanto el estado del <strong><code>TextField</code></strong> se reinicia.</p>
+<p>Para evitar esto vamos a introducir un <strong><code>ViewModel</code></strong> en para cada una de las pantallas. <strong>La forma m&#xE1;s simple de hacerlo</strong> es usando <strong><code>Hilt</code></strong>. Adem&#xE1;s,  como comentamo,s tambi&#xE9;n podr&#xED;a ayudarnos a compartir datos entre pantallas. Recuerda que debemos tener la dependencia de <strong><code>hilt-navigation-compose</code></strong> en el fichero <strong><code>build.gradle.kts</code></strong> del m&#xF3;dulo app:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.hilt:hilt-navigation-compose:1.1.0&quot;</span><span class="token punctuation">)</span>
+</pre><p>Otro aspecto que vamos a mejorar es la transici&#xF3;n entre pantallas durante la navegaci&#xF3;n. Para ello, Google ha incorporado en la biblioteca de navegaci&#xF3;n de Jetpack Compose, un nuevo sistema de animaciones que nos permite definir animaciones de entrada y salida de las pantallas. Recuerda que debes tener a&#xF1;adida la siguiente librer&#xED;a de animaciones en el fichero <strong><code>build.gradle.kts</code></strong> del m&#xF3;dulo app:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.navigation:navigation-compose:2.7.6&quot;</span><span class="token punctuation">)</span>
+</pre><p>Descarga proyecto de <strong>ejemplo 3</strong>: <strong><a href="assets/codigo/tema_4_2/EjemploNavegacionBasico3_recurso.zip">EjemploNavegacionBasico3.zip</a></strong></p>
+<h3 class="mume-header" id="cambiando-las-transiciones-entre-pantallas">Cambiando las transiciones entre pantallas</h3>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
+<p>Vamos a continuar con nuestro ejemplo anterior, pero vamos a cambiar las transiciones entre pantallas. Para ello, lo m&#xE1;s sencillo aplicar la mismas transiciones a todas nuestras navegaciones y para ello nos hemos inventado la transici&#xF3;n en la imagen de ejemplo puedes ver como la pantalla <strong>B</strong> tiene una transici&#xF3;n de entrada de derecha a izquierda con un fade-in y la pantalla <strong>A</strong> una transici&#xF3;n de salida con de arriba a abajo con un fade-out.</p>
+<p>Cuando hagamos un volver atr&#xE1;s con un popBackStack las direcciones de las transiciones se invertir&#xE1;n.</p>
+<p>Puedes encontrar m&#xE1;s informaci&#xF3;n sobre las transiciones de navegaci&#xF3;n en la <strong><a href="https://google.github.io/accompanist/navigation-animation/">documentaci&#xF3;n de Accompanist</a></strong>. Aunque como se indica en ella ya est&#xE1; incluida en la biblioteca de navegaci&#xF3;n de Jetpack Compose a partir de la versi&#xF3;n <strong><code>2.7.0</code></strong></p>
+</div>
+<div style="width: auto">
+    <img height="350px" src="assets/imagenes/tema_4_2/TransicionAtoB.png">
+</div>
+</div>
+<div style="page-break-after:always;"></div>
+<p>Podemos crear una <strong>biblioteca de funciones de extensi&#xF3;n de <code>AnimatedContentTransitionScope&lt;NavBackStackEntry&gt;</code></strong> para definir las transiciones de navegaci&#xF3;n. Para ello siguiendo la documentaci&#xF3;n de Accompanist hemos definido las siguientes. Podr&#xED;amos, por ejemplo,  llevarlas a alg&#xFA;n tipo de fichero el el paquete <strong><code>utilities</code></strong> de nuestro proyecto.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> AnimatedContentTransitionScope<span class="token operator">&lt;</span>NavBackStackEntry<span class="token operator">&gt;</span>
+        <span class="token punctuation">.</span><span class="token function">entradaDesdeDerecha</span><span class="token punctuation">(</span>duracion<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token function">fadeIn</span><span class="token punctuation">(</span>animationSpec <span class="token operator">=</span> <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+    <span class="token function">slideIntoContainer</span><span class="token punctuation">(</span>
+        AnimatedContentTransitionScope<span class="token punctuation">.</span>SlideDirection<span class="token punctuation">.</span>Left<span class="token punctuation">,</span>
+        <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span class="token keyword keyword-fun">fun</span> AnimatedContentTransitionScope<span class="token operator">&lt;</span>NavBackStackEntry<span class="token operator">&gt;</span>
+        <span class="token punctuation">.</span><span class="token function">salidaAlaDerecha</span><span class="token punctuation">(</span>duracion<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token function">fadeOut</span><span class="token punctuation">(</span>animationSpec <span class="token operator">=</span> <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+            <span class="token function">slideOutOfContainer</span><span class="token punctuation">(</span>
+                AnimatedContentTransitionScope<span class="token punctuation">.</span>SlideDirection<span class="token punctuation">.</span>Right<span class="token punctuation">,</span>
+                <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+<span class="token keyword keyword-fun">fun</span> AnimatedContentTransitionScope<span class="token operator">&lt;</span>NavBackStackEntry<span class="token operator">&gt;</span>
+        <span class="token punctuation">.</span><span class="token function">salidaHaciaAbajo</span><span class="token punctuation">(</span>duracion<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token function">fadeOut</span><span class="token punctuation">(</span>animationSpec <span class="token operator">=</span> <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+            <span class="token function">slideOutOfContainer</span><span class="token punctuation">(</span>
+                AnimatedContentTransitionScope<span class="token punctuation">.</span>SlideDirection<span class="token punctuation">.</span>Down<span class="token punctuation">,</span>
+                <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+<span class="token keyword keyword-fun">fun</span> AnimatedContentTransitionScope<span class="token operator">&lt;</span>NavBackStackEntry<span class="token operator">&gt;</span>
+        <span class="token punctuation">.</span><span class="token function">entradaHaciaArriba</span><span class="token punctuation">(</span>duracion<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token function">fadeIn</span><span class="token punctuation">(</span>animationSpec <span class="token operator">=</span> <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+            <span class="token function">slideIntoContainer</span><span class="token punctuation">(</span>
+                AnimatedContentTransitionScope<span class="token punctuation">.</span>SlideDirection<span class="token punctuation">.</span>Up<span class="token punctuation">,</span>
+                <span class="token function">tween</span><span class="token punctuation">(</span>duracion<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+</pre><p>Posteriormente, para conseguir el efecto descrito, simplemente tendremos que usarlas en los par&#xE1;metros de las transiciones de navegaci&#xF3;n en el <strong><code>NavHost</code></strong>. Por ejemplo:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5-8]}" class="language-kotlin" data-line="5-8">    <span class="token keyword keyword-val">val</span> duracionAnimacion <span class="token operator">=</span> <span class="token number">1100</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+        startDestination <span class="token operator">=</span> PantallaARoute<span class="token punctuation">,</span>
+        enterTransition <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">entradaDesdeDerecha</span><span class="token punctuation">(</span>duracionAnimacion<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        exitTransition <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">salidaHaciaAbajo</span><span class="token punctuation">(</span>duracionAnimacion<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        popEnterTransition <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">entradaHaciaArriba</span><span class="token punctuation">(</span>duracionAnimacion<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        popExitTransition <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">salidaAlaDerecha</span><span class="token punctuation">(</span>duracionAnimacion<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5-8" data-start="5" data-end="8">
+
+
+
+</div></div></pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="integrando-los-viewmodels-en-la-navegaci%C3%B3n">Integrando los ViewModels en la navegaci&#xF3;n</h3>
+
+<p>Como sabemos, normalmente nuestras pantallas van a tener toda los &apos;<em>UIStates</em>&apos;, l&#xF3;gica y acceso a datos en un <strong><code>ViewModel</code></strong>. Veamos los pasos para hacerlo en nuestro ejemplo:</p>
+<ol>
+<li>
+<p>Integraremos <strong><code>Hilt</code></strong> en nuestro proyecto como vimos en temas anteriores. No hace falta definir, de momento, el paquete <strong><code>di</code></strong> pues no vamos a preparar ning&#xFA;n m&#xF3;dulo.</p>
+</li>
+<li>
+<p>Definiremos el VM de la pantalla <strong>A</strong> en <strong><code>PantallaAViewModel.kt</code></strong>. En el ascendemos los estados utilizados en la misma. En nuestro caso el nombre introducido y el callback llamado desde el <strong><code>TextField</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> PantallaAViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> nombreState <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token string">&quot;an&#xF3;nimo&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">onNombreChange</span><span class="token punctuation">(</span>nombre<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        nombreState <span class="token operator">=</span> nombre
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Definiremos el VM de la pantalla <strong>B</strong> en <strong><code>PantallaBViewModel.kt</code></strong>. En el ascendemos los estados utilizados en la misma. En nuestro caso el estado con el nombre que vamos a visualizar en el <strong><code>Text</code></strong> de la pantalla <strong>B</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> PantallaBViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> nombreState<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+</pre><p>F&#xED;jate que <strong>NO hemos hecho el <code>private set</code></strong> a la propiedad. De esta manera podremos modificar el estado antes de navegar y no pasar par&#xE1;metro o pasar el par&#xE1;metro y al recibirlo &apos;<em>setearlo</em>&apos; en el VM de <strong>B</strong>. Nosotros vamos a optar por la segunda opci&#xF3;n.</p>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<ol start="4">
+<li>
+<p>En <strong>PantallaARoute.kt</strong> vamos a instanciar el VM de <strong>A</strong> y pasar los estados que <strong><code>PantallaAScreen</code></strong> habr&#xE1; &apos;<em>elevado</em>&apos; a su VM.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[7, 9, 10]}" class="language-kotlin" data-line="7,9,10"><span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantallaAScreen</span><span class="token punctuation">(</span>
+    onNavigatePantallaB<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaARoute</span>&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>        
+        <span class="token keyword keyword-val">val</span> vmPantallaA <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>PantallaAViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">PantallaAScreen</span><span class="token punctuation">(</span>
+            nombreState <span class="token operator">=</span> vmPantallaA<span class="token punctuation">.</span>nombreState<span class="token punctuation">,</span>
+            onNombreChange <span class="token operator">=</span> vmPantallaA<span class="token operator">::</span>onNombreChange<span class="token punctuation">,</span>
+            onNavigatePantallaB <span class="token operator">=</span> onNavigatePantallaB
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+</div></div></pre><blockquote>
+<p>&#x270B; <strong>Importante</strong>: F&#xED;jate que hemos creado el justo antes de emitir la pantalla. En este punto Hilt har&#xE1; que el <strong><code>ViewModeOwner</code></strong> es el <strong><code>NavGraph</code></strong> al que pertenezca el destino de navegaci&#xF3;n. Puesto que el <strong><code>NavGraph</code></strong> pertenece al <strong><code>NavHost</code></strong> y este no cambia al navegar, el VM no ser&#xE1; destruido.<br>
+En este caso, equivale a tener un <strong><code>ViewModel</code></strong> con <strong><code>ViewModelOwner</code></strong> a la <strong><code>MainActivity</code></strong> por si hubi&#xE9;ramos creado el VM en esta y lo hubi&#xE9;ramos ido pasando por par&#xE1;metro por ej...</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,7]}" class="language-kotlin" data-line="4,7"><span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token function">Surface</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> navController <span class="token operator">=</span> <span class="token function">rememberNavController</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> vmPantallaA <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>PantallaAViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">NavHostEjemploBasico</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+        vmPantallaA <span class="token operator">=</span> vmPantallaA
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div></pre><p>Solo si usamos <strong><a href="https://developer.android.com/guide/navigation/design/nested-graphs">grafos de navegaci&#xF3;n anidados</a></strong> y el VM est&#xE1; asociado a un grafo anidado. El VM se destruir&#xE1; al salir del grafo anidado en la navegaci&#xF3;n. Nosotros en este curso no vamos a tratar este tema por simplificar, pero puedes ver en el enlace anterior como se hace.</p>
+</blockquote>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<ol start="5">
+<li>
+<p>En <strong>PantallaBRoute.kt</strong> vamos a instanciar el VM de <strong>B</strong>, &apos;<em>setear</em>&apos; el nombre recibido como par&#xE1;metro en el mismo y pasar este a <strong><code>PantallaBScreen</code></strong> que lo habr&#xE1; &apos;<em>elevado</em>&apos;.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[13,14,16]}" class="language-kotlin" data-line="13,14,16"><span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token function">composable</span><span class="token punctuation">(</span>
+    route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>/{<span class="token interpolation variable">$NombreParam</span>}&quot;</span><span class="token punctuation">,</span>
+    arguments <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+        <span class="token function">navArgument</span><span class="token punctuation">(</span>NombreParam<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            type <span class="token operator">=</span> NavType<span class="token punctuation">.</span>StringType
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+    <span class="token keyword keyword-val">val</span> nombre <span class="token operator">:</span>String<span class="token operator">?</span> <span class="token operator">=</span> backStackEntry<span class="token punctuation">.</span>arguments<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>
+        NombreParam<span class="token punctuation">,</span> <span class="token string">&quot;anonimo&quot;</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> vmPantallaB <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>PantallaBViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    vmPantallaB<span class="token punctuation">.</span>nombreState <span class="token operator">=</span> nombre <span class="token operator">?:</span> <span class="token string">&quot;anonimo&quot;</span>
+    <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>
+        nombre <span class="token operator">=</span> vmPantallaB<span class="token punctuation">.</span>nombreState<span class="token punctuation">,</span>
+        onNavegarAtras <span class="token operator">=</span> onNavegarAtras
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13" data-start="13">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
+</div></div></pre> <div style="page-break-after:always;"></div>
+<p>Otra opci&#xF3;n para este &#xFA;ltimo caso <strong>sugerida en la documentaci&#xF3;n de Jetpack Compose</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> PantallaBViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    savedStateHandle<span class="token operator">:</span> SavedStateHandle
+<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> nombreState<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token function">checkNotNull</span><span class="token punctuation">(</span>savedStateHandle<span class="token punctuation">[</span>NombreParam<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+<span class="token punctuation">}</span>
+</pre><p>Ahora ya no tenemos un <strong>setter p&#xFA;blico</strong>, el <strong><code>nombreState</code></strong> se recupera del objeto inyectado <strong><code>SavedStateHandle</code></strong> y adem&#xE1;s, queda establecido nada m&#xE1;s crear el VM y nos permitir&#xED;a recuperar alg&#xFA;n tipo de objeto complejo del repositorio si fuese su clave primaria. <strong><code>savedStateHandle</code></strong> devuelve ya un State.</p>
+<p>Al hacer esto <strong>PantallaBRoute.kt</strong> quedar&#xED;a as&#xED;...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token function">composable</span><span class="token punctuation">(</span>
+    route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$PantallaBRoute</span>/{<span class="token interpolation variable">$NombreParam</span>}&quot;</span><span class="token punctuation">,</span>
+    arguments <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+        <span class="token function">navArgument</span><span class="token punctuation">(</span>NombreParam<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            type <span class="token operator">=</span> NavType<span class="token punctuation">.</span>StringType
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+    <span class="token keyword keyword-val">val</span> vmPantallaB <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>PantallaBViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">PantallaBScreen</span><span class="token punctuation">(</span>
+        nombre <span class="token operator">=</span> vmPantallaB<span class="token punctuation">.</span>nombreState<span class="token punctuation">,</span>
+        onNavegarAtras <span class="token operator">=</span> onNavegarAtras
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><p>F&#xED;jate que ya no hace falta hacer <strong><code>backStackEntry.arguments?.getString</code></strong> para recuperar el par&#xE1;metro y &apos;<em>setearlo</em>&apos; en el VM.</p>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="integrado-navegaci%C3%B3n-y-navigationbar">Integrado navegaci&#xF3;n y NavigationBar</h2>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 80%">
+<p>En el tema anterior ya vimos como definir diferentes componentes gr&#xE1;ficos en la jerarqu&#xED;a superior de la pantalla, definidos en Material3 para navegar de una pantalla a otra. Algunos de estos ser&#xED;an: <strong><code>NavigationBar</code></strong>, <strong><code>NavigationDrawer</code></strong>, <strong><code>PrimaryTabs</code></strong>, etc. En este aparatado vamos a ver el caso del <strong><code>NavigationBar</code></strong>. Para ello, vamos a realizar una aplicaci&#xF3;n con el esquema mostrado a la derecha.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Si nos fijamos en el mismo, el Scaffold no cambia y ser&#xE1; el contenido del mismo el que contenga nuestro <strong><code>NavHost</code></strong> que intercambiar&#xE1; diferentes &apos;<em>pantallas</em>&apos; que en este caso hemos denominado <strong>Pantalla1</strong>, <strong>Pantalla2</strong> y <strong>Pantalla3</strong>.</p>
+</blockquote>
+</div>
+<div style="width: auto">
+<img height="250px" src="assets/imagenes/tema_4_2/navhost_2.png">
+</div>
+</div>
+<p>Descarga proyecto de <strong>Ejemplo NavigationBar</strong>: <strong><a href="assets/codigo/tema_4_2/EjemploNavConNavigationBar_recurso.zip">EjemploNavConNavigationBar.zip</a></strong></p>
+<p>Puedes ver un esquema de funcionamiento en la siguiente imagen...</p>
+<div style="display: flex; justify-content: center; align-items: center">
+    <img height="525" src="assets/imagenes/tema_4_2/EjemploNavigationBar.png">
+</div>
+<div style="page-break-after:always;"></div>
+<p>Para simplificar la implementaci&#xF3;n de la propuesta, no vamos a usar Hilt, ni ViewModel y voy a pasar como par&#xE1;metro de navegaci&#xF3;n un entero con el n&#xFA;mero de la pantalla de donde vengo. Por tanto, siguiendo los pasos descritos a lo largo del tema ...</p>
+<ol>
+<li>
+<p>Definiremos los composables con las pantallas <strong>Pantalla1</strong>, <strong>Pantalla2</strong> y <strong>Pantalla3</strong> en el paquete <strong><code>ui.features</code></strong>. En nuestro caso, ser&#xE1; un &#xFA;nico componente pantalla denominado <strong><code>PantallaScreen.kt</code></strong> y que tendr&#xE1; el siguiente interfaz.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">PantallaScreen</span><span class="token punctuation">(</span>
+    pantalla<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    pantallaDeDondeVengo<span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    onNavigatePantallaAnterior<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span>
+</pre><p>Si el par&#xE1;metro <strong><code>pantallaDeDondeVengo</code></strong> est&#xE1; a null significa que estoy en la primera pantalla. En caso contrario, se mostrar&#xE1; un tento con la pantalla de donde vengo y un bot&#xF3;n de navegaci&#xF3;n para volver a ella que tendr&#xE1; el mismo efecto que pulsar el icono de la <strong><code>TopAppBar</code></strong> <strong><code>&lt;</code></strong> tal y como se ve&#xED;a en la imagen anterior.</p>
+ <div style="page-break-after:always;"></div>
+</li>
+<li>
+<p>En el paquete <strong><code>ui.navigation</code></strong> definiremos nuestro componente <strong><code>NavHost</code></strong>. Pero antes, definiremos un fuente con la especificaci&#xF3;n de cada uno de los destinos y c&#xF3;mo navegar a ellos. Por ejemplo, vamos a ver la definici&#xF3;n de <strong><code>Pantalla1Route.kt</code></strong> ya que <strong><code>Pantalla2Route.kt</code></strong> y <strong><code>Pantalla3Route.kt</code></strong> ser&#xE1;n an&#xE1;logos.</p>
+<p>La &#xFA;nica diferencia es que en <strong><code>Pantalla1Route.kt</code></strong> definiremos <strong>dos rutas</strong> de navegaci&#xF3;n. <strong>Una sin par&#xE1;metros de entrada para que pueda ser la pantalla inicial de nuestro <code>NavHost</code></strong> y otra con un par&#xE1;metro de entrada de tipo entero que ser&#xE1; el n&#xFA;mero de la pantalla de donde vengo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> Pantalla1Route <span class="token operator">=</span> <span class="token string">&quot;pantalla1&quot;</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> Pantalla1Parameter1Name <span class="token operator">=</span> <span class="token string">&quot;pantalla_de_donde_vengo&quot;</span>
+
+<span class="token keyword keyword-fun">fun</span> NavController<span class="token punctuation">.</span><span class="token function">navigateToPantalla1</span><span class="token punctuation">(</span>
+    pantallaAnterior<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    navOptions<span class="token operator">:</span> NavOptions<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$Pantalla1Route</span>/<span class="token interpolation variable">$pantallaAnterior</span>&quot;</span><span class="token punctuation">,</span> navOptions<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantalla1Screen</span><span class="token punctuation">(</span>
+    onNavigatePantallaAnterior<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$Pantalla1Route</span>&quot;</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+        <span class="token function">PantallaScreen</span><span class="token punctuation">(</span>
+            pantalla <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">composable</span><span class="token punctuation">(</span>
+        route <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$Pantalla1Route</span>/{<span class="token interpolation variable">$Pantalla1Parameter1Name</span>}&quot;</span><span class="token punctuation">,</span>
+        arguments <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+            <span class="token function">navArgument</span><span class="token punctuation">(</span>Pantalla1Parameter1Name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                type <span class="token operator">=</span> NavType<span class="token punctuation">.</span>IntType
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+        <span class="token keyword keyword-val">val</span> pantallaAnterior <span class="token operator">:</span>Int<span class="token operator">?</span> <span class="token operator">=</span> backStackEntry<span class="token punctuation">.</span>arguments<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span>
+            Pantalla1Parameter1Name<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span>
+        <span class="token punctuation">)</span>
+        <span class="token function">PantallaScreen</span><span class="token punctuation">(</span>
+            pantalla <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            pantallaDeDondeVengo <span class="token operator">=</span> pantallaAnterior<span class="token punctuation">,</span>
+            onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre> <div style="page-break-after:always;"></div>
+</li>
+<li>
+<p>Definidas los destinos o rutas, ya podemos definir nuestro <strong><code>NavHost</code></strong> en <strong><code>EjemploNavHost.kt</code></strong>. Este recibir&#xE1; el <strong><code>NavHostController</code></strong> y lo usar&#xE1; en el el callback que pasamos para volver a la pantalla anterior.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5-8]}" class="language-kotlin" data-line="5-8"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">EjemploNavHost</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+        startDestination <span class="token operator">=</span> Pantalla1Route
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> onNavigatePantallaAnterior<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span>
+            navController<span class="token punctuation">.</span><span class="token function">navigateUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">pantalla1Screen</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
+        <span class="token function">pantalla2Screen</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
+        <span class="token function">pantalla3Screen</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5-8" data-start="5" data-end="8">
+
+
+
+</div></div></pre></li>
+<li>
+<p>Implementaremos <strong><code>Scaffold</code></strong> principal con una <strong><code>TopAppBar</code></strong> y la <strong><code>NavigationBar</code></strong> en el fuente <strong><code>EjemploNavDentroDeUnScaffold.kt</code></strong> tal y como vimos en el tema anterior. Este ser&#xE1; emitido desde el <strong><code>setContent</code></strong> de la <strong><code>MainActivity</code></strong> aunque tambi&#xE9;n podremos tener un <strong><code>@Preview</code></strong> y su contenido principal ser&#xE1; el <strong><code>NavHost</code></strong>.</p>
+<p>Nuestro <strong><code>NavigationBar</code></strong> solo recibe el estado con el &#xED;ndice de la pantalla actual y el callback para navegar a la pantalla seleccionada.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">NavigationBarEnEjemploNav</span><span class="token punctuation">(</span>
+    iOpcionNevagacionSeleccionada<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    onNavigateToScreen<span class="token operator">:</span> <span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> titlesAndIcons <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+    NavigationBar <span class="token punctuation">{</span>
+        titlesAndIcons<span class="token punctuation">.</span><span class="token function">forEachIndexed</span> <span class="token punctuation">{</span> index<span class="token punctuation">,</span> <span class="token punctuation">(</span>title<span class="token punctuation">,</span> icon<span class="token punctuation">)</span> <span class="token operator">-&gt;</span>
+            <span class="token function">NavigationBarItem</span><span class="token punctuation">(</span>
+                icon <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Icon</span><span class="token punctuation">(</span>icon<span class="token punctuation">,</span> contentDescription <span class="token operator">=</span> title<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                label <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                selected <span class="token operator">=</span> iOpcionNevagacionSeleccionada <span class="token operator">==</span> index<span class="token punctuation">,</span>
+                onClick <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">onNavigateToScreen</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre> <div style="page-break-after:always;"></div>
+<p>El contenido principal lo metemos dentro de un Box para poder aplicar el padding recibido desde el Scaffold.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">ContenidoPrincipalEnEjemploNav</span><span class="token punctuation">(</span>
+    navController<span class="token operator">:</span> NavHostController<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">EjemploNavHost</span><span class="token punctuation">(</span>navController<span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Definimos una funci&#xF3;n de utilidad privada que a partir de la ruta actual del <strong><code>NavController</code></strong> nos devuelve el &#xED;ndice de la pantalla actual.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">iOpcionNevagacionSeleccionadaAPartirDeRuta</span><span class="token punctuation">(</span>routa<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>routa<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">substringBefore</span><span class="token punctuation">(</span><span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pantalla1Route <span class="token operator">-&gt;</span> <span class="token number">0</span>
+        Pantalla2Route <span class="token operator">-&gt;</span> <span class="token number">1</span>
+        Pantalla3Route <span class="token operator">-&gt;</span> <span class="token number">2</span>
+        <span class="token keyword keyword-else">else</span> <span class="token operator">-&gt;</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Vamos por &#xFA;ltimo a definir la funci&#xF3;n <strong><code>EjemploNavDentroDeUnScaffold</code></strong> que como hemos comentado ser&#xE1; llamada desde la MainActivity. Veamos sus diferentes partes:</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: Cuando pulsemos el bot&#xF3;n de volver atr&#xE1;s. <strong>&#xBF;C&#xF3;mo se actualiza el estado de la <code>NavigationBar</code>?</strong>. F&#xED;jate que obtenemos un <strong>Satate</strong> con <strong><code>navController.currentBackStackEntryAsState()</code></strong> que se actualizar&#xE1; cada vez que se produzca un cambio en el destino de navegaci&#xF3;n. De &#xE9;l, obtenemos un estado derivado (<strong><code>derivedStateOf</code></strong>) con el &#xED;ndice de nuestro <strong><code>NavigationBar</code></strong> utilizando la funci&#xF3;n de utilidad que hemos definido anteriormente y a la que le pasamos la ruta actual con <strong><code>entradaEnPilaDeNavegacionActuasState.value?.destination?.route</code></strong>.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[7-12]}" class="language-kotlin" data-line="7-12"><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalMaterial3Api<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">EjemploNavDentroDeUnScaffold</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> comportamientoAnteScroll 
+        <span class="token operator">=</span> TopAppBarDefaults<span class="token punctuation">.</span><span class="token function">exitUntilCollapsedScrollBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> navController <span class="token operator">=</span> <span class="token function">rememberNavController</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> entradaEnPilaDeNavegacionActuasState 
+        <span class="token operator">=</span> navController<span class="token punctuation">.</span><span class="token function">currentBackStackEntryAsState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-var">var</span> iOpcionNevagacionSeleccionada <span class="token operator">=</span> derivedStateOf <span class="token punctuation">{</span>
+        <span class="token function">iOpcionNevagacionSeleccionadaAPartirDeRuta</span><span class="token punctuation">(</span>
+            entradaEnPilaDeNavegacionActuasState<span class="token punctuation">.</span>value<span class="token operator">?</span><span class="token punctuation">.</span>destination<span class="token operator">?</span><span class="token punctuation">.</span>route
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7-12" data-start="7" data-end="12">
+
+
+
+
+
+</div></div></pre><p>Definimos ya el componente <strong><code>Scaffold</code></strong> y le pasamos al <strong><code>TopAppBar</code></strong>:</p>
+<ol>
+<li>El <strong><code>callback</code></strong> para navegar atr&#xE1;s.</li>
+<li>El <strong><code>callback</code></strong> para deshacer toda la navegaci&#xF3;n.</li>
+</ol>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: para entender la llamada a <strong><code>popBackStack</code></strong> es muy importante que leas la <strong><a href="https://developer.android.com/guide/navigation/backstack?hl=es-419#pop-back">documentaci&#xF3;n oficial de Android</a></strong> y que por su &apos;<em>complejidad</em>&apos; vamos a dejar fuera del Tema.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8, 11-13]}" class="language-kotlin" data-line="8,11-13">    <span class="token function">Scaffold</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">nestedScroll</span><span class="token punctuation">(</span>
+            comportamientoAnteScroll<span class="token punctuation">.</span>nestedScrollConnection<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        topBar <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token function">TopAppBarEnEjemploNav</span><span class="token punctuation">(</span>
+                comportamientoAnteScroll <span class="token operator">=</span> comportamientoAnteScroll<span class="token punctuation">,</span>
+                onNavegarAtras <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    navController<span class="token punctuation">.</span><span class="token function">navigateUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                onDeshacerNavegacion <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span>
+                        navController<span class="token punctuation">.</span>graph<span class="token punctuation">.</span>startDestinationRoute<span class="token operator">!!</span><span class="token punctuation">,</span> <span class="token boolean">false</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11-13" data-start="11" data-end="13">
+
+
+</div></div></pre><p>Nuestro <strong><code>NavigationBar</code></strong> recibir&#xE1; del &#xED;ndice seleccionado a partir del estado que actulizaba la navegaci&#xF3;n. De tal manera que s&#xF3;lo con navegar este estado cambiar&#xE1;. Adem&#xE1;s, le pasamos los callbacks para navegar a la pantalla seleccionada utilizando la funciones de extenxi&#xF3;n de NavHostController que hemos definido anteriormente en cada uno de los destinos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">        bottomBar <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token function">NavigationBarEnEjemploNav</span><span class="token punctuation">(</span>
+                iOpcionNevagacionSeleccionada <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+                onNavigateToScreen <span class="token operator">=</span> <span class="token punctuation">{</span> nuevo <span class="token operator">-&gt;</span>
+                    <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>nuevo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token number">0</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantalla1</span><span class="token punctuation">(</span>
+                            pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
+                        <span class="token punctuation">)</span>
+                        <span class="token number">1</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantalla2</span><span class="token punctuation">(</span>
+                            pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
+                        <span class="token punctuation">)</span>
+                        <span class="token number">2</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantalla3</span><span class="token punctuation">(</span>
+                            pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
+                        <span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</pre><p>Por &#xFA;ltimo, emitiremos el componente que defin&#xED;a el <strong><code>NavHost</code></strong> en el contenido principal del <strong><code>Scaffold</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">        content <span class="token operator">=</span> <span class="token punctuation">{</span> innerPadding <span class="token operator">-&gt;</span>
+            <span class="token function">ContenidoPrincipalEnEjemploNav</span><span class="token punctuation">(</span>
+                navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span>innerPadding<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ol>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
