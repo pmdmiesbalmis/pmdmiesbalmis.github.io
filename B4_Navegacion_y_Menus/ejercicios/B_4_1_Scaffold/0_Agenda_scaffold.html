@@ -1050,15 +1050,44 @@ pre[data-line] .line-highlight[data-end]:after {
                 <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">onSuccess</span> <span class="token punctuation">{</span>
                     informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">onFailure</span> <span class="token punctuation">{</span>
-                    Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string">&quot;ListaContactosViewModel&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Borrando Contacto: <span class="token interpolation"><span class="token delimiter variable">${</span>it<span class="token punctuation">.</span>localizedMessage<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+                    Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>
+                        <span class="token string">&quot;ListaContactosViewModel&quot;</span><span class="token punctuation">,</span> 
+                        <span class="token string">&quot;Borrando Contacto: <span class="token interpolation"><span class="token delimiter variable">${</span>it<span class="token punctuation">.</span>localizedMessage<span class="token delimiter variable">}</span></span>&quot;</span>
+                    <span class="token punctuation">)</span>
                     informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span>
-                        mensaje <span class="token operator">=</span> <span class="token string">&quot;Error al borrar el contacto <span class="token interpolation"><span class="token delimiter variable">${</span>contatoSleccionadoState<span class="token operator">!!</span><span class="token punctuation">.</span>nombre<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">,</span>
-                        onDismiss <span class="token operator">=</span> <span class="token punctuation">{</span> informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                        mensaje <span class="token operator">=</span> 
+                        <span class="token string">&quot;Error al borrar el contacto <span class="token interpolation"><span class="token delimiter variable">${</span>contatoSleccionadoState<span class="token operator">!!</span><span class="token punctuation">.</span>nombre<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">,</span>
+                        onDismiss <span class="token operator">=</span> <span class="token punctuation">{</span> 
+                            informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+                        <span class="token punctuation">}</span>
                     <span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>Ya solo quedar&#xED;a pasar estos estados desde el VM al <strong><code>ListaContactosScreen</code></strong> en la <strong><code>MainActivity</code></strong>. Puedes definir este composable para probarlo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">VerListaContactos</span><span class="token punctuation">(</span>vm <span class="token operator">:</span> ListaContactosViewModel <span class="token operator">=</span> <span class="token function">hiltViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">ListaContactosScreen</span><span class="token punctuation">(</span>
+        contactosState <span class="token operator">=</span> vm<span class="token punctuation">.</span>contactosState<span class="token punctuation">,</span>
+        contactoSeleccionadoState <span class="token operator">=</span> vm<span class="token punctuation">.</span>contatoSleccionadoState<span class="token punctuation">,</span>
+        filtradoActivoState <span class="token operator">=</span> vm<span class="token punctuation">.</span>filtradoActivoState<span class="token punctuation">,</span>
+        filtroCategoriaState <span class="token operator">=</span> vm<span class="token punctuation">.</span>filtroCategoriaState<span class="token punctuation">,</span>
+        informacionEstadoState <span class="token operator">=</span> vm<span class="token punctuation">.</span>informacionEstadoState<span class="token punctuation">,</span>
+        onActualizaContactos <span class="token operator">=</span>  <span class="token punctuation">{</span> vm<span class="token punctuation">.</span><span class="token function">cargaContactos</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        onActivarFiltradoClicked <span class="token operator">=</span> <span class="token punctuation">{</span> vm<span class="token punctuation">.</span><span class="token function">onActivarFiltradoClicked</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        onFiltroModificado <span class="token operator">=</span> <span class="token punctuation">{</span> categorias <span class="token operator">-&gt;</span> vm<span class="token punctuation">.</span><span class="token function">onFiltroModificado</span><span class="token punctuation">(</span>categorias<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        onContactoClicked <span class="token operator">=</span> <span class="token punctuation">{</span> c <span class="token operator">-&gt;</span>
+            vm<span class="token punctuation">.</span><span class="token function">onItemListaContatoEvent</span><span class="token punctuation">(</span>ItemListaContactosEvent<span class="token punctuation">.</span><span class="token function">OnClickContacto</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        onAddClicked <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        onEditClicked <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+        onDeleteClicked <span class="token operator">=</span> <span class="token punctuation">{</span>
+            vm<span class="token punctuation">.</span><span class="token function">onItemListaContatoEvent</span><span class="token punctuation">(</span>ItemListaContactosEvent<span class="token punctuation">.</span>OnDeleteContacto<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre>
       </div>
