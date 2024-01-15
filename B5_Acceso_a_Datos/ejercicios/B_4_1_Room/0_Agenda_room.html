@@ -526,10 +526,297 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>Vamos a partir de nuestra Agenda de Contactos con navegaci&#xF3;n y vamos a a&#xF1;adir a a&#xF1;adir como fuente de datos una BD local de SQLite a la que accederemos usando el ORM room proporcionado por Jetpack Compose.</p>
 <div class="admonition info">
 <p class="admonition-title">Soluci&#xF3;n</p>
-<p>Si te surge alguna duda o tienes dificultades para completar este caso de estudio. Puedes descargar la soluci&#xF3;n de este caso de estudio del siguiente enlace: <strong><a href="../../assets/codigo/ejercicio4_1/ejercicio0/0_AgendaRoom_recurso.zip">propuesta de soluci&#xF3;n</a></strong></p>
+<p>Si te surge alguna duda o tienes dificultades para completar este caso de estudio. Puedes descargar la soluci&#xF3;n de este caso de estudio del siguiente enlace: <strong><a href="../../assets/codigo/ejercicio5_1/ejercicio0/0_AgendaRoom_recurso.zip">propuesta de soluci&#xF3;n</a></strong></p>
 </div>
-<h3 class="mume-header" id="paso-1">Paso 1:</h3>
+<h3 class="mume-header" id="paso-1-a%C3%B1adir-dependencias-y-paquetes">Paso 1: A&#xF1;adir dependencias y paquetes</h3>
 
+<ol>
+<li>
+<p>Para usar room en nuestra aplicaci&#xF3;n debemos a&#xF1;adir las siguientes dependencias en el fichero <code>build.gradle.kts</code> del m&#xF3;dulo <code>app</code>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">dependencies <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Room</span>
+    <span class="token keyword keyword-val">val</span> roomVersion <span class="token operator">=</span> <span class="token string">&quot;2.6.1&quot;</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-runtime:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">annotationProcessor</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-compiler:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">ksp</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-compiler:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-ktx:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// optional - Paging 3 Integration</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-paging:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Crearemos el paquete <strong><code>.data.room</code></strong> dentro del cual definiremos las clases que nos permitir&#xE1;n acceder a la BD.</p>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-2-definir-la-entidad-contacto">Paso 2: Definir la entidad Contacto</h3>
+
+<p>Dentro del paquete <strong><code>.data.room</code></strong> definiremos la entidad <strong><code>Contacto</code></strong> que ser&#xE1; la clase que represente sus datos en la BD.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=14}" class="language-kotlin" data-line="14"><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;contactos&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ContactoEntity</span><span class="token punctuation">(</span>
+    <span class="token annotation builtin">@PrimaryKey</span><span class="token punctuation">(</span>autoGenerate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;nombre&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;apellidos&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;telefono&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> telefono<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;email&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> email<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;foto&quot;</span><span class="token punctuation">,</span>  typeAffinity <span class="token operator">=</span> ColumnInfo<span class="token punctuation">.</span>BLOB<span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> foto<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;categorias&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> categorias<span class="token operator">:</span> String
+<span class="token punctuation">)</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
+</div></div></pre><h3 class="mume-header" id="paso-3-definir-conversores-de-tipos">Paso 3: Definir conversores de tipos</h3>
+
+<p>F&#xED;jate en el c&#xF3;digo anterior que la <strong>imagen del contacto</strong>, la gradaremos en la BD como un tipo <strong><code>BLOB</code></strong> que es un <strong>array de bytes</strong>. Sin embargo, en la entidad <strong><code>ContactoEntity</code></strong> la imagen la tenemos como un <strong>String</strong> que ser&#xE1; una <strong>cadena en base64</strong> tal y como la usamos en nuestro modelo. Para ello debemos definir un conversor de tipos que nos permita convertir de un tipo a otro. Es por eso que crearemos la clase <strong><code>RoomConverters</code></strong> dentro del paquete <strong><code>.data.room</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> RoomConverters <span class="token punctuation">{</span>
+    <span class="token annotation builtin">@TypeConverter</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">toBlob</span><span class="token punctuation">(</span>value<span class="token operator">:</span> ByteArray<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> Imagenes<span class="token punctuation">.</span><span class="token function">blobToBase64</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@TypeConverter</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">fromBlob</span><span class="token punctuation">(</span>value<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> ByteArray<span class="token operator">?</span> <span class="token operator">=</span> Imagenes<span class="token punctuation">.</span><span class="token function">base64ToBlob</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-4-definir-nuestro-dao-sobre-la-entidad-contacto">Paso 4: Definir nuestro DAO sobre la entidad Contacto</h3>
+
+<p>Vamos a definir el DAO sobre la entidad <strong><code>ContactoEntity</code></strong>. Para ello crearemos la <strong>interfaz</strong> <strong><code>ContactoDao</code></strong> dentro del paquete <strong><code>.data.room</code></strong>. En el, definiremos los m&#xE9;todos que nos permitir&#xE1;n realizar las operaciones <strong>CRUD</strong> sobre dicha entidad.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong> F&#xED;jate que todos los m&#xE9;todos son <strong>suspend</strong>. De esta manera estamos indicando que son m&#xE9;todos que se ejecutar&#xE1;n en un hilo secundario (<strong><code>Dispatchers.IO</code></strong>) y que por tanto no bloquear&#xE1;n el hilo principal.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
+<span class="token keyword keyword-interface">interface</span> ContactoDao <span class="token punctuation">{</span>
+    <span class="token annotation builtin">@Insert</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>contacto <span class="token operator">:</span> ContactoEntity<span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Delete</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">delete</span><span class="token punctuation">(</span>contacto <span class="token operator">:</span> ContactoEntity<span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Update</span><span class="token punctuation">(</span>onConflict <span class="token operator">=</span> OnConflictStrategy<span class="token punctuation">.</span>ABORT<span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>contacto <span class="token operator">:</span> ContactoEntity<span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT COUNT(*) FROM contactos&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int
+
+    <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM contactos&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>ContactoEntity<span class="token operator">&gt;</span>
+
+    <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;SELECT * FROM contactos WHERE id = :id&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> ContactoEntity
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-5-definici%C3%B3n-de-la-bd">Paso 5: Definici&#xF3;n de la BD</h3>
+
+<p>Definimos la clase abstracta <strong><code>AgendaDb</code></strong> que extiende de <strong><code>RoomDatabase</code></strong> y que nos permitir&#xE1; acceder a la BD. En ella definiremos:</p>
+<ol>
+<li>La anotaci&#xF3;n <strong><code>@Database</code></strong> que nos permitir&#xE1; indicar el nombre de la BD, la versi&#xF3;n y las entidades que contiene.</li>
+<li>La anoaci&#xF3;n <strong><code>@TypeConverters</code></strong> que nos permitir&#xE1; indicar los conversores de tipos que usaremos.</li>
+<li>El m&#xE9;todo de clase <strong><code>getDatabase()</code></strong> que nos devolver&#xE1; una instancia de la BD.</li>
+<li>El m&#xE9;todo <strong><code>contactoDao()</code></strong> que nos devolver&#xE1; el DAO sobre la entidad <strong><code>ContactoEntity</code></strong>.</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
+    entities <span class="token operator">=</span> <span class="token punctuation">[</span>ContactoEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    exportSchema <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    version <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">)</span>
+<span class="token annotation builtin">@TypeConverters</span><span class="token punctuation">(</span>RoomConverters<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> AgendaDb <span class="token operator">:</span> <span class="token function">RoomDatabase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">contactoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ContactoDao
+
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token annotation builtin">@Volatile</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-var">var</span> db<span class="token operator">:</span> AgendaDb<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+
+        <span class="token keyword keyword-fun">fun</span> <span class="token function">getDatabase</span><span class="token punctuation">(</span>context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token operator">=</span> Room<span class="token punctuation">.</span><span class="token function">databaseBuilder</span><span class="token punctuation">(</span>
+            context<span class="token punctuation">,</span>
+            AgendaDb<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">,</span> <span class="token string">&quot;agenda&quot;</span>
+        <span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">allowMainThreadQueries</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">fallbackToDestructiveMigration</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-6-preparar-para-inyectar-con-hilt-los-m%C3%B3dulos">Paso 6: Preparar para inyectar con Hilt los m&#xF3;dulos</h3>
+
+<p>En el fichero <strong><code>AppModule.kt</code></strong> dentro del paquete <strong><code>.di</code></strong> definiremos como inyectar la BD <strong><code>provideAgendaDatabase</code></strong> y el DAO <strong><code>provideContactoDao</code></strong> en nuestra aplicaci&#xF3;n.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: F&#xED;jate que la anotaci&#xF3;n <strong><code>@ApplicationContext</code></strong> inyecta el contexto de la aplicaci&#xF3;n. De esta manera podr&#xE1; crear el fichero de la BD en el sistema de ficheros accesible por el contexto de la misma.</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8, 17, 21]}" class="language-kotlin" data-line="8,17,21"><span class="token annotation builtin">@Module</span>
+<span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideAgendaDatabase</span><span class="token punctuation">(</span>
+        <span class="token annotation builtin">@ApplicationContext</span> context<span class="token operator">:</span> Context
+    <span class="token punctuation">)</span> <span class="token operator">:</span> AgendaDb <span class="token operator">=</span> AgendaDb<span class="token punctuation">.</span><span class="token function">getDatabase</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideContactoDao</span><span class="token punctuation">(</span>
+        db<span class="token operator">:</span> AgendaDb
+    <span class="token punctuation">)</span> <span class="token operator">:</span> ContactoDao <span class="token operator">=</span> db<span class="token punctuation">.</span><span class="token function">contactoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// En el proveedor del repositorio sustituimos DaoMock por el Dao</span>
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideContactoRepository</span><span class="token punctuation">(</span>
+        contactoDao<span class="token operator">:</span> ContactoDao
+    <span class="token punctuation">)</span> <span class="token operator">:</span> ContactoRepository <span class="token operator">=</span> <span class="token function">ContactoRepository</span><span class="token punctuation">(</span>contactoDao<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="17" data-start="17">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="21" data-start="21">
+</div></div></pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-7-a%C3%B1adir-los-conversores-de-contactoentity-a-contacto-y-viceversa">Paso 7: A&#xF1;adir los conversores de ContactoEntity a Contacto y viceversa</h3>
+
+<p>Necesitamos <strong>mapear las entidades de la BD a nuestro modelo</strong> y viceversa.<br>
+Lo normal es que sea inmediato pero no tiene que ser as&#xED;. Por ejemplo, si te fijas las <strong>categorias</strong> dentro de nuestro <strong><code>ContactoEntity</code></strong> es de tipo <strong><code>string</code></strong> por lo cual la forma de guardarlas ser&#xE1; seguramente el nombre de las mismas separador por comas <em><strong>&quot;Amigos,Trabajo,Familia&quot;</strong></em> , pero en la clase <strong><code>Contacto</code></strong> de nuestro modelo era un array de tipo enumerado <strong><code>EnumSet&lt;Categorias&gt;</code></strong>.</p>
+<p>Es por esto que en <strong><code>RepositoryConverters.kt</code></strong> dentro del paquete <strong><code>.data</code></strong> definiremos los m&#xE9;todos que nos permitir&#xE1;n convertir de un tipo a otro como hicimos a al principio con las clases de Mock y el modelo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-fun">fun</span> EnumSet<span class="token operator">&lt;</span>Contacto<span class="token punctuation">.</span>Categorias<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token function">toCategoriaEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token function">joinToString</span><span class="token punctuation">(</span>separator <span class="token operator">=</span> <span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>name <span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> Contacto<span class="token punctuation">.</span><span class="token function">toContactoEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">ContactoEntity</span><span class="token punctuation">(</span>
+    id <span class="token operator">=</span> id<span class="token punctuation">,</span>
+    nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+    apellidos <span class="token operator">=</span> apellidos<span class="token punctuation">,</span>
+    foto <span class="token operator">=</span> foto<span class="token punctuation">,</span>
+    email <span class="token operator">=</span> correo<span class="token punctuation">,</span>
+    telefono <span class="token operator">=</span> telefono<span class="token punctuation">,</span>
+    categorias <span class="token operator">=</span> categorias<span class="token punctuation">.</span><span class="token function">toCategoriaEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-fun">fun</span> String<span class="token punctuation">.</span><span class="token function">toEnumSetCategorias</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> EnumSet<span class="token operator">&lt;</span>Contacto<span class="token punctuation">.</span>Categorias<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> categorias <span class="token operator">=</span> EnumSet<span class="token punctuation">.</span><span class="token function">noneOf</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Categorias<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> textos <span class="token operator">=</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span>
+    textos<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> categoria <span class="token operator">-&gt;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>categoria<span class="token punctuation">.</span><span class="token function">isNullOrEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            categorias<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Categorias<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>categoria<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> categorias
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-fun">fun</span> ContactoEntity<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>
+    id <span class="token operator">=</span> id<span class="token punctuation">,</span>
+    nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+    apellidos <span class="token operator">=</span> apellidos<span class="token punctuation">,</span>
+    foto <span class="token operator">=</span> foto<span class="token punctuation">,</span>
+    correo <span class="token operator">=</span> email<span class="token punctuation">,</span>
+    telefono <span class="token operator">=</span> telefono<span class="token punctuation">,</span>
+    categorias <span class="token operator">=</span> categorias<span class="token punctuation">.</span><span class="token function">toEnumSetCategorias</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-8-generando-el-nuevo-repositorio">Paso 8: Generando el nuevo repositorio</h3>
+
+<p>Vamos a reescribir el c&#xF3;digo del repositorio <strong><code>ContactoRepository</code></strong> dentro del paquete <strong><code>.data</code></strong> . En el, reescribiremos los m&#xE9;todos para usar <strong><code>ContactoDao.kt</code></strong> en lugar de <strong><code>ContactosMock.kt</code></strong>.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: En la gran mayor&#xED;a de ejemplos de Internet este paso lo hacen combinando el <strong><a href="https://refactoring.guru/es/design-patterns/facade">Facade Pattern</a></strong> con el <strong>Repository Pattern</strong> manteniendo as&#xED; ambos repositorios (Repository en el fondo es una concreci&#xF3;n de Facade). Sin embargo, en nuestro ejemplo no lo vamos a hacer as&#xED;, ya que supondr&#xED;a un mayor nivel de complejidad en la inyecci&#xF3;n de dependencias, teniendo que definir nuestras propias anotaciones para saber que concreci&#xF3;n de la abstracci&#xF3;n del repositorio vamos a inyectar en el <strong>ViewModel</strong>.</p>
+</blockquote>
+<p>B&#xE1;sicamente la implementaci&#xF3;n ser&#xE1; igual a la que ten&#xED;amos con el DaoMock pero usando el Dao de Room....</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> ContactoRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ContactoDao
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>Contacto<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dao<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Contacto  <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> dato <span class="token operator">=</span> dao<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+        dato<span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> Contacto<span class="token punctuation">)</span>  <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dao<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>contacto<span class="token punctuation">.</span><span class="token function">toContactoEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> Contacto<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dao<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>contacto<span class="token punctuation">.</span><span class="token function">toContactoEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">delete</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span>  <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dao<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>dao<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="paso-10-carga-inicial-de-datos-en-la-bd-con-los-datos-de-mock">Paso 10: Carga inicial de datos en la BD con los datos de Mock</h3>
+
+<p>Vamos a cargar los datos de Mock en la BD. Para ello, en el fichero <strong><code>AgendaApplication.kt</code></strong> dentro del paquete <strong><code>com.pmdm.agenda</code></strong> invalidaremos un m&#xE9;todo <strong><code>onCreate()</code></strong> del ciclo de vida de la aplicaci&#xF3;n y que se ejecutar&#xE1; al iniciar la misma. En &#xE9;l, comprobaremos si la BD est&#xE1; vac&#xED;a y en caso afirmativo cargaremos los datos de Mock en la BD.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltAndroidApp</span>
+<span class="token keyword keyword-class">class</span> AgendaApplication <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+    <span class="token annotation builtin">@Inject</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> daoMock<span class="token operator">:</span> ContactoDaoMock
+    <span class="token annotation builtin">@Inject</span>
+    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> daoEntity<span class="token operator">:</span> ContactoDao
+
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        runBlocking <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>daoEntity<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                daoMock<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> daoEntity<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toContactoEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>En la primera ejecuci&#xF3;n crear&#xE1; la BD si no existe y cargar&#xE1; todos los datos. Recuerda que la DB se encuentra en la ruta de nuestro dispositivo <strong><code>/data/data/com.pmdm.agenda/databases</code></strong> y por tanto si borramos su contenido o la vaciamos del todo se volver&#xE1; a cargar.</p>
 
       </div>
       

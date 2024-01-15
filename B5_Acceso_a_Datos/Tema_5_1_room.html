@@ -344,26 +344,21 @@ justo después del front matter
           <a href="#introducci&#xF3;n" class="md-toc-link">
             <p>Introducci&#xF3;n</p>
 
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#dependencias" class="md-toc-link">
+            <p>Dependencias</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#componentes-de-room" class="md-toc-link">
+            <p>Componentes de Room</p>
+
           </a></div><details style="padding:0;;padding-left:0px;" open>
-        <summary class="md-toc-link-wrapper">
-          <a href="#componentes-de-room" class="md-toc-link"><p>Componentes de Room</p>
-</a>
-          </summary>
-        <div>
-          <details style="padding:0;;padding-left:24px;" open>
         <summary class="md-toc-link-wrapper">
           <a href="#crear-las-entidades-que-definen-nuestro-modelo" class="md-toc-link"><p>Crear las entidades que definen nuestro modelo</p>
 </a>
           </summary>
         <div>
-          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#definiendo-relaciones-entre-objetos" class="md-toc-link">
-            <p>Definiendo relaciones entre Objetos</p>
-
-          </a></div>
-        </div>
-      </details>
-    <details style="padding:0;;padding-left:24px;" open>
+          <details style="padding:0;;padding-left:24px;" open>
         <summary class="md-toc-link-wrapper">
           <a href="#crear-los-objetos-de-acceso-a-la-base-de-datos" class="md-toc-link"><p>Crear los Objetos de Acceso a la Base de Datos</p>
 </a>
@@ -396,61 +391,106 @@ justo después del front matter
 <div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
 
-<p>La plataforma Android proporciona dos herramientas principales para el almacenamiento y consulta de datos estructurados: la base de datos <strong>SQLite</strong> y <strong>Content Providers</strong>.</p>
-<p>Vamos a centrarnos en <strong><a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a></strong>, aunque no entraremos ni en el dise&#xF1;o de BBDD relacionales ni en el uso avanzado de la BBDD. Para conocer toda la funcionalidad de SQLite se recomienda usar la documentaci&#xF3;n oficial. El problema de trabajar directamente con esta API es que es un trabajo a bajo nivel que puede llevar a errores en tiempo de ejecuci&#xF3;n.</p>
-<p>Por este motivo Android Jetpack ha proporcionado una capa de abstracci&#xF3;n que facilita enormemente el proceso de codificaci&#xF3;n La biblioteca que nos va a permitir esta abstracci&#xF3;n se distribuye como <strong><a href="https://developer.android.com/training/data-storage/room">Room</a></strong>.</p>
+<ul>
+<li>
+<p><strong>Persistencia local con Room</strong></p>
+<ul>
+<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/training/data-storage/room">Save data in a local database using Room</a></strong></li>
+<li>Documentaci&#xF3;n oficial versiones librer&#xED;a: <strong><a href="https://developer.android.com/jetpack/androidx/releases/room">Room</a></strong></li>
+<li>Video Tutorial (Ingl&#xE9;s): <strong><a href="https://www.youtube.com/watch?v=bOd3wO0uFr8">Philipp Lackner</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=TKZRiq4GDuc">Martin Kiperszmid</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=lYBb4QedYH8">AristiDevs</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=Yu-Ty8T28ag">Gibr&#xE1;n Garc&#xED;a</a></strong></li>
+</ul>
+</li>
+</ul>
+<p>La plataforma Android proporciona <strong>dos herramientas</strong> principales para el almacenamiento y consulta de datos estructurados: la base de datos <strong>SQLite</strong> y <strong>Content Providers</strong>.</p>
+<blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: Existen otras opciones de terceros como <strong><a href="https://www.mongodb.com/docs/realm/sdk/kotlin/">Realm</a></strong> (<strong>MongoDB</strong>) pero no est&#xE1;n tan integradas con Android y Android Studio como Room.<br>
+Incluso si nos decidimos por usar <strong><a href="https://firebase.google.com/docs/firestore/quickstart?hl=es-419#android">Firestore</a></strong>, existe la posibilidad de <strong><a href="https://cloud.google.com/firestore/docs/manage-data/enable-offline?hl=es-419#kotlin+ktxandroid">usarlo de forma offline</a></strong></p>
+</blockquote>
+<p>Nosotros vamos a centrarnos en <strong><a href="https://developer.android.com/training/data-storage/sqlite?hl=es">SQLite</a></strong>, aunque no entraremos ni en el dise&#xF1;o de BBDD relacionales ni en el uso avanzado de la BBDD. Para conocer toda la funcionalidad de SQLite se recomienda usar la documentaci&#xF3;n oficial. <strong>El problema de trabajar directamente con esta API es que es un trabajo a bajo nivel que puede llevar a errores en tiempo de ejecuci&#xF3;n</strong>.</p>
+<p>Por este motivo Android Jetpack ha proporcionado ORM a modo de capa de abstracci&#xF3;n que facilita enormemente el proceso de codificaci&#xF3;n La biblioteca que nos va a permitir esta abstracci&#xF3;n y se distribuye como <strong><a href="https://developer.android.com/training/data-storage/room">Room</a></strong>.</p>
+<div style="page-break-after:always;"></div>
+<h2 class="mume-header" id="dependencias">Dependencias</h2>
+
+<p>Para poder usar la funcionalidad de Room y las anotaciones, deberemos a&#xF1;adir una serie de dependencias y plugins.</p>
+<p>Al igual que suced&#xED;a con <strong>Hilt</strong>, en <strong>Room</strong> vamos a necesitar alg&#xFA;n tipo de procesador de anotaciones. Las primeras versiones usaban<br>
+<strong>KAPT</strong>, pero como con Hilt, <strong>Room</strong> ya est&#xE1; migrado a <strong>KSP</strong>. Por tanto, si ya estamos usando <strong>Hilt</strong> no necesitaremos a&#xF1;adir el plugin de <strong>KSP</strong>. No obstante vamos a recordar los pasos...</p>
+<p>En el <strong><code>build.gradle.kts</code></strong> ra&#xED;z del proyecto a&#xF1;adiremos el siguiente plugin:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">plugins <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Plugin para que Gradle use Ksp</span>
+    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.devtools.ksp&quot;</span><span class="token punctuation">)</span> version <span class="token string">&quot;1.9.0-1.0.12&quot;</span> apply <span class="token boolean">false</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</pre><div style="page-break-after:always;"></div>
+<p>En el <strong><code>build.gradle.kts</code></strong> del <strong>m&#xF3;dulo de la aplicaci&#xF3;n</strong> (app) a&#xF1;adiremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">plugins <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Plugin para que Gradle use Ksp</span>
+    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.devtools.ksp&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+android <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Debemos usar el SDK de la versi&#xF3;n 17 o superior</span>
+    compileOptions <span class="token punctuation">{</span>
+        sourceCompatibility <span class="token operator">=</span> JavaVersion<span class="token punctuation">.</span>VERSION_17
+        targetCompatibility <span class="token operator">=</span> JavaVersion<span class="token punctuation">.</span>VERSION_17
+    <span class="token punctuation">}</span>
+    kotlinOptions <span class="token punctuation">{</span>
+        jvmTarget <span class="token operator">=</span> <span class="token string">&quot;17&quot;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// M&#xED;nimo el compilador de compose 1.5.0</span>
+    composeOptions <span class="token punctuation">{</span>
+        kotlinCompilerExtensionVersion <span class="token operator">=</span> <span class="token string">&quot;1.5.0&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+dependencies <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token comment">// Room</span>
+    <span class="token keyword keyword-val">val</span> roomVersion <span class="token operator">=</span> <span class="token string">&quot;2.6.1&quot;</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-runtime:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">annotationProcessor</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-compiler:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">ksp</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-compiler:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-ktx:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// optional - Paging 3 Integration</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.room:room-paging:<span class="token interpolation variable">$roomVersion</span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><blockquote>
+<p>&#x1F4CC; <strong>Nota</strong>: La versi&#xF3;n de la librer&#xED;a puede cambiar, pero puedes ver los &#xFA;ltimos releases de la misma en el siguiente enlace: <strong><a href="https://developer.android.com/jetpack/androidx/releases/room">Room</a></strong></p>
+</blockquote>
+<div style="page-break-after:always;"></div>
 <h2 class="mume-header" id="componentes-de-room">Componentes de Room</h2>
 
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
+<div style="width: 70%">
 <p>Para trabajar con Room debemos familiarizarnos con su arquitectura que est&#xE1; compuesta por tres partes principales:</p>
-<div align="center">
-    <img height="300" src="assets/imagenes/tema_5_1/imagen1_room.png">
-</div>
 <ul>
 <li><strong>Entity</strong> (Entities), ser&#xE1;n las clases que definir&#xE1;n las entidades de nuestra Base de datos, que corresponden con cada tabla que la forman.</li>
-<li><strong>Daos</strong> (Data Access Objects), en este caso ser&#xE1;n las clases abstractas o interfaces donde estar&#xE1;n definidos los m&#xE9;todos que nos permitir&#xE1;n la operatividad (inserci&#xF3;n, consulta, etc) con cada una de las tablas de la Base de Datos.</li>
-<li><strong>RoomDatabase</strong> (Room Database ), contiene la Base de Datos y el acceso a esta, a la vez que une los dos anteriores conceptos.</li>
+<li><strong>DAOs</strong> (Data Access Objects), en este caso ser&#xE1;n las clases abstractas o interfaces donde estar&#xE1;n definidos los m&#xE9;todos que nos permitir&#xE1;n la operatividad (inserci&#xF3;n, consulta, etc) con cada una de las tablas de la Base de Datos.</li>
+<li><strong>RoomDatabase</strong> (Room Database), contiene la Base de Datos y el acceso a esta, a la vez que une los dos anteriores conceptos.</li>
 </ul>
-<p>Una vez que se creen estos tres elementos, la app podr&#xE1; acceder a los Daos a trav&#xE9;s de las instancias de Room Database que creemos, de forma m&#xE1;s estable que con el acceso directo a la API de SQLite.</p>
+</div>
+<div style="width: auto">
+    <img height="300px" src="assets/imagenes/tema_5_1/imagen1_room.png">
+</div>
+</div>
+<p>Una vez que se creen estos tres elementos, la app podr&#xE1; acceder a los DAOs a trav&#xE9;s de las instancias de Room Database que creemos, de forma m&#xE1;s estable que con el acceso directo a la API de SQLite.</p>
 <p>El uso de Room se hace a trav&#xE9;s de <strong>Anotaciones</strong> a&#xF1;adidas a las clases e interfaces, las principales son:</p>
 <ul>
 <li><strong><code>@Entity</code></strong>, indica que la clase a la que se atribuye debe ser tratada como una entidad.</li>
-<li><strong><code>@Dao</code></strong>, debe de a&#xF1;adirse a las interfaces que queremos que sean nuestras Daos. Dentro de estas interfaces se utiliz&#xE1;n otras anotaciones que veremos m&#xE1;s adelante.</li>
+<li><strong><code>@Dao</code></strong>, debe de a&#xF1;adirse a las interfaces que queremos que sean nuestras Daos. Dentro de estas interfaces se utilizan otras anotaciones que veremos m&#xE1;s adelante.</li>
 <li><strong><code>@Database</code></strong>, se a&#xF1;adir&#xE1; a las Room Database he indicar&#xE1; que es una Database, estas clases deben ser abstractas y heredar de RoomDatabase.</li>
 </ul>
-<blockquote>
-<p>&#x270B; <strong>Importante:</strong> para poder usar la funcionalidad de Room y las anotaciones, deberemos a&#xF1;adir una serie de dependencias a build.gradle del m&#xF3;dulo.<br>
-En las <strong>dependencias</strong>:</p>
-<ul>
-<li>Para las anotaciones deberemos a&#xF1;adir<br>
-<strong><code>kapt(&quot;androidx.room:room-compiler:$room_version&quot;)</code></strong><br>
-No podemos olvidar a&#xF1;adir en plugins <strong><code>id &apos;kotlin-kapt&apos;</code></strong></li>
-<li>Para poder acceder a la funcionalidad de Room y enlazarla con las anotaciones<br>
-<strong><code>implementation &quot;androidx.room:room-ktx:$room_version&quot;</code></strong><br>
-<strong><code>implementation &quot;androidx.room:room-runtime:$room_version&quot;</code></strong></li>
-<li>La versi&#xF3;n en el momento en que se editaron los apuntes era:<br>
-<strong><code>def room_version = &quot;2.4.3&quot; // En el script de Groovy</code></strong></li>
-</ul>
-<p>Por tanto al <strong><code>build.gradle</code></strong> del m&#xF3;dulo deberemos a&#xF1;adir algo similar a ...</p>
-<pre data-role="codeBlock" data-info="groovy" class="language-groovy">plugins <span class="token punctuation">{</span>
-    <span class="token punctuation">...</span>
-    id <span class="token string">&apos;kotlin-kapt&apos;</span>
-<span class="token punctuation">}</span>
-
-<span class="token punctuation">...</span>
-
-dependencies <span class="token punctuation">{</span>
-    <span class="token punctuation">...</span>
-    <span class="token keyword keyword-def">def</span> room_version <span class="token operator">=</span> <span class="token string">&quot;2.4.3&quot;</span>
-    kapt <span class="token string">&quot;androidx.room:room-compiler:$room_version&quot;</span>
-    implementation <span class="token string">&quot;androidx.room:room-ktx:$room_version&quot;</span>
-    implementation <span class="token string">&quot;androidx.room:room-runtime:$room_version&quot;</span>
-    <span class="token punctuation">...</span>
-<span class="token punctuation">}</span>
-</pre></blockquote>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="crear-las-entidades-que-definen-nuestro-modelo">Crear las entidades que definen nuestro modelo</h3>
+<p><strong><mark>HABLAR AQUII DE LOS PAQUETES</mark></strong></p>
+<h2 class="mume-header" id="crear-las-entidades-que-definen-nuestro-modelo">Crear las entidades que definen nuestro modelo</h2>
 
-<p>El primer paso a realizar ser&#xE1; el de crear las distintas tablas que tendr&#xE1; nuestra base de datos. Cada tabla corresponder&#xE1; con una clase <a href="https://developer.android.com/training/data-storage/room/defining-data">Entity</a> etiquetada como <strong>@Entity</strong> en la que a&#xF1;adiremos los campos correspondiente a la tabla. Vamos a usar un ejemplo sencillo para entender el funcionamiento:</p>
+<p>El primer paso a realizar ser&#xE1; el de crear las distintas tablas que tendr&#xE1; nuestra base de datos. Cada tabla corresponder&#xE1; con una clase <strong><a href="https://developer.android.com/training/data-storage/room/defining-data">Entity</a></strong> etiquetada como <strong><code>@Entity</code></strong> en la que a&#xF1;adiremos los campos correspondiente a la tabla. Vamos a usar un ejemplo sencillo para entender el funcionamiento:</p>
 <ol>
 <li>
 <p>Crearemos una clase en Kotlin que etiquetaremos como <strong>data class</strong>.</p>
@@ -471,7 +511,7 @@ dependencies <span class="token punctuation">{</span>
     <span class="token annotation builtin">@PrimaryKey</span> <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token comment">// Clava primaria</span>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span>
-</pre><p>Si necesitaramos una clave primaria compuesta por m&#xE1;s de un campo, tendr&#xED;amos que indicarlo con la propiedad <a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a> de la etiqueta <strong><code>@Entity</code></strong>.</p>
+</pre><p>Si necesitaramos una clave primaria compuesta por m&#xE1;s de un campo, tendr&#xED;amos que indicarlo con la propiedad <strong><a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a></strong> de la etiqueta <strong><code>@Entity</code></strong>.</p>
 <p>De igual manera lo hariamos en el caso de necesitar una <strong>clave ajena</strong>, pero en este caso con la propiedad <a href="https://developer.android.com/reference/kotlin/androidx/room/ForeignKey">foreignKeys</a>. Por ejemplo, si tuvieramos otra tabla <strong><code>pedidos</code></strong> en la que relacionaramos el <strong><code>dni</code></strong> de la tabla <strong><code>clientes</code></strong> con el <strong><code>dni</code></strong> ajeno de los registros de esta tabla, <strong><code>parentColumns</code></strong> se referir&#xED;a al <strong><code>dni</code></strong> de <strong><code>clientes</code></strong> mientras que <strong><code>dni_cliente</code></strong> en <strong><code>childColumns</code></strong> ser&#xED;a al de <strong><code>pedidos</code></strong>.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Expresariamos que un pedidos define una clave ajena dni en clientes.</span>
 <span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string">&quot;pedidos&quot;</span><span class="token punctuation">,</span>
@@ -582,20 +622,20 @@ dependencies <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> pedidos<span class="token operator">:</span> List<span class="token operator">&lt;</span>PedidoEntity<span class="token operator">&gt;</span>
 <span class="token punctuation">)</span>
 </pre><blockquote>
-<p>&#x270B; <strong>Importante:</strong> Puedes saber m&#xE1;s sobre como definir otros tipos de <strong>relaciones entre objetos</strong> con room en el siguiente <a href="https://developer.android.com/training/data-storage/room/relationships">enlace</a></p>
+<p>&#x270B; <strong>Importante:</strong> Puedes saber m&#xE1;s sobre como definir otros tipos de <strong>relaciones entre objetos</strong> con room en el siguiente <strong><a href="https://developer.android.com/training/data-storage/room/relationships">enlace</a></strong></p>
 </blockquote>
 <div style="page-break-after:always;"></div>
 <h3 class="mume-header" id="crear-los-objetos-de-acceso-a-la-base-de-datos">Crear los Objetos de Acceso a la Base de Datos</h3>
 
-<p>Los <a href="https://developer.android.com/training/data-storage/room/accessing-data">DAO</a> ser&#xE1;n elementos de tipo Interfaz mayoritariament, en los cuales incluiremos los m&#xE9;todos necesarios de acceso y gesti&#xF3;n a las entidades de la Base de Datos.  En tiempo de compilaci&#xF3;n, Room generar&#xE1; automaticamente la implementaciones de DAOs que hayamos definido.</p>
+<p>Los <strong><a href="https://developer.android.com/training/data-storage/room/accessing-data">DAO</a></strong> ser&#xE1;n elementos de tipo Interfaz mayoritariament, en los cuales incluiremos los m&#xE9;todos necesarios de acceso y gesti&#xF3;n a las entidades de la Base de Datos.  En tiempo de compilaci&#xF3;n, Room generar&#xE1; autom&#xE1;ticamente la implementaciones de DAOs que hayamos definido.</p>
 <p>Es buena pr&#xE1;ctica, <strong>definir un DAO por cada entidad que tengamos</strong>, y en este definir las funcionalidades asociadas a esta entidad.</p>
-<p>Para que una interfaz sea gestionada como DAO, habr&#xE1; que etiquetarla de esta manera, siguiendo nuestro ejemplo tendriamos:</p>
+<p>Para que una interfaz sea gestionada como DAO, habr&#xE1; que etiquetarla de esta manera, siguiendo nuestro ejemplo tendr&#xED;amos:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Dao</span>
 <span class="token keyword keyword-interface">interface</span> ClienteDao 
 <span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</pre><p>Para poder operar con la funcionalidada de Room, se necesitar&#xE1; hacer las llamadas fuera del hilo principal ya que las instancias de <strong><code>RoomDatabase</code></strong> son costosas en cuanto a tiempo, por lo que ser&#xE1; necesario lanzar estas llamadas mediante corrutinas. <strong>La manera recomendada es la de crear los m&#xE9;todos de la interfaces DAO como m&#xE9;todos de suspensi&#xF3;n</strong>.</p>
+</pre><p>Para poder operar con la funcionalidad de Room, se necesitar&#xE1; hacer las llamadas fuera del hilo principal ya que las instancias de <strong><code>RoomDatabase</code></strong> son costosas en cuanto a tiempo, por lo que ser&#xE1; necesario lanzar estas llamadas mediante corrutinas. <strong>La manera recomendada es la de crear los m&#xE9;todos de la interfaces DAO como m&#xE9;todos de suspensi&#xF3;n</strong>.</p>
 <p>Dentro de un DAO podemos crear dos tipos distintos de m&#xE9;todos, de conveniencia y de b&#xFA;squeda.</p>
 <h4 class="mume-header" id="m%C3%A9todos-de-conveniencia">M&#xE9;todos de conveniencia</h4>
 
