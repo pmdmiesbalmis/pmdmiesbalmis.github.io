@@ -667,11 +667,20 @@ justo después del front matter
           <a href="#implementaciones-de-la-gesti&#xF3;n-del-consumo-de-nuestro-endpoint" class="md-toc-link">
             <p>Implementaciones de la gesti&#xF3;n del &apos;<em>consumo</em>&apos; de nuestro endpoint</p>
 
-          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#usando-nuestra-implementaci&#xF3;n-del-servicio-en-el-patr&#xF3;n-repository" class="md-toc-link">
-            <p>Usando nuestra implementaci&#xF3;n del servicio en el patr&#xF3;n Repository</p>
+          </a></div><details style="padding:0;;padding-left:24px;" open>
+        <summary class="md-toc-link-wrapper">
+          <a href="#usando-nuestra-implementaci&#xF3;n-del-servicio-en-el-patr&#xF3;n-repository" class="md-toc-link"><p>Usando nuestra implementaci&#xF3;n del servicio en el patr&#xF3;n Repository</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#acceder-a-la-api-iniciando-una-sesi&#xF3;n-en-el-servidor" class="md-toc-link">
+            <p>Acceder a la API iniciando una sesi&#xF3;n en el servidor</p>
 
           </a></div>
+        </div>
+      </details>
+    
         </div>
       </details>
     
@@ -782,8 +791,9 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 
     <span class="token comment">// ACCESO USUARIOS (si est&#xE1; vac&#xED;o funciona sin usuarios)</span>
     <span class="token variable">$usuarios</span> <span class="token operator">=</span> <span class="token keyword keyword-array">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// $usuarios[&quot;maria&quot;]=&quot;m1234&quot;;</span>
-    <span class="token comment">// $usuarios[&quot;juan&quot;]=&quot;j1234&quot;;</span>
+    <span class="token comment">// $usuarios[&quot;juanjo&quot;]=&quot;_IesBalmis1&quot;;</span>
+    <span class="token comment">// $usuarios[&quot;xusa&quot;]=&quot;_IesBalmis2&quot;;</span>
+    <span class="token comment">// $usuarios[&quot;pepe&quot;]=&quot;_IesBalmis3&quot;;</span>
     
     <span class="token comment">// TABLAS Y SU CLAVE</span>
     <span class="token variable">$tablas</span> <span class="token operator">=</span> <span class="token keyword keyword-array">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1268,7 +1278,338 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
         contactoService<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre>
+</pre><div style="page-break-after:always;"></div>
+<h4 class="mume-header" id="acceder-a-la-api-iniciando-una-sesi%C3%B3n-en-el-servidor">Acceder a la API iniciando una sesi&#xF3;n en el servidor</h4>
+
+<p>Si queremos incrementar la seguridad del acceso a nuestra APIRest, podemos <strong>iniciar una sesi&#xF3;n en el servidor</strong> con determinadas credenciales. Tran enviar la petici&#xF3;n de &apos;<em>login</em>&apos;, capturaremos la &apos;<em>cookie</em>&apos; que nos devuelve con el id de la sesi&#xF3;n y usaremos esta misma cookie para poder acceder al resto de funcionalidades del APIRest. Para habilitar la autenticaci&#xF3;n a traves del uso de sesiones en nuestro APIRest con PHP, volveremos a editar el archivo <strong><code>apirest_variables.php</code></strong> y descomentaremos las siguientes l&#xED;neas donde definimos los usuarios y sus contrase&#xF1;as.</p>
+<pre data-role="codeBlock" data-info="php {highlight=6-8}" class="language-php" data-line="6-8"><span class="token delimiter important">&lt;?php</span>
+    <span class="token operator">...</span>
+
+    <span class="token comment">// ACCESO USUARIOS (si est&#xE1; vac&#xED;o funciona sin usuarios)</span>
+    <span class="token variable">$usuarios</span> <span class="token operator">=</span> <span class="token keyword keyword-array">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$usuarios</span><span class="token punctuation">[</span><span class="token string double-quoted-string">&quot;juanjo&quot;</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string double-quoted-string">&quot;_IesBalmis1&quot;</span><span class="token punctuation">;</span>
+    <span class="token variable">$usuarios</span><span class="token punctuation">[</span><span class="token string double-quoted-string">&quot;xusa&quot;</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string double-quoted-string">&quot;_IesBalmis2&quot;</span><span class="token punctuation">;</span>
+    <span class="token variable">$usuarios</span><span class="token punctuation">[</span><span class="token string double-quoted-string">&quot;pepe&quot;</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string double-quoted-string">&quot;_IesBalmis3&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token operator">...</span>    
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-8" data-start="6" data-end="8">
+
+
+</div></div></pre><p>Tras ello, entremos donde entremos a nuestro API en <strong><code>http://localhost/agenda/</code></strong> nos pedir&#xE1; que iniciemos sesi&#xF3;n con un usuario y contrase&#xF1;a indic&#xE1;ndonos como debemos hacerlo con la siguiente pantalla...</p>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 15px">
+    <img height="400" src="assets/imagenes/tema_5_2/agenda_api_sesion.png">
+</div>
+<div style="page-break-after:always;"></div>
+<p>Si nos fijamos en la ayuda para autenticarnos necesitamos enviar una petici&#xF3;n <strong><code>GET</code></strong> a la url <strong><code>http://localhost/agenda/?usu=&lt;usuario&gt;&amp;pass=&lt;password&gt;</code></strong>. Por tanto, deberemos definir un nuevo servicio en nuestro APIRest llamado <strong><code>AutenticacionService</code></strong> en el paquete <strong><code>.data.services.autenticacion</code></strong> que nos permita realizar esta petici&#xF3;n y la de cerrar la sesi&#xF3;n como m&#xED;nimo.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-interface">interface</span> AutenticacionService <span class="token punctuation">{</span>
+    <span class="token annotation builtin">@GET</span><span class="token punctuation">(</span><span class="token string">&quot;.&quot;</span><span class="token punctuation">)</span>
+    <span class="token annotation builtin">@Headers</span><span class="token punctuation">(</span><span class="token string">&quot;Accept: application/json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type: application/json&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">login</span><span class="token punctuation">(</span>
+        <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;usu&quot;</span><span class="token punctuation">)</span> usuario <span class="token operator">:</span> String<span class="token punctuation">,</span>
+        <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;pass&quot;</span><span class="token punctuation">)</span> password <span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Response<span class="token operator">&lt;</span>RespuestaAutenticacionApi<span class="token operator">&gt;</span>
+
+    <span class="token annotation builtin">@GET</span><span class="token punctuation">(</span><span class="token string">&quot;.&quot;</span><span class="token punctuation">)</span>
+    <span class="token annotation builtin">@Headers</span><span class="token punctuation">(</span><span class="token string">&quot;Accept: application/json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type: application/json&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">logout</span><span class="token punctuation">(</span>
+        <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string">&quot;logout&quot;</span><span class="token punctuation">)</span> usuario <span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token operator">:</span> Response<span class="token operator">&lt;</span>RespuestaAutenticacionApi<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</pre><p>En ambos casos la respuesta del APIRest ser&#xE1; un objeto del tipo <strong><code>RespuestaAutenticacionApi</code></strong> que definiremos como...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">RespuestaAutenticacionApi</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> mensaje <span class="token operator">:</span> String<span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> usuario <span class="token operator">:</span> String
+<span class="token punctuation">)</span>
+</pre><p>y que nos devolver&#xE1; un mensaje de error o de &#xE9;xito y el usuario que ha iniciado la sesi&#xF3;n o null si no se ha podido iniciar la sesi&#xF3;n.</p>
+<p>A la hora de realizar la implementaci&#xF3;n de este servicio de <strong>login</strong>...</p>
+<pre data-role="codeBlock" data-info="txt  {highlight=1}" class="language-txt" data-line="1">--&gt; GET http://10.0.2.2/agenda/?usu=juanjo&amp;pass=Mb14e92i_
+Accept: application/json
+Content-Type: application/json
+--&gt; END GET
+<div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
+</div></div></pre><p>deberemos tener en cuenta que en la cabecera de la respuesta del APIRest <strong>se nos devuelve una cookie con el id de la sesi&#xF3;n que deberemos almacenar</strong> del alg&#xFA;n modo para poder acceder al resto de funcionalidades del APIRest. En nuestro caso el valor de esa cookie se encuentra en la cabecera <strong><code>Set-Cookie</code></strong> y es <strong><code>PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o</code></strong>. Sin tener en cuenta que podr&#xED;an llegar otras cookies en en esta misma cabecera.</p>
+<pre data-role="codeBlock" data-info="txt {highlight=[5-6]}" class="language-txt" data-line="5-6">&lt;-- 200 OK http://10.0.2.2/agenda/?usu=juanjo&amp;pass=Mb14e92i_ (18ms)
+Date: ...
+Server: Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4
+X-Powered-By: PHP/8.2.4
+Set-Cookie: PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o; path=/
+Expires: Fecha de expiraci&#xF3;n de la Cookie
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Content-Length: 59
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json; charset=utf-8
+&lt;-- END HTTP
+<div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5-6" data-start="5" data-end="6">
+
+</div></div></pre><p>Para ello, podemos definir <strong>una propiedad est&#xE1;tica p&#xFA;blica</strong> en la clase <strong><code>AutenticacionServiceImplementation</code></strong> que almacenar&#xE1; la cookie de la sesi&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin { highlight=[6-8, 22] }" class="language-kotlin" data-line="6-8,22"><span class="token keyword keyword-class">class</span> AutenticacionServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> autenticacionService<span class="token operator">:</span> AutenticacionService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> logTag<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;OkHttp&quot;</span>
+
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-var">var</span> cookie<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">login</span><span class="token punctuation">(</span>
+        userName <span class="token operator">:</span> String<span class="token punctuation">,</span>
+        password <span class="token operator">:</span> String
+    <span class="token punctuation">)</span><span class="token operator">:</span> RespuestaAutenticacionApi <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span> <span class="token string">&quot;Error al loguear a <span class="token interpolation variable">$userName</span>&quot;</span>
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> response <span class="token operator">=</span> autenticacionService<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>
+                usuario <span class="token operator">=</span> userName<span class="token punctuation">,</span>
+                password <span class="token operator">=</span> password
+            <span class="token punctuation">)</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>isSuccessful<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> response<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> dato <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                cookie <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">headers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;Set-Cookie&quot;</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-return">return</span> dato <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span><span class="token string">&quot;No hay datos&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token operator">..</span><span class="token punctuation">.</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6-8" data-start="6" data-end="8">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="22" data-start="22">
+</div></div></pre><div style="page-break-after:always;"></div>
+<p>Esta cookie la utilizaremos en el resto de peticiones que realicemos al APIRest. Para ello, deberemos a&#xF1;adir la cabecera <strong><code>Cookie</code></strong> en las peticiones que realicemos al APIRest. Por ejemplo, para la petici&#xF3;n <strong><code>http://localhost/agenda/contactos</code></strong> que devuelve un listado de contactos la petici&#xF3;n HTTP deber&#xED;a ser...</p>
+<pre data-role="codeBlock" data-info="txt {highlight=4}" class="language-txt" data-line="4">--&gt; GET http://10.0.2.2/agenda/contactos
+Accept: application/json
+Content-Type: application/json
+Cookie: PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o; path=/
+--&gt; END GET
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div></pre><p>Para ello, deber&#xED;amos modificar la interfaz <strong><code>ContactoService</code></strong> y a&#xF1;adir la cabecera <strong><code>Cookie</code></strong> en las peticiones que realicemos al APIRest. Por ejemplo, para la petici&#xF3;n GET a esa ruta ser&#xE1; ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@GET</span><span class="token punctuation">(</span><span class="token string">&quot;contactos&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Headers</span><span class="token punctuation">(</span><span class="token string">&quot;Accept: application/json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Content-Type: application/json&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">contactos</span><span class="token punctuation">(</span><span class="token annotation builtin">@Header</span><span class="token punctuation">(</span><span class="token string">&quot;Cookie&quot;</span><span class="token punctuation">)</span> cookie <span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Response<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>ContactoApi<span class="token operator">&gt;</span><span class="token operator">&gt;</span>
+</pre><p>F&#xED;jate que hemos a&#xF1;adido la anotaci&#xF3;n <strong><code>@Header</code></strong> para indicar que el valor de la cabecera <strong><code>Cookie</code></strong> se obtendr&#xE1; del par&#xE1;metro <strong><code>cookie</code></strong> que le pasamos al m&#xE9;todo y por tanto deberemos a&#xF1;adirlo en la llamada al m&#xE9;todo que hac&#xED;amos desde el <strong><code>ContactoServiceImplementation</code></strong>.</p>
+<blockquote>
+<p>&#x270B; <strong>Importante</strong>: El problema de esto es que, como hemos mencionado, deberemos hacer lo mismo en todas las peticiones de todos servicios a &apos;<em>endpoints</em>&apos; que hayamos definido y pasarlo en todas las llamadas a los m&#xE9;todos de los servicios en las implementaciones de los mismos.</p>
+</blockquote>
+<p>Para evitar hacer esto, podemos definir un <strong>interceptor</strong> o (&apos;<em><strong>hook</strong></em>&apos;) que se ejecutar&#xE1; antes de realizar la petici&#xF3;n y que a&#xF1;adir&#xE1; la cabecera <strong><code>Cookie</code></strong> a la petici&#xF3;n. Para ello, podemos seguir los siguientes pasos:</p>
+<ol>
+<li>
+<p>En el paquete <strong><code>services</code></strong> vamos a crear un nuevo paquete llamado <strong><code>services.interceptors</code></strong> donde definiremos el interceptor que se encargar&#xE1; de guardar la cookie de la sesi&#xF3;n y el de a&#xF1;adirla a las peticiones que se realicen al APIRest.</p>
+</li>
+<li>
+<p>En el paquete <strong><code>services.interceptors</code></strong> definiremos una clase llamada AlmacenDeCookies guardar&#xE1; en un <strong><code>HashSet</code></strong> las cookies que se vayan recibiendo en las respuestas del APIRest. Hilts nos permitir&#xE1; inyectar un objeto &#xFA;nico esta clase en los interceptores que definamos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Singleton</span>
+<span class="token keyword keyword-class">class</span> AlmacenDeCookies <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-var">var</span> cookies<span class="token operator">:</span> HashSet<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> HashSet<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token operator">?</span>  <span class="token operator">=</span> cookies
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">setCookies</span><span class="token punctuation">(</span>cookies<span class="token operator">:</span> HashSet<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>cookies <span class="token operator">=</span> cookies
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>En el paquete <strong><code>services.interceptors</code></strong> definiremos una clase llamada <strong><code>ReciveCookiesInterceptor</code></strong> que implementar&#xE1; el interfaz <strong><code>Interceptor</code></strong> y se encargar&#xE1; de <strong>preprocesar cualquier respuesta del servidor y guardar las cookies recibidas</strong> en la cabecera <strong><code>Set-Cookie</code></strong>, incluida la de la sesi&#xF3;n, en el objeto <strong><code>AlmacenDeCookies</code></strong> invalidando el m&#xE9;todo <strong><code>intercept</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword keyword-class">class</span> <span class="token function">ReciveCookiesInterceptor</span><span class="token punctuation">(</span>
+    <span class="token comment">// Inyectamos el objeto AlmacenDeCookies</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> almacenDeCookies<span class="token operator">:</span> AlmacenDeCookies
+<span class="token punctuation">)</span> <span class="token operator">:</span> Interceptor <span class="token punctuation">{</span>
+
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">intercept</span><span class="token punctuation">(</span>chain<span class="token operator">:</span> Interceptor<span class="token punctuation">.</span>Chain<span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">{</span>
+        <span class="token comment">// Procesamos la respuesta actual            </span>
+        <span class="token keyword keyword-val">val</span> originalResponse <span class="token operator">=</span> chain<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>chain<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// Extraemos de ella las cookies de la cabecera Set-Cookie</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>originalResponse<span class="token punctuation">.</span><span class="token function">headers</span><span class="token punctuation">(</span><span class="token string">&quot;Set-Cookie&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> cookies <span class="token operator">=</span> HashSet<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>header <span class="token keyword keyword-in">in</span> originalResponse<span class="token punctuation">.</span><span class="token function">headers</span><span class="token punctuation">(</span><span class="token string">&quot;Set-Cookie&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                cookies<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            almacenDeCookies<span class="token punctuation">.</span><span class="token function">setCookies</span><span class="token punctuation">(</span>cookies<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// Devolvemos la respuesta original</span>
+        <span class="token keyword keyword-return">return</span> originalResponse
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>En el paquete <strong><code>services.interceptors</code></strong> definiremos una clase llamada <strong><code>EnviaCookiesInterceptor</code></strong> que implementar&#xE1; el interfaz <strong><code>Interceptor</code></strong> y se encargar&#xE1; de <strong>preprocesar cualquier petici&#xF3;n al servidor y a&#xF1;a&#xF1;dir las cookies guardadas</strong> en el objeto <strong><code>AlmacenDeCookies</code></strong> a la cabecera <strong><code>Cookie</code></strong> de la petici&#xF3;n, incluida la de la sesi&#xF3;n.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin" data-line><span class="token keyword keyword-class">class</span> <span class="token function">EnviaCookiesInterceptor</span><span class="token punctuation">(</span>
+    <span class="token comment">// Inyectamos el objeto AlmacenDeCookies</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> almacenDeCookies<span class="token operator">:</span> AlmacenDeCookies
+<span class="token punctuation">)</span> <span class="token operator">:</span> Interceptor <span class="token punctuation">{</span>
+
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">intercept</span><span class="token punctuation">(</span>chain<span class="token operator">:</span> Interceptor<span class="token punctuation">.</span>Chain<span class="token punctuation">)</span><span class="token operator">:</span> Response <span class="token punctuation">{</span>
+        <span class="token comment">// Builder con el contenido de la peticion original</span>
+        <span class="token keyword keyword-val">val</span> builder <span class="token operator">=</span> chain<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-val">val</span> cookies <span class="token operator">=</span> almacenDeCookies<span class="token punctuation">.</span><span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>cookies <span class="token operator">!=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span>cookie <span class="token keyword keyword-in">in</span> cookies<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// A&#xF1;adimos las cookies a la cabecera Cookie de la </span>
+                <span class="token comment">// peticion en el builder</span>
+                builder<span class="token punctuation">.</span><span class="token function">addHeader</span><span class="token punctuation">(</span><span class="token string">&quot;Cookie&quot;</span><span class="token punctuation">,</span> cookie<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// Procesamos la peticion con las cookies a&#xF1;adidas</span>
+        <span class="token keyword keyword-return">return</span> chain<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>builder<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+<li>
+<p>Redefinimos <strong><code>provideOkHttpClient</code></strong> inyectando el objeto <strong><code>AlmacenDeCookies</code></strong> y a&#xF1;adiendo los interceptores que hemos definido en el builder de nuestro cliente.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4, 11-15]}" class="language-kotlin" data-line="4,11-15"><span class="token annotation builtin">@Provides</span>
+<span class="token annotation builtin">@Singleton</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">provideOkHttpClient</span><span class="token punctuation">(</span>
+    almacenDeCookies<span class="token operator">:</span> AlmacenDeCookies
+<span class="token punctuation">)</span> <span class="token operator">:</span> OkHttpClient <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> loggingInterceptor <span class="token operator">=</span> <span class="token function">HttpLoggingInterceptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    loggingInterceptor<span class="token punctuation">.</span>level <span class="token operator">=</span> HttpLoggingInterceptor<span class="token punctuation">.</span>Level<span class="token punctuation">.</span>HEADERS
+
+    <span class="token keyword keyword-val">val</span> timeout <span class="token operator">=</span> <span class="token number">10L</span>
+    <span class="token keyword keyword-return">return</span> OkHttpClient<span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">addInterceptor</span><span class="token punctuation">(</span><span class="token function">EnviaCookiesInterceptor</span><span class="token punctuation">(</span>almacenDeCookies<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">addInterceptor</span><span class="token punctuation">(</span><span class="token function">ReciveCookiesInterceptor</span><span class="token punctuation">(</span>almacenDeCookies<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">// El orden de los interceptores es importante si</span>
+        <span class="token comment">// quiero ver la informaci&#xF3;n de las cookies en el log.</span>
+        <span class="token punctuation">.</span><span class="token function">addInterceptor</span><span class="token punctuation">(</span>loggingInterceptor<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">connectTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">readTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">writeTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<div class="line-highlight-wrapper">
+
+
+<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11-15" data-start="11" data-end="15">
+
+
+
+
+</div></div></pre></li>
+</ol>
+<p>Tras esto <strong><code>.data/services/autenticacion/AutenticacionService.kt</code></strong> quedar&#xE1; igu&#xE1;l que antes, pero su implementaci&#xF3;n en <strong><code>.data/services/autenticacion/AutenticacionServiceImplementation.kt</code></strong> ya no necesitar&#xE1; quedarse con la cookie de la sesi&#xF3;n...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> AutenticacionServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> autenticacionService<span class="token operator">:</span> AutenticacionService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> logTag<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;OkHttp&quot;</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">login</span><span class="token punctuation">(</span>
+        userName <span class="token operator">:</span> String<span class="token punctuation">,</span>
+        password <span class="token operator">:</span> String
+    <span class="token punctuation">)</span><span class="token operator">:</span> RespuestaAutenticacionApi <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span> <span class="token string">&quot;Error al loguear a <span class="token interpolation variable">$userName</span>&quot;</span>
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> response <span class="token operator">=</span> autenticacionService<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>
+                usuario <span class="token operator">=</span> userName<span class="token punctuation">,</span>
+                password <span class="token operator">=</span> password
+            <span class="token punctuation">)</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>isSuccessful<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> response<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> dato <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-return">return</span> dato <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span><span class="token string">&quot;No hay datos&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> body <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">errorBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string">&quot;<span class="token interpolation variable">$mensajeError</span> (c&#xF3;digo <span class="token interpolation"><span class="token delimiter variable">${</span>response<span class="token punctuation">.</span><span class="token function">code</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>): <span class="token interpolation variable">$this</span>\n<span class="token interpolation"><span class="token delimiter variable">${</span>body<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string">&quot;Error: <span class="token interpolation"><span class="token delimiter variable">${</span>e<span class="token punctuation">.</span>localizedMessage<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> RespuestaAutenticacionApi <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span> <span class="token string">&quot;Error al cerrar sesi&#xF3;n&quot;</span>
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> response <span class="token operator">=</span> autenticacionService<span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>isSuccessful<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> response<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-val">val</span> dato <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-return">return</span> dato <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span><span class="token string">&quot;No hay datos&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> body <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">errorBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string">&quot;<span class="token interpolation variable">$mensajeError</span> (c&#xF3;digo <span class="token interpolation"><span class="token delimiter variable">${</span>response<span class="token punctuation">.</span><span class="token function">code</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>): <span class="token interpolation variable">$this</span>\n<span class="token interpolation"><span class="token delimiter variable">${</span>body<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string">&quot;Error: <span class="token interpolation"><span class="token delimiter variable">${</span>e<span class="token punctuation">.</span>localizedMessage<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><p>Adem&#xE1;s, tras hacer login, ya podremos seguir us&#xE1;ndo nuestro APIRest como lo hac&#xED;amos anteriormente  pero sin tener que a&#xF1;adir la cabecera <strong><code>Cookie</code></strong> en las peticiones que realicemos al APIRest.</p>
+<p>Una posible implementaci&#xF3;n de <strong><code>./data/AutenticacionRepository.kt</code></strong> que use la implementaci&#xF3;n de nuestro servicio podr&#xED;a ser...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> AutenticacionRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> autenticacionService<span class="token operator">:</span> AutenticacionServiceImplementation
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">login</span><span class="token punctuation">(</span>
+        userName<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        password<span class="token operator">:</span> String
+    <span class="token punctuation">)</span><span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        autenticacionService<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>
+            userName <span class="token operator">=</span> userName<span class="token punctuation">,</span>
+            password <span class="token operator">=</span> password
+        <span class="token punctuation">)</span><span class="token punctuation">.</span>usuario<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Unit <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        autenticacionService<span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><div class="admonition info">
+<p class="admonition-title">C&#xF3;digo de los ejemplos</p>
+<p>En el siguiente enlace puedes deacargar un proyecto ejemplo con la implementaci&#xF3;n que acabamos de describir del uso de APIRest en PHP para autenticarnos con la agenda. Para ello, le hemos a&#xF1;adido una pantalla m&#xE1;s donde realizar dicha autenticaci&#xF3;n: <strong><a href="0_AgendaRetrofit_son_sesiones_recurso.zip">Proyecto ejemplo</a></strong></p>
+</div>
+
       </div>
       
       
