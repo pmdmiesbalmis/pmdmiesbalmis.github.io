@@ -24,54 +24,12 @@
     
       <div class="crossnote markdown-preview  ">
       
-<h1 id="recetas-con-login-en-room">Recetas con login en Room </h1>
+<h1 id="recetas-con-login-en-retrofit">Recetas con login en Retrofit </h1>
 <p><a href="./1_Recetas_login.pdf">Descargar estos apuntes</a></p>
 <h3 id="ejercicio">Ejercicio </h3>
-<p>A partir del ejercicio de recetas ya implementado en el <a href="..\..\assets\codigo\ejercicio5_1\ejercicio1\recetas_login_recurso.zip">bloque 3 parte ViewModel</a>, vamos a modificarlo de forma que ahora guardaremos las recetas en una Base de Datos gestionada mediante Room. La BD contendrá la tabla Recetas, <strong>RecipeEntity</strong> con su correspondiente interface <strong>RecipeDao</strong> para gestionar las funciones CRUD.</p>
-<blockquote>
-<p>⚠️ <strong>Aviso:</strong> Tendremos que modificar levemente la entidad recipe para que ahora el string de la imagen sea de tipo Blob (revisa el Codelab de AgendaRoom para ayudarte en este ejercicio). Además le quitaremos el elemento <strong>isLiked</strong> que no tiene sentido asociado a una receta, para gestionar los likes correctamente nos crearemos otra tabla.</p>
-</blockquote>
-<p>La otra tabla que crearemos será la asociada a la parte de logear un usuarios, que ya hemos usado en otros ejercicios y que nos servirá para entrar en la aplicación. El código base de usuarios lo puedes encontrar en <a href="..\..\assets\codigo\ejercicio5_1\ejercicio1\usuarios_recurso.zip">este enlace</a>. El usuario estará representado, a nivel de room, por las clases <strong>UsuarioDao</strong> y <strong>UsuarioEntity</strong>. A la tabla usuario le añadiremos una lista de enteros para gestionar los likeds.</p>
-<blockquote>
-<p>⚠️ <strong>Aviso:</strong> Room no gestiona directamente listas, por lo que se le tiene que aplicar un conversor de tipo lista a string, el código junto a otros necesarios se pasa en el siguiente <a href="..\..\assets\codigo\ejercicio5_1\ejercicio1\otros_recurso.zip">enlace</a> es el archivo <em>RoomConverters.kt</em> y que debes alojar en el paquete room, especificaciones para su uso las encontrarás en este <a href="https://developer.android.com/training/data-storage/room/referencing-data?hl=es-419">enlace</a>. Tendrás que añadir el código que te convierta de lista a cadena y a la inversa.</p>
-</blockquote>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 68%">
-<h5 id="loginscreen">LoginScreen </h5>
-<p>La aplicación se iniciará con una pantalla de login que solo permitirá la opción de logearse, (por lo que deberás añadir datos de usuarios de ejemplo en la base de datos).</p>
-<h5 id="recipescreen">RecipeScreen </h5>
-<p>Una vez logeados se pasará a la pantalla de recetas, que mostrará las recetas usando un HorizontalPager que teníamos hecho con anterioridad, aunque ahora le añadiremos una BottomAppBar y una TopAppBar con los iconos que se ven en la imagen para gestionar las acciones de la App. Para inicializar la tabla recetas con valores, se usará el compain object que se pasa en la MainActivity.</p>
-<h5 id="gestión-de-los-like">Gestión de los Like </h5>
-<p>Como nos habremos logeado con un usuario para entrar a la app, podremos hacer Like para ese usuario de manera que lo que haremos será añadir el id de la receta a la lista de enteros que tenemos en la tabla usuarios. De forma que los like serán personalizados para cada usuario, así que tendremos que realizar el código necesario para que esto se refleje al logearse con distintos usuarios.</p>
-<h5 id="eliminar-recetas">Eliminar recetas </h5>
-<p>Al clickear sobre el icono de la papera alojado en la BottomAppBar, se eliminará de la Base de datos la receta que se está mostrando en ese momento, para controlar que elemento se está mostrando, puedes guardar en una variable de estado el valor de la receta que está activa en ese momento usando <em><code>currentPage</code></em> para indicar la posición.</p>
-<h5 id="añadir-y-modificar-recetas">Añadir y modificar recetas </h5>
-<p>Para esta funcionalidad deberemos crear una nueva pantalla <strong>NewRecipeScreen</strong> con el aspecto de la última imagen de la derecha, tendremos una TopAppBar, un FloatingActionButton y el contenido principal con la imagen. En esta pantalla podremos gestionar tanto la inserción de nueva receta, como la eliminación de una receta existente. La única diferencia es que si se carga la screen mediante el icono de edición, tendremos que pasar el id de la receta para poder acceder a ella y mostrar los datos de esta.</p>
-<blockquote>
-<p>⚠️ <strong>Aviso:</strong> Para esta última pantalla deberemos crear tanto la clase Event como la clase ViewModel. Por otra parte los iconos de las dos TopAppBar, tendrán la funcionalidad de navegar atrás. <strong>Tendremos que gestionar los id de las nuevas recetas introducidas, para conseguir un buen funcionamiento, no podremos crear el id como autogerado</strong>.</p>
-</blockquote>
-</div>
-<div style="width:30%">
-<img height="350px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen1.png">
-<img height="350px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen2.png">
-<img height="350px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen3.png">
-</div>
-</div>
-<p>Por último tendremos la funcionalidad de seleccionar una imagen de la galería al pulsar sobre la imagen de la cuchara y el tenedor, sustituyendo la imagen por defecto por la seleccionada.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 20%">
-<img height="250px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen4.png">
-</div>
-<div style="width:20%">
-<img height="250px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen6.png">
-</div>
-<div style="width:20%">
-<img height="250px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen7.png">
-</div>
-<div style="width:20%">
-<img height="250px" src="../../assets/imagenes/ejercicios5_1/ejercicio1/imagen5.png">
-</div>
-</div>
+<p>A partir del ejercicio de recetas login de la entrega de room, realiza los cambios necesarios para que ahora las recetas se guarden en una base de datos externa.<br>
+Recuerda que primero de todo debes activar los servicios necesarios de Xampp, así como alojar los archivos que os hemos pasado con la API en la carpeta htdocs. Recuerda modificar los archivos como se ha explicado en el tema.<br>
+Lo siguiente será crear la BD en MySql con las dos tablas necesarias y añadir los datos de los usuarios y de las recetas que tenemos como base.</p>
 
       </div>
       
