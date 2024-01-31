@@ -827,14 +827,34 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
     <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;com.squareup.okhttp3:logging-interceptor:4.2.2&quot;</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </pre><p>En el archivo <strong><code>AndroidManifest.xml</code></strong> deberemos a&#xF1;adir el permiso de acceso a internet para que el servicio pueda acceder al API.</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+<pre data-role="codeBlock" data-info="xml {highlight=[3-5,9]}" class="language-xml" data-line="3-5,9"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
     ...
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.INTERNET<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.ACCESS_NETWORK_STATE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>android.permission.ACCESS_WIFI_STATE<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
     ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Permitir tr&#xE1;fico http en lugar de https --&gt;</span>
+        android:usesCleartextTraffic=&quot;true&quot;
+        ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
-</pre><h3 class="mume-header" id="crear-los-servicios-con-retrofit">Crear los servicios con Retrofit</h3>
+<div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-5" data-start="3" data-end="5">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div></pre><div style="page-break-after:always;"></div>
+<h3 class="mume-header" id="crear-los-servicios-con-retrofit">Crear los servicios con Retrofit</h3>
 
 <p>En la paquete <strong><code>data</code></strong> crearemos un nuevo paquete llamado <strong><code>data.services</code></strong> donde definiremos los API de cara uno de nuestro &apos;<em>endpoint</em>&apos;.</p>
 <h4 class="mume-header" id="definiendo-los-tipos-a-serializar-a-json">Definiendo los tipos a serializar a JSON</h4>
@@ -992,7 +1012,8 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensaje<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Exception</span><span class="token punctuation">(</span>mensaje<span class="token punctuation">)</span>
 </pre><p>Posteriormente, definiremos para ello una clase denominada <strong><code>ContactoServiceImplementation</code></strong> a la que le inyectaremos una instancia de <strong><code>ContactoService</code></strong> que es la que realmente utilizaremos para realizar las peticiones al API Rest.</p>
 <p>Veamos la anatom&#xED;a de uso de Retrofit para <strong>obtener la lista de contactos</strong> del API Rest en esta clase comentado paso por paso...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5,10,14-19,23-26,32-35]}" class="language-kotlin" data-line="4,5,10,14-19,23-26,32-35"><span class="token keyword keyword-class">class</span> ContactoServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5,6,11,15-20,24-27,33-36]}" class="language-kotlin" data-line="5,6,11,15-20,24-27,33-36"><span class="token annotation builtin">@Singleton</span>
+<span class="token keyword keyword-class">class</span> ContactoServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> contactoService<span class="token operator">:</span> ContactoService
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Propiedad privada cte. donde definimos el tag para los logs</span>
@@ -1037,10 +1058,6 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 <div class="line-highlight-wrapper">
 
 
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
 
 <div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
 </div></div><div class="line-highlight-wrapper">
@@ -1048,11 +1065,18 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 
 
 
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div><div class="line-highlight-wrapper">
 
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
 </div></div><div class="line-highlight-wrapper">
 
 
@@ -1066,35 +1090,10 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="14-19" data-start="14" data-end="19">
+
+<div aria-hidden="true" class="line-highlight" data-range="15-20" data-start="15" data-end="20">
 
 
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="23-26" data-start="23" data-end="26">
 
 
 
@@ -1121,6 +1120,11 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 
 
 
+<div aria-hidden="true" class="line-highlight" data-range="24-27" data-start="24" data-end="27">
+
+
+
+</div></div><div class="line-highlight-wrapper">
 
 
 
@@ -1129,7 +1133,30 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 
 
 
-<div aria-hidden="true" class="line-highlight" data-range="32-35" data-start="32" data-end="35">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="33-36" data-start="33" data-end="36">
 
 
 
@@ -1319,13 +1346,13 @@ RewriteBase <span class="token string">&quot;/agenda/&quot;</span>
 <span class="token punctuation">)</span>
 </pre><p>y que nos devolver&#xE1; un mensaje de error o de &#xE9;xito y el usuario que ha iniciado la sesi&#xF3;n o null si no se ha podido iniciar la sesi&#xF3;n.</p>
 <p>A la hora de realizar la implementaci&#xF3;n de este servicio de <strong>login</strong>...</p>
-<pre data-role="codeBlock" data-info="txt  {highlight=1}" class="language-txt" data-line="1">--&gt; GET http://10.0.2.2/agenda/?usu=juanjo&amp;pass=Mb14e92i_
+<pre data-role="codeBlock" data-info="txt  {highlight=1}" class="language-txt" data-line="1">--&gt; GET http://10.0.2.2/agenda/?usu=juanjo&amp;pass=_IesBalmis1
 Accept: application/json
 Content-Type: application/json
 --&gt; END GET
 <div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
 </div></div></pre><p>deberemos tener en cuenta que en la cabecera de la respuesta del APIRest <strong>se nos devuelve una cookie con el id de la sesi&#xF3;n que deberemos almacenar</strong> del alg&#xFA;n modo para poder acceder al resto de funcionalidades del APIRest. En nuestro caso el valor de esa cookie se encuentra en la cabecera <strong><code>Set-Cookie</code></strong> y es <strong><code>PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o</code></strong>. Sin tener en cuenta que podr&#xED;an llegar otras cookies en en esta misma cabecera.</p>
-<pre data-role="codeBlock" data-info="txt {highlight=[5-6]}" class="language-txt" data-line="5-6">&lt;-- 200 OK http://10.0.2.2/agenda/?usu=juanjo&amp;pass=Mb14e92i_ (18ms)
+<pre data-role="codeBlock" data-info="txt {highlight=[5-6]}" class="language-txt" data-line="5-6">&lt;-- 200 OK http://10.0.2.2/agenda/?usu=juanjo&amp;pass=_IesBalmis1 (18ms)
 Date: ...
 Server: Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4
 X-Powered-By: PHP/8.2.4
