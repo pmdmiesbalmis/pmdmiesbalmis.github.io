@@ -1,530 +1,18 @@
 <!DOCTYPE html><html><head>
-      <title>Programa de Recuperaci&#xF3;n</title>
+      <title>Programa de Recuperación</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-      
-      
-      
-      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
       
       
       
       
       
       <style>
-      /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
- */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #333;
-  background: none;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.4;
-
-  -moz-tab-size: 8;
-  -o-tab-size: 8;
-  tab-size: 8;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: .8em;
-  overflow: auto;
-  /* border: 1px solid #ddd; */
-  border-radius: 3px;
-  /* background: #fff; */
-  background: #f5f5f5;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
-}
-
-.token.comment,
-.token.blockquote {
-  color: #969896;
-}
-
-.token.cdata {
-  color: #183691;
-}
-
-.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
-}
-
-.token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}
-
-.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}
-
-.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
-}
-
-.token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
-}
-
-.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
-}
-
-.token.list {
-  color: #ed6a43;
-}
-
-.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
-}
-
-.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
-}
-
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-
-/* JSON */
-.language-json .token.property {
-  color: #183691;
-}
-
-.language-markup .token.tag .token.punctuation {
-  color: #333;
-}
-
-/* CSS */
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
-}
-
-/* YAML */
-.language-yaml .token.atrule {
-  color: #63a35c;
-}
-
-code.language-yaml {
-  color: #183691;
-}
-
-/* Ruby */
-.language-ruby .token.function {
-  color: #333;
-}
-
-/* Markdown */
-.language-markdown .token.url {
-  color: #795da3;
-}
-
-/* Makefile */
-.language-makefile .token.symbol {
-  color: #795da3;
-}
-
-.language-makefile .token.variable {
-  color: #183691;
-}
-
-.language-makefile .token.builtin {
-  color: #0086b3;
-}
-
-/* Bash */
-.language-bash .token.keyword {
-  color: #0086b3;
-}
-
-/* highlight */
-pre[data-line] {
-  position: relative;
-  padding: 1em 0 1em 3em;
-}
-pre[data-line] .line-highlight-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  display: block;
-  width: 100%;
-}
-
-pre[data-line] .line-highlight {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding: inherit 0;
-  margin-top: 1em;
-  background: hsla(24, 20%, 50%,.08);
-  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-  pointer-events: none;
-  line-height: inherit;
-  white-space: pre;
-}
-
-pre[data-line] .line-highlight:before, 
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-start);
-  position: absolute;
-  top: .4em;
-  left: .6em;
-  min-width: 1em;
-  padding: 0 .5em;
-  background-color: hsla(24, 20%, 50%,.4);
-  color: hsl(24, 20%, 95%);
-  font: bold 65%/1.5 sans-serif;
-  text-align: center;
-  vertical-align: .3em;
-  border-radius: 999px;
-  text-shadow: none;
-  box-shadow: 0 1px white;
-}
-
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-end);
-  top: auto;
-  bottom: .4em;
-}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face {
-  font-family: "Material Icons";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("data:application/x-font-woff;charset=utf-8;base64,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") format("woff");
-}
-
-.admonition {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
-  position: relative;
-  margin: 1.5625em 0;
-  padding: 0 1.2rem;
-  border-left: .4rem solid rgba(68, 138, 255, .8);
-  border-radius: .2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  overflow: auto;
-}
-
-.admonition>p {
-  margin-top: .8rem;
-}
-
-.admonition>.admonition-title {
-  margin: 0 -1.2rem;
-  padding: .8rem 1.2rem .8rem 3.6rem;
-  border-bottom: 1px solid rgba(68, 138, 255, .2);
-  background-color: rgba(68, 138, 255, .1);
-  font-weight: 700;
-}
-
-.admonition>.admonition-title:before {
-  position: absolute;
-  left: 1.2rem;
-  font-size: 1.5rem;
-  color: rgba(68, 138, 255, .8);
-  content: "\E3C9";
-}
-
-.admonition>.admonition-title:before {
-  font-family: Material Icons;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 2rem;
-  text-transform: none;
-  white-space: nowrap;
-  speak: none;
-  word-wrap: normal;
-  direction: ltr;
-}
-
-.admonition.summary,
-.admonition.abstract,
-.admonition.tldr {
-  border-left-color: rgba(0, 176, 255, .8);
-}
-
-.admonition.summary>.admonition-title,
-.admonition.abstract>.admonition-title,
-.admonition.tldr>.admonition-title {
-  background-color: rgba(0, 176, 255, .1);
-  border-bottom-color: rgba(0, 176, 255, .2);
-}
-
-.admonition.summary>.admonition-title:before,
-.admonition.abstract>.admonition-title:before,
-.admonition.tldr>.admonition-title:before {
-  color: rgba(0, 176, 255, 1);
-  ;
-  content: "\E8D2";
-}
-
-.admonition.hint,
-.admonition.tip {
-  border-left-color: rgba(0, 191, 165, .8);
-}
-
-.admonition.hint>.admonition-title,
-.admonition.tip>.admonition-title {
-  background-color: rgba(0, 191, 165, .1);
-  border-bottom-color: rgba(0, 191, 165, .2);
-}
-
-.admonition.hint>.admonition-title:before,
-.admonition.tip>.admonition-title:before {
-  color: rgba(0, 191, 165, 1);
-  content: "\E80E";
-}
-
-.admonition.info,
-.admonition.todo {
-  border-left-color: rgba(0, 184, 212, .8);
-}
-
-.admonition.info>.admonition-title,
-.admonition.todo>.admonition-title {
-  background-color: rgba(0, 184, 212, .1);
-  border-bottom-color: rgba(0, 184, 212, .2);
-}
-
-.admonition.info>.admonition-title:before,
-.admonition.todo>.admonition-title:before {
-  color: rgba(0, 184, 212, 1);
-  ;
-  content: "\E88E";
-}
-
-.admonition.success,
-.admonition.check,
-.admonition.done {
-  border-left-color: rgba(0, 200, 83, .8);
-}
-
-.admonition.success>.admonition-title,
-.admonition.check>.admonition-title,
-.admonition.done>.admonition-title {
-  background-color: rgba(0, 200, 83, .1);
-  border-bottom-color: rgba(0, 200, 83, .2);
-}
-
-.admonition.success>.admonition-title:before,
-.admonition.check>.admonition-title:before,
-.admonition.done>.admonition-title:before {
-  color: rgba(0, 200, 83, 1);
-  ;
-  content: "\E876";
-}
-
-.admonition.question,
-.admonition.help,
-.admonition.faq {
-  border-left-color: rgba(100, 221, 23, .8);
-}
-
-.admonition.question>.admonition-title,
-.admonition.help>.admonition-title,
-.admonition.faq>.admonition-title {
-  background-color: rgba(100, 221, 23, .1);
-  border-bottom-color: rgba(100, 221, 23, .2);
-}
-
-.admonition.question>.admonition-title:before,
-.admonition.help>.admonition-title:before,
-.admonition.faq>.admonition-title:before {
-  color: rgba(100, 221, 23, 1);
-  ;
-  content: "\E887";
-}
-
-.admonition.warning,
-.admonition.attention,
-.admonition.caution {
-  border-left-color: rgba(255, 145, 0, .8);
-}
-
-.admonition.warning>.admonition-title,
-.admonition.attention>.admonition-title,
-.admonition.caution>.admonition-title {
-  background-color: rgba(255, 145, 0, .1);
-  border-bottom-color: rgba(255, 145, 0, .2);
-}
-
-.admonition.attention>.admonition-title:before {
-  color: rgba(255, 145, 0, 1);
-  content: "\E417";
-}
-
-.admonition.warning>.admonition-title:before,
-.admonition.caution>.admonition-title:before {
-  color: rgba(255, 145, 0, 1);
-  content: "\E002";
-}
-
-.admonition.failure,
-.admonition.fail,
-.admonition.missing {
-  border-left-color: rgba(255, 82, 82, .8);
-}
-
-.admonition.failure>.admonition-title,
-.admonition.fail>.admonition-title,
-.admonition.missing>.admonition-title {
-  background-color: rgba(255, 82, 82, .1);
-  border-bottom-color: rgba(255, 82, 82, .2);
-}
-
-.admonition.failure>.admonition-title:before,
-.admonition.fail>.admonition-title:before,
-.admonition.missing>.admonition-title:before {
-  color: rgba(255, 82, 82, 1);
-  ;
-  content: "\E14C";
-}
-
-.admonition.danger,
-.admonition.error,
-.admonition.bug {
-  border-left-color: rgba(255, 23, 68, .8);
-}
-
-.admonition.danger>.admonition-title,
-.admonition.error>.admonition-title,
-.admonition.bug>.admonition-title {
-  background-color: rgba(255, 23, 68, .1);
-  border-bottom-color: rgba(255, 23, 68, .2);
-}
-
-.admonition.danger>.admonition-title:before {
-  color: rgba(255, 23, 68, 1);
-  content: "\E3E7";
-}
-
-.admonition.error>.admonition-title:before {
-  color: rgba(255, 23, 68, 1);
-  content: "\E14C";
-}
-
-.admonition.bug>.admonition-title:before {
-  color: rgba(255, 23, 68, 1);
-  content: "\E868";
-}
-
-.admonition.example,
-.admonition.snippet {
-  border-left-color: rgba(0, 184, 212, .8);
-}
-
-.admonition.example>.admonition-title,
-.admonition.snippet>.admonition-title {
-  background-color: rgba(0, 184, 212, .1);
-  border-bottom-color: rgba(0, 184, 212, .2);
-}
-
-.admonition.example>.admonition-title:before,
-.admonition.snippet>.admonition-title:before {
-  color: rgba(0, 184, 212, 1);
-  ;
-  content: "\E242";
-}
-
-.admonition.quote,
-.admonition.cite {
-  border-left-color: rgba(158, 158, 158, .8);
-}
-
-.admonition.quote>.admonition-title,
-.admonition.cite>.admonition-title {
-  background-color: rgba(158, 158, 158, .1);
-  border-bottom-color: rgba(158, 158, 158, .2);
-}
-
-.admonition.quote>.admonition-title:before,
-.admonition.cite>.admonition-title:before {
-  color: rgba(158, 158, 158, 1);
-  ;
-  content: "\E244";
-}
-
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
-
-      </style>
-    </head>
-    <body for="html-export">
-      <div class="mume markdown-preview  ">
-      <style>/* 
-Añade 
-
-@import "../EstilosPersonalizadosMarkdownEnhanced.less"
-
-justo después del front matter 
-*/
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
 @font-face {
@@ -533,12 +21,31 @@ justo después del front matter
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
-.contenedor {
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
   display: flex;
   justify-content: center;
   margin: 30px auto 30px auto;
 }
-.fondo {
+.markdown-preview.markdown-preview .fondo {
   background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
   background-size: cover;
   width: 75%;
@@ -546,7 +53,7 @@ justo después del front matter
   border-radius: 10px;
   position: relative;
 }
-.cita {
+.markdown-preview.markdown-preview .cita {
   font-family: Arial;
   font-style: italic;
   font-weight: 600;
@@ -561,7 +68,7 @@ justo después del front matter
   font-size: 1.3rem;
   transform: translate(-50%, -50%);
 }
-.abre_comilla {
+.markdown-preview.markdown-preview .abre_comilla {
   font-family: "Catamaran";
   font-weight: 600;
   color: white;
@@ -570,7 +77,7 @@ justo después del front matter
   font-size: 6rem;
   transform: translate(0%, -15%);
 }
-.cierra_comilla {
+.markdown-preview.markdown-preview .cierra_comilla {
   font-family: "Catamaran";
   font-weight: 600;
   color: white;
@@ -580,7 +87,7 @@ justo después del front matter
   font-size: 6rem;
   transform: translate(0%, 55%);
 }
-.autor {
+.markdown-preview.markdown-preview .autor {
   font-family: Arial;
   color: white;
   margin: 0px;
@@ -589,21 +96,94 @@ justo después del front matter
   top: 83%;
   font-size: 1rem;
 }
-</style>
-<h1 class="mume-header" id="programa-de-recuperaci%C3%B3n-de-pmdm-2024">Programa de Recuperaci&#xF3;n de PMDM 2024</h1>
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
 
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="programa-de-recuperación-de-pmdm-2024">Programa de Recuperación de PMDM 2024 </h1>
 <p>Descargar estos apuntes <a href="./programa_recuperacion.pdf">pdf</a> o <a href="./programa_recuperacion.html">html</a></p>
-<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
-
+<h2 id="índice">Índice </h2>
 
 <div class="md-toc">
-<details style="padding:0;;padding-left:0px;" open>
+<details style="padding:0;;padding-left:0px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#programa-de-recuperaci&#xF3;n-de-pmdm-2024" class="md-toc-link"><p>Programa de Recuperaci&#xF3;n de PMDM 2024</p>
+          <a href="#programa-de-recuperación-de-pmdm-2024" class="md-toc-link"><p>Programa de Recuperación de PMDM 2024</p>
 </a>
           </summary>
         <div>
-          <details style="padding:0;;padding-left:24px;" open>
+          <details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#normativa" class="md-toc-link"><p>Normativa</p>
 </a>
@@ -616,7 +196,7 @@ justo después del front matter
           </a></div>
         </div>
       </details>
-    <details style="padding:0;;padding-left:24px;" open>
+    <details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#trabajo-a-realizar" class="md-toc-link"><p>Trabajo a realizar</p>
 </a>
@@ -630,10 +210,10 @@ justo después del front matter
         </div>
       </details>
     <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#tutor&#xED;as" class="md-toc-link">
-            <p>Tutor&#xED;as</p>
+          <a href="#tutorías" class="md-toc-link">
+            <p>Tutorías</p>
 
-          </a></div><details style="padding:0;;padding-left:24px;" open>
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#seguimiento-y-calendario" class="md-toc-link"><p>Seguimiento y calendario</p>
 </a>
@@ -655,8 +235,8 @@ justo después del front matter
         </div>
       </details>
     <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#superaci&#xF3;n-del-m&#xF3;dulo-en-convocatoria-extraordinaria" class="md-toc-link">
-            <p>Superaci&#xF3;n del m&#xF3;dulo en convocatoria extraordinaria</p>
+          <a href="#superación-del-módulo-en-convocatoria-extraordinaria" class="md-toc-link">
+            <p>Superación del módulo en convocatoria extraordinaria</p>
 
           </a></div>
         </div>
@@ -664,93 +244,89 @@ justo después del front matter
     
 </div>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="normativa">Normativa</h2>
-
+<h2 id="normativa">Normativa </h2>
 <p>La normativa vigente que regula el acceso a la convocatoria extraordinaria de este curso escolar dice:</p>
 <blockquote>
-<p><strong>RESOLUCI&#xD3;N de 6 de julio de 2023</strong>, de la Secretar&#xED;a Auton&#xF3;mica de Educaci&#xF3;n y Formaci&#xF3;n Profesional, por la que se dictan instrucciones sobre la ordenaci&#xF3;n acad&#xE9;mica y de organizaci&#xF3;n de la actividad docente de los centros de la Comunitat Valenciana que durante el curso 2023-2024 impartan Formaci&#xF3;n Profesional de grado C, D y E. [2023/7821]</p>
+<p><strong>RESOLUCIÓN de 6 de julio de 2023</strong>, de la Secretaría Autonómica de Educación y Formación Profesional, por la que se dictan instrucciones sobre la ordenación académica y de organización de la actividad docente de los centros de la Comunitat Valenciana que durante el curso 2023-2024 impartan Formación Profesional de grado C, D y E. [2023/7821]</p>
 </blockquote>
-<h3 class="mume-header" id="acceso-a-la-segunda-convocatoria-extraordinaria">Acceso a la segunda convocatoria (extraordinaria)</h3>
-
+<h3 id="acceso-a-la-segunda-convocatoria-extraordinaria">Acceso a la segunda convocatoria (extraordinaria) </h3>
 <ol>
 <li>
-<p>Quien no supere alg&#xFA;n m&#xF3;dulo profesional de los realizados en el centro educativo en la primera convocatoria dispondr&#xE1; en el mismo curso escolar de una segunda convocatoria.</p>
+<p>Quien no supere algún módulo profesional de los realizados en el centro educativo en la primera convocatoria dispondrá en el mismo curso escolar de una segunda convocatoria.</p>
 </li>
 <li>
-<p>Con el fin de facilitar al alumnado la superaci&#xF3;n de los resultados de aprendizaje no adquiridos en los m&#xF3;dulos profesionales, el profesorado organizar&#xE1; un programa formativo espec&#xED;fico.</p>
+<p>Con el fin de facilitar al alumnado la superación de los resultados de aprendizaje no adquiridos en los módulos profesionales, el profesorado organizará un programa formativo específico.</p>
 </li>
 <li>
-<p>El programa formativo espec&#xED;fico de los m&#xF3;dulos no superados se dise&#xF1;ar&#xE1; de forma diferenciada seg&#xFA;n los periodos o momentos de aplicaci&#xF3;n, que podr&#xE1;n ser los siguientes:</p>
+<p>El programa formativo específico de los módulos no superados se diseñará de forma diferenciada según los periodos o momentos de aplicación, que podrán ser los siguientes:</p>
 <ol>
-<li>Programa formativo espec&#xED;fico posterior a la evaluaci&#xF3;n de la <strong>primera convocatoria</strong> del <strong>primer curso</strong>. Se dise&#xF1;ar&#xE1; para que el alumno o la alumna lo realice entre la primera y la segunda convocatoria, sin asistir a clases ni a tutor&#xED;as, pero contando con la orientaci&#xF3;n previa del profesorado.</li>
-<li>Programa formativo espec&#xED;fico tras la evaluaci&#xF3;n de la <strong>segunda convocatoria</strong> del <strong>primer curso</strong>. Se dise&#xF1;ar&#xE1; para que el alumno o la alumna lo pueda realizar simult&#xE1;neamente a los m&#xF3;dulos de segundo curso, teniendo en cuenta que no se garantizar&#xE1; su asistencia a las clases del m&#xF3;dulo o los m&#xF3;dulos pendientes.</li>
-<li>Programa formativo espec&#xED;fico de <strong>segundo curso</strong> tras la evaluaci&#xF3;n de la <strong>primera convocatoria</strong> realizada antes del inicio del primer periodo de realizaci&#xF3;n del m&#xF3;dulo profesional de Formaci&#xF3;n en Centros de Trabajo. <strong>Este programa incorporar&#xE1; las actividades que el alumno o la alumna realizar&#xE1; durante el tercer trimestre del a&#xF1;o acad&#xE9;mico, con docencia directa por parte de profesor o profesora responsable de cada m&#xF3;dulo profesional.</strong></li>
-<li>Programa formativo espec&#xED;fico de <strong>segundo curso</strong> tras la evaluaci&#xF3;n de la <strong>segunda convocatoria</strong> haci&#xE9;ndolo compatible con la realizaci&#xF3;n del m&#xF3;dulo de Formaci&#xF3;n en Centros de Trabajo o de Proyecto. Se dise&#xF1;ar&#xE1; para que el alumno o la alumna lo realice simult&#xE1;neamente, compatibilizando <strong>la asistencia a clases o contando con tutor&#xED;as</strong> y orientaci&#xF3;n del profesorado correspondiente.</li>
+<li>Programa formativo específico posterior a la evaluación de la <strong>primera convocatoria</strong> del <strong>primer curso</strong>. Se diseñará para que el alumno o la alumna lo realice entre la primera y la segunda convocatoria, sin asistir a clases ni a tutorías, pero contando con la orientación previa del profesorado.</li>
+<li>Programa formativo específico tras la evaluación de la <strong>segunda convocatoria</strong> del <strong>primer curso</strong>. Se diseñará para que el alumno o la alumna lo pueda realizar simultáneamente a los módulos de segundo curso, teniendo en cuenta que no se garantizará su asistencia a las clases del módulo o los módulos pendientes.</li>
+<li>Programa formativo específico de <strong>segundo curso</strong> tras la evaluación de la <strong>primera convocatoria</strong> realizada antes del inicio del primer periodo de realización del módulo profesional de Formación en Centros de Trabajo. <strong>Este programa incorporará las actividades que el alumno o la alumna realizará durante el tercer trimestre del año académico, con docencia directa por parte de profesor o profesora responsable de cada módulo profesional.</strong></li>
+<li>Programa formativo específico de <strong>segundo curso</strong> tras la evaluación de la <strong>segunda convocatoria</strong> haciéndolo compatible con la realización del módulo de Formación en Centros de Trabajo o de Proyecto. Se diseñará para que el alumno o la alumna lo realice simultáneamente, compatibilizando <strong>la asistencia a clases o contando con tutorías</strong> y orientación del profesorado correspondiente.</li>
 </ol>
 </li>
 <li>
-<p><strong>Tras la evaluaci&#xF3;n de la primera convocatoria, el equipo educativo podr&#xE1; autorizar la renuncia extraordinaria a la segunda convocatoria</strong>.<br>
+<p><strong>Tras la evaluación de la primera convocatoria, el equipo educativo podrá autorizar la renuncia extraordinaria a la segunda convocatoria</strong>.<br>
 Las razones que se aleguen para la renuncia se deben justificar siempre documentalmente.</p>
 </li>
 </ol>
-<h2 class="mume-header" id="trabajo-a-realizar">Trabajo a realizar</h2>
-
-<p>Adem&#xE1;s de poder repasar los ejercicios y pr&#xE1;cticas realizados durante el curso, el alumno dispondr&#xE1; de una serie de ejercicios similares a los realizados en ex&#xE1;menes del m&#xF3;dulo profesional que le permitir&#xE1;n comprobar su nivel y destreza para superarlo.<br>
-Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
-<h3 class="mume-header" id="orientaciones-generales-para-el-examen">Orientaciones generales para el examen</h3>
-
-<p>Al tratarse de un examen final del m&#xF3;dulo, la prueba ser&#xE1; similar a la del &#xFA;ltimo trimestre donde se intentan poner en pr&#xE1;ctica todo lo tratado a lo largo del curso y m&#xED;nimo necesario para realizar una aplicaci&#xF3;n m&#xF3;vil operativa. Aspectos generales que que habr&#xED;a que trabajar:</p>
+<h2 id="trabajo-a-realizar">Trabajo a realizar </h2>
+<p>Además de poder repasar los ejercicios y prácticas realizados durante el curso, el alumno dispondrá de una serie de ejercicios similares a los realizados en exámenes del módulo profesional que le permitirán comprobar su nivel y destreza para superarlo.<br>
+Todos los ejercicios estarán disponibles en AULES.</p>
+<h3 id="orientaciones-generales-para-el-examen">Orientaciones generales para el examen </h3>
+<p>Al tratarse de un examen final del módulo, la prueba será similar a la del último trimestre donde se intentan poner en práctica todo lo tratado a lo largo del curso y mínimo necesario para realizar una aplicación móvil operativa. Aspectos generales que que habría que trabajar:</p>
 <ol>
 <li>
-<p>Conocer la <strong>arquitectura de la aplicaci&#xF3;n</strong> descrita en el tema 2, con sus partes y los paquetes propuestos en ella.</p>
+<p>Conocer la <strong>arquitectura de la aplicación</strong> descrita en el tema 2, con sus partes y los paquetes propuestos en ella.</p>
 </li>
 <li>
-<p>Saber definir y usar <strong>Hilt</strong> (con Ksp) como librer&#xED;a para la inyecci&#xF3;n de dependencias.</p>
+<p>Saber definir y usar <strong>Hilt</strong> (con Ksp) como librería para la inyección de dependencias.</p>
 </li>
 <li>
-<p>Saber gestionar en la arquitectura una <strong>capa de datos</strong> con una persistencia a trav&#xE9;s de la librer&#xED;a Room.</p>
+<p>Saber gestionar en la arquitectura una <strong>capa de datos</strong> con una persistencia a través de la librería Room.</p>
 <ul>
 <li>Definir entidades a partir de un modelo dado. Nombres y tipos de campo adecuados.</li>
 <li>Definir la BD y los DAO a usar. Eliminando elementos innecesarios como Converters si no se usan.</li>
 <li>Definir el repositorio y el mapeo entre entidades y modelos y viceversa.</li>
 <li>Realizar una primera carga de datos en la BD con una fuente de datos de prueba.</li>
-<li>Realizar todos estos procesos de forma <strong>as&#xED;ncrona</strong>.</li>
+<li>Realizar todos estos procesos de forma <strong>asíncrona</strong>.</li>
 </ul>
 </li>
 <li>
 <p>Saber gestionar en la arquitectura la <strong>capa de UI</strong> con:</p>
 <ul>
 <li>
-<p>Definici&#xF3;n <strong>&apos;<em>features</em>&apos;</strong> a modo de <strong>pantalla</strong> (Screen) para ello:</p>
+<p>Definición <strong>'<em>features</em>'</strong> a modo de <strong>pantalla</strong> (Screen) para ello:</p>
 <ul>
-<li>Deberemos saber definir y saber interpretar componentes b&#xE1;sicos de la interfaz de usuario: <strong><code>Layouts</code></strong>, <strong><code>LazyLayouts</code></strong>, <strong><code>Cards</code></strong>, <strong><code>TextFields</code></strong>, <strong><code>Modificadores</code></strong>, etc. dentro de los apuntes si fuera necesario.</li>
-<li>Saber definir una entrada de datos b&#xE1;sica, a trav&#xE9;s de <strong><code>TetxtFields</code></strong> y adicionalmente hacer una validaci&#xF3;n de los datos introducidos.</li>
+<li>Deberemos saber definir y saber interpretar componentes básicos de la interfaz de usuario: <strong><code>Layouts</code></strong>, <strong><code>LazyLayouts</code></strong>, <strong><code>Cards</code></strong>, <strong><code>TextFields</code></strong>, <strong><code>Modificadores</code></strong>, etc. dentro de los apuntes si fuera necesario.</li>
+<li>Saber definir una entrada de datos básica, a través de <strong><code>TetxtFields</code></strong> y adicionalmente hacer una validación de los datos introducidos.</li>
 </ul>
 </li>
 <li>
-<p>Deberemos saber definir un <strong><code>Scaffold</code></strong> con los elementos vistos en clase, como m&#xED;nimo:</p>
+<p>Deberemos saber definir un <strong><code>Scaffold</code></strong> con los elementos vistos en clase, como mínimo:</p>
 <ul>
-<li><strong><code>AppBar</code></strong> con sus elementos como navegaci&#xF3;n, t&#xED;tulo y acciones, etc. As&#xED; como men&#xFA;s de desbordamiento (overflowmenu).</li>
+<li><strong><code>AppBar</code></strong> con sus elementos como navegación, título y acciones, etc. Así como menús de desbordamiento (overflowmenu).</li>
 <li><strong><code>FloatingActionButton</code></strong>.</li>
 <li><strong><code>NavigationBar</code></strong> y como gestionarla.</li>
 <li><strong><code>BottomAppBar</code></strong> y como gestionarla.</li>
 </ul>
 </li>
 <li>
-<p>Saber definir un <strong><code>ViewModel</code></strong> asociado la UI o pantalla como <strong>gestor del estado</strong> y encargado de realizar todo la l&#xF3;gica y comunicaci&#xF3;n con la capa de datos. En este sentido deberemos saber:</p>
+<p>Saber definir un <strong><code>ViewModel</code></strong> asociado la UI o pantalla como <strong>gestor del estado</strong> y encargado de realizar todo la lógica y comunicación con la capa de datos. En este sentido deberemos saber:</p>
 <ul>
 <li>Saber definir un <strong><code>ViewModel</code></strong> con Hilt e inyectarle clases <em>colaboradoras</em> en su constructor.</li>
 <li>Saber crear una instancia de <strong><code>ViewModel</code></strong> con el ViewModelOwner adecuado, usando las funciones que proporciona Hilt para ello.</li>
-<li>Realizar correctamente la gesti&#xF3;n del estado de los datos que se necesiten en la UI.</li>
-<li>Saber lanzar un proceso as&#xED;ncrono o no bloqueante desde el <strong><code>ViewModel</code></strong> y gestionar su resultado.</li>
-<li>Implementar &apos;<em>State Hoisting</em>&apos; de los datos necesarios para la UI hasta el <strong><code>ViewModel</code></strong>. Intentando que la UI sea completamente <strong>&apos;<em>stateless</em>&apos;</strong>. Saber definir un componente <strong>&apos;<em>stateful</em>&apos;</strong> si su estado no fuera necesario de manejar en el VM.</li>
-<li>Saber definir un <strong>patr&#xF3;n <em>&apos;Sum-Type&apos;</em></strong> para agrupar callbacks de eventos de la UI si fuera necesario.</li>
+<li>Realizar correctamente la gestión del estado de los datos que se necesiten en la UI.</li>
+<li>Saber lanzar un proceso asíncrono o no bloqueante desde el <strong><code>ViewModel</code></strong> y gestionar su resultado.</li>
+<li>Implementar '<em>State Hoisting</em>' de los datos necesarios para la UI hasta el <strong><code>ViewModel</code></strong>. Intentando que la UI sea completamente <strong>'<em>stateless</em>'</strong>. Saber definir un componente <strong>'<em>stateful</em>'</strong> si su estado no fuera necesario de manejar en el VM.</li>
+<li>Saber definir un <strong>patrón <em>'Sum-Type'</em></strong> para agrupar callbacks de eventos de la UI si fuera necesario.</li>
 </ul>
 </li>
 <li>
-<p>Definir la navegaci&#xF3;n entre pantallas, ya sea dentro de un mismo Scaffold o entre pantallas con su propio Scaffold.</p>
+<p>Definir la navegación entre pantallas, ya sea dentro de un mismo Scaffold o entre pantallas con su propio Scaffold.</p>
 <ul>
-<li>Pasar datos entre pantallas de forma segura y sin acoplamiento usando par&#xE1;metros en la ruta de navegaci&#xF3;n.</li>
+<li>Pasar datos entre pantallas de forma segura y sin acoplamiento usando parámetros en la ruta de navegación.</li>
 <li>Saber hacer llegar estos datos al ViewModel de destino.</li>
 </ul>
 </li>
@@ -758,39 +334,36 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 </li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="tutor%C3%ADas">Tutor&#xED;as</h2>
-
-<p>En caso necesario, el alumno podr&#xE1; <strong>solicitar</strong> al profesor una tutor&#xED;a para resolver dudas de forma presencial en el instituto en el horario que se haya preestablecido en el calendario de seguimiento.</p>
-<h2 class="mume-header" id="seguimiento-y-calendario">Seguimiento y calendario</h2>
-
+<h2 id="tutorías">Tutorías </h2>
+<p>En caso necesario, el alumno podrá <strong>solicitar</strong> al profesor una tutoría para resolver dudas de forma presencial en el instituto en el horario que se haya preestablecido en el calendario de seguimiento.</p>
+<h2 id="seguimiento-y-calendario">Seguimiento y calendario </h2>
 <p>El profesor establece un calendario con al menos los siguientes datos:</p>
 <ul>
-<li>Horario y d&#xED;as de tutor&#xED;as.</li>
+<li>Horario y días de tutorías.</li>
 <li>Temas principales a tratar en cada semana.</li>
 </ul>
-<p>El profesor calificar&#xE1; y orientar&#xE1; a los alumnos en cada entrega de ejercicios que realicen.</p>
-<p>Los domingos se activar&#xE1;n enlaces <strong>en este mismo documento</strong> con los ejercicios propuestos para cada mes de repaso.</p>
+<p>El profesor calificará y orientará a los alumnos en cada entrega de ejercicios que realicen.</p>
+<p>Los domingos se activarán enlaces <strong>en este mismo documento</strong> con los ejercicios propuestos para cada mes de repaso.</p>
 <ul>
 <li><strong>10 de marzo de 2024</strong>: Disponibilidad de actividades de marzo.</li>
 <li><strong>07 de abril de 2024</strong>: Disponibilidad de actividades de abril.</li>
 <li><strong>05 de mayo de 2024</strong>: Disponibilidad de examen final ordinario para realizar.</li>
 </ul>
-<p>El horario para tutor&#xED;as presenciales ser&#xE1; los <mark><strong>martes de 11:05 a 12:00</strong></mark> con las siguiente fechas:</p>
+<p>El horario para tutorías presenciales será los <mark><strong>martes de 11:05 a 12:00</strong></mark> con las siguiente fechas:</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>En ellas solo se resolver&#xE1;n dudas previa solicitud del alumno del tema propuesto a trabajar o leer para esa semana. Junto con las actividades que se ir&#xE1;n proponiendo.</p>
+<p>En ellas solo se resolverán dudas previa solicitud del alumno del tema propuesto a trabajar o leer para esa semana. Junto con las actividades que se irán proponiendo.</p>
 </div>
-<h3 class="mume-header" id="marzo-2024">Marzo 2024</h3>
-
+<h3 id="marzo-2024">Marzo 2024 </h3>
 <table>
 <thead>
 <tr>
 <th>Lunes</th>
 <th>Martes</th>
-<th>Mi&#xE9;rcoles</th>
+<th>Miércoles</th>
 <th>Jueves</th>
 <th>Viernes</th>
-<th>&#x1F517; Descarga actividades del m&#xE9;s<br><strong><a href="ejercicios_marzo/ejercicio1/ejercicio1.html">Ejercicio 1</a></strong><br><strong><a href="ejercicios_marzo/ejercicio2/ejercicio2.html">Ejercicio 2</a></strong><br><strong><a href="ejercicios_marzo/ejercicio3/ejercicio3.html">Ejercicio 3</a></strong></th>
+<th>🔗 Descarga actividades del més<br><strong><a href="ejercicios_marzo/ejercicio1/ejercicio1.html">Ejercicio 1</a></strong><br><strong><a href="ejercicios_marzo/ejercicio2/ejercicio2.html">Ejercicio 2</a></strong><br><strong><a href="ejercicios_marzo/ejercicio3/ejercicio3.html">Ejercicio 3</a></strong></th>
 </tr>
 </thead>
 <tbody>
@@ -824,7 +397,7 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 <td>20</td>
 <td>21</td>
 <td>22</td>
-<td>Leer Tema 2.3 Arquitectura de una aplicaci&#xF3;n.<br>Tema 3.1 Conceptos de Jetpack Compose.</td>
+<td>Leer Tema 2.3 Arquitectura de una aplicación.<br>Tema 3.1 Conceptos de Jetpack Compose.</td>
 </tr>
 <tr>
 <td>25</td>
@@ -836,17 +409,16 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 </tr>
 </tbody>
 </table>
-<h3 class="mume-header" id="abril-2024">Abril 2024</h3>
-
+<h3 id="abril-2024">Abril 2024 </h3>
 <table>
 <thead>
 <tr>
 <th>Lunes</th>
 <th>Martes</th>
-<th>Mi&#xE9;rcoles</th>
+<th>Miércoles</th>
 <th>Jueves</th>
 <th>Viernes</th>
-<th>&#x1F517; Descarga actividades del m&#xE9;s<br>Disponible 07/04/2024</th>
+<th>🔗 Descarga actividades del més<br><strong><a href="ejercicios_abril/ejercicio1/ejercicio1.html">Ejercicio 1</a></strong><br><strong><a href="ejercicios_abril/ejercicio2/ejercicio2.html">Ejercicio 2</a></strong><br><strong><a href="ejercicios_abril/ejercicio3/ejercicio3.html">Ejercicio 3</a></strong><br><strong><a href="ejercicios_abril/ejercicio4/ejercicio4.html">Ejercicio 4</a></strong></th>
 </tr>
 </thead>
 <tbody>
@@ -872,7 +444,7 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 <td>17</td>
 <td>18</td>
 <td>19</td>
-<td>Leer Tema 4.1 A&#xF1;adir Scaffold, Men&#xFA;s y ActionBars.</td>
+<td>Leer Tema 4.1 Añadir Scaffold, Menús y ActionBars.</td>
 </tr>
 <tr>
 <td>22</td>
@@ -880,7 +452,7 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 <td>24</td>
 <td>25</td>
 <td>26</td>
-<td>Leer Tema 4.2 Navegaci&#xF3;n y NavigationBar.</td>
+<td>Leer Tema 4.2 Navegación y NavigationBar.</td>
 </tr>
 <tr>
 <td>29</td>
@@ -892,17 +464,16 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 </tr>
 </tbody>
 </table>
-<h3 class="mume-header" id="mayo-2024">Mayo 2024</h3>
-
+<h3 id="mayo-2024">Mayo 2024 </h3>
 <table>
 <thead>
 <tr>
 <th>Lunes</th>
 <th>Martes</th>
-<th>Mi&#xE9;rcoles</th>
+<th>Miércoles</th>
 <th>Jueves</th>
 <th>Viernes</th>
-<th>&#x1F517; Descarga examen<br>Disponible 05/05/2024</th>
+<th>🔗 Descarga examen<br>Disponible 05/05/2024</th>
 </tr>
 </thead>
 <tbody>
@@ -949,16 +520,13 @@ Todos los ejercicios estar&#xE1;n disponibles en AULES.</p>
 </tbody>
 </table>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="superaci%C3%B3n-del-m%C3%B3dulo-en-convocatoria-extraordinaria">Superaci&#xF3;n del m&#xF3;dulo en convocatoria extraordinaria</h2>
-
-<p>Los ejercicios realizados y calificados durante este periodo no tendr&#xE1;n reflejo en la calificaci&#xF3;n de la convocatoria extraordinaria. Para superar el m&#xF3;dulo en convocatoria extraordinaria, el alumno deber&#xE1; obtener una calificaci&#xF3;n igual o superior a 5 en el examen que se realizar&#xE1; de forma presencial en el instituto en el mes de junio, seg&#xFA;n el calendario que establecer&#xE1; el equipo directivo y del que se informar&#xE1; al alumnado a trav&#xE9;s de AULES.</p>
-<p>El examen de recuperaci&#xF3;n extraordinario el <mark><strong>lunes 10 de junio de 2024</strong></mark> de <mark><strong>8:00 a 12:00</strong></mark>.</p>
+<h2 id="superación-del-módulo-en-convocatoria-extraordinaria">Superación del módulo en convocatoria extraordinaria </h2>
+<p>Los ejercicios realizados y calificados durante este periodo no tendrán reflejo en la calificación de la convocatoria extraordinaria. Para superar el módulo en convocatoria extraordinaria, el alumno deberá obtener una calificación igual o superior a 5 en el examen que se realizará de forma presencial en el instituto en el mes de junio, según el calendario que establecerá el equipo directivo y del que se informará al alumnado a través de AULES.</p>
+<p>El examen de recuperación extraordinario el <mark><strong>lunes 10 de junio de 2024</strong></mark> de <mark><strong>8:00 a 12:00</strong></mark>.</p>
 
       </div>
       
       
-    
-    
     
     
     
