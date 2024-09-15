@@ -277,6 +277,10 @@ justo después del front matter
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#enlaces-de-interés" class="md-toc-link">
+            <p>Enlaces de interés</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
           <a href="#control-de-nulos" class="md-toc-link">
             <p>Control de Nulos</p>
 
@@ -289,6 +293,10 @@ justo después del front matter
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
           <a href="#interpolación-de-cadenas" class="md-toc-link">
             <p>Interpolación de cadenas</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#literales-de-cadena-multilínea" class="md-toc-link">
+            <p>Literales de cadena multilínea</p>
 
           </a></div>
         </div>
@@ -321,8 +329,8 @@ justo después del front matter
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#retornando-una-tupla-paira-b" class="md-toc-link">
-            <p>Retornando una tupla 'Pair&lt;A, B&gt;'</p>
+          <a href="#retornando-una-tupla-paira-b-triplea-b-c" class="md-toc-link">
+            <p>Retornando una tupla 'Pair&lt;A, B&gt;', 'Triple&lt;A, B, C&gt;'</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
           <a href="#número-de-argumentos-indefinido-con-varargs" class="md-toc-link">
@@ -403,7 +411,7 @@ justo después del front matter
 <p>Desarrollo Nativo a Android NDK</p>
 </li>
 <li>
-<p><a href="https://kotlinlang.org/docs/multiplatform-full-stack-app.html">Multiplataforma</a>.</p>
+<p><a href="https://kotlinlang.org/docs/multiplatform-get-started.html">Multiplataforma</a>.</p>
 </li>
 <li>
 <p>Desarrollo web con <a href="https://kotlinlang.org/docs/js-overview.html">interactividad y transpilación a JavaScript</a> con <a href="https://kotlinlang.org/docs/js-ir-compiler.html">JS IR Compiler</a>.</p>
@@ -418,16 +426,8 @@ justo después del front matter
 <p>Ciencia de datos con plataformas como <a href="https://github.com/Kotlin/kotlin-jupyter">Jupyter Notebooks</a> o <a href="https://blog.jetbrains.com/datalore/">Datalore</a></p>
 </li>
 </ul>
-<p>Si quieres saber más del lenguaje puedes consultar los siguientes enlaces:</p>
-<ul>
-<li><a href="https://kotlinlang.org/">Página oficial del lenguaje.</a></li>
-<li><a href="https://play.kotlinlang.org">PlayGround Kotlin. (Probar Kotlin On-line)</a></li>
-<li><a href="https://developer.android.com/courses/kotlin-bootcamp/overview?hl=es-419">Capacitación oficial de Kotlin para programadores.</a></li>
-<li><a href="https://www.youtube.com/watch?v=Y0tcdQ7Nfqk&amp;list=PLrn69hTK5FBz7meApXjpGnvBVZjec-FCr%22%3E">Curso de Kotlin (Lista de reproducción de DevExperto en Castellano)</a></li>
-<li><a href="https://www.youtube.com/watch?v=hug4TNmhw78&amp;list=PLNdFk2_brsReZeIQ1-2r783GWus0ZZ5io%22">Curso de Kotlin Básico (Lista de reproducción oficial de MoureDev)</a></li>
-</ul>
 <blockquote>
-<p>📌 <strong>Nota</strong>: Aunque en el momento de escribir estos apuntes la versión actual es la 1.9.0. Para la versión 2.0.0, el equipo de Kolin esta trabajando en <a href="https://blog.jetbrains.com/es/kotlin/2023/03/el-compilador-k2-se-estabiliza-en-kotlin-2-0/">un nuevo compilador denominado K2</a> previsto liberar a lo largo de 2024 y que acelerará el tiempo de compilación drásticamente.</p>
+<p>📌 <strong>Nota</strong>: Nosotros vamos a ver la sintaxis de <strong>Kotlin 1.9.0</strong>, pues la que en estos momentos usa la platilla de generación de proyectos de Android. Sin embargo, a lo largo de 2024 salió la <strong><a href="https://kotlinlang.org/docs/whatsnew20.html">versión 2.0.x</a></strong>, el cuya característica más importante es usar el nuevo <strong><a href="https://kotlinlang.org/docs/k2-compiler-migration-guide.html">compilador K2</a></strong> que mejora la velocidad de compilación y la calidad del código generado.</p>
 </blockquote>
 <div style="page-break-after:always;"></div>
 <h2 id="creando-nuestro-hola-mundo-en-kotlin">Creando nuestro "<em>Hola Mundo</em>" en Kotlin </h2>
@@ -446,39 +446,39 @@ justo después del front matter
 <li>
 <p>Ejecutamos el comando <strong><code>gradle init</code></strong> y seguimos los pasos introduciendo las opciones del ejemplo a continuación.</p>
 <pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>~<span class="token punctuation">\</span>proyecto_consola_kotlin<span class="token operator">&gt;</span>gradle init
-Starting a Gradle Daemon, <span class="token number">1</span> incompatible and <span class="token number">1</span> stopped Daemons could not be reused, use <span class="token parameter variable">--status</span> <span class="token keyword keyword-for">for</span> details
+Starting a Gradle Daemon, <span class="token number">2</span> stopped Daemons could not be reused, use <span class="token parameter variable">--status</span> <span class="token keyword keyword-for">for</span> details
 
-Select <span class="token builtin class-name">type</span> of project to generate:
+Select <span class="token builtin class-name">type</span> of build to generate:
+<span class="token number">1</span>: Application
+<span class="token number">2</span>: Library
 <span class="token punctuation">..</span>.
-<span class="token number">2</span>: application
-<span class="token punctuation">..</span>.
-Enter selection <span class="token punctuation">(</span>default: basic<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token number">2</span>
+Enter selection <span class="token punctuation">(</span>default: Application<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token number">1</span>
 
 Select implementation language:
+<span class="token number">1</span>: Java
+<span class="token number">2</span>: Kotlin
 <span class="token punctuation">..</span>.
-<span class="token number">4</span>: Kotlin
-<span class="token punctuation">..</span>.
-Enter selection <span class="token punctuation">(</span>default: Java<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token number">4</span>
+Enter selection <span class="token punctuation">(</span>default: Java<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token number">2</span>
 
-Split functionality across multiple subprojects?:
-<span class="token number">1</span>: no - only one application project
-<span class="token number">2</span>: <span class="token function">yes</span> - application and library projects
-Enter selection <span class="token punctuation">(</span>default: no - only one application project<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token number">1</span>
+Enter target Java version <span class="token punctuation">(</span>min: <span class="token number">7</span>, default: <span class="token number">21</span><span class="token punctuation">)</span>: <span class="token number">17</span>
+
+Project name <span class="token punctuation">(</span>default: consola<span class="token punctuation">)</span>:
+
+Select application structure:
+<span class="token number">1</span>: Single application project
+<span class="token number">2</span>: Application and library project
+Enter selection <span class="token punctuation">(</span>default: Single application project<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token number">1</span>
 
 Select build script DSL:
-<span class="token number">1</span>: Groovy
-<span class="token number">2</span>: Kotlin
-Enter selection <span class="token punctuation">(</span>default: Kotlin<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token number">2</span>
+<span class="token number">1</span>: Kotlin
+<span class="token number">2</span>: Groovy
+Enter selection <span class="token punctuation">(</span>default: Kotlin<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">..</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token number">1</span>
 
-Generate build using new APIs and behavior <span class="token punctuation">(</span>some features may change <span class="token keyword keyword-in">in</span> the next minor release<span class="token punctuation">)</span>? <span class="token punctuation">(</span>default: no<span class="token punctuation">)</span> <span class="token punctuation">[</span>yes, no<span class="token punctuation">]</span>                                                                                                                       no
-
-Project name <span class="token punctuation">(</span>default: proyecto_consola_kotlin<span class="token punctuation">)</span>: proyecto_consola_kotlin
-
-Source package <span class="token punctuation">(</span>default: proyecto_consola_kotlin<span class="token punctuation">)</span>:
-
+Generate build using new APIs and behavior <span class="token punctuation">(</span>some features may change <span class="token keyword keyword-in">in</span> 
+the next minor release<span class="token punctuation">)</span>? <span class="token punctuation">(</span>default: no<span class="token punctuation">)</span> <span class="token punctuation">[</span>yes, no<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.
 BUILD SUCCESSFUL <span class="token keyword keyword-in">in</span> 2m 36s
-<span class="token number">2</span> actionable tasks: <span class="token number">2</span> executed
+<span class="token number">1</span> actionable task: <span class="token number">1</span> executed
 </code></pre></li>
 <li>
 <p>Para compilar y ejecutar nuestro proyecto ejecutaremos <strong><code>gradlew run</code></strong></p>
@@ -540,7 +540,23 @@ BUILD SUCCESSFUL <span class="token keyword keyword-in">in</span> 8s
 </ol>
 <div style="page-break-after:always;"></div>
 <h2 id="el-lenguaje-kotlin">El lenguaje Kotlin </h2>
+<h3 id="enlaces-de-interés">Enlaces de interés </h3>
+<ul>
+<li><a href="https://kotlinlang.org/">Página oficial del lenguaje.</a></li>
+<li><a href="https://play.kotlinlang.org/byExample/overview">Learn Kotlin by Example</a></li>
+<li><a href="https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-1?hl=es-419">Curso guiado de iniciación</a></li>
+<li><a href="https://developer.android.com/courses/pathways/android-basics-compose-unit-2-pathway-1?hl=es-419">Curso guiado de profundización</a></li>
+<li><a href="https://developer.android.com/courses/kotlin-bootcamp/overview?hl=es-419">Capacitación oficial de Kotlin para programadores (profundización)</a></li>
+<li><a href="https://www.youtube.com/watch?v=Y0tcdQ7Nfqk&amp;list=PLrn69hTK5FBz7meApXjpGnvBVZjec-FCr">Curso de Kotlin (Lista de reproducción de DevExperto en Castellano)</a></li>
+<li><a href="https://www.youtube.com/watch?v=T3ugOYTRF7c">Kotlin Desde Cero: Primeros Pasos en una hora (MoureDev)</a></li>
+<li><a href="https://www.youtube.com/watch?v=hug4TNmhw78&amp;list=PLNdFk2_brsReZeIQ1-2r783GWus0ZZ5io">Curso de Kotlin Básico (Lista de reproducción oficial de MoureDev)</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLAzlSdU-KYwVd0mby6H9gLfJ7bkmXNjQJ">Kotlin desde cero</a></li>
+<li><a href="https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS44LjEwIiwicGxhdGZvcm0iOiJqYXZhIiwiYXJncyI6IiIsIm5vbmVNYXJrZXJzIjp0cnVlLCJ0aGVtZSI6ImlkZWEiLCJjb2RlIjoiLyoqXG4gKiBZb3UgY2FuIGVkaXQsIHJ1biwgYW5kIHNoYXJlIHRoaXMgY29kZS5cbiAqIHBsYXkua290bGlubGFuZy5vcmdcbiAqL1xuZnVuIG1haW4oKSB7XG4gICAgcHJpbnRsbihcIkhlbGxvLCB3b3JsZCEhIVwiKVxufSJ9">PlayGround Kotlin. (Probar Kotlin On-line)</a></li>
+</ul>
 <h3 id="control-de-nulos">Control de Nulos </h3>
+<ul>
+<li><a href="https://kotlinlang.org/docs/null-safety.html">Null safety</a></li>
+</ul>
 <p>Kotlin ha aportado una serie de elementos que permiten realizar un mayor control de los tipos que pueden ser nulos <a href="https://kotlinlang.org/docs/null-safety.html">Null safety</a>, y que pretende evitar la tan conocida excepción <strong>NullPointerException</strong>.</p>
 <p>Como ocurre con otros lenguajes, Kotlin permite definir un tipo no nulo como anulable. Esto lo hace mediante el elemento <strong><code>?</code></strong>, por ejemplo una variable de tipo entera no podría almacenar un valor nulo, pero se puede cambiar esta condición de la siguiente manera.</p>
 <pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin Kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -558,8 +574,7 @@ BUILD SUCCESSFUL <span class="token keyword keyword-in">in</span> 8s
 </code></pre><p>En este ejemplo, si no usáramos el operador de llamada segura, el código lanzaría NPE. Pero ahora mostrará <strong>null</strong>.</p>
 <p>Otro operador, no tan recomendado es el operador de <strong>aserción no nula</strong>  <strong><code>!!</code></strong>. convierte cualquier valor en un tipo no nulo y lanza una excepción si el valor es null. Podemos decir de este operador, que vuelve las cosas a la normalidad ya conocida.</p>
 <p>Por lo tanto, si deseas un NPE, puedes tenerla solicitándola con este operador.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>   
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   
     <span class="token keyword keyword-var">var</span> cadenaAnulable<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
     
     <span class="token comment">// 💀 ERROR de compilación, no permite posibilidad de producir excepción</span>
@@ -569,13 +584,15 @@ BUILD SUCCESSFUL <span class="token keyword keyword-in">in</span> 8s
     <span class="token function">println</span><span class="token punctuation">(</span>cadenaAnulable<span class="token operator">!!</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> 
 <span class="token punctuation">}</span>
 </code></pre><p>Y por último tenemos el operador <em><strong>elvis</strong></em> <strong><code>?:</code></strong> que comprueba que el valor no es nulo, permitiendo la llamada en ese caso o devolviendo lo que <em>decidamos</em> en caso que sea nulo. Equivaldrá al operador <strong><code>??</code></strong> en C#.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>   
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   
     <span class="token keyword keyword-var">var</span> cadenaAnulable<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>    
     <span class="token function">println</span><span class="token punctuation">(</span>cadenaAnulable<span class="token operator">?</span><span class="token punctuation">.</span>length <span class="token operator">?:</span> <span class="token number">0</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre><p>Recuerda que si la expresión a la izquierda de <strong><code>?:</code></strong> no es null, se realiza la llamada a length, de lo contrario devuelve la expresión de la derecha, en este caso 0.</p>
 <h3 id="variables">Variables </h3>
+<ul>
+<li><a href="https://kotlinlang.org/docs/basic-syntax.html#variables">Variables</a></li>
+</ul>
 <p>Igual que en todos los lenguajes de programación, en Kotlin también tendremos el recurso de las <a href="https://kotlinlang.org/docs/basic-syntax.html#variables">variables</a> para almacenar valores. En Kotlin nos podemos encontrar con variables <strong>inmutables</strong> y variables <strong>mutables</strong>. En el caso de las primeras, una vez se le asigna un valor a la variable no podrá ser modificado, es decir, se comporta como una constante (lo mismo que utilizar final en Java o readonly en C#).</p>
 <p>Mientras que con la mutables podremos modificar en cualquier momento el valor de la variable.</p>
 <p>Para declarar una variable como mutable, la tendremos que preceder de la palabra clave <strong>var</strong> mientras que para las inmutables usaremos <strong>val</strong>.</p>
@@ -676,6 +693,9 @@ inmutable <span class="token operator">=</span> <span class="token char">'A'</sp
 <p>📌 <strong>Nota</strong>: Mientras que <strong><code>a = b.toInt() + 2</code></strong>, evitaría el error, aunque la función redondearía a 3.</p>
 </blockquote>
 <h4 id="interpolación-de-cadenas">Interpolación de cadenas </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/strings.html#string-templates">Strings Templates</a></li>
+</ul>
 <p>El tipo <a href="https://kotlinlang.org/docs/basic-types.html#strings">String</a> representa el literal de cadena ya conocido, podemos ver un ejemplo  del uso de interpolación con <strong><code>$</code></strong> para la salida por pantalla.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span> <span class="token punctuation">(</span>args<span class="token operator">:</span> Array <span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>   
   <span class="token keyword keyword-val">val</span> cadena <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"El resultado de:"</span></span>
@@ -684,13 +704,34 @@ inmutable <span class="token operator">=</span> <span class="token char">'A'</sp
   <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">cadena</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">a</span></span><span class="token string"> + </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">b</span></span><span class="token string"> es: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">a <span class="token operator">+</span> b</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>El resultado de: <span class="token number">2</span> + <span class="token number">5</span> es: <span class="token number">7</span>
+</code></pre><h4 id="literales-de-cadena-multilínea">Literales de cadena multilínea </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/strings.html#multiline-strings">Multiline Strings</a></li>
+</ul>
+<p>Al igual que sucede en las versiones actuales de lenguajes como C# podré definir cadenas multilínea con el carácter <strong><code>"""</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> estudianteJson <span class="token operator">=</span> <span class="token string-literal multiline"><span class="token string">"""
+    {
+        "nombre": "Juan",
+        "edad": 23,
+        "cursos": ["Kotlin", "Java", "C#"]
+    }
+    """</span></span><span class="token punctuation">.</span><span class="token function">trimIndent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Elimina los espacios en blanco iniciales</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>estudianteJson<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h3 id="control-de-flujo">Control de flujo </h3>
 <p>El <a href="https://kotlinlang.org/docs/coding-conventions.html#control-flow-statements">control de flujo en kotlin</a> tiene algunas diferencias interesantes a otros lenguajes más conocidos. Las instrucciones <strong>if/else, for y while</strong> se pueden considerar similares, así que vamos a explicar solamente los elementos que las diferencian:</p>
 <h4 id="condicionales-como-expresión">Condicionales como expresión </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/control-flow.html#if-expression">Conditional expressions</a></li>
+</ul>
 <p>En Kotlin no existe el operador ternario para expresar condiciones simples como por ejemplo hacíamos en C# con <strong><code>string t = exp ? "true" : "false"</code></strong> en su lugar usaremos <strong><code>if - else</code></strong> como hace Python para realizar este tipo de expresiones. Por tanto, el Kotlin tendremos ...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-val">val</span> t <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>exp<span class="token punctuation">)</span> <span class="token string-literal singleline"><span class="token string">"true"</span></span> <span class="token keyword keyword-else">else</span> <span class="token string-literal singleline"><span class="token string">"false"</span></span>
 </code></pre><h4 id="bucles-con-for-y-while">Bucles con for y while </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/control-flow.html#for-loops">for and while loops</a></li>
+</ul>
 <p>Se diferencia sobre todo en que se tienen que usar rangos en la sentencia for y se pueden usar en la while:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">repeticionConForV1</span><span class="token punctuation">(</span>v<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Fíjate que Kotlin me permite definir rangos de forma similar a C#</span>
@@ -734,6 +775,9 @@ inmutable <span class="token operator">=</span> <span class="token char">'A'</sp
 <span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">repeticionConWhile</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="condicional-múltiple-con-when">Condicional múltiple con when </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/control-flow.html#when-expression">When expression</a></li>
+</ul>
 <p>Equivalente a los <strong>swich</strong> de <strong>expresión</strong> de C#. Sin embargo no dispondremos del <strong>swich</strong> como <strong>instrucción</strong>.<br>
 En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cuenta que el operador 'arrow' en Kolin es <strong><code>-&gt;</code></strong> y en C# o JavaScript es <strong><code>=&gt;</code></strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">getEstacion</span><span class="token punctuation">(</span>entrada<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token punctuation">{</span>
@@ -747,7 +791,7 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <span class="token punctuation">}</span>
 
 <span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">getEstacion</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</code></pre><p>En este caso usamos <strong><code>when</code></strong> con patrones que se aplican a la variable <strong><code>x</code></strong> como hacíamos en C#.</p>
+</code></pre><p>En este caso usamos <strong><code>when</code></strong> con <a href="https://kotlinlang.org/docs/control-flow.html#when-expression">patrones</a> que se aplican a la variable <strong><code>x</code></strong> como hacíamos en C#.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> x <span class="token operator">=</span> <span class="token number">12</span>
     <span class="token keyword keyword-val">val</span> validNumbers <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">15</span>
@@ -771,6 +815,9 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">noHagoNada</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">,</span> <span class="token number">3.5f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h3 id="funciones">Funciones </h3>
+<ul>
+<li><a href="https://kotlinlang.org/docs/functions.html">Functions</a></li>
+</ul>
 <p>Como ya hemos podido deducir de los ejemplos del tema, si queremos crear una <a href="https://kotlinlang.org/docs/basic-syntax.html#functions">función</a> en kotlin tendremos que precederla de la palabra reservada <strong>fun</strong>. Por tanto, una función constará de la palabra fun seguida por el nombre de la función y entre paréntesis los parámetros, siempre y cuando los tenga. Si la función retorna un valor se definirá al final de la signatura (esto último se puede omitir siempre que la función no devuelva nada).</p>
 <p><strong><code>fun idFuncion([p1 : T1, p2 : T2, ... ]) : Tr</code></strong></p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">sumaDatos</span><span class="token punctuation">(</span>datoUno<span class="token operator">:</span> Int<span class="token punctuation">,</span> datoDos<span class="token operator">:</span> Char<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -787,13 +834,13 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">mayor</span><span class="token punctuation">(</span>numeroUno<span class="token operator">:</span> Int<span class="token punctuation">,</span> numeroDos<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
     <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>numeroUno <span class="token operator">&gt;</span> numeroDos<span class="token punctuation">)</span> numeroUno <span class="token keyword keyword-else">else</span> numeroDos
 <span class="token punctuation">}</span>
-</code></pre><p>Aunque ya lo hemos usado en algunos ejemplos, si la función tiene una única instrucción o expresión. Se pueden omitir las llaves usando el operador <strong><code>=</code></strong></p>
+</code></pre><p>Aunque ya lo hemos usado en algunos ejemplos, si la función tiene una única <strong><a href="https://kotlinlang.org/docs/functions.html#single-expression-functions">instrucción o expresión</a></strong>. Se pueden omitir las llaves usando el operador <strong><code>=</code></strong></p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">mayor</span><span class="token punctuation">(</span>numeroUno<span class="token operator">:</span> Int<span class="token punctuation">,</span> numeroDos<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token operator">=</span>
     <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>numeroUno <span class="token operator">&gt;</span> numeroDos<span class="token punctuation">)</span> numeroUno <span class="token keyword keyword-else">else</span> numeroDos
 
 <span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token function">mayor</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre><div style="page-break-after:always;"></div>
-<h4 id="retornando-una-tupla-paira-b">Retornando una tupla 'Pair&lt;A, B&gt;' </h4>
+<h4 id="retornando-una-tupla-paira-b-triplea-b-c">Retornando una tupla 'Pair&lt;A, B&gt;', 'Triple&lt;A, B, C&gt;' </h4>
 <p>Aunque no tenemos la sintaxis de tipo tupla tan avanzada como en Python o C# podemos usar el tipo <strong><code>Pair&lt;A, B&gt;</code></strong> para retornar dos valores a la vez.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">angulo</span><span class="token punctuation">(</span>grados<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Pair<span class="token operator">&lt;</span>Double<span class="token punctuation">,</span> Double<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> radianes <span class="token operator">=</span> grados <span class="token operator">*</span> <span class="token number">3.1416</span> <span class="token operator">/</span> <span class="token number">180</span>
@@ -803,6 +850,9 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
     <span class="token keyword keyword-val">val</span> <span class="token punctuation">(</span>seno<span class="token punctuation">,</span> coseno<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">angulo</span><span class="token punctuation">(</span>grados <span class="token operator">=</span> <span class="token number">45</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="número-de-argumentos-indefinido-con-varargs">Número de argumentos indefinido con 'varargs' </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/functions.html#variable-number-of-arguments-varargs">Variable number of arguments (Varargs)</a></li>
+</ul>
 <p>Para pasar un número variable de argumentos a una función, debemos declarar esa función con un parámetro <strong><code>vararg</code></strong>:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Esto significa que la función suma() puede aceptar cero o más enteros.</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">suma</span><span class="token punctuation">(</span><span class="token keyword keyword-vararg">vararg</span> xs<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token operator">=</span> xs<span class="token punctuation">.</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
@@ -814,6 +864,9 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="funciones-de-extensión">Funciones de extensión </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/extensions.html">Extension Functions</a></li>
+</ul>
 <p>Idénticos a los métodos de extensión en C#. Me permiten ampliar la funcionalidad de una clase cumpliendo el principio <strong>OCP</strong> (Abierto para extensión. Cerrado para modificación) de SOLID. No debemos abusar de ellas. Aunque en algunos casos nos van a ayudar a reducir dependencias.</p>
 <blockquote>
 <p>✋ <strong>Importante</strong>: Su ámbito de aplicación se restringirá al paquete donde se definen y si quisiéramos usarlas en otros paquetes deberíamos hacer un import de las mismas.</p>
@@ -852,6 +905,9 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h3 id="excepciones">Excepciones </h3>
+<ul>
+<li><a href="https://kotlinlang.org/docs/exceptions.html">Exceptions</a></li>
+</ul>
 <blockquote>
 <p>✋ <strong>Importante</strong>: <strong><code>try</code></strong> es una <strong>expresión</strong>. Esto es interesante pues va a ser muy común retornar un <strong><code>try</code></strong> en un método teniendo en cuenta que la última instrucción de cada bloque debe evaluarse al mismo tipo.</p>
 </blockquote>
@@ -868,6 +924,9 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h3 id="clases-e-interfaces">Clases e Interfaces </h3>
+<ul>
+<li><a href="https://kotlinlang.org/docs/classes.html">Classes and Inheritance</a></li>
+</ul>
 <p>Todos los elementos en Kotlin son públicos por defecto, por lo que también lo serán las <a href="https://kotlinlang.org/docs/visibility-modifiers.html#classes-and-interfaces">clases</a>. Las clases nos sirven para referenciar objetos del mundo real, y mediante las propiedades podemos definir las distintas características que nos interese manipular de estos. En Kotlin ya no existen los atributos, sino que todo pasa a ser propiedades, similares a las que utiliza C#, se les puede dar funcionalidad si lo necesitamos.</p>
 <p>Por tanto, una clase <strong><code>Persona</code></strong> con <strong><code>nombre</code></strong> y <strong><code>edad</code></strong> a las que queremos dar funcionalidad, en C# se podría definir así:</p>
 <pre data-role="codeBlock" data-info="csharp" class="language-csharp csharp"><code><span class="token comment">// C# Example</span>
@@ -904,7 +963,7 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
     <span class="token punctuation">}</span>    
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
-<p>Su equivalente en Kolin sería ...</p>
+<p>Su equivalente en Kotlin sería ...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">EdadException</span><span class="token punctuation">(</span>cadena<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Exception</span><span class="token punctuation">(</span>cadena<span class="token punctuation">)</span>
 
 <span class="token keyword keyword-class">class</span> <span class="token function">Persona</span><span class="token punctuation">(</span>nombre<span class="token operator">:</span> String<span class="token punctuation">,</span> edad<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1026,6 +1085,7 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Cuenta </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">n</span></span><span class="token string">úmero titular </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">titular</span></span><span class="token string"> saldo </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">saldo</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">€"</span></span>
 
     <span class="token comment">// Método público que lanza una excepción</span>
+    <span class="token comment">// La anotación @Throws es opcional y se usaría para interoperabilidad con Java.</span>
     <span class="token annotation builtin">@Throws</span><span class="token punctuation">(</span>IllegalArgumentException<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-fun">fun</span> <span class="token function">reintegro</span><span class="token punctuation">(</span>cantidad<span class="token operator">:</span> Double<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>cantidad <span class="token operator">&gt;</span> saldo<span class="token punctuation">)</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Saldo insuficiente"</span></span><span class="token punctuation">)</span>
@@ -1034,9 +1094,14 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="definir-métodos-y-propiedades-estáticas">Definir métodos y propiedades estáticas </h4>
+<p>En Kotlin no existen los métodos y propiedades estáticas como en Java o C#. Pero podemos definirlos de forma similar a como lo hacemos en C# con las <strong><code>clases estáticas</code></strong>.</p>
+<h5 id="declaración-de-clases-estáticas">Declaración de '<em>clases estáticas</em>' </h5>
+<ul>
+<li><a href="https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview">Object Declarations</a></li>
+</ul>
 <p>Creamos un <strong>objeto global anónimo</strong> denominado por ejemplo <strong><code>Datos</code></strong>. En otras palabras, no estamos definiendo una clase sino un objeto instanciado, referenciado por el id <strong><code>Datos</code></strong> y de tipo anónimo.</p>
-<p>Después usaremos la anotación <strong><code>@JvmStatic</code></strong> para indicar que es un método o propiedad de clase. Si no, ponemos <strong><code>@JvmStatic</code></strong> estaremos definiendo un <strong>Singleton</strong>.</p>
 <pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin Kotlin"><code><span class="token keyword keyword-object">object</span> Datos <span class="token punctuation">{</span>
+    <span class="token comment">// La anotación @JvmStatic es opcional y se usaría para interoperabilidad con Java.</span>
     <span class="token annotation builtin">@JvmStatic</span>
     <span class="token keyword keyword-val">val</span> empleados <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
             <span class="token function">Empleado</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Xusa"</span></span><span class="token punctuation">,</span> <span class="token number">45</span><span class="token punctuation">,</span> Empleado<span class="token punctuation">.</span>Ciudad<span class="token punctuation">.</span>Alicante<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -1047,7 +1112,11 @@ En el siguiente ejemplo podemos deducir la sintaxis fácilmente, teniendo en cue
 
 <span class="token comment">// Para acceder a la propiedad estática empleados </span>
 Datos<span class="token punctuation">.</span>empleados
-</code></pre><p>Si queremos hacerlo en otra clase, marcaremos el objeto creado con el modificador <strong><code>companion</code></strong></p>
+</code></pre><h5 id="métodos-y-propiedades-estáticas-en-una-clase">Métodos y propiedades estáticas en una clase </h5>
+<ul>
+<li><a href="https://kotlinlang.org/docs/object-declarations.html#companion-objects">Companion Objects</a></li>
+</ul>
+<p>Si queremos hacerlo en otra clase, marcaremos el objeto creado con el modificador <strong><code>companion</code></strong></p>
 <blockquote>
 <p>✋ <strong>Importante</strong>: Fíjate que no hace falta que le pongamos un identificador de tipo al <strong><code>companion object</code></strong> ya que solo podemos definir uno por clase y dentro del mismo definiremos los métodos o propiedades '<em>estáticas</em>' de la misma.</p>
 </blockquote>
@@ -1064,8 +1133,32 @@ Datos<span class="token punctuation">.</span>empleados
 
 <span class="token comment">// Para acceder a la propiedad estática empleados.</span>
 MiClasse<span class="token punctuation">.</span>empleados
+</code></pre><h5 id="objetos-anónimos">Objetos anónimos </h5>
+<ul>
+<li><a href="https://kotlinlang.org/docs/object-declarations.html#object-expressions">Object Expressions</a></li>
+</ul>
+<p>Son equivalentes a las clases anónimas de C# o Java y como sucede en C# las propiedades que definen no son accesible fuera del ámbito donde se define el objeto anónimo a no ser que este implemente algún tipo de abstracción que queramos retornar sin definir un tipo específico para la misma. El tipo de retorno de un objeto anónimo es <strong><code>Any</code></strong> y si implementa alguna interfaz, esta será la que se devuelva.</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin Kotlin"><code><span class="token keyword keyword-interface">interface</span> A <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">funcionDeA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-class">class</span> B <span class="token punctuation">{</span>
+    <span class="token comment">// El tipo de retorno es Any y la propiedad x no es accesible</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> x<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"x"</span></span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// El tipo de retorno es A y la propiedad x no es accesible</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getObjectA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword keyword-object">object</span><span class="token operator">:</span> A <span class="token punctuation">{</span>
+        <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">funcionDeA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token keyword keyword-val">val</span> x<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"x"</span></span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="herencia">Herencia </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/inheritance.html">Inheritance</a></li>
+</ul>
 <p>En Kotlin, la clase <strong><code>Any</code></strong> es la raíz de la jerarquía de clases. Cada clase del lenguaje derivará de ella si no especificas una superclase. Sería similar a la clase <strong><code>Object</code></strong> de C# y Java.</p>
 <p>Por otro lado en Kotlin, tanto las clases como los miembros de estas son cerrados, esto significa que no se puede heredar de una clase y tampoco se pueden sobreescribir sus miembros si no lo indicamos explícitamente.</p>
 <p>Para que de una clase se pueda heredar habrá que añadirle el modificador <strong><code>open</code></strong>. Por ejemplo, si la clase Persona queremos hacerla abierta sería:</p>
@@ -1092,8 +1185,11 @@ MiClasse<span class="token punctuation">.</span>empleados
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre><h4 id="interfaces">Interfaces </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/interfaces.html">Interfaces</a></li>
+</ul>
 <p>En Kotlin podemos implementar clases abstractas, que son iguales a las que ya conocemos de otros lenguajes, salvo los cambios concretos para la herencia. Por esta razón, no vamos a comentar nada sobre ellas.</p>
-<p>También se pueden crear <a href="https://kotlinlang.org/docs/interfaces.html">interfaces</a>, que permiten definir tipos cuyos comportamientos pueden ser compartidos por varias clases que no están relacionadas. Usa la palabra reservada <strong><code>interface</code></strong> y su implementación es similar a los lenguajes que conocemos con algunas pequeñas diferencias. Como ya sabemos permiten la herencia múltiple, y además:</p>
+<p>También se pueden crear interfaces, que permiten definir tipos cuyos comportamientos pueden ser compartidos por varias clases que no están relacionadas. Usa la palabra reservada <strong><code>interface</code></strong> y su implementación es similar a los lenguajes que conocemos con algunas pequeñas diferencias. Como ya sabemos permiten la herencia múltiple, y además:</p>
 <ul>
 <li>Pueden contener métodos abstractos (sin implementación) y métodos regulares (con implementación).</li>
 <li>Puede contener propiedades abstractas y regulares.</li>
@@ -1120,6 +1216,9 @@ MiClasse<span class="token punctuation">.</span>empleados
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="definiendo-valueobjects-o-dtos-con-data-class">Definiendo ValueObjects o DTO's con data class </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/data-classes.html">Data Classes</a></li>
+</ul>
 <blockquote>
 <p>✋ <strong>Importante</strong>: La gran mayoría de objetos que definiremos en nuestros programas serán de este tipo. Especialmente al recuperar información de las fuentes de datos.</p>
 </blockquote>
@@ -1204,7 +1303,61 @@ MiClasse<span class="token punctuation">.</span>empleados
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="scope-functions">Scope functions </h4>
-<p>Kotlin nos permite usar una <a href="https://kotlinlang.org/docs/scope-functions.html">serie de métodos</a> denominadas <strong>Scope Functions</strong> (Funciones de Ámbito) que nos permiten trabajar con objetos de forma más cómoda y en una <strong>única expresión</strong>. Muchas de ellas son aproximaciones para hacer la misma cosa. Pero las principales y más utilizadas son ...</p>
+<ul>
+<li><a href="https://kotlinlang.org/docs/scope-functions.html">Scope Functions</a></li>
+</ul>
+<blockquote>
+<p>📌 <strong>Nota</strong>: Para entender esta sección es necesario tener conocimientos de <strong><code>lambda</code></strong> y <strong><code>higher-order functions</code></strong> que veremos en el siguiente tema. Por eso, deberemos volver sobre este punto al ver dicho tema. <strong>La idea de las mismas es trabajar de forma funcional y con expresiones lambda de forma sintácticamente más cómoda</strong>.</p>
+</blockquote>
+<p>Kotlin nos permite usar una serie de métodosdenominadas <strong>Scope Functions</strong> (Funciones de Ámbito) que nos permiten trabajar con objetos de forma más cómoda y en una <strong>única expresión</strong>. Muchas de ellas son aproximaciones para hacer la misma cosa. Pero las principales y más utilizadas son ...</p>
+<table>
+<thead>
+<tr>
+<th>Función</th>
+<th>Referencia a objeto</th>
+<th>Valor de retorno</th>
+<th>Es funcion de extensión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>let</code></td>
+<td><code>it</code></td>
+<td>Expresión Lambda</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td><code>this</code></td>
+<td>Expresión Lambda</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td>-</td>
+<td>Expresión Lambda</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>with</code></td>
+<td><code>this</code></td>
+<td>Expresión Lambda</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>apply</code></td>
+<td><code>this</code></td>
+<td><code>this</code></td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>also</code></td>
+<td><code>it</code></td>
+<td><code>this</code></td>
+<td>Sí</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>
 <p><strong><code>let</code></strong>: Nos permite ...</p>
@@ -1238,6 +1391,9 @@ numbers<span class="token punctuation">.</span><span class="token function">map<
 </ul>
 <div style="page-break-after:always;"></div>
 <h4 id="clases-enumeradas-con-enum-class">Clases enumeradas con enum class </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/enum-classes.html">Enum Classes</a></li>
+</ul>
 <p>Igual que en otros lenguajes, Kotlin nos permite crear tipos <a href="https://kotlinlang.org/docs/enum-classes.html">enumerados</a>, aunque en este caso se puede ver como un modificador de clase. Una enumeración es un conjunto de valores que usan como identificador un nombre. Dicho nombre se comporta como una constante en nuestro lenguaje. Al marcar una clase con el modificador <strong><code>enum</code></strong>, la declara como una de enumeración.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-enum">enum</span> <span class="token keyword keyword-class">class</span> CiclosInformatica <span class="token punctuation">{</span> SMR<span class="token punctuation">,</span> ASIR<span class="token punctuation">,</span> DAM<span class="token punctuation">,</span> DAW <span class="token punctuation">}</span>
 
@@ -1335,9 +1491,12 @@ DAW <span class="token number">3</span>
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h4 id="clases-selladas-sum-type-pattern">Clases Selladas (Sum Type Pattern) </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/sealed-classes.html">Sealed Classes</a></li>
+</ul>
 <p>Las clases selladas son un tipo de clase que nos permite definir un tipo de dato que puede ser de un tipo u otro, pero no de ambos. Es decir, que no se puede crear un objeto de una clase sellada, sino que se creará un objeto de una de sus clases hijas.</p>
 <p>En el fondo <strong>podríamos decir que es un tipo enumerado mejorado</strong> de hecho es un superconjunto y cualquier tipo enumerado podríamos representarlo a través de una clase sellada. La diferencia radica en que en los enumerados sólo tenemos un único objeto por tipo, mientras que en las sealed classes podemos tener varios objetos de la misma clase y <strong>permiten almacenar estado</strong>.</p>
-<p>Esto es la forma en que Kotlin y otros lenguajes como <a href="https://spencerfarley.com/2021/03/26/unions-in-csharp/">C# implementan</a> el patrón funcional <a href="https://en.wikipedia.org/wiki/Tagged_union">Sum Type Pattern</a>.</p>
+<p>Esto es la forma en que Kotlin y otros lenguajes como <strong><a href="https://spencerfarley.com/2021/03/26/unions-in-csharp/">C# implementan</a></strong> el patrón funcional <strong><a href="https://en.wikipedia.org/wiki/Tagged_union">Sum Type Pattern</a></strong>.</p>
 <blockquote>
 <p>📣 <strong>Resumen</strong>: En resumen podemos decir que una clase sellada permite definir una enumeración de tipos con propiedades diferentes de los cuales una instancia solo podrá ser de uno de ellos de forma excluyente.</p>
 </blockquote>
@@ -1455,8 +1614,12 @@ DAW <span class="token number">3</span>
 
     acciones<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> <span class="token function">println</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">aTexto</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><div style="page-break-after:always;"></div>
+</code></pre><p>Descargar ejemplos de código <strong><a href="./assets/codigo/ejemplo_clase_sellada_recurso.zip">aquí</a></strong>.</p>
+<div style="page-break-after:always;"></div>
 <h4 id="delegación-de-propiedades-con-by">Delegación de propiedades con <strong><code>by</code></strong> </h4>
+<ul>
+<li><a href="https://kotlinlang.org/docs/delegated-properties.html">Delegated Properties</a></li>
+</ul>
 <p>La <a href="https://kotlinlang.org/docs/delegated-properties.html">delegación de propiedades</a> es una característica de Kotlin que nos permite delegar la implementación de una propiedad a un objeto externo.  Por tanto, utilizará otro objeto que es capaz de devolver un resultado cuando se llame al <strong><code>get</code></strong> y al <strong><code>set</code></strong> (en caso de que se utilice var).</p>
 <p>Veamos el siguiente ejemplo comentado:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Definimos un tipo Dato que guarda un valor</span>
@@ -1499,6 +1662,9 @@ DAW <span class="token number">3</span>
 <p>✋ <strong>Importante</strong>: Fíjate que hemos usado la palabra reservada <strong><code>by</code></strong> para indicar que inicialización de los datos se va a delegar en una intáncia de del tipo <strong><code>MiDelegado</code></strong>.</p>
 </blockquote>
 <h5 id="lazy">lazy </h5>
+<ul>
+<li><a href="https://kotlinlang.org/docs/delegated-properties.html#lazy-properties">Lazy Properties</a></li>
+</ul>
 <p>Existen <strong>delegados estándar</strong> ya implementados en el lenguaje que nos permiten implementar la delegación de propiedades de forma sencilla. Por ejemplo, tenemos la interfaz <strong><code>lazy</code></strong> que nos permite inicializar el valor de una propiedad de <strong>forma perezosa</strong>. Es decir, que no se inicializa hasta que no se accede a ella por <strong>primera vez</strong>.</p>
 <p>Por ejemplo:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Definimos una clase llamada Dato</span>
@@ -1520,6 +1686,9 @@ DAW <span class="token number">3</span>
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
 <h5 id="observable">observable </h5>
+<ul>
+<li><a href="https://kotlinlang.org/docs/delegated-properties.html#observable-properties">Observable Properties</a></li>
+</ul>
 <p>Existen muchos <strong>delegados estándar</strong> que nos permiten implementar la delegación de propiedades usando <strong><code>by</code></strong>. Por ejemplo, la interfaz <strong><code>observable</code></strong> nos permite observar los cambios que se producen en una propiedad. Es decir, que cada vez que se cambie el valor de la propiedad, se ejecutará un código que nosotros definamos. Muchos de ellos están definidos en el paquete <strong><code>kotlin.properties</code></strong> dentro de la clase <strong><code>Delegates</code></strong>.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Dato</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> valor <span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
 
