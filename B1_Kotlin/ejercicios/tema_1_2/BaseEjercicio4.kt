@@ -1,7 +1,4 @@
-package _ejercicios_funcional
-
-import java.io.File.separator
-import java.lang.reflect.ParameterizedType
+package ejercicios.kotlin.funcional
 
 data class Producto(
     val codArticulo: String,
@@ -12,7 +9,7 @@ data class Producto(
     val precio: Double
 )
 
-public class Dimensiones(val largo: Int, val ancho: Int, val espesor: Int) {
+class Dimensiones(val largo: Int, val ancho: Int, val espesor: Int) {
     override fun toString(): String = "L:$largo x A:$ancho x E:$espesor";
 }
 
@@ -73,7 +70,7 @@ class Datos {
     }
 }
 
-fun ejercicio5() {
+fun ejercicio4() {
     val x: String = ""
     val SeparadorConsulta = "\n" + x.padEnd(80, '_') + "\n";
 
@@ -84,8 +81,7 @@ fun ejercicio5() {
                 "de productos con Precio entre 10 y 30 euros\n"
     )
 
-    val consulta1= listOf<Any>() //A sustituir por lo necesario
-
+    val consulta1 =
     println(consulta1.joinToString(separator = "\n"))
     println(SeparadorConsulta)
     println(
@@ -93,177 +89,79 @@ fun ejercicio5() {
                 "Muestra CodArticulo, Descripcion y Precio de los 3 productos.\n" +
                 "más caros (ordenando por Precio descendente)\n"
     )
-
-    val consulta2= listOf<Any>() //A sustituir por lo necesario
+    val consulta2: List<Any> =
     println(consulta2.joinToString(separator = "\n"));
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 3: Usando las funciones groupBy, map, sortedByDescending y last.\n" +
                 "Muestra el precio más barato por categoría\n"
     )
-
-    var consulta3 = listOf<Any>() //A sustituir por lo necesario
+    var consulta3 =
     println(consulta3?.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 4: Usando las funciones groupBy y map.\n" +
                 "¿Cuántos productos hay de cada categoría?\n"
     )
-
-    var consulta4 = listOf<Any>() //A sustituir por lo necesario
+    var consulta4 =
     println(consulta4.joinToString(separator = "\n"))
-    println(SeparadorConsulta);
 
+    println(SeparadorConsulta);
     println(
         "Consulta 5: Usando las funciones groupBy, map y filter\n" +
                 "Mostrar las categorías que tengan más de 2 productos\n"
     )
-    var consulta5= listOf<Any>() //A sustituir por lo necesario
+    var consulta5 =
     println(consulta5.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 6: Usando la función map\n" +
                 "Mostrar CodArticulo, Descripcion, Precio y Descuento redondeado a 2 decimales,\n" +
                 "siendo Descuento el 10% del Precio\n"
     )
-    var consulta6= listOf<Any>() //A sustituir por lo necesario
+    var consulta6: List<Any> =
     println(consulta6.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 7: Usando las funciones filter, contains y map.\n" +
                 "Mostrar CodArticulo, Descripcion y Colores\n" +
                 "de los productos de color verde o rojo\n" +
                 "(es decir, que contengan alguno de los dos)\n"
     )
-    var consulta7= listOf<Any>() //A sustituir por lo necesario
+    var consulta7: List<Any> =
     println(consulta7.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 8: Usando las funciones filter y map.\n" +
                 "Mostrar CodArticulo, Descripcion y Colores.\n" +
                 "de los productos que se fabrican en tres Colores\n"
     )
-    var consulta8= listOf<Any>() //A sustituir por lo necesario
+    var consulta8: List<Any> =
     println(consulta8.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 9: Usando las funciones filter, map.\n" +
                 "Mostrar CodArticulo, Descripcion y Dimensiones\n" +
                 "de los productos con espesor de 3 cm\n"
     )
-    var consulta9= listOf<Any>() //A sustituir por lo necesario
+    var consulta9: List<Any> =
     println(consulta9.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
 
+    println(SeparadorConsulta)
     println(
         "Consulta 10: Usando las funciones flatMap, distinct y sortedBy.\n" +
                 "Mostrar los colores de productos ordenados y sin repeticiones\n"
     )
-    var consulta10= listOf<Any>() //A sustituir por lo necesario
+
+    var consulta10 =
     println(consulta10.joinToString(separator = "\n"))
-    println(SeparadorConsulta);
-}
-
-
-fun ejercicio5() {
-    val x: String = ""
-    val SeparadorConsulta = "\n" + x.padEnd(80, '_') + "\n";
 
     println(SeparadorConsulta);
-    println(
-        "Consulta 1: Usando las funciones filter y map.\n" +
-                "Mostrar CodArticulo, Descripcion y Precio .\n" +
-                "de productos con Precio entre 10 y 30 euros\n"
-    )
 
-    val consulta1= listOf<Any>() //A sustituir por lo necesario
-
-    println(consulta1.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-    println(
-        "Consulta 2: Usando las funciones map, sortedByDescending y take.\n" +
-                "Muestra CodArticulo, Descripcion y Precio de los 3 productos.\n" +
-                "más caros (ordenando por Precio descendente)\n"
-    )
-
-    val consulta2= listOf<Any>() //A sustituir por lo necesario
-    println(consulta2.joinToString(separator = "\n"));
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 3: Usando las funciones groupBy, map, sortedByDescending y last.\n" +
-                "Muestra el precio más barato por categoría\n"
-    )
-
-    var consulta3 = listOf<Any>() //A sustituir por lo necesario
-    println(consulta3?.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 4: Usando las funciones groupBy y map.\n" +
-                "¿Cuántos productos hay de cada categoría?\n"
-    )
-
-    var consulta4 = listOf<Any>() //A sustituir por lo necesario
-    println(consulta4.joinToString(separator = "\n"))
-    println(SeparadorConsulta);
-
-    println(
-        "Consulta 5: Usando las funciones groupBy, map y filter\n" +
-                "Mostrar las categorías que tengan más de 2 productos\n"
-    )
-    var consulta5= listOf<Any>() //A sustituir por lo necesario
-    println(consulta5.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 6: Usando la función map\n" +
-                "Mostrar CodArticulo, Descripcion, Precio y Descuento redondeado a 2 decimales,\n" +
-                "siendo Descuento el 10% del Precio\n"
-    )
-    var consulta6= listOf<Any>() //A sustituir por lo necesario
-    println(consulta6.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 7: Usando las funciones filter, contains y map.\n" +
-                "Mostrar CodArticulo, Descripcion y Colores\n" +
-                "de los productos de color verde o rojo\n" +
-                "(es decir, que contengan alguno de los dos)\n"
-    )
-    var consulta7= listOf<Any>() //A sustituir por lo necesario
-    println(consulta7.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 8: Usando las funciones filter y map.\n" +
-                "Mostrar CodArticulo, Descripcion y Colores.\n" +
-                "de los productos que se fabrican en tres Colores\n"
-    )
-    var consulta8= listOf<Any>() //A sustituir por lo necesario
-    println(consulta8.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 9: Usando las funciones filter, map.\n" +
-                "Mostrar CodArticulo, Descripcion y Dimensiones\n" +
-                "de los productos con espesor de 3 cm\n"
-    )
-    var consulta9= listOf<Any>() //A sustituir por lo necesario
-    println(consulta9.joinToString(separator = "\n"))
-    println(SeparadorConsulta)
-
-    println(
-        "Consulta 10: Usando las funciones flatMap, distinct y sortedBy.\n" +
-                "Mostrar los colores de productos ordenados y sin repeticiones\n"
-    )
-    var consulta10= listOf<Any>() //A sustituir por lo necesario
-    println(consulta10.joinToString(separator = "\n"))
-    println(SeparadorConsulta);
 }
