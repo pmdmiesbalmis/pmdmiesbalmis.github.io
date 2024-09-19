@@ -201,15 +201,14 @@ Una clase de tipo excepción <strong>LetraConsumoInvalidaException</strong> con 
 <li>propiedad abstracta <strong>consumo</strong> energético de tipo char y que solo podrá contener letras entre A y F (esto se resolverá a través de un método de interface llamado compruebaConsumo, explicado posteriormente)</li>
 <li>propiedad regular <strong>precio</strong> de tipo float inmutable y calculada. Devolverá mediante un when de expresión el precio del electrodoméstico, de forma que dependerá del consumo y el peso  (consumo + peso * 2). Donde el consumo se mapeará de forma (consumo-&gt;precio) con la siguiente correspondencia <code>[A-&gt;100, B-&gt;80, C-&gt;60, E-&gt;30, otros-&gt;10]</code></li>
 <li>propiedad regular inmutable <strong>color</strong> de tipo enumerado Color y que devolverá por defecto el color BLANCO</li>
-<li>propiedad abstracta <strong>peso</strong> de tipo Float.</li>
+<li>propiedad abstracta mutable <strong>peso</strong> de tipo Float.</li>
 </ul>
 <p>Además tendrá una función regular <strong>compruebaConsumo</strong> a la que le llegará un Char y comprobará que está entre las letras A y F (teniendo en cuenta las mayúsculas), devolverá la letra del consumo en mayúsculas si es correcta y una excepción del tipo <code>LetraConsumoInvalidaException</code> en otro caso.</p>
 <p>Además tendremos una <strong>clase Lavadora</strong> que implementará la interface de forma que:</p>
 <ul>
-<li>El consumo seguirá siendo inmutable, pero al ser abstracto en la interfaz ahora tendremos que implementar su get, se asignará en el constructor <code>init{}</code> después de comprobar que es correcto con el método regular de la interfaz <em>compruebaConsumo</em>.</li>
-<li>El peso también deberá de implementarse, pero será de acceso y modificación.</li>
-<li>Podemos definir la nueva propiedad carga, como mutable dentro del propio constructor por defecto.</li>
-<li>El color se asignará en el segundo constructor una vez se haya comprobado que es correcta la cadena de entrada con el tipo Color. Para indicar que se inicializará posteriormente, la señalaremos como <em><code>lateinit</code></em>. Además para que este modificador no nos de excepción por no inicialialización, deberemos asignar la propiedad  en el constructor por defecto con la propiedad del padre.</li>
+<li>El consumo seguirá siendo inmutable, se asignará en el constructor <code>init{}</code> después de comprobar que es correcto con el método regular de la interfaz <em>compruebaConsumo</em>.</li>
+<li>Podemos definir la nueva propiedad carga, como mutable dentro del propio constructor por defecto de Lavadora.</li>
+<li>El color se asignará en el segundo constructor una vez se haya comprobado que es correcta la cadena de entrada con el tipo Color.</li>
 <li>Anulará el precio añadiendo 50 al precio base si la carga supera los 6kg, seguirá siendo una propiedad de solo acceso.</li>
 <li>Esta clase tendrá el constructor por defecto al que le llegará el consumo, el peso y la carga, además de otro constructor al que además de los argumentos anteriores también le llegará el color como String.</li>
 <li>Deberás sobreescribir el toString para conseguir una salida de la forma:</li>
@@ -259,7 +258,7 @@ Además tendremos una enumeración Genero con un constructor al que se le pasar�
 <li>Marcar una serie como acabada, a este evento le llegará un código de la serie.</li>
 <li>Marcar el seguimiento de una serie, a este evento le llegará un código de la serie, el número de temporada y el número de capitulo por el que nos hemos quedado.</li>
 </ul>
-<p>Tendremos una función <strong>onSeriesEvent(seriesEvent: SeriesEvent)</strong> al que le llegará el evento y se encargará de gestionar cada uno de ellos mediante when, mostrando el mensaje con los datos que llegan.</p>
+<p>Externa a la interfaz tendremos una función <strong>onSeriesEvent(seriesEvent: SeriesEvent)</strong> al que le llegará el evento y se encargará de gestionar cada uno de ellos mediante when, mostrando el mensaje con los datos que llegan.</p>
 <div class="admonition warning">
 <p class="admonition-title">Aviso</p>
 <p>Por ahora solamente vamos a mostrar un mensaje para cada evento con los datos que le llegan a este, en ejercicios posteriores ampliaremos la aplicación.</p>

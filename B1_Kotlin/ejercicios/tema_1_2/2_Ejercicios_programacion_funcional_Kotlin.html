@@ -341,15 +341,19 @@ verde
 <div style="page-break-after:always;"></div>
 <div class="ejercicio">
 <h3 id="ejercicio-5">Ejercicio 5 </h3>
-<p>Vamos a prácticas los conceptos del anterior tema, además de añadir HOF y funciones Lambda. Para ellos nos crearemos una <strong>date class Usuario</strong>, con solamente login y password de tipo String. Crearemos una interface sellada <strong>UsuarioEvent</strong>, para gestionar los eventos del usuario:</p>
+<p>Vamos a prácticas los conceptos del anterior tema, además de añadir HOF y funciones Lambda. Para ellos nos crearemos una <strong>data class Usuario</strong>, con solamente login y password de tipo String. Crearemos una interface sellada <strong>UsuarioEvent</strong>, para gestionar los eventos del usuario:</p>
 <ul>
 <li><strong><code>AñadeUsuario</code></strong> al que le llega un usuario</li>
 <li><strong><code>ModificicaUsuario</code></strong> al que le llega un string</li>
 <li><strong><code>MuestraUsuario</code></strong> de tipo object</li>
 </ul>
 <p>Por otro lado tendremos una clase donde gestionaremos la lógica de la aplicación llamada <strong>UsuarioViewModel</strong>, que contendrá una lista mutable de usuarios y el método <strong>onUsuarioEvent</strong> al que le llega una UsuarioEvent y le da la funcionalidad necesaria a cada evento para que hagan lo que su nombre indica, sobre la lista de usuarios.</p>
-<p>Para la parte de la interacción del usuario con la aplicación crearemos una <strong>función usuarioScreen</strong> a la que le llegará una función de nivel superior HOF, con un UsuarioEvent de parámetro de entrada y vacío de salida. Esta función tendrá un menú que nos permitirá añadir, modificar y mostrar usuarios invocando a los eventos a través del parámetro de entrada de la función. Por ejemplo, para mostrar podría ser algo como <strong><code>usuarioEvent(UsuarioEvent.MuestraUsuarios)</code></strong>.</p>
+<p>Para la parte de la interacción del usuario con la aplicación crearemos una <strong>función usuarioScreen</strong> a la que le llegará una función de nivel superior HOF, con un UsuarioEvent de parámetro de entrada y vacío de salida ( <strong><code>usuarioEvent: (UsuarioEvent) -&gt; Unit</code></strong> ). Esta función tendrá un menú que nos permitirá añadir, modificar y mostrar usuarios invocando a los eventos a través del parámetro de entrada de la función. Por ejemplo, para mostrar podría ser algo como <strong><code>usuarioEvent(UsuarioEvent.MuestraUsuarios)</code></strong>.</p>
 <p>En el programa principal habrá que crear un objeto de tipo ViewModel y con este llamar a la función de interacción con el cliente.</p>
+<blockquote>
+<p>💡 <strong>Tips:</strong> Para realizar la llamada a la función con el objeto ViewModel se tendrá que hacer de la siguiente manera:<br>
+<em><code>val usuarioViewModel = UsuarioViewModel() usuarioScreen(usuarioViewModel::onUsuarioEvent)</code></em></p>
+</blockquote>
 </div>
 
       </div>
