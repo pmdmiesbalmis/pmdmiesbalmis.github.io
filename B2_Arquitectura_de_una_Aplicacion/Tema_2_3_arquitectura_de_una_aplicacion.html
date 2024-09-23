@@ -931,7 +931,7 @@ justo después del front matter
 <li>Símbolos especiales (<strong>62-63</strong>): +/</li>
 </ul>
 <p>Si la cadena de bytes no contiene exactamente un múltiplo de 6 bits, se <strong>completará con ceros</strong>.</p>
-<blockquote>
+<div class="caso_estudio">
 <p><strong>Ejemplo</strong>: Supongamos la cadena ...</p>
 <table>
 <thead>
@@ -947,9 +947,13 @@ justo después del front matter
 <td>0110 0001 1100 0011 1001 1000</td>
 <td>61 C3 98</td>
 </tr>
+<tr>
+<td>Si queremos codificar esta cadena de bits en Base64 tendremos que realizar <strong>grupos de 6 bits</strong>:</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>Si queremos codificar esta cadena de bits en Base64 tendremos que realizar <strong>grupos de 6 bits</strong>:</p>
 <table>
 <thead>
 <tr>
@@ -966,7 +970,7 @@ justo después del front matter
 </tr>
 </tbody>
 </table>
-</blockquote>
+</div> <!-- fin caso de estudio -->
 <p>Aquí tienes diferentes URL's de utilidad que te permiten codificar y decodificar textos e imágenes en Base64:</p>
 <ul>
 <li><a href="https://codebeautify.org/text-to-base64-converter">https://codebeautify.org/text-to-base64-converter</a></li>
@@ -977,49 +981,30 @@ justo después del front matter
 <div style="page-break-after:always;"></div>
 <h3 class="crossnote-header" id="funciones-de-utilidad-para-codificar-y-decodificar-im%C3%A1genes">Funciones de utilidad para codificar y decodificar imágenes</h3>
 
-<p>En el siguiente código tienes una serie de funciones de utilidad para codificar y decodificar imágenes en Base64. Puedes descargar el código de las funciones de utilidad desde el siguiente enlace <strong><a href="assets/codigo/Imagenes.kt">Imagenes.kt</a></strong>.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 80%">
-<p>En nuestra propuesta organizativa de proyecto, estas funciones de utilidad las vamos a incluir en el paquete <strong><code>utilities.imagenes</code></strong> dentro del paquete <strong>principal</strong> de nuestro proyecto y a su vez. Iremos pues, creando dentro de este paquete diferentes paquetes para agrupar las diferentes funciones de utilidad que vayamos creando.</p>
-</div>
-<div style="width: auto">
-<p align="center" style="zoom:1" class="puml"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="78px" preserveAspectRatio="none" style="width:151px;height:78px;background:#FFFFFF;" version="1.1" viewBox="0 0 151 78" width="151px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="26" y="39.5508">[com.pmdm.agenda]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="108" x="36" y="54.6445">[utilities.imagenes]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="70" x="46" y="69.7383">Imagenes.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="38" y1="64.8281" y2="64.8281"></line><!--SRC=[HO_TQi9044RlzodcgcZ44AsMiXInrLYQ9bHgzAOehDdHBjtiolu88hvxLse9SpTppimtO-kOSPP9HyYPR9uLDrhm3JcNf0DFTpijEPhHLwNh-53pEcPxL9ojIITCAosreLlfSHH53UkTaC89jB6ehpZQTHG5eL6CFZ5vyzvkJFpZ0dK9DGuN_WBD9LDkMUHmH6E5Lj2B-qb_4D-tocyFCzn2RmZzX0uIcWnXafPm7RT9wtMUWzNUL0XSM6V4DeJIgaqoTcJmwPKJDLBuEA3Afk__3KZLKHYjQbIEPAkY0Hu6tHVXO84c985LGQQuOrwwO5IQ2xMdi2ndtKUICxNtuI4AQCb4XxtcH25T_080]--></g></svg></p></div>
-</div>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><span class="token keyword keyword-fun">fun</span> <span class="token function">base64ToAndroidBitmap</span><span class="token punctuation">(</span>base64ImageString<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Bitmap <span class="token operator">=</span>
-Base64<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>base64ImageString<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> decodedString <span class="token operator">-&gt;</span>
-    BitmapFactory<span class="token punctuation">.</span><span class="token function">decodeByteArray</span><span class="token punctuation">(</span>decodedString<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> decodedString<span class="token operator">!!</span><span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+<p>En el <strong><code>proyectoBase</code></strong> se ha incluido una <strong>librería de utilidades</strong> hecha por los profesores del módulo para gestión de imágenes de forma '<em>sencilla</em>'. Purdes encontrar su implementación en el siguiente repositorio de <strong>GitHub</strong> público <a href="https://github.com/pmdmiesbalmis/utilities">https://github.com/pmdmiesbalmis/utilities</a>.</p>
+<p>Para usarla en los proyectos de Android, debes incluir entrada en la sección <strong><code>[libraries]</code></strong> del <strong><code>libs.versions.toml</code></strong> del proyecto de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin">pmdm<span class="token operator">-</span>ies<span class="token operator">-</span>balmis<span class="token operator">-</span>utilities <span class="token operator">=</span> <span class="token punctuation">{</span> 
+            group <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.github.pmdmiesbalmis"</span></span><span class="token punctuation">,</span> 
+            name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"utilities"</span></span><span class="token punctuation">,</span> 
+            version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"pmdmIesBalmisVersion"</span></span> 
 <span class="token punctuation">}</span>
-
-<span class="token keyword keyword-fun">fun</span> <span class="token function">base64ToBitmap</span><span class="token punctuation">(</span>base64ImageString<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">=</span>
-    <span class="token function">base64ToAndroidBitmap</span><span class="token punctuation">(</span>base64ImageString<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token keyword keyword-fun">fun</span> <span class="token function">androidBitmapToBase64</span><span class="token punctuation">(</span>bitmap<span class="token operator">:</span> Bitmap<span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token operator">=</span> <span class="token function">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
-    bitmap<span class="token punctuation">.</span><span class="token function">compress</span><span class="token punctuation">(</span>Bitmap<span class="token punctuation">.</span>CompressFormat<span class="token punctuation">.</span>PNG<span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">,</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">use</span> <span class="token punctuation">{</span> stream <span class="token operator">-&gt;</span>
-    Base64<span class="token punctuation">.</span><span class="token function">encodeToString</span><span class="token punctuation">(</span>stream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span>
+</pre><p>Posteriormente debes incluir la dependencia en el <strong><code>build.gradle.kts</code></strong> del módulo de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin">dependencies <span class="token punctuation">{</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>pmdm<span class="token punctuation">.</span>ies<span class="token punctuation">.</span>balmis<span class="token punctuation">.</span>utilities<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
+</pre><p>Para usar librería en un funte de código, debes importar todas la funciones de extensión de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><span class="token keyword keyword-import">import</span> com<span class="token punctuation">.</span>github<span class="token punctuation">.</span>pmdmiesbalmis<span class="token punctuation">.</span>utilities<span class="token punctuation">.</span>imagetools<span class="token punctuation">.</span><span class="token operator">*</span>
+</pre><p>A partir de ese momento dispondrás de las siguientes funciones de extensión...</p>
+<ol>
+<li><strong><code>ImageBitmap.resize(ladoLargo: Int): ImageBitmap</code></strong>: Redimensiona una <code>ImageBitmap</code> manteniendo la relación de aspecto.</li>
+<li><strong><code>ImageBitmap.toBase64(formato: FormatosCompresion = FormatosCompresion.PNG_90): String</code></strong>: Convierte una <code>ImageBitmap</code> a un <code>String</code> codificado en Base64.</li>
+<li><strong><code>ImageBitmap.toBlob(formato: FormatosCompresion = FormatosCompresion.PNG_90): ByteArray</code></strong>: Convierte una <code>ImageBitmap</code> a un <code>ByteArray</code>.</li>
+<li><strong><code>String.base64ToImageBitmap(): ImageBitmap</code></strong>: Convierte un <code>String</code> codificado en Base64 a una <code>ImageBitmap</code>.</li>
+<li><strong><code>ByteArray.toImageBitmap(): ImageBitmap</code></strong>: Convierte un <code>ByteArray</code> a una <code>ImageBitmap</code>.</li>
+<li><strong><code>Context.imageBitmapFromRerouceId(recurso: Int): ImageBitmap</code></strong>: Carga una <code>ImageBitmap</code> desde un recurso de la aplicación Android sin compresión.</li>
+<li><strong><code>Context.imageBitmapFromUri(uri: Uri, formato: FormatosCompresion = FormatosCompresion.JPG_75, tamanoMaxKB: Int = 512): ImageBitmap?</code></strong>: Carga una <code>ImageBitmap</code> desde una Uri, con control de tamaño y formato.</li>
+</ol>
 
-<span class="token keyword keyword-fun">fun</span> <span class="token function">bitmapToBase64</span><span class="token punctuation">(</span>bitmap<span class="token operator">:</span> ImageBitmap<span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token operator">=</span>
-    <span class="token function">androidBitmapToBase64</span><span class="token punctuation">(</span>bitmap<span class="token punctuation">.</span><span class="token function">asAndroidBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token keyword keyword-fun">fun</span> <span class="token function">base64ToBitmap</span><span class="token punctuation">(</span>biteArray<span class="token operator">:</span> ByteArray<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> ImageBitmap<span class="token operator">?</span> <span class="token operator">=</span>
-    biteArray<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span>
-        BitmapFactory<span class="token punctuation">.</span><span class="token function">decodeByteArray</span><span class="token punctuation">(</span>biteArray<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> biteArray<span class="token punctuation">.</span>size<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asImageBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-
-<span class="token keyword keyword-fun">fun</span> <span class="token function">bitmapToBase64</span><span class="token punctuation">(</span>bitmap<span class="token operator">:</span> ImageBitmap<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> ByteArray<span class="token operator">?</span> <span class="token operator">=</span>
-    bitmap<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span>
-        <span class="token keyword keyword-val">val</span> stream <span class="token operator">=</span> <span class="token function">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        bitmap<span class="token punctuation">.</span><span class="token function">asAndroidBitmap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compress</span><span class="token punctuation">(</span>Bitmap<span class="token punctuation">.</span>CompressFormat<span class="token punctuation">.</span>JPEG<span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span> stream<span class="token punctuation">)</span>
-        stream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-
-<span class="token keyword keyword-fun">fun</span> <span class="token function">blobToBase64</span><span class="token punctuation">(</span>value<span class="token operator">:</span> ByteArray<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span>
-    value<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> Base64<span class="token punctuation">.</span><span class="token function">encodeToString</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span> <span class="token punctuation">}</span>
-
-<span class="token keyword keyword-fun">fun</span> <span class="token function">base64ToBlob</span><span class="token punctuation">(</span>value<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> ByteArray<span class="token operator">?</span> <span class="token operator">=</span>
-    value<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> Base64<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> Base64<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span> <span class="token punctuation">}</span>
-</pre>
       </div>
       
       
