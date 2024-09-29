@@ -1,4 +1,4 @@
-package com.holamundo.ui.features.saludo
+package com.pmdm.proyectobase.ui.features
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -18,9 +19,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import com.holamundo.ui.theme.ProyectoBaseTheme
+import com.pmdm.proyectobase.R
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -36,7 +42,7 @@ fun Saluda(
     ) {
         Text(
             modifier = Modifier.padding(12.dp),
-            text = "Hola ${nombreState}"
+            text = "${stringResource(R.string.saludo)} ${nombreState}"
         )
         Button(onClick = onClickBorrar) {
             Text(text = "Borrar")
@@ -54,7 +60,7 @@ fun IntroduceNombre(
     ) {
         Text(
             modifier = Modifier.padding(12.dp),
-            text = "Nombre:"
+            text = "${stringResource(R.string.nombre)}:"
         )
         TextField(
             value = nombreState,
@@ -85,7 +91,6 @@ fun SaludaScreen(
     }
 }
 
-
 @Preview(
     name = "PORTRAIT",
     device = "spec:width=360dp,height=800dp,dpi=480",
@@ -93,22 +98,27 @@ fun SaludaScreen(
 )
 @Preview(
     name = "LANDSCAPE",
+    locale = "en",
     device = "spec:width=360dp,height=800dp,dpi=480,orientation=landscape",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true, fontScale = 1.0f
 )
+@PreviewScreenSizes
+@PreviewFontScale
 @Composable
 fun SaludaScreenPreview() {
     var nombreState by remember { mutableStateOf("") }
     val onCambioNombre = { nombre: String -> nombreState = nombre }
     val onClickBorrar = { nombreState = "" }
 
-    HolaMundoTheme {
-        SaludaScreen(
-            nombreState = nombreState,
-            onCambioNombre = onCambioNombre,
-            onClickBorrar = onClickBorrar
-        )
+    ProyectoBaseTheme {
+        Surface {
+            SaludaScreen(
+                nombreState = nombreState,
+                onCambioNombre = onCambioNombre,
+                onClickBorrar = onClickBorrar
+            )
+        }
     }
 }
 
