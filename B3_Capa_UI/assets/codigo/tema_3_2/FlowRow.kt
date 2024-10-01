@@ -1,4 +1,4 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema32
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.holamundo.ui.theme.HolaMundoTheme
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 import kotlin.math.ceil
 
 @Composable
@@ -116,7 +116,7 @@ fun FlowRowSinPesos(ancho: Dp, alto: Dp) {
 )
 @Composable
 fun FlowColumnYRowPreview() {
-    HolaMundoTheme {
+    ProyectoBaseTheme {
         Column()
         {
             Row()

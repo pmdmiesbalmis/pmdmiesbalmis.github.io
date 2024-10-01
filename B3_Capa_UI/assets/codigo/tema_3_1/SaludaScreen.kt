@@ -1,4 +1,4 @@
-package com.holamundo.ui.features.saludo
+package com.pmdm.proyectobase.ui.features.tema31
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -19,11 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.holamundo.ui.theme.ProyectoBaseTheme
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Saluda(
+private fun Saluda(
     nombreState: String,
     onClickBorrar: () -> Unit
 ) {
@@ -42,7 +43,7 @@ fun Saluda(
 }
 
 @Composable
-fun IntroduceNombre(
+private fun IntroduceNombre(
     nombreState: String,
     onCambioNombre: (String) -> Unit
 ) {
@@ -62,7 +63,7 @@ fun IntroduceNombre(
 
 
 @Composable
-fun SaludaScreen() {
+private fun SaludaScreen() {
     var nombreState by remember { mutableStateOf("") }
     val onCambioNombre = { nombre: String -> nombreState = nombre }
     val onClickBorrar = { nombreState = "" }
@@ -83,9 +84,11 @@ fun SaludaScreen() {
 
 @Preview(showBackground = true, name = "DefaultPreview")
 @Composable
-fun DefaultPreview() {
+private fun DefaultPreview() {
     ProyectoBaseTheme {
-        SaludaScreen()
+        Surface {
+            SaludaScreen()
+        }
     }
 }
 

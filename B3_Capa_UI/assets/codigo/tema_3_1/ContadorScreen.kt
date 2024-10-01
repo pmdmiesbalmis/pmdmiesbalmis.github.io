@@ -1,4 +1,4 @@
-package com.holamundo.ui.features.contador
+package com.pmdm.proyectobase.ui.features.tema31
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ContadorStateful() {
+private fun ContadorStateful() {
     var cuentaState by remember { mutableStateOf(0) }
     val onAumentarCuenta: () -> Unit = { cuentaState++ }
 
@@ -22,7 +22,7 @@ fun ContadorStateful() {
 }
 
 @Composable
-fun ContadorStateless(
+private fun ContadorStateless(
     cuentaState: Int,
     onAumentarCuenta: () -> Unit) =
     Column {
@@ -34,5 +34,5 @@ fun ContadorStateless(
 
 @Preview(showBackground = true, name = "ContadorScreenPreview")
 @Composable
-fun ContadorScreenPreview() = ContadorStateful()
+private fun ContadorScreenPreview() = ContadorStateful()
 

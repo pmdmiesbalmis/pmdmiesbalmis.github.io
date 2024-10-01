@@ -3,16 +3,162 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
       
       
       
       
       
       <style>
-      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,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") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,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") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
@@ -23,8 +169,7 @@
     
     
       <div class="crossnote markdown-preview  ">
-      
-<p><style>/* 
+      <style>/* 
 Añade 
 
 @import "../EstilosPersonalizadosMarkdownEnhanced.less"
@@ -95,17 +240,25 @@ justo después del front matter
   top: 83%;
   font-size: 1rem;
 }
-</style></p>
-<h1 id="tema-37---corrutinas">Tema 3.7 - Corrutinas </h1>
+</style>
+<h1 class="crossnote-header" id="tema-37---corrutinasignoretrue">Tema 3.7 - Corrutinas{ignore=true}</h1>
+
 <p>Descargar estos apuntes <a href="./Tema_3_7_corrutinas.pdf">pdf</a> o <a href="./Tema_3_7_corrutinas.html">html</a></p>
-<h2 id="índice">Índice </h2>
+<h2 class="crossnote-header" id="%C3%ADndice">Índice</h2>
+
 
 <div class="md-toc">
-<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+<details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#tema-37---corrutinasignoretrue" class="md-toc-link"><p>Tema 3.7 - Corrutinas{ignore=true}</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
           <a href="#introducción" class="md-toc-link">
             <p>Introducción</p>
 
-          </a></div><details style="padding:0;;padding-left:0px;" open="">
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#corrutinas-en-kotlin" class="md-toc-link"><p>Corrutinas en Kotlin</p>
 </a>
@@ -155,7 +308,7 @@ justo después del front matter
     
         </div>
       </details>
-    <details style="padding:0;;padding-left:0px;" open="">
+    <details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#corrutinas-en-android" class="md-toc-link"><p>Corrutinas en Android</p>
 </a>
@@ -175,10 +328,6 @@ justo después del front matter
           <a href="#launchedeffect" class="md-toc-link">
             <p>LaunchedEffect</p>
 
-          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#cargando-imágenes-de-forma-asíncrona-coil" class="md-toc-link">
-            <p>Cargando Imágenes de forma asíncrona (Coil)</p>
-
           </a></div>
         </div>
       </details>
@@ -190,9 +339,13 @@ justo después del front matter
         </div>
       </details>
     
+        </div>
+      </details>
+    
 </div>
 <div style="page-break-after:always;"></div>
-<h2 id="introducción">Introducción </h2>
+<h2 class="crossnote-header" id="introducci%C3%B3n">Introducción</h2>
+
 <ul>
 <li>Documentación oficial: <strong><a href="https://kotlinlang.org/docs/coroutines-guide.html">Lenguaje Kotlin</a></strong></li>
 <li>Documentación oficial: <strong><a href="https://developer.android.com/kotlin/coroutines?hl=es-419">Android</a></strong></li>
@@ -229,15 +382,17 @@ justo después del front matter
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token comment">// Gradle (Kotlin DSL)</span>
     <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"</span></span><span class="token punctuation">)</span>
 </code></pre><div style="page-break-after:always;"></div>
-<h2 id="corrutinas-en-kotlin">Corrutinas en Kotlin </h2>
+<h2 class="crossnote-header" id="corrutinas-en-kotlin">Corrutinas en Kotlin</h2>
+
 <blockquote>
 <p>✋ para probar el código, puedes crear un <strong>proyecto de consola</strong> en Kotlin o usar el <strong><a href="https://play.kotlinlang.org/">playground</a></strong></p>
 </blockquote>
-<h3 id="anatomía-de-una-corrutina">Anatomía de una corrutina </h3>
-<p>Estará formada por las siguientes partes del esquema:</p>
-<p></p><p align="center" style="zoom:0.7" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<h3 class="crossnote-header" id="anatom%C3%ADa-de-una-corrutina">Anatomía de una corrutina</h3>
 
-<!-- Generated by graphviz version 9.0.0 (20230911.1827)
+<p>Estará formada por las siguientes partes del esquema:</p>
+<p align="center" style="zoom:0.7" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 8.1.0 (20230707.0739)
  -->
 <!-- Title: G Pages: 1 -->
 <svg width="472pt" height="336pt" viewBox="0.00 0.00 471.57 336.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -249,15 +404,15 @@ justo después del front matter
 <path fill="none" stroke="#36648b" d="M20,-8C20,-8 443.57,-8 443.57,-8 449.57,-8 455.57,-14 455.57,-20 455.57,-20 455.57,-308 455.57,-308 455.57,-314 449.57,-320 443.57,-320 443.57,-320 20,-320 20,-320 14,-320 8,-314 8,-308 8,-308 8,-20 8,-20 8,-14 14,-8 20,-8"></path>
 <text text-anchor="middle" x="231.79" y="-298" font-family="Arial" font-size="20.00" fill="#36648b">CoroutineScope</text>
 </g>
-<g id="clust4" class="cluster">
-<title>clusterChildScope2</title>
-<path fill="none" stroke="#36648b" d="M151.84,-192C151.84,-192 211.86,-192 211.86,-192 217.86,-192 223.86,-198 223.86,-204 223.86,-204 223.86,-256 223.86,-256 223.86,-262 217.86,-268 211.86,-268 211.86,-268 151.84,-268 151.84,-268 145.84,-268 139.84,-262 139.84,-256 139.84,-256 139.84,-204 139.84,-204 139.84,-198 145.84,-192 151.84,-192"></path>
-<text text-anchor="middle" x="181.85" y="-255" font-family="Arial" font-size="10.00" fill="#36648b">ChildScope</text>
-</g>
 <g id="clust3" class="cluster">
 <title>clusterChildScope1</title>
 <path fill="none" stroke="#36648b" d="M53.99,-192C53.99,-192 114.01,-192 114.01,-192 120.01,-192 126.01,-198 126.01,-204 126.01,-204 126.01,-256 126.01,-256 126.01,-262 120.01,-268 114.01,-268 114.01,-268 53.99,-268 53.99,-268 47.99,-268 41.99,-262 41.99,-256 41.99,-256 41.99,-204 41.99,-204 41.99,-198 47.99,-192 53.99,-192"></path>
 <text text-anchor="middle" x="84" y="-255" font-family="Arial" font-size="10.00" fill="#36648b">ChildScope</text>
+</g>
+<g id="clust4" class="cluster">
+<title>clusterChildScope2</title>
+<path fill="none" stroke="#36648b" d="M151.84,-192C151.84,-192 211.86,-192 211.86,-192 217.86,-192 223.86,-198 223.86,-204 223.86,-204 223.86,-256 223.86,-256 223.86,-262 217.86,-268 211.86,-268 211.86,-268 151.84,-268 151.84,-268 145.84,-268 139.84,-262 139.84,-256 139.84,-256 139.84,-204 139.84,-204 139.84,-198 145.84,-192 151.84,-192"></path>
+<text text-anchor="middle" x="181.85" y="-255" font-family="Arial" font-size="10.00" fill="#36648b">ChildScope</text>
 </g>
 <g id="clust2" class="cluster">
 <title>clusterContext</title>
@@ -307,8 +462,7 @@ justo después del front matter
 <!-- ChildContext1&#45;&gt;ChildContext2 -->
 </g>
 </svg>
-</p><p></p>
-<p>Definiciones básicas:</p>
+</p><p>Definiciones básicas:</p>
 <ul>
 <li>
 <p><strong>CoroutinesScope</strong>: Es el <strong>ámbito</strong> en el que se ejecuta la corrutina. Por ejemplo, si lanzamos una corrutina desde una actividad, el ámbito de la corrutina será la actividad. Cuando la actividad se destruya, la corrutina se cancelará automáticamente.</p>
@@ -320,9 +474,9 @@ justo después del front matter
 </ul>
 </li>
 </ul>
-<p></p><p align="center" style="zoom:0.7" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<p align="center" style="zoom:0.7" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
 
-<!-- Generated by graphviz version 9.0.0 (20230911.1827)
+<!-- Generated by graphviz version 8.1.0 (20230707.0739)
  -->
 <!-- Title: G Pages: 1 -->
 <svg width="562pt" height="240pt" viewBox="0.00 0.00 561.72 240.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -349,8 +503,8 @@ justo después del front matter
 <!-- New&#45;&gt;Active -->
 <g id="edge1" class="edge">
 <title>New-&gt;Active</title>
-<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M100.16,-46C113.98,-46 130.05,-46 144.88,-46"></path>
-<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="144.69,-49.5 154.69,-46 144.69,-42.5 144.69,-49.5"></polygon>
+<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M100.16,-46C114.12,-46 130.37,-46 145.32,-46"></path>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="144.96,-49.5 154.96,-46 144.96,-42.5 144.96,-49.5"></polygon>
 <text text-anchor="middle" x="128.72" y="-49" font-family="Arial" font-size="10.00" fill="#104e8b">start</text>
 </g>
 <!-- Completing -->
@@ -363,8 +517,8 @@ justo después del front matter
 <!-- Active&#45;&gt;Completing -->
 <g id="edge2" class="edge">
 <title>Active-&gt;Completing</title>
-<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M229.86,-52.06C251.07,-55.69 278.36,-60.36 301.8,-64.37"></path>
-<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="300.96,-67.77 311.41,-66.01 302.14,-60.87 300.96,-67.77"></polygon>
+<path fill="none" stroke="#104e8b" stroke-width="1.5" d="M229.86,-52.06C251.16,-55.7 278.61,-60.4 302.12,-64.42"></path>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="301.2,-68.16 311.65,-66.39 302.38,-61.26 301.2,-68.16"></polygon>
 <text text-anchor="middle" x="271.79" y="-66" font-family="Arial" font-size="10.00" fill="#104e8b">complete</text>
 </g>
 <!-- Cancelling -->
@@ -376,8 +530,8 @@ justo después del front matter
 <!-- Active&#45;&gt;Cancelling -->
 <g id="edge4" class="edge">
 <title>Active-&gt;Cancelling</title>
-<path fill="none" stroke="red" stroke-width="1.5" d="M193.45,-64.32C193.45,-80.46 193.45,-104.29 193.45,-123.33"></path>
-<polygon fill="red" stroke="red" stroke-width="1.5" points="189.95,-123.32 193.45,-133.32 196.95,-123.32 189.95,-123.32"></polygon>
+<path fill="none" stroke="red" stroke-width="1.5" d="M193.45,-64.32C193.45,-80.53 193.45,-104.52 193.45,-123.6"></path>
+<polygon fill="red" stroke="red" stroke-width="1.5" points="189.95,-123.59 193.45,-133.59 196.95,-123.59 189.95,-123.59"></polygon>
 <text text-anchor="middle" x="184.45" y="-97" font-family="Arial" font-size="10.00" fill="red">cancel/falil</text>
 </g>
 <!-- Completed -->
@@ -390,14 +544,14 @@ justo después del front matter
 <g id="edge3" class="edge">
 <title>Completing-&gt;Completed</title>
 <path fill="none" stroke="#104e8b" stroke-width="1.5" d="M392.79,-73C408,-73 425.63,-73 441.59,-73"></path>
-<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="441.14,-76.5 451.14,-73 441.14,-69.5 441.14,-76.5"></polygon>
+<polygon fill="#104e8b" stroke="#104e8b" stroke-width="1.5" points="441.41,-76.5 451.41,-73 441.41,-69.5 441.41,-76.5"></polygon>
 <text text-anchor="middle" x="423.05" y="-76" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
 </g>
 <!-- Completing&#45;&gt;Cancelling -->
 <g id="edge5" class="edge">
 <title>Completing-&gt;Cancelling</title>
-<path fill="none" stroke="red" stroke-width="1.5" d="M316.41,-91.4C293.95,-102.93 264.77,-117.91 240.58,-130.32"></path>
-<polygon fill="red" stroke="red" stroke-width="1.5" points="239.18,-127.11 231.88,-134.79 242.38,-133.33 239.18,-127.11"></polygon>
+<path fill="none" stroke="red" stroke-width="1.5" d="M316.41,-91.4C293.85,-102.98 264.5,-118.04 240.26,-130.49"></path>
+<polygon fill="red" stroke="red" stroke-width="1.5" points="239.16,-127.14 231.86,-134.82 242.36,-133.37 239.16,-127.14"></polygon>
 <text text-anchor="middle" x="271.79" y="-129" font-family="Arial" font-size="10.00" fill="red">cancel/falil</text>
 </g>
 <!-- Cancelled -->
@@ -410,13 +564,12 @@ justo después del front matter
 <g id="edge6" class="edge">
 <title>Cancelling-&gt;Cancelled</title>
 <path fill="none" stroke="red" stroke-width="1.5" d="M229.8,-154C242.7,-154 257.41,-154 270.79,-154 270.79,-154 270.79,-154 424.05,-154 429.72,-154 435.66,-154 441.56,-154"></path>
-<polygon fill="red" stroke="red" stroke-width="1.5" points="441.21,-157.5 451.21,-154 441.21,-150.5 441.21,-157.5"></polygon>
+<polygon fill="red" stroke="red" stroke-width="1.5" points="441.48,-157.5 451.48,-154 441.48,-150.5 441.48,-157.5"></polygon>
 <text text-anchor="middle" x="353.26" y="-157" font-family="Arial" font-size="10.00" fill="red">finish</text>
 </g>
 </g>
 </svg>
-</p><p></p>
-<ul>
+</p><ul>
 <li>
 <p><strong>Dispatcher</strong>: Podemos decir que es el <strong>hilo</strong> en el que se ejecuta la corrutina. Por defecto, las corrutinas se ejecutan en el hilo de la corrutina que las lanza. Pero <strong>podemos cambiar el hilo de ejecución de una en el contexto de la misma</strong>.</p>
 <ul>
@@ -428,7 +581,8 @@ justo después del front matter
 </li>
 </ul>
 <p>Vamos a ir adentrándonos con ejemplos en las anteriores definiciones...</p>
-<h3 id="primer-ejemplo-básico">Primer ejemplo básico </h3>
+<h3 class="crossnote-header" id="primer-ejemplo-b%C3%A1sico">Primer ejemplo básico</h3>
+
 <p>Veamos el siguiente ejemplo extraído de la documentación oficial de Kotlin:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-import">import</span> kotlinx<span class="token punctuation">.</span>coroutines<span class="token punctuation">.</span><span class="token operator">*</span>
 
@@ -454,9 +608,9 @@ Mundo!
 <p><strong><code>delay</code></strong> es una función de suspensión especial. Suspende la corrutina durante un tiempo específico.</p>
 </li>
 </ul>
-<p></p><p align="center" style="zoom:1" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<p align="center" style="zoom:1" class="dot"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
 
-<!-- Generated by graphviz version 9.0.0 (20230911.1827)
+<!-- Generated by graphviz version 8.1.0 (20230707.0739)
  -->
 <!-- Title: G Pages: 1 -->
 <svg width="699pt" height="348pt" viewBox="0.00 0.00 699.00 348.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -479,8 +633,8 @@ Mundo!
 <!-- pmain&#45;&gt;main -->
 <g id="edge1" class="edge">
 <title>pmain-&gt;main</title>
-<path fill="none" stroke="#104e8b" d="M28.28,-252C36.28,-252 44.28,-252 52.27,-252"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="52.07,-255.5 62.07,-252 52.07,-248.5 52.07,-255.5"></polygon>
+<path fill="none" stroke="#104e8b" d="M28.28,-252C36.46,-252 44.64,-252 52.83,-252"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="52.58,-255.5 62.58,-252 52.58,-248.5 52.58,-255.5"></polygon>
 </g>
 <!-- mainb -->
 <g id="node3" class="node">
@@ -494,8 +648,8 @@ Mundo!
 <!-- main&#45;&gt;mainb -->
 <g id="edge8" class="edge">
 <title>main-&gt;mainb</title>
-<path fill="none" stroke="#104e8b" stroke-dasharray="1,5" d="M136.29,-252C200.54,-252 334.72,-252 411.27,-252"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="411.07,-255.5 421.07,-252 411.07,-248.5 411.07,-255.5"></polygon>
+<path fill="none" stroke="#104e8b" stroke-dasharray="1,5" d="M136.29,-252C200.67,-252 335.27,-252 411.74,-252"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="411.59,-255.5 421.59,-252 411.59,-248.5 411.59,-255.5"></polygon>
 <text text-anchor="middle" x="279.51" y="-270" font-family="Arial" font-size="10.00" fill="#104e8b">Hilo Principal</text>
 <text text-anchor="middle" x="279.51" y="-258" font-family="Arial" font-size="10.00" fill="#104e8b">Bloquedao</text>
 </g>
@@ -510,8 +664,8 @@ Mundo!
 <!-- main&#45;&gt;rb -->
 <g id="edge2" class="edge">
 <title>main-&gt;rb</title>
-<path fill="none" stroke="#104e8b" d="M112.04,-233.7C122.33,-218.93 137.36,-197.33 149.67,-179.64"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="152.48,-181.73 155.32,-171.53 146.73,-177.74 152.48,-181.73"></polygon>
+<path fill="none" stroke="#104e8b" d="M112.04,-233.7C122.42,-218.79 137.64,-196.93 150.01,-179.15"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="153.34,-181.49 156.18,-171.29 147.6,-177.49 153.34,-181.49"></polygon>
 <text text-anchor="middle" x="185.58" y="-206" font-family="Arial" font-size="10.00" fill="#104e8b">start</text>
 <text text-anchor="middle" x="185.58" y="-194" font-family="Arial" font-size="10.00" fill="#104e8b">corrutina 1</text>
 <text text-anchor="middle" x="185.58" y="-182" font-family="Arial" font-size="10.00" fill="#104e8b">con runBlocking</text>
@@ -526,8 +680,8 @@ Mundo!
 <!-- mainb&#45;&gt;fmain -->
 <g id="edge10" class="edge">
 <title>mainb-&gt;fmain</title>
-<path fill="none" stroke="#104e8b" d="M513.12,-252C531.91,-252 553.82,-252 573.18,-252"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="573.03,-255.5 583.03,-252 573.03,-248.5 573.03,-255.5"></polygon>
+<path fill="none" stroke="#104e8b" d="M513.12,-252C532.09,-252 554.24,-252 573.72,-252"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="573.54,-255.5 583.54,-252 573.54,-248.5 573.54,-255.5"></polygon>
 <text text-anchor="middle" x="548.93" y="-258" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
 </g>
 <!-- hola -->
@@ -540,8 +694,8 @@ Mundo!
 <!-- rb&#45;&gt;hola -->
 <g id="edge4" class="edge">
 <title>rb-&gt;hola</title>
-<path fill="none" stroke="#104e8b" d="M207.09,-148C214.85,-148 222.61,-148 230.37,-148"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="230.22,-151.5 240.22,-148 230.22,-144.5 230.22,-151.5"></polygon>
+<path fill="none" stroke="#104e8b" d="M207.09,-148C215.03,-148 222.97,-148 230.91,-148"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="230.74,-151.5 240.74,-148 230.74,-144.5 230.74,-151.5"></polygon>
 </g>
 <!-- launch -->
 <g id="node7" class="node">
@@ -554,8 +708,8 @@ Mundo!
 <!-- rb&#45;&gt;launch -->
 <g id="edge3" class="edge">
 <title>rb-&gt;launch</title>
-<path fill="none" stroke="#104e8b" d="M190.53,-125.69C202.72,-112.4 218.59,-95.09 231.97,-80.48"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="234.32,-83.1 238.5,-73.36 229.16,-78.37 234.32,-83.1"></polygon>
+<path fill="none" stroke="#104e8b" d="M190.53,-125.69C202.83,-112.27 218.88,-94.76 232.35,-80.07"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="234.35,-82.98 238.52,-73.25 229.19,-78.25 234.35,-82.98"></polygon>
 <text text-anchor="middle" x="254.18" y="-108" font-family="Arial" font-size="10.00" fill="#104e8b">start</text>
 <text text-anchor="middle" x="254.18" y="-96" font-family="Arial" font-size="10.00" fill="#104e8b">corrutina 2</text>
 <text text-anchor="middle" x="254.18" y="-84" font-family="Arial" font-size="10.00" fill="#104e8b">con launch</text>
@@ -571,16 +725,16 @@ Mundo!
 <!-- hola&#45;&gt;frb -->
 <g id="edge5" class="edge">
 <title>hola-&gt;frb</title>
-<path fill="none" stroke="#104e8b" stroke-dasharray="1,5" d="M320.04,-148C336.42,-148 355.98,-148 374.66,-148"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="374.63,-151.5 384.63,-148 374.63,-144.5 374.63,-151.5"></polygon>
+<path fill="none" stroke="#104e8b" stroke-dasharray="1,5" d="M320.04,-148C336.58,-148 356.34,-148 375.19,-148"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="375.14,-151.5 385.14,-148 375.14,-144.5 375.14,-151.5"></polygon>
 <text text-anchor="middle" x="353.15" y="-166" font-family="Arial" font-size="10.00" fill="#104e8b">Corrutina 1</text>
 <text text-anchor="middle" x="353.15" y="-154" font-family="Arial" font-size="10.00" fill="#104e8b">Bloqueada</text>
 </g>
 <!-- frb&#45;&gt;mainb -->
 <g id="edge9" class="edge">
 <title>frb-&gt;mainb</title>
-<path fill="none" stroke="#104e8b" d="M449,-170.26C451.88,-182.5 455.59,-198.24 458.96,-212.57"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="455.52,-213.26 461.22,-222.19 462.34,-211.66 455.52,-213.26"></polygon>
+<path fill="none" stroke="#104e8b" d="M449,-170.26C451.91,-182.62 455.66,-198.55 459.06,-212.99"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="455.87,-213.73 461.57,-222.67 462.68,-212.13 455.87,-213.73"></polygon>
 <text text-anchor="middle" x="469.67" y="-194" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
 </g>
 <!-- mundo -->
@@ -594,30 +748,31 @@ Mundo!
 <!-- launch&#45;&gt;mundo -->
 <g id="edge6" class="edge">
 <title>launch-&gt;mundo</title>
-<path fill="none" stroke="#104e8b" d="M295.26,-50C316.27,-50 337.29,-50 358.3,-50"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="358.12,-53.5 368.12,-50 358.12,-46.5 358.12,-53.5"></polygon>
+<path fill="none" stroke="#104e8b" d="M295.26,-50C316.47,-50 337.67,-50 358.88,-50"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="358.63,-53.5 368.63,-50 358.63,-46.5 358.63,-53.5"></polygon>
 </g>
 <!-- mundo&#45;&gt;frb -->
 <g id="edge7" class="edge">
 <title>mundo-&gt;frb</title>
-<path fill="none" stroke="#104e8b" d="M421.42,-72.25C425.21,-84.79 430.08,-100.91 434.32,-114.97"></path>
-<polygon fill="#104e8b" stroke="#104e8b" points="430.88,-115.68 437.13,-124.25 437.58,-113.66 430.88,-115.68"></polygon>
+<path fill="none" stroke="#104e8b" d="M421.42,-72.25C425.24,-84.91 430.17,-101.23 434.45,-115.39"></path>
+<polygon fill="#104e8b" stroke="#104e8b" points="431.32,-116.13 437.56,-124.69 438.02,-114.11 431.32,-116.13"></polygon>
 <text text-anchor="middle" x="445.67" y="-96" font-family="Arial" font-size="10.00" fill="#104e8b">finish</text>
 </g>
 </g>
 </svg>
-</p><p></p>
-<p>Tanto el código de la <strong>corrutina 1</strong> (bloque <strong><code>runBlocking</code></strong>) y el código de la <strong>corrutina 2</strong> (bloque <strong><code>launch</code></strong>) <strong>se ejecutan en el hilo principal de forma concurrente</strong>.</p>
+</p><p>Tanto el código de la <strong>corrutina 1</strong> (bloque <strong><code>runBlocking</code></strong>) y el código de la <strong>corrutina 2</strong> (bloque <strong><code>launch</code></strong>) <strong>se ejecutan en el hilo principal de forma concurrente</strong>.</p>
 <ol>
 <li>Tras el primer <strong><code>runBlocking</code></strong>, el <strong><code>main</code></strong> se queda esperando a que termine la <strong>corrutina 1</strong>, por lo que se <strong>bloquea el hilo principal</strong>.</li>
 <li>La <strong>corrutina 1</strong> lanza la <strong>corrutina 2</strong> y sigue ejecutando su código <strong><code>println ("Hola")</code></strong>.</li>
 <li>La <strong>corrutina 2</strong> se suspende durante 1 segundo y luego imprime <strong><code>println ("Mundo!")</code></strong> pero la corrutina 1 ya habrá terminado y se habrá unido al hilo principal bloqueado que continúa con la ejecución del <strong><code>main</code></strong>.</li>
 </ol>
-<h3 id="concurrencia-estructurada">Concurrencia estructurada </h3>
+<h3 class="crossnote-header" id="concurrencia-estructurada">Concurrencia estructurada</h3>
+
 <p>Las corrutinas siguen un principio de concurrencia estructurada, lo que significa que solo se pueden lanzar nuevas corrutinas en un <strong><code>CoroutineScope</code></strong> específico que <strong>delimita la vida útil de la corrutina</strong> como ya hemos comentado.</p>
 <p>El ejemplo anterior muestra que <strong><code>runBlocking</code></strong> establece el alcance correspondiente y es por eso que el ejemplo anterior espera hasta que <strong><code>Mundo!</code></strong> se imprime después de un segundo de retraso y solo entonces sale.</p>
 <p>En una aplicación real, lanzarás muchas corrutinas. La concurrencia estructurada garantiza que no se pierdan. Un ámbito externo no puede completarse hasta que se completen todas sus rutinas secundarias. La simultaneidad estructurada también garantiza que cualquier error en el código se informe correctamente y nunca se pierda.</p>
-<h3 id="funciones-de-suspensión-con-suspend">Funciones de suspensión con <strong><code>suspend</code></strong> </h3>
+<h3 class="crossnote-header" id="funciones-de-suspensi%C3%B3n-con-suspend">Funciones de suspensión con <strong><code>suspend</code></strong></h3>
+
 <p>El código de ejemplo está escrito en un solo bloque. <strong>¿Cómo podríamos separar en diferentes funciones el bloque de las corrutinas?</strong>.</p>
 <p>Si extraemos el bloque de código interno de la <strong>corrutina 2</strong> <strong><code>launch { ... }</code></strong> a una función separada. Cuando se realiza la refactorización '<em>Extraer función</em>' en este código, obtiene una nueva función con el modificador <strong><code>suspend</code></strong>. Esta es nuestra primera <strong>función de suspensión</strong>.</p>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
@@ -644,7 +799,8 @@ Mundo!
 <p>✋ <strong>Importante</strong>: Una función de suspensión (<strong><code>suspend</code></strong>), solo puede llamarse dentro de otra función de suspensión o dentro de una corrutina. Si intentas llamar a una función de suspensión desde una función normal, el compilador te dará un error.</p>
 <p>📣 <strong>Resumen</strong>: Podemos resumir diciendo que una función modificada con <strong><code>suspend</code></strong> (función de suspensión) es una función que <strong>solo puede ser ejecutada de forma asíncrona</strong> dentro de una corrutina o dentro de otra función de suspensión.</p>
 </blockquote>
-<h3 id="profundizando-en-el-constructor-de-alcance-coroutinescope">Profundizando en el constructor de alcance <strong><code>CoroutineScope</code></strong> </h3>
+<h3 class="crossnote-header" id="profundizando-en-el-constructor-de-alcance-coroutinescope">Profundizando en el constructor de alcance <strong><code>CoroutineScope</code></strong></h3>
+
 <p>Al usar <strong><code>runBlocking</code></strong> o <strong><code>launch</code></strong> dentro de un bloque de código, se crea un <strong><code>CoroutineScope</code></strong>. <strong><code>CoroutineScope</code></strong> es una interfaz que representa un ámbito de corrutina. <strong>El ámbito de corrutina es responsable de cancelar todas las corrutinas que se ejecutan en él cuando se cierra</strong>.</p>
 <p>Además de los alcances definidos por los constructores que ya hemos definido. Es posible declarar nuestro propio alcance utilizando el constructor <strong><code>coroutineScope</code></strong>. Este crea un alcance de rutina y no se finaliza hasta que todos las corrutinas lanzadas dentro de él no finalicen.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
@@ -672,7 +828,8 @@ Mundo!
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
-<h3 id="controlando-el-estado-de-una-corrutina-con-job">Controlando el estado de una corrutina con <strong><code>Job</code></strong> </h3>
+<h3 class="crossnote-header" id="controlando-el-estado-de-una-corrutina-con-job">Controlando el estado de una corrutina con <strong><code>Job</code></strong></h3>
+
 <p>Cuando lanzamos una corrutina con <strong><code>launch</code></strong>, se devuelve un objeto <strong><code>Job</code></strong> que representa la tarea que se está ejecutando en el contexto de la corrutina. Como ya hemos comentado, podemos usar este objeto para controlar el estado de la corrutina, por ejemplo, para esperarla o cancelarla.</p>
 <ul>
 <li>
@@ -758,7 +915,8 @@ main: Now I can quit.
 </code></pre></li>
 </ul>
 <div style="page-break-after:always;"></div>
-<h3 id="jobs-asíncronos-que-devuelven-un-resultado-asyncawait">Jobs asíncronos que devuelven un resultado <strong><code>async/await</code></strong> </h3>
+<h3 class="crossnote-header" id="jobs-as%C3%ADncronos-que-devuelven-un-resultado-asyncawait">Jobs asíncronos que devuelven un resultado <strong><code>async/await</code></strong></h3>
+
 <p>Hasta ahora hemos visto que las corrutinas se ejecutan de forma concurrente, pero no hemos visto cómo obtener un resultado de una corrutina. Para ello, podemos usar el constructor <strong><code>async</code></strong>. Este constructor es similar a <strong><code>launch</code></strong>, pero devuelve un objeto <strong><code>Deferred</code></strong> que representa un resultado futuro.</p>
 <p><strong><code>Deferred</code></strong> es una <strong>subclase</strong> de <strong><code>Job</code></strong> y, por lo tanto, también se puede cancelar. Además, tiene una función de suspensión <strong><code>await()</code></strong> que devuelve el resultado cuando está listo.</p>
 <p>Veamos un ejemplo donde tenemos la función asíncrona <strong><code>esPrimo(n: Long)</code></strong> que devuelve un booleano indicando si el número pasado como parámetro es primo o no.</p>
@@ -815,7 +973,8 @@ El numero 1000000007 es primo
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre><div style="page-break-after:always;"></div>
-<h3 id="dispatchers-e-hilos">Dispatchers e hilos </h3>
+<h3 class="crossnote-header" id="dispatchers-e-hilos">Dispatchers e hilos</h3>
+
 <p>Como hemos comentado, el contexto de corrutina incluye un CoroutineDispatcher o <em>'despachador'</em> de corrutina que determina qué subproceso utiliza la corrutina correspondiente para su ejecución.</p>
 <p>Todos los constructores de corrutinas, como <strong><code>launch</code></strong> y <strong><code>async</code></strong> , aceptan un parámetro <strong><code>CoroutineContext</code></strong> <strong>opcional</strong> que se puede usar para especificar explícitamente el despachador de la nueva rutina y otros elementos de contexto.</p>
 <p>Hay 5 tipos de Dispatchers:</p>
@@ -860,7 +1019,7 @@ Corrutina: {
 </code><div class="line-highlight-wrapper">
 <div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
 </div></div></pre><p>Ahora la salida nos mostrará el nombre de la corrutina y el proceso en el que se ejecuta:</p>
-<pre data-role="codeBlock" data-info="cmd {code_chunk_offset=0, highlight=[4,9]}" class="language-cmd cmd" data-line="4,9"><code>Hola 
+<pre data-role="codeBlock" data-info="cmd {code_chunk_offset=3, highlight=[4,9]}" class="language-cmd cmd" data-line="4,9"><code>Hola 
 Corrutina: {
 	Contexto: [CoroutineName(CORRUTINA 1), BlockingCoroutine{Active}@1bc6a36e, BlockingEventLoop@1ff8b8f], 
 	Proceso: main
@@ -884,7 +1043,8 @@ Corrutina: {
 
 <div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
 </div></div></pre><div style="page-break-after:always;"></div>
-<h4 id="cambiando-el-contexto-de-una-corrutina-con-withcontext">Cambiando el contexto de una corrutina con <strong><code>withContext</code></strong> </h4>
+<h4 class="crossnote-header" id="cambiando-el-contexto-de-una-corrutina-con-withcontext">Cambiando el contexto de una corrutina con <strong><code>withContext</code></strong></h4>
+
 <p>Podemos cambiar el contexto de una corrutina en cualquier momento usando la función de suspensión <strong><code>withContext</code></strong>. Esta <strong>función de suspensión</strong> crea un nuevo contexto de corrutina con el <em>'dispatcher'</em> especificado y ejecuta el bloque de código en él. Cuando el bloque de código finaliza, la corrutina vuelve al contexto anterior.</p>
 <p>Normalmente, <strong><code>withContext</code></strong> se utiliza en situaciones en las que desea cambiar temporalmente a un contexto de ejecución diferente para realizar una operación que sea más apropiada para ese contexto, como realizar una solicitud de red, E/S de disco o cálculos que requieren un uso intensivo de la CPU.</p>
 <p>Por ejemplo ...</p>
@@ -950,7 +1110,8 @@ Corrutina: {
 	Proceso: DefaultDispatcher-worker-2
 }
 </code></pre><div style="page-break-after:always;"></div>
-<h2 id="corrutinas-en-android">Corrutinas en Android </h2>
+<h2 class="crossnote-header" id="corrutinas-en-android">Corrutinas en Android</h2>
+
 <p>Utilizaremos los conceptos ya vistos pero adaptados a Android. Alguna de las cosas que deberemos tener en cuenta son:</p>
 <ol>
 <li>
@@ -975,7 +1136,8 @@ Corrutina: {
 <p>❌ No debemos exponer métodos de suspensión públicos en el ViewModel. Pero sí puede lanzar corrutinas en su alcance o mejor exponer flujos de datos que se puedan observar desde la UI.</p>
 </li>
 </ol>
-<h3 id="coroutinescopes-más-comunes-en-android">CoroutineScopes más comunes en Android </h3>
+<h3 class="crossnote-header" id="coroutinescopes-m%C3%A1s-comunes-en-android">CoroutineScopes más comunes en Android</h3>
+
 <p>Los alcances (<strong><code>CoroutineScope</code></strong>) de las corrutinas se pueden vincular a los ciclos de vida de los componentes de Android.</p>
 <ul>
 <li>
@@ -1062,9 +1224,11 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
 </li>
 </ul>
 <div style="page-break-after:always;"></div>
-<h3 id="side-effects-y-corrutinas-en-compose">Side-effects y corrutinas en Compose </h3>
+<h3 class="crossnote-header" id="side-effects-y-corrutinas-en-compose">Side-effects y corrutinas en Compose</h3>
+
 <p>Un efecto lateral o side-effect de Compose es un cambio en el estado de la app que ocurre fuera del alcance de una función de componibilidad. Puesto que no podemos realizar ningún proceso bloqueante durante la composición de la UI y además no tenemos ningún control sobre el momento, orden y finalización de la misma. En el ejemplo anterior donde hemos visto como podemos usar <strong><code>rememberCoroutineScope()</code></strong> para mostrar una notificación en un <strong>Scaffold</strong> tras un evento de click en un botón. Esto sería un efecto lateral fuera de la composición de la UI. <strong>Por resumir, cuando un cambio de estado en la UI no lo controla la composición, sino que necesitemos que sea predecible y asíncrono, estaremos ante un efecto lateral</strong>.</p>
-<h4 id="launchedeffect">LaunchedEffect </h4>
+<h4 class="crossnote-header" id="launchedeffect">LaunchedEffect</h4>
+
 <p>Ejecuta funciones de suspensión en el alcance de un elemento componible.</p>
 <p>Por ejemplo, para ejecutar una función de suspensión ante uno o varios cambios de estado.</p>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[6-17]}" class="language-kotlin kotlin" data-line="6-17"><code><span class="token annotation builtin">@Composable</span>
@@ -1160,55 +1324,8 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
 
 
 </div></div></pre><div style="page-break-after:always;"></div>
-<h4 id="cargando-imágenes-de-forma-asíncrona-coil">Cargando Imágenes de forma asíncrona (Coil) </h4>
-<blockquote>
-<p>📌 <strong>Nota</strong>: Coil es la librería recomendada por Google para cargar imágenes en Android con Jetpack Compose. Puedes ver más información en <strong><a href="https://coil-kt.github.io/coil/compose/">https://coil-kt.github.io/coil/compose/</a></strong></p>
-</blockquote>
-<p>Para cargar imágenes de forma <strong>asíncrona</strong> podemos usar la librería <strong><a href="https://coil-kt.github.io/coil/compose/">Coil</a></strong>. Esta librería nos permite cargar imágenes desde una URL, un archivo o un recurso de Android. Además, nos permite transformar la imagen antes de mostrarla, por ejemplo, para redimensionarla o aplicarle un filtro. Además, también nos permite <strong>cachear las imágenes</strong> para que no tengamos que volver a descargarlas.</p>
-<p>Veamos un ejemplo de como cargar una imagen desde una URL:</p>
-<ol>
-<li>
-<p>Añadimos la dependencia de Coil al módulo App de nuestro proyecto:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>dependencies <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"io.coil-kt:coil-compose:2.5.0"</span></span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-</code></pre></li>
-<li>
-<p>Puesto que vamos a cargar una imagen desde una URL, debemos añadir el permiso de acceso a Internet en el <strong>AndroidManifest.xml</strong>:</p>
-<pre data-role="codeBlock" data-info="xml {highlight=[4-6]}" class="language-xml xml" data-line="4-6"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span>
-    <span class="token attr-name"><span class="token namespace">xmlns:</span>tools</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/tools<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<h3 class="crossnote-header" id="ejemplo-de-uso-de-corrutinas-en-android">Ejemplo de uso de corrutinas en Android</h3>
 
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_NETWORK_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_WIFI_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.INTERNET<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span><span class="token punctuation">&gt;</span></span>
-        ...
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4-6" data-start="4" data-end="6">
-
-
-</div></div></pre></li>
-<li>
-<p>Ahora ya simplemente deberemos usar el composable <strong><code>AsyncImage</code></strong> que pos proporciona <strong>Coil</strong> con unas propiedades muy similares a las de <strong><code>Image</code></strong> por ejemplo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
-<span class="token keyword keyword-fun">fun</span> <span class="token function">Imagen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">AsyncImage</span><span class="token punctuation">(</span>
-    model <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"https://www.sportslab.com.au/wp-content/uploads/2023/07/resilientrunner3-wlogoweb.png"</span></span><span class="token punctuation">,</span>
-    contentDescription <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
-    contentScale <span class="token operator">=</span> ContentScale<span class="token punctuation">.</span>Crop<span class="token punctuation">,</span>
-    modifier <span class="token operator">=</span> Modifier
-        <span class="token punctuation">.</span><span class="token function">clip</span><span class="token punctuation">(</span>CircleShape<span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
-<span class="token punctuation">)</span>
-</code></pre><p>Fíjate que donde pone model es donde especificamos la URL de la imagen. Pero también podríamos hacer <strong><code>model = R.drawable.imagen</code></strong> o <strong><code>model = File("ruta de la imagen")</code></strong>, etc. (<strong><a href="https://coil-kt.github.io/coil/getting_started/#supported-data-types">Ver documentación</a></strong>).</p>
-</li>
-</ol>
-<div style="page-break-after:always;"></div>
-<h3 id="ejemplo-de-uso-de-corrutinas-en-android">Ejemplo de uso de corrutinas en Android </h3>
 <blockquote>
 <p>🔗 <strong>Dercarga</strong>: El proyecto con el código del ejemplo que vamos a ver lo puedes descargar de este <strong><a href="assets/codigo/tema_3_7/corrutinas_android_ejemplo.zip">enlace</a></strong></p>
 </blockquote>

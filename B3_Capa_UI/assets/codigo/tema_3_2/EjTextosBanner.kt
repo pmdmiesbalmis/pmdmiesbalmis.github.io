@@ -1,7 +1,9 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema32
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,11 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
-import com.holamundo.ui.theme.HolaMundoTheme
+import androidx.compose.ui.unit.dp
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
 private fun Modifier.miBordeYPadding(
     color: Color = Color.Transparent,
@@ -45,7 +49,7 @@ fun Cabecera4(modifier: Modifier = Modifier) {
         Text(
             text = "IES Doctor Balmis",
             style = MaterialTheme.typography.titleLarge.copy(
-                shadow = remember {sombra()}
+                shadow = remember { sombra() }
             ),
             color = MaterialTheme.colorScheme.primary
         )
@@ -71,7 +75,7 @@ fun Cabecera4(modifier: Modifier = Modifier) {
 @Preview(showBackground = true, name = "Test4")
 @Composable
 private fun Test4Preview() {
-    HolaMundoTheme {
+    ProyectoBaseTheme {
         Column {
             Cabecera4()
         }

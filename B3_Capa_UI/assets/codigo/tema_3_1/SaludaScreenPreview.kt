@@ -1,4 +1,4 @@
-package com.pmdm.proyectobase.ui.features
+package com.pmdm.proyectobase.ui.features.tema31
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -21,16 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewFontScale
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import com.pmdm.proyectobase.R
 import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
+import com.pmdm.proyectobase.R
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Saluda(
+private fun Saluda(
     nombreState: String,
     onClickBorrar: () -> Unit
 ) {
@@ -51,7 +48,7 @@ fun Saluda(
 }
 
 @Composable
-fun IntroduceNombre(
+private fun IntroduceNombre(
     nombreState: String,
     onCambioNombre: (String) -> Unit
 ) {
@@ -71,7 +68,7 @@ fun IntroduceNombre(
 
 
 @Composable
-fun SaludaScreen(
+private fun SaludaScreen(
     nombreState: String,
     onCambioNombre: (String) -> Unit,
     onClickBorrar: () -> Unit) {
@@ -103,8 +100,6 @@ fun SaludaScreen(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true, fontScale = 1.0f
 )
-@PreviewScreenSizes
-@PreviewFontScale
 @Composable
 fun SaludaScreenPreview() {
     var nombreState by remember { mutableStateOf("") }

@@ -1,4 +1,4 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema32
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.holamundo.ui.theme.HolaMundoTheme
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
 @Composable
 private fun TextoConForma(
@@ -70,7 +70,7 @@ fun BoxConAlineacionesIndependientes() {
 @Preview(showBackground = true, name = "BoxPreview")
 @Composable
 fun BoxPreview() {
-    HolaMundoTheme {
+    ProyectoBaseTheme {
         // BoxApiladoAlCento()
         BoxConAlineacionesIndependientes()
     }

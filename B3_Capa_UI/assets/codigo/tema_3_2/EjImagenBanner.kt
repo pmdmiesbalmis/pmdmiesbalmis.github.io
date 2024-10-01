@@ -1,10 +1,9 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema32
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
@@ -18,23 +17,19 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.holamundo.R
-import com.holamundo.ui.theme.HolaMundoTheme
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
+import com.pmdm.proyectobase.R
 
 @Preview(showBackground = true, name = "ImagenesPreview")
 @Composable
 fun ImagenesPreview() {
-    HolaMundoTheme {
+    ProyectoBaseTheme {
         Cabecera5 { Contenido() }
     }
 }

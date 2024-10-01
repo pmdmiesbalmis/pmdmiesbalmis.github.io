@@ -1,4 +1,4 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema32
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.holamundo.ui.theme.HolaMundoTheme
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
 @Composable
 private fun TextoConForma(
@@ -141,7 +141,7 @@ fun RowConPesosDistintos() {
 @Preview(showBackground = true, name = "ColumnYRowPreview")
 @Composable
 fun ColumnYRowPreview() {
-    HolaMundoTheme {
+    ProyectoBaseTheme {
         // ColumnsWithRows()
         // RowConPesosIguales()
         RowConPesosDistintos()
