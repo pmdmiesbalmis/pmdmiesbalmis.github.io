@@ -1,279 +1,186 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM Tema 3</title>
+      <title>PMDM 2º DAM Tema 3</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-      
-      
-      
-      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
       
       
       
       
       
       <style>
-      /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
- */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #333;
-  background: none;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.4;
-
-  -moz-tab-size: 8;
-  -o-tab-size: 8;
-  tab-size: 8;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: .8em;
-  overflow: auto;
-  /* border: 1px solid #ddd; */
-  border-radius: 3px;
-  /* background: #fff; */
-  background: #f5f5f5;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
-}
-
-.token.comment,
-.token.blockquote {
-  color: #969896;
-}
-
-.token.cdata {
-  color: #183691;
-}
-
-.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
-}
-
-.token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}
-
-.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}
-
-.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
-}
-
-.token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
-}
-
-.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
-}
-
-.token.list {
-  color: #ed6a43;
-}
-
-.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
-}
-
-.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
-}
-
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-
-/* JSON */
-.language-json .token.property {
-  color: #183691;
-}
-
-.language-markup .token.tag .token.punctuation {
-  color: #333;
-}
-
-/* CSS */
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
-}
-
-/* YAML */
-.language-yaml .token.atrule {
-  color: #63a35c;
-}
-
-code.language-yaml {
-  color: #183691;
-}
-
-/* Ruby */
-.language-ruby .token.function {
-  color: #333;
-}
-
-/* Markdown */
-.language-markdown .token.url {
-  color: #795da3;
-}
-
-/* Makefile */
-.language-makefile .token.symbol {
-  color: #795da3;
-}
-
-.language-makefile .token.variable {
-  color: #183691;
-}
-
-.language-makefile .token.builtin {
-  color: #0086b3;
-}
-
-/* Bash */
-.language-bash .token.keyword {
-  color: #0086b3;
-}
-
-/* highlight */
-pre[data-line] {
-  position: relative;
-  padding: 1em 0 1em 3em;
-}
-pre[data-line] .line-highlight-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  display: block;
-  width: 100%;
-}
-
-pre[data-line] .line-highlight {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding: inherit 0;
-  margin-top: 1em;
-  background: hsla(24, 20%, 50%,.08);
-  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-  pointer-events: none;
-  line-height: inherit;
-  white-space: pre;
-}
-
-pre[data-line] .line-highlight:before, 
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-start);
-  position: absolute;
-  top: .4em;
-  left: .6em;
-  min-width: 1em;
-  padding: 0 .5em;
-  background-color: hsla(24, 20%, 50%,.4);
-  color: hsl(24, 20%, 95%);
-  font: bold 65%/1.5 sans-serif;
-  text-align: center;
-  vertical-align: .3em;
-  border-radius: 999px;
-  text-shadow: none;
-  box-shadow: 0 1px white;
-}
-
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-end);
-  top: auto;
-  bottom: .4em;
-}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
-.markdown-preview.markdown-preview {
-  background-color: #FFFF;
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
 }
 
       </style>
-    </head>
-    <body for="html-export">
-      <div class="mume markdown-preview  ">
-      <h1 class="mume-header undefined" id="definiendo-componente-imagen-en-la-agenda">Definiendo Componente Imagen en la Agenda</h1>
-
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="definiendo-componente-imagen-en-la-agenda">Definiendo Componente Imagen en la Agenda </h1>
 <p><a href="./3_Definiendo_Compoenete_Imagen_en_agenda.pdf">Descargar estos apuntes</a></p>
-<h3 class="mume-header" id="ejercicio">Ejercicio</h3>
-
-<p>Partiremos del <strong>ejercicio 4 del bloque 2</strong>. Donde definimos nuestra propia clase Aplicaci&#xF3;n a la <strong>Agenda</strong>.</p>
+<div class="ejercicio">
+<h3 id="ejercicio">Ejercicio </h3>
+<p>Partiremos del <strong>ejercicio 4 del bloque 2</strong>. Donde definimos nuestra propia clase Aplicación a la <strong>Agenda</strong>.</p>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 80%">
-<p>Vamos a crear un <strong>composable</strong> personalizado a partir de <strong><code>Image</code></strong> para mostrar la foto de cada contacto de forma homog&#xE9;nea en diferentes contenedores. C&#xF3;mo va a ser una <strong><code>feature</code></strong> reutilizable, lo crearemos en un paquete de componentes re-utilizables denominado <strong><code>com.pmdm.agenda.ui.features.components</code></strong> tal y como se muestra en el diagrama. Adem&#xE1;s, el fuente se llamar&#xE1; <strong><code>ImagenContacto.kt</code></strong>.</p>
-<p>Adem&#xE1;s arrastraremos los siguientes recursos, para realizar las pruebas de previsualizaci&#xF3;n, a la carpeta <strong><code>res/drawable</code></strong>:</p>
+<p>Vamos a crear un <strong>composable</strong> personalizado a partir de <strong><code>Image</code></strong> para mostrar la foto de cada contacto de forma homogénea en diferentes contenedores. Cómo va a ser una <strong><code>feature</code></strong> reutilizable, lo crearemos en un paquete de componentes re-utilizables denominado <strong><code>com.pmdm.agenda.ui.features.components</code></strong> tal y como se muestra en el diagrama. Además, el fuente se llamará <strong><code>ImagenContacto.kt</code></strong>.</p>
+<p>Además arrastraremos los siguientes recursos, para realizar las pruebas de previsualización, a la carpeta <strong><code>res/drawable</code></strong>:</p>
 <ol>
 <li><strong><a href="../../assets/imagenes/ejercicios3_2/ejercicio3/foto_prueba.png">foto_prueba.png</a></strong>: Una foto de prueba de un contacto.</li>
 <li><strong><a href="../../assets/imagenes/ejercicios3_2/ejercicio3/bg_dark.png">bg_dark.png</a></strong>: Un fondo para probar el componente con tema oscuro.</li>
@@ -281,41 +188,41 @@ pre[data-line] .line-highlight[data-end]:after {
 </ol>
 </div>
 <div style="width: auto">
-<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="289px" preserveAspectRatio="none" style="width:190px;height:289px;background:#FFFFFF;" version="1.1" viewBox="0 0 190 289" width="190px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="79" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="8" y="20.457">Andrioid</text><line style="stroke:#000000;stroke-width:1.0;" x1="74" x2="74" y1="6" y2="24.0938"/><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="26" y="39.5508">[app]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="61" x="36" y="54.6445">[manifests]</text><path d="M27,61.375 L27,62.375 L35,62.375 L35,61.375 L27,61.375 M27,63.375 L27,69.285 C27,69.335 27.04,69.375 27.09,69.375 L34.9,69.375 C34.95,69.375 34.99,69.335 34.99,69.285 L34.99,63.375 L32.02,63.375 L32.02,64.405 L29.99,64.405 L29.99,63.375 L26.99,63.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="36" y="69.7383">[java]</text><path d="M37,76.4688 L37,77.4688 L45,77.4688 L45,76.4688 L37,76.4688 M37,78.4688 L37,84.3788 C37,84.4288 37.04,84.4688 37.09,84.4688 L44.9,84.4688 C44.95,84.4688 44.99,84.4288 44.99,84.3788 L44.99,78.4688 L42.02,78.4688 L42.02,79.4988 L39.99,79.4988 L39.99,78.4688 L36.99,78.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="46" y="84.832">[com.pmdm.agenda]</text><path d="M47,91.5625 L47,92.5625 L55,92.5625 L55,91.5625 L47,91.5625 M47,93.5625 L47,99.4725 C47,99.5225 47.04,99.5625 47.09,99.5625 L54.9,99.5625 C54.95,99.5625 54.99,99.5225 54.99,99.4725 L54.99,93.5625 L52.02,93.5625 L52.02,94.5925 L49.99,94.5925 L49.99,93.5625 L46.99,93.5625 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="56" y="99.9258">[ui]</text><path d="M57,106.6563 L57,107.6563 L65,107.6563 L65,106.6563 L57,106.6563 M57,108.6563 L57,114.5663 C57,114.6163 57.04,114.6563 57.09,114.6563 L64.9,114.6563 C64.95,114.6563 64.99,114.6163 64.99,114.5663 L64.99,108.6563 L62.02,108.6563 L62.02,109.6863 L59.99,109.6863 L59.99,108.6563 L56.99,108.6563 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="66" y="115.0195">[features]</text><path d="M67,121.75 L67,122.75 L75,122.75 L75,121.75 L67,121.75 M67,123.75 L67,129.66 C67,129.71 67.04,129.75 67.09,129.75 L74.9,129.75 C74.95,129.75 74.99,129.71 74.99,129.66 L74.99,123.75 L72.02,123.75 L72.02,124.78 L69.99,124.78 L69.99,123.75 L66.99,123.75 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="79" x="76" y="130.1133">[components]</text><text fill="#0000CD" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="107" x="76" y="145.207">ImagenContacto.kt</text><path d="M57,151.9375 L57,152.9375 L65,152.9375 L65,151.9375 L57,151.9375 M57,153.9375 L57,159.8475 C57,159.8975 57.04,159.9375 57.09,159.9375 L64.9,159.9375 C64.95,159.9375 64.99,159.8975 64.99,159.8475 L64.99,153.9375 L62.02,153.9375 L62.02,154.9675 L59.99,154.9675 L59.99,153.9375 L56.99,153.9375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="66" y="160.3008">[theme]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="46" y="175.3945">MainActivity.kt</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="46" y="190.4883">AgendaApplication.kt</text><path d="M27,197.2188 L27,198.2188 L35,198.2188 L35,197.2188 L27,197.2188 M27,199.2188 L27,205.1288 C27,205.1788 27.04,205.2188 27.09,205.2188 L34.9,205.2188 C34.95,205.2188 34.99,205.1788 34.99,205.1288 L34.99,199.2188 L32.02,199.2188 L32.02,200.2488 L29.99,200.2488 L29.99,199.2188 L26.99,199.2188 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="36" y="205.582">[res]</text><path d="M37,212.3125 L37,213.3125 L45,213.3125 L45,212.3125 L37,212.3125 M37,214.3125 L37,220.2225 C37,220.2725 37.04,220.3125 37.09,220.3125 L44.9,220.3125 C44.95,220.3125 44.99,220.2725 44.99,220.2225 L44.99,214.3125 L42.02,214.3125 L42.02,215.3425 L39.99,215.3425 L39.99,214.3125 L36.99,214.3125 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="46" y="220.6758">[drawable]</text><text fill="#FF8C00" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="93" x="46" y="235.7695">foto_prueba.png</text><text fill="#FF8C00" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="71" x="46" y="250.8633">bg_dark.png</text><text fill="#FF8C00" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="69" x="46" y="265.957">bg_light.png</text><path d="M27,272.6875 L27,273.6875 L35,273.6875 L35,272.6875 L27,272.6875 M27,274.6875 L27,280.5975 C27,280.6475 27.04,280.6875 27.09,280.6875 L34.9,280.6875 C34.95,280.6875 34.99,280.6475 34.99,280.5975 L34.99,274.6875 L32.02,274.6875 L32.02,275.7175 L29.99,275.7175 L29.99,274.6875 L26.99,274.6875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="36" y="281.0508">[Gradle Scripts]</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="63.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="64.8281" y2="64.8281"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="78.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="66.8281" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="79.9219" y2="79.9219"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="94.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="81.9219" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="95.0156" y2="95.0156"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="49" y="109.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="97.0156" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="110.1094" y2="110.1094"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="59" y="124.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="50" x2="50" y1="112.1094" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="50" x2="58" y1="125.2031" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="60" y1="127.2031" y2="140.2969"/><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="68" y1="140.2969" y2="140.2969"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="97.0156" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="155.3906" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="81.9219" y2="170.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="170.4844" y2="170.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="81.9219" y2="185.5781"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="185.5781" y2="185.5781"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="199.6719"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="200.6719"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="200.6719" y2="200.6719"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="214.7656"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="202.6719" y2="215.7656"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="215.7656" y2="215.7656"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="230.8594"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="230.8594" y2="230.8594"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="245.9531"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="245.9531" y2="245.9531"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="261.0469"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="261.0469" y2="261.0469"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="276.1406"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="276.1406" y2="276.1406"/><!--SRC=[ZP9lJzim4CRV-rFSgwaj8eACmHHDYAuhRAYH42cycG1TuclmYF_8ENT3QDzzJakYJXhIv5Ttpy- -v-vyrZ9wRh5XyIBkfqPwPPMy5ozBiGUVtfNsr-btTEvEx0sXHgDMr7Axc_o1Q-pY8L5PdJWjTO8r6RdLebZPnlgiR0ATJYQlQ51tayb6VmDO4NBmr0xO6roiwQmXmplaW6gIAkZN2zzqPsjc3MF5DddYmS3m63-IfluTo56PQSLghVWvujlaTDFQrBb6LSZAcgtIZw1pl3iIwV4dbWtzFGk9_ibwD7NdQsNPFZWVgCJ4cRgl_Y-qh1-w-3-mHjMFF72zcmkFiY4eAgzSjylVyPp5VZP_GLmrQFWcNy2QV1ixWyCaFKZV9-ce20REgOJq60uFilH3TdG2i_aIEdaiHXTN2sXjy1M1L2rxLOPkCcDn6Ny8N0V3IbC6NJHQvcCevdqIvcQjl3KwBb1StkPR2BvQBfpb3NnyjFzPCHJaeosupSKNMc5eE5wjh5Icpk1cURx_KInYzo6kE0DgnSp60luvWtdn1m00]--></g></svg></p></div>
+<p align="center" style="zoom:1" class="puml"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="289px" preserveAspectRatio="none" style="width:190px;height:289px;background:#FFFFFF;" version="1.1" viewBox="0 0 190 289" width="190px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="79" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="8" y="20.457">Andrioid</text><line style="stroke:#000000;stroke-width:1.0;" x1="74" x2="74" y1="6" y2="24.0938"></line><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1.0;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="26" y="39.5508">[app]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="61" x="36" y="54.6445">[manifests]</text><path d="M27,61.375 L27,62.375 L35,62.375 L35,61.375 L27,61.375 M27,63.375 L27,69.285 C27,69.335 27.04,69.375 27.09,69.375 L34.9,69.375 C34.95,69.375 34.99,69.335 34.99,69.285 L34.99,63.375 L32.02,63.375 L32.02,64.405 L29.99,64.405 L29.99,63.375 L26.99,63.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="36" y="69.7383">[java]</text><path d="M37,76.4688 L37,77.4688 L45,77.4688 L45,76.4688 L37,76.4688 M37,78.4688 L37,84.3788 C37,84.4288 37.04,84.4688 37.09,84.4688 L44.9,84.4688 C44.95,84.4688 44.99,84.4288 44.99,84.3788 L44.99,78.4688 L42.02,78.4688 L42.02,79.4988 L39.99,79.4988 L39.99,78.4688 L36.99,78.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="46" y="84.832">[com.pmdm.agenda]</text><path d="M47,91.5625 L47,92.5625 L55,92.5625 L55,91.5625 L47,91.5625 M47,93.5625 L47,99.4725 C47,99.5225 47.04,99.5625 47.09,99.5625 L54.9,99.5625 C54.95,99.5625 54.99,99.5225 54.99,99.4725 L54.99,93.5625 L52.02,93.5625 L52.02,94.5925 L49.99,94.5925 L49.99,93.5625 L46.99,93.5625 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="56" y="99.9258">[ui]</text><path d="M57,106.6563 L57,107.6563 L65,107.6563 L65,106.6563 L57,106.6563 M57,108.6563 L57,114.5663 C57,114.6163 57.04,114.6563 57.09,114.6563 L64.9,114.6563 C64.95,114.6563 64.99,114.6163 64.99,114.5663 L64.99,108.6563 L62.02,108.6563 L62.02,109.6863 L59.99,109.6863 L59.99,108.6563 L56.99,108.6563 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="66" y="115.0195">[features]</text><path d="M67,121.75 L67,122.75 L75,122.75 L75,121.75 L67,121.75 M67,123.75 L67,129.66 C67,129.71 67.04,129.75 67.09,129.75 L74.9,129.75 C74.95,129.75 74.99,129.71 74.99,129.66 L74.99,123.75 L72.02,123.75 L72.02,124.78 L69.99,124.78 L69.99,123.75 L66.99,123.75 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="79" x="76" y="130.1133">[components]</text><text fill="#0000CD" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="107" x="76" y="145.207">ImagenContacto.kt</text><path d="M57,151.9375 L57,152.9375 L65,152.9375 L65,151.9375 L57,151.9375 M57,153.9375 L57,159.8475 C57,159.8975 57.04,159.9375 57.09,159.9375 L64.9,159.9375 C64.95,159.9375 64.99,159.8975 64.99,159.8475 L64.99,153.9375 L62.02,153.9375 L62.02,154.9675 L59.99,154.9675 L59.99,153.9375 L56.99,153.9375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="66" y="160.3008">[theme]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="46" y="175.3945">MainActivity.kt</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="46" y="190.4883">AgendaApplication.kt</text><path d="M27,197.2188 L27,198.2188 L35,198.2188 L35,197.2188 L27,197.2188 M27,199.2188 L27,205.1288 C27,205.1788 27.04,205.2188 27.09,205.2188 L34.9,205.2188 C34.95,205.2188 34.99,205.1788 34.99,205.1288 L34.99,199.2188 L32.02,199.2188 L32.02,200.2488 L29.99,200.2488 L29.99,199.2188 L26.99,199.2188 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="36" y="205.582">[res]</text><path d="M37,212.3125 L37,213.3125 L45,213.3125 L45,212.3125 L37,212.3125 M37,214.3125 L37,220.2225 C37,220.2725 37.04,220.3125 37.09,220.3125 L44.9,220.3125 C44.95,220.3125 44.99,220.2725 44.99,220.2225 L44.99,214.3125 L42.02,214.3125 L42.02,215.3425 L39.99,215.3425 L39.99,214.3125 L36.99,214.3125 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="46" y="220.6758">[drawable]</text><text fill="#FF8C00" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="93" x="46" y="235.7695">foto_prueba.png</text><text fill="#FF8C00" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="71" x="46" y="250.8633">bg_dark.png</text><text fill="#FF8C00" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="69" x="46" y="265.957">bg_light.png</text><path d="M27,272.6875 L27,273.6875 L35,273.6875 L35,272.6875 L27,272.6875 M27,274.6875 L27,280.5975 C27,280.6475 27.04,280.6875 27.09,280.6875 L34.9,280.6875 C34.95,280.6875 34.99,280.6475 34.99,280.5975 L34.99,274.6875 L32.02,274.6875 L32.02,275.7175 L29.99,275.7175 L29.99,274.6875 L26.99,274.6875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="36" y="281.0508">[Gradle Scripts]</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="79.9219" y2="79.9219"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="94.0156"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="95.0156" y2="95.0156"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="49" y="109.1094"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="97.0156" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="59" y="124.2031"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="50" x2="50" y1="112.1094" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1.0;" x1="50" x2="58" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="60" y1="127.2031" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="68" y1="140.2969" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="97.0156" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="155.3906" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="81.9219" y2="170.4844"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="170.4844" y2="170.4844"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="81.9219" y2="185.5781"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="185.5781" y2="185.5781"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="199.6719"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="200.6719"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="200.6719" y2="200.6719"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="214.7656"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="202.6719" y2="215.7656"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="215.7656" y2="215.7656"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="230.8594"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="230.8594" y2="230.8594"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="245.9531"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="245.9531" y2="245.9531"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="217.7656" y2="261.0469"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="261.0469" y2="261.0469"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="276.1406"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="276.1406" y2="276.1406"></line><!--SRC=[ZP9lQzim4CRVwrFSgv6arAHPEeOPfLcMTYinbCNjcz6MitLnj5f_a4_fIjbtdvpK9eCLXbxTFJ_fdhlJUSFekS6QnOkudndfbLNoNhpauWW-lIlihxCVwDoTEEf3ZKQjgU7cCFaJjzZ6VQAqEd5QwWGhCdAlHR6qjVLfKGSw6urUqQ3kHgET_WQm9kJWgUcnDxXOqrb3XW_87jKaLT2l5xxfrjRS6iQIRVB8lO7-CTwGfkuTo52PMSbgg_WvullaRDVQpBbQbSZAchtIZQ1rV3WIwV49Yvh-deL4_sWzcghrjRPi7vmFL63YJDLL_nTQL0zj_1zOhQeDzrpdvjAZh0bMfLUktUNlUCvZFxk_8AvhD7oJBM5BlecTmKao6K-coVj1lWbmGGMSdC9ad4x7wVWKveiSMdae1fVNIsXiy2M1L0rxLOHsCaDn5Ny8V0-6bQOKscYGPqDOBReaBCnMUMjqNA2ukits47orl7AMT_27wV5dnR0Y7st1RIQ-q1f3pV5gQQKoLGet-SNnHx6CtOUuuXIe4NCR2_Zd51QhFm00]--></g></svg></p></div>
 </div>
-<p>Nuestro componente se denominar&#xE1; <strong><code>ImagenContacto</code></strong> y tendr&#xE1; el siguiente interfaz y aspecto:</p>
+<p>Nuestro componente se denominará <strong><code>ImagenContacto</code></strong> y tendrá el siguiente interfaz y aspecto:</p>
 <div style="display: flex; justify-content: space-between; align-items: top; margin-top: 15px">
 <div style="width: 70%">
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">ImagenContacto</span><span class="token punctuation">(</span>
     modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
     foto <span class="token operator">:</span> ImageBitmap<span class="token operator">?</span><span class="token punctuation">,</span>
     anchoBorde <span class="token operator">:</span> Dp <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
 <span class="token punctuation">)</span>
-</pre></div>
+</code></pre></div>
 <div style="width: auto">
 <img height="130px" src="../../assets/imagenes/ejercicios3_2/ejercicio3/PreviewSinFoto.png">
 </div>
 </div>
-<p>La especificaci&#xF3;n de la funci&#xF3;n <strong><code>ImagenContacto</code></strong> es la siguiente:</p>
+<p>La especificación de la función <strong><code>ImagenContacto</code></strong> es la siguiente:</p>
 <ol>
 <li>
-<p>Definir&#xE1; una variable <strong><code>painterFoto</code></strong> que ser&#xE1; un <strong><code>Painter</code></strong> que se inicializar&#xE1; con la <strong><code>foto</code></strong> del contacto si es distinta de null o con un icono de cara de Material (<strong><code>Icons.Filled.Face2</code></strong>), si no la tiene.</p>
+<p>Definirá una variable <strong><code>painterFoto</code></strong> que será un <strong><code>Painter</code></strong> que se inicializará con la <strong><code>foto</code></strong> del contacto si es distinta de null o con un icono de cara de Material (<strong><code>Icons.Filled.Face2</code></strong>), si no la tiene.</p>
 </li>
 <li>
-<p>Definir&#xE1; un <em>composable</em> <strong><code>Image</code></strong> con los siguientes par&#xE1;metros:</p>
+<p>Definirá un <em>composable</em> <strong><code>Image</code></strong> con los siguientes parámetros:</p>
 <ul>
 <li>
-<p><strong><code>painter</code></strong>: Ser&#xE1; el <strong><code>painterFoto</code></strong> definido anteriormente.</p>
+<p><strong><code>painter</code></strong>: Será el <strong><code>painterFoto</code></strong> definido anteriormente.</p>
 </li>
 <li>
-<p><strong><code>contentScale</code></strong>: Ser&#xE1; <strong><code>ContentScale.Crop</code></strong>.</p>
+<p><strong><code>contentScale</code></strong>: Será <strong><code>ContentScale.Crop</code></strong>.</p>
 </li>
 <li>
-<p><strong><code>contentDescription</code></strong>: Ser&#xE1; <strong><code>&quot;Imagen contacto&quot;</code></strong>.</p>
+<p><strong><code>contentDescription</code></strong>: Será <strong><code>"Imagen contacto"</code></strong>.</p>
 </li>
 <li>
-<p><strong><code>modifier</code></strong>: Ser&#xE1; el modificador que se le pase como par&#xE1;metro a la funci&#xF3;n seguido de:</p>
+<p><strong><code>modifier</code></strong>: Será el modificador que se le pase como parámetro a la función seguido de:</p>
 <ul>
 <li><strong><code>clip(CircleShape)</code></strong>: Para que la imagen tenga forma circular.</li>
 <li><strong><code>aspectRatio(ratio = 1f)</code></strong>: Para que la imagen tenga un aspecto cuadrado.</li>
@@ -326,17 +233,17 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 </ol>
-<p>Vamos ahora a probar nuestro componente en <strong>un primer</strong> <strong><code>@Preview</code></strong>. Para ello, definiremos el composable <strong><code>ImagenContactoPreviewSinFoto</code></strong> que aplicar&#xE1; el tema <strong><code>AgendaTheme</code></strong> un <strong><code>Box</code></strong> con un fondo de color primario y un tama&#xF1;o de <strong><code>300dp</code></strong> de ancho y <strong><code>200dp</code></strong> de alto. Dentro del <strong><code>Box</code></strong> definiremos un <strong><code>ImagenContacto</code></strong> con un modificador que ocupe <strong>todo el alto</strong> del <strong><code>Box</code></strong> y que no tenga foto.</p>
-<p>Definiremos <strong>dos</strong> <strong><code>@Preview</code></strong> m&#xE1;s, una con tema <strong>claro</strong> y otra con tema <strong>oscuro</strong>. Sobre un composable denominado <strong><code>ImagenContactoPreviewConFotoYFondo</code></strong> que aplicar&#xE1; el tema <strong><code>AgendaTheme</code></strong> un <strong><code>Box</code></strong> con un fondo de color primario y un tama&#xF1;o de <strong><code>300dp</code></strong> de ancho y <strong><code>200dp</code></strong> de alto. Dentro del <strong><code>Box</code></strong> definiremos:</p>
+<p>Vamos ahora a probar nuestro componente en <strong>un primer</strong> <strong><code>@Preview</code></strong>. Para ello, definiremos el composable <strong><code>ImagenContactoPreviewSinFoto</code></strong> que aplicará el tema <strong><code>AgendaTheme</code></strong> un <strong><code>Box</code></strong> con un fondo de color primario y un tamaño de <strong><code>300dp</code></strong> de ancho y <strong><code>200dp</code></strong> de alto. Dentro del <strong><code>Box</code></strong> definiremos un <strong><code>ImagenContacto</code></strong> con un modificador que ocupe <strong>todo el alto</strong> del <strong><code>Box</code></strong> y que no tenga foto.</p>
+<p>Definiremos <strong>dos</strong> <strong><code>@Preview</code></strong> más, una con tema <strong>claro</strong> y otra con tema <strong>oscuro</strong>. Sobre un composable denominado <strong><code>ImagenContactoPreviewConFotoYFondo</code></strong> que aplicará el tema <strong><code>AgendaTheme</code></strong> un <strong><code>Box</code></strong> con un fondo de color primario y un tamaño de <strong><code>300dp</code></strong> de ancho y <strong><code>200dp</code></strong> de alto. Dentro del <strong><code>Box</code></strong> definiremos:</p>
 <ol>
 <li>
-<p>Un <strong><code>Image</code></strong> con una imagen de fondo que depender&#xE1; de si el tema es claro (<strong><code>bg_light.png</code></strong>) u oscuro (<strong><code>bg_dark.png</code></strong>). Para decidir cual aplicamos, usaremos el m&#xE9;todo <strong><code>isSystemInDarkTheme() : Boolean</code></strong> que est&#xE1; definido en <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/package-summary#isSystemInDarkTheme()">fundation</a></strong>. Adem&#xE1;s, el par&#xE1;metro <strong><code>contentScale</code></strong> ser&#xE1; <strong><code>ContentScale.FillBounds</code></strong> y un modificador <strong><code>matchParentSize()</code></strong>.</p>
+<p>Un <strong><code>Image</code></strong> con una imagen de fondo que dependerá de si el tema es claro (<strong><code>bg_light.png</code></strong>) u oscuro (<strong><code>bg_dark.png</code></strong>). Para decidir cual aplicamos, usaremos el método <strong><code>isSystemInDarkTheme() : Boolean</code></strong> que está definido en <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/package-summary#isSystemInDarkTheme()">fundation</a></strong>. Además, el parámetro <strong><code>contentScale</code></strong> será <strong><code>ContentScale.FillBounds</code></strong> y un modificador <strong><code>matchParentSize()</code></strong>.</p>
 </li>
 <li>
 <p>Un <strong><code>ImagenContacto</code></strong> con un modificador que ocupe <strong>todo el alto</strong> del <strong><code>Box</code></strong> y que tenga como foto la imagen de prueba <strong><code>foto_prueba.png</code></strong>.</p>
 </li>
 </ol>
-<p>Esta &#xFA;ltima funci&#xF3;n con 2 &apos;<em>previews</em>&apos; me deber&#xE1; producir una salida similar a la siguiente:</p>
+<p>Esta última función con 2 '<em>previews</em>' me deberá producir una salida similar a la siguiente:</p>
 <div style="display: flex; justify-content: space-evenly; align-items: center; margin-top: 15px; margin-bottom: 15px">
 <div style="width: 50%">
 <img height="200px" src="../../assets/imagenes/ejercicios3_2/ejercicio3/PreviewConFotoClaro.png">
@@ -345,12 +252,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <img height="200px" src="../../assets/imagenes/ejercicios3_2/ejercicio3/PreviewConFotoOscuro.png">
 </div>
 </div>
+</div>
 
       </div>
       
       
-    
-    
     
     
     
