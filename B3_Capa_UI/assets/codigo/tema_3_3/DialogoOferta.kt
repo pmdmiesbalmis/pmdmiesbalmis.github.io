@@ -1,13 +1,12 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema33
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.QuestionAnswer
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -17,14 +16,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.holamundo.ui.theme.HolaMundoTheme
+import com.pmdm.proyectobase.R
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
 enum class ContenidoCaja { BOTON, DESPEDIDA_TRISTE, DESPEDIDA_ALEGRE }
 
 @Composable
-fun ContenidoCaja(
+private fun ContenidoCaja(
     contenidoCajaState: ContenidoCaja,
     onClickVerOferta: () -> Unit
 ) {
@@ -46,7 +47,7 @@ fun ContenidoCaja(
 }
 
 @Composable
-fun DialogoOferta(
+private fun DialogoOferta(
     onAceptarDialogoOferta: () -> Unit,
     onRechazarDialogoOferta: () -> Unit,
     onCalcelaDialogoOferta: () -> Unit
@@ -54,7 +55,7 @@ fun DialogoOferta(
     AlertDialog(
         icon = {
             Icon(
-                Icons.Filled.QuestionAnswer,
+                painterResource(R.drawable.gifts_24px),
                 contentDescription = "Pregunta"
             )
         },
@@ -90,7 +91,7 @@ fun DialogoOferta(
 
 
 @Composable
-fun BoxOferta() = Box(
+private fun BoxOferta() = Box(
     modifier = Modifier
         .fillMaxWidth()
         .size(height = 300.dp, width = 0.dp),
@@ -118,10 +119,12 @@ fun BoxOferta() = Box(
     }
 }
 
-@Preview(showBackground = true, name = "EjemploAlertDialogPreview")
+@PreviewLightDark
 @Composable
-fun EjemploAlertDialogPreview() {
-    HolaMundoTheme {
-        BoxOferta()
+private fun EjemploAlertDialogPreview() {
+    ProyectoBaseTheme {
+        Surface {
+            BoxOferta()
+        }
     }
 }

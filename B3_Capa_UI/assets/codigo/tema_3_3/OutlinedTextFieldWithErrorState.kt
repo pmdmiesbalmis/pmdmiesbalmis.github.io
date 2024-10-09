@@ -1,14 +1,13 @@
-package com.holamundo.ui.features.ejemplos
+package com.pmdm.proyectobase.ui.features.tema33
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,12 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.github.pmdmiesbalmis.components.ui.icons.Filled
+import com.pmdm.proyectobase.ui.theme.ProyectoBaseTheme
 
-import com.holamundo.ui.theme.HolaMundoTheme
-
-
-interface Validacion {
+private interface Validacion {
     val hayError: Boolean      // Si hay error o no.
         get() = false
     val mensajeError: String? // EL mensaje asociado al error.
@@ -31,7 +29,7 @@ interface Validacion {
 }
 
 @Composable
-fun OutlinedTextFieldWithErrorState(
+private fun OutlinedTextFieldWithErrorState(
     modifier: Modifier = Modifier,
     label: String,
     textoState: String,
@@ -79,7 +77,7 @@ fun OutlinedTextFieldWithErrorState(
 }
 
 @Composable
-fun OutlinedTextFieldEmail(
+private fun OutlinedTextFieldEmail(
     modifier: Modifier = Modifier,
     label: String = "Email",
     emailState: String,
@@ -97,7 +95,7 @@ fun OutlinedTextFieldEmail(
         // El icono será el de un email.
         leadingIcon = {
             Icon(
-                imageVector = Icons.Filled.Email,
+                painter = Filled.getMailIcon(),
                 contentDescription = "Email"
             )
         },
@@ -107,48 +105,50 @@ fun OutlinedTextFieldEmail(
     )
 }
 
-@Preview(showBackground = true, name = "TextFiledPreview")
+@PreviewLightDark
 @Composable
-fun TextFiledPreview() {
+private fun TextFiledPreview() {
     var nombreState by remember { mutableStateOf("") }
     var validacionNombre by remember { mutableStateOf(object : Validacion {} as Validacion) }
 
     var emailState by remember { mutableStateOf("") }
     var validacionEmail by remember { mutableStateOf(object : Validacion {} as Validacion) }
 
-    HolaMundoTheme {
-        Column {
-            OutlinedTextFieldWithErrorState(
-                modifier = Modifier.fillMaxWidth(),
-                label = "Nombre",
-                textoState = nombreState,
-                validacionState = validacionNombre,
-                onValueChange = {
-                    nombreState = it
-                    validacionNombre = object : Validacion {
-                        override val hayError: Boolean
-                            get() = it.isEmpty()
-                        override val mensajeError: String?
-                            get() = "El nombre no puede estar vacío"
+    ProyectoBaseTheme {
+        Surface {
+            Column {
+                OutlinedTextFieldWithErrorState(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = "Nombre",
+                    textoState = nombreState,
+                    validacionState = validacionNombre,
+                    onValueChange = {
+                        nombreState = it
+                        validacionNombre = object : Validacion {
+                            override val hayError: Boolean
+                                get() = it.isEmpty()
+                            override val mensajeError: String
+                                get() = "El nombre no puede estar vacío"
+                        }
                     }
-                }
-            )
-            OutlinedTextFieldEmail(
-                modifier = Modifier.fillMaxWidth(),
-                emailState = emailState,
-                validacionState = validacionEmail,
-                onValueChange = {
-                    emailState = it
-                    validacionEmail = object : Validacion {
-                        override val hayError: Boolean
-                            get() = it.isEmpty()
-                                    || !Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})$")
-                                .matches(it)
-                        override val mensajeError: String?
-                            get() = "El email no es válido"
+                )
+                OutlinedTextFieldEmail(
+                    modifier = Modifier.fillMaxWidth(),
+                    emailState = emailState,
+                    validacionState = validacionEmail,
+                    onValueChange = {
+                        emailState = it
+                        validacionEmail = object : Validacion {
+                            override val hayError: Boolean
+                                get() = it.isEmpty()
+                                        || !Regex("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})$")
+                                    .matches(it)
+                            override val mensajeError: String
+                                get() = "El email no es válido"
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
