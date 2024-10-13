@@ -1,523 +1,174 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3.5 - Inyecci&#xF3;n de Dependencias (ID) con Hilt</title>
+      <title>PMDM 2º DAM  Tema 3.5 - Inyección Dependencias (DI) Hilt</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-      
-      
-      
-      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
       
       
       
       
       
       <style>
-      /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
- */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #333;
-  background: none;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.4;
-
-  -moz-tab-size: 8;
-  -o-tab-size: 8;
-  tab-size: 8;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: .8em;
-  overflow: auto;
-  /* border: 1px solid #ddd; */
-  border-radius: 3px;
-  /* background: #fff; */
-  background: #f5f5f5;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
-}
-
-.token.comment,
-.token.blockquote {
-  color: #969896;
-}
-
-.token.cdata {
-  color: #183691;
-}
-
-.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
-}
-
-.token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}
-
-.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}
-
-.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
-}
-
-.token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
-}
-
-.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
-}
-
-.token.list {
-  color: #ed6a43;
-}
-
-.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
-}
-
-.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
-}
-
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-
-/* JSON */
-.language-json .token.property {
-  color: #183691;
-}
-
-.language-markup .token.tag .token.punctuation {
-  color: #333;
-}
-
-/* CSS */
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
-}
-
-/* YAML */
-.language-yaml .token.atrule {
-  color: #63a35c;
-}
-
-code.language-yaml {
-  color: #183691;
-}
-
-/* Ruby */
-.language-ruby .token.function {
-  color: #333;
-}
-
-/* Markdown */
-.language-markdown .token.url {
-  color: #795da3;
-}
-
-/* Makefile */
-.language-makefile .token.symbol {
-  color: #795da3;
-}
-
-.language-makefile .token.variable {
-  color: #183691;
-}
-
-.language-makefile .token.builtin {
-  color: #0086b3;
-}
-
-/* Bash */
-.language-bash .token.keyword {
-  color: #0086b3;
-}
-
-/* highlight */
-pre[data-line] {
-  position: relative;
-  padding: 1em 0 1em 3em;
-}
-pre[data-line] .line-highlight-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  display: block;
-  width: 100%;
-}
-
-pre[data-line] .line-highlight {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding: inherit 0;
-  margin-top: 1em;
-  background: hsla(24, 20%, 50%,.08);
-  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-  pointer-events: none;
-  line-height: inherit;
-  white-space: pre;
-}
-
-pre[data-line] .line-highlight:before, 
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-start);
-  position: absolute;
-  top: .4em;
-  left: .6em;
-  min-width: 1em;
-  padding: 0 .5em;
-  background-color: hsla(24, 20%, 50%,.4);
-  color: hsl(24, 20%, 95%);
-  font: bold 65%/1.5 sans-serif;
-  text-align: center;
-  vertical-align: .3em;
-  border-radius: 999px;
-  text-shadow: none;
-  box-shadow: 0 1px white;
-}
-
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-end);
-  top: auto;
-  bottom: .4em;
-}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face {
-  font-family: "Material Icons";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("data:application/x-font-woff;charset=utf-8;base64,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") format("woff");
-}
-
-.admonition {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
-  position: relative;
-  margin: 1.5625em 0;
-  padding: 0 1.2rem;
-  border-left: .4rem solid rgba(68, 138, 255, .8);
-  border-radius: .2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  overflow: auto;
-}
-
-.admonition>p {
-  margin-top: .8rem;
-}
-
-.admonition>.admonition-title {
-  margin: 0 -1.2rem;
-  padding: .8rem 1.2rem .8rem 3.6rem;
-  border-bottom: 1px solid rgba(68, 138, 255, .2);
-  background-color: rgba(68, 138, 255, .1);
-  font-weight: 700;
-}
-
-.admonition>.admonition-title:before {
-  position: absolute;
-  left: 1.2rem;
-  font-size: 1.5rem;
-  color: rgba(68, 138, 255, .8);
-  content: "\E3C9";
-}
-
-.admonition>.admonition-title:before {
-  font-family: Material Icons;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 2rem;
-  text-transform: none;
-  white-space: nowrap;
-  speak: none;
-  word-wrap: normal;
-  direction: ltr;
-}
-
-.admonition.summary,
-.admonition.abstract,
-.admonition.tldr {
-  border-left-color: rgba(0, 176, 255, .8);
-}
-
-.admonition.summary>.admonition-title,
-.admonition.abstract>.admonition-title,
-.admonition.tldr>.admonition-title {
-  background-color: rgba(0, 176, 255, .1);
-  border-bottom-color: rgba(0, 176, 255, .2);
-}
-
-.admonition.summary>.admonition-title:before,
-.admonition.abstract>.admonition-title:before,
-.admonition.tldr>.admonition-title:before {
-  color: rgba(0, 176, 255, 1);
-  ;
-  content: "\E8D2";
-}
-
-.admonition.hint,
-.admonition.tip {
-  border-left-color: rgba(0, 191, 165, .8);
-}
-
-.admonition.hint>.admonition-title,
-.admonition.tip>.admonition-title {
-  background-color: rgba(0, 191, 165, .1);
-  border-bottom-color: rgba(0, 191, 165, .2);
-}
-
-.admonition.hint>.admonition-title:before,
-.admonition.tip>.admonition-title:before {
-  color: rgba(0, 191, 165, 1);
-  content: "\E80E";
-}
-
-.admonition.info,
-.admonition.todo {
-  border-left-color: rgba(0, 184, 212, .8);
-}
-
-.admonition.info>.admonition-title,
-.admonition.todo>.admonition-title {
-  background-color: rgba(0, 184, 212, .1);
-  border-bottom-color: rgba(0, 184, 212, .2);
-}
-
-.admonition.info>.admonition-title:before,
-.admonition.todo>.admonition-title:before {
-  color: rgba(0, 184, 212, 1);
-  ;
-  content: "\E88E";
-}
-
-.admonition.success,
-.admonition.check,
-.admonition.done {
-  border-left-color: rgba(0, 200, 83, .8);
-}
-
-.admonition.success>.admonition-title,
-.admonition.check>.admonition-title,
-.admonition.done>.admonition-title {
-  background-color: rgba(0, 200, 83, .1);
-  border-bottom-color: rgba(0, 200, 83, .2);
-}
-
-.admonition.success>.admonition-title:before,
-.admonition.check>.admonition-title:before,
-.admonition.done>.admonition-title:before {
-  color: rgba(0, 200, 83, 1);
-  ;
-  content: "\E876";
-}
-
-.admonition.question,
-.admonition.help,
-.admonition.faq {
-  border-left-color: rgba(100, 221, 23, .8);
-}
-
-.admonition.question>.admonition-title,
-.admonition.help>.admonition-title,
-.admonition.faq>.admonition-title {
-  background-color: rgba(100, 221, 23, .1);
-  border-bottom-color: rgba(100, 221, 23, .2);
-}
-
-.admonition.question>.admonition-title:before,
-.admonition.help>.admonition-title:before,
-.admonition.faq>.admonition-title:before {
-  color: rgba(100, 221, 23, 1);
-  ;
-  content: "\E887";
-}
-
-.admonition.warning,
-.admonition.attention,
-.admonition.caution {
-  border-left-color: rgba(255, 145, 0, .8);
-}
-
-.admonition.warning>.admonition-title,
-.admonition.attention>.admonition-title,
-.admonition.caution>.admonition-title {
-  background-color: rgba(255, 145, 0, .1);
-  border-bottom-color: rgba(255, 145, 0, .2);
-}
-
-.admonition.attention>.admonition-title:before {
-  color: rgba(255, 145, 0, 1);
-  content: "\E417";
-}
-
-.admonition.warning>.admonition-title:before,
-.admonition.caution>.admonition-title:before {
-  color: rgba(255, 145, 0, 1);
-  content: "\E002";
-}
-
-.admonition.failure,
-.admonition.fail,
-.admonition.missing {
-  border-left-color: rgba(255, 82, 82, .8);
-}
-
-.admonition.failure>.admonition-title,
-.admonition.fail>.admonition-title,
-.admonition.missing>.admonition-title {
-  background-color: rgba(255, 82, 82, .1);
-  border-bottom-color: rgba(255, 82, 82, .2);
-}
-
-.admonition.failure>.admonition-title:before,
-.admonition.fail>.admonition-title:before,
-.admonition.missing>.admonition-title:before {
-  color: rgba(255, 82, 82, 1);
-  ;
-  content: "\E14C";
-}
-
-.admonition.danger,
-.admonition.error,
-.admonition.bug {
-  border-left-color: rgba(255, 23, 68, .8);
-}
-
-.admonition.danger>.admonition-title,
-.admonition.error>.admonition-title,
-.admonition.bug>.admonition-title {
-  background-color: rgba(255, 23, 68, .1);
-  border-bottom-color: rgba(255, 23, 68, .2);
-}
-
-.admonition.danger>.admonition-title:before {
-  color: rgba(255, 23, 68, 1);
-  content: "\E3E7";
-}
-
-.admonition.error>.admonition-title:before {
-  color: rgba(255, 23, 68, 1);
-  content: "\E14C";
-}
-
-.admonition.bug>.admonition-title:before {
-  color: rgba(255, 23, 68, 1);
-  content: "\E868";
-}
-
-.admonition.example,
-.admonition.snippet {
-  border-left-color: rgba(0, 184, 212, .8);
-}
-
-.admonition.example>.admonition-title,
-.admonition.snippet>.admonition-title {
-  background-color: rgba(0, 184, 212, .1);
-  border-bottom-color: rgba(0, 184, 212, .2);
-}
-
-.admonition.example>.admonition-title:before,
-.admonition.snippet>.admonition-title:before {
-  color: rgba(0, 184, 212, 1);
-  ;
-  content: "\E242";
-}
-
-.admonition.quote,
-.admonition.cite {
-  border-left-color: rgba(158, 158, 158, .8);
-}
-
-.admonition.quote>.admonition-title,
-.admonition.cite>.admonition-title {
-  background-color: rgba(158, 158, 158, .1);
-  border-bottom-color: rgba(158, 158, 158, .2);
-}
-
-.admonition.quote>.admonition-title:before,
-.admonition.cite>.admonition-title:before {
-  color: rgba(158, 158, 158, 1);
-  ;
-  content: "\E244";
-}
-
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,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") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
 
       </style>
-    </head>
-    <body for="html-export">
-      <div class="mume markdown-preview  ">
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
       <style>/* 
 Añade 
 
@@ -590,43 +241,47 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="tema-34---inyecci%C3%B3n-de-dependencias-id-con-hilt">Tema 3.4 - Inyecci&#xF3;n de Dependencias (ID) con Hilt</h1>
+<h1 class="crossnote-header" id="tema-34---inyecci%C3%B3n-dependencias-di">Tema 3.4 - Inyección Dependencias (DI)</h1>
 
 <p>Descargar estos apuntes <a href="./Tema_3_5_inyeccion_de_dependencias_id_con_hilt.pdf">pdf</a> o <a href="./Tema_3_5_inyeccion_de_dependencias_id_con_hilt.html">html</a></p>
-<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
+<h2 class="crossnote-header" id="%C3%ADndice">Índice</h2>
 
 
 <div class="md-toc">
 <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
-          <a href="#introducci&#xF3;n" class="md-toc-link">
-            <p>Introducci&#xF3;n</p>
+          <a href="#introducción" class="md-toc-link">
+            <p>Introducción</p>
 
-          </a></div><details style="padding:0;;padding-left:0px;" open>
+          </a></div><details style="padding:0;;padding-left:0px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#hilt" class="md-toc-link"><p>Hilt</p>
 </a>
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#configuraci&#xF3;n" class="md-toc-link">
-            <p>Configuraci&#xF3;n</p>
+          <a href="#procesador-de-anotaciones-ksp" class="md-toc-link">
+            <p>Procesador de anotaciones KSP</p>
 
-          </a></div><details style="padding:0;;padding-left:24px;" open>
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#configuración" class="md-toc-link">
+            <p>Configuración</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#preparando-los-componentes-de-android-para-la-inyecci&#xF3;n-de-dependencias" class="md-toc-link"><p>Preparando los componentes de Android para la inyecci&#xF3;n de dependencias</p>
+          <a href="#preparando-los-componentes-de-android-para-la-inyección-de-dependencias" class="md-toc-link"><p>Preparando los componentes de Android para la inyección de dependencias</p>
 </a>
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#c&#xF3;mo-insertar-objetos-viewmodel-con-hilt-en-compose" class="md-toc-link">
-            <p>C&#xF3;mo insertar objetos ViewModel con Hilt en Compose</p>
+          <a href="#cómo-insertar-objetos-viewmodel-con-hilt-en-compose" class="md-toc-link">
+            <p>Cómo insertar objetos ViewModel con Hilt en Compose</p>
 
           </a></div>
         </div>
       </details>
-    <details style="padding:0;;padding-left:24px;" open>
+    <details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#exponer-dependencias-y-preparar-m&#xF3;dulos-con-hilt" class="md-toc-link"><p>Exponer dependencias y preparar m&#xF3;dulos con Hilt</p>
+          <a href="#exponer-dependencias-y-preparar-módulos-con-hilt" class="md-toc-link"><p>Exponer dependencias y preparar módulos con Hilt</p>
 </a>
           </summary>
         <div>
@@ -638,12 +293,16 @@ justo después del front matter
           <a href="#preparando-modulos" class="md-toc-link">
             <p>Preparando Modulos</p>
 
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#inyectando-el-contexto-de-la-aplicación" class="md-toc-link">
+            <p>Inyectando el contexto de la aplicación</p>
+
           </a></div>
         </div>
       </details>
     <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#mega-resumen" class="md-toc-link">
-            <p>&#x1F4E3; Resumen</p>
+          <a href="#resumen-configuración-hilt" class="md-toc-link">
+            <p>Resumen configuración Hilt</p>
 
           </a></div>
         </div>
@@ -651,240 +310,234 @@ justo después del front matter
     
 </div>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
+<h2 class="crossnote-header" id="introducci%C3%B3n">Introducción</h2>
 
-<p>Enlaces de inter&#xE9;s:</p>
+<p>Enlaces de interés:</p>
 <ul>
-<li>Documentaci&#xF3;n oficial de Android: <strong><a href="https://developer.android.com/training/dependency-injection">Inyecci&#xF3;n de dependencias</a></strong></li>
-<li>V&#xED;deo tutorial Divulgativo (Castellano): <strong><a href="https://www.youtube.com/watch?v=eefQelCqA-E">DevExperto</a></strong></li>
-<li>Codelab Google: <strong><a href="https://developer.android.com/codelabs/android-hilt?hl=es-419#0">Inyecci&#xF3;n de dependencias</a></strong></li>
-<li>Lista de reproducci&#xF3;n: <strong><a href="https://www.youtube.com/watch?v=mnMCgjuMJPA&amp;list=PLWz5rJ2EKKc_9Qo-RBRYhVmME1iR4oeTK">Andorid Developers</a></strong></li>
-<li>V&#xED;deo tutorial (Ingl&#xE9;s): <strong><a href="https://www.youtube.com/watch?v=bbMsuI2p1DQ">Philipp Lackner</a></strong></li>
+<li>Documentación oficial de Android: <strong><a href="https://developer.android.com/training/dependency-injection">Inyección de dependencias</a></strong></li>
+<li>Vídeo tutorial Divulgativo (Castellano): <strong><a href="https://www.youtube.com/watch?v=eefQelCqA-E">DevExperto</a></strong></li>
+<li>Codelab Google: <strong><a href="https://developer.android.com/codelabs/android-hilt?hl=es-419#0">Inyección de dependencias</a></strong></li>
+<li>Lista de reproducción: <strong><a href="https://www.youtube.com/watch?v=mnMCgjuMJPA&amp;list=PLWz5rJ2EKKc_9Qo-RBRYhVmME1iR4oeTK">Andorid Developers</a></strong></li>
+<li>Vídeo tutorial (Inglés): <strong><a href="https://www.youtube.com/watch?v=bbMsuI2p1DQ">Philipp Lackner</a></strong></li>
 </ul>
-<p>La <strong>inyecci&#xF3;n de dependencias (DI)</strong> es una t&#xE9;cnica muy utilizada en programaci&#xF3;n y adecuada para el desarrollo de Android. Si sigues los principios de la DI, sentar&#xE1;s las bases para una buena arquitectura de apps.</p>
-<p>Implementar la inyecci&#xF3;n de dependencias te proporciona las siguientes ventajas:</p>
+<p>La <strong>inyección de dependencias (DI)</strong> es una técnica muy utilizada en programación y adecuada para el desarrollo de Android. Si sigues los principios de la DI, sentarás las bases para una buena arquitectura de apps.</p>
+<p>Implementar la inyección de dependencias te proporciona las siguientes ventajas:</p>
 <ul>
-<li>Reutilizaci&#xF3;n de c&#xF3;digo</li>
-<li>Facilidad de refactorizaci&#xF3;n.</li>
+<li>Reutilización de código</li>
+<li>Facilidad de refactorización.</li>
 <li>Facilidad de prueba o test</li>
 </ul>
-<p>Una de las razones de por qu&#xE9; necesitamos inyecci&#xF3;n de dependencias. Es porque durante el desarrollo de un proyecto, es importante aplicar el <strong>Principio de Responsabilidad &#xDA;nica (SRP)</strong>, uno de los 5 principios <strong>SOLID</strong>. Este principio establece, por explicarlo de forma simple, que nuestras entidades o clases deben hacer una sola cosa. Esto hace que las clases sean m&#xE1;s legibles, f&#xE1;ciles de modificar y de probar.</p>
-<p>Sin embargo, este principio puede llevar a la <strong>creaci&#xF3;n de muchos m&#xF3;dulos con muchas dependencias entre ellos</strong>. Gestionar estas dependencias puede ser un problema ya que no se pueden ver los colaboradores de las entidades desde fuera y los m&#xF3;dulos no pueden ser probados de forma aislada. Para evitar esto, es importante que cada m&#xF3;dulo <strong>exponga sus dependencias</strong>. Tambi&#xE9;n, est&#xE1; &#xED;ntimamente relacionado con el <strong>principio de inversi&#xF3;n de dependencias (DIP)</strong> que vimos en primero tambi&#xE9;n y que deforma resumida establece los m&#xF3;dulos (clases) no deben crear sus dependencias, sino que deben ser provistas desde fuera.</p>
-<p>Puesto que los m&#xF3;dulos exponen sus dependencias a trav&#xE9;s de sus constructores y se necesita un componente adicional para proporcionarles instancias de memoria de estas dependencias. Crear una pieza que proporcione todas las dependencias puede ser un trabajo dif&#xED;cil, por lo que existen los inyectores de dependencias para facilitar este proceso.</p>
-<p>En el caso de <strong>aplicaciones grandes</strong>, tomar todas las dependencias y conectarlas correctamente puede requerir una gran cantidad de c&#xF3;digo est&#xE1;ndar. En una arquitectura de varias capas, para crear un objeto en una capa superior, debes proporcionar todas las dependencias de las capas que se encuentran debajo de ella. Por ejemplo, para construir un autom&#xF3;vil real, es posible que necesites un motor, una transmisi&#xF3;n, un chasis y otras piezas; a su vez, el motor necesita cilindros y buj&#xED;as.</p>
+<p>Una de las razones de por qué necesitamos inyección de dependencias. Es porque durante el desarrollo de un proyecto, es importante aplicar el <strong>Principio de Responsabilidad Única (SRP)</strong>, uno de los 5 principios <strong>SOLID</strong>. Este principio establece, por explicarlo de forma simple, que nuestras entidades o clases deben hacer una sola cosa. Esto hace que las clases sean más legibles, fáciles de modificar y de probar.</p>
+<p>Sin embargo, este principio puede llevar a la <strong>creación de muchos módulos con muchas dependencias entre ellos</strong>. Gestionar estas dependencias puede ser un problema ya que no se pueden ver los colaboradores de las entidades desde fuera y los módulos no pueden ser probados de forma aislada. Para evitar esto, es importante que cada módulo <strong>exponga sus dependencias</strong>. También, está íntimamente relacionado con el <strong>principio de inversión de dependencias (DIP)</strong> que vimos en primero también y que deforma resumida establece los módulos (clases) no deben crear sus dependencias, sino que deben ser provistas desde fuera.</p>
+<p>Puesto que los módulos exponen sus dependencias a través de sus constructores y se necesita un componente adicional para proporcionarles instancias de memoria de estas dependencias. Crear una pieza que proporcione todas las dependencias puede ser un trabajo difícil, por lo que existen los inyectores de dependencias para facilitar este proceso.</p>
+<p>En el caso de <strong>aplicaciones grandes</strong>, tomar todas las dependencias y conectarlas correctamente puede requerir una gran cantidad de código estándar. En una arquitectura de varias capas, para crear un objeto en una capa superior, debes proporcionar todas las dependencias de las capas que se encuentran debajo de ella. Por ejemplo, para construir un automóvil real, es posible que necesites un motor, una transmisión, un chasis y otras piezas; a su vez, el motor necesita cilindros y bujías.</p>
 <p>Cuando no puedes construir dependencias antes de pasarlas (por ejemplo, si usas inicializaciones diferidas o solicitas permisos para objetos en los flujos de tu app), necesitas escribir y conservar un contenedor personalizado (<strong>o un grafo de dependencias</strong>) que administre las dependencias en la memoria desde el principio.</p>
-<p>Hay <strong>bibliotecas</strong> que resuelven este problema automatizando el proceso de creaci&#xF3;n y provisi&#xF3;n de dependencias. Se dividen en <strong>dos categor&#xED;as</strong>:</p>
+<p>Hay <strong>bibliotecas</strong> que resuelven este problema automatizando el proceso de creación y provisión de dependencias. Se dividen en <strong>dos categorías</strong>:</p>
 <ol>
 <li>
-<p>Soluciones basadas en reflexiones que conectan las dependencias durante el <strong>tiempo de ejecuci&#xF3;n</strong>.</p>
+<p>Soluciones basadas en reflexiones que conectan las dependencias durante el <strong>tiempo de ejecución</strong>.</p>
 </li>
 <li>
-<p>Soluciones est&#xE1;ticas que generan el c&#xF3;digo para conectar las dependencias durante el <strong>tiempo de compilaci&#xF3;n</strong> (Las m&#xE1;s usadas).</p>
+<p>Soluciones estáticas que generan el código para conectar las dependencias durante el <strong>tiempo de compilación</strong> (Las más usadas).</p>
 </li>
 </ol>
-<p>Dagger es una biblioteca de inserci&#xF3;n de dependencias popular para <strong>Java</strong>, <strong>Kotlin</strong> y Android que mantiene Google. Dagger facilita el uso de la DI en tu app mediante la creaci&#xF3;n y administraci&#xF3;n del <strong>grafo de dependencias</strong>. Proporciona dependencias totalmente est&#xE1;ticas y <strong>en tiempo de compilaci&#xF3;n</strong> que abordan muchos de los problemas de desarrollo y <strong>rendimiento</strong> de las soluciones basadas en reflexiones.</p>
-<p>Por tanto, casi todos los frameworks modernos proveen alg&#xFA;n tipo de librer&#xED;a de inyecci&#xF3;n de dependencias. En el ecosistema de Java existen diferentes opciones como: <strong><a href="(https://dagger.dev/)">Dagger2</a></strong>, <strong><a href="https://insert-koin.io/">Koin</a></strong> para Kotlin e incluso <strong><a href="https://jakarta.ee/specifications/cdi/3.0/jakarta-cdi-spec-3.0.html">JCDI</a></strong> en <strong>Jakarta EE</strong>.</p>
-<p>En Android, la librer&#xED;a m&#xE1;s popular es <strong>Dagger2</strong>. Sin embargo, <strong>Dagger2</strong> es una librer&#xED;a muy compleja y requiere de mucho c&#xF3;digo boilerplate para configurarla. Por eso, Google ha desarrollado <strong><a href="https://dagger.dev/hilt/">Hilt</a></strong>, una librer&#xED;a de inyecci&#xF3;n de dependencias que se integra con el framework nativo de Android y que <strong>elimina mucho c&#xF3;digo boilerplate</strong> necesario en <strong>Dagger2</strong>.</p>
-<blockquote>
-<p>&#x1F4E3; <strong>Resumen</strong>: En resumen, la inyecci&#xF3;n de dependencias no es m&#xE1;s que una forma autom&#xE1;tica de proveer dependencias a los m&#xF3;dulos que las requieran. Para requerirlas tienen que exponerlas por constructor.</p>
-<p>Podemos pensar en el inyector de dependencias como un chef en una cocina. Los m&#xF3;dulos o clases ser&#xED;an los platos y las dependencias los ingredientes. Cada vez que un plato requiera un ingrediente, el chef ir&#xE1; a la despensa y lo a&#xF1;adir&#xE1; a la receta.</p>
-<p>La gran mayor&#xED;a de inyectores de dependencias funcionan de la misma forma:</p>
+<p>Dagger es una biblioteca de inserción de dependencias popular para <strong>Java</strong>, <strong>Kotlin</strong> y Android que mantiene Google. Dagger facilita el uso de la DI en tu app mediante la creación y administración del <strong>grafo de dependencias</strong>. Proporciona dependencias totalmente estáticas y <strong>en tiempo de compilación</strong> que abordan muchos de los problemas de desarrollo y <strong>rendimiento</strong> de las soluciones basadas en reflexiones.</p>
+<p>Por tanto, casi todos los frameworks modernos proveen algún tipo de librería de inyección de dependencias. En el ecosistema de Java existen diferentes opciones como: <strong><a href="(https://dagger.dev/)">Dagger2</a></strong>, <strong><a href="https://insert-koin.io/">Koin</a></strong> para Kotlin e incluso <strong><a href="https://jakarta.ee/specifications/cdi/3.0/jakarta-cdi-spec-3.0.html">JCDI</a></strong> en <strong>Jakarta EE</strong>.</p>
+<p>En Android, la librería más popular es <strong>Dagger2</strong>. Sin embargo, <strong>Dagger2</strong> es una librería muy compleja y requiere de mucho código boilerplate para configurarla. Por eso, Google ha desarrollado <strong><a href="https://dagger.dev/hilt/">Hilt</a></strong>, una librería de inyección de dependencias que se integra con el framework nativo de Android y que <strong>elimina mucho código boilerplate</strong> necesario en <strong>Dagger2</strong>.</p>
+<div class="admonition summary">
+<p class="admonition-title">Resumen</p>
+<p>En resumen, la inyección de dependencias no es más que una forma automática de proveer dependencias a los módulos que las requieran. Para requerirlas tienen que exponerlas por constructor.<br>
+Podemos pensar en el inyector de dependencias como un chef en una cocina. Los módulos o clases serían los platos y las dependencias los ingredientes. Cada vez que un plato requiera un ingrediente, el chef irá a la despensa y lo añadirá a la receta.</p>
+<p>La gran mayoría de inyectores de dependencias funcionan de la misma forma:</p>
 <ul>
-<li>Los m&#xF3;dulos exponen sus dependencias a trav&#xE9;s de sus constructores.</li>
-<li>Un inyector de dependencias se encarga de proveer instancias de memoria de las dependencias a los m&#xF3;dulos que las requieran.</li>
-<li>Existen diferentes librer&#xED;as de ID en Android de dependencias: <strong>Hilt</strong>, Koin, Dagger2...</li>
+<li>Los módulos exponen sus dependencias a través de sus constructores.</li>
+<li>Un inyector de dependencias se encarga de proveer instancias de memoria de las dependencias a los módulos que las requieran.</li>
+<li>Existen diferentes librerías de ID en Android de dependencias como <strong>Hilt</strong>, <strong>Koin</strong>, Kotlin-inject, Dagger2...</li>
 </ul>
-</blockquote>
-<h2 class="mume-header" id="hilt">Hilt</h2>
-
-<p><strong><a href="https://dagger.dev/hilt">Hilt</a></strong> es una librer&#xED;a de inyecci&#xF3;n de dependencias <strong>desarrollada y recomendada por Google</strong> en incluida en el <strong>framework nativo de Android</strong>.</p>
-<p>La principal caracter&#xED;stica de Hilt es su <strong>facilidad de uso</strong> y la cantidad de c&#xF3;digo boilerplate que elimina con respecto a la integraci&#xF3;n de <strong>Dagger2</strong>. Por tanto, el objetivo de Hilt es <strong>hacer todo este proceso muy sencillo e integrado con el framework nativo de Android</strong>.</p>
-<h3 class="mume-header" id="configuraci%C3%B3n">Configuraci&#xF3;n</h3>
-
-<div class="admonition warning">
-<p class="admonition-title">Importante</p>
-<p>En el momento de escribir este tutorial, Hilt est&#xE1; haciendo un cambio importante, para usar el procesador de anotaciones <strong>Ksp</strong> en lugar del procesador de anotaciones <strong>Kapt</strong>. Este cambio a&#xFA;n est&#xE1; en fase inicial y no por ello a&#xFA;n no se refleja en la <strong><a href="https://developer.android.com/training/dependency-injection/hilt-android">documentaci&#xF3;n oficial de Android</a></strong>, pero s&#xED; en la de la p&#xE1;gina <strong><a href="https://dagger.dev/hilt/gradle-setup">Hilt</a></strong>.</p>
-<p>Por tanto:</p>
-<ul>
-<li>Versi&#xF3;n de Hilt &lt;= <strong>2.44</strong> &#x2192; Solo <strong>Kapt</strong></li>
-<li>Versi&#xF3;n de Hilt &gt;= <strong>2.48</strong> &#x2192; <strong>Ksp</strong> o <strong>Kapt</strong></li>
-</ul>
-<p><strong>Nosotros vamos a usar la versi&#xF3;n 2.48</strong></p>
 </div>
+<h2 class="crossnote-header" id="hilt">Hilt</h2>
+
+<p><strong><a href="https://dagger.dev/hilt">Hilt</a></strong> es una librería de inyección de dependencias <strong>desarrollada y recomendada por Google</strong> en incluida en el <strong>framework nativo de Android</strong>.</p>
+<p>La principal característica de Hilt es su <strong>facilidad de uso</strong> y la cantidad de código boilerplate que elimina con respecto a la integración de <strong>Dagger2</strong>. Por tanto, el objetivo de Hilt es <strong>hacer todo este proceso muy sencillo e integrado con el framework nativo de Android</strong>.</p>
+<p>Como <strong>única pega</strong> podemos decir que, al estar construida sobre la librería de Java <strong>Dagger2</strong>, <strong>Hilt</strong> funciona solo con <em>Kotlin/JVM</em> y por tanto <strong>módulos comunes de proyectos de KMP</strong> (Kotlin Multiplatform) donde se use <em>Kotlin/native</em> o <em>Kotlin/wasm</em> en ese caso la alternativa sería <strong>Koin</strong>.</p>
+<h3 class="crossnote-header" id="procesador-de-anotaciones-ksp">Procesador de anotaciones KSP</h3>
+
+<p>Puesto que <strong>Hilt utiliza anotaciones</strong>, para poder usarlo en un proyecto de Android, necesitamos añadir el <strong>procesador de anotaciones</strong> <strong>KSP</strong> (Kotlin Symbol Processing) a nuestro proyecto. <strong>KSP</strong> es un procesador de anotaciones de Kotlin creado por <strong>Google</strong> que reemplaza a '<em>antiguo</em>' <strong>KAPT</strong> (Kotlin Annotation Processing Tool) usado hasta la versión 2.48 de Hilt ya que <strong>KSP</strong> mejora mucho los tiempos de compilación.</p>
 <ul>
-<li>
-<p>La forma de incluir Hilt en nuestro proyecto de forma actualizada la puedes encontrar a <strong><a href="https://dagger.dev/hilt/gradle-setup">Aqu&#xED; &#x1F517;</a></strong>.</p>
-</li>
-<li>
-<p>Puedes encontrar m&#xE1;s informaci&#xF3;n sobre por qu&#xE9; usar <strong>Ksp</strong> <strong><a href="https://android-developers.googleblog.com/2021/09/accelerated-kotlin-build-times-with.html">Aqu&#xED; &#x1F517;</a></strong></p>
-</li>
+<li>Puedes encontrar más información sobre por qué usar <strong>Ksp</strong> <strong><a href="https://android-developers.googleblog.com/2021/09/accelerated-kotlin-build-times-with.html">Aquí 🔗</a></strong></li>
 </ul>
-<p>En el <strong><code>build.gradle.kts</code></strong> ra&#xED;z del proyecto a&#xF1;adiremos el siguiente plugin:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">plugins <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token comment">// Plugin para que Gradle use Ksp</span>
-    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.devtools.ksp&quot;</span><span class="token punctuation">)</span> version <span class="token string">&quot;1.9.0-1.0.12&quot;</span> apply <span class="token boolean">false</span>
-    <span class="token comment">// Plugin para que Gradle use Hilt con Ksp</span>
-    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger.hilt.android&quot;</span><span class="token punctuation">)</span> version <span class="token string">&quot;2.48&quot;</span> apply <span class="token boolean">false</span>
-<span class="token punctuation">}</span>
-</pre><p>En el <strong><code>build.gradle.kts</code></strong> del <strong>m&#xF3;dulo de la aplicaci&#xF3;n</strong> (app) a&#xF1;adiremos:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">plugins <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token comment">// Plugin para que Gradle use Ksp</span>
-    <span class="token function">id</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.devtools.ksp&quot;</span><span class="token punctuation">)</span>
-    <span class="token comment">// Plugin para que Gradle use Hilt</span>
-    <span class="token function">id</span> <span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger.hilt.android&quot;</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+<h3 class="crossnote-header" id="configuraci%C3%B3n">Configuración</h3>
 
-android <span class="token punctuation">{</span>
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token comment">// Debemos usar el SDK de la versi&#xF3;n 17 o superior</span>
-    compileOptions <span class="token punctuation">{</span>
-        sourceCompatibility <span class="token operator">=</span> JavaVersion<span class="token punctuation">.</span>VERSION_17
-        targetCompatibility <span class="token operator">=</span> JavaVersion<span class="token punctuation">.</span>VERSION_17
-    <span class="token punctuation">}</span>
-    kotlinOptions <span class="token punctuation">{</span>
-        jvmTarget <span class="token operator">=</span> <span class="token string">&quot;17&quot;</span>
-    <span class="token punctuation">}</span>
+<ul>
+<li>La forma de incluir Hilt en nuestro proyecto de forma actualizada la puedes encontrar a <strong><a href="https://dagger.dev/hilt/gradle-setup">Aquí 🔗</a></strong> o en la <strong><a href="https://developer.android.com/training/dependency-injection/hilt-android">documentación oficial de Android en Inglés</a></strong>.</li>
+</ul>
+<p>En el <strong><code>libs.versions.toml</code></strong> añadiremos las versiones de las librerías y plugins que vamos a usar:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token punctuation">[</span>versions<span class="token punctuation">]</span>
+kotlin <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"2.0.20"</span></span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token comment">// Fíjate que la versión de KSP debe coincidir con la de Kotlin 2.0.20</span>
+ksp <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"2.0.20-1.0.25"</span></span>
+hilt <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"2.52"</span></span>
+hiltNavigationCompose <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"1.2.0"</span></span>
 
-    <span class="token comment">// M&#xED;nimo el compilador de compose 1.5.0</span>
-    composeOptions <span class="token punctuation">{</span>
-        kotlinCompilerExtensionVersion <span class="token operator">=</span> <span class="token string">&quot;1.5.0&quot;</span>
-    <span class="token punctuation">}</span>
+<span class="token punctuation">[</span>libraries<span class="token punctuation">]</span>
+dagger<span class="token operator">-</span>hilt<span class="token operator">-</span>android 
+<span class="token operator">=</span> <span class="token punctuation">{</span> group <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.google.dagger"</span></span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hilt-android"</span></span><span class="token punctuation">,</span> version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hilt"</span></span> <span class="token punctuation">}</span>
+dagger<span class="token operator">-</span>hilt<span class="token operator">-</span>android<span class="token operator">-</span>compiler 
+<span class="token operator">=</span> <span class="token punctuation">{</span> group <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.google.dagger"</span></span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hilt-android-compiler"</span></span><span class="token punctuation">,</span> version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hilt"</span></span> <span class="token punctuation">}</span>
+androidx<span class="token operator">-</span>hilt<span class="token operator">-</span>navigation<span class="token operator">-</span>compose 
+<span class="token operator">=</span> <span class="token punctuation">{</span> group <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"androidx.hilt"</span></span><span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hilt-navigation-compose"</span></span><span class="token punctuation">,</span> version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hiltNavigationCompose"</span></span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span>plugins<span class="token punctuation">]</span>
+devtools<span class="token operator">-</span>ksp <span class="token operator">=</span> <span class="token punctuation">{</span> id <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.google.devtools.ksp"</span></span><span class="token punctuation">,</span> version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"ksp"</span></span> <span class="token punctuation">}</span>
+com<span class="token operator">-</span>google<span class="token operator">-</span>dagger <span class="token operator">=</span> <span class="token punctuation">{</span> id <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.google.dagger.hilt.android"</span></span><span class="token punctuation">,</span> version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"hilt"</span></span> <span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> raíz del proyecto añadiremos los plugins de <strong>KSP</strong> y <strong>Hilt</strong> definidos en el <strong><code>libs.versions.toml</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>devtools<span class="token punctuation">.</span>ksp<span class="token punctuation">)</span> apply <span class="token boolean">false</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>dagger<span class="token punctuation">)</span> apply <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> del <strong>módulo de la aplicación</strong> (app) definiremos los plugins y las dependencias de <strong>Hilt</strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>devtools<span class="token punctuation">.</span>ksp<span class="token punctuation">)</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>dagger<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
 dependencies <span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
-    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger:hilt-android:2.44&quot;</span><span class="token punctuation">)</span>
-    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token string">&quot;androidx.hilt:hilt-navigation-compose:1.0.0&quot;</span><span class="token punctuation">)</span>
-    <span class="token function">ksp</span><span class="token punctuation">(</span><span class="token string">&quot;com.google.dagger:hilt-compiler:2.48&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>dagger<span class="token punctuation">.</span>hilt<span class="token punctuation">.</span>android<span class="token punctuation">)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>androidx<span class="token punctuation">.</span>hilt<span class="token punctuation">.</span>navigation<span class="token punctuation">.</span>compose<span class="token punctuation">)</span>
+    <span class="token function">ksp</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>dagger<span class="token punctuation">.</span>hilt<span class="token punctuation">.</span>android<span class="token punctuation">.</span>compiler<span class="token punctuation">)</span>
+    <span class="token function">kspAndroidTest</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>dagger<span class="token punctuation">.</span>hilt<span class="token punctuation">.</span>android<span class="token punctuation">.</span>compiler<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
-</pre><p>Tras ello pulsamos &apos;<em>Sync Now</em>&apos; para sincronizar los cambios en Gradle.</p>
-<h3 class="mume-header" id="preparando-los-componentes-de-android-para-la-inyecci%C3%B3n-de-dependencias">Preparando los componentes de Android para la inyecci&#xF3;n de dependencias</h3>
+</code></pre><p>Tras ello pulsamos '<em>Sync Now</em>' para sincronizar los cambios en Gradle.</p>
+<h3 class="crossnote-header" id="preparando-los-componentes-de-android-para-la-inyecci%C3%B3n-de-dependencias">Preparando los componentes de Android para la inyección de dependencias</h3>
 
 <ul>
 <li>Puedes descargar una chuleta con todas las anotaciones que vamos a ver <strong><a href="./hilt-annotations_cheat-sheet.pdf">en este enlace</a></strong>.</li>
 </ul>
-<p>En el paquete ra&#xED;z creamos una clase que extienda de <strong><code>Application</code></strong> y le a&#xF1;adimos la anotaci&#xF3;n <strong><code>@HiltAndroidApp</code></strong> para indicar que es la clase principal de la aplicaci&#xF3;n:</p>
+<p>En el paquete raíz creamos una clase que extienda de <strong><code>Application</code></strong> y le añadimos la anotación <strong><code>@HiltAndroidApp</code></strong> para indicar que es la clase principal de la aplicación:</p>
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/application">HiltAndroidApp</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://dagger.dev/hilt/application">HiltAndroidApp</a></strong></li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Indicamos que es la clase principal de la aplicaci&#xF3;n</span>
-<span class="token comment">// Esta clase se ejecutar&#xE1; antes que cualquier otra clase de la aplicaci&#xF3;n</span>
-<span class="token comment">// y se encargar&#xE1; de proveer las dependencias a los m&#xF3;dulos que las requieran</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Indicamos que es la clase principal de la aplicación</span>
+<span class="token comment">// Esta clase se ejecutará antes que cualquier otra clase de la aplicación</span>
+<span class="token comment">// y se encargará de proveer las dependencias a los módulos que las requieran</span>
 <span class="token annotation builtin">@HiltAndroidApp</span>
 <span class="token keyword keyword-class">class</span> MiApplication <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-</pre><p>Recuerda a continuaci&#xF3;n, en el <strong><code>AndroidManifest.xml</code></strong> a&#xF1;adir la clase que acabamos de crear como la clase principal de la aplicaci&#xF3;n si no la hab&#xED;as hecho ya:</p>
-<pre data-role="codeBlock" data-info="xml" class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
-  <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>.MiApplication<span class="token punctuation">&quot;</span></span>
-  <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span>
+</code></pre><p>Recuerda a continuación, en el <strong><code>AndroidManifest.xml</code></strong> añadir la clase que acabamos de crear como la clase principal de la aplicación si no la habías hecho ya:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span>
+  <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>.MiApplication<span class="token punctuation">"</span></span>
+  <span class="token attr-name"><span class="token namespace">android:</span>allowBackup</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span>
   <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
 
   ...
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
-</pre><p>Es recomendable a&#xF1;adir la anotaci&#xF3;n <strong><code>@AndroidEntryPoint</code></strong> a la MainActivity para que Hilt pueda inyectar dependencias en ella:</p>
+</code></pre><p>Es recomendable añadir la anotación <strong><code>@AndroidEntryPoint</code></strong> a la MainActivity para que Hilt pueda inyectar dependencias en ella:</p>
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/android-entry-point.html">AndroidEntryPoint</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://dagger.dev/hilt/android-entry-point.html">AndroidEntryPoint</a></strong></li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@AndroidEntryPoint</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@AndroidEntryPoint</span>
 <span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
 
-</pre><h4 class="mume-header" id="c%C3%B3mo-insertar-objetos-viewmodel-con-hilt-en-compose">C&#xF3;mo insertar objetos ViewModel con Hilt en Compose</h4>
+</code></pre><h4 class="crossnote-header" id="c%C3%B3mo-insertar-objetos-viewmodel-con-hilt-en-compose">Cómo insertar objetos ViewModel con Hilt en Compose</h4>
 
-<blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Recuerda que para usar Hilt en Compose estamos usando la dependencia <code>implementation &quot;androidx.hilt:hilt-navigation-compose&quot;</code> en el <strong><code>build.gradle.kts</code></strong> del m&#xF3;dulo de la aplicaci&#xF3;n.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Fíjate que hemos añadido la dependencia <strong><code>androidx.hilt:hilt-navigation-compose</code></strong> en el <strong><code>build.gradle.kts</code></strong> del módulo de la aplicación. Ya que tal y como nos indicaba el <strong><a href="https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-cheatsheet">cheatsheet</a></strong> del ViewModel que vimos en el tema anterior. Esta dependencia nos permitirá inyectar <strong><code>ViewModels</code></strong> en las funciones <strong><code>@Composable</code></strong>.</p>
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/libraries#hilt">Hilt en Compose</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/jetpack/compose/libraries#hilt">Hilt en Compose</a></strong></li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Inyectamos el contexto de la aplicaci&#xF3;n</span>
+</div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Inyectamos el contexto de la aplicación</span>
 <span class="token annotation builtin">@HiltViewModel</span>
 <span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-</pre><p>Para acceder al <strong><code>ViewModel</code></strong> dentro de una <strong><code>Activity</code></strong> seguiremos usando el delegado <strong><code>by viewModels()</code></strong></p>
-<p>Para usar un <strong><code>ViewModel</code></strong> con Hilt dentro de una funci&#xF3;n <strong><code>@Composable</code></strong> usaremos ahora <strong><code>hiltViewModel()</code></strong> ...</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+</code></pre><p>Para acceder al <strong><code>ViewModel</code></strong> dentro de una <strong><code>Activity</code></strong> seguiremos usando el delegado <strong><code>by viewModels()</code></strong></p>
+<p>Para usar un <strong><code>ViewModel</code></strong> con Hilt dentro de una función <strong><code>@Composable</code></strong> usaremos ahora <strong><code>hiltViewModel()</code></strong> ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">MiScreen</span><span class="token punctuation">(</span>miVm<span class="token operator">:</span> MiViewModel <span class="token operator">=</span> <span class="token function">hiltViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-</pre><p>Tambi&#xE9;n es posible usarlo en la navegaci&#xF3;n como veremos m&#xE1;s adelante con ...</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>MiViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span>navBackStackEntry<span class="token punctuation">)</span>
-</pre><p>de esta manera el <strong><code>ViewModelStoreOwner</code></strong> ser&#xE1; una determinada ruta de navegaci&#xF3;n y no la <strong><code>Activity</code></strong>.</p>
-<h3 class="mume-header" id="exponer-dependencias-y-preparar-m%C3%B3dulos-con-hilt">Exponer dependencias y preparar m&#xF3;dulos con Hilt</h3>
+</code></pre><p>También es posible usarlo en la navegación como veremos más adelante con ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>MiViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span>navBackStackEntry<span class="token punctuation">)</span>
+</code></pre><p>de esta manera el <strong><code>ViewModelStoreOwner</code></strong> será una determinada ruta de navegación y no la <strong><code>Activity</code></strong>.</p>
+<h3 class="crossnote-header" id="exponer-dependencias-y-preparar-m%C3%B3dulos-con-hilt">Exponer dependencias y preparar módulos con Hilt</h3>
 
 <ul>
 <li><strong><a href="https://dagger.dev/hilt/entry-points">Entry Points</a></strong></li>
 </ul>
-<p>Realmente ya lo hemos hecho al usar el <strong><code>ViewModel</code></strong>, y es a trav&#xE9;s de la anotaci&#xF3;n <strong><code>@Inject</code></strong>. Con esta anotaci&#xF3;n <strong>indicamos que queremos inyectar una dependencia en el constructor</strong> de una clase. En otras palabras, le estamos diciendo a Hilt que queremos que nos provea una instancia de memoria de una dependencia que necesitamos. Nos ser&#xE1; &#xFA;til para indicar que necesitamos instancias de otros m&#xF3;dulos tales como <strong>repositorios</strong>, <strong>servicios</strong>, etc.</p>
-<p>Pero tambi&#xE9;n deberemos <strong>preparar los m&#xF3;dulos</strong> que queramos inyectar con Hilt. Para ello, debemos a&#xF1;adir la anotaci&#xF3;n <strong><code>@Module</code></strong> a la clase que queramos inyectar. En otras palabras, deberemos anotar aquellas clases que queramos que Hilt provea instancias de memoria de ellas.</p>
-<h4 class="mume-header" id="viewmodels-con-hilt">ViewModels con Hilt</h4>
+<p>Realmente ya lo hemos hecho al usar el <strong><code>ViewModel</code></strong>, y es a través de la anotación <strong><code>@Inject</code></strong>. Con esta anotación <strong>indicamos que queremos inyectar una dependencia en el constructor</strong> de una clase. En otras palabras, le estamos diciendo a Hilt que queremos que nos provea una instancia de memoria de una dependencia que necesitamos. Nos será útil para indicar que necesitamos instancias de otros módulos tales como <strong>repositorios</strong>, <strong>servicios</strong>, etc.</p>
+<p>Pero también deberemos <strong>preparar los módulos</strong> que queramos inyectar con Hilt. Para ello, debemos añadir la anotación <strong><code>@Module</code></strong> a la clase que queramos inyectar. En otras palabras, deberemos anotar aquellas clases que queramos que Hilt provea instancias de memoria de ellas.</p>
+<h4 class="crossnote-header" id="viewmodels-con-hilt">ViewModels con Hilt</h4>
 
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/view-model">Hilt ViewModels</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://dagger.dev/hilt/view-model">Hilt ViewModels</a></strong></li>
 </ul>
-<p>Por ejemplo, un colaborador t&#xED;pico o agregaci&#xF3;n que genera una dependencia en el <strong><code>ViewModel</code></strong> es el repositorio o repositorios de datos a los que accedemos.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+<p>Por ejemplo, un colaborador típico o agregación que genera una dependencia en el <strong><code>ViewModel</code></strong> es el repositorio o repositorios de datos a los que accedemos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltViewModel</span>
 <span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
   <span class="token comment">// Dependencia que queremos inyectar</span>
   <span class="token comment">// Creamos una instancia de MiRepositorio cada vez que se crea un MiViewModel </span>
-  <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">=</span> <span class="token function">MiRepositorio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x1F480;</span>
+  <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">=</span> <span class="token function">MiRepositorio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 💀</span>
   <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</pre><p>Realizaremos una <strong>inversi&#xF3;n de dependencia</strong> (Principio SOLID) por la cual <strong>exponemos</strong> en el constructor la instancia del <strong>objeto colaborador</strong> que queremos que nos inyecte Hilt.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@HiltViewModel</span>
+</code></pre><p>Realizaremos una <strong>inversión de dependencia</strong> (Principio SOLID) por la cual <strong>exponemos</strong> en el constructor la instancia del <strong>objeto colaborador</strong> que queremos que nos inyecte Hilt.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltViewModel</span>
 <span class="token keyword keyword-class">class</span> MiViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
   <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> miRepositorio <span class="token operator">:</span> MiRepository <span class="token comment">// Sigue siendo una propiedad privada</span>
 <span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</pre><h4 class="mume-header" id="preparando-modulos">Preparando Modulos</h4>
+</code></pre><h4 class="crossnote-header" id="preparando-modulos">Preparando Modulos</h4>
 
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://dagger.dev/hilt/modules">Modules</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://dagger.dev/hilt/modules">Modules</a></strong></li>
 </ul>
-<p>Ahora deberemos <strong>preparar el m&#xF3;dulo</strong> o la clase <strong><code>MiRepositorio</code></strong> para poder ser inyectado. Para ello, definiremos una clase que definir&#xE1; los m&#xE9;todos proveedores de las instancias de las clases que queremos inyectar. A esta clase le denominaremos <strong><a href="https://dagger.dev/hilt/components.html">Componente de Hilt</a></strong></p>
+<p>Ahora deberemos <strong>preparar el módulo</strong> o la clase <strong><code>MiRepositorio</code></strong> para poder ser inyectado. Para ello, definiremos una clase que definirá los métodos proveedores de las instancias de las clases que queremos inyectar. A esta clase le denominaremos <strong><a href="https://dagger.dev/hilt/components.html">Componente de Hilt</a></strong></p>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 80%">
-<p>Esta clase deber&#xE1; tener la anotaci&#xF3;n <strong><code>@Module</code></strong> y la anotaci&#xF3;n <strong><code>@InstallIn</code></strong> que indicar&#xE1; el alcance o Scope de la clase que se provee. En este caso, la clase se proveer&#xE1; en el <strong><code>SingletonComponent</code></strong> que es el alcance por defecto.</p>
-<p>Para seguir los convenios de nomenclatura propuesta en el curso al ver la arquitectura de una app de Android. La clase que define los proveedores la podemos llamar <strong><code>AppModule</code></strong> y la a&#xF1;adiremos el paquete <strong><code>di</code></strong> (<em>dependency injection</em>) al paquete ra&#xED;z de nuestro proyecto ya que centralizar&#xE1; todos proveedores de dependencias de la aplicaci&#xF3;n.</p>
+<p>Esta clase deberá tener la anotación <strong><code>@Module</code></strong> y la anotación <strong><code>@InstallIn</code></strong> que indicará el alcance o Scope de la clase que se provee. En este caso, la clase se proveerá en el <strong><code>SingletonComponent</code></strong> que es el alcance por defecto.</p>
+<p>Para seguir los convenios de nomenclatura propuesta en el curso al ver la arquitectura de una app de Android. La clase que define los proveedores la podemos llamar <strong><code>AppModule</code></strong> y la añadiremos el paquete <strong><code>di</code></strong> (<em>dependency injection</em>) al paquete raíz de nuestro proyecto ya que centralizará todos proveedores de dependencias de la aplicación.</p>
 </div>
 <div style="width: auto">
-<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="123px" preserveAspectRatio="none" style="width:179px;height:123px;background:#FFFFFF;" version="1.1" viewBox="0 0 179 123" width="179px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"/><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="146" x="26" y="39.5508">[com.pmdm.miapplication]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="36" y="54.6445">[data]</text><path d="M27,61.375 L27,63.375 L35,63.375 L35,62.375 L30,62.375 L30,61.375 L27,61.375 M27,64.375 L27,68.875 C27,69.155 27.22,69.375 27.5,69.375 L34.5,69.375 C34.78,69.375 35,69.155 35,68.875 L35,64.375 L27,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="36" y="69.7383">[models]</text><path d="M27,76.4688 L27,78.4688 L35,78.4688 L35,77.4688 L30,77.4688 L30,76.4688 L27,76.4688 M27,79.4688 L27,83.9688 C27,84.2488 27.22,84.4688 27.5,84.4688 L34.5,84.4688 C34.78,84.4688 35,84.2488 35,83.9688 L35,79.4688 L27,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="16" x="36" y="84.832">[ui]</text><path d="M27,91.5625 L27,93.5625 L35,93.5625 L35,92.5625 L30,92.5625 L30,91.5625 L27,91.5625 M27,94.5625 L27,99.0625 C27,99.3425 27.22,99.5625 27.5,99.5625 L34.5,99.5625 C34.78,99.5625 35,99.3425 35,99.0625 L35,94.5625 L27,94.5625 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="99.9258">[di]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="77" x="36" y="115.0195">AppModule.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="64.8281" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="79.9219" y2="79.9219"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="94.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="95.0156" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="97.0156" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="110.1094" y2="110.1094"/><!--SRC=[NO_RQW8n48RlynHpLNIBYswjBKiHhOU2TQdKmqrHY9jHGfFCaeCWqdTlR2aLcRjlld_uf-SyjzvnvHaxiKtV24jIRDXfmMxXwMP7Ig3jVfIaqqeBdMh9gqh9adj9PirkBoN1FRz2cWGgTmM3_059SX6LwoI9C6ebARAvfIDNMnMmcoJzgYf818NffuyM-uhJGoD-MyyKDtvPJE60riLIq4gpPdQNPhLvC336BMGTQ3Npx3vlFy1Wj83pkivgBxCfE0gsH13IUIktuVnKdKtuWSDxC5vgpE6jGZCPllu169c3j6Gq6iycg-9VwBGRpzB376ri0gk23N77W_8nKPAGPf_3SZ5kFB8fD_l0z_4sEZQWUDSUSnZDlm40]--></g></svg></p></div>
+<p align="center" style="zoom:1" class="puml"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="123px" preserveAspectRatio="none" style="width:179px;height:123px;background:#FFFFFF;" version="1.1" viewBox="0 0 179 123" width="179px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="146" x="26" y="39.5508">[com.pmdm.miapplication]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="36" y="54.6445">[data]</text><path d="M27,61.375 L27,63.375 L35,63.375 L35,62.375 L30,62.375 L30,61.375 L27,61.375 M27,64.375 L27,68.875 C27,69.155 27.22,69.375 27.5,69.375 L34.5,69.375 C34.78,69.375 35,69.155 35,68.875 L35,64.375 L27,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="36" y="69.7383">[models]</text><path d="M27,76.4688 L27,78.4688 L35,78.4688 L35,77.4688 L30,77.4688 L30,76.4688 L27,76.4688 M27,79.4688 L27,83.9688 C27,84.2488 27.22,84.4688 27.5,84.4688 L34.5,84.4688 C34.78,84.4688 35,84.2488 35,83.9688 L35,79.4688 L27,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="16" x="36" y="84.832">[ui]</text><path d="M27,91.5625 L27,93.5625 L35,93.5625 L35,92.5625 L30,92.5625 L30,91.5625 L27,91.5625 M27,94.5625 L27,99.0625 C27,99.3425 27.22,99.5625 27.5,99.5625 L34.5,99.5625 C34.78,99.5625 35,99.3425 35,99.0625 L35,94.5625 L27,94.5625 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="99.9258">[di]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="77" x="36" y="115.0195">AppModule.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="64.8281" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="79.9219" y2="79.9219"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="94.0156"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="97.0156" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="110.1094" y2="110.1094"></line><!--SRC=[NO_RQi9048RlzodcgcZ446qi9HJHUYYaXagDtXI5DJlQfNi8Un14VFUkBQKYS_VDzm__3AoZnbag724diXagPZHd6t8gIGkUxdPQC3JzZqhBk9PCnfBJkXQyeevhjIQjQubHHs-Gr0o5lO6U_u0ekehoTHG56BHA2sqoeuzKR8N7VXGDwxhGp0kClromo3dC01NxRJqNLBbbCOC36XjAGIVk9jqqlc-Kdnwck8LE3xf9bYPPqeFHf8JBkaaQB_CPMErDXS2uTOPl_UMf9idfWSAxLuvBpE2jHfMFN_y0JDI16wqaAaVoLV4lFAJjP-vWWIOqWLL1nhYZNhYGg3JZQf_1ifos7ycCghsd-t0RBHdfSDSSCvWilW40]--></g></svg></p></div>
 </div>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-package">package</span> com<span class="token punctuation">.</span>pmdm<span class="token punctuation">.</span>miapplication<span class="token punctuation">.</span>di
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-package">package</span> com<span class="token punctuation">.</span>pmdm<span class="token punctuation">.</span>miapplication<span class="token punctuation">.</span>di
 
 <span class="token annotation builtin">@Module</span>
 <span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
 
-  <span class="token comment">// Crearemos un m&#xE9;todo que suele empezar con el prefijo &apos;provide&apos;</span>
-  <span class="token comment">// y que devolver&#xE1; una instancia de MiRepositorio  </span>
+  <span class="token comment">// Crearemos un método que suele empezar con el prefijo 'provide'</span>
+  <span class="token comment">// y que devolverá una instancia de MiRepositorio  </span>
   <span class="token annotation builtin">@Provides</span>
   <span class="token annotation builtin">@Singleton</span>
   <span class="token keyword keyword-fun">fun</span> <span class="token function">provideMiRepositorio</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> MiRepository <span class="token operator">=</span> <span class="token function">MiRepository</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-  <span class="token comment">// Crearemos un m&#xF3;dulo para cada clase que queramos inyectar</span>
+  <span class="token comment">// Crearemos un módulo para cada clase que queramos inyectar</span>
 <span class="token punctuation">}</span>
-</pre><p>Anotaciones:</p>
+</code></pre><p>Anotaciones:</p>
 <ul>
-<li><strong><code>@Provides</code></strong>: Indica que el m&#xE9;todo provee una instancia de la clase que se indica en el tipo de retorno del m&#xE9;todo.</li>
-<li><strong><code>@Singleton</code></strong>: Indica que la instancia de la clase que se provee es &#xFA;nica y que se reutilizar&#xE1; en todas las clases que la necesiten. <strong>Cuidado no siempre una instancia &#xFA;nica es una buena opci&#xF3;n</strong>.</li>
-<li><strong><code>@InstallIn</code></strong>: Indica el <strong>alcance o Scope de la clase que se provee</strong>. En este caso, la clase se proveer&#xE1; en el <strong><code>SingletonComponent</code></strong> que es el alcance m&#xE1;s alto que existe.</li>
+<li><strong><code>@Provides</code></strong>: Indica que el método provee una instancia de la clase que se indica en el tipo de retorno del método.</li>
+<li><strong><code>@Singleton</code></strong>: Indica que la instancia de la clase que se provee es única y que se reutilizará en todas las clases que la necesiten. <strong>Cuidado no siempre una instancia única es una buena opción</strong>.</li>
+<li><strong><code>@InstallIn</code></strong>: Indica el <strong>alcance o Scope de la clase que se provee</strong>. En este caso, la clase se proveerá en el <strong><code>SingletonComponent</code></strong> que es el alcance más alto que existe.</li>
 </ul>
-<p>Puede darse el caso de que se produzca una <strong>&apos;<em>cadena</em>&apos; de dependencias</strong> a inyectar. Por ejemplo, puede ser que nuestro repositorio necesite de una DAO (Data Access Object) para acceder a la fuente de datos.</p>
+<p>Puede darse el caso de que se produzca una <strong>'<em>cadena</em>' de dependencias</strong> a inyectar. Por ejemplo, puede ser que nuestro repositorio necesite de una DAO (Data Access Object) para acceder a la fuente de datos.</p>
 <ol>
 <li>
-<p>Expondremos la inyecci&#xF3;n de la dependencia en el <strong>constructor del repositorio</strong> a Hilt y de los objetos que se inyecten.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MiRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
-    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ModeloDaoMock <span class="token comment">// Como se inyecta tambi&#xE9;n tendremos que exponerlo</span>
+<p>Expondremos la inyección de la dependencia en el <strong>constructor del repositorio</strong> a Hilt y de los objetos que se inyecten.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> MiRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ModeloDaoMock <span class="token comment">// Como se inyecta también tendremos que exponerlo</span>
 <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span>  <span class="token punctuation">}</span>
 
 <span class="token keyword keyword-class">class</span> ModeloDaoMock <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span>  <span class="token punctuation">}</span>
-</pre> <div style="page-break-after:always;"></div>
+</code></pre> <div style="page-break-after:always;"></div>
 </li>
 <li>
-<p>Definiremos el m&#xE9;todo proveedor de las instancias de <strong><code>ModeloDaoMock</code></strong> hemos marcado como <strong><code>@Inject</code></strong> en <strong><code>MiRepository</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=7}" class="language-kotlin" data-line="7"><span class="token annotation builtin">@Module</span>
+<p>Definiremos el método proveedor de las instancias de <strong><code>ModeloDaoMock</code></strong> hemos marcado como <strong><code>@Inject</code></strong> en <strong><code>MiRepository</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=7}" class="language-kotlin kotlin" data-line="7"><code><span class="token annotation builtin">@Module</span>
 <span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
 
@@ -892,7 +545,7 @@ dependencies <span class="token punctuation">{</span>
   <span class="token annotation builtin">@Singleton</span>
   <span class="token keyword keyword-fun">fun</span> <span class="token function">provideModeloDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ModeloDaoMock <span class="token operator">=</span> <span class="token function">ModeloDaoMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -901,8 +554,8 @@ dependencies <span class="token punctuation">{</span>
 <div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
 </div></div></pre></li>
 <li>
-<p>Por &#xFA;ltimo, <strong><code>modeloDaoMock</code></strong> es inyectado por <strong><code>provideModeloDaoMock()</code></strong> en el proveedor de <strong><code>MiRepository</code></strong> y por tanto resuelto autom&#xE1;ticamente por Hilt.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=12}" class="language-kotlin" data-line="12"><span class="token annotation builtin">@Module</span>
+<p>Por último, <strong><code>modeloDaoMock</code></strong> es inyectado por <strong><code>provideModeloDaoMock()</code></strong> en el proveedor de <strong><code>MiRepository</code></strong> y por tanto resuelto automáticamente por Hilt.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=12}" class="language-kotlin kotlin" data-line="12"><code><span class="token annotation builtin">@Module</span>
 <span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
 
@@ -916,7 +569,7 @@ dependencies <span class="token punctuation">{</span>
     modeloDaoMock <span class="token operator">:</span> ModeloDaoMock <span class="token comment">// Es inyectado por provideModeloDaoMock()</span>
   <span class="token punctuation">)</span> <span class="token operator">:</span> MiRepository <span class="token operator">=</span> <span class="token function">MiRepository</span><span class="token punctuation">(</span>modeloDaoMock<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -930,28 +583,60 @@ dependencies <span class="token punctuation">{</span>
 <div aria-hidden="true" class="line-highlight" data-range="12" data-start="12">
 </div></div></pre></li>
 </ol>
-<p>Otras anotaciones que podemos usar en los m&#xE9;todos &apos;<em>proveedores</em>&apos; son:</p>
+<div class="admonition tip">
+<p class="admonition-title">Importante</p>
+<p>Aunque es recomendable definir los proveedores de dependencias. En aquellos módulos cuyo '<em><strong>proveedor</strong></em>' simplemente se instancie un constructor por defecto o que reciba objetos ya marcados con <strong><code>@Inject</code></strong> no es necesario definir un proveedor. Hilt lo hará automáticamente.</p>
+<p>Por ejemplo, en el caso de <strong><code>ModeloDaoMock</code></strong> no sería necesario definir el proveedor <strong><code>fun provideModeloDaoMock() : ModeloDaoMock = ModeloDaoMock()</code></strong> ya que no tiene dependencias y se instanciará automáticamente. Pero si quisiéramos que se instanciara una única vez, podríamos aplicarle la anotación <strong><code>@Singleton</code></strong> en la definición.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Singleton</span>
+<span class="token keyword keyword-class">class</span> ModeloDaoMock <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span>  <span class="token punctuation">}</span>
+</code></pre></div>
+<p>Otras anotaciones que podemos usar en los métodos '<em>proveedores</em>' son:</p>
 <ul>
 <li><strong><code>@Binds</code></strong>: Indica que la clase que se provee es una interfaz y que se debe enlazar con una clase concreta que implemente dicha interfaz. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
-<li><strong><code>@IntoMap</code></strong>: Indica que la clase que se provee es un mapa y que se debe a&#xF1;adir a un mapa concreto. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
-<li><strong><code>@IntoSet</code></strong>: Indica que la clase que se provee es un conjunto y que se debe a&#xF1;adir a un conjunto concreto. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
+<li><strong><code>@IntoMap</code></strong>: Indica que la clase que se provee es un mapa y que se debe añadir a un mapa concreto. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
+<li><strong><code>@IntoSet</code></strong>: Indica que la clase que se provee es un conjunto y que se debe añadir a un conjunto concreto. Se usa en lugar de <strong><code>@Provides</code></strong>.</li>
 </ul>
-<div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="mega-resumen">&#x1F4E3; Resumen</h3>
+<h4 class="crossnote-header" id="inyectando-el-contexto-de-la-aplicaci%C3%B3n">Inyectando el contexto de la aplicación</h4>
 
+<p>Aquellos objetos que no se puedan inyectar por Hilt, como por ejemplo <strong><code>SharedPreferences</code></strong>, <strong><code>Resources</code></strong>, etc. se pueden inyectar en el <strong><code>AppModule</code></strong> usando la <strong><a href="https://developer.android.com/training/dependency-injection/hilt-android#predefined-qualifiers">inyección del contexto</a></strong> de la aplicación con las anotaciones <strong><code>@ApplicationContext</code></strong> o <strong><code>@ActivityContext</code></strong>:</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=7}" class="language-kotlin kotlin" data-line="7"><code><span class="token annotation builtin">@Module</span>
+<span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideSharedPreferences</span><span class="token punctuation">(</span><span class="token annotation builtin">@ApplicationContext</span> context<span class="token operator">:</span> Context<span class="token punctuation">)</span> <span class="token operator">:</span> SharedPreferences <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> context<span class="token punctuation">.</span><span class="token function">getSharedPreferences</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"miApp"</span></span><span class="token punctuation">,</span> Context<span class="token punctuation">.</span>MODE_PRIVATE<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
+</div></div></pre><div style="page-break-after:always;"></div>
+<h3 class="crossnote-header" id="resumen-configuraci%C3%B3n-hilt">Resumen configuración Hilt</h3>
+
+<ul>
+<li><strong><a href="https://developer.android.com/static/images/training/dependency-injection/hilt-annotations.pdf">CheatSheet Anotaciones</a></strong></li>
+</ul>
+<div class="admonition summary">
+<p class="admonition-title">Resumen</p>
 <ol>
 <li>
-<p>Definir loa <strong>Entry Points</strong> de la aplicaci&#xF3;n:</p>
+<p>Definir loa <strong>Entry Points</strong> de la aplicación:</p>
 <ul>
 <li><strong><code>@HiltAndroidApp</code></strong> en la clase <strong><code>Application</code></strong>.</li>
 <li><strong><code>@AndroidEntryPoint</code></strong> en la clase <strong><code>MainActivity</code></strong>.</li>
 </ul>
 </li>
 <li>
-<p>Exponer las dependencias en los constructores de las clases que queramos inyectar con <strong><code>@Inject</code></strong> de forma &apos;<em>recursiva</em>&apos;.</p>
+<p>Exponer las dependencias en los constructores de las clases que queramos inyectar con <strong><code>@Inject</code></strong> de forma '<em>recursiva</em>'.</p>
 </li>
 <li>
-<p>Preparar aquellos m&#xF3;dulos que hemos expuesto con la anotaci&#xF3;n <strong><code>@Inject</code></strong>. Por tanto, a la clase <strong><code>AppModule</code></strong> dentro del paquete <strong><code>di</code></strong>.</p>
+<p>Preparar aquellos módulos que hemos expuesto con la anotación <strong><code>@Inject</code></strong>. Por tanto, a la clase <strong><code>AppModule</code></strong> dentro del paquete <strong><code>di</code></strong>.</p>
 <ul>
 <li>La anotaremos con:
 <ul>
@@ -959,16 +644,15 @@ dependencies <span class="token punctuation">{</span>
 <li><strong><code>@InstallIn(SingletonComponent::class)</code></strong></li>
 </ul>
 </li>
-<li><strong><code>@Provides</code></strong> en los m&#xE9;todos proveedores de las instancias de las clases que queramos inyectar que empiezan por <strong><code>fun provide...</code></strong>.</li>
+<li><strong><code>@Provides</code></strong> en los métodos proveedores de las instancias de las clases que queramos inyectar que empiezan por <strong><code>fun provide...</code></strong>.</li>
 </ul>
 </li>
 </ol>
+</div>
 
       </div>
       
       
-    
-    
     
     
     

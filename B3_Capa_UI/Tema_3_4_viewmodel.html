@@ -1,269 +1,174 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3.4 - ViewModel</title>
+      <title>PMDM 2º DAM  Tema 3.4 - ViewModel</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
-      
-      
-      
-      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
       
       
       
       
       
       <style>
-      /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
- */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #333;
-  background: none;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.4;
-
-  -moz-tab-size: 8;
-  -o-tab-size: 8;
-  tab-size: 8;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: .8em;
-  overflow: auto;
-  /* border: 1px solid #ddd; */
-  border-radius: 3px;
-  /* background: #fff; */
-  background: #f5f5f5;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
-}
-
-.token.comment,
-.token.blockquote {
-  color: #969896;
-}
-
-.token.cdata {
-  color: #183691;
-}
-
-.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
-}
-
-.token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}
-
-.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}
-
-.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
-}
-
-.token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
-}
-
-.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
-}
-
-.token.list {
-  color: #ed6a43;
-}
-
-.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
-}
-
-.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
-}
-
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-
-/* JSON */
-.language-json .token.property {
-  color: #183691;
-}
-
-.language-markup .token.tag .token.punctuation {
-  color: #333;
-}
-
-/* CSS */
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
-}
-
-/* YAML */
-.language-yaml .token.atrule {
-  color: #63a35c;
-}
-
-code.language-yaml {
-  color: #183691;
-}
-
-/* Ruby */
-.language-ruby .token.function {
-  color: #333;
-}
-
-/* Markdown */
-.language-markdown .token.url {
-  color: #795da3;
-}
-
-/* Makefile */
-.language-makefile .token.symbol {
-  color: #795da3;
-}
-
-.language-makefile .token.variable {
-  color: #183691;
-}
-
-.language-makefile .token.builtin {
-  color: #0086b3;
-}
-
-/* Bash */
-.language-bash .token.keyword {
-  color: #0086b3;
-}
-
-/* highlight */
-pre[data-line] {
-  position: relative;
-  padding: 1em 0 1em 3em;
-}
-pre[data-line] .line-highlight-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  display: block;
-  width: 100%;
-}
-
-pre[data-line] .line-highlight {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding: inherit 0;
-  margin-top: 1em;
-  background: hsla(24, 20%, 50%,.08);
-  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-  pointer-events: none;
-  line-height: inherit;
-  white-space: pre;
-}
-
-pre[data-line] .line-highlight:before, 
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-start);
-  position: absolute;
-  top: .4em;
-  left: .6em;
-  min-width: 1em;
-  padding: 0 .5em;
-  background-color: hsla(24, 20%, 50%,.4);
-  color: hsl(24, 20%, 95%);
-  font: bold 65%/1.5 sans-serif;
-  text-align: center;
-  vertical-align: .3em;
-  border-radius: 999px;
-  text-shadow: none;
-  box-shadow: 0 1px white;
-}
-
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-end);
-  top: auto;
-  bottom: .4em;
-}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
-.markdown-preview.markdown-preview {
-  background-color: #FFFF;
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
 }
 
       </style>
-    </head>
-    <body for="html-export">
-      <div class="mume markdown-preview  ">
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
       <style>/* 
 Añade 
 
@@ -336,68 +241,68 @@ justo después del front matter
   font-size: 1rem;
 }
 </style>
-<h1 class="mume-header undefined" id="-tema-34---viewmodel">Tema 3.4 - ViewModel</h1>
+<h1 class="crossnote-header" id="tema-34---viewmodel">Tema 3.4 - ViewModel</h1>
 
 <p>Descargar estos apuntes <a href="./Tema_3_4_viewmodel.pdf">pdf</a> o <a href="./Tema_3_4_viewmodel.html">html</a></p>
-<h2 class="mume-header undefined" id="-%C3%ADndice">&#xCD;ndice</h2>
+<h2 class="crossnote-header" id="%C3%ADndice">Índice</h2>
 
 
 <div class="md-toc">
-<details style="padding:0;;padding-left:0px;" open>
+<details style="padding:0;;padding-left:0px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#-introducci&#xF3;n-" class="md-toc-link"><p>Introducci&#xF3;n</p>
+          <a href="#introducción" class="md-toc-link"><p>Introducción</p>
 </a>
           </summary>
         <div>
-          <details style="padding:0;;padding-left:24px;" open>
+          <details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#-alcance-de-un-viewmodel-viewmodel-scope-" class="md-toc-link"><p>Alcance de un ViewModel (ViewModel Scope)</p>
+          <a href="#alcance-de-un-viewmodel-viewmodel-scope" class="md-toc-link"><p>Alcance de un ViewModel (ViewModel Scope)</p>
 </a>
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-ciclo-de-vida-de-un-viewmodel-" class="md-toc-link">
+          <a href="#ciclo-de-vida-de-un-viewmodel" class="md-toc-link">
             <p>Ciclo de vida de un ViewModel</p>
 
           </a></div>
         </div>
       </details>
     <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-instanciando-un-viewmodel-" class="md-toc-link">
+          <a href="#instanciando-un-viewmodel" class="md-toc-link">
             <p>Instanciando un ViewModel</p>
 
-          </a></div><details style="padding:0;;padding-left:24px;" open>
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#-ejemplo-de-uso-y-definici&#xF3;n-de-un-viewmodel-" class="md-toc-link"><p>Ejemplo de uso y definici&#xF3;n de un ViewModel</p>
+          <a href="#ejemplo-de-uso-y-definición-de-un-viewmodel" class="md-toc-link"><p>Ejemplo de uso y definición de un ViewModel</p>
 </a>
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-ahorcadouistatekt-" class="md-toc-link">
+          <a href="#ahorcadouistatekt" class="md-toc-link">
             <p>AhorcadoUiState.kt</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-ahorcadoeventkt-" class="md-toc-link">
+          <a href="#ahorcadoeventkt" class="md-toc-link">
             <p>AhorcadoEvent.kt</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-ahorcadoscreenkt-" class="md-toc-link">
+          <a href="#ahorcadoscreenkt" class="md-toc-link">
             <p>AhorcadoScreen.kt</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-ahorcadoviewmodelkt-" class="md-toc-link">
+          <a href="#ahorcadoviewmodelkt" class="md-toc-link">
             <p>AhorcadoViewModel.kt</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-asociando-el-viewmodel-a-la-ui-en-mainactivitykt-" class="md-toc-link">
+          <a href="#asociando-el-viewmodel-a-la-ui-en-mainactivitykt" class="md-toc-link">
             <p>Asociando el ViewModel a la UI en MainActivity.kt</p>
 
           </a></div>
         </div>
       </details>
     <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#-hand-pr&#xE1;cticas-no-recomendadas-" class="md-toc-link">
-            <p>&#x270B; Pr&#xE1;cticas no recomendadas</p>
+          <a href="#hand-prácticas-no-recomendadas" class="md-toc-link">
+            <p>✋ Prácticas no recomendadas</p>
 
           </a></div>
         </div>
@@ -405,16 +310,16 @@ justo después del front matter
     
 </div>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="-introducci%C3%B3n-">Introducci&#xF3;n</h2>
+<h2 class="crossnote-header" id="introducci%C3%B3n">Introducción</h2>
 
-<p>En anteriores temas cuando hablamos de la <strong>arquitectura de aplicaciones de Android</strong> ya mencionamos este componente como parte de la Capa de UI. En este tema vamos a centrarnos en &#xE9;l para concretar la implementaci&#xF3;n de MVVM en nuestra capa UI de la arquitectura.</p>
-<p><strong><code>ViewModel</code></strong> es una de esas clases que <strong>Google</strong> defini&#xF3;, all&#xE1; por 2018, en la primera versi&#xF3;n de <strong>Jetpack</strong> para ayudar a los desarrolladores a crear aplicaciones de Android m&#xE1;s robustas y f&#xE1;ciles de mantener. <strong><code>ViewModel</code></strong> es una clase que est&#xE1; <strong>dise&#xF1;ada para almacenar y administrar datos relacionados con la interfaz de usuario de una manera que sobrevive a los cambios de configuraci&#xF3;n</strong>, como la rotaci&#xF3;n de la pantalla.</p>
-<p>Los beneficios clave de la clase ViewModel son b&#xE1;sicamente dos:</p>
+<p>En anteriores temas cuando hablamos de la <strong>arquitectura de aplicaciones de Android</strong> ya mencionamos este componente como parte de la Capa de UI. En este tema vamos a centrarnos en él para concretar la implementación de MVVM en nuestra capa UI de la arquitectura.</p>
+<p><strong><code>ViewModel</code></strong> es una de esas clases que <strong>Google</strong> definió, allá por 2018, en la primera versión de <strong>Jetpack</strong> para ayudar a los desarrolladores a crear aplicaciones de Android más robustas y fáciles de mantener. <strong><code>ViewModel</code></strong> es una clase que está <strong>diseñada para almacenar y administrar datos relacionados con la interfaz de usuario de una manera que sobrevive a los cambios de configuración</strong>, como la rotación de la pantalla.</p>
+<p>Los beneficios clave de la clase ViewModel son básicamente dos:</p>
 <ul>
 <li>Te permite conservar el estado de la IU.</li>
-<li>Proporciona acceso a la l&#xF3;gica empresarial, idealmente a trav&#xE9;s de casos de uso definidos en el dominio.</li>
+<li>Proporciona acceso a la lógica empresarial, idealmente a través de casos de uso definidos en el dominio.</li>
 </ul>
-<h3 class="mume-header" id="-alcance-de-un-viewmodel-viewmodel-scope-">Alcance de un ViewModel (ViewModel Scope)</h3>
+<h3 class="crossnote-header" id="alcance-de-un-viewmodel-viewmodel-scope">Alcance de un ViewModel (ViewModel Scope)</h3>
 
 <p>Cuando se crea una instancia de <strong><code>ViewModel</code></strong>, se pasa un objeto que implementa la interfaz <strong><code>ViewModelStoreOwner</code></strong>.</p>
 <p>Los objetos que implementan <strong><code>ViewModelStoreOwner</code></strong> puede ser por ejemplo:</p>
@@ -423,82 +328,80 @@ justo después del front matter
 <li>Un <strong><code>Fragment</code></strong>.</li>
 <li>Un destino de Navigation <strong><code>NavBackStackEntry</code></strong>.</li>
 </ul>
-<blockquote>
-<p>&#x270B; <strong>Importante</strong>: El alcance de tu ViewModel se define en el Ciclo de vida del <strong><code>ViewModelStoreOwner</code></strong>. Esto es, contin&#xFA;a en la memoria hasta que su <strong><code>ViewModelStoreOwner</code></strong> desaparece de forma permanente.</p>
-</blockquote>
-<p>Cuando se destruye el fragmento o la actividad para los que se defini&#xF3; el alcance del ViewModel, el trabajo as&#xED;ncrono contin&#xFA;a en el ViewModel espec&#xED;fico. Esta es la clave de la persistencia.</p>
-<blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Cuando se defini&#xF3; la clase <strong><code>ViewModel</code></strong> en la primera versi&#xF3;n de <strong>Jetpack</strong>, a&#xFA;n no existia <strong>Compose</strong> y se usaba asociado a una vista como un <strong><code>Activity</code></strong> o a un <strong><code>Fragment</code></strong>. Nuestras aplicaciones de Android se compon&#xED;an de una o m&#xE1;s <strong><code>Activity</code></strong> o <strong><code>Fragment</code></strong> y cada uno de ellos ten&#xED;a su propio <strong><code>ViewModel</code></strong> que se creaba como una <strong>instancia &#xFA;nica</strong>. <strong><code>ViewModel</code></strong> se usaba para almacenar datos que se necesitaban en la interfaz de usuario de la <strong><code>Activity/Fragment</code></strong> o el <strong><code>Fragment</code></strong> y quer&#xED;amos que sobrevivieran a los cambios de configuraci&#xF3;n o quer&#xED;amos compartir datos entre ellos.</p>
-<p>Con la llegada de <strong>Jetpack Compose</strong> este enfoque ha cambiado y Google ahora <strong>recomienda aplicaciones de actividad &#xFA;nica</strong> donde las diferentes pantallas se cargan como contenido dentro de la misma actividad. Por tanto, un ViewModel utilizado por una actividad permanece en memoria hasta que la actividad finalice esto es hasta que la aplicaci&#xF3;n finalice.</p>
-</blockquote>
-<h4 class="mume-header" id="-ciclo-de-vida-de-un-viewmodel-">Ciclo de vida de un ViewModel</h4>
+<div class="admonition tip">
+<p class="admonition-title">Importante</p>
+<p>El alcance de tu ViewModel se define en el Ciclo de vida del <strong><code>ViewModelStoreOwner</code></strong>. Esto es, continúa en la memoria hasta que su <strong><code>ViewModelStoreOwner</code></strong> desaparece de forma permanente.</p>
+</div>
+<p>Cuando se destruye el fragmento o la actividad para los que se definió el alcance del ViewModel, el trabajo asíncrono continúa en el ViewModel específico. Esta es la clave de la persistencia.</p>
+<p>Cuando se definió la clase <strong><code>ViewModel</code></strong> en la primera versión de <strong>Jetpack</strong>, aún no existia <strong>Compose</strong> y se usaba asociado a una vista como un <strong><code>Activity</code></strong> o a un <strong><code>Fragment</code></strong>. Nuestras aplicaciones de Android se componían de una o más <strong><code>Activity</code></strong> o <strong><code>Fragment</code></strong> y cada uno de ellos tenía su propio <strong><code>ViewModel</code></strong> que se creaba como una <strong>instancia única</strong>. <strong><code>ViewModel</code></strong> se usaba para almacenar datos que se necesitaban en la interfaz de usuario de la <strong><code>Activity/Fragment</code></strong> o el <strong><code>Fragment</code></strong> y queríamos que sobrevivieran a los cambios de configuración o queríamos compartir datos entre ellos.</p>
+<p>Con la llegada de <strong>Jetpack Compose</strong> este enfoque ha cambiado y Google ahora <strong>recomienda aplicaciones de actividad única</strong> donde las diferentes pantallas se cargan como contenido dentro de la misma actividad. Por tanto, un ViewModel utilizado por una actividad permanece en memoria hasta que la actividad finalice esto es hasta que la aplicación finalice.</p>
+<h4 class="crossnote-header" id="ciclo-de-vida-de-un-viewmodel">Ciclo de vida de un ViewModel</h4>
 
 <ul>
-<li>En el caso de una <strong><code>Activity</code></strong>, hasta que termina. (<strong>El m&#xE1;s com&#xFA;n</strong>)</li>
+<li>En el caso de una <strong><code>Activity</code></strong>, hasta que termina. (<strong>El más común</strong>)</li>
 <li><s>En el caso de un <strong><code>Fragment</code></strong>, cuando se desvincula.</s> (No se usa en Compose)</li>
-<li>En el caso de un <strong><code>NavBackStackEntry</code></strong>, hasta volvemos atr&#xE1;s en el grafo.</li>
+<li>En el caso de un <strong><code>NavBackStackEntry</code></strong>, hasta volvemos atrás en el grafo.</li>
 </ul>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 65%">
-<p>En la imagen de la derecha vemos que el objeto <strong><code>ViewModel</code></strong> cuyo <strong>&apos;<em>propietario</em>&apos;</strong> (el <strong><code>ViewModelStoreOwner</code></strong>) es una <strong><code>Activity</code></strong> que tiene un cambio de configuraci&#xF3;n (rotaci&#xF3;n de pantalla) y por tanto se destruye y vuelve a crearse su vista asociada.</p>
+<div class="flotante" ,="" style="align-items: end;">
+<div class="flotante_izq">
+<p>En la imagen de la derecha vemos que el objeto <strong><code>ViewModel</code></strong> cuyo <strong>'<em>propietario</em>'</strong> (el <strong><code>ViewModelStoreOwner</code></strong>) es una <strong><code>Activity</code></strong> que tiene un cambio de configuración (rotación de pantalla) y por tanto se destruye y vuelve a crearse su vista asociada.</p>
 <ol>
 <li>
-<p>Se crea al llamarse al m&#xE9;todo <strong><code>onCreate()</code></strong> de la <strong><code>Activity</code></strong> <strong>solo la primera vez</strong> y aunque se vuelva a llamar a <strong><code>onCreate()</code></strong> por un cambio de configuraci&#xF3;n, <strong>no se vuelve a crear</strong> permanece el mismo objeto <strong><code>ViewModel</code></strong> que se cre&#xF3; en la primera llamada.</p>
+<p>Se crea al llamarse al método <strong><code>onCreate()</code></strong> de la <strong><code>Activity</code></strong> <strong>solo la primera vez</strong> y aunque se vuelva a llamar a <strong><code>onCreate()</code></strong> por un cambio de configuración, <strong>no se vuelve a crear</strong> permanece el mismo objeto <strong><code>ViewModel</code></strong> que se creó en la primera llamada.</p>
 </li>
 <li>
-<p><strong>No se destruye</strong> aunque la <strong><code>Activity</code></strong> destruya su vista y permanece en memoria hasta la finalizaci&#xF3;n de la <strong><code>Activity</code></strong>, en ese momento se llama al m&#xE9;todo <strong><code>onCleared()</code></strong> del <strong><code>ViewModel</code></strong> para que realice las tareas de limpieza necesarias.</p>
+<p><strong>No se destruye</strong> aunque la <strong><code>Activity</code></strong> destruya su vista y permanece en memoria hasta la finalización de la <strong><code>Activity</code></strong>, en ese momento se llama al método <strong><code>onCleared()</code></strong> del <strong><code>ViewModel</code></strong> para que realice las tareas de limpieza necesarias.</p>
 </li>
 </ol>
 </div>
-<div style="width: auto">
-    <img height="350px" src="assets/imagenes/tema_3_4/viewmodel-lifecycle.png">
+<div class="flotante_der">
+    <img width="800px" src="assets/imagenes/tema_3_4/viewmodel-lifecycle.png">
 </div>
 </div>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="-instanciando-un-viewmodel-">Instanciando un ViewModel</h3>
+<h3 class="crossnote-header" id="instanciando-un-viewmodel">Instanciando un ViewModel</h3>
 
-<p>Hay muchas formas de instanciarlo y eso nos puede llevar a confusi&#xF3;n. Pero nosotros vamos a usar la m&#xE1;s sencilla y recomendada por Google. De todas formas, si quieres profundizar puedes ver el siguiente <em><strong><a href="https://developer.android.com/static/images/topic/libraries/architecture/viewmodel-apis-cheatsheet.png?hl=es-419">&apos;cheatsheet&apos;</a></strong></em> creado por los desarrolladores de Google.</p>
+<p>Hay muchas formas de instanciarlo y eso nos puede llevar a confusión. Pero nosotros vamos a usar la más sencilla y recomendada por Google. De todas formas, si quieres profundizar puedes ver el siguiente <em><strong><a href="https://developer.android.com/static/images/topic/libraries/architecture/viewmodel-apis-cheatsheet.png?hl=es-419">'cheatsheet'</a></strong></em> creado por los desarrolladores de Google.</p>
 <ol>
 <li>
-<p>Para definirlo deberemos crear una clase que herede de <strong><code>ViewModel</code></strong> y que implemente la l&#xF3;gica de negocio que necesitemos.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> MiViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-</pre></li>
+<p>Para definirlo deberemos crear una clase que herede de <strong><code>ViewModel</code></strong> y que implemente la lógica de negocio que necesitemos.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> MiViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+</code></pre></li>
 <li>
-<p>&#x274C; <strong>No debemos hacer jam&#xE1;s una instancia direcra</strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> <span class="token function">MiViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//&#x1F480;&#x1F480;</span>
-</pre><p>Ya que el ciclo de vida de un ViewModel est&#xE1; asociado a un <strong><code>ViewModelStoreOwner</code></strong> y por tanto es la clase <strong><code>ViewModelProvider</code></strong> la que se encarga de crearlo y mantenerlo en memoria.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// activity es el objeto que implementa ViewModelStoreOwner</span>
+<p>❌ <strong>No debemos hacer jamás una instancia direcra</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> <span class="token function">MiViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//💀💀</span>
+</code></pre><p>Ya que el ciclo de vida de un ViewModel está asociado a un <strong><code>ViewModelStoreOwner</code></strong> y por tanto es la clase <strong><code>ViewModelProvider</code></strong> la que se encarga de crearlo y mantenerlo en memoria.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// activity es el objeto que implementa ViewModelStoreOwner</span>
 <span class="token keyword keyword-val">val</span> miVm <span class="token operator">=</span> <span class="token function">ViewModelProvider</span><span class="token punctuation">(</span>activity<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>MiViewModel<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
-</pre><blockquote>
-<p>&#x270B; <strong>Importante</strong>: Sin embargo nosotros <strong>no tendremos que crearlo as&#xED; nunca</strong> pues <strong>Jetpack</strong> nos proporciona formas m&#xE1;s sencillas de hacerlo.</p>
-</blockquote>
+</code></pre><p>El código anterior, nosotros <strong>no tendremos que crearlo así nunca</strong>, pues <strong>Jetpack</strong> nos proporciona formas más sencillas de hacerlo.</p>
 </li>
 <li>
-<p>&#x26A0;&#xFE0F; Como en el fondo debe ser <strong><code>ViewModelProvider</code></strong> quien lo crea, <strong>si pasamos par&#xE1;metros al constructor</strong> de la clase <strong><code>MiViewModel</code></strong> no nos va a dejar, m&#xE1;s adelante tendremos formas m&#xE1;s sencillas de hacerlo. Por tanto, de momento, no deber&#xED;amos pasar par&#xE1;metros al constructor.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> <span class="token function">MiViewModel</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> param<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>  <span class="token comment">//&#x1F480;&#x1F480;</span>
-</pre><p>Si necesit&#xE1;ramos pasar par&#xE1;metros al constructor, deberemos crear una clase que implemente <strong><code>ViewModelProvider.Factory</code></strong> y que se encargue de crear el objeto <strong><code>MiViewModel</code></strong> como se indica en la <strong><a href="https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-factories?hl=es-419">documentaci&#xF3;n oficial</a></strong>.</p>
+<p>⚠️ Como en el fondo debe ser <strong><code>ViewModelProvider</code></strong> quien lo crea, <strong>si pasamos parámetros al constructor</strong> de la clase <strong><code>MiViewModel</code></strong> no nos va a dejar, más adelante tendremos formas más sencillas de hacerlo. Por tanto, de momento, no deberíamos pasar parámetros al constructor.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">MiViewModel</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> param<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>  <span class="token comment">//💀💀</span>
+</code></pre><p>Si necesitáramos pasar parámetros al constructor, deberemos crear una clase que implemente <strong><code>ViewModelProvider.Factory</code></strong> y que se encargue de crear el objeto <strong><code>MiViewModel</code></strong> como se indica en la <strong><a href="https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-factories">documentación oficial</a></strong>.</p>
 <blockquote></blockquote>
-<blockquote>
-<p>&#x270B; <strong>Importante</strong>: Ya veremos m&#xE1;s adelante que la librer&#xED;a <strong>Hilt</strong> (Jetpack) para inyecci&#xF3;n de dependencias me facilita mucho esta tarea. As&#xED; pues, no tendremos nunca que crear una clase que implemente <strong><code>ViewModelProvider.Factory</code></strong> cuando pasemos par&#xE1;metros.</p>
-</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Importante</p>
+<p>Ya veremos más adelante que la librería <strong>Hilt</strong> (Jetpack) para inyección de dependencias me facilita mucho esta tarea. Así pues, no tendremos nunca que crear una clase que implemente <strong><code>ViewModelProvider.Factory</code></strong> cuando pasemos parámetros.</p>
+</div>
  <div style="page-break-after:always;"></div>
 </li>
 <li>
-<p>Delegado  de creaci&#xF3;n <strong><code>by viewModels()</code></strong>, si el propietario es una <strong><code>Activity</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2-7,12-16]}" class="language-kotlin" data-line="2-7,12-16"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Opci&#xF3;n 1</span>
-    <span class="token comment">// Lo defino como propiedad de la clase y delego su creaci&#xF3;n que ser&#xE1; al ser usado por </span>
-    <span class="token comment">// primera vez despu&#xE9;s de llamarse el m&#xE9;todo onCreate() de la Activity y puede ser </span>
-    <span class="token comment">// accedido desde cualquier m&#xE9;todo de la Activity que usemos despu&#xE9;s del onCreate()</span>
+<p>Delegado  de creación <strong><code>by viewModels()</code></strong>, si el propietario es una <strong><code>Activity</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[2-7,12-16]}" class="language-kotlin kotlin" data-line="2-7,12-16"><code><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Opción 1</span>
+    <span class="token comment">// Lo defino como propiedad de la clase y delego su creación que será al ser usado por </span>
+    <span class="token comment">// primera vez después de llamarse el método onCreate() de la Activity y puede ser </span>
+    <span class="token comment">// accedido desde cualquier método de la Activity que usemos después del onCreate()</span>
     <span class="token comment">// El delegado internamente llama a ViewModelProvider</span>
     <span class="token keyword keyword-val">val</span> miVm<span class="token operator">:</span> MiViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
 
-        <span class="token comment">// Opci&#xF3;n 2</span>
-        <span class="token comment">// Lo defino en el m&#xE9;todo onCreate() y lo clausuramos al definir el &#xE1;rbol de composici&#xF3;n.</span>
-        <span class="token comment">// seguir&#xE1; siendo destruido por ViewModelProvider al destruirse la </span>
+        <span class="token comment">// Opción 2</span>
+        <span class="token comment">// Lo defino en el método onCreate() y lo clausuramos al definir el árbol de composición.</span>
+        <span class="token comment">// seguirá siendo destruido por ViewModelProvider al destruirse la </span>
         <span class="token comment">// Activity que es el ViewModelStoreOwner</span>
         <span class="token keyword keyword-val">val</span> miVm<span class="token operator">:</span> MiViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
@@ -507,7 +410,7 @@ justo después del front matter
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 <div aria-hidden="true" class="line-highlight" data-range="2-7" data-start="2" data-end="7">
 
 
@@ -532,84 +435,69 @@ justo después del front matter
 
 </div></div></pre></li>
 <li>
-<p>Creaci&#xF3;n con <strong><code>viewModel()</code></strong>, si estamos dentro de una funci&#xF3;n <strong><code>@Composable</code></strong></p>
-<p>El <strong><code>ViewModelStoreOwner</code></strong> ser&#xE1; la <strong><code>Activity</code></strong> que renderiza la composici&#xF3;n. No importa que <strong><code>viewModel()</code></strong> sea llamado m&#xE1;s veces a lo largo de las recomposiciones pues solo se instanciar&#xE1; en la primera llamada.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<p>Creación con <strong><code>viewModel()</code></strong>, si estamos dentro de una función <strong><code>@Composable</code></strong></p>
+<p>El <strong><code>ViewModelStoreOwner</code></strong> será la <strong><code>Activity</code></strong> que renderiza la composición. No importa que <strong><code>viewModel()</code></strong> sea llamado más veces a lo largo de las recomposiciones pues solo se instanciará en la primera llamada.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">MiScreen</span><span class="token punctuation">(</span>miVm<span class="token operator">:</span> MiViewModel <span class="token operator">=</span> <span class="token function">viewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-</pre></li>
+</code></pre><p>Esta última forma, tal y como indica el <strong><code>cheatSheet</code></strong> de Google, necesita de la siguiente dependencia:</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin Kotlin"><code>dependencies <span class="token punctuation">{</span>
+    <span class="token comment">// androidx.lifecycle:lifecycle-viewmodel-compose:&lt;version&gt;</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>androidx<span class="token punctuation">.</span>lifecycle<span class="token punctuation">.</span>viewmodel<span class="token punctuation">.</span>compose<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>por lo que en el <strong><code>libs.versions.toml</code></strong> deberemos añadir la entrada correspondiente.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token punctuation">[</span>libraries<span class="token punctuation">]</span>
+androidx<span class="token operator">-</span>lifecycle<span class="token operator">-</span>viewmodel<span class="token operator">-</span>compose <span class="token operator">=</span> <span class="token punctuation">{</span> 
+    group <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"androidx.lifecycle"</span></span><span class="token punctuation">,</span> 
+    name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"lifecycle-viewmodel-compose"</span></span><span class="token punctuation">,</span> 
+    version<span class="token punctuation">.</span>ref <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"lifecycleRuntimeKtx"</span></span> 
+<span class="token punctuation">}</span>
+</code></pre></li>
 </ol>
-<blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Existen m&#xE1;s formas de crear un <strong><code>ViewModel</code></strong> que veremos m&#xE1;s adelante.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Existen más formas de crear un <strong><code>ViewModel</code></strong> que veremos más adelante.</p>
+</div>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="-ejemplo-de-uso-y-definici%C3%B3n-de-un-viewmodel-">Ejemplo de uso y definici&#xF3;n de un ViewModel</h3>
+<h3 class="crossnote-header" id="ejemplo-de-uso-y-definici%C3%B3n-de-un-viewmodel">Ejemplo de uso y definición de un ViewModel</h3>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 80%">
-<p>Vamos a crear un simple juego del ahorcado para ver c&#xF3;mo se implementa un <strong><code>ViewModel</code></strong>. Para ello vamos a partir de un proyecto donde ya hemos dise&#xF1;ado una UI con <strong>Jetpack Compose</strong>.</p>
+<div class="flotante" ,="" style="align-items: center;">
+<div class="flotante_izq">
+<p>Vamos a crear un simple juego del ahorcado para ver cómo se implementa un <strong><code>ViewModel</code></strong>. Para ello vamos a partir de un proyecto donde ya hemos diseñado una UI con <strong>Jetpack Compose</strong>.</p>
 <ul>
 <li>Puedes descargar el proyecto de partida de este enlace <strong><a href="assets/codigo/tema_3_4/Ahorcado_recurso.zip">Ahorcado.zip</a></strong>.</li>
 </ul>
-<p>Vamos a explicar la implementaci&#xF3;n del interfaz de usuario antes de ver la implementaci&#xF3;n del <strong><code>ViewModel</code></strong>. Para ello, partimos de la estructura del proyecto que se muestra en la imagen de la derecha donde tenemos un <strong><code>AhorcadoScreen.kt</code></strong>, un <strong><code>AhorcadoUiState.kt</code></strong> que guardar&#xE1; el &apos;<em>State</em>&apos; del UI y un <strong><code>AhorcadoEvent.kt</code></strong> que gestionar&#xE1; los eventos que se produzcan en el UI.</p>
+<p>Vamos a explicar la implementación del interfaz de usuario antes de ver la implementación del <strong><code>ViewModel</code></strong>. Para ello, partimos de la estructura del proyecto que se muestra en la imagen de la derecha donde tenemos un <strong><code>AhorcadoScreen.kt</code></strong>, un <strong><code>AhorcadoUiState.kt</code></strong> que guardará el '<em>State</em>' del UI y un <strong><code>AhorcadoEvent.kt</code></strong> que gestionará los eventos que se produzcan en el UI.</p>
 </div>
-<div style="width: auto">
-<p align="center" style="zoom:1"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" contentscripttype="application/ecmascript" contentstyletype="text/css" height="183px" preserveAspectRatio="none" style="width:173px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 173 183" width="173px" zoomAndPan="magnify"><defs/><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"/><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"/><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85" x="26" y="39.5508">[com.ahorcado]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="56" y="84.832">[juego]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="100" x="56" y="99.9258">AhorcadoEvent.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110" x="56" y="115.0195">AhorcadoScreen.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110" x="56" y="130.1133">AhorcadoUiState.kt</text><path d="M37,136.8438 L37,138.8438 L45,138.8438 L45,137.8438 L40,137.8438 L40,136.8438 L37,136.8438 M37,139.8438 L37,144.3438 C37,144.6238 37.22,144.8438 37.5,144.8438 L44.5,144.8438 C44.78,144.8438 45,144.6238 45,144.3438 L45,139.8438 L37,139.8438 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="46" y="145.207">[theme]</text><path d="M37,151.9375 L37,153.9375 L45,153.9375 L45,152.9375 L40,152.9375 L40,151.9375 L37,151.9375 M37,154.9375 L37,159.4375 C37,159.7175 37.22,159.9375 37.5,159.9375 L44.5,159.9375 C44.78,159.9375 45,159.7175 45,159.4375 L45,154.9375 L37,154.9375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="46" y="160.3008">[views]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="46" y="175.3945">MainActivity.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"/><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="63.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="64.8281" y2="64.8281"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="78.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="66.8281" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="79.9219" y2="79.9219"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="95.0156" y2="95.0156"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="110.1094" y2="110.1094"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="125.2031" y2="125.2031"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="140.2969"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="140.2969" y2="140.2969"/><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="154.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="155.3906" y2="155.3906"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="157.3906" y2="170.4844"/><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="170.4844" y2="170.4844"/><!--MD5=[12d1a0535afa2cf1337a7a2dafb93139]
-@startsalt
-
-{
-^Android^
-{T
-+ <&folder>[com.ahorcado]
-++ **<&folder>[ui]**
-+++ **<&folder>[features]**
-++++ **<&folder>[juego]**
-+++++ <color:royalblue>**AhorcadoEvent.kt**
-+++++ <color:royalblue>**AhorcadoScreen.kt**
-+++++ <color:royalblue>**AhorcadoUiState.kt**
-+++ <&folder>[theme]
-+++ <&folder>[views]
-++++ MainActivity.kt
-
-}
-}
-@endsalt
-
-PlantUML version 1.2021.12(Tue Oct 05 18:01:58 CEST 2021)
-(GPL source distribution)
-Java Runtime: Java(TM) SE Runtime Environment
-JVM: Java HotSpot(TM) 64-Bit Server VM
-Default Encoding: UTF-8
-Language: es
-Country: ES
---></g></svg></p></div>
+<div class="flotante_der">
+<p align="center" style="zoom:1" class="puml"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="183px" preserveAspectRatio="none" style="width:173px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 173 183" width="173px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85" x="26" y="39.5508">[com.ahorcado]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39" x="56" y="84.832">[juego]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="100" x="56" y="99.9258">AhorcadoEvent.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110" x="56" y="115.0195">AhorcadoScreen.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110" x="56" y="130.1133">AhorcadoUiState.kt</text><path d="M37,136.8438 L37,138.8438 L45,138.8438 L45,137.8438 L40,137.8438 L40,136.8438 L37,136.8438 M37,139.8438 L37,144.3438 C37,144.6238 37.22,144.8438 37.5,144.8438 L44.5,144.8438 C44.78,144.8438 45,144.6238 45,144.3438 L45,139.8438 L37,139.8438 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="46" y="145.207">[theme]</text><path d="M37,151.9375 L37,153.9375 L45,153.9375 L45,152.9375 L40,152.9375 L40,151.9375 L37,151.9375 M37,154.9375 L37,159.4375 C37,159.7175 37.22,159.9375 37.5,159.9375 L44.5,159.9375 C44.78,159.9375 45,159.7175 45,159.4375 L45,154.9375 L37,154.9375 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="46" y="160.3008">[views]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="46" y="175.3945">MainActivity.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1.0;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="140.2969" y2="140.2969"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="154.3906"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="20" y1="51.7344" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1.0;" x1="20" x2="28" y1="155.3906" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="157.3906" y2="170.4844"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="170.4844" y2="170.4844"></line><!--SRC=[ZP1FJy904CNl-odcPA24fY0QqnW2GZ516eajN4n9bdOegsNNR6Th2F6xkmOGyKJczdvltlpfbSGrbRmWndPiqPUPLY9Ri5tC6d1_jL95XhhxcggDozTAfpnJ2Miqm75Eq8Z4SQnuhgwGaz5O7jWvV3EOgoEnWr9LAErhjUN5iZ3OTPp-OLfGeIJtdIxnHgb6b1UQPo8YJlZh_dCjhN63oJ-n4lXP9ljJGYvaFoLH2ThQ0CQ-RFLGPlj7JWikQHPEe49T2YMXvRQzTiUzhiLh0oDSGki6sfxVyNpl1WP133-upcgFqmcKokWK8HCbQR4qPFlhRCmh3Yz6ajYW3yyVACV3fwC0WQo4Ld9ZFyN6y_1akEqq7mH1XDfk0lEG3N75JK6s8rMPaBaFitZKl6CJBdF3SvkD9HiecwktFWJHDm00]--></g></svg></p></div>
 </div>
-<h4 class="mume-header" id="-ahorcadouistatekt-">AhorcadoUiState.kt</h4>
+<h4 class="crossnote-header" id="ahorcadouistatekt">AhorcadoUiState.kt</h4>
 
-<p>Como hemos comentado guardar&#xE1; el &apos;<em>State</em>&apos; del UI definido en <strong><code>AhorcadoScreen.kt</code></strong> y que b&#xE1;sicamente ser&#xE1; el estado del conocido juego del ahorcado.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span>
-    <span class="token comment">// &#xDA;ltima letra introducida por el usuario, es una cadena de una sola letra.    </span>
-    <span class="token keyword keyword-val">val</span> letraIntroducida<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
-    <span class="token comment">// Palabra que se tiene que adivinar, proceder&#xE1; de alguna fuente de datos.</span>
-    <span class="token keyword keyword-val">val</span> palabra<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+<p>Como hemos comentado guardará el '<em>State</em>' del UI definido en <strong><code>AhorcadoScreen.kt</code></strong> y que básicamente será el estado del conocido juego del ahorcado.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span>
+    <span class="token comment">// Última letra introducida por el usuario, es una cadena de una sola letra.    </span>
+    <span class="token keyword keyword-val">val</span> letraIntroducida<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
+    <span class="token comment">// Palabra que se tiene que adivinar, procederá de alguna fuente de datos.</span>
+    <span class="token keyword keyword-val">val</span> palabra<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
     <span class="token comment">// Cadena que lleva las letras que se han fallado en el juego.</span>
-    <span class="token keyword keyword-val">val</span> letrasFalladas<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> letrasFalladas<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
     <span class="token comment">// Cadena que lleva las letras que se han acertado de la palabra a adivinar.</span>
-    <span class="token keyword keyword-val">val</span> letrasAcertadas<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> letrasAcertadas<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
     <span class="token comment">// Valor enumerado que guarda en que momento del juego estoy.</span>
     <span class="token keyword keyword-val">val</span> estado<span class="token operator">:</span> EstadoJuego <span class="token operator">=</span> EstadoJuego<span class="token punctuation">.</span>EMPEZAR
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-enum">enum</span> <span class="token keyword keyword-class">class</span> EstadoJuego <span class="token punctuation">{</span> 
-        EMPEZAR<span class="token punctuation">,</span> <span class="token comment">// El juego a&#xFA;n no ha empezado y no se ha generado la palabra a adivinar.</span>
+        EMPEZAR<span class="token punctuation">,</span> <span class="token comment">// El juego aún no ha empezado y no se ha generado la palabra a adivinar.</span>
         JUGANDO<span class="token punctuation">,</span> <span class="token comment">// Estamos ya jugando y ya hay una palabra a adivinar.</span>
         GANADO<span class="token punctuation">,</span>  <span class="token comment">// El juego ha terminado ya y se ha ganado o se ha perdido. El usuario debe ve</span>
         PERDIDO  <span class="token comment">// el resultado y debe aceptarlo para poder volver al estado EMPEZAR.</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="-ahorcadoeventkt-">AhorcadoEvent.kt</h4>
+</code></pre><div style="page-break-after:always;"></div>
+<h4 class="crossnote-header" id="ahorcadoeventkt">AhorcadoEvent.kt</h4>
 
-<p>Lo eventos posibles que vamos a manejar en el UI y que se producir&#xE1;n al interactuar con el mismo los agrupamos en el siguiente <strong><code>sealed interface</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> AhorcadoEvent <span class="token punctuation">{</span>
+<p>Lo eventos posibles que vamos a manejar en el UI y que se producirán al interactuar con el mismo los agrupamos en el siguiente <strong><code>sealed interface</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> AhorcadoEvent <span class="token punctuation">{</span>
     <span class="token comment">// Estamos en estado EMPEZAR y pasamos a JUGANDO.</span>
     <span class="token keyword keyword-object">object</span> OnEmpezarJuego <span class="token operator">:</span> AhorcadoEvent
     <span class="token comment">// Ha finalizado el juego, estamos en estado GANADO y PERDIDO y pasamos al estado EMPEZAR.</span>
@@ -617,15 +505,15 @@ Country: ES
     <span class="token comment">// Estamos JUGANDO hay una **`letraIntroducida`** y la enviamos para que se compruebe.</span>
     <span class="token keyword keyword-object">object</span> OnLetraEnviada <span class="token operator">:</span> AhorcadoEvent
     <span class="token comment">// El usuario introduce una letra y tenemos que comprobarla para ver si pertenece al</span>
-    <span class="token comment">// alfabeto castellano (sin tildes) y no est&#xE1; entre las acertadas y falladas. </span>
-    <span class="token comment">// De esta manera despu&#xE9;s podremos jugar con ella.s</span>
+    <span class="token comment">// alfabeto castellano (sin tildes) y no está entre las acertadas y falladas. </span>
+    <span class="token comment">// De esta manera después podremos jugar con ella.s</span>
     <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnCambiaLetraIntroducida</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> letra<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> AhorcadoEvent
 <span class="token punctuation">}</span>
-</pre><h4 class="mume-header" id="-ahorcadoscreenkt-">AhorcadoScreen.kt</h4>
+</code></pre><h4 class="crossnote-header" id="ahorcadoscreenkt">AhorcadoScreen.kt</h4>
 
-<p>Definimos el UI usando <strong><code>Jetpack Compose</code></strong> y aplicando &apos;<em>State Hoisting</em> &apos; con funciones <em>composables</em> sin estado o &apos;<em>stateless</em>&apos;. Es la parte m&#xE1;s extensa y vamos a describir los <strong>componentes m&#xE1;s importantes</strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Recibe el n&#xFA;mero de fallos y los representa con una </span>
-<span class="token comment">// de la im&#xE1;genes del ahorcado definidas en los recursos.</span>
+<p>Definimos el UI usando <strong><code>Jetpack Compose</code></strong> y aplicando '<em>State Hoisting</em> ' con funciones <em>composables</em> sin estado o '<em>stateless</em>'. Es la parte más extensa y vamos a describir los <strong>componentes más importantes</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Recibe el número de fallos y los representa con una </span>
+<span class="token comment">// de la imágenes del ahorcado definidas en los recursos.</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">MuestraAhorcado</span><span class="token punctuation">(</span>modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span> fallos<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> idRecurso <span class="token operator">=</span> <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>fallos<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -636,18 +524,18 @@ Country: ES
         <span class="token number">4</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado4
         <span class="token number">5</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado5
         <span class="token number">6</span> <span class="token operator">-&gt;</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ahorcado6
-        <span class="token keyword keyword-else">else</span> <span class="token operator">-&gt;</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">Exception</span><span class="token punctuation">(</span><span class="token string">&quot;N&#xFA;mero de fallos incorrecto&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-else">else</span> <span class="token operator">-&gt;</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">Exception</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Número de fallos incorrecto"</span></span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
     <span class="token function">Image</span><span class="token punctuation">(</span>
         modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>idRecurso<span class="token punctuation">)</span><span class="token punctuation">,</span>
-        contentDescription <span class="token operator">=</span> <span class="token string">&quot;Dibujo del ahorcado&quot;</span><span class="token punctuation">,</span>
+        contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Dibujo del ahorcado"</span></span><span class="token punctuation">,</span>
         colorFilter <span class="token operator">=</span> ColorFilter<span class="token punctuation">.</span><span class="token function">tint</span><span class="token punctuation">(</span>MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>primary<span class="token punctuation">)</span>
     <span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Recibe la palabra a adivinar y las letras acertadas y muestra las letras acertadas y </span>
-<span class="token comment">// las que faltan por acertar representadas por &apos;_&apos;. Tenemos pues un Row con Text para cada letra.</span>
+</code></pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Recibe la palabra a adivinar y las letras acertadas y muestra las letras acertadas y </span>
+<span class="token comment">// las que faltan por acertar representadas por '_'. Tenemos pues un Row con Text para cada letra.</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">Palabra</span><span class="token punctuation">(</span>palabra<span class="token operator">:</span> String<span class="token punctuation">,</span> letrasAcertadas<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Row</span><span class="token punctuation">(</span>
     modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -677,10 +565,10 @@ Country: ES
         <span class="token function">Fallos</span><span class="token punctuation">(</span>letrasFalladas<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// TextField encargado de introducir una letra. Su estado est&#xE1; representado por letraState.</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// TextField encargado de introducir una letra. Su estado está representado por letraState.</span>
 <span class="token comment">// Si hay letra parra jugar se muestra un Button para enviarla. </span>
-<span class="token comment">// Por esa raz&#xF3;n elevamos dos eventos como la introducci&#xF3;n de una letra y el env&#xED;o de la misma.</span>
-<span class="token comment">// Esto solo se podr&#xE1; hacer si hay una letra v&#xE1;lida para jugar.</span>
+<span class="token comment">// Por esa razón elevamos dos eventos como la introducción de una letra y el envío de la misma.</span>
+<span class="token comment">// Esto solo se podrá hacer si hay una letra válida para jugar.</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">JuegaLetra</span><span class="token punctuation">(</span>    
     letraState<span class="token operator">:</span> String<span class="token punctuation">,</span> onCambiaLetraIntroducida<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span> onLetraEnviada<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
@@ -698,7 +586,7 @@ Country: ES
             value <span class="token operator">=</span> letraState<span class="token punctuation">,</span>
             singleLine <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">onCambiaLetraIntroducida</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">uppercase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            label <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Letra&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            label <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Letra"</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">)</span>
         <span class="token comment">// Hace que el foco recaiga sobre el OutlinedTextField</span>
         <span class="token function">LaunchedEffect</span><span class="token punctuation">(</span>Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span> focusRequester<span class="token punctuation">.</span><span class="token function">requestFocus</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
@@ -708,26 +596,26 @@ Country: ES
             <span class="token function">Button</span><span class="token punctuation">(</span>
                 modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span>start <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> end <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
                 onClick <span class="token operator">=</span> <span class="token punctuation">{</span>
-                    <span class="token comment">// Ocultamos el teclado si est&#xE1; visible antes de enviar la letra.</span>
+                    <span class="token comment">// Ocultamos el teclado si está visible antes de enviar la letra.</span>
                     controller<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                     <span class="token function">onLetraEnviada</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
                 <span class="token punctuation">}</span>
-            <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string">&quot;Jugar&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Jugar"</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">// Componente que se muestra si el juego ha terminado y el estado es GANADO o PERDIDO.</span>
 <span class="token comment">// Mostramos el aviso correspondiente y un Button para aceptar el resultado y volver al estado EMPEZAR.</span>
-<span class="token comment">// Podr&#xED;a ser una AlertDialog.</span>
+<span class="token comment">// Podría ser una AlertDialog.</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">ResultadoFinalJuego</span><span class="token punctuation">(</span>
     modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
     estadoJuego<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">,</span>
     onAceptarResultadoFinalJuego<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Gesti&#xF3;n de los estados de juego y su composici&#xF3;n de la UI.</span>
+</code></pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Gestión de los estados de juego y su composición de la UI.</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">MuestraInterface</span><span class="token punctuation">(</span>
     modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
@@ -771,9 +659,9 @@ Country: ES
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div>
-<p>Layouts principales del juego y que gestionan la visualizaci&#xF3;n de su estado en funci&#xF3;n de la orientaci&#xF3;n del dispositivo. Vamos a permitir el cambio de orientaci&#xF3;n para probar qu&#xE9; sucede con el estado del juego guardado en <strong><code>ArhorcadoUiState</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+</code></pre><div style="page-break-after:always;"></div>
+<p>Layouts principales del juego y que gestionan la visualización de su estado en función de la orientación del dispositivo. Vamos a permitir el cambio de orientación para probar qué sucede con el estado del juego guardado en <strong><code>ArhorcadoUiState</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">AhorcadoPortrait</span><span class="token punctuation">(</span>ahorcadoState<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">,</span> onEventSent<span class="token operator">:</span> <span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
 
 <span class="token annotation builtin">@Composable</span>
@@ -784,14 +672,14 @@ Country: ES
     ahorcadoState<span class="token operator">:</span> AhorcadoUiState<span class="token punctuation">,</span>
     onEventSent<span class="token operator">:</span> <span class="token punctuation">(</span>AhorcadoEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Este es el layout principal que permite accder al tama&#xF1;o del ViewPort de la aplicaci&#xF3;n</span>
-    <span class="token comment">// maxWidth y maxHeight. En funci&#xF3;n de estos valores se decide como se distribuyen los componentes.</span>
+    <span class="token comment">// Este es el layout principal que permite accder al tamaño del ViewPort de la aplicación</span>
+    <span class="token comment">// maxWidth y maxHeight. En función de estos valores se decide como se distribuyen los componentes.</span>
     <span class="token function">BoxWithConstraints</span><span class="token punctuation">(</span>
         modifier <span class="token operator">=</span> Modifier
             <span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
             <span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span>MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surface<span class="token punctuation">)</span>
     <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// Query que decide c&#xF3;mo se pinta el UI en funci&#xF3;n del ancho del ViewPort.</span>
+        <span class="token comment">// Query que decide cómo se pinta el UI en función del ancho del ViewPort.</span>
         <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>maxWidth <span class="token operator">&lt;</span> <span class="token number">600</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">AhorcadoPortrait</span><span class="token punctuation">(</span>
                 ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">,</span>
@@ -805,16 +693,13 @@ Country: ES
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div>
-<h4 class="mume-header" id="-ahorcadoviewmodelkt-">AhorcadoViewModel.kt</h4>
+</code></pre><div style="page-break-after:always;"></div>
+<h4 class="crossnote-header" id="ahorcadoviewmodelkt">AhorcadoViewModel.kt</h4>
 
-<blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Este c&#xF3;digo na no est&#xE1; en el proyecto <strong><code>Ahorcado</code></strong> que hemos descargado al principio del ejemplo.</p>
-</blockquote>
-<p>Esta definici&#xF3;n ir&#xE1; dentro del paquete <strong><code>com.ahorcado.ui.features.juego</code></strong>. Aqu&#xED; definiremos el estado del UI y la l&#xF3;gica de negocio del juego. Hasta aqu&#xED; llegar&#xE1;n todos los eventos que se produzcan en la UI.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-class">class</span> AhorcadoViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p>Esta definición irá dentro del paquete <strong><code>com.ahorcado.ui.features.juego</code></strong>. Aquí definiremos el estado del UI y la lógica de negocio del juego. Hasta aquí llegarán todos los eventos que se produzcan en la UI.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AhorcadoViewModel <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    <span class="token comment">// En esta secci&#xF3;n definimos todas las propiedades y m&#xE9;todos de clase que necesitemos.</span>
+    <span class="token comment">// En esta sección definimos todas las propiedades y métodos de clase que necesitemos.</span>
     <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> MAXIMO_FALLOS <span class="token operator">=</span> <span class="token number">6</span>
 
@@ -832,15 +717,15 @@ Country: ES
     <span class="token punctuation">}</span>
 
     <span class="token comment">// Definimos el estado del UI</span>
-    <span class="token comment">// No podemos usar el API remenber pues no estamos dentro de un @Composable y adem&#xE1;s  </span>
+    <span class="token comment">// No podemos usar el API remenber pues no estamos dentro de un @Composable y además  </span>
     <span class="token comment">// al estar un ViewModel permanace en memoria hasta que se destruya la Activity.</span>
     <span class="token keyword keyword-var">var</span> ahorcadoState <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
     <span class="token operator">..</span><span class="token punctuation">.</span>
-</pre><p>Definiremos lo m&#xE9;todos que gestionan los cambios del estado de la UI</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">empiezaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// Podr&#xED;a ser una fuente de datos.</span>
-        <span class="token keyword keyword-val">val</span> palabras <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string">&quot;XUSA&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;JUANJO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;PEPE&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;COMPOSABLE&quot;</span><span class="token punctuation">)</span>
+</code></pre><p>Definiremos lo métodos que gestionan los cambios del estado de la UI</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">empiezaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Podría ser una fuente de datos.</span>
+        <span class="token keyword keyword-val">val</span> palabras <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"XUSA"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"JUANJO"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"PEPE"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"COMPOSABLE"</span></span><span class="token punctuation">)</span>
         ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
             <span class="token comment">// Tomamos una palabra aleatoria a adivinar.</span>
             palabra <span class="token operator">=</span> palabras<span class="token punctuation">[</span>Random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> palabras<span class="token punctuation">.</span>size<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -848,36 +733,36 @@ Country: ES
             estado <span class="token operator">=</span> AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>JUGANDO
         <span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-</pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">reiniciaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">reiniciaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         ahorcadoState <span class="token operator">=</span> <span class="token function">AhorcadoUiState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 
-    <span class="token comment">// M&#xE9;todo encargado de ver si la letra introducida en el TextField de la</span>
-    <span class="token comment">// UI es v&#xE1;lida para jugar y si es as&#xED;, guardar su estado para reflejarlo en el mismo.</span>
-    <span class="token comment">// Aunque est&#xE9; relacionado con dicho elemento de la UI, f&#xED;jate que en ning&#xFA;n </span>
-    <span class="token comment">// indicarlo en los nombres, ya que el ViewModel debe permanecer &apos;agn&#xF3;stico&apos; de </span>
-    <span class="token comment">// momento debemos c&#xF3;mo es la implementaci&#xF3;n en la UI.</span>
+    <span class="token comment">// Método encargado de ver si la letra introducida en el TextField de la</span>
+    <span class="token comment">// UI es válida para jugar y si es así, guardar su estado para reflejarlo en el mismo.</span>
+    <span class="token comment">// Aunque esté relacionado con dicho elemento de la UI, fíjate que en ningún </span>
+    <span class="token comment">// indicarlo en los nombres, ya que el ViewModel debe permanecer 'agnóstico' de </span>
+    <span class="token comment">// momento debemos cómo es la implementación en la UI.</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">gestionaLetraIntroducida</span><span class="token punctuation">(</span>letra<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        <span class="token comment">// Si solo hay una letra, no est&#xE1; entre las acertadas </span>
-        <span class="token comment">// ni entre las falladas y est&#xE1; entre la A-Z incluida &#xD1;</span>
+        <span class="token comment">// Si solo hay una letra, no está entre las acertadas </span>
+        <span class="token comment">// ni entre las falladas y está entre la A-Z incluida Ñ</span>
         ahorcadoState <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>letra<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">1</span>
             <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>ahorcadoState<span class="token punctuation">.</span>letrasAcertadas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>letra<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
             <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>ahorcadoState<span class="token punctuation">.</span>letrasFalladas<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>letra<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-            <span class="token operator">&amp;&amp;</span> <span class="token function">Regex</span><span class="token punctuation">(</span><span class="token string">&quot;^[A-Z&#xD1;]$&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span>letra<span class="token punctuation">)</span>
+            <span class="token operator">&amp;&amp;</span> <span class="token function">Regex</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"^[A-ZÑ]$"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span>letra<span class="token punctuation">)</span>
         <span class="token punctuation">)</span>
             ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>letraIntroducida <span class="token operator">=</span> letra<span class="token punctuation">)</span>
         <span class="token keyword keyword-else">else</span>
-            ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>letraIntroducida <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+            ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>letraIntroducida <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 
-    <span class="token comment">// M&#xE9;todo encargado de jugar la letra introducida</span>
+    <span class="token comment">// Método encargado de jugar la letra introducida</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">juegaLetraIntroducida</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>palabra<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>letraIntroducida<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword keyword-val">val</span> letrasAcertadas <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letrasAcertadas 
                                 <span class="token operator">+</span> ahorcadoState<span class="token punctuation">.</span>letraIntroducida
             ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
-                letraIntroducida <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                letraIntroducida <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
                 letrasAcertadas <span class="token operator">=</span> letrasAcertadas<span class="token punctuation">,</span>
                 estado <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">palabraAcertada</span><span class="token punctuation">(</span>ahorcadoState<span class="token punctuation">.</span>palabra<span class="token punctuation">,</span> letrasAcertadas<span class="token punctuation">)</span><span class="token punctuation">)</span>
                     AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>GANADO
@@ -888,7 +773,7 @@ Country: ES
             <span class="token keyword keyword-val">val</span> letrasFalladas <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span>letrasFalladas 
                                <span class="token operator">+</span> ahorcadoState<span class="token punctuation">.</span>letraIntroducida
             ahorcadoState <span class="token operator">=</span> ahorcadoState<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
-                letraIntroducida <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                letraIntroducida <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
                 letrasFalladas <span class="token operator">=</span> letrasFalladas<span class="token punctuation">,</span>
                 estado <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>letrasFalladas<span class="token punctuation">.</span>length <span class="token operator">==</span> MAXIMO_FALLOS<span class="token punctuation">)</span>
                     AhorcadoUiState<span class="token punctuation">.</span>EstadoJuego<span class="token punctuation">.</span>PERDIDO
@@ -897,8 +782,8 @@ Country: ES
             <span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-</pre><div style="page-break-after:always;"></div>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token comment">// M&#xE9;todo encargado de gestionar los eventos que se produzcan en la UI.</span>
+</code></pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token comment">// Método encargado de gestionar los eventos que se produzcan en la UI.</span>
     <span class="token keyword keyword-fun">fun</span> <span class="token function">onEventoAhorcado</span><span class="token punctuation">(</span>evento <span class="token operator">:</span> AhorcadoEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>evento<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword keyword-is">is</span> AhorcadoEvent<span class="token punctuation">.</span>OnEmpezarJuego <span class="token operator">-&gt;</span> <span class="token function">empiezaJuego</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -908,17 +793,17 @@ Country: ES
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span> <span class="token comment">// Fin de la clase AhorcadoViewModel</span>
-</pre><h4 class="mume-header" id="-asociando-el-viewmodel-a-la-ui-en-mainactivitykt-">Asociando el ViewModel a la UI en MainActivity.kt</h4>
+</code></pre><h4 class="crossnote-header" id="asociando-el-viewmodel-a-la-ui-en-mainactivitykt">Asociando el ViewModel a la UI en MainActivity.kt</h4>
 
 <p>Vamos ahora a usar nuestro <strong><code>ViewModel</code></strong>...</p>
 <ol>
 <li>
-<p>&#x274C; Supongamos que cramos el objeto <strong><code>ViewModel</code></strong> sin m&#xE1;s en el <strong><code>onCreate()</code></strong> sin usar ning&#xFA;n tipo de <strong><code>ViewModelProvider</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[2, 5]}" class="language-kotlin" data-line="2,5"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p>❌ Supongamos que cramos el objeto <strong><code>ViewModel</code></strong> sin más en el <strong><code>onCreate()</code></strong> sin usar ningún tipo de <strong><code>ViewModelProvider</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[2, 5]}" class="language-kotlin kotlin" data-line="2,5"><code><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-        ahorcadoViewModel <span class="token operator">=</span> <span class="token function">AhorcadoViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x1F480;&#x1F480;</span>
+        ahorcadoViewModel <span class="token operator">=</span> <span class="token function">AhorcadoViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 💀💀</span>
         setContent <span class="token punctuation">{</span>
             AhorcadoTheme <span class="token punctuation">{</span>
                 <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
@@ -929,7 +814,7 @@ Country: ES
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 <div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
 </div></div><div class="line-highlight-wrapper">
 
@@ -937,16 +822,16 @@ Country: ES
 
 <div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
 </div></div></pre><p>Si empezamos a jugar y giramos el movil se vuelve a llamar a <strong><code>onCreate()</code></strong> y el estado se pierde.</p>
- <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 20px;">
+ <div class="galeria_imagenes">
      <img height="200" src="assets/imagenes/tema_3_4/VMError.png">
  </div>
 </li>
 <li>
 <p>Lo hacemos correctamente u asignaremos el <strong><code>ViewModel</code></strong> a la <strong><code>Activity</code></strong> que es el <strong><code>ViewModelStoreOwner</code></strong> primero usando <strong><code>VieModelProvider</code></strong> con el delegado <strong><code>viewModels()</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=4}" class="language-kotlin" data-line="4"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=4}" class="language-kotlin kotlin" data-line="4"><code><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
-        <span class="token keyword keyword-val">val</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x2705;</span>
+        <span class="token keyword keyword-val">val</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel <span class="token keyword keyword-by">by</span> <span class="token function">viewModels</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// ✅</span>
         setContent <span class="token punctuation">{</span>
             AhorcadoTheme <span class="token punctuation">{</span>
                 <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
@@ -957,23 +842,23 @@ Country: ES
         <span class="token punctuation">}</span>     
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 <div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
 </div></div></pre><p>Ahora si volvemos a jugar y giramos el movil el <strong><code>ViewModel</code></strong> permanece y el estado se redibuja.</p>
- <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 20px;">
+ <div class="galeria_imagenes">
      <img height="200" src="assets/imagenes/tema_3_4/VMok.png">
  </div>
 </li>
 <li>
-<p>Por &#xFA;ltimo, vamos a probar a crear el <strong><code>ViewModel</code></strong> dentro de una funci&#xF3;n <strong><code>@Composable</code></strong> usando la funci&#xF3;n <em>composable</em> <strong><code>viewModel()</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=6}" class="language-kotlin" data-line="6"><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p>Por último, vamos a probar a crear el <strong><code>ViewModel</code></strong> dentro de una función <strong><code>@Composable</code></strong> usando la función <em>composable</em> <strong><code>viewModel()</code></strong> que <strong>requiere de las dependencias</strong> que hemos comentado antes.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=6}" class="language-kotlin kotlin" data-line="6"><code><span class="token keyword keyword-class">class</span> MainActivity <span class="token operator">:</span> <span class="token function">ComponentActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-super">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
         setContent <span class="token punctuation">{</span>
             AhorcadoTheme <span class="token punctuation">{</span>
-                <span class="token keyword keyword-val">val</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel <span class="token operator">=</span> <span class="token function">viewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// &#x2705;</span>
+                <span class="token keyword keyword-val">val</span> ahorcadoViewModel<span class="token operator">:</span> AhorcadoViewModel <span class="token operator">=</span> <span class="token function">viewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// ✅</span>
                 <span class="token function">AhorcaDoScreen</span><span class="token punctuation">(</span>
                     ahorcadoViewModel<span class="token punctuation">.</span>ahorcadoState<span class="token punctuation">,</span>
                     ahorcadoViewModel<span class="token operator">::</span>onEventoAhorcado
@@ -982,7 +867,7 @@ Country: ES
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -991,32 +876,30 @@ Country: ES
 </div></div></pre></li>
 </ol>
 <div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="-hand-pr%C3%A1cticas-no-recomendadas-">&#x270B; Pr&#xE1;cticas no recomendadas</h3>
+<h3 class="crossnote-header" id="hand-pr%C3%A1cticas-no-recomendadas">✋ Prácticas no recomendadas</h3>
 
-<p>Las siguientes son varias pr&#xE1;cticas recomendadas clave que debes seguir cuando implementes <strong><code>ViewModel</code></strong>:</p>
+<p>Las siguientes son varias prácticas recomendadas clave que debes seguir cuando implementes <strong><code>ViewModel</code></strong>:</p>
 <ul>
 <li>
-<p>&#x274C; <strong>NO</strong> definas <strong><code>ViewModel</code></strong> para <em>composables</em> reutilizables en tu UI o para componentes de IU que no sean de nivel superior. Deber&#xED;amos definirlos a nivel de Screen (pantalla).</p>
+<p>❌ <strong>NO</strong> definas <strong><code>ViewModel</code></strong> para <em>composables</em> reutilizables en tu UI o para componentes de IU que no sean de nivel superior. Deberíamos definirlos a nivel de Screen (pantalla).</p>
 </li>
 <li>
-<p>&#x274C; Los ViewModels <strong>NO deber&#xED;an conocer los detalles de implementaci&#xF3;n de la IU</strong>. Mant&#xE9;n los nombres de los m&#xE9;todos que expone la API de ViewModel y los de los campos del UIState lo m&#xE1;s gen&#xE9;ricos posible.</p>
+<p>❌ Los ViewModels <strong>NO deberían conocer los detalles de implementación de la IU</strong>. Mantén los nombres de los métodos que expone la API de ViewModel y los de los campos del UIState lo más genéricos posible.</p>
 </li>
 <li>
-<p>&#x274C; Como pueden tener una vida m&#xE1;s larga que el <strong><code>ViewModelStoreOwner</code></strong>, los ViewModels <strong>NO deber&#xED;an contener ninguna referencia de APIs relacionadas con el ciclo de vida</strong>, como <strong><code>Context</code></strong> o <strong><code>Resources</code></strong> para evitar fugas de memoria.</p>
+<p>❌ Como pueden tener una vida más larga que el <strong><code>ViewModelStoreOwner</code></strong>, los ViewModels <strong>NO deberían contener ninguna referencia de APIs relacionadas con el ciclo de vida</strong>, como <strong><code>Context</code></strong> o <strong><code>Resources</code></strong> para evitar fugas de memoria.</p>
 </li>
 <li>
-<p>&#x274C; <strong>NO pases ViewModels a funciones ni otros componentes de la IU</strong>. Esto evita que los componentes de nivel inferior accedan a m&#xE1;s datos y l&#xF3;gica de los que necesitan.</p>
+<p>❌ <strong>NO pases ViewModels a funciones ni otros componentes de la IU</strong>. Esto evita que los componentes de nivel inferior accedan a más datos y lógica de los que necesitan.</p>
 </li>
 <li>
-<p>&#x274C; Derivado del anterior <strong>NO instancies directamente un objeto ViewModels</strong>. En su lugar, usa alg&#xFA;n tipo de <em>&apos;proveedor de ViewModels&apos;</em> para obtener una instancia del mismo.</p>
+<p>❌ Derivado del anterior <strong>NO instancies directamente un objeto ViewModels</strong>. En su lugar, usa algún tipo de <em>'proveedor de ViewModels'</em> para obtener una instancia del mismo.</p>
 </li>
 </ul>
 
       </div>
       
       
-    
-    
     
     
     
