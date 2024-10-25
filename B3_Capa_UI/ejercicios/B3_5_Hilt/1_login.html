@@ -175,8 +175,13 @@
 <h1 id="aplicando-hilt-a-login">Aplicando Hilt a Login </h1>
 <p><a href="./1_login.pdf">Descargar estos apuntes</a></p>
 <p>Vamos a aplicar la Inyección de dependencia explicada en el tema, al ejercicio de Login de la entrega de ejercicios anterior. <strong>Debes tener en cuenta que si no has usado el proyecto base como base de Login, es posible que ocurran errores al añadir las dependencias y los plugins.</strong></p>
-<p>Como se ve en los apuntes tendremos que añadir los plugins necesarios tanto a gradle del proyecto como al de aplicación. De forma que:</p>
-<p>En el <strong><code>build.gradle.kts</code></strong> raíz del proyecto:</p>
+<p>Como se ve en los apuntes tendremos que añadir los plugins necesarios tanto a gradle del proyecto como al de aplicación. Ademas de descomentar las variables afectadas en el archivo <strong><code>libs.versions.toml</code></strong> De forma que:</p>
+<p>En <strong><code>libs.versions.toml</code></strong> descomentaremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>dagger<span class="token operator">-</span>hilt<span class="token operator">-</span>android <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+dagger<span class="token operator">-</span>hilt<span class="token operator">-</span>android<span class="token operator">-</span>compiler <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+androidx<span class="token operator">-</span>hilt<span class="token operator">-</span>navigation<span class="token operator">-</span>compose <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
+
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> raíz del proyecto:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
     <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>devtools<span class="token punctuation">.</span>ksp<span class="token punctuation">)</span> apply <span class="token boolean">false</span>
