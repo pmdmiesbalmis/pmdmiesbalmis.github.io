@@ -176,12 +176,12 @@
 <p><a href="./3_Login.pdf">Descargar estos apuntes</a></p>
 <div class="ejercicio">
 <h3 id="ejercicio">Ejercicio </h3>
-<p>Vamos a crear una aplicación con aspecto similar al siguiente, usaremos los <strong>TexField</strong> explicados en el tema con el tipo <strong>Validacion</strong>, será necesario crear un TextField propio para el password que permita visualizar o no la contraseña (será sencillo encontrarlo en la web). La pantalla de la imagen, la crearemos a partir de la función <strong>LoginScreen</strong> que deberemos situar en el lugar correcto, según la arquitectura explicada en temas anteriores.</p>
+<p>Vamos a crear una aplicación con aspecto similar al siguiente, usaremos los <strong>TexField</strong> explicados en el tema con el tipo <strong>Validacion</strong>, si no queremos crear un TextField propio para el password que permita visualizar o no la contraseña (será sencillo encontrarlo en la web), podemos usar los componentes que se proporcionan en la librería que proporcionan los profesores y que está localizada en <em><code>github.pmdmiesbalmis.components</code></em>. La pantalla de la imagen, la crearemos a partir de la función <strong>LoginScreen</strong> que deberemos situar en el lugar correcto, según la arquitectura explicada en temas anteriores.</p>
 <div align="center">
     <img height="350" src="../../assets/imagenes/ejercicios3_3/ejercicio3/imagen1.png">
 </div>
 <blockquote>
-<p>⚠️ <strong>Aviso:</strong> Como ya hemos visto a lo largo del tema y ejercicios, para acceder a los componentes TextField y controlar su validación, deberemos importar la librería de components alojada en <strong>github.pmdmiesbalmis.components</strong>.</p>
+<p>⚠️ <strong>Aviso:</strong> Como ya hemos visto a lo largo del tema, para acceder a los componentes TextField modificados y poder controlar su validación, deberemos importar la librería de components alojada en <strong>github.pmdmiesbalmis.components</strong>, si has usado en proyecto base, estará añadida por defecto en los archivos correspondientes.</p>
 </blockquote>
 <p>Habrá que validar las <strong>entradas incorrectas</strong> de los TextField, de forma que se mostrarán los mensajes de error: indicando que no pueden estar vacíos, para el correo que debe cumplir el formato de correo y para el password que debe ser mayor o igual a 8.</p>
 <div style="display: flex; justify-content: space-evenly; align-items: center; margin-top: 15px; margin-bottom: 15px">
@@ -204,7 +204,7 @@
 <img height="200px" src="../../assets/imagenes/ejercicios3_3/ejercicio3/imagen6.png">
 </div>
 </div>
-<p>⚠️ <strong>Aviso:</strong> como en ejercicios anteriores, la lógica de la app se manejará fuera de los Composables que forman la screen (Preview o Activity), por lo que toda la parte de las validaciones tendrán que ir fuera de la función LoginScreen, necesitando pasar como variables de tipo State <strong>validacionLogin</strong> y <strong>validacionPassword</strong> además de las necesarias para los TextField. Para definir una interfaz como estado deberemos de concretarle el tipo con <code>as</code>, por ejemplo:<br>
+<p>⚠️ <strong>Aviso:</strong> como en ejercicios anteriores, la lógica de la app se manejará <strong>fuera</strong> de los Composables que forman la screen (es decir en Preview o Activity), por lo que toda la parte de las validaciones tendrán que ir fuera de la función LoginScreen. Por tanto, necesitaremos pasar como variables de tipo State <strong>validacionLogin</strong> y <strong>validacionPassword</strong> además de los estados necesarias para los TextField a la función LoginScreen. Para definir una interfaz como estado deberemos de concretarle el tipo con <code>as</code>, por ejemplo:<br>
 <em><code>  var validacionLogin by remember { mutableStateOf(object : Validacion {} as Validacion) }</code></em></p>
 <p>💡 <strong>Tips:</strong> Los componentes que debemos definir (la mayoría los podrás importar de las componentes de la librería y otros se os proporciona el código ) son:</p>
 <div style="display: flex; justify-content: space-evenly; align-items: center; margin-top: 15px; margin-bottom: 15px">
@@ -219,7 +219,7 @@
 </div>
 <ul>
 <li>
-<p>Definidos en <strong>FieldTextCommon.kt</strong><br>
+<p>Definidos en <strong>la librería de componentes de git hub</strong><br>
 <strong><code>OutlinedTextFieldMail</code></strong> se basa en un <strong><code>OutlinedTextFieldWithErrorState</code></strong><br>
 <strong><code>OutlinedTextFilePassword</code></strong> basado en <strong><code>OutlinedTextField</code></strong></p>
 </li>
@@ -231,8 +231,7 @@
 </ul>
 </li>
 <li>
-<p>Definidos en <strong>ImageCommon.kt</strong><br>
-<strong><code>CircularImageFromResource</code></strong> que  incluirá un <strong><code>Image</code></strong></p>
+<p>El archivo <strong>UsuarioPassword.kt</strong> podéis implementarlo para que vuestro código quede más claro y puede incluir la inserción del login y password más checkbox y botón</p>
 </li>
 </ul>
 </div>
