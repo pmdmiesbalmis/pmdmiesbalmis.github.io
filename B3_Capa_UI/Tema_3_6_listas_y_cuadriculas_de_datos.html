@@ -1,267 +1,178 @@
 <!DOCTYPE html><html><head>
-      <title>PMDM 2&#xBA; DAM  Tema 3.6 - Listas y cuadriculas de datos</title>
+      <title>PMDM 2º DAM  Tema 3.6 - Listas y cuadriculas de datos</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-      
-      
-      
-      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
       
       
       
       
       
       <style>
-      /**
- * prism.js Github theme based on GitHub's theme.
- * @author Sam Clarke
- */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: #333;
-  background: none;
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.4;
-
-  -moz-tab-size: 8;
-  -o-tab-size: 8;
-  tab-size: 8;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: .8em;
-  overflow: auto;
-  /* border: 1px solid #ddd; */
-  border-radius: 3px;
-  /* background: #fff; */
-  background: #f5f5f5;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
-}
-
-.token.comment,
-.token.blockquote {
-  color: #969896;
-}
-
-.token.cdata {
-  color: #183691;
-}
-
-.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
-}
-
-.token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}
-
-.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}
-
-.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
-}
-
-.token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
-}
-
-.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
-}
-
-.token.list {
-  color: #ed6a43;
-}
-
-.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
-}
-
-.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
-}
-
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-
-/* JSON */
-.language-json .token.property {
-  color: #183691;
-}
-
-.language-markup .token.tag .token.punctuation {
-  color: #333;
-}
-
-/* CSS */
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
-}
-
-/* YAML */
-.language-yaml .token.atrule {
-  color: #63a35c;
-}
-
-code.language-yaml {
-  color: #183691;
-}
-
-/* Ruby */
-.language-ruby .token.function {
-  color: #333;
-}
-
-/* Markdown */
-.language-markdown .token.url {
-  color: #795da3;
-}
-
-/* Makefile */
-.language-makefile .token.symbol {
-  color: #795da3;
-}
-
-.language-makefile .token.variable {
-  color: #183691;
-}
-
-.language-makefile .token.builtin {
-  color: #0086b3;
-}
-
-/* Bash */
-.language-bash .token.keyword {
-  color: #0086b3;
-}
-
-/* highlight */
-pre[data-line] {
-  position: relative;
-  padding: 1em 0 1em 3em;
-}
-pre[data-line] .line-highlight-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  display: block;
-  width: 100%;
-}
-
-pre[data-line] .line-highlight {
-  position: absolute;
-  left: 0;
-  right: 0;
-  padding: inherit 0;
-  margin-top: 1em;
-  background: hsla(24, 20%, 50%,.08);
-  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
-  pointer-events: none;
-  line-height: inherit;
-  white-space: pre;
-}
-
-pre[data-line] .line-highlight:before, 
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-start);
-  position: absolute;
-  top: .4em;
-  left: .6em;
-  min-width: 1em;
-  padding: 0 .5em;
-  background-color: hsla(24, 20%, 50%,.4);
-  color: hsl(24, 20%, 95%);
-  font: bold 65%/1.5 sans-serif;
-  text-align: center;
-  vertical-align: .3em;
-  border-radius: 999px;
-  text-shadow: none;
-  box-shadow: 0 1px white;
-}
-
-pre[data-line] .line-highlight[data-end]:after {
-  content: attr(data-end);
-  top: auto;
-  bottom: .4em;
-}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p,html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div{display:inline}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  300px/2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
 /* Please visit the URL below for more information: */
 /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
 
       </style>
-    </head>
-    <body for="html-export">
-      <div class="mume markdown-preview  ">
-      <style>/* 
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<p><style>/* 
 Añade 
 
 @import "../EstilosPersonalizadosMarkdownEnhanced.less"
@@ -332,28 +243,26 @@ justo después del front matter
   top: 83%;
   font-size: 1rem;
 }
-</style>
-<h1 class="mume-header undefined" id="tema-36---listas-y-cuadriculas-de-datos">Tema 3.6 - Listas y cuadriculas de datos</h1>
-
+</style></p>
+<h1 id="tema-36---listas-y-cuadriculas-de-datos">Tema 3.6 - Listas y cuadriculas de datos </h1>
 <p>Descargar estos apuntes <a href="./Tema_3_6_listas_y_cuadriculas_de_datos.pdf">pdf</a> o <a href="./Tema_3_6_listas_y_cuadriculas_de_datos.html">html</a></p>
-<h2 class="mume-header undefined" id="%C3%ADndice">&#xCD;ndice</h2>
-
+<h2 id="índice">Índice </h2>
 
 <div class="md-toc">
-<details style="padding:0;;padding-left:0px;" open>
+<details style="padding:0;;padding-left:0px;" open="">
         <summary class="md-toc-link-wrapper">
-          <a href="#introducci&#xF3;n" class="md-toc-link"><p>Introducci&#xF3;n</p>
+          <a href="#introducción" class="md-toc-link"><p>Introducción</p>
 </a>
           </summary>
         <div>
           <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#por-qu&#xE9;-los-layouts-lazy-son-m&#xE1;s-eficientes" class="md-toc-link">
-            <p>&#xBF;Por qu&#xE9; los layouts <strong><code>Lazy...</code></strong> son m&#xE1;s eficientes?</p>
+          <a href="#por-qué-los-layouts-lazy-son-más-eficientes" class="md-toc-link">
+            <p>¿Por qué los layouts <strong><code>Lazy...</code></strong> son más eficientes?</p>
 
           </a></div>
         </div>
       </details>
-    <details style="padding:0;;padding-left:0px;" open>
+    <details style="padding:0;;padding-left:0px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#lazycolumn" class="md-toc-link"><p>LazyColumn</p>
 </a>
@@ -368,10 +277,10 @@ justo después del front matter
             <p>Ejemplos de uso de LazyColumn</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
-          <a href="#lazyliststate-y-animaci&#xF3;n-simple-de-transiciones" class="md-toc-link">
-            <p>LazyListState y animaci&#xF3;n simple de transiciones</p>
+          <a href="#lazyliststate-y-animación-simple-de-transiciones" class="md-toc-link">
+            <p>LazyListState y animación simple de transiciones</p>
 
-          </a></div><details style="padding:0;;padding-left:24px;" open>
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#recomponiendo-el-estado-de-un-item-de-forma-aislada" class="md-toc-link"><p>Recomponiendo el estado de un item de forma aislada</p>
 </a>
@@ -387,7 +296,7 @@ justo después del front matter
     
         </div>
       </details>
-    <details style="padding:0;;padding-left:0px;" open>
+    <details style="padding:0;;padding-left:0px;" open="">
         <summary class="md-toc-link-wrapper">
           <a href="#lazyverticalgrid" class="md-toc-link"><p>LazyVerticalGrid</p>
 </a>
@@ -403,10 +312,9 @@ justo después del front matter
     
 </div>
 <div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="introducci%C3%B3n">Introducci&#xF3;n</h2>
-
+<h2 id="introducción">Introducción </h2>
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/lists">Listas y cuadriculas diferidas</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/jetpack/compose/lists">Listas y cuadriculas diferidas</a></strong></li>
 <li>Codelab: <strong><a href="https://developer.android.com/codelabs/jetpack-compose-basics?hl=es-419#8">Crea una lista diferida de rendimiento</a></strong></li>
 <li>Codelab: <strong><a href="https://developer.android.com/codelabs/jetpack-compose-state?hl=es-419#9">Trabajando con listas</a></strong></li>
 </ul>
@@ -414,7 +322,7 @@ justo después del front matter
 <div style="width: 50%">
 <ul>
 <li>
-<p>V&#xED;deo <strong>DevExperto</strong>:</p>
+<p>Vídeo <strong>DevExperto</strong>:</p>
 <ul>
 <li><strong><a href="https://www.youtube.com/watch?v=4c1KB-o9O8A">Listas y Grids</a></strong></li>
 <li><strong><a href="https://www.youtube.com/watch?v=X3ub5EkMmqc">Listas Anidadas</a></strong></li>
@@ -422,7 +330,7 @@ justo después del front matter
 </ul>
 </li>
 <li>
-<p>V&#xED;deos <strong>Stevdza-San</strong>:</p>
+<p>Vídeos <strong>Stevdza-San</strong>:</p>
 <ul>
 <li><strong><a href="https://www.youtube.com/watch?v=c6TJQixS51Y">LazyColumn</a></strong></li>
 <li><strong><a href="https://www.youtube.com/watch?v=4CH9T02kq0Y">LazyListState</a></strong></li>
@@ -434,7 +342,7 @@ justo después del front matter
 <div style="width: auto">
 <ul>
 <li>
-<p>V&#xED;deos <strong>Philipp Lackner</strong>:</p>
+<p>Vídeos <strong>Philipp Lackner</strong>:</p>
 <ul>
 <li><strong><a href="https://www.youtube.com/watch?v=1Thp0bB5Ev0">LazyColumn</a></strong></li>
 <li><strong><a href="https://www.youtube.com/watch?v=UhnTTk3cwc4">Lazy Grids</a></strong></li>
@@ -443,7 +351,7 @@ justo después del front matter
 </ul>
 </li>
 <li>
-<p>V&#xED;deo <strong>Gibr&#xE1;n Garc&#xED;a</strong>:</p>
+<p>Vídeo <strong>Gibrán García</strong>:</p>
 <ul>
 <li><strong><a href="https://www.youtube.com/watch?v=C4EkfVFC0cg">LazyColumn</a></strong></li>
 </ul>
@@ -451,39 +359,39 @@ justo después del front matter
 </ul>
 </div>
 </div>
-<p>En el <strong>sistema cl&#xE1;sico de widgets XML</strong> de <strong>Android</strong> para mostrar una lista de datos se utilizaba el componente <strong><code>RecyclerView</code></strong> que se encargaba de mostrar los datos de forma eficiente. Adem&#xE1;s, este estaba asociado a un <strong><code>Adapter</code></strong> que se encargaba de gestionar los datos y de crear las vistas que se mostraban en el <strong><code>RecyclerView</code></strong>. A su vez el <strong><code>Adapter</code></strong> estaba asociado a un <strong><code>ViewHolder</code></strong> que se encargaba de gestionar los datos en cada vista.</p>
-<p>Todo este &apos;<em>boilerplate</em>&apos; de clases se simplifica en <strong>Jetpack Compose</strong> con los componentes <strong><code>LazyColumn</code></strong>, <strong><code>LazyRow</code></strong>, <strong><code>LazyVerticalGrid</code></strong> y <strong><code>LazyHorizontalGrid</code></strong> que se encarga de mostrar los datos de forma eficiente o <em>&apos;diferida&apos;</em>.</p>
-<p>Para utilizar estos componentes necesitamos un <strong><code>LazyListState</code></strong> que se encarga de gestionar el estado de la lista. Este estado se puede utilizar para saber si se ha llegado al final de la lista, para saber si se est&#xE1; haciendo scroll, para saber la posici&#xF3;n de la lista, etc.</p>
-<h3 class="mume-header" id="por-qu%C3%A9-los-layouts-lazy-son-m%C3%A1s-eficientes">&#xBF;Por qu&#xE9; los layouts <strong><code>Lazy...</code></strong> son m&#xE1;s eficientes?</h3>
-
-<p>Si necesitas mostrar una gran cantidad de elementos (o una lista de longitud desconocida), el uso de un dise&#xF1;o como <strong><code>Column</code></strong> puede causar problemas de rendimiento, ya que todos los elementos se compondr&#xE1;n y se dispondr&#xE1;n (renderizar&#xE1;n) independientemente de si son visibles o no.</p>
-<p>Compose proporciona un conjunto de componentes que <strong>solo componen y disponen elementos que est&#xE1;n visibles en el viewport</strong> del componente. Esos componentes incluyen <strong><code>LazyColumn</code></strong> y <strong><code>LazyRow</code></strong>.</p>
-<p>Como sugiere el nombre, la diferencia entre <strong><code>LazyColumn</code></strong> y <strong><code>LazyRow</code></strong> es la orientaci&#xF3;n en la que se integran sus elementos y se desplazan. Por tanto aunque en los ejemplos se utilice <strong><code>LazyColumn</code></strong> se puede utilizar <strong><code>LazyRow</code></strong> de forma an&#xE1;loga.</p>
-<h2 class="mume-header" id="lazycolumn">LazyColumn</h2>
-
-<p>El componente <strong><code>LazyColumn</code></strong> es un componente que muestra una lista diferida de elementos de forma vertical. Est&#xE1; definido en la capa <strong>Fundation</strong> en el paquete <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/lazy/package-summary">fundation.lazy</a></strong>.</p>
-<p>Los componentes diferidos como <strong><code>LazyColumn</code></strong> son distintos en la mayor&#xED;a de los dise&#xF1;os de Compose. En lugar de aceptar un par&#xE1;metro de bloque de contenido <strong><code>@Composable</code></strong> (lo que permite que las apps emitan directamente los objetos componibles), los componentes diferidos proporcionan un bloque <strong><code>LazyListScope</code></strong>.</p>
-<h3 class="mume-header" id="lazylistscope">LazyListScope</h3>
-
-<p>Este bloque <strong><code>LazyListScope</code></strong> ofrece un <strong>DSL</strong> (Lenguaje espec&#xED;fico de dominio) que permite que las apps describan el contenido del elemento. Luego, el componente diferido es responsable de agregar el contenido de cada elemento seg&#xFA;n lo requiera el dise&#xF1;o y la posici&#xF3;n de desplazamiento.</p>
+<p>En el <strong>sistema clásico de widgets XML</strong> de <strong>Android</strong> para mostrar una lista de datos se utilizaba el componente <strong><code>RecyclerView</code></strong> que se encargaba de mostrar los datos de forma eficiente. Además, este estaba asociado a un <strong><code>Adapter</code></strong> que se encargaba de gestionar los datos y de crear las vistas que se mostraban en el <strong><code>RecyclerView</code></strong>. A su vez el <strong><code>Adapter</code></strong> estaba asociado a un <strong><code>ViewHolder</code></strong> que se encargaba de gestionar los datos en cada vista.</p>
+<p>Todo este '<em>boilerplate</em>' de clases se simplifica en <strong>Jetpack Compose</strong> con los componentes <strong><code>LazyColumn</code></strong>, <strong><code>LazyRow</code></strong>, <strong><code>LazyVerticalGrid</code></strong> y <strong><code>LazyHorizontalGrid</code></strong> que se encarga de mostrar los datos de forma eficiente o <em>'diferida'</em>.</p>
+<p>Para utilizar estos componentes necesitamos un <strong><code>LazyListState</code></strong> que se encarga de gestionar el estado de la lista. Este estado se puede utilizar para saber si se ha llegado al final de la lista, para saber si se está haciendo scroll, para saber la posición de la lista, etc.</p>
+<h3 id="por-qué-los-layouts-lazy-son-más-eficientes">¿Por qué los layouts <strong><code>Lazy...</code></strong> son más eficientes? </h3>
+<p>Si necesitas mostrar una gran cantidad de elementos (o una lista de longitud desconocida), el uso de un diseño como <strong><code>Column</code></strong> puede causar problemas de rendimiento, ya que todos los elementos se compondrán y se dispondrán (renderizarán) independientemente de si son visibles o no.</p>
+<p>Compose proporciona un conjunto de componentes que <strong>solo componen y disponen elementos que están visibles en el viewport</strong> del componente. Esos componentes incluyen <strong><code>LazyColumn</code></strong> y <strong><code>LazyRow</code></strong>.</p>
+<p>Como sugiere el nombre, la diferencia entre <strong><code>LazyColumn</code></strong> y <strong><code>LazyRow</code></strong> es la orientación en la que se integran sus elementos y se desplazan. Por tanto aunque en los ejemplos se utilice <strong><code>LazyColumn</code></strong> se puede utilizar <strong><code>LazyRow</code></strong> de forma análoga.</p>
+<h2 id="lazycolumn">LazyColumn </h2>
+<p>El componente <strong><code>LazyColumn</code></strong> es un componente que muestra una lista diferida de elementos de forma vertical. Está definido en la capa <strong>Fundation</strong> en el paquete <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/lazy/package-summary">fundation.lazy</a></strong>.</p>
+<p>Los componentes diferidos como <strong><code>LazyColumn</code></strong> son distintos en la mayoría de los diseños de Compose. En lugar de aceptar un parámetro de bloque de contenido <strong><code>@Composable</code></strong> (lo que permite que las apps emitan directamente los objetos componibles), los componentes diferidos proporcionan un bloque <strong><code>LazyListScope</code></strong>.</p>
+<h3 id="lazylistscope">LazyListScope </h3>
+<p>Este bloque <strong><code>LazyListScope</code></strong> ofrece un <strong>DSL</strong> (Lenguaje específico de dominio) que permite que las apps describan el contenido del elemento. Luego, el componente diferido es responsable de agregar el contenido de cada elemento según lo requiera el diseño y la posición de desplazamiento.</p>
 <p>En este <strong>DSL</strong> contamos con una serie de funciones que permiten describir el contenido de un elemento. Podemos destacar las siguientes:</p>
 <ul>
 <li><strong><code>item</code></strong>: Agrega un elemento a la lista.</li>
 <li><strong><code>items</code></strong>: Agrega una lista de elementos a la lista</li>
-<li><strong><code>itemsIndexed</code></strong>: Agrega una lista de elementos a la lista. El &#xED;ndice de cada elemento se pasa al bloque de contenido.</li>
-<li><strong><code>stickyHeader</code></strong> y <strong><code>stickyHeaderFor</code></strong>: Agregan un <strong>encabezado fijo</strong> a la lista y aunque en este tema no lo vamos a ver, es interesante saber que existe y puedes ver los v&#xED;deos de <strong>DevExperto</strong> y <strong>Philipp Lackner</strong> de Sticky Headers si quieres saber c&#xF3;mo se utilizan.</li>
+<li><strong><code>itemsIndexed</code></strong>: Agrega una lista de elementos a la lista. El índice de cada elemento se pasa al bloque de contenido.</li>
+<li><strong><code>stickyHeader</code></strong> y <strong><code>stickyHeaderFor</code></strong>: Agregan un <strong>encabezado fijo</strong> a la lista y aunque en este tema no lo vamos a ver, es interesante saber que existe y puedes ver los vídeos de <strong>DevExperto</strong> y <strong>Philipp Lackner</strong> de Sticky Headers si quieres saber cómo se utilizan.</li>
 </ul>
-<div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="ejemplos-de-uso-de-lazycolumn">Ejemplos de uso de LazyColumn</h3>
-
 <blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Puedes descargar el c&#xF3;digo de los ejemplos de este apartado en el siguiente enlace <strong><a href="assets/codigo/tema_3_6/ListaDeDatos.kt">ListaDeDatos.kt</a></strong> y a&#xF1;adirlo al proyecto <strong>HolaMundo</strong>. En concreto en el paquete <strong><code>com.holamundo.ui.features.ejemplos</code></strong> donde en temas anteriores hemos ido realizando los ejemplos de componentes de <strong>Jetpack Compose</strong>.</p>
+<p>📌 <strong>Nota</strong>: Para poder utilizar estas funciones además de estar dentro de un <strong><code>LazyColumn</code></strong> o <strong><code>LazyRow</code></strong> debemos importar el paquete <strong><code>import androidx.compose.foundation.lazy.*</code></strong>.</p>
 </blockquote>
-<p>Para ello vamos a definir en primer lugar unos datos que mostrar en la lista. Es un data class con un identificador (no repetido) y un texto. Adem&#xE1;s, definiremos una funci&#xF3;n <strong><code>datosAleatorios()</code></strong> que generar&#xE1; 20 datos aleatorios.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Dato</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> texto<span class="token operator">:</span> String<span class="token punctuation">)</span>
+<div style="page-break-after:always;"></div>
+<h3 id="ejemplos-de-uso-de-lazycolumn">Ejemplos de uso de LazyColumn </h3>
+<div class="admonition tip">
+<p class="admonition-title">Importante</p>
+<p>En este <strong><a href="assets/codigo/tema_3_6/drawables_para_tema36_recurso.zip">enlace</a></strong> puedes descargar todo los drawables que se utilizan en los ejemplos.</p>
+</div>
+<p>En <strong><a href="assets/codigo/tema_3_6/tema36/lazycolumn/DatosPruebaLista.kt">DatosPruebaLista.kt</a></strong> definimos en primer lugar unos datos que mostrar en la lista. Es un <strong><code>data class</code></strong> con un identificador (no repetido) y un texto. Además, definiremos una función <strong><code>datosAleatorios()</code></strong> que generará 20 datos aleatorios.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Dato</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword keyword-val">val</span> texto<span class="token operator">:</span> String<span class="token punctuation">)</span>
 
 <span class="token comment">// Genera un id aleatorio </span>
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">generaId</span><span class="token punctuation">(</span>idsGenerados<span class="token operator">:</span> MutableSet<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">generaId</span><span class="token punctuation">(</span>idsGenerados<span class="token operator">:</span> MutableSet<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> id <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>idsGenerados<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span>
         id <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -491,25 +399,25 @@ justo después del front matter
     <span class="token keyword keyword-return">return</span> id
 <span class="token punctuation">}</span>
 
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> idsGenerados <span class="token operator">=</span> mutableSetOf<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-return">return</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> id <span class="token operator">=</span> <span class="token function">generaId</span><span class="token punctuation">(</span>idsGenerados<span class="token punctuation">)</span>
         <span class="token function">Dato</span><span class="token punctuation">(</span>
             id <span class="token operator">=</span> id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            texto <span class="token operator">=</span> <span class="token string">&quot;Dato <span class="token interpolation variable">$id</span>&quot;</span>
+            texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Dato </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">id</span></span><span class="token string">"</span></span>
         <span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 80%">
-<p>En primer lugar deberemos definir el componente que emitir&#xE1; cada uno de los elementos de la lista. En este caso ser&#xE1; un <strong><code>TarjetaDato</code></strong> que recibe un <strong><code>Dato</code></strong> y un <strong><code>onClickDato</code></strong> que se ejecutar&#xE1; cuando se pulse sobre el elemento.</p>
+</code></pre><div class="flotante" ,="" style="align-items: center;">
+<div class="flotante_izq">
+<p>En primer lugar, en <strong><a href="assets/codigo/tema_3_6/tema36/lazycolumn/CardDatosPruebaLista.kt">CardDatosPruebaLista.kt</a></strong> hemos definido el componente que emitirá cada uno de los elementos de la lista. En este caso será un <strong><code>TarjetaDato</code></strong> que recibe un <strong><code>Dato</code></strong> y un <strong><code>onClickDato</code></strong> que se ejecutará cuando se pulse sobre el elemento.</p>
 </div>
-<div style="width: auto">
-  <img height="75px" src="assets/imagenes/tema_3_6/lazyColumnItem.png">
+<div class="flotante_der">
+  <img width="600px" src="assets/imagenes/tema_3_6/lazyColumnItem.png">
 </div>
 </div>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// Cada dato ir&#xE1; en un elevated card y solo mostrar&#xE1; el texto que nos indica el id</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Cada dato irá en un elevated card y solo mostrará el texto que nos indica el id</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">TarjetaDato</span><span class="token punctuation">(</span>
     modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
@@ -534,10 +442,10 @@ justo después del front matter
         modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</pre><p>La forma m&#xE1;s sencilla de utilizar <strong><code>LazyColumn</code></strong> es con la funci&#xF3;n <strong><code>items()</code></strong> que recibe una lista de elementos y un bloque de contenido que se ejecutar&#xE1; por cada elemento de la lista. En este caso simplemente mostraremos el texto del elemento en un <strong><code>TarjetaDato</code></strong>.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 70%">
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+</code></pre><p>Si descargamos el ejemplo <strong><a href="assets/codigo/tema_3_6/tema36/lazycolumn/ListaBasica.kt">ListaBasica.kt</a></strong>, podemos ver que la forma más básica de utilizar <strong><code>LazyColumn</code></strong> es con la función <strong><code>items()</code></strong> que recibe una lista de elementos y un bloque de contenido que se ejecutará por cada elemento de la lista. En este caso simplemente mostraremos el texto del elemento en un <strong><code>TarjetaDato</code></strong>.</p>
+<div class="flotante" ,="" style="align-items: center;">
+<div class="flotante_izq">
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosEnColumnaBasico</span><span class="token punctuation">(</span>
     datosState<span class="token operator">:</span> List<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span><span class="token punctuation">,</span>
     onClickDato<span class="token operator">:</span> <span class="token punctuation">(</span>Dato<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
@@ -551,43 +459,42 @@ justo después del front matter
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre></div>
-<div style="width: auto">
+</code></pre></div>
+<div class="flotante_der">
   <img height="250px" src="assets/imagenes/tema_3_6/DatosListaBasicaPreview.png">
 </div>
 </div>
-<p>Veamos c&#xF3;mo definir el preview de <strong><code>DatosEnColumnaBasico</code></strong> y vamos ha hacer alguna consideraciones.</p>
-<div style="page-break-after:always;"></div>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 90%">
-<p>En primer lugar vamos a usar el componente de material <strong><code>FloatingActionButton</code></strong> (<strong><a href="https://m3.material.io/components/floating-action-button/overview">FAB</a></strong>) de material3. Es un componente que se utiliza mucho en las apps de <strong>Android</strong> y que nos permite realizar una acci&#xF3;n principal de la app. En este caso <strong>regenerar los datos de la lista</strong>. Puedes aprender un poco m&#xE1;s sobre su uso en Jetpack Compose en el siguiente enlace <strong><a href="https://developer.android.com/jetpack/compose/components/fab">&#x1F517; FAB Compose</a></strong>.</p>
+<p>Veamos la definición del <strong>preview</strong> de <strong><code>DatosEnColumnaBasico</code></strong> y vamos ha hacer alguna consideraciones.</p>
+<div class="flotante" ,="" style="align-items: center;">
+<div class="flotante_izq">
+<p>En primer lugar vamos a usar el componente de material <strong><code>FloatingActionButton</code></strong> (<strong><a href="https://m3.material.io/components/floating-action-button/overview">FAB</a></strong>) de material3. Es un componente que se utiliza mucho en las apps de <strong>Android</strong> y que nos permite realizar una acción principal de la app. En este caso <strong>regenerar los datos de la lista</strong>. Puedes aprender un poco más sobre su uso en Jetpack Compose en el siguiente enlace <strong><a href="https://developer.android.com/jetpack/compose/components/fab">🔗 FAB Compose</a></strong>.</p>
 </div>
-<div style="width: auto">
-  <img height="75px" src="assets/imagenes/tema_3_6/FAB.png">
+<div class="flotante_der">
+  <img width="300px" src="assets/imagenes/tema_3_6/FAB.png">
 </div>
 </div>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[6,7,10,13,16-18]}" class="language-kotlin" data-line="6,7,10,13,16-18"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> 
-device <span class="token operator">=</span> <span class="token string">&quot;spec:width=700px,height=725px,dpi=480,orientation=portrait&quot;</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6,7,10,13,16-18]}" class="language-kotlin kotlin" data-line="6,7,10,13,16-18"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> 
+device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=725px,dpi=480,orientation=portrait"</span></span><span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosListaBasicaPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token comment">// Generamos unos datos en una lista inmutable List&lt;Dato&gt; y lo guardamos como estado.</span>
-    <span class="token comment">// &#x270B; Deberemos regenerar TODA LA LISTA para que se recomponga el LazyColumn</span>
+    <span class="token comment">// ✋ Deberemos regenerar TODA LA LISTA para que se recomponga el LazyColumn</span>
     <span class="token keyword keyword-var">var</span> datosState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
-    <span class="token comment">// Funci&#xF3;n que regenera los datos de la lista al pulsar el FAB</span>
+    <span class="token comment">// Función que regenera los datos de la lista al pulsar el FAB</span>
     <span class="token keyword keyword-val">val</span> regeneraLista <span class="token operator">=</span> <span class="token punctuation">{</span> datosState <span class="token operator">=</span> <span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
-    <span class="token comment">// Funci&#xF3;n que borra un dato de la lista al pulsar sobre &#xE9;l</span>
+    <span class="token comment">// Función que borra un dato de la lista al pulsar sobre él</span>
     <span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>Dato<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span>
         datosState<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">takeIf</span> <span class="token punctuation">{</span> it <span class="token operator">&gt;=</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> i <span class="token operator">-&gt;</span>
-            <span class="token comment">// Si encontramos el &#xED;ndice del dato en la lista deberemos convertirla </span>
-            <span class="token comment">// en mutable para poder usar el removeAt. Adem&#xE1;s, toMutableList() me crear&#xE1; </span>
-            <span class="token comment">// un nuevo objeto por lo que se producir&#xE1; la recomposici&#xF3;n.</span>
+            <span class="token comment">// Si encontramos el índice del dato en la lista deberemos convertirla </span>
+            <span class="token comment">// en mutable para poder usar el removeAt. Además, toMutableList() me creará </span>
+            <span class="token comment">// un nuevo objeto por lo que se producirá la recomposición.</span>
             datosState <span class="token operator">=</span> datosState<span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span> <span class="token function">removeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-    HolaMundoTheme <span class="token punctuation">{</span>
+    ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">DatosEnColumnaBasico</span><span class="token punctuation">(</span>datosState <span class="token operator">=</span> datosState<span class="token punctuation">,</span> onClickDato <span class="token operator">=</span> borraDato<span class="token punctuation">)</span>
             <span class="token function">FloatingActionButton</span><span class="token punctuation">(</span>
@@ -595,14 +502,14 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
                 onClick <span class="token operator">=</span> regeneraLista
             <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token function">Icon</span><span class="token punctuation">(</span>
-                    imageVector <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Refresh<span class="token punctuation">,</span>
-                    contentDescription <span class="token operator">=</span> <span class="token string">&quot;Recargar Datos&quot;</span>
+                    painter <span class="token operator">=</span> Filled<span class="token punctuation">.</span><span class="token function">getRefreshIcon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Recargar Datos"</span></span>
                 <span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -656,29 +563,29 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
 <div aria-hidden="true" class="line-highlight" data-range="16-18" data-start="16" data-end="18">
 
 
-</div></div></pre><p>Veamos a continuaci&#xF3;n otra forma de generar los items de la lista con la funci&#xF3;n <strong><code>itemsIndexed</code></strong>...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,8-12,14-16]}" class="language-kotlin" data-line="4,8-12,14-16"><span class="token annotation builtin">@Composable</span>
+</div></div></pre><p>Veamos a continuación otra forma de generar los items de la lista con la función <strong><code>itemsIndexed</code></strong> para ello definiremos el fuente <strong><a href="assets/codigo/tema_3_6/tema36/lazycolumn/ListaIndizado.kt">ListaIndizado.kt</a></strong></p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[4,8-12,14-16]}" class="language-kotlin kotlin" data-line="4,8-12,14-16"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosEnColumnaIndizada</span><span class="token punctuation">(</span>
     datosState<span class="token operator">:</span> List<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-    <span class="token comment">// &#x270B; La funci&#xF3;n de gesti&#xF3;n ahora puede recibir el &#xED;ndice en lugar del dato</span>
+    <span class="token comment">// ✋ La función de gestión ahora puede recibir el índice en lugar del dato</span>
     onClickDato<span class="token operator">:</span> <span class="token punctuation">(</span>Int<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     LazyColumn <span class="token punctuation">{</span>
-        <span class="token comment">// Esta funci&#xF3;n adem&#xE1;s de cada dato me pasar&#xE1; el &#xED;ndice de la lista donde </span>
+        <span class="token comment">// Esta función además de cada dato me pasará el índice de la lista donde </span>
         <span class="token comment">// se encuentra el mismo de esta manera podremos por ejemplo realizar</span>
-        <span class="token comment">// selecciones m&#xFA;ltiples para borrar o pasarle a la funci&#xF3;n de selecci&#xF3;n</span>
-        <span class="token comment">// el &#xED;ndice de la lista y de esa manera ahorrarnos la b&#xFA;squeda del mismo </span>
+        <span class="token comment">// selecciones múltiples para borrar o pasarle a la función de selección</span>
+        <span class="token comment">// el índice de la lista y de esa manera ahorrarnos la búsqueda del mismo </span>
         <span class="token comment">// como en el caso anterior.</span>
         <span class="token function">itemsIndexed</span><span class="token punctuation">(</span>items <span class="token operator">=</span> datosState<span class="token punctuation">)</span> <span class="token punctuation">{</span> i<span class="token punctuation">,</span> dato <span class="token operator">-&gt;</span>
-            <span class="token comment">// Debo pulsar fuera del card, sobre el n&#xFA;mero del &#xED;ndice, para que tenga </span>
-            <span class="token comment">// efecto el click. En caso contrario se ejecutar&#xE1; el click del TarjetaDato que</span>
+            <span class="token comment">// Debo pulsar fuera del card, sobre el número del índice, para que tenga </span>
+            <span class="token comment">// efecto el click. En caso contrario se ejecutará el click del TarjetaDato que</span>
             <span class="token comment">// hemos dejado sin efecto al no establecerlo.</span>
             <span class="token function">Row</span><span class="token punctuation">(</span>
                 modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">clickable</span> <span class="token punctuation">{</span> <span class="token function">onClickDato</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
                 verticalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterVertically
             <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token function">Text</span><span class="token punctuation">(</span>
-                    text <span class="token operator">=</span> <span class="token string">&quot;<span class="token interpolation variable">$i</span>:&quot;</span><span class="token punctuation">,</span>
+                    text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">i</span></span><span class="token string">:"</span></span><span class="token punctuation">,</span>
                     style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>titleMedium<span class="token punctuation">,</span>
                     modifier <span class="token operator">=</span> Modifier
                         <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
@@ -692,7 +599,7 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 <div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
@@ -724,31 +631,31 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
 <div aria-hidden="true" class="line-highlight" data-range="14-16" data-start="14" data-end="16">
 
 
-</div></div></pre><div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 70%">
-<p>Veamos ahora como generar un preview denominado <strong><code>DatosListaIndizada</code></strong> que utilice el componente <strong><code>DatosEnColumnaIndizada</code></strong> que acabamos de definir. Para mostrar el &#xED;ndice junto al card de cada dato. Adem&#xE1;s, de regenerar el &#xED;ndice ahora <strong>al pulsar sobre el &#xED;ndice</strong>, se borrar&#xE1; el dato de la lista. Regener&#xC1;ndose de nuRvo la lista y todos sus &#xED;ndices.</p>
+</div></div></pre><div class="flotante" ,="" style="align-items: center;">
+<div class="flotante_izq">
+<p>Veamos ahora como generar un preview denominado <strong><code>DatosListaIndizada</code></strong> que utilice el componente <strong><code>DatosEnColumnaIndizada</code></strong> que acabamos de definir. Para mostrar el índice junto al card de cada dato. Además, de regenerar el índice ahora <strong>al pulsar sobre el índice</strong>, se borrará el dato de la lista. RegenerÁndose de nuRvo la lista y todos sus índices.</p>
 </div>
-<div style="width: auto">
-  <img height="250px" src="assets/imagenes/tema_3_6/DatosListaIndizada.png">
+<div class="flotante_der">
+  <img width="600px" src="assets/imagenes/tema_3_6/DatosListaIndizada.png">
 </div>
 </div>
 <div style="page-break-after:always;"></div>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[10,11]}" class="language-kotlin" data-line="10,11"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[10,11]}" class="language-kotlin kotlin" data-line="10,11"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
     showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=700px,height=725px,dpi=480,orientation=portrait&quot;</span>
+    device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=725px,dpi=480,orientation=portrait"</span></span>
 <span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosListaIndizada</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> datosState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-val">val</span> regeneraLista <span class="token operator">=</span> <span class="token punctuation">{</span> datosState <span class="token operator">=</span> <span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
-    <span class="token comment">// La funci&#xF3;n de gesti&#xF3;n ahora puede recibir el &#xED;ndice en lugar del dato, por lo que</span>
-    <span class="token comment">// me ahorro la b&#xFA;squeda de la posici&#xF3;n del dato en la lista.</span>
+    <span class="token comment">// La función de gestión ahora puede recibir el índice en lugar del dato, por lo que</span>
+    <span class="token comment">// me ahorro la búsqueda de la posición del dato en la lista.</span>
     <span class="token keyword keyword-val">val</span> borraDatoIndizado<span class="token operator">:</span> <span class="token punctuation">(</span>i<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> i <span class="token operator">-&gt;</span>
         datosState <span class="token operator">=</span> datosState<span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span> <span class="token function">removeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    HolaMundoTheme <span class="token punctuation">{</span>
+    ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">DatosEnColumnaIndizada</span><span class="token punctuation">(</span>datosState <span class="token operator">=</span> datosState<span class="token punctuation">,</span> onClickDato <span class="token operator">=</span> borraDatoIndizado<span class="token punctuation">)</span>
             <span class="token function">FloatingActionButton</span><span class="token punctuation">(</span>
@@ -756,14 +663,14 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
                 onClick <span class="token operator">=</span> regeneraLista
             <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token function">Icon</span><span class="token punctuation">(</span>
-                    imageVector <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Refresh<span class="token punctuation">,</span>
-                    contentDescription <span class="token operator">=</span> <span class="token string">&quot;Recargar Datos&quot;</span>
+                    painter <span class="token operator">=</span> Filled<span class="token punctuation">.</span><span class="token function">getRefreshIcon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Recargar Datos"</span></span>
                 <span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -784,22 +691,21 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
 
 
 <div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
-</div></div></pre><h3 class="mume-header" id="lazyliststate-y-animaci%C3%B3n-simple-de-transiciones">LazyListState y animaci&#xF3;n simple de transiciones</h3>
-
-<p>Adem&#xE1;s de estado con los datos de la lista, podemos utilizar un <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/lazy/LazyListState">LazyListState</a></strong> que se encargar&#xE1; de gestionar el estado de la propia lista. Este estado se puede utilizar para saber si se ha llegado al final de la lista, para saber si se est&#xE1; haciendo scroll, para saber la posici&#xF3;n de la lista, etc.</p>
-<p>Si examinamos el prototipo de la funci&#xF3;n <code>@Composable</code> <strong><code>LazyColumn</code></strong> veremos que tiene un par&#xE1;metro <strong><code>state</code></strong> que es de este tipo y que se instancia por defecto con la funci&#xF3;n <strong><code>rememberLazyListState()</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=4}" class="language-kotlin" data-line="4"><span class="token annotation builtin">@Composable</span>
+</div></div></pre><h3 id="lazyliststate-y-animación-simple-de-transiciones">LazyListState y animación simple de transiciones </h3>
+<p>Además de estado con los datos de la lista, podemos utilizar un <strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/foundation/lazy/LazyListState">LazyListState</a></strong> que se encargará de gestionar el estado de la propia lista. Este estado se puede utilizar para saber si se ha llegado al final de la lista, para saber si se está haciendo scroll, para saber la posición de la lista, etc.</p>
+<p>Si examinamos el prototipo de la función <code>@Composable</code> <strong><code>LazyColumn</code></strong> veremos que tiene un parámetro <strong><code>state</code></strong> que es de este tipo y que se instancia por defecto con la función <strong><code>rememberLazyListState()</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=4}" class="language-kotlin kotlin" data-line="4"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">LazyColumn</span><span class="token punctuation">(</span>
     modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
     state<span class="token operator">:</span> LazyListState <span class="token operator">=</span> <span class="token function">rememberLazyListState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 <div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div></pre><p>Podemos usar esa misma funci&#xF3;n para crear un <strong><code>LazyListState</code></strong> y pas&#xE1;rselo a nuestro componente <strong><code>LazyColumn</code></strong> y de esa manera llevar control de la posici&#xF3;n de la lista.</p>
-<p>Por ejemplo, supongamos que a nuestra funci&#xF3;n de composici&#xF3;n de la lista le pasamos el estado de la lista ...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[6, 11-14, 17-19]}" class="language-kotlin" data-line="6,11-14,17-19"><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalFoundationApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+</div></div></pre><p>Podemos usar esa misma función para crear un <strong><code>LazyListState</code></strong> y pasárselo a nuestro componente <strong><code>LazyColumn</code></strong> y de esa manera llevar control de la posición de la lista.</p>
+<p>Por ejemplo, vamos a modificar en <strong><a href="assets/codigo/tema_3_6/tema36/lazycolumn/ListaConEstado.kt">ListaConEstado.kt</a></strong> ejemplos anteriores donde a nuestra función de composición de la lista le pasamos el estado de la lista ...</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[6, 11-14, 17-19]}" class="language-kotlin kotlin" data-line="6,11-14,17-19"><code><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalFoundationApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosEnColumnaDisposicionAnimada</span><span class="token punctuation">(</span>
     datosState<span class="token operator">:</span> List<span class="token operator">&lt;</span>Dato<span class="token operator">&gt;</span><span class="token punctuation">,</span>
@@ -809,22 +715,22 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
     <span class="token function">LazyColumn</span><span class="token punctuation">(</span>state <span class="token operator">=</span> lazyListState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token function">items</span><span class="token punctuation">(</span>
             items <span class="token operator">=</span> datosState<span class="token punctuation">,</span>
-            <span class="token comment">// Necesitamos que cada item genere una clave &#xFA;nica para identificar cambios de </span>
-            <span class="token comment">// posici&#xF3;n en la lista y as&#xED; indicarle donde tiene que ir en</span>
+            <span class="token comment">// Necesitamos que cada item genere una clave única para identificar cambios de </span>
+            <span class="token comment">// posición en la lista y así indicarle donde tiene que ir en</span>
             <span class="token comment">// el redibujo de la misma.</span>
             key <span class="token operator">=</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span>id <span class="token punctuation">}</span>
         <span class="token punctuation">)</span> <span class="token punctuation">{</span> dato <span class="token operator">-&gt;</span>
             <span class="token function">TarjetaDato</span><span class="token punctuation">(</span>
                 <span class="token comment">// Le pasamos este modifier a nuestra tarjeta para que si cambia su</span>
-                <span class="token comment">// posici&#xF3;n, ocupe la nueva posici&#xF3;n en la lista mediante una animaci&#xF3;n.</span>
-                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">animateItemPlacement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token comment">// posición, ocupe la nueva posición en la lista mediante una animación.</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">animateItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
                 datoState <span class="token operator">=</span> dato<span class="token punctuation">,</span>
                 onClickDato <span class="token operator">=</span> onClickDato
             <span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -864,26 +770,18 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
 
 
 </div></div></pre><blockquote>
-<p>&#x1F517; <strong>Enlaces</strong>: SObre animateItemPlacement &#x2192; <strong><a href="https://developer.android.com/jetpack/compose/lists?hl=es-419#item-animations">Enlace 1</a></strong>, <strong><a href="https://fvilarino.medium.com/exploring-jetpack-compose-lazylist-animations-a3f97c91c2dd">Enlace 2</a></strong></p>
+<p>🔗 <strong>Enlaces</strong>: SObre animateItem → <strong><a href="https://developer.android.com/develop/ui/compose/lists?hl=es-419#item-animations">Enlace 1</a></strong></p>
 </blockquote>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px, margin-bottom: 15px">
-<div style="width: 40%">
-<p>Vamos a definir una funci&#xF3;n de preview que muestre la lista y al borrar un item los situados abajo se desplacen con una animaci&#xF3;n hasta su nueva posici&#xF3;n. Adem&#xE1;s, al hacer scroll el icono del FAB cambiar&#xE1; su aspecto y comportamiento de tal manera que al pulsar en el lo que har&#xE1; es volver al principio de la lista, como se muestre en la captura m&#xE1;s a la derecha.</p>
-</div>
-<div style="width: auto">
-    <img height="250px" src="assets/imagenes/tema_3_6/lazyColumScroll1.png">
-</div>
-<div style="width: auto">
-    <img height="250px" src="assets/imagenes/tema_3_6/lazyColumScroll3.png">
-</div>
-<div style="width: auto">
-    <img height="250px" src="assets/imagenes/tema_3_6/lazyColumScroll2.png">
-</div>
+<p>Vamos a definir una función de preview que muestre la lista y al borrar un item los situados abajo se desplacen con una animación hasta su nueva posición. Además, al hacer scroll el icono del FAB cambiará su aspecto y comportamiento de tal manera que al pulsar en el lo que hará es volver al principio de la lista, como se muestre en la captura más a la derecha.</p>
+<div class="galeria_imagenes">
+    <img height="300px" src="assets/imagenes/tema_3_6/lazyColumScroll1.png">
+    <img height="300px" src="assets/imagenes/tema_3_6/lazyColumScroll3.png">
+    <img height="300px" src="assets/imagenes/tema_3_6/lazyColumScroll2.png">
 </div>
 <div style="page-break-after:always;"></div>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[15-21,34,38,41,42]}" class="language-kotlin" data-line="15-21,34,38,41,42"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[15-21,34,38,41,42]}" class="language-kotlin kotlin" data-line="15-21,34,38,41,42"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
     showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=700px,height=725px,dpi=480,orientation=portrait&quot;</span>
+    device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=725px,dpi=480,orientation=portrait"</span></span>
 <span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosListaDisposicionAnimadaYEstado</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -898,19 +796,19 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
     <span class="token comment">// Definimos un objeto estado de la lista que pasaremos al composable que la muestra</span>
     <span class="token keyword keyword-var">var</span> lazyListState <span class="token operator">=</span> <span class="token function">rememberLazyListState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token comment">// Definimos un estado derivado de la lista que me indique si el </span>
-    <span class="token comment">// primer elemento de la misma est&#xE1; visible o no.</span>
+    <span class="token comment">// primer elemento de la misma está visible o no.</span>
     <span class="token keyword keyword-val">val</span> primeroVisible <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span>
         derivedStateOf <span class="token punctuation">{</span> lazyListState<span class="token punctuation">.</span>firstVisibleItemIndex <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 
-    <span class="token comment">// Este c&#xF3;digo se entender&#xE1; m&#xE1;s adelante en el curso. Pero b&#xE1;sicamente</span>
-    <span class="token comment">// define un handler que mueve la lista hasta su posici&#xF3;n inicial usando concurrencia.</span>
-    <span class="token comment">// Debe ser as&#xED; porque este tipo de comportamientos din&#xE1;micos no se puede definir</span>
-    <span class="token comment">// utilizando estados de composici&#xF3;n.</span>
+    <span class="token comment">// Este código se entenderá más adelante en el curso. Pero básicamente</span>
+    <span class="token comment">// define un handler que mueve la lista hasta su posición inicial usando concurrencia.</span>
+    <span class="token comment">// Debe ser así porque este tipo de comportamientos dinámicos no se puede definir</span>
+    <span class="token comment">// utilizando estados de composición.</span>
     <span class="token keyword keyword-val">val</span> cs <span class="token operator">=</span> <span class="token function">rememberCoroutineScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> volverAlPrincipio <span class="token operator">=</span> <span class="token punctuation">{</span> cs<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span> lazyListState<span class="token punctuation">.</span><span class="token function">animateScrollToItem</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> 
         Unit <span class="token punctuation">}</span>
-    HolaMundoTheme <span class="token punctuation">{</span>
+    ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">DatosEnColumnaDisposicionAnimada</span><span class="token punctuation">(</span>
                 datosState <span class="token operator">=</span> datosState<span class="token punctuation">,</span> onClickDato <span class="token operator">=</span> borraDato<span class="token punctuation">,</span>
@@ -921,15 +819,15 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
                 onClick <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>primeroVisible<span class="token punctuation">)</span> regeneraLista <span class="token keyword keyword-else">else</span> volverAlPrincipio
             <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token function">Icon</span><span class="token punctuation">(</span>
-                    imageVector <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>primeroVisible<span class="token punctuation">)</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Refresh 
-                                  <span class="token keyword keyword-else">else</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>MoveUp<span class="token punctuation">,</span>
-                    contentDescription <span class="token operator">=</span> <span class="token string">&quot;Datos&quot;</span>
+                    painter <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>primeroVisible<span class="token punctuation">)</span> Filled<span class="token punctuation">.</span><span class="token function">getRefreshIcon</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token keyword keyword-else">else</span> Filled<span class="token punctuation">.</span><span class="token function">getArrowBackIosIcon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Datos"</span></span>
                 <span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -1106,70 +1004,69 @@ device <span class="token operator">=</span> <span class="token string">&quot;sp
 
 <div aria-hidden="true" class="line-highlight" data-range="42" data-start="42">
 </div></div></pre><div style="page-break-after:always;"></div>
-<h3 class="mume-header" id="recomponiendo-el-estado-de-un-item-de-forma-aislada">Recomponiendo el estado de un item de forma aislada</h3>
-
-<p>Si volvemos sobre la documentaci&#xF3;n oficial del <strong><a href="https://developer.android.com/jetpack/compose/state#state-in-composables">Estado de Compose</a></strong> podemos encontrar la siguiente advertencia al final del apartado:</p>
-<blockquote>
-<p>&#x26A0;&#xFE0F; <strong>Precauci&#xF3;n:</strong> Utilizar objetos mutables como <strong><code>ArrayList&lt;T&gt;</code></strong> o <strong><code>mutableListOf()</code></strong> como estado en Compose puede hacer que los usuarios vean datos incorrectos o caducados en tu app. Los objetos mutables que no son observables, como <strong><code>ArrayList</code></strong> o una clase de datos mutable, no son observables por Compose y no provocan una recomposici&#xF3;n cuando cambian. En lugar de utilizar objetos mutables no observables, la recomendaci&#xF3;n es utilizar un contenedor de datos observable como <strong><code>State&lt;List&lt;T&gt;&gt;</code></strong> y el inmutable <strong><code>listOf()</code></strong>.</p>
-</blockquote>
-<p>Esto ya lo hemos comentado al principio del tema cuando defin&#xED;amos...</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> datosState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
-</pre><p>donde <strong><code>datosState</code></strong> es, en el fondo, un <strong><code>State&lt;List&lt;Dato&gt;&gt;</code></strong> que es un objeto observable inmutable y al borrar un dato de la lista ten&#xED;amos que hacer que asignar de nuevo <strong><code>datosSate</code></strong></p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=3}" class="language-kotlin" data-line="3"><span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>Dato<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span>
+<h3 id="recomponiendo-el-estado-de-un-item-de-forma-aislada">Recomponiendo el estado de un item de forma aislada </h3>
+<p>Si volvemos sobre la documentación oficial del <strong><a href="https://developer.android.com/jetpack/compose/state#state-in-composables">Estado de Compose</a></strong> podemos encontrar la siguiente advertencia al final del apartado:</p>
+<div class="admonition warning">
+<p class="admonition-title">Precaución</p>
+<p>Utilizar objetos mutables como <strong><code>ArrayList&lt;T&gt;</code></strong> o <strong><code>mutableListOf()</code></strong> como estado en Compose puede hacer que los usuarios vean datos incorrectos o caducados en tu app. Los objetos mutables que no son observables, como <strong><code>ArrayList</code></strong> o una clase de datos mutable, no son observables por Compose y no provocan una recomposición cuando cambian. En lugar de utilizar objetos mutables no observables, la recomendación es utilizar un contenedor de datos observable como <strong><code>State&lt;List&lt;T&gt;&gt;</code></strong> y el inmutable <strong><code>listOf()</code></strong>.</p>
+</div>
+<p>Esto ya lo hemos comentado al principio del tema cuando definíamos...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-var">var</span> datosState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+</code></pre><p>donde <strong><code>datosState</code></strong> es, en el fondo, un <strong><code>State&lt;List&lt;Dato&gt;&gt;</code></strong> que es un objeto observable inmutable y al borrar un dato de la lista teníamos que hacer que asignar de nuevo <strong><code>datosSate</code></strong></p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=3}" class="language-kotlin kotlin" data-line="3"><code><span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>Dato<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span>
     datosState<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">takeIf</span> <span class="token punctuation">{</span> it <span class="token operator">&gt;=</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> i <span class="token operator">-&gt;</span>
         datosState <span class="token operator">=</span> datosState<span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span> <span class="token function">removeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 <div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
-</div></div></pre><p>Porque si hac&#xED;amos que datosState fuera un <strong><code>State&lt;MutableList&lt;Dato&gt;&gt;</code></strong> con ...</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-var">var</span> datosState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
-</pre><p>y luego quisi&#xE9;ramos modificar solo un objeto Dato de la lista con...</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// No se producir&#xED;a una recomposici&#xF3;n del dato modificado i porque solo son observables cambios  </span>
+</div></div></pre><p>Porque si hacíamos que datosState fuera un <strong><code>State&lt;MutableList&lt;Dato&gt;&gt;</code></strong> con ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-var">var</span> datosState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+</code></pre><p>y luego quisiéramos modificar solo un objeto Dato de la lista con...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// No se produciría una recomposición del dato modificado i porque solo son observables cambios  </span>
 <span class="token comment">// completos en la lista y no en cada uno de los objetos que contiene.</span>
-datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string">&quot;Modificado <span class="token interpolation"><span class="token delimiter variable">${</span>d<span class="token punctuation">.</span>id<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
-</pre><p>En el caso concreto del <strong><code>LazyColumn</code></strong> estos cambios en objetos de la lista sin modificar la referencia a la misma. No se ver&#xE1;n reflejados en los items actuales del viewport, sino solo si se tiene que redibujar al aparecer de nuevo en el viewport de la lista por el efecto del scroll.</p>
-<h4 class="mume-header" id="mutablestatelist">MutableStateList</h4>
-
+datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Modificado </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">d<span class="token punctuation">.</span>id</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+</code></pre><p>En el caso concreto del <strong><code>LazyColumn</code></strong> estos cambios en objetos de la lista sin modificar la referencia a la misma. No se verán reflejados en los items actuales del viewport, sino solo si se tiene que redibujar al aparecer de nuevo en el viewport de la lista por el efecto del scroll.</p>
+<h4 id="mutablestatelist">MutableStateList </h4>
 <ul>
-<li><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary#mutableStateListOf()">Documentacion oficial</a></strong>, <strong><a href="https://www.youtube.com/watch?v=szMmAd2GfyA">V&#xED;deo Stevdza-San</a></strong></li>
+<li><strong><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/package-summary#mutableStateListOf()">Documentacion oficial</a></strong>, <strong><a href="https://www.youtube.com/watch?v=szMmAd2GfyA">Vídeo Stevdza-San</a></strong></li>
 </ul>
-<p>En los casos en que queramos que cada uno de los objetos de la lista sea observable y se produzca una recomposici&#xF3;n de los items de la lista cuando se modifique un objeto de la lista, podemos utilizar la funci&#xF3;n <strong><code>mutableStateListOf()</code></strong> que nos devolver&#xE1; un <strong><code>SnapshotStateList&lt;T&gt;</code></strong> que es una <strong>lista mutable de objetos observables</strong>.</p>
-<p>En el siguiente <strong><code>@Preview</code></strong> vamos a volver a usar <strong><code>DatosEnColumnaDisposicionAnimada</code></strong> pero esta vez sin pasarle un estado de la lista.</p>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[7,11-14,20,23]}" class="language-kotlin" data-line="7,11-14,20,23"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=700px,height=725px,dpi=480,orientation=portrait&quot;</span><span class="token punctuation">)</span>
+<p>En los casos en que queramos que cada uno de los objetos de la lista sea observable y se produzca una recomposición de los items de la lista cuando se modifique un objeto de la lista, podemos utilizar la función <strong><code>mutableStateListOf()</code></strong> que nos devolverá un <strong><code>SnapshotStateList&lt;T&gt;</code></strong> que es una <strong>lista mutable de objetos observables</strong>.</p>
+<p>En el siguiente <strong><code>@Preview</code></strong>, que definiremos en <strong><a href="assets/codigo/tema_3_6/tema36/lazycolumn/ListaDeSnapShot.kt">ListaDeSnapShot.kt</a></strong>, vamos a volver a usar <strong><code>DatosEnColumnaDisposicionAnimada</code></strong> pero esta vez sin pasarle un estado de la lista.</p>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[7,11-14,20,23]}" class="language-kotlin kotlin" data-line="7,11-14,20,23"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=725px,dpi=480,orientation=portrait"</span></span><span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosListaSnapShot</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Usamos toMutableStateList() para poder modificar la lista y adem&#xE1;s</span>
+    <span class="token comment">// Usamos toMutableStateList() para poder modificar la lista y además</span>
     <span class="token comment">// observar cambios en los objetos. No hace falta usar by</span>
     <span class="token keyword keyword-var">var</span> datosState <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">datosAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toMutableStateList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token comment">// Al hacer clic sobre el card tendremos 2 efectos:</span>
     <span class="token keyword keyword-val">val</span> modificaDato<span class="token operator">:</span> <span class="token punctuation">(</span>Dato<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span>
         datosState<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">takeIf</span> <span class="token punctuation">{</span> it <span class="token operator">&gt;=</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> i <span class="token operator">-&gt;</span>
             <span class="token comment">// Detecto si estamos en el primer o segundo click viendo si el texto</span>
-            <span class="token comment">// del card empieza por &quot;Modificado &quot;</span>
-            <span class="token comment">// F&#xED;jate que ninguno de los casos de la l&#xF3;gica reasignamos datosState como</span>
-            <span class="token comment">// antes. Sino que modificamos el objeto que est&#xE1; en el &#xED;ndice devuelto.</span>
+            <span class="token comment">// del card empieza por "Modificado "</span>
+            <span class="token comment">// Fíjate que ninguno de los casos de la lógica reasignamos datosState como</span>
+            <span class="token comment">// antes. Sino que modificamos el objeto que está en el índice devuelto.</span>
             <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-                    <span class="token punctuation">.</span>texto<span class="token punctuation">.</span><span class="token function">subSequence</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>texto<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">&quot; &quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token operator">!=</span> <span class="token string">&quot;Modificado&quot;</span>
+                    <span class="token punctuation">.</span>texto<span class="token punctuation">.</span><span class="token function">subSequence</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>texto<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">" "</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token operator">!=</span> <span class="token string-literal singleline"><span class="token string">"Modificado"</span></span>
             <span class="token punctuation">)</span>
-                <span class="token comment">// El primer click modificar&#xE1; el texto del card por &quot;Modificado id&quot;</span>
-                datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string">&quot;Modificado <span class="token interpolation"><span class="token delimiter variable">${</span>d<span class="token punctuation">.</span>id<span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+                <span class="token comment">// El primer click modificará el texto del card por "Modificado id"</span>
+                datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> datosState<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Modificado </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">d<span class="token punctuation">.</span>id</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
             <span class="token keyword keyword-else">else</span>
-                <span class="token comment">// El segundo click eliminar&#xE1; el card de la lista</span>
+                <span class="token comment">// El segundo click eliminará el card de la lista</span>
                 datosState<span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-    HolaMundoTheme <span class="token punctuation">{</span>
+    ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">DatosEnColumnaDisposicionAnimada</span><span class="token punctuation">(</span>
                 datosState <span class="token operator">=</span> datosState<span class="token punctuation">,</span> onClickDato <span class="token operator">=</span> modificaDato<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -1234,75 +1131,83 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
 
 <div aria-hidden="true" class="line-highlight" data-range="23" data-start="23">
 </div></div></pre><div style="page-break-after:always;"></div>
-<h2 class="mume-header" id="lazyverticalgrid">LazyVerticalGrid</h2>
-
+<h2 id="lazyverticalgrid">LazyVerticalGrid </h2>
 <ul>
-<li>Documentaci&#xF3;n oficial: <strong><a href="https://developer.android.com/jetpack/compose/lists?hl=es-419#lazy-grids">Cuadr&#xED;dulas Diferidas</a></strong></li>
+<li>Documentación oficial: <strong><a href="https://developer.android.com/jetpack/compose/lists?hl=es-419#lazy-grids">Cuadrídulas Diferidas</a></strong></li>
 </ul>
-<p>Los elementos que admiten composici&#xF3;n <strong><code>LazyVerticalGrid</code></strong> y <strong><code>LazyHorizontalGrid</code></strong> admiten la <strong>visualizaci&#xF3;n</strong> de elementos <strong>en una cuadr&#xED;cula</strong>. Una cuadr&#xED;cula vertical diferida mostrar&#xE1; sus elementos en un contenedor desplazable de forma vertical, que abarcar&#xE1; varias columnas, mientras que las cuadr&#xED;culas horizontales diferidas tendr&#xE1;n el mismo comportamiento en el eje horizontal.</p>
-<p>Las cuadr&#xED;culas tienen las mismas capacidades de API potentes que las listas y tambi&#xE9;n usan un DSL muy similar (<strong><code>LazyGridScope</code></strong>) para describir el contenido. Por lo que muchas de las cosas aplicables a <strong><code>LazyColumn</code></strong> tambi&#xE9;n lo son a <strong><code>LazyVerticalGrid</code></strong>.</p>
-<h3 class="mume-header" id="ejemplo-de-uso-de-lazyverticalgrid">Ejemplo de uso de LazyVerticalGrid</h3>
-
-<blockquote>
-<p>&#x1F4CC; <strong>Nota</strong>: Puedes descargar el c&#xF3;digo de los ejemplos de este apartado en el siguiente enlace <strong><a href="assets/codigo/tema_3_6/GridDeDatos.kt">GridDeDatos.kt</a></strong> y a&#xF1;adirlo al proyecto <strong>HolaMundo</strong>. En concreto en el paquete <strong><code>com.holamundo.ui.features.ejemplos</code></strong> donde en temas anteriores hemos ido realizando los ejemplos de componentes de <strong>Jetpack Compose</strong>.</p>
-</blockquote>
+<p>Los elementos que admiten composición <strong><code>LazyVerticalGrid</code></strong> y <strong><code>LazyHorizontalGrid</code></strong> admiten la <strong>visualización</strong> de elementos <strong>en una cuadrícula</strong>. Una cuadrícula vertical diferida mostrará sus elementos en un contenedor desplazable de forma vertical, que abarcará varias columnas, mientras que las cuadrículas horizontales diferidas tendrán el mismo comportamiento en el eje horizontal.</p>
+<p>Las cuadrículas tienen las mismas capacidades de API potentes que las listas y también usan un DSL muy similar (<strong><code>LazyGridScope</code></strong>) para describir el contenido. Por lo que muchas de las cosas aplicables a <strong><code>LazyColumn</code></strong> también lo son a <strong><code>LazyVerticalGrid</code></strong>.</p>
+<h3 id="ejemplo-de-uso-de-lazyverticalgrid">Ejemplo de uso de LazyVerticalGrid </h3>
 <p>Aunque tratemos <strong><code>LazyVerticalGrid</code></strong>. Todo lo que se diga de este componente es aplicable a <strong><code>LazyHorizontalGrid</code></strong>.</p>
-<p>Para este ejemplo vamos a cambiar un poco la clase que hemos utilizado para mostrar los datos en la lista. La llamaremos <strong><code>DatoGrid</code></strong> y cada dato adem&#xE1;s tendr&#xE1; un <strong>color</strong> y un <strong>icono</strong> asociado.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">DatoGrid</span><span class="token punctuation">(</span>
+<p>Para este ejemplo vamos a cambiar un poco la clase que hemos utilizado para mostrar los datos en la lista.</p>
+<p>Vamos a crear el fuente <strong><a href="assets/codigo/tema_3_6/tema36/lazyverticalgrid/DatosPruebaGrid.kt">DatosPruebaGrid.kt</a></strong> donde definiremos una clase llamada <strong><code>DatoGrid</code></strong> y cada dato además tendrá un <strong>color</strong> y un <strong>icono</strong> asociado.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">DatoGrid</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> texto<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> color<span class="token operator">:</span> Color<span class="token punctuation">,</span>
-    <span class="token keyword keyword-val">val</span> icono<span class="token operator">:</span> ImageVector
-<span class="token punctuation">)</span>
-</pre><p>Vamos a definir dos listas de iconos y colores para intentar que los datos que se muestren en la cuadr&#xED;cula sean diferentes.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 55%">
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> iconos <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
-  Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Favorite<span class="token punctuation">,</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>AcUnit<span class="token punctuation">,</span>
-  Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>AccessTime<span class="token punctuation">,</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Blender<span class="token punctuation">,</span>
-  Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Cake<span class="token punctuation">,</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Cottage<span class="token punctuation">)</span>
-</pre></div>
-<div style="width: 45%">
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> colores <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
-  <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFFA20001</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF9C27B0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF673AB7</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF3F51B5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF605D7B</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF005618</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</pre></div>
-</div>
-<div style="page-break-after:always;"></div>
-<p>Adem&#xE1;s, esta vez vamos a insertar datos aleatorios al principio de la lista de datos por hacer algo diferente y ver somo se comporta la animaci&#xF3;n de la cuadr&#xED;cula. Es por ello que hemos definido la lista <strong><code>idsGenerados</code></strong> como una variable global, para no repetir ids, despu&#xE9;s de haber generado los datos de la lista.</p>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
-<div style="width: 55%">
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> idsGenerados <span class="token operator">=</span> mutableSetOf<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> idIcono<span class="token operator">:</span> Int
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> idsGenerados <span class="token operator">=</span> mutableSetOf<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
+        <span class="token comment">// Vamos a definir dos listas de iconos y colores para intentar </span>
+        <span class="token comment">//que los datos que se muestren en la cuadrícula sean diferentes.</span>
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> iconos <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>favorite_24px<span class="token punctuation">,</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>ac_unit_24px<span class="token punctuation">,</span>
+            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>schedule_24px<span class="token punctuation">,</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>blender_24px<span class="token punctuation">,</span>
+            R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>cake_24px<span class="token punctuation">,</span> R<span class="token punctuation">.</span>drawable<span class="token punctuation">.</span>cottage_24px
+        <span class="token punctuation">)</span>
 
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> colores <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
+            <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFFA20001</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF9C27B0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF673AB7</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF3F51B5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF605D7B</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xFF005618</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
 
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">:</span> Int <span class="token punctuation">{</span>
-  <span class="token keyword keyword-var">var</span> id <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>idsGenerados<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span>
-      id <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  idsGenerados<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
-  <span class="token keyword keyword-return">return</span> id
+        <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+            <span class="token keyword keyword-var">var</span> id <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>idsGenerados<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                id <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            idsGenerados<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+            <span class="token keyword keyword-return">return</span> id
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword keyword-fun">fun</span> <span class="token function">datosGridAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-return">return</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> id <span class="token operator">=</span> <span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token function">DatoGrid</span><span class="token punctuation">(</span>
+                    id <span class="token operator">=</span> id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Dato\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">id</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+                    color <span class="token operator">=</span> colores<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    idIcono <span class="token operator">=</span> iconos<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword keyword-fun">fun</span> <span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> DatoGrid<span class="token punctuation">,</span> datos<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> i <span class="token operator">=</span> datos<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span>
+            <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>i <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> datos<span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span> <span class="token function">removeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> datos
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword keyword-fun">fun</span> <span class="token function">addDatoGridAleatorio</span><span class="token punctuation">(</span>datos<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-return">return</span> mutableListOf<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+                <span class="token function">add</span><span class="token punctuation">(</span>
+                    <span class="token function">DatoGrid</span><span class="token punctuation">(</span>
+                        id <span class="token operator">=</span> <span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Dato\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+                        color <span class="token operator">=</span> colores<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                        idIcono <span class="token operator">=</span> iconos<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+                datos<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> <span class="token function">add</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre></div>
-<div style="width: 45%">
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">datosGridAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword keyword-return">return</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">..</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span>
-      <span class="token keyword keyword-val">val</span> id <span class="token operator">=</span> <span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token function">DatoGrid</span><span class="token punctuation">(</span>
-          id <span class="token operator">=</span> id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-          texto <span class="token operator">=</span> <span class="token string">&quot;Dato\n<span class="token interpolation variable">$id</span>&quot;</span><span class="token punctuation">,</span>
-          color <span class="token operator">=</span> colores<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-          icono <span class="token operator">=</span> iconos<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</pre></div>
-</div>
-<p>Ahora el componente que emitir&#xE1; cada uno de los <em>&apos;items&apos;</em> de la cuadr&#xED;cula ser&#xE1; un <strong><code>TarjetaDatoGrid</code></strong> y dispondr&#xE1; en columna el icono y el texto del dato.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+</code></pre><p>Como se puede ver en el código, esta vez vamos a insertar datos aleatorios al principio de la lista de datos por hacer algo diferente y ver somo se comporta la animación de la cuadrícula. Es por ello que hemos definido la lista <strong><code>idsGenerados</code></strong> como una variable global, para no repetir ids, después de haber generado los datos de la lista.</p>
+<p>Además definiremos el fichero <strong><a href="assets/codigo/tema_3_6/tema36/lazyverticalgrid/GridAnimado.kt">GridAnimado.kt</a></strong> donde definimos primero el componente que emitirá cada uno de los <em>'items'</em> de la cuadrícula será un <strong><code>TarjetaDatoGrid</code></strong> y dispondrá en columna el icono y el texto del dato.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">TarjetaDatoGrid</span><span class="token punctuation">(</span>
     modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier<span class="token punctuation">,</span>
     datoState<span class="token operator">:</span> DatoGrid<span class="token punctuation">,</span> onClickDato<span class="token operator">:</span> <span class="token punctuation">(</span>DatoGrid<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
@@ -1319,7 +1224,7 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
         horizontalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterHorizontally<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token function">Icon</span><span class="token punctuation">(</span>
-            imageVector <span class="token operator">=</span> datoState<span class="token punctuation">.</span>icono<span class="token punctuation">,</span> contentDescription <span class="token operator">=</span> <span class="token string">&quot;Icono&quot;</span><span class="token punctuation">,</span>
+            imageVector <span class="token operator">=</span> datoState<span class="token punctuation">.</span>icono<span class="token punctuation">,</span> contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Icono"</span></span><span class="token punctuation">,</span>
             tint <span class="token operator">=</span> datoState<span class="token punctuation">.</span>color<span class="token punctuation">,</span> modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
         <span class="token punctuation">)</span>
         <span class="token function">Text</span><span class="token punctuation">(</span>
@@ -1329,17 +1234,17 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
         <span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>Vamos a definir el componente DatosEnGridDisposicionAnimada que recibe una lista de datos y un <strong><code>onClickDato</code></strong> que se ejecutar&#xE1; cuando se pulse sobre el elemento.</p>
-<p>Adem&#xE1;s de la lista de datos, recibe un par&#xE1;metro <strong><code>columns</code></strong> de tipo <strong><code>GridCells</code></strong> que nos permite definir el n&#xFA;mero de columnas que tendr&#xE1; la cuadr&#xED;cula y podr&#xE1; tener los siguientes valores:</p>
+</code></pre><p>Vamos a definir el componente <strong><code>DatosEnGridDisposicionAnimada</code></strong> que recibe una lista de datos y un <strong><code>onClickDato</code></strong> que se ejecutará cuando se pulse sobre el elemento.</p>
+<p>Además de la lista de datos, recibe un parámetro <strong><code>columns</code></strong> de tipo <strong><code>GridCells</code></strong> que nos permite definir el número de columnas que tendrá la cuadrícula y podrá tener los siguientes valores:</p>
 <ul>
-<li>&#x2B50;&#xFE0F; <strong><code>GridCells.Adaptive</code></strong>: Define una cuadr&#xED;cula con tantas filas o columnas como sea posible con la condici&#xF3;n de que <strong>cada celda tenga al menos el espacio <code>minSize</code></strong> y todo <strong>el espacio extra se distribuya uniformemente</strong>.</li>
-<li><strong><code>GridCells.Fixed</code></strong>: Define una cuadr&#xED;cula con un <strong>n&#xFA;mero fijo</strong> de filas o columnas.</li>
-<li><strong><code>GridCells.FixedSize</code></strong>: Define una cuadr&#xED;cula con tantas filas o columnas como sea posible con la condici&#xF3;n de que cada celda tenga exactamente el tama&#xF1;o size.</li>
+<li>⭐ <strong><code>GridCells.Adaptive</code></strong>: Define una cuadrícula con tantas filas o columnas como sea posible con la condición de que <strong>cada celda tenga al menos el espacio <code>minSize</code></strong> y todo <strong>el espacio extra se distribuya uniformemente</strong>.</li>
+<li><strong><code>GridCells.Fixed</code></strong>: Define una cuadrícula con un <strong>número fijo</strong> de filas o columnas.</li>
+<li><strong><code>GridCells.FixedSize</code></strong>: Define una cuadrícula con tantas filas o columnas como sea posible con la condición de que cada celda tenga exactamente el tamaño size.</li>
 </ul>
-<pre data-role="codeBlock" data-info="kotlin{highlight=[4,9,14,24]}" class="language-kotlin" data-line="4,9,14,24"><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalFoundationApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin{highlight=[4,9,14,24]}" class="language-kotlin kotlin" data-line="4,9,14,24"><code><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalFoundationApi<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosEnGridDisposicionAnimada</span><span class="token punctuation">(</span>
-    columns<span class="token operator">:</span> GridCells<span class="token punctuation">,</span> <span class="token comment">// Lo hemos definido como par&#xE1;metro para poder hacer pruebas</span>
+    columns<span class="token operator">:</span> GridCells<span class="token punctuation">,</span> <span class="token comment">// Lo hemos definido como parámetro para poder hacer pruebas</span>
     datosState<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">,</span>
     onClickDato<span class="token operator">:</span> <span class="token punctuation">(</span>DatoGrid<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1348,24 +1253,24 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
         state <span class="token operator">=</span> <span class="token function">rememberLazyGridState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token function">items</span><span class="token punctuation">(</span>
-            <span class="token comment">// La funci&#xF3;n items esta vez recibe el n&#xFA;mero de elementos de la lista</span>
+            <span class="token comment">// La función items esta vez recibe el número de elementos de la lista</span>
             count <span class="token operator">=</span> datosState<span class="token punctuation">.</span>size<span class="token punctuation">,</span>
             <span class="token comment">// Permite saber que items permanecen en la lista y cuales no</span>
             <span class="token comment">// para poder animar los que se permanezcan tras un cambio.</span>
             key <span class="token operator">=</span> <span class="token punctuation">{</span> index <span class="token operator">-&gt;</span> datosState<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>id <span class="token punctuation">}</span>
         <span class="token punctuation">)</span> <span class="token punctuation">{</span> index <span class="token operator">-&gt;</span>
             <span class="token function">TarjetaDatoGrid</span><span class="token punctuation">(</span>
-                <span class="token comment">// Animaremos el desplazamiento de los items de la cuadr&#xED;cula </span>
-                <span class="token comment">// ante un cambio de posici&#xF3;n</span>
-                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">animateItemPlacement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                <span class="token comment">// Accederemos al &#xED;ndice recibido en el manejador.</span>
+                <span class="token comment">// Animaremos el desplazamiento de los items de la cuadrícula </span>
+                <span class="token comment">// ante un cambio de posición</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">animateItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token comment">// Accederemos al índice recibido en el manejador.</span>
                 datoState <span class="token operator">=</span> datosState<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">,</span>
                 onClickDato <span class="token operator">=</span> onClickDato
             <span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 <div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
@@ -1417,51 +1322,49 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
 
 <div aria-hidden="true" class="line-highlight" data-range="24" data-start="24">
 </div></div></pre><div style="page-break-after:always;"></div>
-<p>Vamos a definir una funci&#xF3;n de <strong><code>@Preview</code></strong> para visualizar nuestra cuadr&#xED;cula pero antes vamos a definir un par de funciones de utilidad para a&#xF1;adir y borrar datos de la lista.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> DatoGrid<span class="token punctuation">,</span> datos<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+<p>Vamos a definir una función de <strong><code>@Preview</code></strong> para visualizar nuestra cuadrícula pero antes vamos a definir un par de funciones de utilidad para añadir y borrar datos de la lista.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>dato<span class="token operator">:</span> DatoGrid<span class="token punctuation">,</span> datos<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> i <span class="token operator">=</span> datos<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>dato<span class="token punctuation">)</span>
     <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>i <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> datos<span class="token punctuation">.</span><span class="token function">toMutableList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span> <span class="token function">removeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> datos
 <span class="token punctuation">}</span>
 
 <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">addDatoGridAleatorio</span><span class="token punctuation">(</span>datos<span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-return">return</span> mutableListOf<span class="token operator">&lt;</span>DatoGrid<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
-        <span class="token comment">// A&#xF1;adimos un dato aleatorio al principio de la lista</span>
+        <span class="token comment">// Añadimos un dato aleatorio al principio de la lista</span>
         <span class="token function">add</span><span class="token punctuation">(</span><span class="token function">DatoGrid</span><span class="token punctuation">(</span>
             id <span class="token operator">=</span> <span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            texto <span class="token operator">=</span> <span class="token string">&quot;Dato\n<span class="token interpolation"><span class="token delimiter variable">${</span><span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">,</span>
+            texto <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Dato\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token function">generaId</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
             color <span class="token operator">=</span> colores<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             icono <span class="token operator">=</span> iconos<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token comment">// A&#xF1;adimos el resto de datos a continuaci&#xF3;n</span>
+        <span class="token comment">// Añadimos el resto de datos a continuación</span>
         datos<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> <span class="token function">add</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</pre><p>En esta ocasi&#xF3;n el FAB a&#xF1;adir&#xE1; el dato de forma aleatoria al principio de la lista. En las siguientes im&#xE1;genes puedes ver el resultado de la visualizaci&#xF3;n aplicando los valores a <strong><code>columns</code></strong> de <strong><code>GridCells.Fixed(2)</code></strong> para tener 2 columnas fijas y <strong><code>GridCells.Adaptive(50.dp)</code></strong> para que intente meter el m&#xE1;ximo n&#xFA;mero de columnas posibles con un tama&#xF1;o m&#xED;nimo de <strong><code>50dp</code></strong> y el espacio sobrante lo distribuya entre los items de la fila.</p>
-<div style="display: flex; justify-content: center; align-items: center; margin-top: 15px">
-<div style="width: 50%">
-<img height="300px" src="assets/imagenes/tema_3_6/LazyVerticalGridFixed.png">
+</code></pre><p>En esta ocasión el FAB añadirá el dato de forma aleatoria al principio de la lista. En las siguientes imágenes puedes ver el resultado de la visualización aplicando los valores a <strong><code>columns</code></strong> de <strong><code>GridCells.Fixed(2)</code></strong> para tener 2 columnas fijas y <strong><code>GridCells.Adaptive(50.dp)</code></strong> para que intente meter el máximo número de columnas posibles con un tamaño mínimo de <strong><code>50dp</code></strong> y el espacio sobrante lo distribuya entre los items de la fila.</p>
+<div class="galeria_imagenes">
+  <img height="300px" src="assets/imagenes/tema_3_6/LazyVerticalGridFixed.png">
+  <img height="300px" src="assets/imagenes/tema_3_6/LazyVerticalGridAdaptative.png">
 </div>
-<div style="width: auto">
-<img height="300px" src="assets/imagenes/tema_3_6/LazyVerticalGridAdaptative.png">
-</div>
-</div>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[20,21]}" class="language-kotlin" data-line="20,21"><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[20,21]}" class="language-kotlin kotlin" data-line="20,21"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
     showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    device <span class="token operator">=</span> <span class="token string">&quot;spec:width=700px,height=755px,dpi=480,orientation=portrait&quot;</span>
+    device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=755px,dpi=480,orientation=portrait"</span></span>
 <span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosGridDisposicionAnimada</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosGridDisposicionAnimadaPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token comment">// Definimos un State&lt;List&lt;DataGrid&gt;&gt; para el estado</span>
-    <span class="token keyword keyword-var">var</span> datosGridState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token function">datosGridAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> datosGridState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>DatoGrid<span class="token punctuation">.</span><span class="token function">datosGridAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
-    <span class="token comment">// Definimos los manejadores de eventos que llamar&#xE1;n a las funciones de utilidad</span>
-    <span class="token comment">// que hemos definido para a&#xF1;adir y borrar datos de la lista.</span>
-    <span class="token comment">// Adem&#xE1;s, deber&#xE1;n modificar toda el objeto lista para que se produzca la recomposici&#xF3;n.</span>
-    <span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>DatoGrid<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span> datosGridState <span class="token operator">=</span> <span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> datosGridState<span class="token punctuation">)</span> <span class="token punctuation">}</span>
-    <span class="token keyword keyword-val">val</span> addDato<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> datosGridState <span class="token operator">=</span> <span class="token function">addDatoGridAleatorio</span><span class="token punctuation">(</span>datosGridState<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token comment">// Definimos los manejadores de eventos que llamarán a las funciones de utilidad</span>
+    <span class="token comment">// que hemos definido para añadir y borrar datos de la lista.</span>
+    <span class="token comment">// Además, deberán modificar toda el objeto lista para que se produzca la recomposición.</span>
+    <span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>DatoGrid<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span> datosGridState <span class="token operator">=</span>
+        DatoGrid<span class="token punctuation">.</span><span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> datosGridState<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> addDato<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> datosGridState <span class="token operator">=</span> DatoGrid<span class="token punctuation">.</span><span class="token function">addDatoGridAleatorio</span><span class="token punctuation">(</span>datosGridState<span class="token punctuation">)</span> <span class="token punctuation">}</span>
 
-    HolaMundoTheme <span class="token punctuation">{</span>
+    ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">DatosEnGridDisposicionAnimada</span><span class="token punctuation">(</span>
                 <span class="token comment">// columns = GridCells.Fixed(2),</span>
@@ -1475,13 +1378,13 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
             <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token function">Icon</span><span class="token punctuation">(</span>
                     imageVector <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Add<span class="token punctuation">,</span>
-                    contentDescription <span class="token operator">=</span> <span class="token string">&quot;Datos&quot;</span>
+                    contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Datos"</span></span>
                 <span class="token punctuation">)</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<div class="line-highlight-wrapper">
+</code><div class="line-highlight-wrapper">
 
 
 
@@ -1526,8 +1429,6 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
       </div>
       
       
-    
-    
     
     
     
