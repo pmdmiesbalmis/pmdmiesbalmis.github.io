@@ -778,8 +778,7 @@ device <span class="token operator">=</span> <span class="token string-literal s
     <img height="300px" src="assets/imagenes/tema_3_6/lazyColumScroll3.png">
     <img height="300px" src="assets/imagenes/tema_3_6/lazyColumScroll2.png">
 </div>
-<div style="page-break-after:always;"></div>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[15-21,34,38,41,42]}" class="language-kotlin kotlin" data-line="15-21,34,38,41,42"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
     showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=725px,dpi=480,orientation=portrait"</span></span>
 <span class="token punctuation">)</span>
@@ -800,14 +799,17 @@ device <span class="token operator">=</span> <span class="token string-literal s
     <span class="token keyword keyword-val">val</span> primeroVisible <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span>
         derivedStateOf <span class="token punctuation">{</span> lazyListState<span class="token punctuation">.</span>firstVisibleItemIndex <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-
-    <span class="token comment">// Este código se entenderá más adelante en el curso. Pero básicamente</span>
+</code></pre><div style="page-break-after:always;"></div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token comment">// Este código se entenderá más adelante en el curso. Pero básicamente</span>
     <span class="token comment">// define un handler que mueve la lista hasta su posición inicial usando concurrencia.</span>
     <span class="token comment">// Debe ser así porque este tipo de comportamientos dinámicos no se puede definir</span>
     <span class="token comment">// utilizando estados de composición.</span>
     <span class="token keyword keyword-val">val</span> cs <span class="token operator">=</span> <span class="token function">rememberCoroutineScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-val">val</span> volverAlPrincipio <span class="token operator">=</span> <span class="token punctuation">{</span> cs<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span> lazyListState<span class="token punctuation">.</span><span class="token function">animateScrollToItem</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> 
-        Unit <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> volverAlPrincipio <span class="token operator">=</span> <span class="token punctuation">{</span> 
+        cs<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span> lazyListState<span class="token punctuation">.</span><span class="token function">animateScrollToItem</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> 
+        Unit 
+    <span class="token punctuation">}</span>
+
     ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token function">DatosEnColumnaDisposicionAnimada</span><span class="token punctuation">(</span>
@@ -827,183 +829,7 @@ device <span class="token operator">=</span> <span class="token string-literal s
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15-21" data-start="15" data-end="21">
-
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="34" data-start="34">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="38" data-start="38">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="41" data-start="41">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="42" data-start="42">
-</div></div></pre><div style="page-break-after:always;"></div>
+</code></pre><div style="page-break-after:always;"></div>
 <h3 id="recomponiendo-el-estado-de-un-item-de-forma-aislada">Recomponiendo el estado de un item de forma aislada </h3>
 <p>Si volvemos sobre la documentación oficial del <strong><a href="https://developer.android.com/jetpack/compose/state#state-in-composables">Estado de Compose</a></strong> podemos encontrar la siguiente advertencia al final del apartado:</p>
 <div class="admonition warning">
@@ -1224,7 +1050,7 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
         horizontalAlignment <span class="token operator">=</span> Alignment<span class="token punctuation">.</span>CenterHorizontally<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token function">Icon</span><span class="token punctuation">(</span>
-            imageVector <span class="token operator">=</span> datoState<span class="token punctuation">.</span>icono<span class="token punctuation">,</span> contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Icono"</span></span><span class="token punctuation">,</span>
+            painter <span class="token operator">=</span> <span class="token function">painterResource</span><span class="token punctuation">(</span>id <span class="token operator">=</span> datoState<span class="token punctuation">.</span>idIcono<span class="token punctuation">)</span><span class="token punctuation">,</span> contentDescription <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Icono"</span></span><span class="token punctuation">,</span>
             tint <span class="token operator">=</span> datoState<span class="token punctuation">.</span>color<span class="token punctuation">,</span> modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
         <span class="token punctuation">)</span>
         <span class="token function">Text</span><span class="token punctuation">(</span>
@@ -1346,7 +1172,7 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
   <img height="300px" src="assets/imagenes/tema_3_6/LazyVerticalGridFixed.png">
   <img height="300px" src="assets/imagenes/tema_3_6/LazyVerticalGridAdaptative.png">
 </div>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[20,21]}" class="language-kotlin kotlin" data-line="20,21"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
     showBackground <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=700px,height=755px,dpi=480,orientation=portrait"</span></span>
 <span class="token punctuation">)</span>
@@ -1354,15 +1180,19 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
 <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DatosGridDisposicionAnimadaPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token comment">// Definimos un State&lt;List&lt;DataGrid&gt;&gt; para el estado</span>
-    <span class="token keyword keyword-var">var</span> datosGridState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>DatoGrid<span class="token punctuation">.</span><span class="token function">datosGridAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-var">var</span> datosGridState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> 
+        <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>DatoGrid<span class="token punctuation">.</span><span class="token function">datosGridAleatorios</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">}</span>
 
     <span class="token comment">// Definimos los manejadores de eventos que llamarán a las funciones de utilidad</span>
     <span class="token comment">// que hemos definido para añadir y borrar datos de la lista.</span>
     <span class="token comment">// Además, deberán modificar toda el objeto lista para que se produzca la recomposición.</span>
-    <span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>DatoGrid<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> d <span class="token operator">-&gt;</span> datosGridState <span class="token operator">=</span>
-        DatoGrid<span class="token punctuation">.</span><span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> datosGridState<span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> borraDato<span class="token operator">:</span> <span class="token punctuation">(</span>DatoGrid<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> 
+        d <span class="token operator">-&gt;</span> datosGridState <span class="token operator">=</span> DatoGrid<span class="token punctuation">.</span><span class="token function">borraDatoGrid</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> datosGridState<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword keyword-val">val</span> addDato<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> datosGridState <span class="token operator">=</span> DatoGrid<span class="token punctuation">.</span><span class="token function">addDatoGridAleatorio</span><span class="token punctuation">(</span>datosGridState<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-val">val</span> addDato<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> 
+        datosGridState <span class="token operator">=</span> DatoGrid<span class="token punctuation">.</span><span class="token function">addDatoGridAleatorio</span><span class="token punctuation">(</span>datosGridState<span class="token punctuation">)</span> 
+    <span class="token punctuation">}</span>
 
     ProyectoBaseTheme <span class="token punctuation">{</span>
         <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1384,48 +1214,7 @@ datosState<span class="token punctuation">[</span>i<span class="token punctuatio
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="20" data-start="20">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="21" data-start="21">
-</div></div></pre>
+</code></pre>
       </div>
       
       
