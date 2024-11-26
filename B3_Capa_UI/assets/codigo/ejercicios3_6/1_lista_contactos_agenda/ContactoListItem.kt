@@ -16,12 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Mail
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,10 +31,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.pmdmiesbalmis.components.ui.icons.Filled
 import com.pmdm.agenda.ui.features.components.ImagenContacto
 import com.pmdm.agenda.ui.theme.AgendaTheme
 
@@ -52,25 +47,25 @@ fun Categorias(
 ) {
     data class IconoCategoriaUi(
         val visible: Boolean,
-        val icon: ImageVector,
+        val icon: Painter,
     )
 
     val iconosCategoriaUi = listOf(
         IconoCategoriaUi(
             visible = categoriasState.amigos,
-            icon = categoriasState.amigosIcon,
+            icon = categoriasState.amigosIcon()
         ),
         IconoCategoriaUi(
             visible = categoriasState.trabajo,
-            icon = categoriasState.trabajoIcon,
+            icon = categoriasState.trabajoIcon()
         ),
         IconoCategoriaUi(
             visible = categoriasState.familia,
-            icon = categoriasState.familiaIcon,
+            icon = categoriasState.familiaIcon()
         ),
         IconoCategoriaUi(
             visible = categoriasState.emergencias,
-            icon = categoriasState.emergenciasIcon,
+            icon = categoriasState.emergenciasIcon()
         )
     )
 
@@ -81,7 +76,7 @@ fun Categorias(
         for (iconUi in iconosCategoriaUi) {
             if (iconUi.visible) {
                 Icon(
-                    imageVector = iconUi.icon,
+                    painter = iconUi.icon,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(end = 4.dp)
@@ -151,30 +146,34 @@ fun AccionesContacto(
     onDeleteClicked: () -> Unit = {}
 ) {
     data class Accion(
-        val icon: ImageVector,
+        val icon: Painter,
         val description: String,
         val onClick: () -> Unit
     )
 
+    val phoneIcon = Filled.getPhoneEnabledIcon()
+    val correoIcon = Filled.getMailIcon()
+    val editIcon = Filled.getEditIcon()
+    val deleteIcon = Filled.getDeleteIcon()
     val acciones = remember {
         listOf(
             Accion(
-                icon = Icons.Filled.Phone,
+                icon = phoneIcon,
                 description = "Llamar",
                 onClick = onLlamarClicked
             ),
             Accion(
-                icon = Icons.Filled.Mail,
+                icon = correoIcon,
                 description = "Correo",
                 onClick = onCorreoClicked
             ),
             Accion(
-                icon = Icons.Filled.Edit,
+                icon = editIcon,
                 description = "Editar",
                 onClick = onEditClicked
             ),
             Accion(
-                icon = Icons.Filled.Delete,
+                icon = deleteIcon,
                 description = "Eliminar",
                 onClick = onDeleteClicked
             )
@@ -197,7 +196,7 @@ fun AccionesContacto(
                 onClick = accion.onClick,
             ) {
                 Icon(
-                    imageVector = accion.icon,
+                    painter = accion.icon,
                     contentDescription = accion.description,
                     modifier = Modifier.size(ButtonDefaults.IconSize),
                 )
@@ -258,7 +257,7 @@ fun ContenidoPrincipalCardContacto(
             )
         }
         Icon(
-            imageVector = Icons.Filled.ArrowDropDown,
+            painter = Filled.getArrowDropDownIcon(),
             contentDescription = "Seleccionado",
             // El valor viene establecido por un estado que se animará
             // cuando el item esté seleccionado o no.
