@@ -1,5 +1,3 @@
-package com.pmdm.agenda.ui.features.formcontacto
-
 import androidx.compose.ui.graphics.ImageBitmap
 
 sealed interface ContactoEvent {

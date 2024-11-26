@@ -1,13 +1,13 @@
 package com.pmdm.agenda.ui.features.formcontacto
 
 import com.pmdm.agenda.ui.features.ContactoUiState
-import com.pmdm.agenda.utilities.validacion.Validador
-import com.pmdm.agenda.utilities.validacion.ValidadorCompuesto
-import com.pmdm.agenda.utilities.validacion.validadores.ValidadorCorreo
-import com.pmdm.agenda.utilities.validacion.validadores.ValidadorLongitudMaximaTexto
-import com.pmdm.agenda.utilities.validacion.validadores.ValidadorLongitudMinimaTexto
-import com.pmdm.agenda.utilities.validacion.validadores.ValidadorTelefono
-import com.pmdm.agenda.utilities.validacion.validadores.ValidadorTextoNoVacio
+import com.github.pmdmiesbalmis.components.validacion.Validador
+import com.github.pmdmiesbalmis.components.validacion.ValidadorCompuesto
+import com.github.pmdmiesbalmis.components.validacion.validadores.ValidadorCorreo
+import com.github.pmdmiesbalmis.components.validacion.validadores.ValidadorLongitudMaximaTexto
+import com.github.pmdmiesbalmis.components.validacion.validadores.ValidadorLongitudMinimaTexto
+import com.github.pmdmiesbalmis.components.validacion.validadores.ValidadorTelefono
+import com.github.pmdmiesbalmis.components.validacion.validadores.ValidadorTextoNoVacio
 import javax.inject.Inject
 
 class ValidadorContacto @Inject constructor() : Validador<ContactoUiState> {

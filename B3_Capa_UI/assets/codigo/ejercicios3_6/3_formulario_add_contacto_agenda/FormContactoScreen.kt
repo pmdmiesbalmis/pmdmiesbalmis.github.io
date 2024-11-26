@@ -1,5 +1,3 @@
-package com.pmdm.agenda.ui.features.formcontacto
-
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,11 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Cancel
-import androidx.compose.material.icons.filled.Image
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -43,10 +36,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.pmdmiesbalmis.components.ui.icons.Filled
 import com.pmdm.agenda.R
-import com.pmdm.agenda.ui.composables.OutlinedTextFieldEmail
-import com.pmdm.agenda.ui.composables.OutlinedTextFieldPhone
-import com.pmdm.agenda.ui.composables.OutlinedTextFieldWithErrorState
+import com.github.pmdmiesbalmis.components.ui.composables.OutlinedTextFieldEmail
+import com.github.pmdmiesbalmis.components.ui.composables.OutlinedTextFieldPhone
+import com.github.pmdmiesbalmis.components.ui.composables.OutlinedTextFieldWithErrorState
 import com.pmdm.agenda.ui.features.ContactoUiState
 import com.pmdm.agenda.ui.features.components.ImagenContacto
 import com.pmdm.agenda.ui.features.formcontacto.seleccioncategorias.SeleccionCategoriasConCheckBox
@@ -86,7 +80,7 @@ private fun CabeceraFoto(
             onClick = { },
         ) {
             Icon(
-                imageVector = Icons.Filled.CameraAlt,
+                painter = Filled.getPhotoCameraIcon(),
                 contentDescription = "Hacer Foto",
                 modifier = Modifier.size(ButtonDefaults.IconSize),
             )
@@ -98,7 +92,7 @@ private fun CabeceraFoto(
             onClick = { }
         ) {
             Icon(
-                imageVector = Icons.Filled.Image,
+                painter = Filled.getImageIcon(),
                 contentDescription = "Cargar Imagen",
                 modifier = Modifier.size(ButtonDefaults.IconSize),
             )
@@ -185,7 +179,7 @@ private fun BoxScope.Pie(
                     onClick = { onContactoEvent(ContactoEvent.OnDismissError) },
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Cancel,
+                        painter = Filled.getCancelIcon(),
                         contentDescription = "Cancelar",
                         modifier = Modifier.size(ButtonDefaults.IconSize),
                     )
@@ -202,7 +196,7 @@ private fun BoxScope.Pie(
             text = { Text(text = "Guardar") },
             icon = {
                 Icon(
-                    Icons.Filled.Save,
+                    painter = Filled.getSaveIcon(),
                     contentDescription = "Localized description",
                     modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize),
                 )
@@ -304,12 +298,12 @@ fun FormContactoScreen(
 
 @Preview(
     name = "PORTRAIT",
-    device = "spec:width=360dp,height=800dp,dpi=480",
+    device = "id:pixel_3",
     showBackground = true
 )
 @Preview(
     name = "LANDSCAPE",
-    device = "spec:width=360dp,height=800dp,dpi=480,orientation=landscape",
+    device = "spec:parent=pixel_3,orientation=landscape",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true, fontScale = 1.0f
 )

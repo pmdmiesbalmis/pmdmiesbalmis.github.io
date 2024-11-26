@@ -1,5 +1,3 @@
-package com.pmdm.agenda.ui.features.formcontacto.seleccioncategorias
-
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,12 +13,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pmdm.agenda.ui.composables.CheckboxWithLabel
-import com.pmdm.agenda.ui.composables.FilterChipWithIcon
+import com.github.pmdmiesbalmis.components.ui.composables.CheckboxWithLabel
+import com.github.pmdmiesbalmis.components.ui.composables.FilterChipWithIcon
 import com.pmdm.agenda.ui.features.CatergoriaUiState
+import com.pmdm.agenda.ui.features.amigosIcon
+import com.pmdm.agenda.ui.features.emergenciasIcon
+import com.pmdm.agenda.ui.features.familiaIcon
+import com.pmdm.agenda.ui.features.trabajoIcon
 import com.pmdm.agenda.ui.theme.AgendaTheme
 
 @Composable
@@ -33,7 +35,7 @@ fun SeleccionCategoriasConCheckBox(
     data class CheckBoxUiState(
         val label: String = "",
         val selected: Boolean = false,
-        val icon: ImageVector? = null,
+        val icon: Painter? = null,
         val onClick: (Boolean) -> Unit = {}
     )
 
@@ -41,25 +43,25 @@ fun SeleccionCategoriasConCheckBox(
         CheckBoxUiState(
             label = "Familia",
             selected = categoriaState.familia,
-            icon = categoriaState.familiaIcon,
+            icon = categoriaState.familiaIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(familia = it)) }
         ),
         CheckBoxUiState(
             label = "Amigos",
             selected = categoriaState.amigos,
-            icon = categoriaState.amigosIcon,
+            icon = categoriaState.amigosIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(amigos = it)) }
         ),
         CheckBoxUiState(
             label = "Trabajo",
             selected = categoriaState.trabajo,
-            icon = categoriaState.trabajoIcon,
+            icon = categoriaState.trabajoIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(trabajo = it)) }
         ),
         CheckBoxUiState(
             label = "Emergencias",
             selected = categoriaState.emergencias,
-            icon = categoriaState.emergenciasIcon,
+            icon = categoriaState.emergenciasIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(emergencias = it)) }
         )
     )
@@ -94,7 +96,7 @@ fun SeleccionCategoriasConFilterChip(
     data class FilterChipGroupUiState(
         val label: String = "",
         val selected: Boolean = false,
-        val icon: ImageVector? = null,
+        val icon: Painter? = null,
         val onClick: () -> Unit = {}
     )
 
@@ -102,25 +104,25 @@ fun SeleccionCategoriasConFilterChip(
         FilterChipGroupUiState(
             label = "Familia",
             selected = categoriaState.familia,
-            icon = categoriaState.familiaIcon,
+            icon = categoriaState.familiaIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(familia = !categoriaState.familia)) }
         ),
         FilterChipGroupUiState(
             label = "Amigos",
             selected = categoriaState.amigos,
-            icon = categoriaState.amigosIcon,
+            icon = categoriaState.amigosIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(amigos = !categoriaState.amigos)) }
         ),
         FilterChipGroupUiState(
             label = "Trabajo",
             selected = categoriaState.trabajo,
-            icon = categoriaState.trabajoIcon,
+            icon = categoriaState.trabajoIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(trabajo = !categoriaState.trabajo)) }
         ),
         FilterChipGroupUiState(
             label = "Emergencias",
             selected = categoriaState.emergencias,
-            icon = categoriaState.emergenciasIcon,
+            icon = categoriaState.emergenciasIcon(),
             onClick = { onCategoriaChanged(categoriaState.copy(emergencias = !categoriaState.emergencias)) }
         )
     )
@@ -182,3 +184,4 @@ fun SeleccionCategoriasTest() {
         }
     }
 }
+
