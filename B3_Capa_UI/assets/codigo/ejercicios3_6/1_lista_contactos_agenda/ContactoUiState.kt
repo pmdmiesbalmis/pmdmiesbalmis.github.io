@@ -1,10 +1,7 @@
-package com.pmdm.agenda.ui.features.vercontactos
-
-
 import androidx.compose.ui.graphics.ImageBitmap
 import com.pmdm.agenda.models.Contacto
-import com.pmdm.agenda.utilities.imagenes.Imagenes
 import java.time.Instant
+import com.github.pmdmiesbalmis.utilities.imagetools.*
 
 data class ContactoUiState(
     val id: Int = Instant.now().epochSecond.toInt(),
@@ -22,7 +19,7 @@ fun ContactoUiState.toContacto() = Contacto(
     apellidos = apellidos,
     correo = correo,
     telefono = telefono,
-    foto = foto?.let { Imagenes.bitmapToBase64(it) },
+    foto = foto?.toBase64(),
     categorias = categorias.toEnum()
 )
 
@@ -32,7 +29,7 @@ fun Contacto.toContactoUiState() = ContactoUiState(
     apellidos = apellidos,
     correo = correo,
     telefono = telefono,
-    foto = foto?.let { Imagenes.base64ToBitmap(it) },
+    foto = foto?.base64ToImageBitmap(),
     categorias = CatergoriaUiState(
         amigos = categorias.contains(Contacto.Categorias.Amigos),
         trabajo = categorias.contains(Contacto.Categorias.Trabajo),
