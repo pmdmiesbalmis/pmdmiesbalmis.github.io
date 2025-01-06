@@ -1047,7 +1047,137 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
 </code></pre></div>
 </li>
 </ol>
-<p>En el siguiente ejemplo <strong><a href="assets/codigo/tema_4_2/EjemploNavegacionCompartiendoVM_recurso.zip">EjemploNavegacionCompartiendoVM.zip</a></strong>. Puedes ver cómo aplicar lo que hemos visto hasta ahora para en lugar de pasar datos en la navegación, compartir datos complejos entre ViewModels. Aunque como hemos comentado, no es la opción recomendada por Google.</p>
+<div style="page-break-after:always;"></div>
+<div class="caso_estudio">
+<p>🎓 <strong>Caso de estudio:</strong></p>
+<p>Puedes descargar el código aquí: <strong><a href="assets/codigo/tema_4_2/EjemploNavegacionCompartiendoVM_recurso.zip">EjemploNavegacionCompartiendoVM.zip</a></strong> si no sabes seguir alguno de los ejemplos.</p>
+<p>Aunque como hemos comentado, no es la opción recomendada por Google. En el siguiente caso de estudio vamos a aplicar lo que hemos visto hasta ahora para en lugar de pasar datos en la navegación, <strong>compartir datos complejos entre <code>ViewModels</code></strong>. Además, vamos a ver como crear un <strong>destino de navegación que sea un diálogo</strong>.</p>
+<ol>
+<li>
+<p>Creamos una feature <strong><code>datos</code></strong> con el siguiente contenido:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">DatosUiState</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Jhon"</span></span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> apellido<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Doe"</span></span>
+<span class="token punctuation">)</span>
+</code></pre></li>
+<li>
+<p>En el paquete <strong><code>.features.datos.ver</code></strong> definimos el <strong><code>ViewModel</code></strong> de la pantalla <strong><code>VerDatosScreen.kt</code></strong> y lo denominaremos <strong><code>VerDatosViewModel.kt.</code></strong>. Simplemente me gestionará un estado de tipo <strong><code>DatosUiState</code></strong>.</p>
+</li>
+<li>
+<p>En el paquete <strong><code>.features.datos.editar</code></strong> definimos <strong><code>EditarDatosDialog.kt</code></strong> y <strong><code>EditarDatosEvent.kt</code></strong> que agrupe los eventos de modificar nombre y apellido. Así mismo definirmos <strong><code>EditarDatosViewModel.kt</code></strong> que además de los eventos contenga como antes un estado de tipo <strong><code>DatosUiState</code></strong>.</p>
+ <div class="galeria_imagenes">
+ <img height="350px" src="assets/imagenes/tema_4_2/NavegarADialogo1.png">
+ <img height="350px" src="assets/imagenes/tema_4_2/NavegarADialogo2.png">
+ </div>
+</li>
+<li>
+<p>En el paquete <strong><code>.ui.nabigation</code></strong> definimos <strong><code>VerDatosRoute.kt</code></strong> donde <strong>la destinación que recibirá su correspondiente <code>VerDatosViewModel</code></strong> y el callback de nagación desde donde centralizamos la misma.</p>
+</li>
+<li>
+<p>En el paquete <strong><code>.ui.nabigation</code></strong> definimos <strong><code>EditarDatosRoute.kt</code></strong> con el siguiente código.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Serializable</span>
+<span class="token keyword keyword-object">object</span> EditarDatosRoute
+
+<span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">editarDatosDestination</span><span class="token punctuation">(</span>
+    vm<span class="token operator">:</span> EditarDatosViewModel<span class="token punctuation">,</span>
+    onAceptar<span class="token operator">:</span> <span class="token punctuation">(</span>DatosUiState<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onCancelar<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    dialog<span class="token operator">&lt;</span>EditarDatosRoute<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">EditarDatosDialog</span><span class="token punctuation">(</span>
+            datosState <span class="token operator">=</span> vm<span class="token punctuation">.</span>datosState<span class="token punctuation">,</span>
+            onPantallaPrincipalEvent <span class="token operator">=</span> vm<span class="token operator">::</span>onEditarDatosEvent<span class="token punctuation">,</span>
+            onAceptar <span class="token operator">=</span> onAceptar<span class="token punctuation">,</span>
+            onCancelar <span class="token operator">=</span> onCancelar
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Fíjate que en lugar de <strong><code>composable&lt;EditarDatosRoute&gt;</code></strong> usamos <strong><code>dialog&lt;EditarDatosRoute&gt;</code></strong> para definir un destino de navegación se comporte como un diálogo modal. <strong><code>EditarDatosDialog.kt</code></strong> emite el componente de material3 <strong><code>AlertDialog</code></strong> que ya hemos visto en temas anteriores.</p>
+ <div style="page-break-after:always;"></div>
+</li>
+<li>
+<p>La opción de compartir datos entre los ViewModel la centralizaremos al definir el <strong><code>NavHost</code></strong> y <strong>en los callback de navegación al diálogo y volver de la misma</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[5,6, 13-16, 20-23]}" class="language-kotlin kotlin" data-line="5,6,13-16,20-23"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">NavHostCompartiendoVm</span><span class="token punctuation">(</span>
+    navController<span class="token operator">:</span> NavHostController
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> vVm <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>VerDatosViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> eVm <span class="token operator">=</span> hiltViewModel<span class="token operator">&lt;</span>EditarDatosViewModel<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+        startDestination <span class="token operator">=</span> VerDatosRoute
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">verDatosDestination</span><span class="token punctuation">(</span>
+            vm <span class="token operator">=</span> vVm<span class="token punctuation">,</span>
+            onEditar <span class="token operator">=</span> <span class="token punctuation">{</span>
+                eVm<span class="token punctuation">.</span><span class="token function">setDatos</span><span class="token punctuation">(</span>vVm<span class="token punctuation">.</span>datosState<span class="token punctuation">)</span>
+                navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>EditarDatosRoute<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+        <span class="token function">editarDatosDestination</span><span class="token punctuation">(</span>
+            vm <span class="token operator">=</span> eVm<span class="token punctuation">,</span>
+            onAceptar <span class="token operator">=</span> <span class="token punctuation">{</span> datos <span class="token operator">-&gt;</span>
+                navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                vVm<span class="token punctuation">.</span><span class="token function">setDatos</span><span class="token punctuation">(</span>datos<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            onCancelar <span class="token operator">=</span> <span class="token punctuation">{</span> navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="13-16" data-start="13" data-end="16">
+
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="20-23" data-start="20" data-end="23">
+
+
+
+</div></div></pre></li>
+</ol>
+</div> <!-- fin caso de estudio -->
+<div style="page-break-after:always;"></div>
 <h2 id="gestionar-grafos-de-navegación-complejos">Gestionar grafos de navegación complejos </h2>
 <p>Descarga proyecto: <strong><a href="assets/codigo/tema_4_2/EjemploNavegacionJerarquiaCompleja_recurso.zip">EjemploNavegacionJerarquiaCompleja.zip</a></strong></p>
 <p>En dicho proyecto hemos definido el siguiente grafo de navegación. Donde hay pantallas que me pueden llevar a <strong>dos posibles destinos</strong> como <strong><code>n1</code></strong>, <strong><code>n21</code></strong> y <strong><code>n22</code></strong>. Otras que me llevan a <strong>un único destino</strong> como <strong><code>n32</code></strong> y pantalla finales que <strong>no tienen destinos</strong> como <strong><code>n31</code></strong>, <strong><code>n33</code></strong> y <strong><code>n4</code></strong>.</p>
@@ -1214,7 +1344,9 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
         <span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><div style="page-break-after:always;"></div>
+</code></pre><p>Recuerda <strong>profuncizar</strong> en el uso  de <strong><code>popBackStack(...)</code></strong> es muy altamente <strong>recomendable</strong> la lectura <strong><a href="https://developer.android.com/guide/navigation/backstack?hl=es-419#pop-back">documentación oficial de Android</a></strong> ya que por su '<em>complejidad</em>' vamos a dejar fuera del Tema.</p>
+<p>Así mimos en <strong><a href="https://developer.android.com/guide/navigation/backstack?hl=es-419#compose-examples">este enlace</a></strong> tienes un ejemplo de como como definir un builder de opciones de navegación con más detalle.</p>
+<div style="page-break-after:always;"></div>
 <h2 id="integrado-navegación-y-navigationbar">Integrado navegación y NavigationBar </h2>
 <div class="flotante" ,="" style="align-items: center;">
 <div class="flotante_izq">
@@ -1227,7 +1359,7 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
 </div>
 <p>Descarga proyecto de <strong>Ejemplo NavigationBar</strong>: <strong><a href="assets/codigo/tema_4_2/EjemploNavConNavigationBar_recurso.zip">EjemploNavConNavigationBar.zip</a></strong></p>
 <p>Puedes ver un esquema de funcionamiento en la siguiente imagen...</p>
-<div style="display: flex; justify-content: center; align-items: center">
+<div class="galeria_imagenes">
     <img height="525" src="assets/imagenes/tema_4_2/EjemploNavigationBar.png">
 </div>
 <div style="page-break-after:always;"></div>
@@ -1240,47 +1372,21 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
     pantallaDeDondeVengo<span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
     onNavigatePantallaAnterior<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span>
-</code></pre><p>Si el parámetro <strong><code>pantallaDeDondeVengo</code></strong> está a null significa que estoy en la primera pantalla. En caso contrario, se mostrará un texto con la pantalla de donde vengo y un botón de navegación para volver a ella que tendrá el mismo efecto que pulsar el icono de la <strong><code>TopAppBar</code></strong> <strong><code>&lt;</code></strong> tal y como se veía en la imagen anterior.</p>
- <div style="page-break-after:always;"></div>
+</code></pre><p>Si el parámetro <strong><code>pantallaDeDondeVengo</code></strong> está a <strong><code>null</code></strong> significa que estoy en la primera pantalla. En caso contrario, se mostrará un texto con la pantalla de donde vengo y un botón de navegación para volver a ella que tendrá el mismo efecto que pulsar el icono de la <strong><code>TopAppBar</code></strong> <strong><code>&lt;</code></strong> tal y como se veía en la imagen anterior.</p>
 </li>
 <li>
 <p>En el paquete <strong><code>ui.navigation</code></strong> definiremos nuestro componente <strong><code>NavHost</code></strong>. Pero antes, definiremos un fuente con la especificación de cada uno de los destinos y cómo navegar a ellos. Por ejemplo, vamos a ver la definición de <strong><code>Pantalla1Route.kt</code></strong> ya que <strong><code>Pantalla2Route.kt</code></strong> y <strong><code>Pantalla3Route.kt</code></strong> serán análogos.</p>
-<p>La única diferencia es que en <strong><code>Pantalla1Route.kt</code></strong> definiremos <strong>dos rutas</strong> de navegación. <strong>Una sin parámetros de entrada para que pueda ser la pantalla inicial de nuestro <code>NavHost</code></strong> y otra con un parámetro de entrada de tipo entero que será el número de la pantalla de donde vengo.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> Pantalla1Route <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"pantalla1"</span></span>
-<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> Pantalla1Parameter1Name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"pantalla_de_donde_vengo"</span></span>
+<p>Permitimos que <strong><code>pantallaAnterior</code></strong> pueda ser <strong><code>null</code></strong> porque al ser Pantalla1Route el primer destino de navegación, no vendrá de ninguna pantalla anterior, pero podemos volver regresar a ella desde la 2 y la 3 y en ese caso sí que tendremos un valor.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Serializable</span>
+<span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">Pantalla1Route</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> pantallaAnterior<span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
 
-<span class="token keyword keyword-fun">fun</span> NavController<span class="token punctuation">.</span><span class="token function">navigateToPantalla1</span><span class="token punctuation">(</span>
-    pantallaAnterior<span class="token operator">:</span> Int<span class="token punctuation">,</span>
-    navOptions<span class="token operator">:</span> NavOptions<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span>
-<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">Pantalla1Route</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">pantallaAnterior</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> navOptions<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantalla1Screen</span><span class="token punctuation">(</span>
+<span class="token keyword keyword-fun">fun</span> NavGraphBuilder<span class="token punctuation">.</span><span class="token function">pantalla1Destination</span><span class="token punctuation">(</span>
     onNavigatePantallaAnterior<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">composable</span><span class="token punctuation">(</span>
-        route <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">Pantalla1Route</span></span><span class="token string">"</span></span>
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
+    composable<span class="token operator">&lt;</span>Pantalla1Route<span class="token operator">&gt;</span><span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
         <span class="token function">PantallaScreen</span><span class="token punctuation">(</span>
             pantalla <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
-            onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior
-        <span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">composable</span><span class="token punctuation">(</span>
-        route <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">Pantalla1Route</span></span><span class="token string">/{</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">Pantalla1Parameter1Name</span></span><span class="token string">}"</span></span><span class="token punctuation">,</span>
-        arguments <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
-            <span class="token function">navArgument</span><span class="token punctuation">(</span>Pantalla1Parameter1Name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                type <span class="token operator">=</span> NavType<span class="token punctuation">.</span>IntType
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">)</span>
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span> backStackEntry <span class="token operator">-&gt;</span>
-        <span class="token keyword keyword-val">val</span> pantallaAnterior <span class="token operator">:</span>Int<span class="token operator">?</span> <span class="token operator">=</span> backStackEntry<span class="token punctuation">.</span>arguments<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span>
-            Pantalla1Parameter1Name<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token punctuation">)</span>
-        <span class="token function">PantallaScreen</span><span class="token punctuation">(</span>
-            pantalla <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
-            pantallaDeDondeVengo <span class="token operator">=</span> pantallaAnterior<span class="token punctuation">,</span>
+            pantallaDeDondeVengo <span class="token operator">=</span> backStackEntry<span class="token punctuation">.</span>toRoute<span class="token operator">&lt;</span>Pantalla1Route<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>pantallaAnterior<span class="token punctuation">,</span>
             onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior
         <span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
@@ -1289,29 +1395,20 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
 </li>
 <li>
 <p>Implementados los destinos o rutas, ya podemos definir nuestro <strong><code>NavHost</code></strong> en <strong><code>EjemploNavHost.kt</code></strong>. Este recibirá el <strong><code>NavHostController</code></strong> y lo usará en el el callback que pasamos para volver a la pantalla anterior.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[5-8]}" class="language-kotlin kotlin" data-line="5-8"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">EjemploNavHost</span><span class="token punctuation">(</span>navController<span class="token operator">:</span> NavHostController<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">NavHost</span><span class="token punctuation">(</span>
         navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
         startDestination <span class="token operator">=</span> Pantalla1Route
     <span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> onNavigatePantallaAnterior<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span>
-            navController<span class="token punctuation">.</span><span class="token function">navigateUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
-        <span class="token function">pantalla1Screen</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
-        <span class="token function">pantalla2Screen</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
-        <span class="token function">pantalla3Screen</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
+    <span class="token function">pantalla1Destination</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
+    <span class="token function">pantalla2Destination</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>
+    <span class="token function">pantalla3Destination</span><span class="token punctuation">(</span>onNavigatePantallaAnterior <span class="token operator">=</span> onNavigatePantallaAnterior<span class="token punctuation">)</span>        <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5-8" data-start="5" data-end="8">
-
-
-
-</div></div></pre></li>
+</code></pre></li>
 <li>
 <p>Implementaremos <strong><code>Scaffold</code></strong> principal con una <strong><code>TopAppBar</code></strong> y la <strong><code>NavigationBar</code></strong> en el fuente <strong><code>EjemploNavDentroDeUnScaffold.kt</code></strong> tal y como vimos en el tema anterior. Este será emitido desde el <strong><code>setContent</code></strong> de la <strong><code>MainActivity</code></strong> aunque también podremos tener un <strong><code>@Preview</code></strong> y su contenido principal será el <strong><code>NavHost</code></strong>.</p>
 <p>Nuestro <strong><code>NavigationBar</code></strong> solo recibe el estado con el índice de la pantalla actual y el callback para navegar a la pantalla seleccionada.</p>
@@ -1341,31 +1438,34 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> modifier<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">EjemploNavHost</span><span class="token punctuation">(</span>navController<span class="token punctuation">)</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><p>Definimos una función de utilidad privada que a partir de la ruta actual del <strong><code>NavController</code></strong> nos devuelve el índice de la pantalla actual.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">iOpcionNevagacionSeleccionadaAPartirDeRuta</span><span class="token punctuation">(</span>routa<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
-    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>routa<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">substringBefore</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"/"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Pantalla1Route <span class="token operator">-&gt;</span> <span class="token number">0</span>
-        Pantalla2Route <span class="token operator">-&gt;</span> <span class="token number">1</span>
-        Pantalla3Route <span class="token operator">-&gt;</span> <span class="token number">2</span>
+</code></pre><p>Definimos una función de utilidad privada que a partir de la <strong>ruta actual</strong> como <strong><code>NavDestination</code></strong> obtenida de la <strong>pila de nevegación</strong> <strong><code>NavBackStackEntry</code></strong> nos devuelve el índice de la pantalla actual.</p>
+<p>Fíjate que usamos el método <strong><code>hasRoute</code></strong> indicándole el tipo de la ruta que queremos comprobar.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">iOpcionNevagacionSeleccionadaAPartirDeDestino</span><span class="token punctuation">(</span>destino<span class="token operator">:</span> NavDestination<span class="token operator">?</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-when">when</span> <span class="token punctuation">{</span>
+        destino <span class="token operator">==</span> <span class="token keyword keyword-null">null</span> <span class="token operator">-&gt;</span> <span class="token number">0</span>
+        destino<span class="token punctuation">.</span>hasRoute<span class="token operator">&lt;</span>Pantalla1Route<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token number">0</span>
+        destino<span class="token punctuation">.</span>hasRoute<span class="token operator">&lt;</span>Pantalla2Route<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token number">1</span>
+        destino<span class="token punctuation">.</span>hasRoute<span class="token operator">&lt;</span>Pantalla3Route<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token number">2</span>
         <span class="token keyword keyword-else">else</span> <span class="token operator">-&gt;</span> <span class="token number">0</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><p>Vamos por último a definir la función <strong><code>EjemploNavDentroDeUnScaffold</code></strong> que como hemos comentado será llamada desde la MainActivity. Veamos sus diferentes partes:</p>
-<blockquote>
-<p>✋ <strong>Importante</strong>: Cuando pulsemos el botón de volver atrás. <strong>¿Cómo se actualiza el estado de la <code>NavigationBar</code>?</strong>. Fíjate que obtenemos un <strong>Satate</strong> con <strong><code>navController.currentBackStackEntryAsState()</code></strong> que se actualizará cada vez que se produzca un cambio en el destino de navegación. De él, obtenemos un estado derivado (<strong><code>derivedStateOf</code></strong>) con el índice de nuestro <strong><code>NavigationBar</code></strong> utilizando la función de utilidad que hemos definido anteriormente y a la que le pasamos la ruta actual con <strong><code>entradaEnPilaDeNavegacionActuasState.value?.destination?.route</code></strong>.</p>
-</blockquote>
+</code></pre><p>Vamos por último a definir la función <strong><code>EjemploNavDentroDeUnScaffold</code></strong> que como hemos comentado será llamada desde la <strong><code>MainActivity</code></strong>. Veamos sus diferentes partes:</p>
+<div class="admonition tip">
+<p class="admonition-title">Importante</p>
+<p>Cuando pulsemos el botón de volver atrás. <strong>¿Cómo se actualiza el estado de la <code>NavigationBar</code>?</strong>. Fíjate que obtenemos un <strong><code>State&lt;NavBackStackEntry?&gt;</code></strong> con <strong><code>navController.currentBackStackEntryAsState()</code></strong> que se actualizará cada vez que se produzca un cambio en el destino de navegación. De él, obtenemos un estado derivado (<strong><code>derivedStateOf</code></strong>) con el índice de nuestro <strong><code>NavigationBar</code></strong> utilizando la función de utilidad que hemos definido anteriormente y a la que le pasamos la ruta actual con <strong><code>entradaEnPilaDeNavegacionActuasState.destination?</code></strong>.</p>
+</div>
 <pre data-role="codeBlock" data-info="kotlin {highlight=[7-12]}" class="language-kotlin kotlin" data-line="7-12"><code><span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalMaterial3Api<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">EjemploNavDentroDeUnScaffold</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword keyword-val">val</span> comportamientoAnteScroll 
-        <span class="token operator">=</span> TopAppBarDefaults<span class="token punctuation">.</span><span class="token function">exitUntilCollapsedScrollBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> comportamientoAnteScroll <span class="token operator">=</span> TopAppBarDefaults<span class="token punctuation">.</span><span class="token function">exitUntilCollapsedScrollBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> navController <span class="token operator">=</span> <span class="token function">rememberNavController</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-val">val</span> entradaEnPilaDeNavegacionActuasState 
-        <span class="token operator">=</span> navController<span class="token punctuation">.</span><span class="token function">currentBackStackEntryAsState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword keyword-var">var</span> iOpcionNevagacionSeleccionada <span class="token operator">=</span> derivedStateOf <span class="token punctuation">{</span>
-        <span class="token function">iOpcionNevagacionSeleccionadaAPartirDeRuta</span><span class="token punctuation">(</span>
-            entradaEnPilaDeNavegacionActuasState<span class="token punctuation">.</span>value<span class="token operator">?</span><span class="token punctuation">.</span>destination<span class="token operator">?</span><span class="token punctuation">.</span>route
-        <span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> entradaEnPilaDeNavegacionActuasState <span class="token keyword keyword-by">by</span> navController<span class="token punctuation">.</span><span class="token function">currentBackStackEntryAsState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> iOpcionNevagacionSeleccionada <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span>
+        derivedStateOf <span class="token punctuation">{</span>
+            <span class="token function">iOpcionNevagacionSeleccionadaAPartirDeDestino</span><span class="token punctuation">(</span>
+                entradaEnPilaDeNavegacionActuasState<span class="token operator">?</span><span class="token punctuation">.</span>destination
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 </code><div class="line-highlight-wrapper">
 
@@ -1384,24 +1484,21 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
 <li>El <strong><code>callback</code></strong> para navegar atrás.</li>
 <li>El <strong><code>callback</code></strong> para deshacer toda la navegación.</li>
 </ol>
-<blockquote>
-<p>✋ <strong>Importante</strong>: para entender la llamada a <strong><code>popBackStack</code></strong> es muy importante que leas la <strong><a href="https://developer.android.com/guide/navigation/backstack?hl=es-419#pop-back">documentación oficial de Android</a></strong> y que por su '<em>complejidad</em>' vamos a dejar fuera del Tema.</p>
-</blockquote>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[8, 11-13]}" class="language-kotlin kotlin" data-line="8,11-13"><code>    <span class="token function">Scaffold</span><span class="token punctuation">(</span>
-        modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">nestedScroll</span><span class="token punctuation">(</span>
-            comportamientoAnteScroll<span class="token punctuation">.</span>nestedScrollConnection<span class="token punctuation">)</span><span class="token punctuation">,</span>
-        topBar <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token function">TopAppBarEnEjemploNav</span><span class="token punctuation">(</span>
-                comportamientoAnteScroll <span class="token operator">=</span> comportamientoAnteScroll<span class="token punctuation">,</span>
-                onNavegarAtras <span class="token operator">=</span> <span class="token punctuation">{</span>
-                    navController<span class="token punctuation">.</span><span class="token function">navigateUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">}</span><span class="token punctuation">,</span>
-                onDeshacerNavegacion <span class="token operator">=</span> <span class="token punctuation">{</span>
-                    navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span>
-                        navController<span class="token punctuation">.</span>graph<span class="token punctuation">.</span>startDestinationRoute<span class="token operator">!!</span><span class="token punctuation">,</span> <span class="token boolean">false</span>
-                    <span class="token punctuation">)</span>
-                <span class="token punctuation">}</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<pre data-role="codeBlock" data-info="kotlin {highlight=[8, 11-13]}" class="language-kotlin kotlin" data-line="8,11-13"><code><span class="token function">Scaffold</span><span class="token punctuation">(</span>
+    modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">nestedScroll</span><span class="token punctuation">(</span>
+        comportamientoAnteScroll<span class="token punctuation">.</span>nestedScrollConnection<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    topBar <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token function">TopAppBarEnEjemploNav</span><span class="token punctuation">(</span>
+            comportamientoAnteScroll <span class="token operator">=</span> comportamientoAnteScroll<span class="token punctuation">,</span>
+            onNavegarAtras <span class="token operator">=</span> <span class="token punctuation">{</span>
+                navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            onDeshacerNavegacion <span class="token operator">=</span> <span class="token punctuation">{</span>
+                navController<span class="token punctuation">.</span><span class="token function">popBackStack</span><span class="token punctuation">(</span>
+                    navController<span class="token punctuation">.</span>graph<span class="token punctuation">.</span>startDestinationRoute<span class="token operator">!!</span><span class="token punctuation">,</span> <span class="token boolean">false</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
 </code><div class="line-highlight-wrapper">
 
 
@@ -1424,24 +1521,24 @@ Por ejemnplo, definiendo el setter de la propiedad <strong><code>id</code></stro
 
 
 </div></div></pre><p>Nuestro <strong><code>NavigationBar</code></strong> recibirá del índice seleccionado a partir del estado que actulizaba la navegación. De tal manera que sólo con navegar este estado cambiará. Además, le pasamos los callbacks para navegar a la pantalla seleccionada utilizando la funciones de extenxión de NavHostController que hemos definido anteriormente en cada uno de los destinos.</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>        bottomBar <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token function">NavigationBarEnEjemploNav</span><span class="token punctuation">(</span>
-                iOpcionNevagacionSeleccionada <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
-                onNavigateToScreen <span class="token operator">=</span> <span class="token punctuation">{</span> nuevo <span class="token operator">-&gt;</span>
-                    <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>nuevo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                        <span class="token number">0</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantalla1</span><span class="token punctuation">(</span>
-                            pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
-                        <span class="token punctuation">)</span>
-                        <span class="token number">1</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantalla2</span><span class="token punctuation">(</span>
-                            pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
-                        <span class="token punctuation">)</span>
-                        <span class="token number">2</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigateToPantalla3</span><span class="token punctuation">(</span>
-                            pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
-                        <span class="token punctuation">)</span>
-                    <span class="token punctuation">}</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">)</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>bottomBar <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token function">NavigationBarEnEjemploNav</span><span class="token punctuation">(</span>
+        iOpcionNevagacionSeleccionada <span class="token operator">=</span> iOpcionNevagacionSeleccionada<span class="token punctuation">,</span>
+        onNavigateToScreen <span class="token operator">=</span> <span class="token punctuation">{</span> i <span class="token operator">-&gt;</span>
+            <span class="token keyword keyword-when">when</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token number">0</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>
+                    <span class="token function">Pantalla1Route</span><span class="token punctuation">(</span>pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+                <span class="token number">1</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>
+                    <span class="token function">Pantalla2Route</span><span class="token punctuation">(</span>pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+                <span class="token number">2</span> <span class="token operator">-&gt;</span> navController<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span>
+                    <span class="token function">Pantalla3Route</span><span class="token punctuation">(</span>pantallaAnterior <span class="token operator">=</span> iOpcionNevagacionSeleccionada <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
 </code></pre><p>Por último, emitiremos el componente que definía el <strong><code>NavHost</code></strong> en el contenido principal del <strong><code>Scaffold</code></strong>.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>        content <span class="token operator">=</span> <span class="token punctuation">{</span> innerPadding <span class="token operator">-&gt;</span>
             <span class="token function">ContenidoPrincipalEnEjemploNav</span><span class="token punctuation">(</span>
