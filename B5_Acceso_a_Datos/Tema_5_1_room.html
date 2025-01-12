@@ -474,18 +474,18 @@ dependencies <span class="token punctuation">{</span>
 </li>
 <li>
 <p>A veces, necesitas que la app almacene un tipo de datos personalizado en una sola columna de base de datos. Para admitir tipos personalizados, debes proporcionar convertidores de tipo, que son métodos que indican a Room cómo convertir tipos personalizados en tipos conocidos que Room pueda tratar. Para identificar los conversores de tipo, puedes usar la anotación <strong><code>@TypeConverter</code></strong>.</p>
-<p>Supongamos que necesitas conservar instancias del tipo <strong><code>LocalDate</code></strong> de Kotlin (Java) para saber la <strong>fecha</strong> en que se hizo un pedido. Pero la base de datos para guardar fechas lo hace mediante un <strong><code>Long</code></strong> que representa el <strong>TIMESTAMP</strong>.</p>
+<p>Supongamos que necesitas conservar instancias del tipo <strong><code>LocalDate</code></strong> definido en <strong><code>org.jetbrains.kotlinx:kotlinx-datetime</code></strong> para saber la <strong>fecha</strong> en que se hizo un pedido. Pero la base de datos para guardar fechas lo hace mediante un <strong><code>Int</code></strong> que representa el <strong>TIMESTAMP</strong>.</p>
 <p>Definiremos primero una clase denominada <strong><code>RoomConverters</code></strong> dentro del paquete <strong><code>.data.room</code></strong> con todos los métodos convertidores. Ojo, no importa el nombre del método, <strong>sino su signatura</strong> (parámetro de entrada y de salida). Por ejemplo para fecha podría ser:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Estamos presuponiendo que nuestras fechas nunca son nulas.</span>
 <span class="token keyword keyword-class">class</span> RoomConverters <span class="token punctuation">{</span>
     <span class="token annotation builtin">@TypeConverter</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">fromTimestamp</span><span class="token punctuation">(</span>value<span class="token operator">:</span> Long<span class="token punctuation">)</span><span class="token operator">:</span> LocalDate <span class="token punctuation">{</span>
-        <span class="token keyword keyword-return">return</span> value<span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> LocalDate<span class="token punctuation">.</span><span class="token function">ofEpochDay</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">fromTimestamp</span><span class="token punctuation">(</span>value<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> LocalDate <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> LocalDate<span class="token punctuation">.</span><span class="token function">fromEpochDays</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 
     <span class="token annotation builtin">@TypeConverter</span>
-    <span class="token keyword keyword-fun">fun</span> <span class="token function">dateToTimestamp</span><span class="token punctuation">(</span>date<span class="token operator">:</span> LocalDate<span class="token punctuation">)</span><span class="token operator">:</span> Long <span class="token punctuation">{</span>
-        <span class="token keyword keyword-return">return</span> date<span class="token punctuation">.</span><span class="token function">toEpochDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">dateToTimestamp</span><span class="token punctuation">(</span>date<span class="token operator">:</span> LocalDate<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> date<span class="token punctuation">.</span><span class="token function">toEpochDays</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre><div class="admonition tip">
@@ -512,7 +512,7 @@ dependencies <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> dniCliente<span class="token operator">:</span> Int<span class="token punctuation">,</span>
 
     <span class="token comment">// Indicamos que siempre debe tener una fecha.</span>
-    <span class="token comment">// Esta en la DB se guardará como un Long.</span>
+    <span class="token comment">// Esta en la DB se guardará como un Int.</span>
     <span class="token annotation builtin">@NonNull</span>                 
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"fecha"</span></span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> fecha<span class="token operator">:</span> LocalDate
