@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
       
       
       
@@ -179,10 +179,6 @@
 <ul>
 <li>En el paquete <strong><code>.coche</code></strong> están <strong><code>CocheMock.kt</code></strong> y <strong><code>CocheDaoMock.kt</code></strong> que contiene un listado de coches que vamos a utilizar para la primera carga de datos en la base de datos de Room.</li>
 </ul>
-<p>En el paquete <strong><code>com.vehiculos.ui.composables</code></strong>:</p>
-<ul>
-<li>Dispones de las clases utilizadas en los materiales del curso denominas <strong><code>FielTextCommon.kt</code></strong> e <strong><code>FilterChipCommon.kt</code></strong> que puedes utilizar para algunos de los apartados del examen.</li>
-</ul>
 <p>En el paquete <strong><code>com.vehiculos.ui.features</code></strong>:</p>
 <div class="flotante" ,="" style="align-items:top;">
 <div class="flotante_izq">
@@ -205,32 +201,20 @@
     <img width="500px" src="../imagenes/fichaVehiculo_inicial.png">
 </div>
 </div>
-<p>En el paquete <strong><code>com.vehiculos.utilities</code></strong>:</p>
-<ul>
-<li>Dispones de diferentes clases de utilidad utilizadas en los materiales del curso y que puedes utilizar si lo consideras necesario de forma opcional.</li>
-</ul>
 <h2 id="especificaciones">Especificaciones </h2>
 <ol>
 <li>
 <p>Crea un BD con Room para almacenar todos los datos de nuestro modelo denominada  "<em><strong>coches.db</strong></em>". La BD debe contener una única tabla denominada <em><strong>coches</strong></em> donde la clave primaria será el campo <em><strong>id</strong></em> de tipo <em><strong>Int</strong></em> que tienes en el modelo. Los campos de las tabla deben ir en <strong><code>snake_casing</code></strong></p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Fíjate bien el los datos del mock para definir <strong><code>CocheEntity</code></strong> y fíjate que la foto es de tipo <strong><code>String?</code></strong> que contiene la URL de la imagen o null si no tiene.</p>
-</div>
 <p>Las operaciones sobre la tablas serán todas asíncronas y debes definir las siguientes:</p>
 <ul>
 <li>Operaciones básicas <strong><code>insert</code></strong>, <strong><code>delete</code></strong>, <strong><code>update</code></strong> y <strong><code>count</code></strong></li>
 <li><strong><code>get()</code></strong>: Devuelve todos los coches de la base de datos.</li>
 <li><strong><code>get(Int)</code></strong>: Devuelve un coche de la base de datos a partir de su id.</li>
-<li><strong><code>getOertas()</code></strong>: Devuelve todos los coches de la base de datos que tengan un porcentaje de descuento mayor que 0.<br>
-<strong><code>SELECT * FROM coches WHERE porcentaje_descuento &gt; 0</code></strong></li>
-<li><strong><code>getOrdenadosPrecio()</code></strong>: Devuelve todos los coches de la base de datos ordenados por precio de menor a mayor.<br>
-<strong><code>SELECT * FROM coches ORDER BY precio ASC</code></strong></li>
-<li><strong><code>getOertasOrdenadasPrecio()</code></strong>: Devuelve todos los coches de la base de datos que tengan un porcentaje de descuento mayor que 0 ordenados por precio de menor a mayor.</li>
+<li><strong><code>getOertas()</code></strong>: Devuelve todos los coches de la base de datos que tengan un porcentaje de descuento mayor que 0. <strong><code>SELECT * FROM coches WHERE porcentaje_descuento &gt; 0</code></strong></li>
 </ul>
 </li>
 <li>
-<p>Prepara los '<em>providers</em>' que consideres necesarios de las instancias de Room para la inyección de dependencias con <strong>Hilt</strong>. Teniendo en cuenta que se creará una <strong>instancia única</strong> de cada uno de ellos.</p>
+<p>Añade las anotaciones de Hilt en la aplicación y prepara los '<em>providers</em>' que consideres necesarios de las instancias de Room para la inyección de dependencias con <strong>Hilt</strong>. Teniendo en cuenta que se creará una <strong>instancia única</strong> de cada uno de ellos.</p>
 </li>
 <li>
 <p>Modifica el '<em>repositorio</em>' para usar los métodos definidos.</p>
@@ -238,16 +222,7 @@
 <li>
 <p>Realiza la primera carga de datos de la base de datos de Room a partir de los datos <strong><code>CocheDaoMock</code></strong>. <strong>Solo si la BD está vacía</strong>.</p>
 <p>Para ello, realiza la carga de datos en la BD al iniciar la aplicación. Utilizando el método <strong><code>onCreate</code></strong> de la clase <strong><code>VehiculosApplication</code></strong>.</p>
-<p>Puedes inyectar de forma sencilla los datos de prueba y el Dao o el Repositorio de forma simple utilizando Hilt de la siguiente manera:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltAndroidApp</span>
-<span class="token keyword keyword-class">class</span> VehiculosApplication <span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token annotation builtin">@Inject</span>
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> daoMock<span class="token operator">:</span> CocheDaoMock
-    <span class="token annotation builtin">@Inject</span>
-    <span class="token keyword keyword-lateinit">lateinit</span> <span class="token keyword keyword-var">var</span> daoEntity<span class="token operator">:</span> CocheDao
-    <span class="token operator">..</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span>
-</code></pre><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Recuerda que los métodos de Room deben ser asíncronos y que debes tener en cuenta que la carga de datos se realiza solo si la BD está vacía.</p>
 </div>

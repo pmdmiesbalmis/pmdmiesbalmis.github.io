@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
       
       
       
@@ -192,42 +192,53 @@
 </div>
 <ol start="2">
 <li>
-<p>La lista de coches debe estar <strong>contenida en un Scaffold</strong> con un <strong><code>CenterAlignedTopAppBar</code></strong> que <strong>colapse al hacer scroll</strong> en la lista y un <strong><code>BottomAppBar</code></strong> que cambiará dependiendo de si tenemos seleccionado o no algún coche en la misma.</p>
+<p>La lista de coches debe estar <strong>contenida en un Scaffold</strong> con un <strong><code>CenterAlignedTopAppBar</code></strong> que <strong>colapse al hacer scroll</strong> en la lista, un <strong><code>BottomAppBar</code></strong> que comentaremos en el siguiente punto y un <strong>FAB</strong> con la imagen <strong><code>Filled.getFilterListIcon()</code></strong> que me permitirá filtrar la lista de coches.</p>
+<p>Como puedes ver en las imágenes de ejemplo abajo. Al pulsar el FAB se debe mostrar un <strong><code>ModalBottomSheet</code></strong> con:</p>
 <ul>
-<li>
-<p>Si no hay ningún coche seleccionado la <strong><code>BottomAppBar</code></strong> debe ofrecer dos componentes <strong><code>FilterChipWithIcon</code></strong> definidos en <strong><code>com.vehiculos.ui.composables.FilterChipCommon.kt</code></strong>:</p>
-<ul>
-<li>Uno para ordenar los coches por precio con el icono <strong><code>Icons.Filled.SortByAlpha</code></strong>.</li>
-<li>Otro para mostrar solo los coches con descuento o en oferta con con el icono <strong><code>Icons.Filled.LocalOffer</code></strong>.</li>
-</ul>
-</li>
-<li>
-<p>Si tenemos un coche seleccionado la <strong><code>BottomAppBar</code></strong> debe ofrecer dos botones de acción:</p>
-<ul>
-<li>Uno para <strong>ver la ficha del coche seleccionado</strong> con el icono <strong><code>Icons.Filled.Edit</code></strong>.</li>
-<li>Otro para <strong>eliminar el coche seleccionado</strong> con el icono <strong><code>Icons.Filled.Delete</code></strong>.</li>
-</ul>
-</li>
+<li>Un primer <strong><code>SingleChoiceSegmentedButtonRow</code></strong> para ordenar los coches por precio, modelo o año. Crea un <strong><code>enum class Ordenacion</code></strong> con los valores <strong><code>PRECIO</code></strong>, <strong><code>MODELO</code></strong> y <strong><code>AÑO</code></strong> para gestionar su visualización y guardar su estado en el VM. Puesto que, es visualizar los mismos coches en otro orden, no es necesario hacer una nueva petición al repositorio y utilizaremos el método <strong><code>sortedBy</code></strong> para cambiar el orden de la lista de coches.</li>
+<li>Un <strong><code>HorizontalDivider</code></strong>.</li>
+<li>Un <strong><code>FilterChipWithIcon</code></strong> para mostrar ver <strong>solo las ofertas</strong> <strong>o todos los coches</strong> que gestionaremos mediante una petición al repositorio.</li>
 </ul>
  <div class="galeria_imagenes">
- <img height="150" src="../imagenes/bottomAppBar1.png">
- <img height="150" src="../imagenes/bottomAppBar2.png">
+ <img height="300" src="../imagenes/filtro1.png">
+ <img height="300" src="../imagenes/filtro2.png">
+ <img height="300" src="../imagenes/filtro3.png">
+ <img height="300" src="../imagenes/filtro4.png">
  </div>
 </li>
 <li>
-<p>Tanto la ordenación por precio como el filtrado por coches en oferta se realizarán en el <strong><code>GaleriaCochesViewModel.kt</code></strong> llamando a los métodos correspondientes del repositorio que usarán las operaciones definidas en la BD con Room. Para ello deberás definir clase <strong><code>GaleriaCochesEvent</code></strong> que será un '<em>Sum-Type</em>' con los siguientes eventos:</p>
+<p>Cuando seleccionemos una coche aparecerá una <strong><code>BottomAppBar</code></strong> en el Scaffold que debe ofrecer dos botones de acción:</p>
 <ul>
-<li><strong><code>OnEditarFicha</code></strong> que reciba un callback que me permita navegar a la pantalla de edición de coche pasándole el id del coche seleccionado.</li>
-<li><strong><code>OnSeleccionarCoche</code></strong> que recibirá el <strong><code>CocheUiState</code></strong> seleccionado.</li>
-<li><strong><code>OnOrdenarPorPrecio</code></strong>.</li>
-<li><strong><code>OnFiltrarPorDescuento</code></strong>.</li>
+<li>
+<p>Uno para <strong>ver la ficha del coche seleccionado</strong> con el icono <strong><code>painter = Filled.getEditIcon()</code></strong>. De momento, no hará nada. Pero, en futuros ejercicios, nos llevará a la pantalla de edición de coche.</p>
+</li>
+<li>
+<p>Otro para <strong>eliminar el coche seleccionado</strong> con el icono <strong><code>painter = Filled.getDeleteIcon()</code></strong>.</p>
+</li>
 </ul>
-<div class="admonition tip">
+ <div class="galeria_imagenes">
+ <img height="120" src="../imagenes/bottomAppBar1.png">
+ <img height="160" src="../imagenes/bottomAppBar2.png">
+ </div>
+</li>
+<li>
+<p>Tanto las ordenaciones como el filtrado de ver solo ofertas se realizarán en el <strong><code>GaleriaCochesViewModel.kt</code></strong> llamando a los métodos correspondientes del repositorio que usarán las operaciones definidas en la BD con Room. Para ello deberás definir clase <strong><code>GaleriaCochesEvent</code></strong> que será un '<em>Sum-Type</em>' con los siguientes eventos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> GaleriaCochesEvent <span class="token punctuation">{</span>
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnSeleccionarCoche</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> coche<span class="token operator">:</span> CocheUiState<span class="token punctuation">)</span> <span class="token operator">:</span> GaleriaCochesEvent
+    <span class="token keyword keyword-object">object</span> OnVerSoloOfertas <span class="token operator">:</span> GaleriaCochesEvent
+    <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">OnOrdenacion</span><span class="token punctuation">(</span><span class="token keyword keyword-val">val</span> ordenacion<span class="token operator">:</span> Ordenacion<span class="token punctuation">)</span> <span class="token operator">:</span> GaleriaCochesEvent
+    <span class="token keyword keyword-object">object</span> OnBorrarVehiculo <span class="token operator">:</span> GaleriaCochesEvent
+<span class="token punctuation">}</span>
+</code></pre><div class="admonition tip">
 <p class="admonition-title">Pista</p>
 <p>Puedes definir el método privado ...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getCohes</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> List<span class="token operator">&lt;</span>CocheUiState<span class="token operator">&gt;</span>
-</code></pre><p>en el <strong><code>GaleriaCochesViewModel.kt</code></strong> que te devuelva la lista de coches ordenada y filtrada si fuera necesario usando los estados booleanos que en el ViewModel <strong><code>ordenarPorPrecioState</code></strong> y <strong><code>filtrarPorDescuentoState</code></strong>.</p>
-</div>
+</code></pre><p>en el <strong><code>GaleriaCochesViewModel.kt</code></strong> que te devuelva la lista de coches ordenada y filtrada si fuera necesario usando los estados  en el <strong><code>ViewModel</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-var">var</span> ordenacionState <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span>Ordenacion<span class="token punctuation">.</span>PRECIO<span class="token punctuation">)</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+<span class="token keyword keyword-var">var</span> verSoloOfertas <span class="token keyword keyword-by">by</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-set">set</span>
+</code></pre></div>
 </li>
 </ol>
 
