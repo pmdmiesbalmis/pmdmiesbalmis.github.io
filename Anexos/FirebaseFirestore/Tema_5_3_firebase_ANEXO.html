@@ -1,0 +1,676 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2º DAM Firebase</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="firebase-anexo">Firebase (Anexo) </h1>
+<p>Descargar estos apuntes <a href="./Tema_5_3_firebase_ANEXO.pdf">pdf</a> o <a href="./Tema_5_3_firebase_ANEXO.html">html</a></p>
+<h2 id="índice">Índice </h2>
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducción" class="md-toc-link">
+            <p>Introducción</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#modificando-la-agenda-para-usar-firestore" class="md-toc-link"><p>Modificando la Agenda para usar Firestore</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#creando-un-proyecto-de-firebase" class="md-toc-link">
+            <p>Creando un proyecto de Firebase</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#activación-del-servicio-de-firestore" class="md-toc-link">
+            <p>Activación del servicio de Firestore</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#añadiendo-permisos-en-el-manifestxml" class="md-toc-link">
+            <p>Añadiendo permisos en el <code>manifest.xml</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#dependencias-y-plugins-de-en-gradle" class="md-toc-link">
+            <p>Dependencias y Plugins de en Gradle</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#modificando-el-proyecto" class="md-toc-link"><p>Modificando el proyecto</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#definiendo-el-proveedor-de-firestore-con-dagger-hilt" class="md-toc-link">
+            <p>Definiendo el proveedor de Firestore con Dagger-Hilt</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#definiendo-las-clases-para-operar-con-firestore" class="md-toc-link">
+            <p>Definiendo las clases para operar con Firestore</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    
+</div>
+<div style="page-break-after:always;"></div>
+<h2 id="introducción">Introducción </h2>
+<ul>
+<li>
+<p><strong>Persistencia en la nube con Firebase</strong></p>
+<ul>
+<li>Documentación oficial: <strong><a href="https://firebase.google.com/docs/reference/kotlin/packages?hl=es">Firebase documentation</a></strong></li>
+<li>Video Tutorial (Inglés): <strong><a href="https://www.youtube.com/@Firebase/videos">Firebase</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=RLN_tRx766g&amp;pp=ygUYZmlyZWJhc2UgdHV0b3JpYWwga290bGlu">DevExpert</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=LxABxtwhrDE&amp;t=948s&amp;pp=ygURZmlyZWJhc2UgdHV0b3JpYWw%3D">AristiDevs</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=LxABxtwhrDE">AristiDevs</a></strong></li>
+</ul>
+</li>
+</ul>
+<p>La plataforma Firebase proporciona múltiples herramientas para el almacenamiento, consulta y gestión de datos, así como otros servicios en la nube. Algunas de las más destacadas incluyen:</p>
+<ul>
+<li><strong>Cloud Firestore</strong>: Base de datos NoSQL en la nube con sincronización en tiempo real.</li>
+<li><strong>Realtime Database</strong>: Base de datos en tiempo real que permite actualizaciones instantáneas entre clientes.</li>
+<li><strong>Firebase Authentication</strong>: Servicio para gestionar autenticación de usuarios con correo, Google, Facebook, etc.</li>
+<li><strong>Firebase Cloud Storage</strong>: Almacenamiento de archivos en la nube, ideal para imágenes, videos y otros documentos.</li>
+<li><strong>Firebase Cloud Messaging (FCM)</strong>: Servicio para enviar notificaciones push y mensajes a dispositivos.</li>
+<li><strong>Firebase Remote Config</strong>: Permite cambiar la configuración de la app de forma remota sin necesidad de actualizarla.</li>
+<li><strong>Firebase Crashlytics</strong>: Herramienta para la detección y análisis de errores en tiempo real.</li>
+<li><strong>Firebase Analytics</strong>: Plataforma para el análisis del comportamiento de los usuarios dentro de la aplicación.</li>
+</ul>
+<p>Firebase proporciona un ecosistema completo para desarrollar aplicaciones escalables sin necesidad de administrar servidores. 🚀</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Existen otras opciones de terceros como <strong><a href="https://supabase.com">Supabase</a></strong> (alternativa basada en SQL con PostgreSQL) o <strong><a href="https://appwrite.io">Appwrite</a></strong> (un backend ligero y multiplataforma con soporte para Flutter, Kotlin Multiplatform y más), pero no están tan integradas con el ecosistema de Google como Firebase. Además, Firebase ofrece un plan gratuito con ciertas limitaciones, lo que lo convierte en una opción atractiva para proyectos pequeños o en fase de prueba.</p>
+</div>
+<p>Nosotros nos vamos a centrar en Firebase, aunque no entraremos en el diseño de bases de datos NoSQL ni en el uso avanzado de esta tecnología. Para conocer toda la funcionalidad de Firebase, se recomienda consultar la documentación oficial. El problema de trabajar directamente con esta API es que puede requerir un manejo detallado de la sincronización de datos y manejo de la red, lo que puede llevar a errores si no se gestiona correctamente.</p>
+<p>Por este motivo, Firebase ofrece diversas herramientas y servicios como Firebase Authentication, Firebase Storage y Firebase Cloud Messaging, que funcionan como una capa de abstracción y simplifican el proceso de implementación, optimizando la gestión de datos, la autenticación de usuarios, el almacenamiento de archivos y las notificaciones push.</p>
+<div style="page-break-after:always;"></div>
+<h2 id="modificando-la-agenda-para-usar-firestore">Modificando la Agenda para usar Firestore </h2>
+<div class="admonition info">
+<p class="admonition-title">Proyecto</p>
+<p>Puedes descargar el proyecto de la agenda con todo el código visto en el tema desde el siguiente enlace <strong><a href="assets/codigo/0_AgendaFirebase_recurso.zip">AgendaFirebase</a></strong></p>
+</div>
+<h3 id="creando-un-proyecto-de-firebase">Creando un proyecto de Firebase </h3>
+<p>Lo primero que debemos hacer, es crear una cuenta de Google e iniciar sesión en la <strong><a href="https://console.firebase.google.com/">consola</a></strong> de Firebase. Antes de comenzar a trabajar en el proyecto de Android, es necesario configurar un proyecto de Firebase en la consola. Una vez que hayas creado y configurado el proyecto en Firebase, podrás ver los proyectos que tienes y empezar a integrarlos con tu aplicación Android.</p>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>Firebase impone un límite en la cantidad de proyectos que puedes crear. Si alcanzas este límite, tendrás que enviar una solicitud para pedir una cantidad específica de proyectos, indicando el motivo. En caso de que necesites proyectos ilimitados, puedes solicitar la versión Spark, explicando las razones por las que debería ser concedida.</p>
+</div>
+<p>Los pasos para <strong>crear un proyecto en Firebase</strong> son los siguientes:</p>
+<ol>
+<li>Indicamos el <strong>nombre del proyecto</strong> por ejemplo <em><strong>agenda</strong></em>.</li>
+<li>Habilitamos Google Analytics en nuestro proyecto.</li>
+<li>Elegimos la cuenta por defecto de Google Analytics.</li>
+<li>Hacemos clic en "<em><strong>Crear proyecto</strong></em>".</li>
+</ol>
+<p>Ahora, los pasos para configurar un proyecto de Android en Firebase son los siguientes:</p>
+<ol>
+<li>
+<p>Registrar la aplicación Android pulsando sobre el <strong>botón con el icono de Android</strong>:</p>
+<ul>
+<li>
+<p>Introduce el <strong>nombre del paquete</strong> de tu aplicación Android.<br>
+Este se encuentra en El archivo <strong><code>build.gradle.kts</code></strong> del módulo <strong><code>app</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin {highlight=2}" class="language-kotlin kotlin" data-line="2"><code>android <span class="token punctuation">{</span>
+    namespace <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"com.pmdm.agenda"</span></span>
+    compileSdk <span class="token operator">=</span> <span class="token number">34</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code><div class="line-highlight-wrapper">
+<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
+</div></div></pre></li>
+<li>
+<p>Si es necesario, puedes agregar el SHA-1 de la firma de tu app (esto es importante si vas a usar servicios como Firebase Authentication o Firebase Dynamic Links).</p>
+</li>
+<li>
+<p>Haz <strong>clic en Registrar</strong> la aplicación.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Descargar el archivo <strong><code>google-services.json</code></strong>:</p>
+<ul>
+<li>
+<p>Una vez registrada la aplicación, se te pedirá descargar el archivo <strong><code>google-services.json</code></strong>.</p>
+</li>
+<li>
+<p>Descarga este archivo y sigue las instrucciones proporcionadas en el sitio web.</p>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>Es importante no cambiar el nombre del archivo <strong><code>google-services.json</code></strong> ya que, si lo haces, podrías tener problemas al conectarte con Firebase. Asegúrate de colocarlo en la carpeta <strong><code>app</code></strong> dentro de tu proyecto. Además, cada vez que añadas un nuevo servicio en tu proyecto de Firebase, deberás revisar este archivo y descargarlo por si ha cambiado algo en la configuración.</p>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h3 id="activación-del-servicio-de-firestore">Activación del servicio de Firestore </h3>
+<ul>
+<li><strong><a href="https://firebase.google.com/docs/firestore/quickstart?hl=es&amp;authuser=0#create">Documentación Oficial</a></strong></li>
+<li><strong><a href="https://firebase.google.com/docs/reference/kotlin/com/google/firebase/firestore/package-summary?authuser=0">API de Firestore en Kotlin</a></strong></li>
+</ul>
+<p>Es una BD NoSQL flexible y escalable para aplicaciones móviles, web y servidores, que organiza los datos en <strong>documentos</strong> y <strong>colecciones</strong>. Ofrece sincronización en tiempo real y soporte sin conexión.</p>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/CrearFirestoreDatabase.png">
+</div>
+<p>Una vez hemos accedido a nuestro proyecto:</p>
+<ul>
+<li>
+<p>Marcamos la opción <strong>Cloud Firestore</strong> 1️⃣.</p>
+</li>
+<li>
+<p>Nos aparecerá la opción 2️⃣ de firestore, y al pulsar seleccionamos <strong>Agregar base de datos</strong> dejamos la BD por defecto <em><strong><code>(default)</code></strong></em> que es la gratuita seleccionando como ubicación por ejemplo <strong><code>europe3</code></strong>. Firebase proveerá en ese momento los recursos necesarios para que la BD funcione correctamente.</p>
+</li>
+<li>
+<p>En 3️⃣ y 4️⃣ podremos acceder a la configuración de nuestro proyecto y desde la misma podremos volver el archivo de configuración <strong><code>google-services.json</code></strong>.</p>
+</li>
+<li>
+<p>Una vez creada nos aparecerá la BD vacía y deberemos configurar las reglas de acceso en las pestaña reglas. l</p>
+  <div class="galeria_imagenes">
+      <img height="200" src="assets/imagenes/ReglasBD.png">
+  </div>
+</li>
+<li>
+<p>Deberemos pondremos la regla <strong><code>if true;</code></strong> para no tener ningún tipo de restricción en la BD ya que no estamos utilizando ningún tipo de autenticación.</p>
+<pre data-role="codeBlock" data-info="txt { highlight=6 }" class="language-txt txt" data-line="6"><code>rules_version = '2';
+
+service cloud.firestore {
+    match /databases/{database}/documents {
+        match /{document=**} {
+            allow read, write: if true;
+        }
+    }
+}
+</code><div class="line-highlight-wrapper">
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
+</div></div></pre></li>
+</ul>
+<h3 id="añadiendo-permisos-en-el-manifestxml">Añadiendo permisos en el <code>manifest.xml</code> </h3>
+<p>Puesto que Firestore es una BD en la nube, vamos a necesitar permisos de internet. Pare ello, en el archivo <strong><code>AndroidManifest.xml</code></strong> deberemos añadir el permiso de acceso a internet para que el servicio pueda acceder al API.</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[3-5,9]}" class="language-xml xml" data-line="3-5,9"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+    ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.INTERNET<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_NETWORK_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_WIFI_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Permitir tráfico http en lugar de https --&gt;</span>
+        android:usesCleartextTraffic="true"
+        ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
+</code><div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-5" data-start="3" data-end="5">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div></pre><h3 id="dependencias-y-plugins-de-en-gradle">Dependencias y Plugins de en Gradle </h3>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Puede que todas las dependencias relacionadas con <strong>kotlinx-serialization-json</strong> las tengas ya añadidas en tu proyecto porque se usan en la nueva navegación segura de Jetpack Compose. Si es así, fíjate bien pues no es necesario añadirlas de nuevo.</p>
+</div>
+<p>En el catálogo de versiones <strong><code>lib.versions.toml</code></strong> deberemos comprobar que hemos definido tener:</p>
+<pre data-role="codeBlock" data-info="toml" class="language-toml toml"><code><span class="token comment"># Recuerda además que las entradas van en una sola línea.</span>
+<span class="token comment"># Algunas se han indentado para que se vean mejor.</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">versions</span><span class="token punctuation">]</span>
+<span class="token key property">googleServices</span> <span class="token punctuation">=</span> <span class="token string">"4.4.2"</span>
+<span class="token key property">firebaseFirestoreKtx</span> <span class="token punctuation">=</span> <span class="token string">"25.1.1"</span>
+<span class="token comment"># Solo si no está ya incluido</span>
+<span class="token key property">kotlinxSerializationJson</span> <span class="token punctuation">=</span> <span class="token string">"1.7.3"</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">libraries</span><span class="token punctuation">]</span>
+<span class="token key property">google-firebase-bom</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> 
+    <span class="token key property">group</span> <span class="token punctuation">=</span> <span class="token string">"com.google.firebase"</span><span class="token punctuation">,</span> <span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">"firebase-bom"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"firebase"</span> 
+<span class="token punctuation">}</span>
+<span class="token key property">firebase-firestore-ktx</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> 
+    <span class="token key property">group</span> <span class="token punctuation">=</span> <span class="token string">"com.google.firebase"</span><span class="token punctuation">,</span> <span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">"firebase-firestore-ktx"</span><span class="token punctuation">,</span> 
+    <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"firebaseFirestoreKtx"</span> 
+<span class="token punctuation">}</span>
+<span class="token comment"># Solo si no está ya incluido</span>
+<span class="token key property">kotlinx-serializarion-json</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> 
+    <span class="token key property">group</span> <span class="token punctuation">=</span> <span class="token string">"org.jetbrains.kotlinx"</span><span class="token punctuation">,</span> <span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">"kotlinx-serialization-json"</span><span class="token punctuation">,</span> 
+    <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"kotlinxSerializationJson"</span> 
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">plugins</span><span class="token punctuation">]</span>
+<span class="token key property">google-services</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">id</span> <span class="token punctuation">=</span> <span class="token string">"com.google.gms.google-services"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"googleServices"</span> <span class="token punctuation">}</span>
+<span class="token comment"># Solo si no está ya incluido</span>
+<span class="token key property">kotlinx-serialization</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> 
+    <span class="token key property">id</span> <span class="token punctuation">=</span> <span class="token string">"org.jetbrains.kotlin.plugin.serialization"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"kotlin"</span> 
+<span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> raíz del proyecto añadiremos el siguiente plugin:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>google<span class="token punctuation">.</span>services<span class="token punctuation">)</span> apply <span class="token boolean">false</span>
+    <span class="token comment">// Solo si no está ya incluido</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>kotlinx<span class="token punctuation">.</span>serialization<span class="token punctuation">)</span> apply <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> del <strong>módulo de la aplicación</strong> (app) añadiremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>google<span class="token punctuation">.</span>services<span class="token punctuation">)</span>
+    <span class="token comment">// Solo si no está ya incluido</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>kotlinx<span class="token punctuation">.</span>serialization<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+dependencies <span class="token punctuation">{</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token function">platform</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>google<span class="token punctuation">.</span>firebase<span class="token punctuation">.</span>bom<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<h3 id="modificando-el-proyecto">Modificando el proyecto </h3>
+<h4 id="definiendo-el-proveedor-de-firestore-con-dagger-hilt">Definiendo el proveedor de Firestore con Dagger-Hilt </h4>
+<p>Definiremos el proveedor de Firestore en el archivo <strong><code>AppModule.kt</code></strong> que me creará una instancia de Firestore de acuerdo a la configuración de mi proyecto definida en el archivo <strong><code>google-services.json</code></strong> y me la inyectará con <strong>Dagger-Hilt</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Module</span>
+<span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>       
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideFirestore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> FirebaseFirestore <span class="token operator">=</span> Firebase<span class="token punctuation">.</span>firestore
+<span class="token punctuation">}</span>
+</code></pre><h4 id="definiendo-las-clases-para-operar-con-firestore">Definiendo las clases para operar con Firestore </h4>
+<div class="flotante" ,="" style="align-items: top;">
+<div class="flotante_izq">
+<p>Definiremos el <strong>paquete</strong> <strong><code>data.firestore.contacto</code></strong> en nuestro proyecto. El documento a almacenar en Firestore y el servicio que hara las veces de DAO y me proporcionará las operaciones CRUD que usamos en nuestro repositorio.</p>
+<p>Primero definiremos la clase que modelizará el documento a almacenar en Firestore. En este caso, será un <strong>Contacto</strong> y que definiremos en el fichero <strong><code>ContactoFSDocument.kt</code></strong>.</p>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:1" class="puml"><!--?xml version="1.0" encoding="us-ascii" standalone="no"?--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="153px" preserveAspectRatio="none" style="width:220px;height:153px;background:#FFFFFF;" version="1.1" viewBox="0 0 220 153" width="220px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1.0;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1.0;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1.0;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="117" x="26" y="39.5508">[com.pmdm.agenda]</text><path d="M37,46.2813 L37,48.2813 L45,48.2813 L45,47.2813 L40,47.2813 L40,46.2813 L37,46.2813 M37,49.2813 L37,53.7813 C37,54.0613 37.22,54.2813 37.5,54.2813 L44.5,54.2813 C44.78,54.2813 45,54.0613 45,53.7813 L45,49.2813 L37,49.2813 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="33" x="46" y="54.6445">[data]</text><path d="M57,61.375 L57,63.375 L65,63.375 L65,62.375 L60,62.375 L60,61.375 L57,61.375 M57,64.375 L57,68.875 C57,69.155 57.22,69.375 57.5,69.375 L64.5,69.375 C64.78,69.375 65,69.155 65,68.875 L65,64.375 L57,64.375 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57" x="66" y="69.7383">[firestore]</text><path d="M67,76.4688 L67,78.4688 L75,78.4688 L75,77.4688 L70,77.4688 L70,76.4688 L67,76.4688 M67,79.4688 L67,83.9688 C67,84.2488 67.22,84.4688 67.5,84.4688 L74.5,84.4688 C74.78,84.4688 75,84.2488 75,83.9688 L75,79.4688 L67,79.4688 " fill="#0000FF" style="stroke:;stroke-width:0.0;stroke-dasharray:;"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="58" x="76" y="84.832">[contacto]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="137" x="76" y="99.9258">ContactoFSDocument.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="122" x="76" y="115.0195">ContactoFSService.kt</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="120" x="46" y="130.1133">ContactoRepository.kt</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="131" x="46" y="145.207">RepositoryConverters.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="29" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1.0;" x1="10" x2="28" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="49" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="48" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1.0;" width="2" x="59" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1.0;" x1="50" x2="50" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1.0;" x1="50" x2="58" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="60" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="68" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="60" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1.0;" x1="60" x2="68" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="51.7344" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="30" y1="51.7344" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1.0;" x1="30" x2="38" y1="140.2969" y2="140.2969"></line><!--SRC=[ZP7RQW8n48RlynHpLNGNbzNQKXOHMmy5grHqzQPKYCbeGtSJoM51fE_UB1wsDoqbT_D_tv2PwHbBjJKqiuGSoVfHSgq4NvDZIa88WixDLcKSTVUDgJpQvpoFw0ubf-z1GC8mX0vJcTB99dFO_ObpQY_C7zHMQ3HMQRoYlxDCIKkPLHLwPRKwqEmizC_OQ35GpEKeRVHf_wiiK1U2OMN09PlZNXdXlthmuIcgIXugK5lKfWo__Elv7PsMEikejClf13nXX9BGZ5fngntTrj8F1oFSGFCEMd7IZfFu3lh35CguJchFimaOvJH3uC9OBJREUhzEnhIWC7VIYXmJUDsZ70zUBWKOoa9e9Sl1oNWrhO3xTkD9M2X7H0shAHdWbhhCUeCfBkGkWMKwQZoG2PKxvw-S01hILxwlFYGmN7m3]--></g></svg></p></div>
+</div>
+<p>Para ello, tenemos que entender primero <strong><a href="https://firebase.google.com/docs/firestore/manage-data/structure-data?hl=es-419&amp;authuser=0">cómo se almacenan los datos en Firestore</a></strong>.</p>
+<p>Nuestro modelo será la <strong>BD</strong> <strong><code>(default)</code></strong> con la <strong>colección</strong> <strong><code>contactos</code></strong> y cada <strong>documento</strong> dentro de la misma tendrá un <strong>id</strong> que se tratará como cadena de texto y se recomienda que sea un UUID. En nuestro caso será el id que definimos en el '<em>mock</em>' por lo que nos debería quedar algo similar a esto:</p>
+<div class="galeria_imagenes">
+<img height="300" src="assets/imagenes/EsquemaDeDatos.png">
+</div>
+<p>A la hora de <strong><a href="https://firebase.google.com/docs/firestore/manage-data/add-data?hl=es-419&amp;authuser=0#add_a_document">agregar o crear un documento</a></strong> ejecutaremos algo similar a:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>Firebase<span class="token punctuation">.</span>firestore<span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"contactos"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"3"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>contacto<span class="token punctuation">)</span>
+</code></pre><p>Donde el método document nos devolverá una <strong>referencia al documento</strong> (<strong><a href="https://firebase.google.com/docs/reference/kotlin/com/google/firebase/firestore/DocumentReference?authuser=0">DocumentReference</a></strong>) con el id <strong><code>"3"</code></strong> dentro de la colección <strong><code>contactos</code></strong> o <strong>lo creará si no existe</strong> devolviendo la referencia al nuevo documento. Si no pasamos el id, Firestore lo generará automáticamente y lo podremos obtener a través del objeto <strong><code>DocumentReference</code></strong> que devuelve document.</p>
+<h5 id="definiendo-el-documento-en-kotlin">Definiendo el documento en Kotlin </h5>
+<p>Ahora ya podemos definir el <strong><a href="https://firebase.google.com/docs/firestore/manage-data/add-data?hl=es-419&amp;authuser=0#custom_objects">objeto personalizado</a></strong> que modelizará el documento a almacenar en Firestore dentro de <strong><code>ContactoFSDocument.kt</code></strong> siguiendo las siguientes recomendaciones:</p>
+<ol>
+<li>Al crear objetos para Firestore, es necesario inicializarlos con valores por defecto; de lo contrario, se generará un error.</li>
+<li>Si usamos '<em>Hash Maps</em>', solo podrán usar claves de tipo string.</li>
+<li>Si usas un campo en inglés, como por ejemplo <strong><code>isBlocked</code></strong>, es recomendable usar <strong><code>blocked</code></strong> en su lugar, ya que obtendrmos errores si no usamos la anotación <strong><code>@field:JvmField</code></strong> sobre el campo.</li>
+</ol>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ContactoFSDocument</span><span class="token punctuation">(</span>
+    <span class="token comment">// Excluimos el id pues se almacenará a parte de los datos del documento.</span>
+    <span class="token annotation builtin">@get:Exclude</span>        
+    <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> foto<span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> correo<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> telefono<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-val">val</span> categorias<span class="token operator">:</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token function">emptyList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre><p>Fíjate que podemos guardar las categorías como una lista de cadenas de texto. Esto nos permitirá realizar consultas más avanzadas en Firestore, como buscar todos los contactos que pertenecen a una categoría específica.</p>
+<h5 id="definiendo-los-mapeos-al-modelo">Definiendo los '<em>mapeos</em>' al modelo </h5>
+<p>Una vez tenemos modelado el documento en <strong><code>RepositoryConverters.kt</code></strong> definiremos el mapeo del documento a nuestro modelo <strong><code>Contacto</code></strong> y viceversa.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token function">toEnumSetCategorias</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> EnumSet<span class="token operator">&lt;</span>Contacto<span class="token punctuation">.</span>Categorias<span class="token operator">&gt;</span> <span class="token operator">=</span>
+    <span class="token keyword keyword-this">this</span><span class="token punctuation">.</span><span class="token function">mapNotNull</span> <span class="token punctuation">{</span> categoria <span class="token operator">-&gt;</span>
+        runCatching <span class="token punctuation">{</span> Contacto<span class="token punctuation">.</span>Categorias<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>categoria<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">getOrNull</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token function">takeIf</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> EnumSet<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token operator">?:</span> EnumSet<span class="token punctuation">.</span><span class="token function">noneOf</span><span class="token punctuation">(</span>Contacto<span class="token punctuation">.</span>Categorias<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+
+
+<span class="token keyword keyword-fun">fun</span> ContactoFSDocument<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">Contacto</span><span class="token punctuation">(</span>
+    id <span class="token operator">=</span> id<span class="token punctuation">,</span>
+    nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+    apellidos <span class="token operator">=</span> apellidos<span class="token punctuation">,</span>
+    foto <span class="token operator">=</span> foto<span class="token punctuation">,</span>
+    correo <span class="token operator">=</span> correo<span class="token punctuation">,</span>
+    telefono <span class="token operator">=</span> telefono<span class="token punctuation">,</span>
+    categorias <span class="token operator">=</span> categorias<span class="token punctuation">.</span><span class="token function">toEnumSetCategorias</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-fun">fun</span> Contacto<span class="token punctuation">.</span><span class="token function">toContactoFSDocument</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">ContactoFSDocument</span><span class="token punctuation">(</span>
+    id <span class="token operator">=</span> id<span class="token punctuation">,</span>
+    nombre <span class="token operator">=</span> nombre<span class="token punctuation">,</span>
+    apellidos <span class="token operator">=</span> apellidos<span class="token punctuation">,</span>
+    foto <span class="token operator">=</span> foto<span class="token punctuation">,</span>
+    correo <span class="token operator">=</span> correo<span class="token punctuation">,</span>
+    telefono <span class="token operator">=</span> telefono<span class="token punctuation">,</span>
+    categorias <span class="token operator">=</span> categorias<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> c <span class="token operator">-&gt;</span> c<span class="token punctuation">.</span>name <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+</code></pre><h5 id="definiendo-el-servicio-de-firestore-con-el-crud">Definiendo el servicio de Firestore con el CRUD </h5>
+<p>Una vez tenemos los '<em>mapeos</em>' entre <strong><code>ContactoFSDocumento</code></strong> y <strong><code>Contacto</code></strong> definiremos <strong><code>ContactoFSService.kt</code></strong> donde definiremos las operaciones CRUD que necesitamos para interactuar con Firestore.</p>
+<p>Definiremos una excepción personalizada <strong><code>FirestoreException</code></strong> que nos permitirá lanzar excepciones hacia el ViewModel.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">FirestoreException</span><span class="token punctuation">(</span>message<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Exception</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+</code></pre><p>Posteriormente inyectaremos la la instancia de Firestore creada a través de Dagger-Hilt en el servicio <strong><code>ContactoFSService</code></strong> y lo definiremos como un <strong>singleton</strong> para no tener que definir un provider para <strong><code>ContactoFSService</code></strong> en el <strong><code>AppModule.kt</code></strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Singleton</span>
+<span class="token keyword keyword-class">class</span> ContactoFSService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firestore<span class="token operator">:</span> FirebaseFirestore
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Definición de constantes a nivel de clase</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-companion">companion</span> <span class="token keyword keyword-object">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> COLLECTION <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"contactos"</span></span>
+        <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-val">val</span> TAG <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Firestore"</span></span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Método de extensión privado para centralizar la gestión de errores.</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> Exception<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span>mensaje<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>TAG<span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">mensaje</span></span><span class="token string">: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-this">this</span><span class="token punctuation">.</span>localizedMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span> <span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-throw">throw</span> <span class="token function">FirestoreException</span><span class="token punctuation">(</span>mensaje<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Definimos las diferentes operaciones como <strong>métodos de suspensión</strong> siguiendo un esquema similar. Por ejemplo, para recuperar <strong>todos los contactos</strong> de la colección.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>ContactoFSDocument<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> firestore
+        <span class="token comment">// Recuperamos la colección de contactos CollectionReference</span>
+        <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+        <span class="token comment">// Lanzamos la query que hayamos definido a firestore</span>
+        <span class="token comment">// en nuestro caso no hay ningún filtro obteniendo una </span>
+        <span class="token comment">// tarea de tipo Task&lt;QuerySnapshot&gt;</span>
+        <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// Ante cualquier error lanzamos nuestra excepción personalizada</span>
+        <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+            e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al obtener los contactos"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// Función de suspensión que bloquea la corrutina hasta que </span>
+        <span class="token comment">// se resuelva la tarea con la consulta devolviendo un QuerySnapshot</span>
+        <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// Una fez obtenido los datos mapeamos cada DocumentSnapshot</span>
+        <span class="token comment">// a un objeto ContactoFSDocument con toObject</span>
+        <span class="token punctuation">.</span>documents<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> document <span class="token operator">-&gt;</span>
+            document<span class="token punctuation">.</span><span class="token function">toObject</span><span class="token punctuation">(</span>ContactoFSDocument<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>
+                <span class="token comment">// Como al recuperar el documento no obtenemos un id por el Exclude</span>
+                <span class="token comment">// lo añadimos tras el mapeo obteniéndolo del documento</span>
+                id <span class="token operator">=</span> document<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>El resto de consultas para completar el API del repositorio serán similares a la anterior.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> ContactoFSDocument<span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> firestore
+            <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span>id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+                e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al obtener el contacto </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">id</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span> document <span class="token operator">-&gt;</span>
+                document<span class="token punctuation">.</span><span class="token function">toObject</span><span class="token punctuation">(</span>ContactoFSDocument<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>id <span class="token operator">=</span> document<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> ContactoFSDocument<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        firestore
+            <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span>contacto<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>contacto<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+                e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al insertar el contacto </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">contacto<span class="token punctuation">.</span>id</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> ContactoFSDocument<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        firestore
+            <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span>contacto<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>contacto<span class="token punctuation">,</span> SetOptions<span class="token punctuation">.</span><span class="token function">merge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+                e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al actualizar el contacto </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">contacto<span class="token punctuation">.</span>id</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">delete</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        firestore
+            <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">document</span><span class="token punctuation">(</span>id<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+                e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al borrar el contacto </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">id</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> querySnapshot <span class="token operator">=</span> firestore
+            <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+                e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al obtener el número de contactos"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword keyword-return">return</span> querySnapshot<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</code></pre><p>Puedes ver más información sobre <strong>cómo realizar consultas en Firestore</strong> en la <strong><a href="https://firebase.google.com/docs/firestore/query-data/queries?hl=es&amp;authuser=0#kotlin+ktx">documentación oficial</a></strong>.</p>
+<p>Por ejemplo, para obtener los contactos que pertenezcan a un determinado número de categorías para cumplir el filtro podríamos hacer una consulta similar a la siguiente...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span>
+    ascendente<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    categorias<span class="token operator">:</span> List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>ContactoFSDocument<span class="token operator">&gt;</span> <span class="token operator">=</span> firestore
+    <span class="token punctuation">.</span><span class="token function">collection</span><span class="token punctuation">(</span>COLLECTION<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">orderBy</span><span class="token punctuation">(</span>
+        ContactoFSDocument<span class="token operator">::</span>nombre<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>ascendente<span class="token punctuation">)</span> Query<span class="token punctuation">.</span>Direction<span class="token punctuation">.</span>ASCENDING
+        <span class="token keyword keyword-else">else</span> Query<span class="token punctuation">.</span>Direction<span class="token punctuation">.</span>DESCENDING
+    <span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">whereArrayContainsAny</span><span class="token punctuation">(</span>ContactoFSDocument<span class="token operator">::</span>categorias<span class="token punctuation">.</span>name<span class="token punctuation">,</span> categorias<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">addOnFailureListener</span> <span class="token punctuation">{</span> e <span class="token operator">-&gt;</span>
+        e<span class="token punctuation">.</span><span class="token function">gestionaError</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error al obtener contactos por categorías."</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>documents<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> document <span class="token operator">-&gt;</span>
+        document<span class="token punctuation">.</span><span class="token function">toObject</span><span class="token punctuation">(</span>ContactoFSDocument<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token operator">!!</span><span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>id <span class="token operator">=</span> document<span class="token punctuation">.</span>id<span class="token punctuation">.</span><span class="token function">toInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+</code></pre><div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>Si estableces muchas condiciones en una consulta, al ejecutar la aplicación podrías encontrarte con un error. En el 🐱 Logcat, revisa el mensaje de error, ya que te indicará que necesitas generar índices para optimizar las consultas. Haz clic en el enlace proporcionado en el Logcat y serás dirigido a la consola, donde se generará automáticamente el índice necesario.</p>
+</div>
+<h5 id="usando-el-servicio-de-firestore-en-el-repositorio">Usando el servicio de Firestore en el repositorio </h5>
+<p>Dentro del paquete <strong><code>data</code></strong>, crearemos el archivo <strong><code>ContactoRepository.kt</code></strong> como en casos anteriores. Esta clase implementará las operaciones CRUD (Create, Read, Update, Delete) sobre los <strong>objetos del modelo</strong> <strong><code>Contacto</code></strong> y se encargará de gestionarlos en la fuente de datos, en este caso, Firestore, de forma transparente.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Singleton</span>
+<span class="token keyword keyword-class">class</span> ContactoRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> dao<span class="token operator">:</span> ContactoFSService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&lt;</span>Contacto<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        dao<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">toContacto</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

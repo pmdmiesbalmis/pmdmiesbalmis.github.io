@@ -1,0 +1,779 @@
+<!DOCTYPE html><html><head>
+      <title>PMDM 2º DAM Firebase</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="autenticación-anexo">Autenticación (Anexo) </h1>
+<p>Descargar estos apuntes <a href="./Tema_5_3_firebase_ANEXO.pdf">pdf</a> o <a href="./Tema_5_3_firebase_ANEXO.html">html</a></p>
+<h2 id="índice">Índice </h2>
+
+<div class="md-toc">
+<div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#introducción" class="md-toc-link">
+            <p>Introducción</p>
+
+          </a></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#modificando-el-login-para-usar-firebase-authentication" class="md-toc-link"><p>Modificando el Login para usar Firebase Authentication</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#activación-del-servicio-de-authentication" class="md-toc-link">
+            <p>Activación del servicio de Authentication</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#añadiendo-permisos-en-el-manifestxml" class="md-toc-link">
+            <p>Añadiendo permisos en el <code>manifest.xml</code></p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#dependencias-y-plugins-de-en-gradle" class="md-toc-link">
+            <p>Dependencias y Plugins de en Gradle</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#modificando-el-proyecto" class="md-toc-link"><p>Modificando el proyecto</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#definiendo-el-proveedor-de-firestore-con-dagger-hilt" class="md-toc-link">
+            <p>Definiendo el proveedor de Firestore con Dagger-Hilt</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#implementación-con-email-y-contraseña" class="md-toc-link">
+            <p>Implementación con Email y Contraseña</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#implementación-con-varios-métodos-de-acceso" class="md-toc-link">
+            <p>Implementación con varios métodos de acceso</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#implementación-métodos-acceso" class="md-toc-link">
+            <p>Implementación métodos acceso</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#implementación-con-google" class="md-toc-link">
+            <p>Implementación con Google</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#implementación-con-facebook" class="md-toc-link">
+            <p>Implementación con Facebook</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#manejo-de-sesión-en-la-aplicación" class="md-toc-link">
+            <p>Manejo de Sesión en la Aplicación</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#cerrar-sesión" class="md-toc-link">
+            <p>Cerrar sesión</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#restablecer-contraseña" class="md-toc-link">
+            <p>Restablecer contraseña</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    
+</div>
+<div style="page-break-after:always;"></div>
+<h2 id="introducción">Introducción </h2>
+<ul>
+<li>
+<p><strong>Autenticación con Firebase Authentication</strong></p>
+<ul>
+<li>Documentación oficial: <strong><a href="https://firebase.google.com/docs/auth?hl=es">Firebase documentation</a></strong></li>
+<li>Video Tutorial (Inglés): <strong><a href="https://www.youtube.com/watch?v=wm626abfMM8&amp;t=67s&amp;pp=ygU3ZmlyZWJhc2UgYXV0ZW50aWNhdGlvbiBrb3RsaW4gdHV0b3JpYWwgZmlyZWJhc2UgY2hhbm5lbA%3D%3D">Firebase</a></strong></li>
+<li>Video Tutorial (Inglés): <strong><a href="https://www.youtube.com/watch?v=zCIfBbm06QM&amp;pp=ygUmZmlyZWJhc2UgYXV0ZW50aWNhdGlvbiBrb3RsaW4gdHV0b3JpYWw%3D">Philipp Lackner</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=vGeiA3mmKvw">AristiDevs</a></strong></li>
+<li>Video Tutorial (Castellano): <strong><a href="https://www.youtube.com/watch?v=6OVKnRqzcgo">DevExpert</a></strong></li>
+</ul>
+</li>
+</ul>
+<p>Firebase Authentication es un servicio que forma parte del ecosistema de Firebase, diseñado para facilitar la implementación de autenticación en aplicaciones móviles y web. Permite gestionar de manera sencilla y segura el acceso de los usuarios a tu aplicación mediante diversas opciones de autenticación.</p>
+<p>Con Firebase Authentication, puedes autenticar a los usuarios a través de métodos populares como:</p>
+<ul>
+<li><strong>Correo electrónico y contraseña</strong>: Los usuarios pueden registrarse y acceder a tu aplicación usando una dirección de correo electrónico y una contraseña.</li>
+<li><strong>Autenticación de Google, Facebook, Twitter y otros proveedores</strong>: Firebase simplifica la integración con proveedores de identidad como Google, Facebook, Twitter, GitHub, entre otros.</li>
+<li><strong>Autenticación anónima</strong>: Para aquellos usuarios que prefieren interactuar con la aplicación sin registrarse, Firebase permite el acceso temporal sin necesidad de crear una cuenta.</li>
+<li><strong>Autenticación con teléfono (SMS)</strong>: Los usuarios pueden autenticar su identidad mediante el envío de un código por mensaje de texto, lo cual es útil especialmente en regiones donde los métodos de correo electrónico son menos populares.</li>
+<li><strong>Autenticación con OAuth y proveedores personalizados</strong>: Firebase también ofrece la posibilidad de integrar autenticación con otros proveedores de identidad personalizados mediante OAuth.</li>
+</ul>
+<p>Firebase Authentication se usa para gestionar usuarios, almacenar contraseñas de forma segura y personalizar la experiencia, además de manejar verificación de correo, recuperación de contraseñas y administración de sesiones.</p>
+<p>Nosotros nos vamos a centrar en Firebase Authentication, específicamente en la implementación de autenticación mediante correo electrónico y contraseña, así como con proveedores de identidad como Google y Facebook, ya que son las formas de autenticación más utilizadas en aplicaciones modernas.</p>
+<h2 id="modificando-el-login-para-usar-firebase-authentication">Modificando el Login para usar Firebase Authentication </h2>
+<div class="admonition info">
+<p class="admonition-title">Proyecto</p>
+<p>Puedes descargar el proyecto del login con todo el código visto en el tema desde el siguiente enlace <strong><a href="assets/codigo/Login.zip">LoginFirebase</a></strong></p>
+</div>
+<h3 id="activación-del-servicio-de-authentication">Activación del servicio de Authentication </h3>
+<ul>
+<li><strong><a href="https://firebase.google.com/docs/auth/android/start?hl=es&amp;authuser=0">Documentación Oficial</a></strong></li>
+<li><strong><a href="https://firebase.google.com/docs/reference/kotlin/com/google/firebase/auth/package-summary">API de Authentication en Kotlin</a></strong></li>
+</ul>
+<p>Es un servicio flexible y escalable para la gestión de usuarios en aplicaciones móviles, web y servidores. Permite la autenticación mediante múltiples métodos como correo electrónico y contraseña, así como proveedores de identidad como Google y Facebook. Ofrece una integración sencilla y segura, gestionando tareas como la verificación de correo electrónico, recuperación de contraseñas y autenticación multifactor (MFA), todo ello con soporte para múltiples plataformas.</p>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Authetication.png">
+</div>
+<p>Una vez hemos accedido a nuestro proyecto:</p>
+<ul>
+<li>Marcamos la opción <strong>Authentication</strong> 1️⃣.</li>
+<li>Nos aparecerá la opción 2️⃣ de Authentication, y al pulsar seleccionamos Comenzar, lo que nos llevará a los métodos de acceso. Más adelante, veremos cómo agregar los métodos de acceso de Google y Facebook.</li>
+<li>En 3️⃣ y 4️⃣ debemos acceder a la configuración de nuestro proyecto y desde la misma <strong>debemos</strong> volver a descargar el archivo de configuración <strong><code>google-services.json</code></strong>, ya que, si no lo hacemos, no funcionará al intentar registrarse o iniciar sesión.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>Al utilizar varios métodos de acceso, si primero registras una cuenta con email y contraseña (por ejemplo, <a href="mailto:pepe@gmail.com">pepe@gmail.com</a>) y luego intentas registrarla nuevamente mediante el servicio de Google, obtendrás un error.<br>
+Para solucionar este problema, debemos seguir estos pasos:</p>
+<div class="galeria_imagenes">
+    <img height="320" src="assets/imagenes/Configuracion Authetication.png">
+</div>
+</div>
+<h3 id="añadiendo-permisos-en-el-manifestxml">Añadiendo permisos en el <code>manifest.xml</code> </h3>
+<p>Puesto que Authentication es una BD en la nube, vamos a necesitar permisos de internet. Pare ello, en el archivo <strong><code>AndroidManifest.xml</code></strong> deberemos añadir el permiso de acceso a internet para que el servicio pueda acceder al API.</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[3-5,9]}" class="language-xml xml" data-line="3-5,9"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>manifest</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+    ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.INTERNET<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_NETWORK_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>uses-permission</span> <span class="token attr-name"><span class="token namespace">android:</span>name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android.permission.ACCESS_WIFI_STATE<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+    ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>application</span> <span class="token attr-name">...</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- Permitir tráfico http en lugar de https --&gt;</span>
+        android:usesCleartextTraffic="true"
+        ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>application</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>manifest</span><span class="token punctuation">&gt;</span></span>
+</code><div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-5" data-start="3" data-end="5">
+
+
+</div></div><div class="line-highlight-wrapper">
+
+
+
+
+
+
+
+<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
+</div></div></pre><h3 id="dependencias-y-plugins-de-en-gradle">Dependencias y Plugins de en Gradle </h3>
+<p>En el catálogo de versiones <strong><code>lib.versions.toml</code></strong> deberemos comprobar que hemos definido tener:</p>
+<pre data-role="codeBlock" data-info="toml" class="language-toml toml"><code><span class="token comment"># Recuerda además que las entradas van en una sola línea.</span>
+<span class="token comment"># Algunas se han indentado para que se vean mejor.</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">versions</span><span class="token punctuation">]</span>
+<span class="token key property">googleServices</span> <span class="token punctuation">=</span> <span class="token string">"4.4.2"</span>
+<span class="token key property">firebaseBom</span> <span class="token punctuation">=</span> <span class="token string">"33.11.0"</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">libraries</span><span class="token punctuation">]</span>
+<span class="token key property">google-firebase-bom</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> 
+    <span class="token key property">group</span> <span class="token punctuation">=</span> <span class="token string">"com.google.firebase"</span><span class="token punctuation">,</span> <span class="token key property">name</span> <span class="token punctuation">=</span> <span class="token string">"firebase-bom"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"firebaseBom"</span> 
+<span class="token punctuation">}</span>
+<span class="token key property">firebase-auth-ktx</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">module</span> <span class="token punctuation">=</span> <span class="token string">"com.google.firebase:firebase-auth-ktx"</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">plugins</span><span class="token punctuation">]</span>
+<span class="token key property">com-google-services</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">id</span> <span class="token punctuation">=</span> <span class="token string">"com.google.gms.google-services"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"googleServices"</span> <span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> raíz del proyecto añadiremos el siguiente plugin:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>services<span class="token punctuation">)</span> apply <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> del <strong>módulo de la aplicación</strong> (app) añadiremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>plugins <span class="token punctuation">{</span>
+    <span class="token function">alias</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span>com<span class="token punctuation">.</span>google<span class="token punctuation">.</span>services<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token operator">..</span><span class="token punctuation">.</span>
+dependencies <span class="token punctuation">{</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token function">platform</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>google<span class="token punctuation">.</span>firebase<span class="token punctuation">.</span>bom<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>firebase<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>ktx<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div style="page-break-after:always;"></div>
+<h3 id="modificando-el-proyecto">Modificando el proyecto </h3>
+<h4 id="definiendo-el-proveedor-de-firestore-con-dagger-hilt">Definiendo el proveedor de Firestore con Dagger-Hilt </h4>
+<p>Definiremos el proveedor de Firestore en el archivo <strong><code>AppModule.kt</code></strong> que me creará una instancia de Firestore de acuerdo a la configuración de mi proyecto definida en el archivo <strong><code>google-services.json</code></strong> y me la inyectará con <strong>Dagger-Hilt</strong>.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Module</span>
+<span class="token annotation builtin">@InstallIn</span><span class="token punctuation">(</span>SingletonComponent<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-class">class</span> AppModule <span class="token punctuation">{</span>       
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token annotation builtin">@Singleton</span>
+    <span class="token annotation builtin">@Provides</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">provideFirebaseAuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> FirebaseAuth <span class="token operator">=</span> FirebaseAuth<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="implementación-con-email-y-contraseña">Implementación con Email y Contraseña </h4>
+<h5 id="configuración-en-firebase-console">Configuración en Firebase Console </h5>
+<p>Para utilizar este método de acceso, es necesario activarlo desde la consola de Firebase. A continuación, te explicamos cómo hacerlo:</p>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Activar email.png">
+</div>
+<div class="flotante" ,="" style="align-items: top;">
+<div class="flotante_izq">
+<h5 id="definiendo-las-clases-para-operar-con-authetication">Definiendo las clases para operar con Authetication </h5>
+<p>Definiremos el <strong>paquete</strong> <strong><code>data.services.authetication</code></strong> en nuestro proyecto, donde implementaremos el servicio de autenticación que proporcionará las operaciones necesarias para gestionar el acceso de los usuarios.</p>
+<p>Dentro de este paquete, crearemos las clases que manejarán la autenticación en Firebase. Estas incluirán la definición de la interfaz del servicio, su implementación y la gestión de excepciones relacionadas con la autenticación.</p>
+<p>La estructura del paquete quedará organizada de la siguiente manera:</p>
+</div>
+<div style="width: auto">
+<p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="138px" preserveAspectRatio="none" style="width:255px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 255 138" width="255px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41.3613" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="103.9922" x="26" y="39.5508">[com.pmdm.login]</text><path d="M37,46.2813 L37,48.2813 L45,48.2813 L45,47.2813 L40,47.2813 L40,46.2813 L37,46.2813 M37,49.2813 L37,53.7813 C37,54.0613 37.22,54.2813 37.5,54.2813 L44.5,54.2813 C44.78,54.2813 45,54.0613 45,53.7813 L45,49.2813 L37,49.2813 " fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="32.666" x="46" y="54.6445">[data]</text><path d="M57,61.375 L57,63.375 L65,63.375 L65,62.375 L60,62.375 L60,61.375 L57,61.375 M57,64.375 L57,68.875 C57,69.155 57.22,69.375 57.5,69.375 L64.5,69.375 C64.78,69.375 65,69.155 65,68.875 L65,64.375 L57,64.375 " fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56.0391" x="66" y="69.7383">[services]</text><path d="M67,76.4688 L67,78.4688 L75,78.4688 L75,77.4688 L70,77.4688 L70,76.4688 L67,76.4688 M67,79.4688 L67,83.9688 C67,84.2488 67.22,84.4688 67.5,84.4688 L74.5,84.4688 C74.78,84.4688 75,84.2488 75,83.9688 L75,79.4688 L67,79.4688 " fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="82.6641" x="76" y="84.832">[authetication]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="84.0293" x="76" y="99.9258">AuthService.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="172.7051" x="76" y="115.0195">AuthServiceImplementation.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="141.375" x="76" y="130.1133">AuthServiceException.kt</text><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="28" y1="49.7344" y2="49.7344"></line><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="49" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="48" y1="64.8281" y2="64.8281"></line><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="59" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="50" x2="50" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="50" x2="58" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="125.2031" y2="125.2031"></line><!--SRC=[bT1TQy8m50RW-_oASpMqnUB7vgI8w5pt8HPahTwC2R6DNLYQbEH49hB_lbQTxcPZ8rT9dZSl9qE3LAEX0WdPaUL8fbhnT4bsCN71SVeNQoLIfWVFYSgz8azpJwYConV78QxhGZzHGcb_9ImRVDSfHNeqloZ3z8Odp9papvHQV6N84ufSoRC_1RJQKd5CZKeR7Pxstl3FzZ4l1CkPn7t7VvB1UyAAS-YZN4CcqyElpWILE0-di67Qb0PQNhlPllAQjTWoc509pMjezVpEbT_fmZY8eRgkazhzR0f6MPqmIBb1pLUswgYJ2TrGUB8IUSvyg7QrEAn357mTGY0tN2jP3KCcY_20u45XL2ZSu-vbuuOZL0Cm3OkGtB8rjGBBQA9IBZCVvl5TeqUcL6QMPcKHCsIioWAzzI68FW40]--></g></svg></p></div>
+</div>
+<p>Con esta estructura, centralizaremos la lógica de autenticación, facilitando la gestión de usuarios mediante Firebase Authentication.</p>
+<p><strong>Métodos de autenticación con email y contraseña</strong></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firebaseAuth<span class="token operator">:</span> FirebaseAuth<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ApplicationContext</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">signUp</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">,</span> password<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Task<span class="token operator">&lt;</span>AuthResult<span class="token operator">&gt;</span> <span class="token operator">=</span>
+        firebaseAuth<span class="token punctuation">.</span><span class="token function">createUserWithEmailAndPassword</span><span class="token punctuation">(</span>email<span class="token punctuation">,</span> password<span class="token punctuation">)</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">signIn</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">,</span> password<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Task<span class="token operator">&lt;</span>AuthResult<span class="token operator">&gt;</span> <span class="token operator">=</span>
+        firebaseAuth<span class="token punctuation">.</span><span class="token function">signInWithEmailAndPassword</span><span class="token punctuation">(</span>email<span class="token punctuation">,</span> password<span class="token punctuation">)</span>  
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">logOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        firebaseAuth<span class="token punctuation">.</span><span class="token function">signOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>En esta clase <strong>AuthService</strong>, definimos dos métodos clave para la autenticación de usuarios mediante <strong>email y contraseña</strong> usando Firebase:</p>
+<ul>
+<li>
+<p><strong><code>signUp</code></strong>: Este método se encarga de registrar a un nuevo usuario en Firebase utilizando su email y contraseña. Utiliza el método <strong><code>createUserWithEmailAndPassword</code></strong> de FirebaseAuth, el cual devuelve una tarea (Task) que, al completarse, indica si el registro fue exitoso.</p>
+</li>
+<li>
+<p><strong><code>signIn</code></strong>: Este método permite que un usuario existente inicie sesión con su email y contraseña. Utiliza el método <strong><code>signInWithEmailAndPassword</code></strong> de FirebaseAuth, también devolviendo una tarea (<strong><code>Task</code></strong>) que nos informa si la autenticación fue correcta.</p>
+</li>
+</ul>
+<p>Ambos métodos devuelven un objeto <strong><code>Task&lt;AuthResult&gt;</code></strong>, lo que nos permite manejar el resultado de las operaciones de autenticación y tomar acciones según si fueron exitosas o no.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> logTag<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"AuthServiceImplementation"</span></span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">signIn</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">,</span> password<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> FirebaseUser <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> errorMessage<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error while trying to sign in."</span></span>
+
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> response<span class="token operator">:</span> Task<span class="token operator">&lt;</span>AuthResult<span class="token operator">&gt;</span> <span class="token operator">=</span> authService<span class="token punctuation">.</span><span class="token function">signIn</span><span class="token punctuation">(</span>email<span class="token punctuation">,</span> password<span class="token punctuation">)</span>
+            <span class="token keyword keyword-val">val</span> user<span class="token operator">:</span> FirebaseUser<span class="token operator">?</span> <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>user
+
+            <span class="token keyword keyword-return">return</span> user <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">e<span class="token punctuation">.</span>localizedMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">signUp</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">,</span> password<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> FirebaseUser <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> errorMessage<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error while trying to sign up."</span></span>
+
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> response<span class="token operator">:</span> Task<span class="token operator">&lt;</span>AuthResult<span class="token operator">&gt;</span> <span class="token operator">=</span> authService<span class="token punctuation">.</span><span class="token function">signUp</span><span class="token punctuation">(</span>email<span class="token punctuation">,</span> password<span class="token punctuation">)</span>
+            <span class="token keyword keyword-val">val</span> user<span class="token operator">:</span> FirebaseUser<span class="token operator">?</span> <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>user
+
+            <span class="token keyword keyword-return">return</span> user <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">e<span class="token punctuation">.</span>localizedMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="implementación-con-varios-métodos-de-acceso">Implementación con varios métodos de acceso </h4>
+<p>Ahora definiremos el <strong>patrón Strategy</strong> para poder, en el futuro. Este patrón nos permite reducir código, eliminar duplicación y adaptar el código de manera eficiente cuando necesitemos implementar métodos de autenticación como <strong><code>Google</code></strong> o <strong><code>Facebook</code></strong>. De esta forma, el código será más modular, fácil de mantener y escalar, permitiendo añadir nuevos proveedores de autenticación sin grandes cambios en la estructura.</p>
+<p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="183px" preserveAspectRatio="none" style="width:255px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 255 183" width="255px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41.3613" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875 " fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="103.9922" x="26" y="39.5508">[com.pmdm.login]</text><path d="M37,46.2813 L37,48.2813 L45,48.2813 L45,47.2813 L40,47.2813 L40,46.2813 L37,46.2813 M37,49.2813 L37,53.7813 C37,54.0613 37.22,54.2813 37.5,54.2813 L44.5,54.2813 C44.78,54.2813 45,54.0613 45,53.7813 L45,49.2813 L37,49.2813 " fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="32.666" x="46" y="54.6445">[data]</text><path d="M57,61.375 L57,63.375 L65,63.375 L65,62.375 L60,62.375 L60,61.375 L57,61.375 M57,64.375 L57,68.875 C57,69.155 57.22,69.375 57.5,69.375 L64.5,69.375 C64.78,69.375 65,69.155 65,68.875 L65,64.375 L57,64.375 " fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="56.0391" x="66" y="69.7383">[services]</text><path d="M67,76.4688 L67,78.4688 L75,78.4688 L75,77.4688 L70,77.4688 L70,76.4688 L67,76.4688 M67,79.4688 L67,83.9688 C67,84.2488 67.22,84.4688 67.5,84.4688 L74.5,84.4688 C74.78,84.4688 75,84.2488 75,83.9688 L75,79.4688 L67,79.4688 " fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="82.6641" x="76" y="84.832">[authetication]</text><path d="M77,91.5625 L77,93.5625 L85,93.5625 L85,92.5625 L80,92.5625 L80,91.5625 L77,91.5625 M77,94.5625 L77,99.0625 C77,99.3425 77.22,99.5625 77.5,99.5625 L84.5,99.5625 C84.78,99.5625 85,99.3425 85,99.0625 L85,94.5625 L77,94.5625 " fill="#800080"></path><text fill="#800080" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="57.9961" x="86" y="99.9258">[methods]</text><text fill="#800080" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="138.0293" x="86" y="115.0195">AuthProviderStrategy.kt</text><text fill="#800080" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="82.6582" x="86" y="130.1133">GoogleAuth.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="84.0293" x="76" y="145.207">AuthService.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="172.7051" x="76" y="160.3008">AuthServiceImplementation.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="141.375" x="76" y="175.3945">AuthServiceException.kt</text><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="28" y1="49.7344" y2="49.7344"></line><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="49" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="48" y1="64.8281" y2="64.8281"></line><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="59" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="50" x2="50" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="50" x2="58" y1="79.9219" y2="79.9219"></line><rect fill="transparent" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="69" y="94.0156"></rect><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="70" x2="70" y1="97.0156" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="70" x2="78" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="70" x2="70" y1="97.0156" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="70" x2="78" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="140.2969" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="155.3906" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="60" y1="81.9219" y2="170.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="60" x2="68" y1="170.4844" y2="170.4844"></line><!--SRC=[bP5TIyCm58RlyolEbUm3ovmwfGnHP_qO6mnRlH65s9nrmJIdf2V5CVpljawTWWgIgoJFSzwyvBXawRYKXeLOYOSJgnnfzI1MYUX2fpFScfDHw8xkKig38bTvO2ZJzhxJ4Trk5uOf6NBXe_5uz9LMakKxymTLegjqYkKd-JigFI-GTIfPaztmdqBXNM6-ApdoWjINuJ_G9_NOcQDArqRCJZ9co-29_r8kY3A3ZVWD_E0SBQLvVtu3nUkE_s6lyZefHyjlPVzZHiyf5XlffLx7QDNwUsT6MhwPJg12LzOCx0JzNdy_wBKIZp2M5de7i7COxkw7kmCOHGaqrstHkfXDe2JlKWIbItRwqJSPRJ6MbOHhRrdd64ApQoNJDiJHno54jjAER5D6Z6-dQmWkYUE2-0qUx6sVQeQc03gudOepd4jlk5PJKjfc8Tmavzk7OY9jvcLM1s4fHbG7k6K8KVmA]--></g></svg></p><p>Mediante esta clase abstracta <strong><code>AuthProviderStrategy</code></strong>, definimos la estructura básica para los diferentes métodos de acceso, como Google, Facebook, etc. Como la mayoría de sus métodos son comunes, podemos evitar la repetición de código. La clase contiene un método abstracto <strong><code>getCredential(idToken)</code></strong> que debe ser implementado por las clases hijas para obtener las credenciales específicas de cada proveedor de autenticación.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Se recomienda ejecutar la aplicación en un dispositivo real en lugar de un emulador, ya que este último suele presentar problemas.</p>
+</div>
+<p>Además, incluye un método <strong><code>signIn(credential)</code></strong> que maneja el proceso de inicio de sesión de manera uniforme, utilizando un <strong><code>Task</code></strong> de Firebase. Si la autenticación es exitosa, devuelve el FirebaseUser, y si ocurre un error, lanza una excepción personalizada (<strong><code>AuthServiceException</code></strong>) con un mensaje de error predefinido.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-class">class</span> <span class="token function">AuthProviderStrategy</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-protected">protected</span> <span class="token keyword keyword-val">val</span> errorMessage<span class="token operator">:</span> String
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> AuthCredential
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">signIn</span><span class="token punctuation">(</span>credential<span class="token operator">:</span> Task<span class="token operator">&lt;</span>AuthResult<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> FirebaseUser <span class="token punctuation">{</span>
+        <span class="token keyword keyword-return">return</span> <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> user<span class="token operator">:</span> FirebaseUser<span class="token operator">?</span> <span class="token operator">=</span> credential<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>user
+
+            user <span class="token operator">?:</span> <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="implementación-métodos-acceso">Implementación métodos acceso </h4>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firebaseAuth<span class="token operator">:</span> FirebaseAuth<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ApplicationContext</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token operator">:</span> String<span class="token punctuation">,</span> authProvider<span class="token operator">:</span> AuthProviderStrategy<span class="token punctuation">)</span><span class="token operator">:</span> Task<span class="token operator">&lt;</span>AuthResult<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> credential<span class="token operator">:</span> AuthCredential <span class="token operator">=</span> authProvider<span class="token punctuation">.</span><span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token punctuation">)</span>
+
+        <span class="token keyword keyword-return">return</span> firebaseAuth<span class="token punctuation">.</span><span class="token function">signInWithCredential</span><span class="token punctuation">(</span>credential<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">signInWithProvider</span><span class="token punctuation">(</span>
+            idToken<span class="token operator">:</span> String<span class="token punctuation">,</span>
+            authProvider<span class="token operator">:</span> AuthProviderStrategy
+    <span class="token punctuation">)</span><span class="token operator">:</span> FirebaseUser <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> credential <span class="token operator">=</span> authService<span class="token punctuation">.</span><span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token punctuation">,</span> authProvider<span class="token punctuation">)</span>
+
+        <span class="token keyword keyword-return">return</span> authProvider<span class="token punctuation">.</span><span class="token function">signIn</span><span class="token punctuation">(</span>credential <span class="token operator">=</span> credential<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="implementación-con-google">Implementación con Google </h4>
+<p><strong>Configuración en Firebase Console</strong></p>
+<p>Al agregar el método de acceso de Google, debes pulsar en Agregar Nuevo Proveedor, seleccionar la opción Google y luego elegir el correo por defecto que nos permite Firebase. Nos pedirá volver a descargar el fichero de configuración <strong><code>google-services.json</code></strong> para poder usar su método de acceso. En la siguiente imagen puedes observar cómo se activa este método de acceso:</p>
+<div class="galeria_imagenes">
+    <img height="400" width="600" src="assets/imagenes/Google.PNG">
+</div>
+<p><strong>Dependencias y Plugins de en Gradle</strong></p>
+<pre data-role="codeBlock" data-info="toml" class="language-toml toml"><code><span class="token punctuation">[</span><span class="token table class-name">versions</span><span class="token punctuation">]</span>
+<span class="token key property">playServices</span> <span class="token punctuation">=</span> <span class="token string">"21.3.0"</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">libraries</span><span class="token punctuation">]</span>
+<span class="token key property">play-services-auth</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">module</span> <span class="token punctuation">=</span> <span class="token string">"com.google.android.gms:play-services-auth"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"playServices"</span> <span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> del <strong>módulo de la aplicación</strong> (app) añadiremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token operator">..</span><span class="token punctuation">.</span>
+dependencies <span class="token punctuation">{</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>play<span class="token punctuation">.</span>services<span class="token punctuation">.</span>auth<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>Definiendo los métodos</strong></p>
+<p>En este caso, debemos definir un launcher para poder usar la autenticación de <strong>Google</strong>. A este launcher le tenemos que pasar un método para gestionar el inicio de sesión desde el <strong><code>ViewModel</code></strong>. Además, debemos definir otros dos métodos: uno para manejar el inicio de sesión cuando el usuario ya tiene una cuenta registrada, y otro para registrar al usuario en caso contrario.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">registerGoogleLauncher</span><span class="token punctuation">(</span>
+    signInWithGoogle<span class="token operator">:</span> <span class="token punctuation">(</span>idToken<span class="token operator">:</span> String<span class="token punctuation">,</span> onSignIn<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span> onSignUp<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onSignIn<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onSignUp<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+<span class="token punctuation">)</span><span class="token operator">:</span> ManagedActivityResultLauncher<span class="token operator">&lt;</span>Intent<span class="token punctuation">,</span> ActivityResult<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-return">return</span> <span class="token function">rememberLauncherForActivityResult</span><span class="token punctuation">(</span>ActivityResultContracts<span class="token punctuation">.</span><span class="token function">StartActivityForResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> result<span class="token operator">:</span> ActivityResult <span class="token operator">-&gt;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>resultCode <span class="token operator">==</span> Activity<span class="token punctuation">.</span>RESULT_OK<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> task<span class="token operator">:</span> Task<span class="token operator">&lt;</span>GoogleSignInAccount<span class="token operator">&gt;</span> <span class="token operator">=</span>
+                GoogleSignIn<span class="token punctuation">.</span><span class="token function">getSignedInAccountFromIntent</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+            <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-val">val</span> account<span class="token operator">:</span> GoogleSignInAccount <span class="token operator">=</span> task<span class="token punctuation">.</span><span class="token function">getResult</span><span class="token punctuation">(</span>ApiException<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span class="token operator">!!</span>
+                <span class="token function">signInWithGoogle</span><span class="token punctuation">(</span>account<span class="token punctuation">.</span>idToken<span class="token operator">!!</span><span class="token punctuation">,</span> onSignIn<span class="token punctuation">,</span> onSignUp<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"GoogleLauncher"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">e<span class="token punctuation">.</span>message</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"GoogleLauncher"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">result<span class="token punctuation">.</span>resultCode</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Creamos la clase encargada de implementar la autenticación con Google.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">GoogleAuth</span><span class="token punctuation">(</span>
+    errorMessage<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error while trying to sign in with Google."</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">AuthProviderStrategy</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> AuthCredential <span class="token operator">=</span> GoogleAuthProvider<span class="token punctuation">.</span><span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token punctuation">,</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p>Es necesario agregar un método en la clase AuthService para obtener la cuenta de Google al iniciar el launcher.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firebaseAuth<span class="token operator">:</span> FirebaseAuth<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ApplicationContext</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getGoogleAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> GoogleSignInClient <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> idToken <span class="token operator">=</span> GoogleSignInOptions
+            <span class="token punctuation">.</span><span class="token function">Builder</span><span class="token punctuation">(</span>GoogleSignInOptions<span class="token punctuation">.</span>DEFAULT_SIGN_IN<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">requestIdToken</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>string<span class="token punctuation">.</span>default_web_client_id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">requestEmail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword keyword-return">return</span> GoogleSignIn<span class="token punctuation">.</span><span class="token function">getClient</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> idToken<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El string resource <strong><code>default_web_client_id</code></strong> generará un error. Para solucionarlo, es necesario compilar el proyecto, lo que permitirá que el recurso se genere automáticamente.</p>
+</div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">getGoogleAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> GoogleSignInClient <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> errorMessage<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error while trying to get Google account."</span></span>
+
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-return">return</span> authService<span class="token punctuation">.</span><span class="token function">getGoogleAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">e<span class="token punctuation">.</span>localizedMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="implementación-con-facebook">Implementación con Facebook </h4>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>La autenticación con Facebook puede ser <strong>compleja</strong>, ya que requiere varios pasos y, además, la documentación está completamente <strong>desactualizada</strong>. En esta guía, te guiaremos paso a paso para implementarla de manera que todo funcione correctamente.</p>
+</div>
+<p>Documentación oficial:</p>
+<ul>
+<li><a href="https://firebase.google.com/docs/auth/android/facebook-login?hl=es-419">Firebase</a></li>
+<li><a href="https://developers.facebook.com/docs/facebook-login/android">Facebook</a></li>
+</ul>
+<p><strong>Configuración en Firebase Console</strong></p>
+<p>Para que funcione el inicio de sesión con Facebook, primero debes configurar el SHA1 en la consola de Firebase. Para ello, ejecuta el siguiente comando en la terminal del proyecto o corre una tarea de Gradle.</p>
+<div class="terminal" style="background-color: #111; border-radius: 10px; padding: 20px; width: 500px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 20px; display: flex; justify-content: left; align-items: center;">
+  <div>
+    <span style="color: #4CAF50;">$</span>
+    <span style="color: #ffffff">./gradlew signingReport</span>
+  </div>
+</div>
+<p>Al ejecutarlo, se mostrará un resultado. Debes copiar el código SHA1.</p>
+<div class="galeria_imagenes">
+    <img height="350" src="assets/imagenes/SHA1.png">
+</div>
+<p><strong>Configuración Facebook y Gradle</strong></p>
+<p>Para comenzar, necesitamos registrarnos en la plataforma <a href="https://developers.facebook.com">Facebook Developers</a>. Una vez<br>
+registrados, crearemos un nuevo proyecto y lo configuraremos. Luego, en Firebase, agregaremos<br>
+el proveedor de Facebook.</p>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Paso 1 Facebook.PNG">
+</div>
+<div class="galeria_imagenes">
+    <img height="500" src="assets/imagenes/Paso 2 Facebook.PNG">
+</div>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Paso 3 Facebook.PNG">
+</div>
+<div class="galeria_imagenes">
+    <img height="400" src="assets/imagenes/Paso 4 Facebook.PNG">
+</div>
+<p>Ve a Información Básica, copia el Identificador de la aplicación y pégalo en la consola de Firebase. Luego, haz clic en Mostrar, copia el texto que aparece y pégalo en el último campo de Firebase Console. Finalmente, haz clic en Guardar.</p>
+<div class="galeria_imagenes">
+    <img height="350" src="assets/imagenes/Paso 6 Facebook.PNG">
+</div>
+<p>Habilita el método de acceso con Facebook desde la consola de Firebase, copia los códigos correspondientes, pégalos en su lugar y luego guarda los cambios.</p>
+<div class="galeria_imagenes">
+    <img height="400" src="assets/imagenes/Paso 7 Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Paso 8 Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="350" src="assets/imagenes/Paso 9 Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="450" src="assets/imagenes/Paso 10 Facebook.png">
+</div>
+<p>Copia el código del método de acceso de Facebook desde la consola de Firebase y pégalo en el campo indicado en la imagen.</p>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Paso 11 Facebook.png">
+</div>
+<p><strong>Dependencias y Plugins de en Gradle</strong></p>
+<pre data-role="codeBlock" data-info="toml" class="language-toml toml"><code><span class="token punctuation">[</span><span class="token table class-name">versions</span><span class="token punctuation">]</span>
+<span class="token key property">facebook</span> <span class="token punctuation">=</span> <span class="token string">"18.0.2"</span>
+
+<span class="token punctuation">[</span><span class="token table class-name">libraries</span><span class="token punctuation">]</span>
+<span class="token key property">facebook-android-sdk</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span> <span class="token key property">module</span> <span class="token punctuation">=</span> <span class="token string">"com.facebook.android:facebook-android-sdk"</span><span class="token punctuation">,</span> <span class="token key property">version.ref</span> <span class="token punctuation">=</span> <span class="token string">"facebook"</span> <span class="token punctuation">}</span>
+</code></pre><p>En el <strong><code>build.gradle.kts</code></strong> del <strong>módulo de la aplicación</strong> (app) añadiremos:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token operator">..</span><span class="token punctuation">.</span>
+dependencies <span class="token punctuation">{</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span>libs<span class="token punctuation">.</span>facebook<span class="token punctuation">.</span>android<span class="token punctuation">.</span>sdk<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>Ajustes finales</strong></p>
+<div class="galeria_imagenes">
+    <img height="350" src="assets/imagenes/Paso12Facebook.png">
+</div>
+<p>Instala el siguiente programa desde el enlace, descomprime el archivo en tu ordenador y ejecuta el comando indicado a continuación.</p>
+<div class="galeria_imagenes">
+    <img height="500" src="assets/imagenes/Paso13.2Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="350" src="assets/imagenes/Paso13Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Paso14Facebook.png">
+</div>
+<p>Ejecuta el siguiente comando, copia y pega la ruta donde está ubicado el programa mencionado arriba. Además, ten en cuenta que debes usar <strong>android</strong> como contraseña para evitar errores.</p>
+<div class="terminal" style="background-color: #111; border-radius: 10px; padding: 20px; width: 500px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 20px; display: flex; justify-content: left; align-items: center;">
+  <div>
+    <span style="color: #4CAF50;">$</span>
+    <span style="color: #ffffff">keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Jesus\.android\debug.keystore" | "C:\Users\Jesus\Desktop\openssl\bin\openssl" sha1 -binary | "C:\Users\Jesus\Desktop\openssl\bin\openssl" base64</span>
+  </div>
+</div>
+<p>Al ejecutar el comando, se mostrará un código que debes ingresar en el campo indicado en la siguiente imagen.</p>
+<div class="galeria_imagenes">
+    <img height="100" src="assets/imagenes/Paso15Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="350" src="assets/imagenes/Paso16Facebook.png">
+</div>
+<p>En este paso, haz clic en Siguiente. No es necesario activar esta opción.</p>
+<div class="galeria_imagenes">
+    <img height="250" src="assets/imagenes/Paso17Facebook.png">
+</div>
+<p>Por último, solo debes seguir los pasos indicados en la guía para añadir todo lo necesario al manifest, y con eso, todo debería estar configurado correctamente.</p>
+<div class="galeria_imagenes">
+    <img height="500" src="assets/imagenes/Paso18Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="50" src="assets/imagenes/Paso19Facebook.png">
+</div>
+<div class="galeria_imagenes">
+    <img height="300" src="assets/imagenes/Paso20Facebook.png">
+</div>
+<p>Finalmente, nuestro archivo <strong><code>strings.xml</code></strong> debe quedar de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="xml {highlight=[3-5,9]}" class="language-xml xml" data-line="3-5,9"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app_name<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Login<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>facebook_app_id<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>994286956135230<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fb_login_protocol_scheme<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>fb994286956135230<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>facebook_client_token<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>d6d901ca140a50bccc0311b05c195af9<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+</code><div class="line-highlight-wrapper">
+
+<div aria-hidden="true" class="line-highlight" data-range="3-5" data-start="3" data-end="5">
+
+
+</div></div></pre><div class="admonition danger">
+<p class="admonition-title">Resumen</p>
+<p>Todo este proceso se detalla en un <a href="https://www.youtube.com/watch?v=IaVSqG0qSj8&amp;t=2121s">tutorial</a> paso a paso. El tutorial de configuración termina en el minuto <strong>18:20</strong>.</p>
+</div>
+<p><strong>Definiendo los métodos</strong></p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">FacebookAuth</span><span class="token punctuation">(</span>
+    errorMessage<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error while trying to sign in with Facebook."</span></span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">AuthProviderStrategy</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> AuthCredential <span class="token operator">=</span> FacebookAuthProvider<span class="token punctuation">.</span><span class="token function">getCredential</span><span class="token punctuation">(</span>idToken<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> LoginViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> validadorLogin<span class="token operator">:</span> ValidadorLogin<span class="token punctuation">,</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthServiceImplementation
+<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onSuccessFacebookLogin</span><span class="token punctuation">(</span>
+        token<span class="token operator">:</span> String<span class="token punctuation">,</span>
+        onSignIn<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+        onSignUp<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+                authService<span class="token punctuation">.</span><span class="token function">signInWithProvider</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> <span class="token function">FacebookAuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token function">onSignIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> AuthServiceException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span>
+                    mensaje <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error al iniciar sesion con facebook"</span></span><span class="token punctuation">,</span>
+                    onDismiss <span class="token operator">=</span> <span class="token punctuation">{</span> informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                <span class="token punctuation">)</span>
+                Log<span class="token punctuation">.</span><span class="token function">d</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"AuthenticationViewModel"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">e<span class="token punctuation">.</span><span class="token function">stackTraceToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">signInWithFacebook</span><span class="token punctuation">(</span>
+        onSignIn<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+        onSignUp<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+        activityOwner<span class="token operator">:</span> ActivityResultRegistryOwner
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-val">val</span> callbackManager <span class="token operator">=</span> CallbackManager<span class="token punctuation">.</span>Factory<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Informacion</span><span class="token punctuation">(</span>
+            muestraProgreso <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            mensaje <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Iniciando sesion con facebook"</span></span>
+        <span class="token punctuation">)</span>
+        LoginManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">registerCallback</span><span class="token punctuation">(</span>callbackManager<span class="token punctuation">,</span>
+            <span class="token keyword keyword-object">object</span> <span class="token operator">:</span> FacebookCallback<span class="token operator">&lt;</span>LoginResult<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onCancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onError</span><span class="token punctuation">(</span>error<span class="token operator">:</span> FacebookException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span>
+                        mensaje <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Error al iniciar sesion con facebook"</span></span><span class="token punctuation">,</span>
+                        onDismiss <span class="token operator">=</span> <span class="token punctuation">{</span> informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword keyword-override">override</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">onSuccess</span><span class="token punctuation">(</span>result<span class="token operator">:</span> LoginResult<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword keyword-val">val</span> token<span class="token operator">:</span> String <span class="token operator">=</span> result<span class="token punctuation">.</span>accessToken<span class="token punctuation">.</span>token
+                    <span class="token function">onSuccessFacebookLogin</span><span class="token punctuation">(</span>
+                        token <span class="token operator">=</span> token<span class="token punctuation">,</span>
+                        onSignIn <span class="token operator">=</span> onSignIn<span class="token punctuation">,</span>
+                        onSignUp <span class="token operator">=</span> onSignUp
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span>
+        LoginManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">logInWithReadPermissions</span><span class="token punctuation">(</span>
+            activityResultRegistryOwner <span class="token operator">=</span> activityOwner<span class="token punctuation">,</span>
+            callbackManager <span class="token operator">=</span> callbackManager<span class="token punctuation">,</span>
+            permissions <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"email"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"public_profile"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">onLoginEvent</span><span class="token punctuation">(</span>loginEvent<span class="token operator">:</span> LoginEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-when">when</span><span class="token punctuation">(</span>loginEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-is">is</span> LoginEvent<span class="token punctuation">.</span>OnSignInWithFacebookClick <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token function">signInWithFacebook</span><span class="token punctuation">(</span>
+                    onSignIn <span class="token operator">=</span> loginEvent<span class="token punctuation">.</span>onSignIn<span class="token punctuation">,</span>
+                    onSignUp <span class="token operator">=</span> loginEvent<span class="token punctuation">.</span>onSignUp<span class="token punctuation">,</span>
+                    activityOwner <span class="token operator">=</span> loginEvent<span class="token punctuation">.</span>activityOwner
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Al cerrar sesión después de haber iniciado con la autenticación de Facebook, al volver a iniciar sesión no se mostrará la opción para seleccionar entre varias cuentas en el dispositivo. En su lugar, se iniciará sesión automáticamente con la cuenta utilizada la primera vez.</p>
+</div>
+<h4 id="manejo-de-sesión-en-la-aplicación">Manejo de Sesión en la Aplicación </h4>
+<p>Para determinar si el usuario esta iniciado sesion y navegar dependiendo del rsultado hacia la pantalla de autenticacion o dentro de la app deberemos usar una pantalla de carga.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">LoadingScreen</span><span class="token punctuation">(</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">LaunchedEffect</span><span class="token punctuation">(</span>key1 <span class="token operator">=</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">onLoadingEvent</span><span class="token punctuation">(</span>
+            LoadingEvent<span class="token punctuation">.</span><span class="token function">OnManejarSesion</span><span class="token punctuation">(</span>
+                onNavigateToLogin <span class="token operator">=</span> onNavigateToLogin<span class="token punctuation">,</span>
+                onNavigateToAccount <span class="token operator">=</span> onNavigateToAccount
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> LoadingViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthServiceImplementation
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">manejarSesion</span><span class="token punctuation">(</span>
+        onNavigateToAccount<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+        onNavigateToLogin<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-val">val</span> isUserLoggedIn<span class="token operator">:</span> Boolean <span class="token operator">=</span> authService<span class="token punctuation">.</span><span class="token function">isUserLoggedIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span>isUserLoggedIn<span class="token punctuation">)</span> <span class="token function">onNavigateToAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword keyword-else">else</span> <span class="token function">onNavigateToLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">onLoadingEvent</span><span class="token punctuation">(</span>event<span class="token operator">:</span> LoadingEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-when">when</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-is">is</span> LoadingEvent<span class="token punctuation">.</span>OnManejarSesion <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token function">manejarSesion</span><span class="token punctuation">(</span>
+                    onNavigateToAccount <span class="token operator">=</span> event<span class="token punctuation">.</span>onNavigateToAccount<span class="token punctuation">,</span>
+                    onNavigateToLogin <span class="token operator">=</span> event<span class="token punctuation">.</span>onNavigateToLogin
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-fun">fun</span> <span class="token function">LoginNavHost</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-val">val</span> navController<span class="token operator">:</span> NavHostController <span class="token operator">=</span> <span class="token function">rememberNavController</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> vmLoading<span class="token operator">:</span> LoadingViewModel <span class="token operator">=</span> <span class="token function">hiltViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token function">NavHost</span><span class="token punctuation">(</span>
+        navController <span class="token operator">=</span> navController<span class="token punctuation">,</span>
+        startDestination <span class="token operator">=</span> LoadingRoute
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="cerrar-sesión">Cerrar sesión </h4>
+<p>Para cerrar sesión en cualquier proveedor de servicio, podemos hacer lo siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firebaseAuth<span class="token operator">:</span> FirebaseAuth<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ApplicationContext</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">logOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        firebaseAuth<span class="token punctuation">.</span><span class="token function">signOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">getGoogleAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">signOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        LoginManager<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">logOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthService
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">logOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> authService<span class="token punctuation">.</span><span class="token function">logOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="restablecer-contraseña">Restablecer contraseña </h4>
+<p>Para finalizar, permitiremos al usuario restablecer su contraseña en caso de que la haya olvidado.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltViewModel</span>
+<span class="token keyword keyword-class">class</span> ForgotPasswordViewModel <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> authService<span class="token operator">:</span> AuthServiceImplementation<span class="token punctuation">,</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> forgotPasswordValidador<span class="token operator">:</span> ForgotPasswordValidador
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">ViewModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">onForgotPasswordEvent</span><span class="token punctuation">(</span>forgotPasswordEvent<span class="token operator">:</span> ForgotPasswordEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-when">when</span><span class="token punctuation">(</span>forgotPasswordEvent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-is">is</span> ForgotPasswordEvent<span class="token punctuation">.</span>EnviarEmail <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token operator">!</span>forgotPasswordValidacionState<span class="token punctuation">.</span>hayError<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    viewModelScope<span class="token punctuation">.</span><span class="token function">launch</span> <span class="token punctuation">{</span>
+                        informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Informacion</span><span class="token punctuation">(</span>
+                            muestraProgreso <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                            mensaje <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Enviando email"</span></span>
+                        <span class="token punctuation">)</span>
+                        authService<span class="token punctuation">.</span><span class="token function">sendPasswordResetEmail</span><span class="token punctuation">(</span>emailState<span class="token punctuation">)</span>
+                        informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Exitoso</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Se ha enviado un email para restablecer la contraseña"</span></span><span class="token punctuation">)</span>
+                        <span class="token function">delay</span><span class="token punctuation">(</span>SnackbarDuration<span class="token punctuation">.</span>Short<span class="token punctuation">.</span><span class="token function">toMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                    informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span>
+                        mensaje <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Email no valido"</span></span><span class="token punctuation">,</span>
+                        onDismiss <span class="token operator">=</span> <span class="token punctuation">{</span> informacionEstadoState <span class="token operator">=</span> InformacionEstadoUiState<span class="token punctuation">.</span><span class="token function">Oculta</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firebaseAuth<span class="token operator">:</span> FirebaseAuth<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ApplicationContext</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-fun">fun</span> <span class="token function">sendPasswordResetEmail</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Task<span class="token operator">&lt;</span>Void<span class="token operator">&gt;</span> <span class="token operator">=</span>
+        firebaseAuth<span class="token punctuation">.</span><span class="token function">sendPasswordResetEmail</span><span class="token punctuation">(</span>email<span class="token punctuation">)</span>`
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AuthService <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> firebaseAuth<span class="token operator">:</span> FirebaseAuth<span class="token punctuation">,</span>
+    <span class="token annotation builtin">@ApplicationContext</span> <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> context<span class="token operator">:</span> Context
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">sendPasswordResetEmail</span><span class="token punctuation">(</span>email<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
+            authService<span class="token punctuation">.</span><span class="token function">sendPasswordResetEmail</span><span class="token punctuation">(</span>email<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Log<span class="token punctuation">.</span><span class="token function">e</span><span class="token punctuation">(</span>logTag<span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">e<span class="token punctuation">.</span>localizedMessage</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+            <span class="token keyword keyword-throw">throw</span> <span class="token function">AuthServiceException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Error while trying to send password reset email."</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
