@@ -1,0 +1,605 @@
+<!DOCTYPE html><html><head>
+      <title>Programa de Recuperación</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      @import url(https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css);
+code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v28/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+@page a4landscape {
+  size: A4 landscape;
+  margin: 1cm;
+}
+@page a4portrait {
+  size: A4 portrait;
+  margin: 1cm 1cm 2.5cm 1cm;
+}
+.markdown-preview.markdown-preview .landscape {
+  page: a4landscape;
+}
+.markdown-preview.markdown-preview .portrait {
+  page: a4portrait;
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="programa-de-recuperación-de-pmdm-alumnos-loe">Programa de Recuperación de PMDM alumnos LOE </h1>
+<p>Descargar estos apuntes <a href="./programa_recuperacion.pdf">pdf</a> o <a href="./programa_recuperacion.html">html</a></p>
+<h2 id="índice">Índice </h2>
+
+<div class="md-toc">
+<details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#programa-de-recuperación-de-pmdm-alumnos-loe" class="md-toc-link"><p>Programa de Recuperación de PMDM alumnos LOE</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#información-general" class="md-toc-link">
+            <p>Información general</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#trabajo-a-realizar" class="md-toc-link"><p>Trabajo a realizar</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#orientaciones-generales-para-el-examen" class="md-toc-link">
+            <p>Orientaciones generales para el examen</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#tutorías" class="md-toc-link">
+            <p>Tutorías</p>
+
+          </a></div><details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#seguimiento-y-calendario" class="md-toc-link"><p>Seguimiento y calendario</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#octubre-2025" class="md-toc-link">
+            <p>Octubre 2025</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#noviembre-2025" class="md-toc-link">
+            <p>Noviembre 2025</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#diciembre-2025" class="md-toc-link">
+            <p>Diciembre 2025</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#enero-2026" class="md-toc-link">
+            <p>Enero 2026</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#febrero-2026" class="md-toc-link">
+            <p>Febrero 2026</p>
+
+          </a></div>
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#superación-del-módulo-en-convocatoria-extraordinaria" class="md-toc-link">
+            <p>Superación del módulo en convocatoria extraordinaria</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+</div>
+<div style="page-break-after:always;"></div>
+<h2 id="información-general">Información general </h2>
+<p><strong>Alumnado LOE con pendientes de 1º</strong><br>
+El alumnado que tiene módulos pendientes LOE <strong>de primer curso</strong> tiene dos opciones:</p>
+<ul>
+<li>Pasarse a LFP y cursar el resto de módulos con normalidad.</li>
+<li>Presentarse a las convocatorias de pruebas libres que se realizarán durante el curso 25/26.</li>
+</ul>
+<p>Una durante el primer trimestre y otra en el segundo trimestre. Se informará más adelante cómo y dónde se realizarán estas pruebas.</p>
+<p><strong>Los alumnos LOE no puede ir a clase en modalidad presencial</strong>, por lo que se les preparará un plan de recuperación por cada uno de los módulos que tenga pendientes.</p>
+<p>Este alumnado tiene derecho a <strong>dos convocatorias</strong> de recuperación, ordinaria y extraordinaria. Para la evaluación se seguirán los puntos establecidos en las programaciones didácticas LOE de los módulos profesionales del curso pasado (2024-2025).<br>
+Para el curso 25/26 el calendario de evaluación del alumnado LOE es el indicado a continuación:</p>
+<table>
+<thead>
+<tr>
+<th>Acciones</th>
+<th>Fechas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EVALUACIÓN FINAL</td>
+<td>23 a 26 de febrero</td>
+</tr>
+<tr>
+<td>Inicio FCT</td>
+<td>a partir del 9 de marzo</td>
+</tr>
+<tr>
+<td>Exposición de Proyectos (solo alumnado con todos los módulos aprobados)</td>
+<td>1 a 5 de junio</td>
+</tr>
+<tr>
+<td>Exámenes extraordinarios</td>
+<td>8 a 10 junio</td>
+</tr>
+<tr>
+<td>EVALUACIÓN EXTRAORDINARIA</td>
+<td>11 junio</td>
+</tr>
+<tr>
+<td>Exposición de Proyectos (alumnado que apruebe en convocatoria extraordinaria)</td>
+<td>15 junio</td>
+</tr>
+<tr>
+<td>EVALUACIÓN FCT y PROYECTO</td>
+<td>16 junio</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Los profesores de cada módulo establecerán la fecha concreta del examen ordinario y extraordinario, pudiéndolos hacer coincidir con los alumnos de este curso</strong></p>
+<h2 id="trabajo-a-realizar">Trabajo a realizar </h2>
+<p>Además de poder repasar los ejercicios y prácticas realizados durante el curso, que estarán abiertos en los cursos de PMDM de la plataforma AULES, y que tendrán el mismo contenido que el curso anterior, el alumno dispondrá de una serie de ejercicios similares a los realizados en exámenes del módulo profesional que le permitirán comprobar su nivel y destreza para superarlo.<br>
+Estos jercicios más concretes estarán disponibles en AULES PMDM LOE.</p>
+<h3 id="orientaciones-generales-para-el-examen">Orientaciones generales para el examen </h3>
+<p>La prueba será similar al examen ordinario del segundo trimestre, donde se pone en práctica todo lo tratado a lo largo del curso y mínimo necesario para realizar una aplicación móvil operativa. Aspectos generales que que habría que trabajar:</p>
+<ol>
+<li>
+<p>Conocer la <strong>arquitectura de la aplicación</strong> descrita en el tema 2, con sus partes y los paquetes propuestos en ella.</p>
+</li>
+<li>
+<p>Saber definir y usar <strong>Hilt</strong> (con Ksp) como librería para la inyección de dependencias.</p>
+</li>
+<li>
+<p>Saber gestionar en la arquitectura una <strong>capa de datos</strong> con una persistencia a través de la librería Room.</p>
+<ul>
+<li>Definir entidades a partir de un modelo dado. Nombres y tipos de campo adecuados.</li>
+<li>Definir la BD y los DAO a usar. Eliminando elementos innecesarios como Converters si no se usan.</li>
+<li>Definir el repositorio y el mapeo entre entidades y modelos y viceversa.</li>
+<li>Realizar una primera carga de datos en la BD con una fuente de datos de prueba.</li>
+<li>Realizar todos estos procesos de forma <strong>asíncrona</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Saber gestionar en la arquitectura la <strong>capa de UI</strong> con:</p>
+<ul>
+<li>
+<p>Definición <strong>'<em>features</em>'</strong> a modo de <strong>pantalla</strong> (Screen) para ello:</p>
+<ul>
+<li>Deberemos saber definir y saber interpretar componentes básicos de la interfaz de usuario: <strong><code>Layouts</code></strong>, <strong><code>LazyLayouts</code></strong>, <strong><code>Cards</code></strong>, <strong><code>TextFields</code></strong>, <strong><code>Modificadores</code></strong>, etc. dentro de los apuntes si fuera necesario.</li>
+<li>Saber definir una entrada de datos básica, a través de <strong><code>TetxtFields</code></strong> y adicionalmente hacer una validación de los datos introducidos.</li>
+</ul>
+</li>
+<li>
+<p>Deberemos saber definir un <strong><code>Scaffold</code></strong> con los elementos vistos en clase, como mínimo:</p>
+<ul>
+<li><strong><code>AppBar</code></strong> con sus elementos como navegación, título y acciones, etc. Así como menús de desbordamiento (overflowmenu).</li>
+<li><strong><code>FloatingActionButton</code></strong>.</li>
+<li><strong><code>NavigationDrawer</code></strong> y como gestionarla.</li>
+<li><strong><code>BottomAppBar</code></strong> y como gestionarla.</li>
+<li><strong><code>ModalBottomSheet</code></strong> y como gestionarla.</li>
+</ul>
+</li>
+<li>
+<p>Saber definir un <strong><code>ViewModel</code></strong> asociado la UI o pantalla como <strong>gestor del estado</strong> y encargado de realizar todo la lógica y comunicación con la capa de datos. En este sentido deberemos saber:</p>
+<ul>
+<li>Saber definir un <strong><code>ViewModel</code></strong> con Hilt e inyectarle clases <em>colaboradoras</em> en su constructor.</li>
+<li>Saber crear una instancia de <strong><code>ViewModel</code></strong> con el ViewModelOwner adecuado, usando las funciones que proporciona Hilt para ello.</li>
+<li>Realizar correctamente la gestión del estado de los datos que se necesiten en la UI.</li>
+<li>Saber lanzar un proceso asíncrono o no bloqueante desde el <strong><code>ViewModel</code></strong> y gestionar su resultado.</li>
+<li>Implementar '<em>State Hoisting</em>' de los datos necesarios para la UI hasta el <strong><code>ViewModel</code></strong>. Intentando que la UI sea completamente <strong>'<em>stateless</em>'</strong>. Saber definir un componente <strong>'<em>stateful</em>'</strong> si su estado no fuera necesario de manejar en el VM.</li>
+<li>Saber definir un <strong>patrón <em>'Sum-Type'</em></strong> para agrupar callbacks de eventos de la UI si fuera necesario.</li>
+</ul>
+</li>
+<li>
+<p>Definir la navegación entre pantallas, ya sea dentro de un mismo Scaffold o entre pantallas con su propio Scaffold.</p>
+<ul>
+<li>Pasar datos entre pantallas de forma segura y sin acoplamiento usando parámetros en la ruta de navegación.</li>
+<li>Saber hacer llegar estos datos al ViewModel de destino.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h2 id="tutorías">Tutorías </h2>
+<p>No están establecidas las tutorías para los alumnos LOE, es decisión del profesor de cada módulo el realizar un seguimiento del alumnado conforme al plan de recuperación establecido. Por lo que se deberá contactar con el profesor correspondiente para aclarar este punto.</p>
+<h2 id="seguimiento-y-calendario">Seguimiento y calendario </h2>
+<p>Se propone un calendario, no obligatorio, como guía para que el alumno tenga mayor facilidad para organizarse los tiempos para cada uno de los contenidos del módulo.</p>
+<h3 id="octubre-2025">Octubre 2025 </h3>
+<table>
+<thead>
+<tr>
+<th>Lunes</th>
+<th>Martes</th>
+<th>Miércoles</th>
+<th>Jueves</th>
+<th>Viernes</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>Repasar lenguaje Kotlin Tema 1.1 y 1.2</td>
+</tr>
+<tr>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>Leer Tema del 2.1 al 2.3</td>
+</tr>
+<tr>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+<td>Leer Temas del 3.1 al 3.3</td>
+</tr>
+<tr>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+<td>Ejercicio temas 3.1 y 3.3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="noviembre-2025">Noviembre 2025 </h3>
+<table>
+<thead>
+<tr>
+<th>Lunes</th>
+<th>Martes</th>
+<th>Miércoles</th>
+<th>Jueves</th>
+<th>Viernes</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>Leer Tema 3.4. ViewModel</td>
+</tr>
+<tr>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>Tema 3.5 Hilt</td>
+</tr>
+<tr>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>Ejercicios temas 3.4 y 3.5</td>
+</tr>
+<tr>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>Leer Tema 3.6 Crear una lista con ViewModel + Hilt.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="diciembre-2025">Diciembre 2025 </h3>
+<table>
+<thead>
+<tr>
+<th>Lunes</th>
+<th>Martes</th>
+<th>Miércoles</th>
+<th>Jueves</th>
+<th>Viernes</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>Ejercicios tema 3.6</td>
+</tr>
+<tr>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>Leer Tema 4.1 Añadir Scaffold, ModalBottomSheet y ActionBars.</td>
+</tr>
+<tr>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>Ejercicios tema 4.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="enero-2026">Enero 2026 </h3>
+<table>
+<thead>
+<tr>
+<th>Lunes</th>
+<th>Martes</th>
+<th>Miércoles</th>
+<th>Jueves</th>
+<th>Viernes</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>Leer Tema 4.2 Navegación con tipos seguros y NavigationBar.</td>
+</tr>
+<tr>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>Ejercicios tema 4.2</td>
+</tr>
+<tr>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>Leer Tema 5.1.Cargar datos de Mock a Room y Ejercicios tema 5.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="febrero-2026">Febrero 2026 </h3>
+<table>
+<thead>
+<tr>
+<th>Lunes</th>
+<th>Martes</th>
+<th>Miércoles</th>
+<th>Jueves</th>
+<th>Viernes</th>
+<th>Ejercicios tema 5.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>Hacer ejemplo de examen</td>
+</tr>
+<tr>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>Hacer ejemplo de examen</td>
+</tr>
+<tr>
+<td>16</td>
+<td>17</td>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>Repaso general</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after:always;"></div>
+<h2 id="superación-del-módulo-en-convocatoria-extraordinaria">Superación del módulo en convocatoria extraordinaria </h2>
+<p>Los ejercicios realizados y calificados durante este periodo <strong>no tendrán reflejo en la calificación de la convocatoria ordinaria o extraordinaria</strong>. Para superar el módulo, el alumno deberá obtener una calificación igual o superior a 5 en el examen que se realizará de forma presencial en las fechas establecidas según el calendario propuesto por el equipo directivo y del que se informará al alumnado a través de AULES y la Web del centro.</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
