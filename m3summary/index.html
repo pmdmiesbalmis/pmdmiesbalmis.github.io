@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Material 3 Compose</title>
+    
+    <!-- Google Fonts & Icons - LOCAL -->
+    <link href="assets/fonts/fonts-local.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/fonts/material-symbols-local.css" />
+    
+    <!-- Tailwind CSS - LOCAL -->
+    <script src="assets/js/tailwind.js"></script>
+    
+    <!-- PrismJS for Syntax Highlighting - LOCAL -->
+    <link href="assets/css/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="assets/js/prism.min.js"></script>
+    <script src="assets/js/prism-kotlin.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        m3: {
+                            primary: '#6750A4',
+                            onPrimary: '#FFFFFF',
+                            primaryContainer: '#EADDFF',
+                            onPrimaryContainer: '#21005D',
+                            secondary: '#625B71',
+                            background: '#FFFBFE',
+                            surface: '#FFFBFE',
+                            outline: '#79747E',
+                            surfaceVariant: '#E7E0EC',
+                            onSurfaceVariant: '#49454F',
+                            error: '#B3261E',
+                            onError: '#FFFFFF',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ccc; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #aaa; 
+        }
+
+        /* Ripple Effect Simulation */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #6750a4 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: 0.2;
+            transition: 0s;
+        }
+        
+        /* M3 Specific styles for web simulation */
+        .m3-card {
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+            transition: box-shadow 0.2s ease;
+        }
+        .m3-card:hover {
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15);
+        }
+        .m3-elevated-button {
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+        }
+        
+        .m3-switch input:checked + div {
+            background-color: #6750A4;
+            border-color: #6750A4;
+        }
+        .m3-switch input:checked + div .thumb {
+            transform: translateX(20px);
+            background-color: #FFFFFF;
+            width: 24px;
+            height: 24px;
+        }
+        .m3-switch input:checked + div .icon-check {
+            opacity: 1;
+        }
+
+        /* Slider Styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #6750A4;
+            margin-top: -8px;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #E7E0EC;
+            border-radius: 2px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #E7E0EC;
+        }
+
+        pre {
+            border-radius: 12px !important;
+            margin: 0 !important;
+        }
+    </style>
+</head>
+<body class="bg-[#FDFCF4] text-[#1C1B1F] h-screen flex overflow-hidden selection:bg-m3-primaryContainer selection:text-m3-onPrimaryContainer">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 flex-shrink-0 bg-[#F3EDF7] border-r border-[#CAC4D0] flex flex-col h-full transition-transform duration-300 absolute md:relative z-20 -translate-x-full md:translate-x-0" id="sidebar">
+        <div class="p-6 flex items-center gap-3 border-b border-[#E7E0EC]">
+            <span class="material-symbols-rounded text-m3-primary text-3xl">widgets</span>
+            <h1 class="font-bold text-xl text-[#1D1B20]">M3 Catalog</h1>
+        </div>
+        
+        <div class="overflow-y-auto flex-1 py-4 px-3 space-y-1" id="componentList">
+            <!-- JS populates this -->
+        </div>
+
+        <div class="p-4 text-xs text-gray-500 text-center border-t border-[#E7E0EC]">
+            Basado en Androidx Compose Material3
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-10 hidden md:hidden" onclick="toggleSidebar()"></div>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        
+        <!-- Top Bar -->
+        <header class="h-16 bg-[#F3EDF7] flex items-center px-4 justify-between border-b border-[#CAC4D0]">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="md:hidden p-2 rounded-full hover:bg-[#E7E0EC] ripple">
+                    <span class="material-symbols-rounded">menu</span>
+                </button>
+                <h2 id="pageTitle" class="text-lg font-medium">Bienvenido</h2>
+            </div>
+            <span class="text-sm text-m3-primary flex items-center gap-1">
+                <span class="material-symbols-rounded text-sm">android</span> Material 3 Compose
+            </span>
+        </header>
+
+        <!-- Content Area -->
+        <div class="flex-1 overflow-y-auto p-4 md:p-8">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8" id="contentArea">
+                
+                <!-- Intro State -->
+                <div class="col-span-1 lg:col-span-2 text-center py-20">
+                    <span class="material-symbols-rounded text-6xl text-m3-primary mb-4">android</span>
+                    <h3 class="text-2xl font-medium mb-2">Selecciona un componente</h3>
+                    <p class="text-gray-600">Explora la implementación visual y obtén el código Compose al instante.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#322F35] text-[#F4EFF4] px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+            <span class="material-symbols-rounded text-green-400">check_circle</span>
+            Código copiado al portapapeles
+        </div>
+    </main>
+
+    <script>
+        // --- DATA SOURCE: Based on Android Material 3 Samples ---
+        const components = [
+            // 1. BUTTONS
+            {
+                id: 'buttons',
+                name: 'Buttons',
+                icon: 'smart_button',
+                description: 'Botones comunes para desencadenar acciones.',
+                webPreview: `
+                    <div class="flex flex-col gap-4 items-center justify-center p-4">
+                        <button class="ripple bg-m3-primary text-white px-6 py-2.5 rounded-full font-medium shadow-sm hover:shadow-md transition-all">
+                            Filled Button
+                        </button>
+                        <button class="ripple bg-m3-primaryContainer text-m3-onPrimaryContainer px-6 py-2.5 rounded-full font-medium hover:shadow transition-all">
+                            Tonal Button
+                        </button>
+                        <button class="ripple border border-m3-outline text-m3-primary px-6 py-2.5 rounded-full font-medium hover:bg-m3-surfaceVariant/30 transition-all">
+                            Outlined Button
+                        </button>
+                        <button class="ripple text-m3-primary px-6 py-2.5 rounded-full font-medium hover:bg-m3-surfaceVariant/30 transition-all">
+                            Text Button
+                        </button>
+                    </div>
+                `,
+                kotlinCode: `Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    Button(onClick = { }) { Text("Filled Button") }
+    FilledTonalButton(onClick = { }) { Text("Tonal Button") }
+    OutlinedButton(onClick = { }) { Text("Outlined Button") }
+    TextButton(onClick = { }) { Text("Text Button") }
+}`
+            },
+            // 2. FABs
+            {
+                id: 'fab',
+                name: 'Floating Action Button',
+                icon: 'add_circle',
+                description: 'Botones de acción principal, incluyendo variantes extendidas.',
+                webPreview: `
+                    <div class="flex flex-col gap-6 items-center justify-center p-8">
+                        <button class="ripple w-14 h-14 bg-m3-primaryContainer text-m3-onPrimaryContainer rounded-2xl shadow-md hover:shadow-lg flex items-center justify-center transition-all">
+                            <span class="material-symbols-rounded text-2xl">edit</span>
+                        </button>
+                        <button class="ripple px-6 py-4 bg-m3-primaryContainer text-m3-onPrimaryContainer rounded-2xl shadow-md hover:shadow-lg flex items-center gap-2 font-medium transition-all">
+                            <span class="material-symbols-rounded">navigation</span>
+                            <span>Extended FAB</span>
+                        </button>
+                    </div>
+                `,
+                kotlinCode: `// 1. Standard FAB
+FloatingActionButton(onClick = { }) {
+    Icon(Icons.Filled.Edit, contentDescription = "Edit")
+}
+
+// 2. Extended FAB
+ExtendedFloatingActionButton(
+    onClick = { },
+    icon = { Icon(Icons.Filled.Navigation, "Navigate") },
+    text = { Text("Extended FAB") },
+)`
+            },
+            // 3. ICON BUTTONS
+            {
+                id: 'iconbuttons',
+                name: 'Icon Buttons',
+                icon: 'ads_click',
+                description: 'Botones que contienen solo un icono.',
+                webPreview: `
+                    <div class="flex gap-6 items-center justify-center p-4">
+                        <button class="ripple w-10 h-10 rounded-full flex items-center justify-center text-[#49454F] hover:bg-[#1d1b2014]">
+                            <span class="material-symbols-rounded">settings</span>
+                        </button>
+                        <button class="ripple w-10 h-10 rounded-full flex items-center justify-center bg-m3-primary text-white shadow hover:shadow-md">
+                            <span class="material-symbols-rounded">favorite</span>
+                        </button>
+                        <button class="ripple w-10 h-10 rounded-full flex items-center justify-center bg-m3-primaryContainer text-m3-onPrimaryContainer hover:shadow">
+                            <span class="material-symbols-rounded">share</span>
+                        </button>
+                        <button class="ripple w-10 h-10 rounded-full flex items-center justify-center border border-m3-outline text-m3-primary hover:bg-m3-surfaceVariant/30">
+                            <span class="material-symbols-rounded">delete</span>
+                        </button>
+                    </div>
+                `,
+                kotlinCode: `Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    // Standard
+    IconButton(onClick = { }) {
+        Icon(Icons.Filled.Settings, contentDescription = "Settings")
+    }
+    // Filled
+    FilledIconButton(onClick = { }) {
+        Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
+    }
+    // Filled Tonal
+    FilledTonalIconButton(onClick = { }) {
+        Icon(Icons.Filled.Share, contentDescription = "Share")
+    }
+    // Outlined
+    OutlinedIconButton(onClick = { }) {
+        Icon(Icons.Outlined.Delete, contentDescription = "Delete")
+    }
+}`
+            },
+            // 4. APP BARS
+            {
+                id: 'appbars',
+                name: 'App Bars',
+                icon: 'web_asset',
+                description: 'Barras de aplicación superior e inferior.',
+                webPreview: `
+                    <div class="w-full flex flex-col gap-4 items-center">
+                        <!-- Top App Bar -->
+                        <div class="w-full bg-[#F3EDF7] h-16 flex items-center px-4 justify-between shadow-sm rounded-lg overflow-hidden">
+                             <div class="flex items-center gap-4">
+                                <span class="material-symbols-rounded text-[#1D1B20]">menu</span>
+                                <span class="text-xl font-normal text-[#1D1B20]">Page Title</span>
+                             </div>
+                             <div class="flex items-center gap-4 text-[#49454F]">
+                                <span class="material-symbols-rounded">attach_file</span>
+                                <span class="material-symbols-rounded">more_vert</span>
+                             </div>
+                        </div>
+                        
+                        <!-- Bottom App Bar -->
+                        <div class="w-full bg-[#F3EDF7] h-20 flex items-center px-4 justify-between shadow-inner rounded-lg overflow-hidden mt-4 relative">
+                             <div class="flex items-center gap-4 text-[#49454F]">
+                                <span class="material-symbols-rounded text-2xl">check_box</span>
+                                <span class="material-symbols-rounded text-2xl">edit</span>
+                                <span class="material-symbols-rounded text-2xl">mic</span>
+                                <span class="material-symbols-rounded text-2xl">image</span>
+                             </div>
+                             <button class="absolute right-4 top-[-14px] shadow-md bg-m3-primaryContainer text-m3-onPrimaryContainer w-14 h-14 rounded-2xl flex items-center justify-center">
+                                <span class="material-symbols-rounded text-2xl">add</span>
+                             </button>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `// 1. Top App Bar
+TopAppBar(
+    title = { Text("Page Title") },
+    navigationIcon = {
+        IconButton(onClick = {}) { Icon(Icons.Filled.Menu, "Menu") }
+    },
+    actions = {
+        IconButton(onClick = {}) { Icon(Icons.Filled.MoreVert, "Options") }
+    }
+)
+
+// 2. Bottom App Bar
+BottomAppBar(
+    actions = {
+        IconButton(onClick = {}) { Icon(Icons.Filled.Check, "Check") }
+        IconButton(onClick = {}) { Icon(Icons.Filled.Edit, "Edit") }
+    },
+    floatingActionButton = {
+        FloatingActionButton(onClick = {}) {
+            Icon(Icons.Filled.Add, "Add")
+        }
+    }
+)`
+            },
+            // 5. PROGRESS
+            {
+                id: 'progress',
+                name: 'Progress Indicators',
+                icon: 'pending',
+                description: 'Indicadores de estado de carga circular y lineal.',
+                webPreview: `
+                    <div class="flex flex-col gap-8 items-center justify-center w-full p-4">
+                        <!-- Circular -->
+                        <div class="w-12 h-12 border-4 border-m3-primaryContainer border-t-m3-primary rounded-full animate-spin"></div>
+                        
+                        <!-- Linear -->
+                        <div class="w-full max-w-xs h-1 bg-m3-primaryContainer overflow-hidden rounded-full relative">
+                            <div class="absolute top-0 left-0 h-full w-1/2 bg-m3-primary animate-pulse"></div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    // Circular
+    CircularProgressIndicator()
+    
+    Spacer(Modifier.height(16.dp))
+
+    // Linear
+    LinearProgressIndicator()
+}`
+            },
+            // 6. PULL TO REFRESH
+            {
+                id: 'pullrefresh',
+                name: 'Pull To Refresh',
+                icon: 'refresh',
+                description: 'Contenedor que permite refrescar contenido al deslizar.',
+                webPreview: `
+                    <div class="w-full max-w-xs h-48 bg-white border border-gray-200 rounded-lg relative overflow-hidden flex justify-center">
+                         <div class="absolute top-4 w-10 h-10 bg-white shadow-md rounded-full flex items-center justify-center z-10 text-m3-primary">
+                            <div class="w-5 h-5 border-2 border-m3-primaryContainer border-t-m3-primary rounded-full animate-spin"></div>
+                         </div>
+                         <div class="mt-16 w-full px-4 space-y-2 opacity-50">
+                            <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-200 rounded w-full"></div>
+                            <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                         </div>
+                    </div>
+                `,
+                kotlinCode: `// Material 3 (1.3.0+) - PullToRefreshBox
+var isRefreshing by remember { mutableStateOf(false) }
+val state = rememberPullToRefreshState()
+
+PullToRefreshBox(
+    isRefreshing = isRefreshing,
+    onRefresh = { /* refresh logic */ },
+    state = state
+) {
+    LazyColumn {
+        items(50) { ListItem({ Text(text = "Item $it") }) }
+    }
+}`
+            },
+            // 7. BADGES
+            {
+                id: 'badge',
+                name: 'Badge',
+                icon: 'notification_important',
+                description: 'Notificaciones numéricas o puntos sobre iconos.',
+                webPreview: `
+                    <div class="flex gap-8 items-center justify-center p-4">
+                        <!-- Small Badge -->
+                        <div class="relative">
+                            <span class="material-symbols-rounded text-3xl text-[#49454F]">mail</span>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </div>
+                        
+                        <!-- Number Badge -->
+                        <div class="relative">
+                            <span class="material-symbols-rounded text-3xl text-[#49454F]">shopping_cart</span>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">8</span>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `// 1. Small Badge (Dot)
+BadgedBox(
+    badge = { Badge() }
+) {
+    Icon(Icons.Filled.Mail, contentDescription = "Mail")
+}
+
+// 2. Number Badge
+BadgedBox(
+    badge = { 
+        Badge { Text("8") } 
+    }
+) {
+    Icon(Icons.Filled.ShoppingCart, contentDescription = "Cart")
+}`
+            },
+            // 8. MENUS
+            {
+                id: 'menus',
+                name: 'Menus & Dropdowns',
+                icon: 'menu_open',
+                description: 'Listas de opciones que aparecen temporalmente.',
+                webPreview: `
+                    <div class="relative border border-[#CAC4D0] bg-[#F3EDF7] p-2 rounded-md inline-block">
+                        <div class="flex items-center justify-between w-40 cursor-pointer text-[#1D1B20]">
+                            <span>Options</span>
+                            <span class="material-symbols-rounded">arrow_drop_down</span>
+                        </div>
+                        
+                        <!-- Simulación Dropdown abierto -->
+                        <div class="absolute top-full left-0 mt-1 w-48 bg-[#FDFCF4] rounded-md shadow-xl border border-[#E7E0EC] py-2 z-10">
+                            <div class="px-4 py-2 hover:bg-black/5 cursor-pointer flex items-center gap-3 text-[#1D1B20]">
+                                <span class="material-symbols-rounded text-sm">edit</span>
+                                <span class="text-sm">Edit</span>
+                            </div>
+                            <div class="px-4 py-2 hover:bg-black/5 cursor-pointer flex items-center gap-3 text-[#1D1B20]">
+                                <span class="material-symbols-rounded text-sm">settings</span>
+                                <span class="text-sm">Settings</span>
+                            </div>
+                            <div class="px-4 py-2 hover:bg-black/5 cursor-pointer flex items-center gap-3 text-[#1D1B20]">
+                                <span class="material-symbols-rounded text-sm">share</span>
+                                <span class="text-sm">Share</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var expanded by remember { mutableStateOf(false) }
+
+Box {
+    IconButton(onClick = { expanded = true }) {
+        Icon(Icons.Default.MoreVert, contentDescription = "Menu")
+    }
+    
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { expanded = false }
+    ) {
+        DropdownMenuItem(
+            text = { Text("Edit") },
+            onClick = { /* Handle edit! */ },
+            leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) }
+        )
+        DropdownMenuItem(
+            text = { Text("Settings") },
+            onClick = { /* Handle settings! */ },
+            leadingIcon = { Icon(Icons.Outlined.Settings, contentDescription = null) }
+        )
+    }
+}`
+            },
+            // 9. DATE PICKER
+            {
+                id: 'datepicker',
+                name: 'Date Picker',
+                icon: 'calendar_month',
+                description: 'Selección de fechas a través de un calendario o input.',
+                webPreview: `
+                    <div class="bg-[#ECE6F0] rounded-[28px] p-4 w-full max-w-[280px] shadow-lg text-[#1D1B20]">
+                        <div class="mb-4 px-2">
+                            <div class="text-xs text-[#49454F]">Select date</div>
+                            <div class="text-3xl font-medium">Mon, Nov 20</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs mb-2 font-medium text-[#49454F]">
+                            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-y-2 text-center text-sm">
+                            <span class="text-gray-400">29</span><span class="text-gray-400">30</span>
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+                            <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+                            <span class="bg-m3-primary text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto">20</span>
+                            <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+                        </div>
+                        <div class="flex justify-end gap-2 mt-4">
+                            <button class="text-m3-primary text-sm font-medium px-3 py-1">Cancel</button>
+                            <button class="text-m3-primary text-sm font-medium px-3 py-1">OK</button>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var openDialog by remember { mutableStateOf(true) }
+val datePickerState = rememberDatePickerState()
+
+if (openDialog) {
+    DatePickerDialog(
+        onDismissRequest = { openDialog = false },
+        confirmButton = {
+            TextButton(onClick = { openDialog = false }) { Text("OK") }
+        },
+        dismissButton = {
+            TextButton(onClick = { openDialog = false }) { Text("Cancel") }
+        }
+    ) {
+        DatePicker(state = datePickerState)
+    }
+}`
+            },
+            // 10. SELECTION (Radio & Segmented)
+            {
+                id: 'selection',
+                name: 'Selection Controls',
+                icon: 'check_box',
+                description: 'Radio Buttons y Segmented Buttons.',
+                webPreview: `
+                    <div class="flex flex-col gap-6 items-center w-full">
+                        <!-- Radio -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-5 h-5 rounded-full border-2 border-m3-primary flex items-center justify-center">
+                                    <div class="w-2.5 h-2.5 bg-m3-primary rounded-full"></div>
+                                </div>
+                                <span>Option A</span>
+                            </div>
+                            <div class="flex items-center gap-2 opacity-60">
+                                <div class="w-5 h-5 rounded-full border-2 border-[#49454F]"></div>
+                                <span>Option B</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Segmented -->
+                        <div class="flex rounded-full border border-[#79747E] overflow-hidden h-10">
+                            <button class="px-4 bg-m3-secondaryContainer text-m3-onSecondaryContainer border-r border-[#79747E] flex items-center gap-2">
+                                <span class="material-symbols-rounded text-lg">check</span> Songs
+                            </button>
+                            <button class="px-4 hover:bg-black/5 text-[#49454F] border-r border-[#79747E]">Albums</button>
+                            <button class="px-4 hover:bg-black/5 text-[#49454F]">Podcasts</button>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `// 1. Radio Button
+var selectedOption by remember { mutableStateOf("A") }
+Row {
+    RadioButton(selected = selectedOption == "A", onClick = { selectedOption = "A" })
+    Text("Option A")
+    RadioButton(selected = selectedOption == "B", onClick = { selectedOption = "B" })
+    Text("Option B")
+}
+
+// 2. Segmented Button
+var selectedIndex by remember { mutableIntStateOf(0) }
+val options = listOf("Songs", "Albums", "Podcasts")
+
+SingleChoiceSegmentedButtonRow {
+    options.forEachIndexed { index, label ->
+        SegmentedButton(
+            shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
+            onClick = { selectedIndex = index },
+            selected = index == selectedIndex
+        ) {
+            Text(label)
+        }
+    }
+}`
+            },
+            // 11. SNACKBAR
+            {
+                id: 'snackbar',
+                name: 'Snackbar',
+                icon: 'call_to_action',
+                description: 'Mensajes breves en la parte inferior de la pantalla.',
+                webPreview: `
+                    <div class="bg-[#322F35] text-[#F4EFF4] rounded-lg shadow-lg p-4 w-full max-w-sm flex justify-between items-center">
+                        <span class="text-sm">Correo archivado</span>
+                        <button class="text-[#D0BCFF] text-sm font-medium hover:bg-white/10 px-2 py-1 rounded">Deshacer</button>
+                    </div>
+                `,
+                kotlinCode: `val snackbarHostState = remember { SnackbarHostState() }
+val scope = rememberCoroutineScope()
+
+Scaffold(
+    snackbarHost = { SnackbarHost(snackbarHostState) },
+    floatingActionButton = {
+        ExtendedFloatingActionButton(
+            onClick = {
+                scope.launch {
+                    val result = snackbarHostState.showSnackbar(
+                        message = "Correo archivado",
+                        actionLabel = "Deshacer"
+                    )
+                }
+            }
+        ) { Text("Show Snackbar") }
+    }
+) { contentPadding -> 
+    // Content 
+}`
+            },
+            // 12. BOTTOM SHEET
+            {
+                id: 'bottomsheet',
+                name: 'Bottom Sheet',
+                icon: 'vertical_align_bottom',
+                description: 'Superficie que desliza desde abajo.',
+                webPreview: `
+                    <div class="relative w-full max-w-xs h-64 bg-gray-200 rounded-lg overflow-hidden border border-gray-300">
+                        <!-- Scrim -->
+                        <div class="absolute inset-0 bg-black/30"></div>
+                        <!-- Sheet -->
+                        <div class="absolute bottom-0 w-full bg-[#ECE6F0] rounded-t-[28px] p-6 h-48 shadow-2xl">
+                             <div class="w-8 h-1 bg-[#79747E] opacity-40 rounded-full mx-auto mb-6"></div>
+                             <h4 class="text-xl font-medium mb-2">Opciones</h4>
+                             <div class="space-y-4 mt-4">
+                                <div class="h-4 bg-gray-300 rounded w-full"></div>
+                                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                             </div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var showBottomSheet by remember { mutableStateOf(false) }
+val sheetState = rememberModalBottomSheetState()
+
+if (showBottomSheet) {
+    ModalBottomSheet(
+        onDismissRequest = { showBottomSheet = false },
+        sheetState = sheetState
+    ) {
+        // Sheet content
+        Column(Modifier.padding(16.dp)) {
+            Text("Opciones", style = MaterialTheme.typography.titleLarge)
+            Spacer(Modifier.height(16.dp))
+            Button(onClick = { 
+                scope.launch { sheetState.hide() }.invokeOnCompletion {
+                    if (!sheetState.isVisible) showBottomSheet = false
+                }
+            }) {
+                Text("Hide")
+            }
+        }
+    }
+}`
+            },
+            // Previous components kept for completeness
+            {
+                id: 'cards',
+                name: 'Cards',
+                icon: 'style',
+                description: 'Contenedores que muestran contenido y acciones sobre un solo tema.',
+                webPreview: `
+                    <div class="flex flex-col gap-6 items-center justify-center w-full p-4">
+                        <!-- Elevated Card -->
+                        <div class="m3-card bg-[#F7F2FA] w-full max-w-xs p-4 rounded-xl flex flex-col gap-2 cursor-pointer">
+                            <h4 class="font-bold text-lg">Elevated Card</h4>
+                            <p class="text-sm text-gray-600">Tiene una sombra sutil para separarse del fondo.</p>
+                        </div>
+                        <!-- Outlined Card -->
+                        <div class="border border-m3-outline bg-transparent w-full max-w-xs p-4 rounded-xl flex flex-col gap-2 hover:bg-gray-50 transition-colors cursor-pointer">
+                            <h4 class="font-bold text-lg">Outlined Card</h4>
+                            <p class="text-sm text-gray-600">Tiene un borde visible y fondo transparente.</p>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `ElevatedCard {
+    Text(text = "Elevated Card", modifier = Modifier.padding(16.dp))
+}
+OutlinedCard(border = BorderStroke(1.dp, Color.Black)) {
+    Text(text = "Outlined", modifier = Modifier.padding(16.dp))
+}`
+            },
+            {
+                id: 'textfield',
+                name: 'Text Fields',
+                icon: 'text_fields',
+                description: 'Permiten a los usuarios introducir texto.',
+                webPreview: `
+                    <div class="flex flex-col gap-6 items-center justify-center w-full max-w-xs mx-auto p-4">
+                        <div class="relative w-full group">
+                            <input type="text" class="peer w-full border border-[#79747E] rounded-[4px] px-4 py-3 bg-transparent focus:outline-none focus:border-m3-primary focus:border-2" placeholder="Label" />
+                            <label class="absolute left-3 -top-2.5 bg-[#FDFCF4] px-1 text-xs text-[#49454F] peer-focus:text-m3-primary">Label</label>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var text by remember { mutableStateOf("") }
+OutlinedTextField(
+    value = text,
+    onValueChange = { text = it },
+    label = { Text("Label") }
+)`
+            },
+            {
+                id: 'switch',
+                name: 'Switch & Checkbox',
+                icon: 'toggle_on',
+                description: 'Controles de selección binaria.',
+                webPreview: `
+                    <div class="flex flex-col gap-8 items-center justify-center p-4">
+                        <div class="flex items-center gap-4">
+                            <label class="m3-switch relative inline-block w-[52px] h-[32px] cursor-pointer">
+                                <input type="checkbox" checked class="opacity-0 w-0 h-0">
+                                <div class="slider absolute inset-0 bg-[#6750A4] rounded-full border-2 border-[#6750A4]">
+                                    <span class="thumb absolute h-6 w-6 rounded-full bg-white left-[2px] bottom-[2px] translate-x-5 flex items-center justify-center">
+                                         <span class="material-symbols-rounded text-m3-primary text-sm">check</span>
+                                    </span>
+                                </div>
+                            </label>
+                            <span>Switch On</span>
+                        </div>
+                         <div class="flex items-center gap-3">
+                            <div class="w-[18px] h-[18px] bg-m3-primary rounded-sm flex items-center justify-center text-white">
+                                <span class="material-symbols-rounded text-sm">check</span>
+                            </div>
+                            <span>Checkbox</span>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var checked by remember { mutableStateOf(true) }
+Switch(checked = checked, onCheckedChange = { checked = it })
+Checkbox(checked = checked, onCheckedChange = { checked = it })`
+            },
+             {
+                id: 'tabs',
+                name: 'Tabs',
+                icon: 'tab',
+                description: 'Organiza contenido en diferentes pantallas.',
+                webPreview: `
+                    <div class="w-full max-w-sm bg-white border-b border-[#E7E0EC]">
+                        <div class="flex text-center">
+                            <div class="flex-1 py-3 text-m3-primary font-medium text-sm border-b-2 border-m3-primary">Explore</div>
+                            <div class="flex-1 py-3 text-[#49454F] font-medium text-sm">Flights</div>
+                            <div class="flex-1 py-3 text-[#49454F] font-medium text-sm">Trips</div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var state by remember { mutableIntStateOf(0) }
+val titles = listOf("Explore", "Flights", "Trips")
+TabRow(selectedTabIndex = state) {
+    titles.forEachIndexed { index, title ->
+        Tab(
+            selected = state == index,
+            onClick = { state = index },
+            text = { Text(title) }
+        )
+    }
+}`
+            },
+            {
+                id: 'dialog',
+                name: 'Dialog',
+                icon: 'chat_bubble',
+                description: 'Ventanas modales para decisiones críticas.',
+                webPreview: `
+                    <div class="bg-[#ECE6F0] p-6 rounded-[28px] w-full max-w-[280px] shadow-xl mx-auto flex flex-col gap-4">
+                        <h4 class="text-2xl text-[#1D1B20]">Dialog Title</h4>
+                        <p class="text-[#49454F] text-sm">This is a description.</p>
+                        <div class="flex justify-end gap-2">
+                            <button class="text-m3-primary font-medium text-sm px-3 py-2">Cancel</button>
+                            <button class="text-m3-primary font-medium text-sm px-3 py-2">OK</button>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `AlertDialog(
+    onDismissRequest = { },
+    title = { Text("Dialog Title") },
+    text = { Text("This is a description.") },
+    confirmButton = { TextButton(onClick = {}) { Text("OK") } },
+    dismissButton = { TextButton(onClick = {}) { Text("Cancel") } }
+)`
+            }
+        ];
+
+        // --- UI LOGIC ---
+
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const componentList = document.getElementById('componentList');
+        const contentArea = document.getElementById('contentArea');
+        const pageTitle = document.getElementById('pageTitle');
+        const toast = document.getElementById('toast');
+
+        let currentComponentId = null;
+
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        function showToast() {
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2000);
+        }
+
+        function copyCode(code) {
+            const el = document.createElement('textarea');
+            el.value = code;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            showToast();
+        }
+
+        function renderSidebar() {
+            componentList.innerHTML = components.map(comp => `
+                <button 
+                    onclick="loadComponent('${comp.id}')"
+                    class="w-full flex items-center gap-4 px-4 py-3 rounded-full text-left transition-colors group ${currentComponentId === comp.id ? 'bg-m3-primaryContainer text-m3-onPrimaryContainer' : 'hover:bg-[#E8DEF8] text-[#49454F]'}"
+                >
+                    <span class="material-symbols-rounded ${currentComponentId === comp.id ? 'font-fill' : ''}">${comp.icon}</span>
+                    <span class="font-medium text-sm">${comp.name}</span>
+                </button>
+            `).join('');
+        }
+
+        function loadComponent(id) {
+            currentComponentId = id;
+            const comp = components.find(c => c.id === id);
+            
+            if (!comp) return;
+
+            pageTitle.innerText = comp.name;
+            
+            // Close sidebar on mobile upon selection
+            if (window.innerWidth < 768) {
+                toggleSidebar();
+            }
+
+            // Render Sidebar again to update active state
+            renderSidebar();
+
+            // Render Content
+            contentArea.innerHTML = `
+                <!-- Component Description -->
+                <div class="col-span-1 lg:col-span-2 mb-4">
+                    <p class="text-[#49454F] text-lg">${comp.description}</p>
+                </div>
+
+                <!-- Preview Card -->
+                <div class="col-span-1 bg-white rounded-3xl border border-[#CAC4D0] overflow-hidden flex flex-col shadow-sm h-fit">
+                    <div class="bg-[#F3EDF7] px-6 py-4 border-b border-[#E7E0EC] flex justify-between items-center">
+                        <h3 class="font-medium text-[#1D1B20]">Preview Web</h3>
+                        <span class="text-xs bg-white border px-2 py-0.5 rounded text-gray-500">HTML/CSS Sim</span>
+                    </div>
+                    <div class="p-8 bg-[#FDFCF4] min-h-[300px] flex items-center justify-center relative">
+                        ${comp.webPreview}
+                        <div class="absolute bottom-2 right-2 text-[10px] text-gray-300 select-none">M3 Simulation</div>
+                    </div>
+                </div>
+
+                <!-- Code Card -->
+                <div class="col-span-1 bg-[#282c34] rounded-3xl overflow-hidden flex flex-col shadow-md h-fit relative group text-white">
+                    <div class="bg-[#21252b] px-6 py-4 border-b border-[#181a1f] flex justify-between items-center">
+                        <h3 class="font-medium text-[#abb2bf] flex items-center gap-2">
+                            <span class="material-symbols-rounded text-sm text-orange-400">code</span>
+                            Jetpack Compose
+                        </h3>
+                        <button 
+                            onclick="copyCode(components.find(c => c.id === '${id}').kotlinCode)"
+                            class="text-xs bg-[#6750A4] hover:bg-[#7D5260] text-white px-3 py-1.5 rounded-full transition-colors flex items-center gap-1"
+                        >
+                            <span class="material-symbols-rounded text-sm">content_copy</span> Copiar
+                        </button>
+                    </div>
+                    <div class="relative overflow-x-auto">
+                        <pre class="!bg-[#282c34] !p-6 !m-0 !text-sm language-kotlin"><code>${comp.kotlinCode.replace(/</g, '&lt;')}</code></pre>
+                    </div>
+                </div>
+            `;
+
+            // Trigger Syntax Highlight
+            Prism.highlightAll();
+        }
+
+        // Initialize
+        renderSidebar();
+    </script>
+</body>
+</html>
