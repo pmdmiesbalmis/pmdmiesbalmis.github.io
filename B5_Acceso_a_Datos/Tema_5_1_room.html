@@ -23,15 +23,6 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/catamaran/v28/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
-.markdown-preview.markdown-preview .caso_estudio {
-  background-color: #f5f5f5;
-  border: 2px solid #969696;
-  padding: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
-}
 @page a4landscape {
   size: A4 landscape;
   margin: 1cm;
@@ -46,7 +37,16 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 .markdown-preview.markdown-preview .portrait {
   page: a4portrait;
 }
-.markdown-preview.markdown-preview .ejercicio {
+.markdown-preview.markdown-preview .box_bg_lightgray {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .box_bg_lightgreen {
   background-color: #f5faf5;
   border: 2px solid #969b96;
   padding-left: 15px;
@@ -56,13 +56,28 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   border-radius: 5px;
   box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
 }
+.markdown-preview.markdown-preview .salida_consola {
+  background-color: #000000;
+  color: aquamarine;
+  border: 3px solid slategrey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px 0 slategrey;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 0.8rem;
+}
 .markdown-preview.markdown-preview .contenedor {
   display: flex;
   justify-content: center;
   margin: 30px auto 30px auto;
 }
 .markdown-preview.markdown-preview .fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background: url(https://balmisdigigs.github.io/digitalizacion.github.io/imagenes/fondos/quote.png);
   background-size: cover;
   width: 75%;
   height: 160px;
@@ -180,9 +195,25 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    // your code here
-  });
+    const configureMermaidIconPacks = () => {
+        window["mermaid"].registerIconPacks([
+            {
+                name: "logos",
+                loader: () =>
+                    fetch("https://unpkg.com/@iconify-json/logos@1/icons.json").then(
+                        (res) => res.json()
+                    ),
+            },
+        ]);
+    };
+
+    if (document.readyState !== 'loading') {
+        configureMermaidIconPacks();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            configureMermaidIconPacks();
+        });
+    }
 </script></head><body for="html-export">
     
     
@@ -379,26 +410,22 @@ dependencies <span class="token punctuation">{</span>
 <li>
 <p>Por ejemplo, si queremos crear una tabla de <strong><code>clientes</code></strong> con los campos <strong><code>dni</code></strong>, <strong><code>nombre</code></strong> y <strong><code>apellidos</code></strong>. Crearemos una <strong><code>data class</code></strong> denominada <strong><code>ClienteEntity</code></strong> dentro del paquete <strong><code>.data.room.ClienteEntity.kt</code></strong>.</p>
 <p>A esta, le añadiremos a la anotación <strong><code>@Entity</code></strong> la propiedad <strong><code>tableName</code></strong> con el nombre de la tabla: <strong><code>@Entity(tableName = "idTabla")</code></strong>. Si no lo hiciéramos, la tabla tomaría el nombre de nuestra entidad.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=1}" class="language-kotlin kotlin" data-line="1"><code><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"clientes"</span></span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"clientes"</span></span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
-</div></div></pre></li>
+</code></pre></li>
 <li>
 <p>Deberemos decidir cual será nuestra <strong>clave primaria</strong> para añadir la anotación <strong><code>@PrimaryKey</code></strong> a la propiedad que decidamos.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=3}" class="language-kotlin kotlin" data-line="3"><code><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"clientes"</span></span><span class="token punctuation">)</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"clientes"</span></span><span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ClienteEntity</span><span class="token punctuation">(</span>
     <span class="token annotation builtin">@PrimaryKey</span> <span class="token keyword keyword-val">val</span> dni<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> apellidos<span class="token operator">:</span> String<span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper">
-
-<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
-</div></div></pre><p>Si necesitáramos una clave primaria compuesta por más de un campo, tendríamos que indicarlo con la propiedad <strong><a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a></strong> de la anotación <strong><code>@Entity</code></strong>. De igual manera lo haríamos en el caso de necesitar una <strong>clave ajena</strong>, pero en este caso con la propiedad <strong><a href="https://developer.android.com/reference/kotlin/androidx/room/ForeignKey">foreignKeys</a></strong>.</p>
+</code></pre><p>Si necesitáramos una clave primaria compuesta por más de un campo, tendríamos que indicarlo con la propiedad <strong><a href="https://developer.android.com/training/data-storage/room/defining-data#composite-key">primaryKeys</a></strong> de la anotación <strong><code>@Entity</code></strong>. De igual manera lo haríamos en el caso de necesitar una <strong>clave ajena</strong>, pero en este caso con la propiedad <strong><a href="https://developer.android.com/reference/kotlin/androidx/room/ForeignKey">foreignKeys</a></strong>.</p>
 <p>Por ejemplo, si tuviéramos otra tabla <strong><code>pedidos</code></strong> en la que relacionáramos el <strong><code>dni</code></strong> de la tabla <strong><code>clientes</code></strong> con el <strong><code>dni</code></strong> ajeno de los registros de esta tabla, <strong><code>parentColumns</code></strong> se referiría al <strong><code>dni</code></strong> de <strong><code>clientes</code></strong> mientras que <strong><code>dni_cliente</code></strong> en <strong><code>childColumns</code></strong> sería al de <strong><code>pedidos</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[7,8]}" class="language-kotlin kotlin" data-line="7,8"><code><span class="token comment">// Expresaríamos que un pedidos define una clave ajena dni en clientes.</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// Expresaríamos que un pedidos define una clave ajena dni en clientes.</span>
 <span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"pedidos"</span></span><span class="token punctuation">,</span>
         foreignKeys <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span>
             <span class="token function">ForeignKey</span><span class="token punctuation">(</span>
@@ -410,22 +437,7 @@ dependencies <span class="token punctuation">{</span>
             <span class="token punctuation">)</span>
         <span class="token punctuation">)</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">PedidoEntity</span><span class="token punctuation">(</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
-</div></div></pre><p>No obstante, más adelante veremos como definir relaciones entre objetos en lugar de tablas. Además, ten en cuenta que la definición correcta de índices nos va a proporcionar mucha velocidad.</p>
+</code></pre><p>No obstante, más adelante veremos como definir relaciones entre objetos en lugar de tablas. Además, ten en cuenta que la definición correcta de índices nos va a proporcionar mucha velocidad.</p>
 </li>
 <li>
 <p>Es muy <strong>buena práctica</strong> usar la etiqueta <strong><code>@ColumnInfo</code></strong> <strong>para que futuras modificaciones en la BD no afecten a mis entidades</strong>. Esta propiedad sirve para personalizar la columna de la base de datos del atributo asociado. Podemos indicar, entre otras cosas, un nombre para la columna diferente al del atributo. Esto nos permite hacer más independiente la app de la BD. Además nos permite pasar del <em><strong>camelCasing</strong></em> que el como tendremos los nombres de propiedades compuestos en Kotlin a <em><strong>snake_casing</strong></em> que es el convenio estándar en las bases de datos. Por ejemplo, la clave ajena anterior de pedidos sería ...</p>
@@ -513,7 +525,7 @@ dependencies <span class="token punctuation">{</span>
 <p>Cuando definamos la BD ya veremos como indicarle que aplique todas las conversiones definidas.</p>
 </div>
 <p>Ahora ya podemos definir nuestra clase <strong><code>PedidoEntity</code></strong> dentro del paquete <strong><code>.data.room</code></strong> ...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[6, 16]}" class="language-kotlin kotlin" data-line="6,16"><code><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"pedidos"</span></span><span class="token punctuation">,</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Entity</span><span class="token punctuation">(</span>tableName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"pedidos"</span></span><span class="token punctuation">,</span>
         foreignKeys <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span>
             <span class="token function">ForeignKey</span><span class="token punctuation">(</span>
                 entity <span class="token operator">=</span> ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span>
@@ -537,29 +549,7 @@ dependencies <span class="token punctuation">{</span>
     <span class="token annotation builtin">@ColumnInfo</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"fecha"</span></span><span class="token punctuation">)</span>
     <span class="token keyword keyword-val">val</span> fecha<span class="token operator">:</span> LocalDate
 <span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="16" data-start="16">
-</div></div></pre></li>
+</code></pre></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <h3 id="definiendo-relaciones-entre-objetos">Definiendo relaciones entre Objetos </h3>
@@ -657,7 +647,7 @@ dependencies <span class="token punctuation">{</span>
 <div style="page-break-after:always;"></div>
 <h2 id="crear-la-base-de-datos-room-y-consumirla">Crear la Base de Datos Room y consumirla </h2>
 <p>El último elemento que quedaría por crear sería la <a href="https://developer.android.com/training/data-storage/room#database">RoomDatabase</a>. Este elemento es el que <strong>se encargará de crear la base de datos a partir de las entidades definidas</strong> y las operaciones que se realizarán sobre estas a partir de los DAOs de nuestra app. Por tanto, es el elemento que enlaza a los dos anteriores. Para ello crearemos una clase abstracta que deberá de heredar de <strong><code>RoomDatabase</code></strong> y a la que etiquetaremos con la anotación <strong><code>@Database</code></strong> con las propiedades versión y entities. La primera propiedad especificará la versión de la BD, mientras que en entities indicaremos la entidad o entidades asociadas a esta.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[2, 7, 14,15]}" class="language-kotlin kotlin" data-line="2,7,14,15"><code><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
     entities <span class="token operator">=</span> <span class="token punctuation">[</span>ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span> PedidoEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     version <span class="token operator">=</span> <span class="token number">1</span>
 <span class="token punctuation">)</span>
@@ -673,47 +663,9 @@ dependencies <span class="token punctuation">{</span>
     <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">clienteDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> ClienteDao
     <span class="token keyword keyword-abstract">abstract</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">pedidoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> PedidoDao
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15" data-start="15">
-</div></div></pre><h2 id="instanciar-la-roomdatabase-para-su-posterior-funcionamiento">Instanciar la RoomDatabase para su posterior funcionamiento </h2>
+</code></pre><h2 id="instanciar-la-roomdatabase-para-su-posterior-funcionamiento">Instanciar la RoomDatabase para su posterior funcionamiento </h2>
 <p>Una vez creados todos los componentes necesarios para el funcionamiento de Room Database, deberemos poder crear una instancias de la misma. Para ello, podemos definir un método de clase denominado <strong><code>fun getDatabase(context: Context)</code></strong> que usaremos posteriormente para que <strong>Hilt</strong> sepa crear una instancia del mismo e inyectarlo al obtener el DAO como veremos más adelante.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=14}" class="language-kotlin kotlin" data-line="14"><code><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Database</span><span class="token punctuation">(</span>
     entities <span class="token operator">=</span> <span class="token punctuation">[</span>ClienteEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">,</span> PedidoEntity<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     version <span class="token operator">=</span> <span class="token number">1</span>
 <span class="token punctuation">)</span>
@@ -734,39 +686,21 @@ dependencies <span class="token punctuation">{</span>
         <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div></pre><p>Si te fijas <strong><code>Room.databaseBuilder</code></strong> precisa del <strong>contexto</strong> de la aplicación para poder crear el fichero <strong><code>tienda</code></strong> que contendrá la BD.</p>
+</code></pre><p>Si te fijas <strong><code>Room.databaseBuilder</code></strong> precisa del <strong>contexto</strong> de la aplicación para poder crear el fichero <strong><code>tienda</code></strong> que contendrá la BD.</p>
 <h3 id="preparando-la-base-de-datos-y-los-daos-con-hilt">Preparando la Base de Datos y los DAOs con Hilt </h3>
 <p>En el fichero <strong><code>AppModule.kt</code></strong> dentro del paquete <strong><code>.di</code></strong> prepararemos la inyección de dependencias de la siguiente manera:</p>
 <ol>
 <li>
 <p>Para inyectar la BD definimos <strong><code>provideTiendaDatabase</code></strong> que llama al método estático <strong><code>TiendaDB.getDatabase(context)</code></strong> para instanciarla. Fíjate que el contexto de la aplicación se inyecta usando la anotación <strong><code>@ApplicationContext</code></strong> de Hilt.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=4}" class="language-kotlin kotlin" data-line="4"><code><span class="token annotation builtin">@Provides</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Provides</span>
 <span class="token annotation builtin">@Singleton</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">provideTiendaDatabase</span><span class="token punctuation">(</span>
     <span class="token annotation builtin">@ApplicationContext</span> context<span class="token operator">:</span> Context
 <span class="token punctuation">)</span><span class="token operator">:</span> TiendaDB <span class="token operator">=</span> TiendaDB<span class="token punctuation">.</span><span class="token function">getDatabase</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div></pre></li>
+</code></pre></li>
 <li>
 <p>Para inyectar los DAOs, definimos <strong><code>provideClienteDao</code></strong> y <strong><code>providePedidoDao</code></strong> que inyectan los DAOs de la BD. Fíjate que se inyecta la BD y se llama a los métodos abstractos que devuelven los DAOs.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4, 10]}" class="language-kotlin kotlin" data-line="4,10"><code><span class="token annotation builtin">@Provides</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Provides</span>
 <span class="token annotation builtin">@Singleton</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">provideClienteDao</span><span class="token punctuation">(</span>
     tiendaDB<span class="token operator">:</span> TiendaDB
@@ -777,39 +711,23 @@ dependencies <span class="token punctuation">{</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">providePedidoDao</span><span class="token punctuation">(</span>
     tiendaDB<span class="token operator">:</span> TiendaDB
 <span class="token punctuation">)</span><span class="token operator">:</span> PedidoDao <span class="token operator">=</span> tiendaDB<span class="token punctuation">.</span><span class="token function">pedidoDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="10" data-start="10">
-</div></div></pre></li>
+</code></pre></li>
 </ol>
 <h3 id="inyectando-los-daos-en-los-repositorios">Inyectando los DAOs en los repositorios </h3>
 <p>Para inyectar los DAOs en los repositorios, deberemos añadirlos como propiedades privadas en los constructores de estos. Por ejemplo, en el caso del repositorio de <strong><code>ClienteRepository</code></strong> deberemos añadir el DAO de <strong><code>ClienteDao</code></strong> como parámetro del constructor.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=2}" class="language-kotlin kotlin" data-line="2"><code><span class="token keyword keyword-class">class</span> ClienteRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> ClienteRepository <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> clienteDao<span class="token operator">:</span> ClienteDao
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div></pre><div class="admonition tip">
+</code></pre><div class="admonition tip">
 <p class="admonition-title">Importante</p>
 <p>Recuerda que, tal y como hicimos a principio de curso con las clases de prueba. Deberemos definir los métodos de extensión que transformen un <strong><code>ClienteEntity</code></strong> en un objeto <strong><code>Cliente</code></strong> del modelo para su uso en el ViewModel y viceversa.</p>
 </div>
 <h3 id="cargando-datos-de-prueba-en-la-bd">Cargando datos de prueba en la BD </h3>
 <p>Este proceso se puede realizar de diferentes maneras, pero una forma de hacerlo de manera centralizada es en el momento de carga de la aplicación, por ejemplo invalidando el método <strong><code>onCreate</code></strong> de la clase <strong><code>TiendaAplication</code></strong> que recordemos hereda de <strong><code>Application</code></strong>.</p>
 <p>Fíjate que a través de la anotación <strong><code>@Inject</code></strong> <strong>Hilt</strong> será capaz de crear una instancia de <strong><code>ClienteDao</code></strong> y por ende de <strong><code>TiendaDB</code></strong> en la propiedad <strong><code>daoClientes</code></strong> la primera vez que se use al ejecutar el método <strong><code>onCreate</code></strong> para cargar los datos de prueba.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,5]}" class="language-kotlin kotlin" data-line="4,5"><code><span class="token annotation builtin">@HiltAndroidApp</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@HiltAndroidApp</span>
 <span class="token keyword keyword-class">class</span> TiendaAplication<span class="token operator">:</span> <span class="token function">Application</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
     <span class="token annotation builtin">@Inject</span>
@@ -828,22 +746,13 @@ dependencies <span class="token punctuation">{</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div></pre><h2 id="ubicación-de-la-base-de-datos-en-el-dispositivo">Ubicación de la Base de Datos en el dispositivo </h2>
+</code></pre><h2 id="ubicación-de-la-base-de-datos-en-el-dispositivo">Ubicación de la Base de Datos en el dispositivo </h2>
 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px">
 <div style="width: 70%">
 <p>Si abrimos el <strong>Device Explorer</strong> de Android Studio, podremos ver que se ha creado un fichero <strong><code>tienda</code></strong> en la ruta <strong><code>data/data/&lt;nombre_paquete&gt;/databases</code></strong>. Este fichero es la base de datos que hemos creado y que se ha guardado en el dispositivo. Podremos ver su contenido si la copiamos con cualquier herramienta de gestión de bases de datos SQLite como <strong>DBeaver</strong>.</p>
 </div>
 <div style="width: auto">
-<p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="138px" preserveAspectRatio="none" style="width:155px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 155 138" width="155px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="79" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.6914" x="8" y="20.457">Pixel 3a</text><line style="stroke:#000000;stroke-width:1;" x1="74" x2="74" y1="6" y2="24.0938"></line><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="26" y="39.5508">[data]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="36" y="54.6445">[data]</text><path d="M37,61.375 L37,62.375 L45,62.375 L45,61.375 L37,61.375 M37,63.375 L37,69.285 C37,69.335 37.04,69.375 37.09,69.375 L44.9,69.375 C44.95,69.375 44.99,69.335 44.99,69.285 L44.99,63.375 L42.02,63.375 L42.02,64.405 L39.99,64.405 L39.99,63.375 L36.99,63.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="102.041" x="46" y="69.7383">[com.pmdm.tienda]</text><path d="M47,76.4688 L47,77.4688 L55,77.4688 L55,76.4688 L47,76.4688 M47,78.4688 L47,84.3788 C47,84.4288 47.04,84.4688 47.09,84.4688 L54.9,84.4688 C54.95,84.4688 54.99,84.4288 54.99,84.3788 L54.99,78.4688 L52.02,78.4688 L52.02,79.4988 L49.99,79.4988 L49.99,78.4688 L46.99,78.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62.0449" x="56" y="84.832">[databases]</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35.3379" x="56" y="99.9258">tienda</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="64.0078" x="56" y="115.0195">tienda-shm</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="58.6758" x="56" y="130.1133">tienda-wal</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><!--SRC=[VOzVQy8m5CNVxwUuJqCh5gqwN1aYSzs6M92r-Z8cf6tc0caYoOrpoBxxecM3CP3xTCxvtNzJIyoGPPBW2B1PYWENE60RW6CE7RozAlHXyb8nOg_G-QT_ZLBNuQwkwf04LrMJ_Q4BPhbjRE-NMceJ5zBnIH0qBK5m8UpQz_eoyC6a1xvyJRq-_mDBoHIjqWNkkR52A-o7KIyQXSDMnWZdJc4qnluWxjt4qGXdIPRZAMz3wt6vGAkTAJbMmf8HXIC_e0rpjcVux1I9ciTuKgqyRMEM_9YOgBqmMjLS4SpNQGFXawPif-aCNm-xTu8muyRVXUiKxlaRSv9yQwaheROnhlA7xXWMJ6qTs_f5tC9C-mNcCyOa-mO0]--></g></svg></p></div>
+<p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="138px" preserveAspectRatio="none" style="width:155px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 155 138" width="155px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="79" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.6914" x="8" y="20.457">Pixel 3a</text><line style="stroke:#000000;stroke-width:1;" x1="74" x2="74" y1="6" y2="24.0938"></line><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="26" y="39.5508">[data]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="36" y="54.6445">[data]</text><path d="M37,61.375 L37,62.375 L45,62.375 L45,61.375 L37,61.375 M37,63.375 L37,69.285 C37,69.335 37.04,69.375 37.09,69.375 L44.9,69.375 C44.95,69.375 44.99,69.335 44.99,69.285 L44.99,63.375 L42.02,63.375 L42.02,64.405 L39.99,64.405 L39.99,63.375 L36.99,63.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="102.041" x="46" y="69.7383">[com.pmdm.tienda]</text><path d="M47,76.4688 L47,77.4688 L55,77.4688 L55,76.4688 L47,76.4688 M47,78.4688 L47,84.3788 C47,84.4288 47.04,84.4688 47.09,84.4688 L54.9,84.4688 C54.95,84.4688 54.99,84.4288 54.99,84.3788 L54.99,78.4688 L52.02,78.4688 L52.02,79.4988 L49.99,79.4988 L49.99,78.4688 L46.99,78.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62.0449" x="56" y="84.832">[databases]</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35.3379" x="56" y="99.9258">tienda</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="64.0078" x="56" y="115.0195">tienda-shm</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="58.6758" x="56" y="130.1133">tienda-wal</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><!--SRC=[VO_TQi9048NlvodcgcZ4eB5Q2KMaDcqH0w69tfGAcsHh5pQxiZj9BT9txsfeeHHahiuvt_pDBJ53bac28y0s4GSkSSIs0CSCUdXxbUl3xALan5wXzq__6eMk_7rLLZu9hies-qFdp7BRsiuljDGcp6NDPvxNjdZUXR1ltwlBm0UJ3lXoDNVw_0yaaYbQnojikB52AnpwmI0O-q4dgpakcSB13GwduMWSZYQuY38ynLteF2Qh9a2hQrDmB8Kb8_AQt8GkB5d3yBbM92eUuabrihYBQVHZOgGQORIgk29ORk8MmYTDwLxJ6PvSz-y4OSgDEmmtCTppDrPBSgs5BeNQXRZE7lfJM36rgzdEBU8M5jejC9yXHkat]--></g></svg></p></div>
 </div>
 <p>Aunque hay formas de mantener versiones de la BD y <strong><a href="https://developer.android.com/training/data-storage/room/migrating-db-versions">migrar de una a otra</a></strong>. La opción más sencilla es ante un cambio en alguna de las entidades sería eliminar la BD y volver a crearla. Para ello, podemos usar la propiedad <strong><code>fallbackToDestructiveMigration()</code></strong> en el método <strong><code>databaseBuilder</code></strong> que hemos usado para crear la BD o símplmente borrarla usando el <strong>Device Explorer</strong> y volver a ejecutar la app.</p>
 <h2 id="inspeccionando-y-depurando-la-bd-con-database-inspector">Inspeccionando y depurando la BD con Database Inspector </h2>

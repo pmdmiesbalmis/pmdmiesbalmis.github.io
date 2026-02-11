@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
       
       
       
@@ -23,15 +23,6 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/catamaran/v28/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
-.markdown-preview.markdown-preview .caso_estudio {
-  background-color: #f5f5f5;
-  border: 2px solid #969696;
-  padding: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
-}
 @page a4landscape {
   size: A4 landscape;
   margin: 1cm;
@@ -46,7 +37,16 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 .markdown-preview.markdown-preview .portrait {
   page: a4portrait;
 }
-.markdown-preview.markdown-preview .ejercicio {
+.markdown-preview.markdown-preview .box_bg_lightgray {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .box_bg_lightgreen {
   background-color: #f5faf5;
   border: 2px solid #969b96;
   padding-left: 15px;
@@ -56,13 +56,28 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   border-radius: 5px;
   box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
 }
+.markdown-preview.markdown-preview .salida_consola {
+  background-color: #000000;
+  color: aquamarine;
+  border: 3px solid slategrey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px 0 slategrey;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 0.8rem;
+}
 .markdown-preview.markdown-preview .contenedor {
   display: flex;
   justify-content: center;
   margin: 30px auto 30px auto;
 }
 .markdown-preview.markdown-preview .fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background: url(https://balmisdigigs.github.io/digitalizacion.github.io/imagenes/fondos/quote.png);
   background-size: cover;
   width: 75%;
   height: 160px;
@@ -180,9 +195,25 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    // your code here
-  });
+    const configureMermaidIconPacks = () => {
+        window["mermaid"].registerIconPacks([
+            {
+                name: "logos",
+                loader: () =>
+                    fetch("https://unpkg.com/@iconify-json/logos@1/icons.json").then(
+                        (res) => res.json()
+                    ),
+            },
+        ]);
+    };
+
+    if (document.readyState !== 'loading') {
+        configureMermaidIconPacks();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            configureMermaidIconPacks();
+        });
+    }
 </script></head><body for="html-export">
     
     
@@ -817,7 +848,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
 <p>Para evitar esto, podemos usar la API <strong><code>rememberSaveable</code></strong> que nos permite guardar el estado de un objeto en el sistema de tiempo de ejecución de Compose y restaurarlo cuando sea necesario.</p>
 <div style="page-break-after:always;"></div>
 <p>Por tanto, reescribiremos nuestro ejemplo del contador usando <strong><code>rememberSaveable</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight= 3}" class="language-kotlin kotlin" data-line="3"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorStateful</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> rememberSaveable <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span>
@@ -827,10 +858,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
         onAumentarCuenta <span class="token operator">=</span> onAumentarCuenta
     <span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
-</div></div></pre><p>Sin embargo, esto solo funciona para los tipos simples. ¿Qué sucedería si el estado un objeto compuesto?. En ese caso, debemos usar la API <strong><code>rememberSaveable</code></strong> con un <strong><code>Saver</code></strong> personalizado tal y como se indica en la <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419#restore-ui-state">documentación oficial</a></strong>.</p>
+</code></pre><p>Sin embargo, esto solo funciona para los tipos simples. ¿Qué sucedería si el estado un objeto compuesto?. En ese caso, debemos usar la API <strong><code>rememberSaveable</code></strong> con un <strong><code>Saver</code></strong> personalizado tal y como se indica en la <strong><a href="https://developer.android.com/jetpack/compose/state?hl=es-419#restore-ui-state">documentación oficial</a></strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Importante</p>
 <p>De todas formas, esto no nos tiene que preocupar salvo en los casos en que tengamos un '<em>composable stateful</em>' usado por otro composable. Esto se va a dar en muy pocos casos puesto que el estado, como ya veremos más adelante, se almacena en los <strong><code>ViewModels</code></strong>. En caso que esto suceda, se tratará de un tipo simple o uno ya definido por las librerías de Compose que ya es compatible con este API de persistencia.</p>
@@ -852,7 +880,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
 <p><strong>Ejemplo:</strong></p>
 <p>Vamos rehacer el ejemplo del contador para controlar los múltiplos de 3. En  una primera aproximación podríamos usar dos estados '<em>normales</em>' para el contador y el booleano que me indica si es múltiplo de tres o no.</p>
 <p>Esta vez por simplificar no hemos utilizado <em>'state hoisting'</em>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[3,7,14]}" class="language-kotlin kotlin" data-line="3,7,14"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorMultiploTres</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-var">var</span> esMultiploDeTresState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
@@ -868,32 +896,8 @@ el estado y para ello debe pasar también una <strong>función de actualización
         <span class="token function">Text</span><span class="token punctuation">(</span>text <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>esMultiploDeTresState<span class="token punctuation">)</span> <span class="token string-literal singleline"><span class="token string">"Es"</span></span> <span class="token keyword keyword-else">else</span> <span class="token string-literal singleline"><span class="token string">"No es"</span></span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string-literal singleline"><span class="token string">" múltiplo de 3"</span></span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-<div aria-hidden="true" class="line-highlight" data-range="3" data-start="3">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="14" data-start="14">
-</div></div></pre><p>Aunque el código anterior es funcional y correcto. Además, el segundo <strong><code>Text</code></strong> no se recompone a no ser que cambie el valor de <strong><code>esMultiploDeTresState</code></strong>. En manejador de <strong><code>onAumentarCuenta</code></strong> hace algo más de la <em>'responsabilidad'</em> que realmente tiene. Por lo que sería más correcto hacer...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=4}" class="language-kotlin kotlin" data-line="4"><code><span class="token annotation builtin">@Composable</span>
+</code></pre><p>Aunque el código anterior es funcional y correcto. Además, el segundo <strong><code>Text</code></strong> no se recompone a no ser que cambie el valor de <strong><code>esMultiploDeTresState</code></strong>. En manejador de <strong><code>onAumentarCuenta</code></strong> hace algo más de la <em>'responsabilidad'</em> que realmente tiene. Por lo que sería más correcto hacer...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorMultiploTres</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-var">var</span> esMultiploDeTresState <span class="token keyword keyword-by">by</span> <span class="token function">remember</span><span class="token punctuation">(</span>key1 <span class="token operator">=</span> cuentaState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -902,11 +906,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
     <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div></pre></div>
+</code></pre></div>
 <p>Sin embargo, el ejemplo anterior aunque es más correcto aún sigue teniendo un problema. Al estar cambiado constantemente el valor de <strong><code>cuentaState</code></strong> se va a estar recalculando el valor de <strong><code>esMultiploDeTresState</code></strong> aunque no cambie. Por jemplo, para los valores de la cunea 0, 1 y 2 el valor de <strong><code>esMultiploDeTresState</code></strong> siempre va a ser <strong><code>false</code></strong>. Sin embrago, el composable que muestra si es múltiplo de tres o no se va a recomponer porque el estado se ha recalculado al cambiar la clave. Para evitar esto, podemos usar la función <strong><code>derivedStateOf</code></strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Importante</p>
@@ -921,7 +921,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
 <div class="caso_estudio">
 <p><strong>Continuación ejemplo ...</strong></p>
 <p>Vamos rehacer el ejemplo del contador para controlar los múltiplos de 3. Si usamos <strong><code>derivedStateOf</code></strong> podemos reescribir el código anterior de la siguiente forma...</p>
-<pre data-role="codeBlock" data-info="kotlin  {highlight=5}" class="language-kotlin kotlin" data-line="5"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">ContadorMultiploTres</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> cuentaState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-val">val</span> esMultiploDeTresState <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> 
@@ -930,12 +930,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
     <span class="token keyword keyword-val">val</span> onAumentarCuenta<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit <span class="token operator">=</span> <span class="token punctuation">{</span> cuentaState<span class="token operator">++</span> <span class="token punctuation">}</span>
     <span class="token operator">..</span><span class="token punctuation">.</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div></pre><p>de esta forma hasta que deriveStateOf no cambie su valor, no se va a recomponer el composable que usa el estado <strong><code>esMultiploDeTresState</code></strong>.</p>
+</code></pre><p>de esta forma hasta que deriveStateOf no cambie su valor, no se va a recomponer el composable que usa el estado <strong><code>esMultiploDeTresState</code></strong>.</p>
 </div>
 <div style="page-break-after:always;"></div>
 <h3 id="previsualizar-diseño-de-mis-composables">Previsualizar diseño de mis '<em>Composables</em>' </h3>
@@ -947,7 +942,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
 <li>
 <p>La primera idea es que esta previsualización nos puede servir de <strong>'<em>test</em>'</strong> previo de nuestras vistas con <strong>diferentes dispositivos</strong> y <strong>configuraciones de pantalla</strong>.</p>
 <p>Añadiremos la anotación <strong><code>@Preview</code></strong> sobre el componente <strong><code>composable</code></strong> que queramos visualizar. Si es una <strong>pantalla completa</strong>, lo haremos sobre el componente que la contiene. En nuestro caso, sobre <strong><code>SaludaScreen</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=1}" class="language-kotlin kotlin" data-line="1"><code><span class="token annotation builtin">@Preview</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Preview</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreenPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Añadimos el Tema de la aplicación</span>
@@ -957,8 +952,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
-</div></div></pre></li>
+</code></pre></li>
 </ol>
 <div class="flotante" ,="" style="align-items: center;">
 <div class="flotante_izq">
@@ -1015,7 +1009,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
 </code></pre></li>
 <li>
 <p>Podemos <strong>añadir tantos '<em>previews</em>' como queramos</strong>. Por ejemplo, podemos añadir un preview para la orientación <strong>horizontal</strong> o LANDSCAPE, <strong>modo nocturno</strong> e <strong>idioma inglés</strong>. De esta manera de una sola vez podremos ver todos los comportamientos de nuestra vista de una sola vez durante el diseño.</p>
-<pre data-role="codeBlock" data-info="kotlin  {highlight=[6-12]}" class="language-kotlin kotlin" data-line="6-12"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Preview</span><span class="token punctuation">(</span>
     name <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"PORTRAIT"</span></span><span class="token punctuation">,</span>
     device <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"spec:width=360dp,height=800dp,dpi=480"</span></span><span class="token punctuation">,</span>
     showBackground <span class="token operator">=</span> <span class="token boolean">true</span>
@@ -1029,19 +1023,7 @@ el estado y para ello debe pasar también una <strong>función de actualización
 <span class="token punctuation">)</span>
 <span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">SaludaScreenPreview</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6-12" data-start="6" data-end="12">
-
-
-
-
-
-
-</div></div></pre></li>
+</code></pre></li>
 <li>
 <p>Para evitar tener que añadir muchas anotaciones <strong><code>@Preview</code></strong> existen diferentes plantillas preview como <strong><code>@PreviewScreenSizes</code></strong>, <strong><code>@PreviewFontScales</code></strong>, <strong><code>@PreviewLightDark</code></strong>, y <strong><code>@PreviewDynamicColors</code></strong> dependiendo de la versión de la librería <strong><code>androidx.compose.ui:ui-tooling-preview</code></strong> que estemos usando.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@PreviewScreenSizes</span>

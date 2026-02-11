@@ -23,15 +23,6 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/catamaran/v28/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
-.markdown-preview.markdown-preview .caso_estudio {
-  background-color: #f5f5f5;
-  border: 2px solid #969696;
-  padding: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
-}
 @page a4landscape {
   size: A4 landscape;
   margin: 1cm;
@@ -46,7 +37,16 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 .markdown-preview.markdown-preview .portrait {
   page: a4portrait;
 }
-.markdown-preview.markdown-preview .ejercicio {
+.markdown-preview.markdown-preview .box_bg_lightgray {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .box_bg_lightgreen {
   background-color: #f5faf5;
   border: 2px solid #969b96;
   padding-left: 15px;
@@ -56,13 +56,28 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   border-radius: 5px;
   box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
 }
+.markdown-preview.markdown-preview .salida_consola {
+  background-color: #000000;
+  color: aquamarine;
+  border: 3px solid slategrey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px 0 slategrey;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 0.8rem;
+}
 .markdown-preview.markdown-preview .contenedor {
   display: flex;
   justify-content: center;
   margin: 30px auto 30px auto;
 }
 .markdown-preview.markdown-preview .fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background: url(https://balmisdigigs.github.io/digitalizacion.github.io/imagenes/fondos/quote.png);
   background-size: cover;
   width: 75%;
   height: 160px;
@@ -180,9 +195,25 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    // your code here
-  });
+    const configureMermaidIconPacks = () => {
+        window["mermaid"].registerIconPacks([
+            {
+                name: "logos",
+                loader: () =>
+                    fetch("https://unpkg.com/@iconify-json/logos@1/icons.json").then(
+                        (res) => res.json()
+                    ),
+            },
+        ]);
+    };
+
+    if (document.readyState !== 'loading') {
+        configureMermaidIconPacks();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            configureMermaidIconPacks();
+        });
+    }
 </script></head><body for="html-export">
     
     
@@ -298,7 +329,7 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 </ul>
 <p>En la gran mayoría de aplicaciones móviles, se necesita acceder a datos que no están en el dispositivo, sino que están en un servidor remoto. Para ello se utilizan que permiten el acceso a los datos a través de internet. Estos servicios pueden ser <strong>API Rest</strong>, <strong>GraphQL</strong>, <strong>WebSockets</strong>, <strong>gRPC</strong>, etc. En este tema nos centraremos en los servicios API Rest, que son los más utilizados.</p>
 <p>Los Servicios web REST, utilizan el protocolo HTTP para intercambiar información entre el cliente y el servidor. Nosotros en el curso vamos a utilizar una arquitectura similar a la siguiente:</p>
-<p></p><p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" height="776px" preserveAspectRatio="none" style="width:950px;height:776px;background:#000000;" version="1.1" viewBox="0 0 950 776" width="950px" zoomAndPan="magnify"><defs></defs><g><rect fill="#1B260D" height="1" style="stroke:#1B260D;stroke-width:1;" width="1" x="0" y="0"></rect><rect fill="#FFFFFF" height="73" style="stroke:#FFFFFF;stroke-width:1;" width="948.1777" x="0" y="0"></rect><image height="53" width="450" x="1" xlink:href="data:image/png;base64,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" y="10"></image><image height="62" width="62" x="450" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+CAYAAABzwahEAAACp0lEQVR4Xu3SQapbQQxEUe9/08nk9+SQi9S2AyH2hRqoqqR+Bj9+fSgPjU/h+8M/je8P/zTyhz8ej6dU+7e4572tikw8sFXt3+Ke97YqMpkW5bZ/WH/okMvUz2RalNv+4Z//4X5g5TXrTxJ9+5UXmbjoA5XXrD9J9O1XXmTiog9U7jz5qjB3r/IiExd9oHLnyVeFuXuVF5m46AOVO5emnujbr7zIxEUfqNy5NPVE337lRSbTolS/fLE3zRNTP5NpUapfvtib5ompn8lZvJX7755vVWTiga3cf/d8q6KTN1EfUP5hyl/l713+oX5A+Ycpf5W87F9Gib7z1i+JuT1nycSDSvSdt35JzO05Sya1WA+ZPzs/6x+m/JCNOnD8KX92ftY/TPlhbvzgwdtZv/KD+TTfst70odtZv/KD+TTfMm76wLMfrl+asHe7fxibHtw+VLn7asLe7f4hmx6cDpvXnr652FNTr8jEA+Oh4UPKNxd7auoVnUAd0vdhte1tVYy5RlGH9P0wte1tVYy5hnigZjVhz3nC/vX7GuKhmtWEPecJ+9fvaxw8sD1cefkH729VjLnGwcVXHyz/4P2tijHXmKiHJ38767+qopOgDk/+dtZ/VUUnL+LDftBWhfk0Sycv4sP+oK0K82mWTPyArQpzZzHfzqrIxANbFebOYr6dVZHJtCjVX3/IHz5605fyJRvbA4fq3/4QVVRevmTDA35Q5bL1a96q9opMXPRg5bL1a96q9opMXPRg5c7lF+bTnUlFJi56sHLn8gvz6c6kIhMXPVh5zVvffPKd9YtseMDDlde89c0n31m/yMb2wMH+di5VT7/miWxeHxo+pOZS9fRrnsimD27l/kTtF/YnFZl4YCv3J2q/sD+p6OQ/5/vDP43vD/80PvaH/waCbp3NtVew5gAAAABJRU5ErkJggg==" y="5.5"></image><rect fill="#000000" height="629.2656" style="stroke:#000000;stroke-width:1;" width="948.1777" x="0" y="73"></rect><text fill="#33FF02" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="105.375" x="5" y="90">PlantUML 1.2025.4</text><text fill="#33FF02" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="3.334" x="5" y="105.0938">&nbsp;</text><text fill="#33FF02" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="320.7246" x="5" y="120.1875">This version of PlantUML is 212 days old, so you should</text><text fill="#33FF02" font-family="sans-serif" font-size="12" font-style="italic" font-weight="bold" lengthAdjust="spacing" textLength="322.6641" x="5" y="135.2813">consider upgrading from https://plantuml.com/download</text><rect fill="#33FF02" height="22.6094" style="stroke:#33FF02;stroke-width:1;" width="938.1777" x="5" y="146.375"></rect><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="140" x="6" y="161.375">[From string (line 4) ]</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="3.8896" x="5" y="182.9844">&nbsp;</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="68.8857" x="5" y="200.5938">@startuml</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="665.0479" x="16.6689" y="218.2031">!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="720.2344" x="5" y="235.8125">' convert it with additional command line argument -DRELATIVE_INCLUDE="relative/absolute" to use locally</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="291.792" x="5" y="253.4219">!if %variable_exists("RELATIVE_INCLUDE")</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="180.4619" x="12.7793" y="271.0313">!include ./C4_Context.puml</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="11.6689" x="5" y="288.6406">...</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="168.834" x="5" y="306.25">... ( skipping 13482 lines )</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="11.6689" x="5" y="323.8594">...</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="379.8867" x="5" y="341.4688">00008FFFFFD0000000000000000000000000000014000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="376.8242" x="5" y="359.0781">0000122F621000100000010011000001000010006C000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="397.6055" x="5" y="376.6875">0000000F40009FFC20ACFFC8FFA006FFF16FFF54FFF80000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="393.8457" x="5" y="394.2969">0000000F4006E21BB0AE22FC13F23F51302309C08C100000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="393.8525" x="5" y="411.9063">0000000F400B9004F0AA00D700F47D0000168BE08C000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="395.4043" x="5" y="429.5156">0000000F400C8004F0A900D700F48C0000EC7AE08C000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="389.9697" x="5" y="447.125">0000000F4009C008D0A900D700F45F1004F109E08C000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="406.2393" x="5" y="464.7344">0000000F4001EDBF50A900D700F40CEBE2FCCEE04FB60000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="373.7344" x="5" y="482.3438">000000061000166200430052006100574026515004720000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="373.7344" x="5" y="499.9531">000000000000000000000000000000000000000000000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="373.7344" x="5" y="517.5625">000000000000000000000000000000000000000000000000</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="5.4482" x="5" y="535.1719">}</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="3.8896" x="5" y="552.7813">&nbsp;</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="3.8896" x="5" y="570.3906">&nbsp;</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="938.1777" x="5" y="588">!define DEV2_TOMCAT_LINE_WORDMARK(_alias) ENTITY(rectangle,black,tomcat_line_wordmark,_alias,DEV2 TOMCAT_LINE_WORDMARK)</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="910.2324" x="5" y="605.6094">!define DEV2_TOMCAT_LINE_WORDMARK(_alias, _label) ENTITY(rectangle,black,tomcat_line_wordmark,_label, _alias,DEV2 TOMCAT ...</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="900.9355" x="5" y="623.2188">!define DEV2_TOMCAT_LINE_WORDMARK(_alias, _label, _shape) ENTITY(_shape,black,tomcat_line_wordmark,_label, _alias,DEV2 T ...</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="888.4668" x="5" y="640.8281">!define DEV2_TOMCAT_LINE_WORDMARK(_alias, _label, _shape, _color) ENTITY(_shape,_color,tomcat_line_wordmark,_label, _ali ...</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="539.8545" x="5" y="658.4375">skinparam folderBackgroundColor&lt;&lt;DEV2 TOMCAT_LINE_WORDMARK&gt;&gt; White</text><text fill="#33FF02" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" text-decoration="wavy underline" textLength="241.9648" x="16.6689" y="676.0469">!include &lt;tupadr3/devicons2/mysql&gt;</text><text fill="#FF0000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="336.0889" x="8.8896" y="693.6563">cannot include java.io.IOException: Stream closed</text><rect fill="#FFFFFF" height="73" style="stroke:#FFFFFF;stroke-width:1;" width="948.1777" x="0" y="702.2656"></rect><image height="53" width="450" x="1" xlink:href="data:image/png;base64,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" y="712.2656"></image><image height="62" width="62" x="450" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA+CAYAAABzwahEAAACp0lEQVR4Xu3SQapbQQxEUe9/08nk9+SQi9S2AyH2hRqoqqR+Bj9+fSgPjU/h+8M/je8P/zTyhz8ej6dU+7e4572tikw8sFXt3+Ke97YqMpkW5bZ/WH/okMvUz2RalNv+4Z//4X5g5TXrTxJ9+5UXmbjoA5XXrD9J9O1XXmTiog9U7jz5qjB3r/IiExd9oHLnyVeFuXuVF5m46AOVO5emnujbr7zIxEUfqNy5NPVE337lRSbTolS/fLE3zRNTP5NpUapfvtib5ompn8lZvJX7755vVWTiga3cf/d8q6KTN1EfUP5hyl/l713+oX5A+Ycpf5W87F9Gib7z1i+JuT1nycSDSvSdt35JzO05Sya1WA+ZPzs/6x+m/JCNOnD8KX92ftY/TPlhbvzgwdtZv/KD+TTfst70odtZv/KD+TTfMm76wLMfrl+asHe7fxibHtw+VLn7asLe7f4hmx6cDpvXnr652FNTr8jEA+Oh4UPKNxd7auoVnUAd0vdhte1tVYy5RlGH9P0wte1tVYy5hnigZjVhz3nC/vX7GuKhmtWEPecJ+9fvaxw8sD1cefkH729VjLnGwcVXHyz/4P2tijHXmKiHJ38767+qopOgDk/+dtZ/VUUnL+LDftBWhfk0Sycv4sP+oK0K82mWTPyArQpzZzHfzqrIxANbFebOYr6dVZHJtCjVX3/IHz5605fyJRvbA4fq3/4QVVRevmTDA35Q5bL1a96q9opMXPRg5bL1a96q9opMXPRg5c7lF+bTnUlFJi56sHLn8gvz6c6kIhMXPVh5zVvffPKd9YtseMDDlde89c0n31m/yMb2wMH+di5VT7/miWxeHxo+pOZS9fRrnsimD27l/kTtF/YnFZl4YCv3J2q/sD+p6OQ/5/vDP43vD/80PvaH/waCbp3NtVew5gAAAABJRU5ErkJggg==" y="707.7656"></image><!--SRC=[xLtXRwCu5l_ENy5fxyFCXzt1O8ofHYE1WRkRQszNq-xCXzEfeWdRYIPDkeJCj7VQ__ri0y5W1qZI5hI3AqKjyS_- -VczvuTvffilYzLzdCPt-ZpvBTukiwla8VEMYzlLNRBAz1dzI59Ds-ogVKlZ-q-BUVPPDmr3k7uNFrmacqrycrmk_flem3P4r7bocwpcqNgLaVLodUe_HBn8DVnuzkKsNMzNyxnUbiQh3Qr0QSXrr-ayIULwGiKqcMNnwdQPl7sxv1WlJU9tx_J_QJejDxlEPb8Z_7lUWVpT7yekYaOlgRoITVPudx3Hvh8mwv1vdCKtyUO0nE_RP7j0TVgPBMQB-vZEO6zGdARhRqNrOf8GB_oAC7MDgse6IRfPhmxeV9RHfjkgisyssIELS_mjsQpl4jQ0Ugfls9J6wUDkeXKj8iKNHAa5kPfTygxdyUPpCcyAU_Q5QlrJTCKXlAFxPRnOvTstM0IJm0iKHgEth0L5WRnqZg8IiWAd4hviIKFpuFOvD8dSvePcmIsvbOJKqJE9etA2Gyjaar05MSsIc_N3u4gIUokHHfTdwh3xBdZfFzgy28yoxjF59haUYqCP3QN2juo6J-bcHaEey3Zz-0pXV4OZgPeV6ez2bIv9oUWextHKIxqyrUPnaoLte_5Iew1JUAXHS2czqoZ859wfcyiGNcaK4gfvf74eKEcD93P7UQA3M-dbXMOKIcyGatGqZcWiZ0fVD1OwfJiQ2v_28_MYCuHJ6ekSQdvfDCfKkYOLeQEyqp4D7L-K578BsRDLLzyiRWXSkDeK-0y6XgRZoy8s7Cj7EUP3NZsbezSDVYLOnBVhLRpSNLIxka4OAtpSu3nAvpOuaSAhzU4XjAg-Uf90H5Ssk5HgFcmWDlljFdcW5AYnNJyFCuJPZymCU-pdD0SmB7NLtj1e2EqsXqR3gDmTEeIGqBpwwaaYgcqDZKPEzRsXWMdjTnlv_THJ4m80OJ-G2Ld4YOXnchSOXF7UxPa1UTItPWOaKjkMQUSXjAg-Uf90vEsO0QMYs8fvSJOzmeNdOURoyipXmY3KsyA5mGb9uSBWZ9hXGXz2GlFggoU9I1ak32udTRWm4AtEB9MNsLdkuI6cXplJmvtfuSxt_71dB8amJ-sifdoPALzcofVvpl9b-EqQnMM9_jSYvVlV43z0_0QW_r3P60UMfm50roV4SyoU01H6HV6j7W108g4udG0GHhM2km0aQXJK3d0YgO0s093hHsuR02a0KHl0Lm5W2o1K0PmMWAf-Gx8d0W8L0BK0l4C7hH9hs3hJOTSGJbKDnTJPNUeTjCsQqkByjlQL9chlEl50JoTWEPxlkmWydvlf3p1j1sF1jzWO8mZs0fnYj86Be6L1fvIN3vK0gBIU0W9aW1ErbS1i0b3KNa9G1rXHL_7h0ByJK6g9rhC3EWmHuFO0HAO02Fe0a03eKx-mLMsV3vQBToZ07nz068CHzW4u0W3rg5-eNw5Bk5iphBfw0sYt5ki5lSOVpN3Ax8wdfcXdYdQcQ6UATdf5EpmIQSOYpMX4ao8HEHQfHIDQZqYa5ereVI8HCHevRZcm3btI_5w0V1QrtXqKqOZMDn8fen6jRoHI6glMDn8fRKdhkugNSXePm3joq8UBTJTnUm8Ct9mugoSWa9Il0s1BwjqEy6K3QWNKuocd4r0tqS89j02QJY1tCti12ZSZEB9cQJWo8PvArpVhR0oxKnDWK82jzl6Xgru1rO5E3h6KIsQVEsKHqEEMiGQ0hG0Y0-m-Dyhz0U5f0EIwi0GGQ5RYglwW0DV5XIF5FCgoA_aXiLcd_BK8zhJyXg84UE8T08_wJH5WSq0W0FogJe6ssW4yvjtfYBLpu_i1aOU5rMVtHmjWhrZ_N01nuYBiD0gH0Q9gH5BewyggKLC-1pKAaPNl1UpXE9jktqfn502xbmyGFHya- -gBlh9njwqiqmhqfm0qewcEpQbcRDP5m5Dl7Uu5a3PBKG1KTwSXF7IFmsi1u4EtNPuRGAMk1DGcGwirZ_V4xNW272tMCQh6Im1KAmXHMXpCNGJ44eBWyZiHGAglfKBgta3hzrYW6eosnxdiNPgr_XrKEn0JO08yEQ1hSsh4W9t5TG28PDCT02nvZNO0aVoIis-l2Kb-wS1mQZeNFvsBdyx5Vw_dugU3yTF1-EbW_7Gm_j23yOU-OcVtbf-dfWij70JsynoR7ufqsyl41gGYlKXiG2xDbuYrKn4QLbyzIIpAbuSDA1lrYyDUd52FyEBPoFaM-v79UOZzF564CHJxjY1Z39oaE6CCf9gXHazEGW_ggoS9IXbjZ45Qwe1ZE6QTXrPVxFs8JtrcTNffwVJIqkcbfT_bIqlB1zdP-cuMPzTBsjxrDpgIkpZzybnPWgHvj06vhG0h4CzlyRCOGIi0EL54W9YiJdW6-Lw02zqYBuedQVXHPBjM6y2pM0Oy2TcZz208sEDmlW7U0Z20WqoMueBPMHig0coh4ki5G7aceVmDetec2tOn2gF0ASUGFv95nYwvljQ37M3RWaAggiEQSu5HFBa4Lj560K2-aEdFvMqNvqLo07PePQzA4B9sIGScX3bban1h1y20jrPDd2UVku7iW8c9CNkQwHBs6DaXmccqPcqlS8a3U1Pi-M70wZc7MSjH04x0UeIUC0H6EpIhH68HWEdaSj7oR3kFKI8UrpxXw9TVwHp1m6LoWYvsc1njR3Bv8zTnNI2DmIJOPvNfL9YsxK6JDy5cn8AURLS0DvzDXqcIYzMasWCXCmZRDY1bQFhqxqfA9k74S5WNhuiQvbRDj6SRPe1eiqOjGscNSGpzXas3m2gK4jSESX2xUDmDvBEJ1HjIJuBoNJusAHyK15wXbir9nm4YdkncQDUUemGObg_8H_0G8vLdmX0F8xDnUgkPyU2uTAwmvUN6O4B72uXJITYnCQe18A7J2ShqktnymAOA2wi-R0400hCq8ATsv0YwWSl9KMtQWJK-QSIiCdf26rb2Rc_fOhtTKpdRArHVECuc31hWW5kIKPo6qzXCrMONEKxZS1qAk4tx3bDNZGd0CpiM1Gu1qARpheM-xuTMvpfY1znyaAl9ENHx8OIMyCWbgtStjUUlGMj583uT1QOP8HDKtXuKwqvnWG-Nr0s8vzTINQ9pxX6Mxi4pi5WEC60VDgm_uSq1A3I1xnjUI3iam8fCAxAfcpSjmoK69a3gWPaZzS4URPejAn5q-B3Owmf32f0f4Pm3t1AGLmg9uwa1j6DgmWB0PiO1wOUh1e0my2DR01Waz4Cw7hhuKfoFQcw62nNnTPPgbctcbsowL9d81bITeME-N9QW4BVzjbxIwB0HMxvz6uGVJVtgvmlYNLsV_-DVuVMddpy45zw7Vz8WzTDd6fcnqF8lYzLikPqd-jjiUn_FK-lDFFcweE7VndnpzxZvVVbEqtvPqX3yrujp_IkzQLciLphuYQqiFy5Nbt6clz-kT1Fhm3ept3FJrabuUQMpxrzhh_xsoxc-MM_J6GrR5viiNTniCzh0Q-rz_3NMFsnNsU8kETFPNw-kBbxhbs5vKGzNNnVfcl-7LEtznukyalxtTNPvlyvuPGH_z1UPVfcab9V-yK8Byl-kIg6pzNonkZtJVxsAViJQEGrgjpG-FjEJZKQeXBBqyKmFB_yF]--></g></svg></p><p></p>
+<p></p><p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="DESCRIPTION" height="227px" preserveAspectRatio="none" style="width:523px;height:227px;background:#FFFFFF;" version="1.1" viewBox="0 0 523 227" width="523px" zoomAndPan="magnify"><defs></defs><g><!--cluster azure--><g class="cluster" data-entity="azure" data-source-line="1666" data-uid="ent0003" id="cluster_azure"><rect fill="none" height="214" style="stroke:#444444;stroke-width:1;stroke-dasharray:7.0,7.0;" width="312" x="205" y="7"></rect><text fill="#444444" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="44.4531" x="338.7734" y="25.6094">Azure</text><text fill="#444444" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="62.0039" x="329.998" y="41.582">[container]</text></g><!--entity api--><g class="entity" data-entity="api" data-source-line="398" data-uid="ent0004" id="entity_api"><rect fill="#1168BD" height="143.4688" style="stroke:#3C7FC0;stroke-width:0.5;" width="89.3125" x="221" y="61.5"></rect><image height="48" width="48" x="241.6563" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEt0lEQVR4XtWYPY5UVxBG2YJ34CV4CQRegJdASGgRExBZzkxMQkJsUhKEQHJiIRNYsgMHnoDESAhZsghIxjotnVHxVb3u2zM9sudKH7yuV7du/d96c+uLu89v3WQ0wnXgzdnf598++f086ceA/Y9fvW0yGuOpcfu7n1//+e7jOevFb+/Pv7z38uvk2Qf4cQALOfm+bTg18NyDH//YKcBCmVUj4NN49j19/Vfb2zadGoT9m4e/7MLvmlIBxVI5Iua68+jX3T4iWnnagacGXuPQ6k0WHv3wz6cd6oJHuJCBrB+ene2cUeW3A08NDeAZI0gn0uqr+z99Lw9KsVBQGrzQa/HznkhU+e3AY5Ahn1AN2Ac8fogPA7KbNaYJWM1mclAhhp6D8WruEdZA0pFTFUrPTjg6AjCjoBvxEMrwOxd8NS2EKVNpGGX0atok4KlRmZzRNgkOpQskXcG1yKoRyWv3SLrYMgA6xleFScd0UtsIsJoukfQEwjgAbOUvPMgCE89kALSsL52WvO1AsFp4K7DDVBpGWQMY5rN1VmnuIRqTU9uBYLL0GKA0TkCOCqFAehVDsignmjKnaLXDEeDFcQzs8SidEdSg3DMpNNGRRdfL/AdtM8zTYfvAgfVWndoq7zICnJMp5MxT+dg3pQ9oBJi3uk+CTqUC7HPeqSnoHAQPhmUr9I6xLmr6OEK7r7Zf0ZQCh2rAzsKBGJsK1zvBnAZ4lveZCjoi7wvvHfYpY8kALJ0KCdgNMseza6mkM43IbwIVU05NP2TAX/enPk1BN2bOmVrmeyq8CpyTnt7C1ldYRSMIw8YzBpEWHqxXfc69h6BXk15htJKeaAThzYen902KWXirIMJb+1Ce9yvOaYQKPM7aUh6sHjQBD2eKWGOrMhtBGAFSKS+WikMd6xCQbXpOd8AhNIKoIUbodDmBqxoAiLANYp+zJjQCQOHaKUyl/H516TkOhzf7/CqIOmccY0QjeOvx7KWEQEeMXEYApe3jDnIOcftqKM/2Zl5ttZ/9sPp5NiezmBwX6koeAd0b2Mn0UPt0H5HY6lIVn21yBMBjeZFV4Km6Vr2F8hihMVOq1ZloxeCLh3pxofwkvALB1oTewpDVdIGfwp1moArnp6SLC2G2L5hXWxlRQ4Fch4xPGbbS6aMHYOiWY3b/1Fy/zM2KBzlcHGNAyrFppCEYYZHXd+2PRXj/sgqcCpMh/E92mHp2yt2XEgRxlUnz1EBZCz4j4qS6syyRgv5raAipXoGzG/NNQyOAjMj/MSqiESicaZ1iaLsMLN6ki0ZgA10IoLjDWUYhf2+92xfBiZ40R5rkE41QgQFpfZ2F6o1N+62XGs81mvVydLp1oXTSKFzOrmuaUpvSFWyqBnCIfyHjUFuvBvjO6HlB0pb57ZzFsxeSLdt3POMkvY7S01ApGqEiDchPQD3EMwZULzsapCxoUz0ZBRT2PoKuAckvGqEiDTAt/J0GVOO2DNhSCIWh+z1xLQbU0AKHMJ5XDSB1WDUldIQ05FyLARyAYJQjzCwHv1UDePYWNVVqzfhOAzQO3mnsbkpXsCGLx1y1vUrnoDpDYVh9n7J4j4EaBS88FnediK2dachsSt80NMJNw7+KoBF1UomRrAAAAABJRU5ErkJggg==" y="71.5"></image><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="69.3125" x="231" y="136.1094">Endpoint</text><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="26.6719" x="232.7578" y="156.2344">API</text><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="4.4453" x="259.4297" y="156.2344">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="34.6797" x="263.875" y="156.2344">Rest</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="263.7114" y="174.2832">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45.9102" x="231.4185" y="191.8926">Jakarta</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="277.3286" y="191.8926">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18.6758" x="281.2183" y="191.8926">EE</text></g><!--entity db--><g class="entity" data-entity="db" data-source-line="403" data-uid="ent0005" id="entity_db"><path d="M434,92 C434,82 467.3379,82 467.3379,82 C467.3379,82 500.6758,82 500.6758,92 L500.6758,173.9531 C500.6758,183.9531 467.3379,183.9531 467.3379,183.9531 C467.3379,183.9531 434,183.9531 434,173.9531 L434,92" fill="#1168BD" style="stroke:#3C7FC0;stroke-width:0.5;"></path><path d="M434,92 C434,102 467.3379,102 467.3379,102 C467.3379,102 500.6758,102 500.6758,92" fill="none" style="stroke:#3C7FC0;stroke-width:0.5;"></path><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="465.3931" y="120.5332">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="23.1094" x="455.7832" y="140.2188">BD</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="465.3931" y="158.2676">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46.6758" x="444" y="175.877">MySQL</text></g><!--entity android--><g class="entity" data-entity="android" data-source-line="398" data-uid="ent0002" id="entity_android"><rect fill="#1168BD" height="123.3438" style="stroke:#3C7FC0;stroke-width:0.5;" width="100.9063" x="7" y="71.5"></rect><image height="48" width="48" x="33.4531" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADAElEQVR4Xu2ZMaoVQRBF/xbcgUtwCQYuwCUYGoqxgZGYaWxiYqypiYiCiXw0EDQw8AcmCiKCGJg8OQ/vo96t7v9reiYZmILLzLtdfauru2e6p9/JpZsvTtaMRKwNiRjBjUcfdtcfvts53wO+1HF+BIkYxbPTb+UGTfG9CIkYBT1668mn/Ug8fv119/7s1+7n7797cA9HGT5L9T5IxChoWNXw9fqjSMQIXn784W280KjjOiNIxFQwPUaNuq43FYmYAua1jB69fPvVtS/f/4QmHhtl+MQRe/D8bFYSiajiyp0390Pb9g/r3aefI9U0fPCNhpbrV5GIKmLvz7U5o5CIKs6bKlMNLdevIhFVeCPmmutXkYgeWISu3nt7Gn8vCdf1+D0kooX41tA2QKvsUkATbVl1nUiEg14/qP43XoXOzbWWZhzxHhLhYDjd/BW6hLU0K1MpEY4tgaK1NLcEtgQmWEtzS2BLYIK1NBdJYPUrMYifjdoLhTiLGJpxL1T93ExED354FWIvYtIlxpRjl0RUwQ5ySXP9KhJRxchRSs+qW+cWElEFDx1zls/B1uclI6Sy1mipDA20XL+KRIzCG8jpg8papxVefxSJGIU3cEugiESMwhu4JVBEIkbhh7xxMeI+WnWVrSARo2Dfotdp6x8YbRPwqexxqkjE2pCIteHoBw8b8zOCfTplzGOWfLj4gIoTOGnWysq963GqHVdexURHzw0x4ZhqXj/GPkoAAZZ8guLEFUNMbxGCw+On/Qv/d1EuaOtAI9lZxjKV6xmJMXVcj48+bkgg1vXYhwT00RIfLonoGjNv+UcQxHtKUBL60tMIq0y6XtaLvSfpRR2wCmp4KxDAv7dvp4foURpEbwvawdKTrZhqXC9mK3aqKCcloHe4iyHS+ruUqaMy6tJYoNco87gXU1PkvBHw5A4FmoMEQqiagOam5jG8GulwLSVFPY0OmvEZkHbsBPylmQJoqBHhighX37PjR2/IH3Dfm/uCNPWbBlOPRon32FHfp20KsDb8A2Ff73HdZbW2AAAAAElFTkSuQmCC" y="81.5"></image><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="80.9063" x="17" y="146.1094">Aplicación</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="55.5083" y="164.1582">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45.124" x="29.0532" y="181.7676">Retrofit</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="74.1772" y="181.7676">&nbsp;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="7.7861" x="78.0669" y="181.7676">2</text></g><!--link android to api--><g class="link" data-entity-1="android" data-entity-2="api" data-source-line="1779" data-uid="lnk6" id="link_android_api"><path d="M108.1,133 C142.51,133 179.9,133 212.92,133" fill="none" id="android-to-api" style="stroke:#666666;stroke-width:1;"></path><polygon fill="#666666" points="220.92,133,212.92,130,212.92,136,220.92,133" style="stroke:#666666;stroke-width:1;"></polygon><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="20.0039" x="139" y="114.457">API</text><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="3.334" x="159.0039" y="114.457">&nbsp;</text><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="26.0098" x="162.3379" y="114.457">Rest</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="37.998" x="144.6748" y="129.5508">[HTTP]</text></g><!--link api to db--><g class="link" data-entity-1="api" data-entity-2="db" data-source-line="1779" data-uid="lnk7" id="link_api_db"><path d="M310.39,133 C347.65,133 392.26,133 425.88,133" fill="none" id="api-to-db" style="stroke:#666666;stroke-width:1;"></path><polygon fill="#666666" points="433.88,133,425.88,130,425.88,136,433.88,133" style="stroke:#666666;stroke-width:1;"></polygon><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="62.6953" x="341" y="114.457">Eclipselink</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="38.0039" x="353.3457" y="129.5508">[JDBC]</text></g><!--SRC=[ZP3RRjD048Rl_HJB2gc9r7YXz0e1KWuBIPMgnd4lAY5PQ- -sNR87ipjk2QWFmpFm27qnnWcj8rG1ll7Ep3__DpC7v1gWYQyPkz9mtLPfxIrhZ73GMZEA88sksFHub7MfyzDbSa2oLaaLIIK-Yq2qlVznfHp6Kc7j2JDe6o73gzvKrzwDBhs3KMo21XLPPNp5hD2ETRN8fBhPFewOTb9zJQrCIF9CkzgqKf57I12twGxKHXMm0PI3Vos0d0WgOAgSOWT2LKWRrFQ0DmyZztE0jxM0qg2wlFL1MX7Mx_xQOJVnY_bFhN0oU2ttr2HPrS8eyZ9zWU_vOiRBLS5pVbPSP7mmJ9RZYxFpebpozqMPBpxC2ynXpmPNiuFVTeU4ZXkZQr7h-v-EOfWh2FvI0pd2wFdk-c_fdtGwJ1ulKqvywwG8cu7urWRLMNP_EYJV4uBV0x7HME9EDbux-EJ6sOBaAW8zf2TYBG88mla-ywbx8hUtd5K3MQ7dPDODVhfPVLpkzs-lYmrtIQvCl_1kZfvEwBmeCjHjLLrnQyfhevkeaBxkD2UpoPGEVm40]--></g></svg></p><p></p>
 <p>Donde tenemos una aplicación Android que se comunica con un servidor web que tiene un API Rest, que a su vez se comunica con una base de datos MySQL. En este tema nos centraremos en consumo de dicho API Rest desde la aplicación Android utilizando una librería llamada <strong>Retrofit2</strong>.</p>
 <div class="admonition info">
 <p class="admonition-title">Información</p>
@@ -349,28 +380,20 @@ Existen incluso librerías como <strong><a href="https://foso.github.io/Ktorfit/
 <p>Debes instalar un servidor web Apache con PHP y MySQL. En el módulo de Acceso a Datos se ha utilizado <strong>xampp</strong>. En la carpeta <strong><code>xampp\htdocs</code></strong>, o en la carpeta pública de tu servidor web, debes descomprimir el fichero <strong>apiRest-PHP-Session.zip</strong> y renombrar su contenido por ejemplo por la BD que quieras utilizar. Supongamos que queremos crear el servicio de API Rest para la Agenda que hemos ido creando durante el curso. En este caso renombraremos la carpeta <strong><code>apiRest-PHP-Session</code></strong> por agenda como se aprecia a la derecha <strong><code>agenda</code></strong>.</p>
 </div>
 <div class="flotante_der">
-<p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="153px" preserveAspectRatio="none" style="width:177px;height:153px;background:#FFFFFF;" version="1.1" viewBox="0 0 177 153" width="177px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="63" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="12.6621" x="8" y="20.457">C:</text><line style="stroke:#000000;stroke-width:1;" x1="58" x2="58" y1="6" y2="24.0938"></line><polygon fill="#000000" points="61,12,67,12,64,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85.3535" x="26" y="39.5508">[SERVIDORES]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.6855" x="36" y="54.6445">[xampp]</text><path d="M37,61.375 L37,62.375 L45,62.375 L45,61.375 L37,61.375 M37,63.375 L37,69.285 C37,69.335 37.04,69.375 37.09,69.375 L44.9,69.375 C44.95,69.375 44.99,69.335 44.99,69.285 L44.99,63.375 L42.02,63.375 L42.02,64.405 L39.99,64.405 L39.99,63.375 L36.99,63.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.0234" x="46" y="69.7383">[htdocs]</text><path d="M47,76.4688 L47,77.4688 L55,77.4688 L55,76.4688 L47,76.4688 M47,78.4688 L47,84.3788 C47,84.4288 47.04,84.4688 47.09,84.4688 L54.9,84.4688 C54.95,84.4688 54.99,84.4288 54.99,84.3788 L54.99,78.4688 L52.02,78.4688 L52.02,79.4988 L49.99,79.4988 L49.99,78.4688 L46.99,78.4688" fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50.0039" x="56" y="84.832">[agenda]</text><path d="M57,91.5625 L57,92.5625 L65,92.5625 L65,91.5625 L57,91.5625 M57,93.5625 L57,99.4725 C57,99.5225 57.04,99.5625 57.09,99.5625 L64.9,99.5625 C64.95,99.5625 64.99,99.5225 64.99,99.4725 L64.99,93.5625 L62.02,93.5625 L62.02,94.5925 L59.99,94.5925 L59.99,93.5625 L56.99,93.5625" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="22.0078" x="66" y="99.9258">[inc]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="50.6895" x="56" y="115.0195">.htaccess</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114.0703" x="56" y="130.1133">apirest_variables.php</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52.043" x="56" y="145.207">index.php</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="140.2969" y2="140.2969"></line><!--SRC=[FP1VQy8m5CNVyodkqz0CYtOwN1WYq-wFM2Qc-Y8wqZRJG4rASYiEsNTVh4xkq_cTS-zDxj2XiEX4WUH4DfIE6AKRGau9kOVdkzGS1oiUpPSVuyzvnDVa_aQFOb-MPt0ZEynDvchaMMOAOrbQL79myIbTYQtKkLXJMcTkZKfdwoi9TYYoJ3ftrQ9KLZhyEWYhH5f85vIxykefdSjZhNzz3Vte-XjaLWYDYtWA1scTCXewGTWEUq6tmGN2fD8Gzg7pmDfFBEp1AE89dFqcQRpDfk1CPJC9kN9eLLgX7z0a4t4GCAyqghraS5QD96u2Z_uXHFgWhD5xgP5Cbl4b1Ey6UMcm3ZzsMoyAWKlhtmNBc8pbjwWAzAsPoPNUCbWahwq-cGgzhVof64X7HiOli3yC8lu7]--></g></svg></p></div>
+<p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="153px" preserveAspectRatio="none" style="width:177px;height:153px;background:#FFFFFF;" version="1.1" viewBox="0 0 177 153" width="177px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="63" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="12.6621" x="8" y="20.457">C:</text><line style="stroke:#000000;stroke-width:1;" x1="58" x2="58" y1="6" y2="24.0938"></line><polygon fill="#000000" points="61,12,67,12,64,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="85.3535" x="26" y="39.5508">[SERVIDORES]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.6855" x="36" y="54.6445">[xampp]</text><path d="M37,61.375 L37,62.375 L45,62.375 L45,61.375 L37,61.375 M37,63.375 L37,69.285 C37,69.335 37.04,69.375 37.09,69.375 L44.9,69.375 C44.95,69.375 44.99,69.335 44.99,69.285 L44.99,63.375 L42.02,63.375 L42.02,64.405 L39.99,64.405 L39.99,63.375 L36.99,63.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.0234" x="46" y="69.7383">[htdocs]</text><path d="M47,76.4688 L47,77.4688 L55,77.4688 L55,76.4688 L47,76.4688 M47,78.4688 L47,84.3788 C47,84.4288 47.04,84.4688 47.09,84.4688 L54.9,84.4688 C54.95,84.4688 54.99,84.4288 54.99,84.3788 L54.99,78.4688 L52.02,78.4688 L52.02,79.4988 L49.99,79.4988 L49.99,78.4688 L46.99,78.4688" fill="#0000FF"></path><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="50.0039" x="56" y="84.832">[agenda]</text><path d="M57,91.5625 L57,92.5625 L65,92.5625 L65,91.5625 L57,91.5625 M57,93.5625 L57,99.4725 C57,99.5225 57.04,99.5625 57.09,99.5625 L64.9,99.5625 C64.95,99.5625 64.99,99.5225 64.99,99.4725 L64.99,93.5625 L62.02,93.5625 L62.02,94.5925 L59.99,94.5925 L59.99,93.5625 L56.99,93.5625" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="22.0078" x="66" y="99.9258">[inc]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="50.6895" x="56" y="115.0195">.htaccess</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114.0703" x="56" y="130.1133">apirest_variables.php</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52.043" x="56" y="145.207">index.php</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="140.2969" y2="140.2969"></line><!--SRC=[FP1VQy8m5CNVyodkqz28HUjq4eR8jFiZbecjleYEjCqqK9EIt1Q7xBilLYVtwVpEkVScTsoH6xGyHt8cEqedZD8T8UUOjE3v8T6dqIOAbkkFwUSoYBQaTQSdVYoA2xYJ0sOwjJLoBDMvDYp9Ip6w-fHk-5weZ6yfhJFtHgdIxOru1-HfAgozQLv88on-LTn8dkJ2UiMXk7bIPU9KwrzNOpUw_WPPv5pXAfn39OoLMa7Nypj-t_CRSIbWnXLqdg0xPBq-wmrW4iHmiPkayRQOLpvONPfKG2Oj6fcKw2OqoOnN79QbGdaK32wg4OTDY89_286gfD7gA1IIsJgyXk1TOrHehCE3n_QBH8Y4SG-3TKYcufkNERhML6TIxHciujVsaCovsfVkLWo49HFj5fWV1a7q1m00]--></g></svg></p></div>
 </div>
 <p>La configuración de nuestro API consta de dos archivos:</p>
 <ol>
 <li>
 <p><strong><code>.htaccess</code></strong> En este archivo se configuran las reglas de acceso, y solo deberemos modificar la línea <strong><code>RewriteBase</code></strong> para indicar la ruta de acceso a la carpeta de nuestro API. En nuestro caso cambiaremosel valos de la cadena <strong><code>"/apirest-session/"</code></strong> por <strong><code>"/agenda/"</code></strong>.</p>
-<pre data-role="codeBlock" data-info="bash { highlight=[2,6] }" class="language-bash bash" data-line="2,6"><code>RewriteEngine On
+<pre data-role="codeBlock" data-info="bash" class="language-bash bash"><code>RewriteEngine On
 RewriteBase <span class="token string">"/apirest-session/"</span>
 <span class="token punctuation">..</span>.
 
 RewriteEngine On
 RewriteBase <span class="token string">"/agenda/"</span>
 <span class="token punctuation">..</span>.
-</code><div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div></pre></li>
+</code></pre></li>
 </ol>
 <div style="page-break-after:always;"></div>
 <ol start="2">
@@ -481,7 +504,7 @@ RewriteBase <span class="token string">"/agenda/"</span>
 <ol>
 <li>
 <p>Definiremos la clase <strong><code>ContactoApi</code></strong> que será la que se utilizará para transferir los datos de los contactos entre el servidor y la aplicación. Fíjate que los atributos de la clase tienen que tener el mismo nombre que los campos que se devuelven en el JSON del API Rest. Si quisiéramos cambiar el nombre de alguna propiedad, deberemos utilizar la anotación <strong><code>@SerializedName</code></strong> justo antes de la propiedad para indicar el nombre que tiene en el JSON. Puedes obtener más información sobre trasformaciones de en la <strong><a href="https://github.com/google/gson/blob/main/UserGuide.md">documentación de la librería</a></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4]}" class="language-kotlin kotlin" data-line="4"><code><span class="token comment">// ContactoApi.kt</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// ContactoApi.kt</span>
 <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">ContactoApi</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-val">val</span> id<span class="token operator">:</span> Int<span class="token punctuation">,</span>
     <span class="token annotation builtin">@SerializedName</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"nombre"</span></span><span class="token punctuation">)</span>
@@ -492,11 +515,7 @@ RewriteBase <span class="token string">"/agenda/"</span>
     <span class="token keyword keyword-val">val</span> foto<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> categorias<span class="token operator">:</span> String
 <span class="token punctuation">)</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div></pre></li>
+</code></pre></li>
 <li>
 <p>La librería de PHP que estamos usando, en la peticiones de tipo <strong>POST</strong>, <strong>PUT</strong> y <strong>DELETE</strong>, nos devuelve una respuesta en JSON con campos de información sobre la petición, por tanto, deberemos definir un objetos para su deserialización.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token comment">// RespuestaApi.kt</span>
@@ -627,7 +646,7 @@ RewriteBase <span class="token string">"/agenda/"</span>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensaje<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Exception</span><span class="token punctuation">(</span>mensaje<span class="token punctuation">)</span>
 </code></pre><p>Posteriormente, definiremos para ello una clase denominada <strong><code>ContactoServiceImplementation</code></strong> a la que le inyectaremos una instancia de <strong><code>ContactoService</code></strong> que es la que realmente utilizaremos para realizar las peticiones al API Rest.</p>
 <p>Veamos la anatomía de uso de Retrofit para <strong>obtener la lista de contactos</strong> del API Rest en esta clase comentado paso por paso...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[5,6,11,15-20,24-27,33-36]}" class="language-kotlin kotlin" data-line="5,6,11,15-20,24-27,33-36"><code><span class="token annotation builtin">@Singleton</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Singleton</span>
 <span class="token keyword keyword-class">class</span> ContactoServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> contactoService<span class="token operator">:</span> ContactoService
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -670,113 +689,8 @@ RewriteBase <span class="token string">"/agenda/"</span>
 
     <span class="token comment">// ... resto de la implementación de las llamadas al Servicio Rest</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="11" data-start="11">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="15-20" data-start="15" data-end="20">
-
-
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="24-27" data-start="24" data-end="27">
-
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="33-36" data-start="33" data-end="36">
-
-
-
-</div></div></pre><p>Siguiendo el esquema anterior, <strong>obtener un contacto por ID</strong> quedaría...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,8]}" class="language-kotlin kotlin" data-line="4,8"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> ContactoApi <span class="token punctuation">{</span>
+</code></pre><p>Siguiendo el esquema anterior, <strong>obtener un contacto por ID</strong> quedaría...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token keyword keyword-get">get</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> ContactoApi <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"No se han podido obtener el contacto con id = </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">id</span></span><span class="token string">"</span></span>
     <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> response <span class="token operator">=</span> contactoService<span class="token punctuation">.</span><span class="token function">contacto</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
@@ -794,20 +708,8 @@ RewriteBase <span class="token string">"/agenda/"</span>
         <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="8" data-start="8">
-</div></div></pre><p>Para <strong>insertar un contacto</strong> en el API Rest tendremos ...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4,7-9]}" class="language-kotlin kotlin" data-line="4,7-9"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> ContactoApi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</code></pre><p>Para <strong>insertar un contacto</strong> en el API Rest tendremos ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">insert</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> ContactoApi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span><span class="token string-literal singleline"><span class="token string">"No se ha podido añadir el contacto"</span></span>
     <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-val">val</span> response <span class="token operator">=</span> contactoService<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>contacto<span class="token punctuation">)</span>
@@ -826,21 +728,8 @@ RewriteBase <span class="token string">"/agenda/"</span>
         <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7-9" data-start="7" data-end="9">
-
-
-</div></div></pre><p>Para <strong>actualizar un contacto</strong> en el API Rest tendremos ...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4-6]}" class="language-kotlin kotlin" data-line="4-6"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> ContactoApi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</code></pre><p>Para <strong>actualizar un contacto</strong> en el API Rest tendremos ...</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">update</span><span class="token punctuation">(</span>contacto<span class="token operator">:</span> ContactoApi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"No se ha podido actualizar el contacto"</span></span>
     <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
         <span class="token comment">// En este método el API de PHP espera recibir el id del contacto</span>
@@ -859,13 +748,7 @@ RewriteBase <span class="token string">"/agenda/"</span>
         <span class="token keyword keyword-throw">throw</span> <span class="token function">ApiServicesException</span><span class="token punctuation">(</span>mensajeError<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4-6" data-start="4" data-end="6">
-
-
-</div></div></pre><p>Para <strong>borrar un contacto</strong> en el API Rest tendremos ...</p>
+</code></pre><p>Para <strong>borrar un contacto</strong> en el API Rest tendremos ...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">delete</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> mensajeError <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"No se ha podido borrar el contacto"</span></span>
     <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
@@ -958,13 +841,12 @@ RewriteBase <span class="token string">"/agenda/"</span>
 <span class="token punctuation">)</span>
 </code></pre><p>y que nos devolverá un mensaje de error o de éxito y el usuario que ha iniciado la sesión o null si no se ha podido iniciar la sesión.</p>
 <p>A la hora de realizar la implementación de este servicio de <strong>login</strong>...</p>
-<pre data-role="codeBlock" data-info="txt  {highlight=1}" class="language-txt txt" data-line="1"><code>--&gt; GET http://10.0.2.2/agenda/?usu=juanjo&amp;pass=_IesBalmis1
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>--&gt; GET http://10.0.2.2/agenda/?usu=juanjo&amp;pass=_IesBalmis1
 Accept: application/json
 Content-Type: application/json
 --&gt; END GET
-</code><div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
-</div></div></pre><p>deberemos tener en cuenta que en la cabecera de la respuesta del APIRest <strong>se nos devuelve una cookie con el id de la sesión que deberemos almacenar</strong> del algún modo para poder acceder al resto de funcionalidades del APIRest. En nuestro caso el valor de esa cookie se encuentra en la cabecera <strong><code>Set-Cookie</code></strong> y es <strong><code>PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o</code></strong>. Sin tener en cuenta que podrían llegar otras cookies en en esta misma cabecera.</p>
-<pre data-role="codeBlock" data-info="txt {highlight=[5-6]}" class="language-txt txt" data-line="5-6"><code>&lt;-- 200 OK http://10.0.2.2/agenda/?usu=juanjo&amp;pass=_IesBalmis1 (18ms)
+</code></pre><p>deberemos tener en cuenta que en la cabecera de la respuesta del APIRest <strong>se nos devuelve una cookie con el id de la sesión que deberemos almacenar</strong> del algún modo para poder acceder al resto de funcionalidades del APIRest. En nuestro caso el valor de esa cookie se encuentra en la cabecera <strong><code>Set-Cookie</code></strong> y es <strong><code>PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o</code></strong>. Sin tener en cuenta que podrían llegar otras cookies en en esta misma cabecera.</p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>&lt;-- 200 OK http://10.0.2.2/agenda/?usu=juanjo&amp;pass=_IesBalmis1 (18ms)
 Date: ...
 Server: Apache/2.4.56 (Win64) OpenSSL/1.1.1t PHP/8.2.4
 X-Powered-By: PHP/8.2.4
@@ -977,14 +859,8 @@ Keep-Alive: timeout=5, max=100
 Connection: Keep-Alive
 Content-Type: application/json; charset=utf-8
 &lt;-- END HTTP
-</code><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5-6" data-start="5" data-end="6">
-
-</div></div></pre><p>Para ello, podemos definir <strong>una propiedad estática pública</strong> en la clase <strong><code>AutenticacionServiceImplementation</code></strong> que almacenará la cookie de la sesión.</p>
-<pre data-role="codeBlock" data-info="kotlin { highlight=[6-8, 22] }" class="language-kotlin kotlin" data-line="6-8,22"><code><span class="token keyword keyword-class">class</span> AutenticacionServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
+</code></pre><p>Para ello, podemos definir <strong>una propiedad estática pública</strong> en la clase <strong><code>AutenticacionServiceImplementation</code></strong> que almacenará la cookie de la sesión.</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AutenticacionServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> autenticacionService<span class="token operator">:</span> AutenticacionService
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> logTag<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"OkHttp"</span></span>
@@ -1014,37 +890,7 @@ Content-Type: application/json; charset=utf-8
         <span class="token punctuation">}</span> <span class="token keyword keyword-catch">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> Exception<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">..</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6-8" data-start="6" data-end="8">
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="22" data-start="22">
-</div></div></pre><div style="page-break-after:always;"></div>
+</code></pre><div style="page-break-after:always;"></div>
 <p>Esta cookie la utilizaremos en el resto de peticiones que realicemos al APIRest. Para ello, deberemos añadir la cabecera <strong><code>Cookie</code></strong> en las peticiones que realicemos al APIRest. Por ejemplo, para la petición <strong><code>http://localhost/agenda/contactos</code></strong> que devuelve un listado de contactos la petición HTTP debería ser...</p>
 <pre data-role="codeBlock" data-info="txt {highlight=4}" class="language-txt txt" data-line="4"><code>--&gt; GET http://10.0.2.2/agenda/contactos
 Accept: application/json
@@ -1079,7 +925,7 @@ Cookie: PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o; path=/
 </code></pre></li>
 <li>
 <p>En el paquete <strong><code>services.interceptors</code></strong> definiremos una clase llamada <strong><code>ReciveCookiesInterceptor</code></strong> que implementará el interfaz <strong><code>Interceptor</code></strong> y se encargará de <strong>preprocesar cualquier respuesta del servidor y guardar las cookies recibidas</strong> en la cabecera <strong><code>Set-Cookie</code></strong>, incluida la de la sesión, en el objeto <strong><code>AlmacenDeCookies</code></strong> invalidando el método <strong><code>intercept</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin kotlin" data-line=""><code><span class="token keyword keyword-class">class</span> <span class="token function">ReciveCookiesInterceptor</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">ReciveCookiesInterceptor</span><span class="token punctuation">(</span>
     <span class="token comment">// Inyectamos el objeto AlmacenDeCookies</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> almacenDeCookies<span class="token operator">:</span> AlmacenDeCookies
 <span class="token punctuation">)</span> <span class="token operator">:</span> Interceptor <span class="token punctuation">{</span>
@@ -1106,7 +952,7 @@ Cookie: PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o; path=/
 <ol start="4">
 <li>
 <p>En el paquete <strong><code>services.interceptors</code></strong> definiremos una clase llamada <strong><code>EnviaCookiesInterceptor</code></strong> que implementará el interfaz <strong><code>Interceptor</code></strong> y se encargará de <strong>preprocesar cualquier petición al servidor y añañdir las cookies guardadas</strong> en el objeto <strong><code>AlmacenDeCookies</code></strong> a la cabecera <strong><code>Cookie</code></strong> de la petición, incluida la de la sesión.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[]}" class="language-kotlin kotlin" data-line=""><code><span class="token keyword keyword-class">class</span> <span class="token function">EnviaCookiesInterceptor</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> <span class="token function">EnviaCookiesInterceptor</span><span class="token punctuation">(</span>
     <span class="token comment">// Inyectamos el objeto AlmacenDeCookies</span>
     <span class="token keyword keyword-private">private</span> <span class="token keyword keyword-val">val</span> almacenDeCookies<span class="token operator">:</span> AlmacenDeCookies
 <span class="token punctuation">)</span> <span class="token operator">:</span> Interceptor <span class="token punctuation">{</span>
@@ -1132,7 +978,7 @@ Cookie: PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o; path=/
 <ol start="5">
 <li>
 <p>Redefinimos <strong><code>provideOkHttpClient</code></strong> inyectando el objeto <strong><code>AlmacenDeCookies</code></strong> y añadiendo los interceptores que hemos definido en el builder de nuestro cliente.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[4, 11-15]}" class="language-kotlin kotlin" data-line="4,11-15"><code><span class="token annotation builtin">@Provides</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Provides</span>
 <span class="token annotation builtin">@Singleton</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">provideOkHttpClient</span><span class="token punctuation">(</span>
     almacenDeCookies<span class="token operator">:</span> AlmacenDeCookies
@@ -1152,26 +998,7 @@ Cookie: PHPSESSID=obqu9co5rqhgdocspnqs4nlv5o; path=/
         <span class="token punctuation">.</span><span class="token function">writeTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">,</span> TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="11-15" data-start="11" data-end="15">
-
-
-
-
-</div></div></pre></li>
+</code></pre></li>
 </ol>
 <p>Tras esto <strong><code>.data/services/autenticacion/AutenticacionService.kt</code></strong> quedará iguál que antes, pero su implementación en <strong><code>.data/services/autenticacion/AutenticacionServiceImplementation.kt</code></strong> ya no necesitará quedarse con la cookie de la sesión...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-class">class</span> AutenticacionServiceImplementation <span class="token annotation builtin">@Inject</span> <span class="token keyword keyword-constructor">constructor</span><span class="token punctuation">(</span>

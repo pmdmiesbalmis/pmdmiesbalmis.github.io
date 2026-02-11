@@ -23,15 +23,6 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/catamaran/v28/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
-.markdown-preview.markdown-preview .caso_estudio {
-  background-color: #f5f5f5;
-  border: 2px solid #969696;
-  padding: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
-}
 @page a4landscape {
   size: A4 landscape;
   margin: 1cm;
@@ -46,7 +37,16 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 .markdown-preview.markdown-preview .portrait {
   page: a4portrait;
 }
-.markdown-preview.markdown-preview .ejercicio {
+.markdown-preview.markdown-preview .box_bg_lightgray {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .box_bg_lightgreen {
   background-color: #f5faf5;
   border: 2px solid #969b96;
   padding-left: 15px;
@@ -56,13 +56,28 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   border-radius: 5px;
   box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
 }
+.markdown-preview.markdown-preview .salida_consola {
+  background-color: #000000;
+  color: aquamarine;
+  border: 3px solid slategrey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px 0 slategrey;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 0.8rem;
+}
 .markdown-preview.markdown-preview .contenedor {
   display: flex;
   justify-content: center;
   margin: 30px auto 30px auto;
 }
 .markdown-preview.markdown-preview .fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background: url(https://balmisdigigs.github.io/digitalizacion.github.io/imagenes/fondos/quote.png);
   background-size: cover;
   width: 75%;
   height: 160px;
@@ -180,9 +195,25 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    // your code here
-  });
+    const configureMermaidIconPacks = () => {
+        window["mermaid"].registerIconPacks([
+            {
+                name: "logos",
+                loader: () =>
+                    fetch("https://unpkg.com/@iconify-json/logos@1/icons.json").then(
+                        (res) => res.json()
+                    ),
+            },
+        ]);
+    };
+
+    if (document.readyState !== 'loading') {
+        configureMermaidIconPacks();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            configureMermaidIconPacks();
+        });
+    }
 </script></head><body for="html-export">
     
     
@@ -787,7 +818,7 @@ Mundo!
 </ul>
 <p>Cuando <strong><code>launch { ... }</code></strong> se usa sin parámetros, hereda el contexto (y por lo tanto el despachador) del CoroutineScope desde el que se inicia. En este caso, hereda el contexto de la corrutina principal que se ejecuta en el hilo principal <strong><code>Dispatchers.Main</code></strong>.</p>
 <p>Una forma de de indicar el hilo de ejecución es cuando lanzamos la corrutina <strong><code>launch</code></strong> o <strong><code>async</code></strong>. En el ejemplo anterior tanto <strong><code>runBlocking</code></strong> como <strong><code>launch</code></strong> usan el hilo principal <strong><code>Dispatchers.Main</code></strong> por heredar el contexto. Pero podemos cambiar el hilo de ejecución en <strong><code>launch</code></strong> de la siguiente manera...</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=7}" class="language-kotlin kotlin" data-line="7"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
     <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 
@@ -799,18 +830,11 @@ Mundo!
     <span class="token punctuation">}</span>
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div></pre><h4 id="cambiando-el-contexto-y-planificador-de-una-corrutina-con-withcontext">Cambiando el contexto y planificador de una corrutina con <strong><code>withContext</code></strong> </h4>
+</code></pre><h4 id="cambiando-el-contexto-y-planificador-de-una-corrutina-con-withcontext">Cambiando el contexto y planificador de una corrutina con <strong><code>withContext</code></strong> </h4>
 <p>Podemos cambiar el contexto de una corrutina en cualquier momento usando la función de suspensión <strong><code>withContext</code></strong>. Esta <strong>función de suspensión</strong> crea un nuevo contexto de corrutina con el <em>'dispatcher'</em> especificado y ejecuta el bloque de código en él. Cuando el bloque de código finaliza, la corrutina vuelve al contexto anterior.</p>
 <p>Normalmente, <strong><code>withContext</code></strong> se utiliza en situaciones en las que desea cambiar temporalmente a un contexto de ejecución diferente para realizar una operación que sea más apropiada para ese contexto, como realizar una solicitud de red, E/S de disco o cálculos que requieren un uso intensivo de la CPU.</p>
 <p>Por ejemplo, <strong>una forma más '<em>correcta</em>' de hacer el ejemplo anterior</strong> sería la siguiente:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=6}" class="language-kotlin kotlin" data-line="6"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> runBlocking <span class="token punctuation">{</span>
     launch <span class="token punctuation">{</span> <span class="token function">doMundo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola"</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
@@ -819,13 +843,7 @@ Mundo!
     <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo!"</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6" data-start="6">
-</div></div></pre><p>Donde, es el método de suspensión según lo que tenga que hacer en que planificador se ejecuta cambiando su contexto.</p>
+</code></pre><p>Donde, es el método de suspensión según lo que tenga que hacer en que planificador se ejecuta cambiando su contexto.</p>
 <p>Por tanto, este sería el esquema típico de uso de <strong><code>withContext</code></strong>...</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">peticionREST</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Dato 
 <span class="token operator">=</span> <span class="token function">withContext</span><span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>IO<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">getDato</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
@@ -883,7 +901,7 @@ main: Now I can quit.
 <li>
 <p><strong><code>withTimeout(timeout: Long) { }</code></strong> Para generar un <strong>contexto de corrutina</strong> que expira después de un tiempo determinado generando un evento de cancelación y la excepción <strong><code>TimeoutCancellationException</code></strong>.</p>
 <p><strong><code>withTimeout</code></strong> es una <strong>función de suspensión</strong>. Por ejemplo, podemos reescribir el código anterior de la siguiente forma:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=1}" class="language-kotlin kotlin" data-line="1"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">trabajoBloqueante</span><span class="token punctuation">(</span>timeout<span class="token operator">:</span> Long<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">withTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-suspend">suspend</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">trabajoBloqueante</span><span class="token punctuation">(</span>timeout<span class="token operator">:</span> Long<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">withTimeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-val">val</span> startTime <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token keyword keyword-try">try</span> <span class="token punctuation">{</span>
         <span class="token keyword keyword-var">var</span> nextPrintTime <span class="token operator">=</span> startTime
@@ -908,8 +926,7 @@ main: Now I can quit.
     job<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Espera a que termine o expire el trabajo</span>
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"main: Now I can quit."</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper"><div aria-hidden="true" class="line-highlight" data-range="1" data-start="1">
-</div></div></pre><p>Mostrará ...</p>
+</code></pre><p>Mostrará ...</p>
 <pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>main: Waiting for job 1.3 secs.
 job: I'm sleeping 0 ...
 job: I'm sleeping 1 ...
@@ -1000,17 +1017,15 @@ Corrutina: {
 	Proceso: main 
 }
 </code></pre><p>Ahora modificamos el contexto de la corrutina 2 para que se ejecute en el hilo <strong><code>Dispatchers.Default</code></strong> y además le asignamos un nombre ambas corrutinas para poder identificarlas:</p>
-<pre data-role="codeBlock" data-info="kotlin  {highlight=2}" class="language-kotlin kotlin" data-line="2"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">runBlocking</span><span class="token punctuation">(</span><span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CORRUTINA 1"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">runBlocking</span><span class="token punctuation">(</span><span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CORRUTINA 1"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">launch</span> <span class="token punctuation">(</span>Dispatchers<span class="token punctuation">.</span>Default <span class="token operator">+</span> <span class="token function">CoroutineName</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"CORRUTINA 2"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000L</span><span class="token punctuation">)</span>
         <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mundo! </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
     <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Hola </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">coroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-<div aria-hidden="true" class="line-highlight" data-range="2" data-start="2">
-</div></div></pre><p>Ahora la salida nos mostrará el nombre de la corrutina y el proceso en el que se ejecuta:</p>
-<pre data-role="codeBlock" data-info="cmd {code_chunk_offset=0, highlight=[4,9]}" class="language-cmd cmd" data-line="4,9"><code>Hola 
+</code></pre><p>Ahora la salida nos mostrará el nombre de la corrutina y el proceso en el que se ejecuta:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>Hola 
 Corrutina: {
 	Contexto: [CoroutineName(CORRUTINA 1), BlockingCoroutine{Active}@1bc6a36e, BlockingEventLoop@1ff8b8f], 
 	Proceso: main
@@ -1020,20 +1035,7 @@ Corrutina: {
 	Contexto: [CoroutineName(CORRUTINA 2), StandaloneCoroutine{Active}@f4e4ec0, Dispatchers.Default], 
 	Proceso: DefaultDispatcher-worker-2
 }
-</code><div class="line-highlight-wrapper">
-
-
-<div aria-hidden="true" class="line-highlight" data-range="4" data-start="4">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="9" data-start="9">
-</div></div></pre><div class="caso_estudio">
+</code></pre><div class="caso_estudio">
 <p><strong>Ejemplo:</strong></p>
 <p>Volvamos al cálculo de números primos. Pero esta vez <strong>vamos a implementarlo de forma más adecuada</strong>, añadiendo logs de depuración, sin usar <strong><code>GlobalScope</code></strong>, definiendo funciones de suspensión y usando <strong><code>withContext</code></strong> para cambiar de hilo.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-fun">fun</span> CoroutineContext<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"\nCorrutina: {\n\tContexto: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword keyword-this">this</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, \n\tProceso: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n}"</span></span>
@@ -1098,7 +1100,7 @@ Corrutina: {
 </code></pre></div> <!-- fin caso de estudio -->
 <div style="page-break-after:always;"></div>
 <h3 id="esquema-resumen-conceptos-básicos-de-corrutinas">Esquema resumen conceptos básicos de corrutinas </h3>
-<p></p><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="MINDMAP" height="822px" preserveAspectRatio="none" style="width:964px;height:822px;background:#FFFFFF;" version="1.1" viewBox="0 0 964 822" width="964px" zoomAndPan="magnify"><defs></defs><g><rect fill="#00BFFF" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="90.7861" x="10" y="392.2554"></rect><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70.7861" x="20" y="415.3872">Corrutinas</text><rect fill="#87CEFA" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="76.0273" x="150.7861" y="237.8013"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="56.0273" x="160.7861" y="260.9331">Creación</text><rect fill="#FFFFFF" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="78.3789" x="276.8135" y="121.6265"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="17.8965" x="307.0547" y="144.7583">No</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="58.3789" x="286.8135" y="160.8569">producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.2065" y="176.9556">resultado</text><rect fill="#FFFFFF" height="271.5488" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="356.0547" x="405.1924" y="20"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="43.1318">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="415.1924" y="60.1738">val&nbsp;job&nbsp;:&nbsp;Job&nbsp;=&nbsp;scope.launch&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="42.0068" x="448.7979" y="78.4531">try&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="482.4033" y="96.7324">procedimientoAsincrono()</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="448.7979" y="115.0117">}&nbsp;catch&nbsp;(e:&nbsp;CancellationException)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="226.8369" x="482.4033" y="133.291">//&nbsp;Manejo&nbsp;de&nbsp;la&nbsp;cancelación</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="448.7979" y="151.5703">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="33.6055" x="415.1924" y="169.8496">&nbsp;&nbsp;&nbsp;&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="415.1924" y="188.1289">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="415.1924" y="206.4082">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="415.1924" y="224.6875">job.isActive&nbsp;//&nbsp;Comprueba&nbsp;si&nbsp;está&nbsp;activa</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="415.1924" y="242.9668">job.cancel()&nbsp;//&nbsp;Cancela&nbsp;la&nbsp;corrutina</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="294.0479" x="415.1924" y="261.2461">job.join()&nbsp;//&nbsp;Espera&nbsp;a&nbsp;que&nbsp;finalice</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="278.582">&nbsp;</text><path d="M355.1924,155.7744 L365.1924,155.7744 C380.1924,155.7744 380.1924,155.7744 395.1924,155.7744 L405.1924,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,155.7744 266.8135,155.7744 L276.8135,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="52.1973" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="79.9307" x="276.8135" y="375.5264"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="59.9307" x="286.8135" y="398.6582">Producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.9824" y="414.7568">resultado</text><rect fill="#FFFFFF" height="180.1523" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="372.8574" x="406.7441" y="311.5488"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="334.6807">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="416.7441" y="351.7227">val&nbsp;job&nbsp;:&nbsp;Deferred&lt;Tipo&gt;&nbsp;=&nbsp;scope.async&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="319.252" x="450.3496" y="370.002">funcionAsincrona()&nbsp;//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;Tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="388.2813">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="416.7441" y="406.5605">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="416.7441" y="424.8398">job.await().let&nbsp;{&nbsp;resultado&nbsp;-&gt;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="450.3496" y="443.1191">//&nbsp;Procesar&nbsp;el&nbsp;resultado</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="461.3984">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="478.7344">&nbsp;</text><path d="M356.7441,401.625 L366.7441,401.625 C381.7441,401.625 381.7441,401.625 396.7441,401.625 L406.7441,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,401.625 266.8135,401.625 L276.8135,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,255.8506 140.7861,255.8506 L150.7861,255.8506" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#87CEFA" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="110.2891" x="150.7861" y="622.0073"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64.5928" x="173.6343" y="645.1392">Funciones</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="90.2891" x="160.7861" y="661.2378">de suspensión</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="80.1582" x="165.8516" y="677.3364">o asíncronas</text><rect fill="#FFFFFF" height="143.5938" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="633.2998" x="311.0752" y="511.7012"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="534.833">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="613.2998" x="321.0752" y="551.875">suspend&nbsp;fun&nbsp;procedimientoAsincrono()&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="504.082" x="354.6807" y="570.1543">//&nbsp;Puedo&nbsp;llamar&nbsp;directamente&nbsp;a&nbsp;otras&nbsp;funciones&nbsp;de&nbsp;suspension</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="285.6465" x="354.6807" y="588.4336">//&nbsp;Tengo&nbsp;acceso&nbsp;a&nbsp;coroutineContext</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="268.8438" x="354.6807" y="606.7129">//&nbsp;Puedo&nbsp;lanzar&nbsp;otras&nbsp;corrutinas</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="624.9922">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="642.3281">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,583.498 301.0752,583.498 L311.0752,583.498" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="125.3145" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="641.7012" x="311.0752" y="675.2949"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="698.4268">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="621.7012" x="321.0752" y="715.4688">suspend&nbsp;fun&nbsp;funcionAsincrona()&nbsp;:&nbsp;Tipo&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="354.6807" y="733.748">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="159.626" x="354.6807" y="752.0273">//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="770.3066">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="787.6426">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,737.9521 301.0752,737.9521 L311.0752,737.9521" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,656.1553 140.7861,656.1553 L150.7861,656.1553" fill="none" style="stroke:#000000;stroke-width:1;"></path><!--SRC=[ZLJDJXin4BxxAKRg9K5Y-IbKD4qZ80Ggb5GH6xYK2asyGp3isblR6mg8X-a3zDHRhxnOnzua_8XAvE2in_FpVT-ClUqyMbyedHLO2j5s_YQdZfWPzXHEB1O0TmAWhpH9aniBkpdAAxRi6-s_Oa6mOnNcCqEgRWdMDdWtefz-9rSJNP3sqATppqPjCe8xnry0GymofIUm5NTVZ5Mtd03pno392zbulCir3wofTDQD8CwqqNGMZuvggzLaOMqpcj8BpCmrhFBcNjoBzigCc5ZwzcwFg4olRdRpYhv3UzpXI5jvfT6rLyOTiSGkVJMvy0kVhYMKwk6FvhCb-6fETMbDLZ6uKst9LRddOk5igINQaWbsn1Hpk3HZQC4Xhv_1ILDIacEbvGNSGSJexKqKjlvnIacPAXHJDZjEQMcDDercTBW7YPuZ6zI2Bcf9UOvU6TtxAQaC7yqdcLPMO82QBWsmr3boQ0YOCOZPuigo94aY66MYt8xqQaeXj6kAqbOqHd0AoFc7Nu3X4ADddQlHZ9vrtbXYBc5qkZHArouzLv95GFXH4PppUQuaSJTgaJv5FOTlrtAFpibQojeZLPhEGbPqDrhELJrdYLcGkO9O0qa9YFCy_0rWGlGJzdYDoZUQIKwUaon0m7AdpiZXmz0SXnOeVtI8S_N8vENKxDT0o9rgxeEhM0hjGWzEjG5q3xzhV4uyvLgxPO75VoU2ULyhVz7bky8thB6dN1c6WwnBM21aSFDf2CWhOYeyBWMZpvGbwJ5SBM8TZBVeveAHWoSmZPud696UC5x9_FalTDg4JjEi_8iwg6-vJfruCHHEt8TvUzRsLnc_qhjMxDRRAOUcpY0zwxcFFNyEOvlhBfw-8MFtnuC-J3ahWu2rP7rrVJFPQAJeuP3HhM_1sllMwiVM-YPqU-a8mdbJD0w6VN2cif9OOEUj6bVnIef3d28SLTghWkzjs3L6WoQalRaHUdggc6XeY3Wy6THE_1Bwj3G-Ed_OMDvLdhbOnWKd0p7Zow5CWr_F5XoFzfUtH1_rfC895o8dklmYylFIWbxw3m00]--></g></svg></p><p></p>
+<p></p><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="MINDMAP" height="822px" preserveAspectRatio="none" style="width:964px;height:822px;background:#FFFFFF;" version="1.1" viewBox="0 0 964 822" width="964px" zoomAndPan="magnify"><defs></defs><g><rect fill="#00BFFF" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="90.7861" x="10" y="392.2554"></rect><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70.7861" x="20" y="415.3872">Corrutinas</text><rect fill="#87CEFA" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="76.0273" x="150.7861" y="237.8013"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="56.0273" x="160.7861" y="260.9331">Creación</text><rect fill="#FFFFFF" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="78.3789" x="276.8135" y="121.6265"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="17.8965" x="307.0547" y="144.7583">No</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="58.3789" x="286.8135" y="160.8569">producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.2065" y="176.9556">resultado</text><rect fill="#FFFFFF" height="271.5488" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="356.0547" x="405.1924" y="20"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="43.1318">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="415.1924" y="60.1738">val&nbsp;job&nbsp;:&nbsp;Job&nbsp;=&nbsp;scope.launch&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="42.0068" x="448.7979" y="78.4531">try&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="482.4033" y="96.7324">procedimientoAsincrono()</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="448.7979" y="115.0117">}&nbsp;catch&nbsp;(e:&nbsp;CancellationException)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="226.8369" x="482.4033" y="133.291">//&nbsp;Manejo&nbsp;de&nbsp;la&nbsp;cancelación</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="448.7979" y="151.5703">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="33.6055" x="415.1924" y="169.8496">&nbsp;&nbsp;&nbsp;&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="415.1924" y="188.1289">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="415.1924" y="206.4082">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="415.1924" y="224.6875">job.isActive&nbsp;//&nbsp;Comprueba&nbsp;si&nbsp;está&nbsp;activa</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="415.1924" y="242.9668">job.cancel()&nbsp;//&nbsp;Cancela&nbsp;la&nbsp;corrutina</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="294.0479" x="415.1924" y="261.2461">job.join()&nbsp;//&nbsp;Espera&nbsp;a&nbsp;que&nbsp;finalice</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="278.582">&nbsp;</text><path d="M355.1924,155.7744 L365.1924,155.7744 C380.1924,155.7744 380.1924,155.7744 395.1924,155.7744 L405.1924,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,155.7744 266.8135,155.7744 L276.8135,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="52.1973" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="79.9307" x="276.8135" y="375.5264"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="59.9307" x="286.8135" y="398.6582">Producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.9824" y="414.7568">resultado</text><rect fill="#FFFFFF" height="180.1523" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="372.8574" x="406.7441" y="311.5488"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="334.6807">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="416.7441" y="351.7227">val&nbsp;job&nbsp;:&nbsp;Deferred&lt;Tipo&gt;&nbsp;=&nbsp;scope.async&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="319.252" x="450.3496" y="370.002">funcionAsincrona()&nbsp;//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;Tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="388.2813">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="416.7441" y="406.5605">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="416.7441" y="424.8398">job.await().let&nbsp;{&nbsp;resultado&nbsp;-&gt;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="450.3496" y="443.1191">//&nbsp;Procesar&nbsp;el&nbsp;resultado</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="461.3984">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="478.7344">&nbsp;</text><path d="M356.7441,401.625 L366.7441,401.625 C381.7441,401.625 381.7441,401.625 396.7441,401.625 L406.7441,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,401.625 266.8135,401.625 L276.8135,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,255.8506 140.7861,255.8506 L150.7861,255.8506" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#87CEFA" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="110.2891" x="150.7861" y="622.0073"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64.5928" x="173.6343" y="645.1392">Funciones</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="90.2891" x="160.7861" y="661.2378">de suspensión</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="80.1582" x="165.8516" y="677.3364">o asíncronas</text><rect fill="#FFFFFF" height="143.5938" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="633.2998" x="311.0752" y="511.7012"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="534.833">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="613.2998" x="321.0752" y="551.875">suspend&nbsp;fun&nbsp;procedimientoAsincrono()&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="504.082" x="354.6807" y="570.1543">//&nbsp;Puedo&nbsp;llamar&nbsp;directamente&nbsp;a&nbsp;otras&nbsp;funciones&nbsp;de&nbsp;suspension</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="285.6465" x="354.6807" y="588.4336">//&nbsp;Tengo&nbsp;acceso&nbsp;a&nbsp;coroutineContext</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="268.8438" x="354.6807" y="606.7129">//&nbsp;Puedo&nbsp;lanzar&nbsp;otras&nbsp;corrutinas</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="624.9922">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="642.3281">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,583.498 301.0752,583.498 L311.0752,583.498" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="125.3145" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="641.7012" x="311.0752" y="675.2949"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="698.4268">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="621.7012" x="321.0752" y="715.4688">suspend&nbsp;fun&nbsp;funcionAsincrona()&nbsp;:&nbsp;Tipo&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="354.6807" y="733.748">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="159.626" x="354.6807" y="752.0273">//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="770.3066">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="787.6426">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,737.9521 301.0752,737.9521 L311.0752,737.9521" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,656.1553 140.7861,656.1553 L150.7861,656.1553" fill="none" style="stroke:#000000;stroke-width:1;"></path><!--SRC=[ZLJTJXix4BxtKunqRX8abf-M7fIcKI647g6aYaZepU6ecdY7OBextcDxGm7nC7s0NlMkjxnOnzuaGDLApOMp7i_FztqpzbiVq8NIS5vYfLJNXvk2UcffE38uTrW2t2c0eM7Ijh0E3WlKdyHoR3cynvBWm1aibeQ9kINOUIcxANqE1uMPSqaSO4WNGOniSu8xBry0OynpmtFOJxj_h3EtaW2Bno0j2xbqV2WrtpbRSzvF83woPVgOZauRgsDoiBENJ9DBpEqrRClcNjshxjQIcDhuzwyZechowUQmgEa_wCvw4kdgO1XzTslMKnlYCZJpox3swJj2RHw-iPnjm7jxpfMpUItWpjcHhuiWnUBPHaTrjH3igGKMS6Ldq84JMT-0rxQYhC2QzINSGS8Ot4qIjlb9IasvAOrGjWVUi7QMRQkT7Ev1Ov385dMWZwofA30OouFFcghuqNwIQMiBHiXqPK6aBb12Oy2IGSgMLf4bop8bA3FZ3tGm2ugXVLjMhgOPWZT0FZny0Oo7c3oRNArsycpofX8h2PFJbJNSk0nyHGu1uV-Qu4BE2wD9kj68z3hfEVvpBO_eWfoZl3irbUsjPKL_mtgbweL8B8Ai5CG6o8I09C_3zmWcHZzXZzTeGgkT5HGaoHe4RFQQZ18-Zitnw82AHuSqLuzCVfwQumO8-NEMFlXQf60VUt3E5j0_V6tmUVMKQ-EMHnQ_dGZXVMt2PL_kYjomrf7nLHmESZuJWL30hQOX8gz9gCYub88-Duvqm7YrI7ImmQ5V2KOUdi2ql4em9PuBNYtyvIzssiPEqxByJtMGRwLEatWz55xTntbxrlPVClv5xpgfMtzEEJPr2UbPpqFg-NCORwNk-kaR2_PmDXh2Gh8A2DZ9ThTtzxBTrbHczmGPjl-6dVtEYxtEYrVG7qmX7hTLwzrukDW5RskdIHJsmPbPdUwaEi45mcdDmPHoSUEkDHsrOJ9O6M702oDCOqVKoOTHuoHFOPXKDYJdLoyt3qqGCaw0mOUHMXAMKE4XpsS7pgR7c_jgY3olSIw5oAk-F8doldHWCFa1]--></g></svg></p><p></p>
 <div style="page-break-after:always;"></div>
 <h2 id="corrutinas-en-android">Corrutinas en Android </h2>
 <p>Utilizaremos los conceptos ya vistos pero adaptados a Android. Alguna de las cosas que deberemos tener en cuenta son:</p>
@@ -1131,7 +1133,7 @@ Corrutina: {
 <li>
 <p><strong><code>rememberCoroutineScope()</code></strong> Vinculado al ciclo de vida de un componente de Android como un <strong>Composable</strong>. Se cancela cuando el componente se destruye.</p>
 <p><strong>Lo vamos a usar solo cuando queramos ejecutar una acción sobre un componente tras un evento.</strong> Ejemplo extraído de <strong><a href="https://developer.android.com/jetpack/compose/side-effects?hl=es-419#remembercoroutinescope">documentación oficial de Android</a></strong>:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[3-5,12-17]}" class="language-kotlin kotlin" data-line="3-5,12-17"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">MoviesScreen</span><span class="token punctuation">(</span>scaffoldState<span class="token operator">:</span> ScaffoldState <span class="token operator">=</span> <span class="token function">rememberScaffoldState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Crea un CoroutineScope vinculado al ciclo de vida de MoviesScreen</span>
     <span class="token comment">// este alcance es recordado en la recomposición.</span>
@@ -1155,29 +1157,7 @@ Corrutina: {
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-<div aria-hidden="true" class="line-highlight" data-range="3-5" data-start="3" data-end="5">
-
-
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="12-17" data-start="12" data-end="17">
-
-
-
-
-
-</div></div></pre></li>
+</code></pre></li>
 </ul>
 <div style="page-break-after:always;"></div>
 <ul>
@@ -1217,7 +1197,7 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
 <h4 id="launchedeffect">LaunchedEffect </h4>
 <p>Ejecuta funciones de suspensión en el alcance de un elemento componible.</p>
 <p>Por ejemplo, para ejecutar una función de suspensión ante uno o varios cambios de estado.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[6-17]}" class="language-kotlin kotlin" data-line="6-17"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">FlechaRotable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> rotationZAnimationSatate <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">Animatable</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-var">var</span> rotado <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
@@ -1244,28 +1224,11 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
             <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
     <span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="6-17" data-start="6" data-end="17">
-
-
-
-
-
-
-
-
-
-
-
-</div></div></pre><blockquote>
+</code></pre><blockquote>
 <p>📌 <strong>Nota</strong>: Si especificamos <strong><code>LaunchedEffect(Unit) { ... }</code></strong> la corrutina se ejecutará solo en la primera composición del componente.</p>
 </blockquote>
 <p>Podríamos reescribir el código de la función StateFul anterior gestionando el Side-effect en el manejador del evento con <strong><code>rememberCoroutineScope()</code></strong>.</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=[5,13-17]}" class="language-kotlin kotlin" data-line="5,13-17"><code><span class="token annotation builtin">@Composable</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token annotation builtin">@Composable</span>
 <span class="token keyword keyword-fun">fun</span> <span class="token function">FlechaRotable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword keyword-var">var</span> rotationZAnimationSatate <span class="token operator">=</span> remember <span class="token punctuation">{</span> <span class="token function">Animatable</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
     <span class="token keyword keyword-var">var</span> rotado <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
@@ -1287,29 +1250,7 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
             <span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
     <span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="5" data-start="5">
-</div></div><div class="line-highlight-wrapper">
-
-
-
-
-
-
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="13-17" data-start="13" data-end="17">
-
-
-
-
-</div></div></pre><div style="page-break-after:always;"></div>
+</code></pre><div style="page-break-after:always;"></div>
 <h3 id="ejemplo-de-uso-de-corrutinas-en-android">Ejemplo de uso de corrutinas en Android </h3>
 <blockquote>
 <p>🔗 <strong>Dercarga</strong>: El proyecto con el código del ejemplo que vamos a ver lo puedes descargar de este <strong><a href="assets/codigo/tema_3_7/corrutinas_android_ejemplo.zip">enlace</a></strong></p>
@@ -1342,7 +1283,7 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
 <span class="token punctuation">)</span>
 </code></pre><div style="page-break-after:always;"></div>
 <p>Donde el estado de cada corredor se representará por la siguiente clase:</p>
-<pre data-role="codeBlock" data-info="kotlin {highlight=7}" class="language-kotlin kotlin" data-line="7"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">CorredorUiState</span><span class="token punctuation">(</span>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-data">data</span> <span class="token keyword keyword-class">class</span> <span class="token function">CorredorUiState</span><span class="token punctuation">(</span>
     <span class="token keyword keyword-val">val</span> nombre<span class="token operator">:</span> String<span class="token punctuation">,</span>
     <span class="token keyword keyword-val">val</span> porcentajeProgreso <span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span>
 <span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1356,14 +1297,7 @@ Es idéntico a <strong><code>viewModelScope</code></strong> pero su alcance es u
 
     <span class="token keyword keyword-fun">fun</span> <span class="token function">reinicia</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> CorredorUiState <span class="token operator">=</span> <span class="token function">copy</span><span class="token punctuation">(</span>porcentajeProgreso <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code><div class="line-highlight-wrapper">
-
-
-
-
-
-<div aria-hidden="true" class="line-highlight" data-range="7" data-start="7">
-</div></div></pre><p>Además, dispondremos de un <em>'State'</em> <strong><code>enCarrera</code></strong> que me indicará si se está corriendo la carrera o no. Y un <strong><code>onSeguimientoCarreraEvent</code></strong> que será el manejador de eventos de la pantalla y donde se controla la pulsación de ambos botones.</p>
+</code></pre><p>Además, dispondremos de un <em>'State'</em> <strong><code>enCarrera</code></strong> que me indicará si se está corriendo la carrera o no. Y un <strong><code>onSeguimientoCarreraEvent</code></strong> que será el manejador de eventos de la pantalla y donde se controla la pulsación de ambos botones.</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-sealed">sealed</span> <span class="token keyword keyword-interface">interface</span> SeguimientoCarreraEvent <span class="token punctuation">{</span>
     <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-object">object</span> OnEmpezarPararClick <span class="token operator">:</span> SeguimientoCarreraEvent
     <span class="token keyword keyword-data">data</span> <span class="token keyword keyword-object">object</span> OnReiniciarClick <span class="token operator">:</span> SeguimientoCarreraEvent
