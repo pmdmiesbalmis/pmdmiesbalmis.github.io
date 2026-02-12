@@ -192,9 +192,47 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
     flex-direction: row;
   }
 }
+.markdown-preview.markdown-preview .code-block-wrapper {
+  position: relative;
+  margin: 16px 0;
+}
+.markdown-preview.markdown-preview .copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s, background-color 0.2s;
+  z-index: 10;
+}
+.markdown-preview.markdown-preview .code-block-wrapper:hover .copy-button {
+  opacity: 1;
+}
+.markdown-preview.markdown-preview .copy-button:hover {
+  background-color: #1976D2;
+}
+.markdown-preview.markdown-preview .copy-button:active {
+  background-color: #0D47A1;
+}
+.markdown-preview.markdown-preview .copy-button.copied {
+  background-color: #4CAF50;
+}
+.markdown-preview.markdown-preview .copy-button.copied::after {
+  content: ' ✓';
+}
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+
+    // Configure Mermaid to load icon packs from Iconify
+
     const configureMermaidIconPacks = () => {
         window["mermaid"].registerIconPacks([
             {
@@ -213,6 +251,94 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
         document.addEventListener("DOMContentLoaded", () => {
             configureMermaidIconPacks();
         });
+    }
+
+    // Copy to clipboard functionality for code blocks
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initCopyButtons();
+    });
+
+    function initCopyButtons() {
+        const codeBlocks = document.querySelectorAll('pre[data-role="codeBlock"]');
+
+        codeBlocks.forEach(function (codeBlock) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+
+            copyButton.addEventListener('click', function () {
+                copyCodeToClipboard(codeBlock, copyButton);
+            });
+
+            wrapper.appendChild(copyButton);
+        });
+    }
+
+    function copyCodeToClipboard(codeBlock, button) {
+        const codeText = extractCodeText(codeBlock);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(codeText)
+                .then(function () {
+                    showCopySuccess(button);
+                })
+                .catch(function (err) {
+                    console.error('Failed to copy text: ', err);
+                    fallbackCopyToClipboard(codeText, button);
+                });
+        } else {
+            fallbackCopyToClipboard(codeText, button);
+        }
+    }
+
+    function extractCodeText(codeBlock) {
+        const clone = codeBlock.cloneNode(true);
+        const text = clone.textContent || clone.innerText;
+        return text.trim();
+    }
+
+    function fallbackCopyToClipboard(text, button) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess(button);
+            } else {
+                console.error('Fallback copy failed');
+            }
+        } catch (err) {
+            console.error('Fallback copy error: ', err);
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+
+        button.textContent = 'Copied';
+        button.classList.add('copied');
+
+        setTimeout(function () {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
     }
 </script></head><body for="html-export">
     
@@ -489,7 +615,7 @@ androidx<span class="token operator">-</span>lifecycle<span class="token operato
 <p>Vamos a explicar la implementación del interfaz de usuario antes de ver la implementación del <strong><code>ViewModel</code></strong>. Para ello, partimos de la estructura del proyecto que se muestra en la imagen de la derecha donde tenemos un <strong><code>AhorcadoScreen.kt</code></strong>, un <strong><code>AhorcadoUiState.kt</code></strong> que guardará el '<em>State</em>' del UI y un <strong><code>AhorcadoEvent.kt</code></strong> que gestionará los eventos que se produzcan en el UI.</p>
 </div>
 <div class="flotante_der">
-<p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="183px" preserveAspectRatio="none" style="width:174px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 174 183" width="174px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41.3613" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="82.7109" x="26" y="39.5508">[com.ahorcado]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18.6563" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="54.6797" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39.9902" x="56" y="84.832">[juego]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="102.6855" x="56" y="99.9258">AhorcadoEvent.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110.0332" x="56" y="115.0195">AhorcadoScreen.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="111.3516" x="56" y="130.1133">AhorcadoUiState.kt</text><path d="M37,136.8438 L37,138.8438 L45,138.8438 L45,137.8438 L40,137.8438 L40,136.8438 L37,136.8438 M37,139.8438 L37,144.3438 C37,144.6238 37.22,144.8438 37.5,144.8438 L44.5,144.8438 C44.78,144.8438 45,144.6238 45,144.3438 L45,139.8438 L37,139.8438" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40.0195" x="46" y="145.207">[theme]</text><path d="M37,151.9375 L37,153.9375 L45,153.9375 L45,152.9375 L40,152.9375 L40,151.9375 L37,151.9375 M37,154.9375 L37,159.4375 C37,159.7175 37.22,159.9375 37.5,159.9375 L44.5,159.9375 C44.78,159.9375 45,159.7175 45,159.4375 L45,154.9375 L37,154.9375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="36.6738" x="46" y="160.3008">[views]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76.6816" x="46" y="175.3945">MainActivity.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="140.2969" y2="140.2969"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="154.3906"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="155.3906" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="157.3906" y2="170.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="170.4844" y2="170.4844"></line><!--SRC=[ZP11Jy9048Nl-olcPA040aMGD8Q0M3M49iGMBgOaIpkKrR9hjhCrXFZVNGHKF94vxVlUpDkPGK5SKy5pOcp75aEPQYNI1Tj5h0QtLokLfwZxBudQDFXQwOIdAcQr6ZZEBpGYTXmhdgihv6Gq5aTs3byDPkf4R52YSgKzhROyN-O6-uupFARv9KfglD4btZ3HYF92yqo4n0b_t7-sfJLkCFudbW8_YlYmIi2572OaIa5REu2nJri3bEdXaDESIve54oXH5q99Q3NSfjjfk9N888ovXEODj7fUk-Erkp3o8zZZAgiyJYUb2uKoEa58HK5QB0tP2LKsvYM7PoD9RD23_QiI1LK8_PC8lYo5Ld9ZxyN6y-1WWYT5uRkYRtFtkdud24BKzcCm3zWzhhZ9oROcAXKoys0MFTHxRC9bPdXcWx1W8sK3zDO3F_m2]--></g></svg></p></div>
+<p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="183px" preserveAspectRatio="none" style="width:174px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 174 183" width="174px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="71" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41.3613" x="8" y="20.457">Android</text><line style="stroke:#000000;stroke-width:1;" x1="66" x2="66" y1="6" y2="24.0938"></line><polygon fill="#000000" points="69,12,75,12,72,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,33.1875 L25,33.1875 L25,32.1875 L20,32.1875 L20,31.1875 L17,31.1875 M17,34.1875 L17,38.6875 C17,38.9675 17.22,39.1875 17.5,39.1875 L24.5,39.1875 C24.78,39.1875 25,38.9675 25,38.6875 L25,34.1875 L17,34.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="82.7109" x="26" y="39.5508">[com.ahorcado]</text><path d="M27,46.2813 L27,48.2813 L35,48.2813 L35,47.2813 L30,47.2813 L30,46.2813 L27,46.2813 M27,49.2813 L27,53.7813 C27,54.0613 27.22,54.2813 27.5,54.2813 L34.5,54.2813 C34.78,54.2813 35,54.0613 35,53.7813 L35,49.2813 L27,49.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="18.6563" x="36" y="54.6445">[ui]</text><path d="M37,61.375 L37,63.375 L45,63.375 L45,62.375 L40,62.375 L40,61.375 L37,61.375 M37,64.375 L37,68.875 C37,69.155 37.22,69.375 37.5,69.375 L44.5,69.375 C44.78,69.375 45,69.155 45,68.875 L45,64.375 L37,64.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="54.6797" x="46" y="69.7383">[features]</text><path d="M47,76.4688 L47,78.4688 L55,78.4688 L55,77.4688 L50,77.4688 L50,76.4688 L47,76.4688 M47,79.4688 L47,83.9688 C47,84.2488 47.22,84.4688 47.5,84.4688 L54.5,84.4688 C54.78,84.4688 55,84.2488 55,83.9688 L55,79.4688 L47,79.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="39.9902" x="56" y="84.832">[juego]</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="102.6855" x="56" y="99.9258">AhorcadoEvent.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="110.0332" x="56" y="115.0195">AhorcadoScreen.kt</text><text fill="#4169E1" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="111.3516" x="56" y="130.1133">AhorcadoUiState.kt</text><path d="M37,136.8438 L37,138.8438 L45,138.8438 L45,137.8438 L40,137.8438 L40,136.8438 L37,136.8438 M37,139.8438 L37,144.3438 C37,144.6238 37.22,144.8438 37.5,144.8438 L44.5,144.8438 C44.78,144.8438 45,144.6238 45,144.3438 L45,139.8438 L37,139.8438" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40.0195" x="46" y="145.207">[theme]</text><path d="M37,151.9375 L37,153.9375 L45,153.9375 L45,152.9375 L40,152.9375 L40,151.9375 L37,151.9375 M37,154.9375 L37,159.4375 C37,159.7175 37.22,159.9375 37.5,159.9375 L44.5,159.9375 C44.78,159.9375 45,159.7175 45,159.4375 L45,154.9375 L37,154.9375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="36.6738" x="46" y="160.3008">[views]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76.6816" x="46" y="175.3945">MainActivity.kt</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="140.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="140.2969" y2="140.2969"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="154.3906"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="155.3906" y2="155.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="157.3906" y2="170.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="170.4844" y2="170.4844"></line><!--SRC=[ZP11Jy9048Nl-olcPA040XKDDeQ0M3M49iGMBgOaIpkKrNRNR6Th2F6_kmYeU29pslUzcRSpWvAuffBdnDYMBOOorKga2xQDM0DkBrOgJr7tNn9LjFXQwOIdAcQD1ZZEBpGYTXmhdgehv6GqbWTs2byDPkf8R52YSgKzhJOyN-O6-uupFAJv5KfglT4vtZ3HYF9Cyqo4n0b_t7-sfJKM6FyJAu4VPRnV9U123XCIbQ2D7S3Ofwq1odH_o6dE9Ss22LIeIw4aT5fksxrgTMiX9nWR2MuFEfTU-yPphs3aXn7iU9tL7gSJA9NH2K8gIj9YQSWEgBCnhpWy6qcYG0zshreKr27qZoBuiX9QoSAUYutdmTu4Juh2TqNVvkjkyquGXAZjls0Ui7jSSPEJRKrKAcJcmInwQFROXClCyCm6OSb6oWReZGT- -0K0]--></g></svg></p></div>
 </div>
 <h4 id="ahorcadouistatekt">AhorcadoUiState.kt </h4>
 <p>Como hemos comentado guardará el '<em>State</em>' del UI definido en <strong><code>AhorcadoScreen.kt</code></strong> y que básicamente será el estado del conocido juego del ahorcado.</p>

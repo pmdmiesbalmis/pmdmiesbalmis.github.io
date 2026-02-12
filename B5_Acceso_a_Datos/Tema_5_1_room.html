@@ -192,9 +192,47 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
     flex-direction: row;
   }
 }
+.markdown-preview.markdown-preview .code-block-wrapper {
+  position: relative;
+  margin: 16px 0;
+}
+.markdown-preview.markdown-preview .copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s, background-color 0.2s;
+  z-index: 10;
+}
+.markdown-preview.markdown-preview .code-block-wrapper:hover .copy-button {
+  opacity: 1;
+}
+.markdown-preview.markdown-preview .copy-button:hover {
+  background-color: #1976D2;
+}
+.markdown-preview.markdown-preview .copy-button:active {
+  background-color: #0D47A1;
+}
+.markdown-preview.markdown-preview .copy-button.copied {
+  background-color: #4CAF50;
+}
+.markdown-preview.markdown-preview .copy-button.copied::after {
+  content: ' ✓';
+}
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+
+    // Configure Mermaid to load icon packs from Iconify
+
     const configureMermaidIconPacks = () => {
         window["mermaid"].registerIconPacks([
             {
@@ -213,6 +251,94 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
         document.addEventListener("DOMContentLoaded", () => {
             configureMermaidIconPacks();
         });
+    }
+
+    // Copy to clipboard functionality for code blocks
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initCopyButtons();
+    });
+
+    function initCopyButtons() {
+        const codeBlocks = document.querySelectorAll('pre[data-role="codeBlock"]');
+
+        codeBlocks.forEach(function (codeBlock) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+
+            copyButton.addEventListener('click', function () {
+                copyCodeToClipboard(codeBlock, copyButton);
+            });
+
+            wrapper.appendChild(copyButton);
+        });
+    }
+
+    function copyCodeToClipboard(codeBlock, button) {
+        const codeText = extractCodeText(codeBlock);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(codeText)
+                .then(function () {
+                    showCopySuccess(button);
+                })
+                .catch(function (err) {
+                    console.error('Failed to copy text: ', err);
+                    fallbackCopyToClipboard(codeText, button);
+                });
+        } else {
+            fallbackCopyToClipboard(codeText, button);
+        }
+    }
+
+    function extractCodeText(codeBlock) {
+        const clone = codeBlock.cloneNode(true);
+        const text = clone.textContent || clone.innerText;
+        return text.trim();
+    }
+
+    function fallbackCopyToClipboard(text, button) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess(button);
+            } else {
+                console.error('Fallback copy failed');
+            }
+        } catch (err) {
+            console.error('Fallback copy error: ', err);
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+
+        button.textContent = 'Copied';
+        button.classList.add('copied');
+
+        setTimeout(function () {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
     }
 </script></head><body for="html-export">
     
@@ -752,7 +878,7 @@ dependencies <span class="token punctuation">{</span>
 <p>Si abrimos el <strong>Device Explorer</strong> de Android Studio, podremos ver que se ha creado un fichero <strong><code>tienda</code></strong> en la ruta <strong><code>data/data/&lt;nombre_paquete&gt;/databases</code></strong>. Este fichero es la base de datos que hemos creado y que se ha guardado en el dispositivo. Podremos ver su contenido si la copiamos con cualquier herramienta de gestión de bases de datos SQLite como <strong>DBeaver</strong>.</p>
 </div>
 <div style="width: auto">
-<p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="138px" preserveAspectRatio="none" style="width:155px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 155 138" width="155px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="79" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.6914" x="8" y="20.457">Pixel 3a</text><line style="stroke:#000000;stroke-width:1;" x1="74" x2="74" y1="6" y2="24.0938"></line><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="26" y="39.5508">[data]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="36" y="54.6445">[data]</text><path d="M37,61.375 L37,62.375 L45,62.375 L45,61.375 L37,61.375 M37,63.375 L37,69.285 C37,69.335 37.04,69.375 37.09,69.375 L44.9,69.375 C44.95,69.375 44.99,69.335 44.99,69.285 L44.99,63.375 L42.02,63.375 L42.02,64.405 L39.99,64.405 L39.99,63.375 L36.99,63.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="102.041" x="46" y="69.7383">[com.pmdm.tienda]</text><path d="M47,76.4688 L47,77.4688 L55,77.4688 L55,76.4688 L47,76.4688 M47,78.4688 L47,84.3788 C47,84.4288 47.04,84.4688 47.09,84.4688 L54.9,84.4688 C54.95,84.4688 54.99,84.4288 54.99,84.3788 L54.99,78.4688 L52.02,78.4688 L52.02,79.4988 L49.99,79.4988 L49.99,78.4688 L46.99,78.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62.0449" x="56" y="84.832">[databases]</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35.3379" x="56" y="99.9258">tienda</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="64.0078" x="56" y="115.0195">tienda-shm</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="58.6758" x="56" y="130.1133">tienda-wal</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><!--SRC=[VO_TQi9048NlvodcgcZ4eB5Q2KMaDcqH0w69tfGAcsHh5pQxiZj9BT9txsfeeHHahiuvt_pDBJ53bac28y0s4GSkSSIs0CSCUdXxbUl3xALan5wXzq__6eMk_7rLLZu9hies-qFdp7BRsiuljDGcp6NDPvxNjdZUXR1ltwlBm0UJ3lXoDNVw_0yaaYbQnojikB52AnpwmI0O-q4dgpakcSB13GwduMWSZYQuY38ynLteF2Qh9a2hQrDmB8Kb8_AQt8GkB5d3yBbM92eUuabrihYBQVHZOgGQORIgk29ORk8MmYTDwLxJ6PvSz-y4OSgDEmmtCTppDrPBSgs5BeNQXRZE7lfJM36rgzdEBU8M5jejC9yXHkat]--></g></svg></p></div>
+<p align="center" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="138px" preserveAspectRatio="none" style="width:155px;height:138px;background:#FFFFFF;" version="1.1" viewBox="0 0 155 138" width="155px" zoomAndPan="magnify"><defs></defs><g><rect fill="#EEEEEE" height="18.0938" style="stroke:#000000;stroke-width:1;" width="79" x="6" y="6"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.6914" x="8" y="20.457">Pixel 3a</text><line style="stroke:#000000;stroke-width:1;" x1="74" x2="74" y1="6" y2="24.0938"></line><polygon fill="#000000" points="77,12,83,12,80,19.0938" style="stroke:#000000;stroke-width:1;"></polygon><path d="M17,31.1875 L17,32.1875 L25,32.1875 L25,31.1875 L17,31.1875 M17,33.1875 L17,39.0975 C17,39.1475 17.04,39.1875 17.09,39.1875 L24.9,39.1875 C24.95,39.1875 24.99,39.1475 24.99,39.0975 L24.99,33.1875 L22.02,33.1875 L22.02,34.2175 L19.99,34.2175 L19.99,33.1875 L16.99,33.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="26" y="39.5508">[data]</text><path d="M27,46.2813 L27,47.2813 L35,47.2813 L35,46.2813 L27,46.2813 M27,48.2813 L27,54.1913 C27,54.2413 27.04,54.2813 27.09,54.2813 L34.9,54.2813 C34.95,54.2813 34.99,54.2413 34.99,54.1913 L34.99,48.2813 L32.02,48.2813 L32.02,49.3113 L29.99,49.3113 L29.99,48.2813 L26.99,48.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30.0234" x="36" y="54.6445">[data]</text><path d="M37,61.375 L37,62.375 L45,62.375 L45,61.375 L37,61.375 M37,63.375 L37,69.285 C37,69.335 37.04,69.375 37.09,69.375 L44.9,69.375 C44.95,69.375 44.99,69.335 44.99,69.285 L44.99,63.375 L42.02,63.375 L42.02,64.405 L39.99,64.405 L39.99,63.375 L36.99,63.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="102.041" x="46" y="69.7383">[com.pmdm.tienda]</text><path d="M47,76.4688 L47,77.4688 L55,77.4688 L55,76.4688 L47,76.4688 M47,78.4688 L47,84.3788 C47,84.4288 47.04,84.4688 47.09,84.4688 L54.9,84.4688 C54.95,84.4688 54.99,84.4288 54.99,84.3788 L54.99,78.4688 L52.02,78.4688 L52.02,79.4988 L49.99,79.4988 L49.99,78.4688 L46.99,78.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62.0449" x="56" y="84.832">[databases]</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35.3379" x="56" y="99.9258">tienda</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="64.0078" x="56" y="115.0195">tienda-shm</text><text fill="#0000FF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="58.6758" x="56" y="130.1133">tienda-wal</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="33.6406"></rect><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="48.7344"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="36.6406" y2="49.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="49.7344" y2="49.7344"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="29" y="63.8281"></rect><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="51.7344" y2="64.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="64.8281" y2="64.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="39" y="78.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="30" x2="30" y1="66.8281" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="30" x2="38" y1="79.9219" y2="79.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="95.0156" y2="95.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="110.1094" y2="110.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="40" y1="81.9219" y2="125.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="40" x2="48" y1="125.2031" y2="125.2031"></line><!--SRC=[VOzVQy8m5CNVxwUuJqCh5gqwN1aYSzs6M92r-Z8cf6tc0caYoOrpoBxxecM3CP3xTCxvtNzJIyoGPPBW2B1PYWENE60RW6CE7RozAlHXyb8nOg_G-QT_ZLBNuQwkwf04LrMJ_Q4BPhbjRE-NMceJ5zBnIH0qBK5m8UpQz_eoyC6a1xvyJRq-_mDBoHIjqWNkkR52A-o7KIyQXSDMnWZdJc4qnluWxjt4qGXdIPRZAMz3wt6vGAkTAJbMmf8HXIC_e0rpjcVux1I9ciTuKgqyRMEM_9YOgBqmMjLS4SpNQGFXawPif-aCNm-xTu8muyRVXUiKxlaRSv9yQwaheROnhlA7xXWMJ6qTs_f5tC9C-mNcCyOa-mO0]--></g></svg></p></div>
 </div>
 <p>Aunque hay formas de mantener versiones de la BD y <strong><a href="https://developer.android.com/training/data-storage/room/migrating-db-versions">migrar de una a otra</a></strong>. La opción más sencilla es ante un cambio en alguna de las entidades sería eliminar la BD y volver a crearla. Para ello, podemos usar la propiedad <strong><code>fallbackToDestructiveMigration()</code></strong> en el método <strong><code>databaseBuilder</code></strong> que hemos usado para crear la BD o símplmente borrarla usando el <strong>Device Explorer</strong> y volver a ejecutar la app.</p>
 <h2 id="inspeccionando-y-depurando-la-bd-con-database-inspector">Inspeccionando y depurando la BD con Database Inspector </h2>

@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
       
       
       
@@ -23,15 +23,6 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   font-weight: 400;
   src: url(https://fonts.gstatic.com/s/catamaran/v28/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
 }
-.markdown-preview.markdown-preview .caso_estudio {
-  background-color: #f5f5f5;
-  border: 2px solid #969696;
-  padding: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
-}
 @page a4landscape {
   size: A4 landscape;
   margin: 1cm;
@@ -46,7 +37,16 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 .markdown-preview.markdown-preview .portrait {
   page: a4portrait;
 }
-.markdown-preview.markdown-preview .ejercicio {
+.markdown-preview.markdown-preview .box_bg_lightgray {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .box_bg_lightgreen {
   background-color: #f5faf5;
   border: 2px solid #969b96;
   padding-left: 15px;
@@ -56,13 +56,28 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
   border-radius: 5px;
   box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
 }
+.markdown-preview.markdown-preview .salida_consola {
+  background-color: #000000;
+  color: aquamarine;
+  border: 3px solid slategrey;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px 0 slategrey;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 0.8rem;
+}
 .markdown-preview.markdown-preview .contenedor {
   display: flex;
   justify-content: center;
   margin: 30px auto 30px auto;
 }
 .markdown-preview.markdown-preview .fondo {
-  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background: url(https://balmisdigigs.github.io/digitalizacion.github.io/imagenes/fondos/quote.png);
   background-size: cover;
   width: 75%;
   height: 160px;
@@ -177,12 +192,154 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
     flex-direction: row;
   }
 }
+.markdown-preview.markdown-preview .code-block-wrapper {
+  position: relative;
+  margin: 16px 0;
+}
+.markdown-preview.markdown-preview .copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s, background-color 0.2s;
+  z-index: 10;
+}
+.markdown-preview.markdown-preview .code-block-wrapper:hover .copy-button {
+  opacity: 1;
+}
+.markdown-preview.markdown-preview .copy-button:hover {
+  background-color: #1976D2;
+}
+.markdown-preview.markdown-preview .copy-button:active {
+  background-color: #0D47A1;
+}
+.markdown-preview.markdown-preview .copy-button.copied {
+  background-color: #4CAF50;
+}
+.markdown-preview.markdown-preview .copy-button.copied::after {
+  content: ' ✓';
+}
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    // your code here
-  });
+
+    // Configure Mermaid to load icon packs from Iconify
+
+    const configureMermaidIconPacks = () => {
+        window["mermaid"].registerIconPacks([
+            {
+                name: "logos",
+                loader: () =>
+                    fetch("https://unpkg.com/@iconify-json/logos@1/icons.json").then(
+                        (res) => res.json()
+                    ),
+            },
+        ]);
+    };
+
+    if (document.readyState !== 'loading') {
+        configureMermaidIconPacks();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+            configureMermaidIconPacks();
+        });
+    }
+
+    // Copy to clipboard functionality for code blocks
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initCopyButtons();
+    });
+
+    function initCopyButtons() {
+        const codeBlocks = document.querySelectorAll('pre[data-role="codeBlock"]');
+
+        codeBlocks.forEach(function (codeBlock) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+
+            copyButton.addEventListener('click', function () {
+                copyCodeToClipboard(codeBlock, copyButton);
+            });
+
+            wrapper.appendChild(copyButton);
+        });
+    }
+
+    function copyCodeToClipboard(codeBlock, button) {
+        const codeText = extractCodeText(codeBlock);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(codeText)
+                .then(function () {
+                    showCopySuccess(button);
+                })
+                .catch(function (err) {
+                    console.error('Failed to copy text: ', err);
+                    fallbackCopyToClipboard(codeText, button);
+                });
+        } else {
+            fallbackCopyToClipboard(codeText, button);
+        }
+    }
+
+    function extractCodeText(codeBlock) {
+        const clone = codeBlock.cloneNode(true);
+        const text = clone.textContent || clone.innerText;
+        return text.trim();
+    }
+
+    function fallbackCopyToClipboard(text, button) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess(button);
+            } else {
+                console.error('Fallback copy failed');
+            }
+        } catch (err) {
+            console.error('Fallback copy error: ', err);
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+
+        button.textContent = 'Copied';
+        button.classList.add('copied');
+
+        setTimeout(function () {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
 </script></head><body for="html-export">
     
     
@@ -461,7 +618,7 @@ Cabe destacar que en la carpeta <code>avd</code> se guardan las configuraciones 
 </ol>
 </div>
 <div class="flotante_der">
-<p align="center" style="zoom:1.5" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="208px" preserveAspectRatio="none" style="width:135px;height:208px;background:#FFFFFF;" version="1.1" viewBox="0 0 135 208" width="135px" zoomAndPan="magnify"><defs></defs><g><path d="M17,10.0938 L17,12.0938 L25,12.0938 L25,11.0938 L20,11.0938 L20,10.0938 L17,10.0938 M17,13.0938 L17,17.5938 C17,17.8738 17.22,18.0938 17.5,18.0938 L24.5,18.0938 C24.78,18.0938 25,17.8738 25,17.5938 L25,13.0938 L17,13.0938" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="73.3125" x="26" y="18.457">[HolaMundo]</text><path d="M27,25.1875 L27,27.1875 L35,27.1875 L35,26.1875 L30,26.1875 L30,25.1875 L27,25.1875 M27,28.1875 L27,32.6875 C27,32.9675 27.22,33.1875 27.5,33.1875 L34.5,33.1875 C34.78,33.1875 35,32.9675 35,32.6875 L35,28.1875 L27,28.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="47.3379" x="36" y="33.5508">[.gradle]</text><path d="M27,40.2813 L27,42.2813 L35,42.2813 L35,41.2813 L30,41.2813 L30,40.2813 L27,40.2813 M27,43.2813 L27,47.7813 C27,48.0613 27.22,48.2813 27.5,48.2813 L34.5,48.2813 C34.78,48.2813 35,48.0613 35,47.7813 L35,43.2813 L27,43.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35.3379" x="36" y="48.6445">[.idea]</text><path d="M27,55.375 L27,57.375 L35,57.375 L35,56.375 L30,56.375 L30,55.375 L27,55.375 M27,58.375 L27,62.875 C27,63.155 27.22,63.375 27.5,63.375 L34.5,63.375 C34.78,63.375 35,63.155 35,62.875 L35,58.375 L27,58.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="29.3262" x="36" y="63.7383">[app]</text><path d="M27,70.4688 L27,72.4688 L35,72.4688 L35,71.4688 L30,71.4688 L30,70.4688 L27,70.4688 M27,73.4688 L27,77.9688 C27,78.2488 27.22,78.4688 27.5,78.4688 L34.5,78.4688 C34.78,78.4688 35,78.2488 35,77.9688 L35,73.4688 L27,73.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44.0039" x="36" y="78.832">[gradle]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92.0273" x="36" y="93.9258">libs.versions.toml</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="49.3652" x="26" y="109.0195">.gitignore</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80.7129" x="26" y="124.1133">build.gradle.kts</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="90.0527" x="26" y="139.207">gradle.properties</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.0234" x="26" y="154.3008">gradlew</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62.0391" x="26" y="169.3945">gradlew.bat</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="81.375" x="26" y="184.4883">local.properties</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96.7148" x="26" y="199.582">settings.gradle.kts</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="12.5469"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="28.6406"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="28.6406" y2="28.6406"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="43.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="43.7344" y2="43.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="58.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="58.8281" y2="58.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="72.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="73.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="73.9219" y2="73.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="75.9219" y2="89.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="89.0156" y2="89.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="104.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="104.1094" y2="104.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="119.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="119.2031" y2="119.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="134.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="134.2969" y2="134.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="149.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="149.3906" y2="149.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="164.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="164.4844" y2="164.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="179.5781"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="179.5781" y2="179.5781"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="194.6719"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="194.6719" y2="194.6719"></line><!--SRC=[RL1RJy8m57xlhpXF1aPeO0YInHWYe6QoIEJoOdpeQ5aQIxkqfpE6-D_j8iPfI5_ET-btBXE7pA9Z2WavakEQT22AhY_sHd5XRruUZ6APrzoyHX7f_DLeOHbNufmYkM1dU5QMPzXcJ0UKp1sjX7NIQ4VH75JjfuL4MMXZHOroBnK_jQTlw6hkX4fhIc5HYWRvtYXfph26okoO-kTs0b7gmZMJFyER2Cs_BxHKJECcMy1fGEZJk1SFQTnQUm4fqz2xWluu6GoJmGYcypNKSfkqxfUBAWPdlDq9uDAXbRd7aD0cAQiOF7kDyY0IU2g5JcUFFmJCTIMjqGUXaQJRxDSmkkpUIeILi64Ms6Pa9lRCAmm_TeQ7DHBOhE-wOx9Wkl2i2DbXowa9kVOZWVdg2m00]--></g></svg></p></div>
+<p align="center" style="zoom:1.5" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="SALT" height="208px" preserveAspectRatio="none" style="width:135px;height:208px;background:#FFFFFF;" version="1.1" viewBox="0 0 135 208" width="135px" zoomAndPan="magnify"><defs></defs><g><path d="M17,10.0938 L17,12.0938 L25,12.0938 L25,11.0938 L20,11.0938 L20,10.0938 L17,10.0938 M17,13.0938 L17,17.5938 C17,17.8738 17.22,18.0938 17.5,18.0938 L24.5,18.0938 C24.78,18.0938 25,17.8738 25,17.5938 L25,13.0938 L17,13.0938" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="73.3125" x="26" y="18.457">[HolaMundo]</text><path d="M27,25.1875 L27,27.1875 L35,27.1875 L35,26.1875 L30,26.1875 L30,25.1875 L27,25.1875 M27,28.1875 L27,32.6875 C27,32.9675 27.22,33.1875 27.5,33.1875 L34.5,33.1875 C34.78,33.1875 35,32.9675 35,32.6875 L35,28.1875 L27,28.1875" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="47.3379" x="36" y="33.5508">[.gradle]</text><path d="M27,40.2813 L27,42.2813 L35,42.2813 L35,41.2813 L30,41.2813 L30,40.2813 L27,40.2813 M27,43.2813 L27,47.7813 C27,48.0613 27.22,48.2813 27.5,48.2813 L34.5,48.2813 C34.78,48.2813 35,48.0613 35,47.7813 L35,43.2813 L27,43.2813" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="35.3379" x="36" y="48.6445">[.idea]</text><path d="M27,55.375 L27,57.375 L35,57.375 L35,56.375 L30,56.375 L30,55.375 L27,55.375 M27,58.375 L27,62.875 C27,63.155 27.22,63.375 27.5,63.375 L34.5,63.375 C34.78,63.375 35,63.155 35,62.875 L35,58.375 L27,58.375" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="29.3262" x="36" y="63.7383">[app]</text><path d="M27,70.4688 L27,72.4688 L35,72.4688 L35,71.4688 L30,71.4688 L30,70.4688 L27,70.4688 M27,73.4688 L27,77.9688 C27,78.2488 27.22,78.4688 27.5,78.4688 L34.5,78.4688 C34.78,78.4688 35,78.2488 35,77.9688 L35,73.4688 L27,73.4688" fill="#000000"></path><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44.0039" x="36" y="78.832">[gradle]</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92.0273" x="36" y="93.9258">libs.versions.toml</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="49.3652" x="26" y="109.0195">.gitignore</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80.7129" x="26" y="124.1133">build.gradle.kts</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="90.0527" x="26" y="139.207">gradle.properties</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42.0234" x="26" y="154.3008">gradlew</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62.0391" x="26" y="169.3945">gradlew.bat</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="81.375" x="26" y="184.4883">local.properties</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="96.7148" x="26" y="199.582">settings.gradle.kts</text><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="9" y="12.5469"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="28.6406"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="28.6406" y2="28.6406"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="43.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="43.7344" y2="43.7344"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="58.8281"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="58.8281" y2="58.8281"></line><rect fill="none" height="2" style="stroke:#888888;stroke-width:1;" width="2" x="19" y="72.9219"></rect><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="73.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="73.9219" y2="73.9219"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="20" y1="75.9219" y2="89.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="20" x2="28" y1="89.0156" y2="89.0156"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="104.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="104.1094" y2="104.1094"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="119.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="119.2031" y2="119.2031"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="134.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="134.2969" y2="134.2969"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="149.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="149.3906" y2="149.3906"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="164.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="164.4844" y2="164.4844"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="179.5781"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="179.5781" y2="179.5781"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="10" y1="15.5469" y2="194.6719"></line><line style="stroke:#888888;stroke-width:1;" x1="10" x2="18" y1="194.6719" y2="194.6719"></line><!--SRC=[RL1TQy8m57tFhxXFGoi6xNIuCeRCTHEn86lrPUmXDR64nQGaDuuX- -zBfuDkI5voFdBElPawP1OTKqZ8aHmBqeCekhlQ6SM5lN-T6yKohxbvYoBI-wlHoZAkn2L5Si4kyAokBx3jc1ueMJfw4DP9enr5irUDdrOIPQMD5GqglLJyN4_VqJNS6TNMrCAY52toetMb9SC6AhDbwf_R2KIfAzTE_WfdAZG__T1ACOthR0dd0M58uq4yfgDEpX0MNaCyWU5rChXDuZ7Cqho0Hk-IplDg2SvuknN0fKChIuyXe4iMxC3WnMkKUv50Wpf5reKy_IKXrGTfZTuBZMInoKucc1lCQuC_vfjH_q4YvCA6kM2JaKUnOrvXUBerFAoKmBfuwa_8akdAioeKXOrd9XJOpmJI_1i0]--></g></svg></p></div>
 </div>
 <ol start="5">
 <li>

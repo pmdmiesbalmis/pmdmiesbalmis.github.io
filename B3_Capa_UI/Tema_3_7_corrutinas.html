@@ -192,9 +192,47 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
     flex-direction: row;
   }
 }
+.markdown-preview.markdown-preview .code-block-wrapper {
+  position: relative;
+  margin: 16px 0;
+}
+.markdown-preview.markdown-preview .copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s, background-color 0.2s;
+  z-index: 10;
+}
+.markdown-preview.markdown-preview .code-block-wrapper:hover .copy-button {
+  opacity: 1;
+}
+.markdown-preview.markdown-preview .copy-button:hover {
+  background-color: #1976D2;
+}
+.markdown-preview.markdown-preview .copy-button:active {
+  background-color: #0D47A1;
+}
+.markdown-preview.markdown-preview .copy-button.copied {
+  background-color: #4CAF50;
+}
+.markdown-preview.markdown-preview .copy-button.copied::after {
+  content: ' ✓';
+}
 
       </style>
       <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+
+    // Configure Mermaid to load icon packs from Iconify
+
     const configureMermaidIconPacks = () => {
         window["mermaid"].registerIconPacks([
             {
@@ -213,6 +251,94 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
         document.addEventListener("DOMContentLoaded", () => {
             configureMermaidIconPacks();
         });
+    }
+
+    // Copy to clipboard functionality for code blocks
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initCopyButtons();
+    });
+
+    function initCopyButtons() {
+        const codeBlocks = document.querySelectorAll('pre[data-role="codeBlock"]');
+
+        codeBlocks.forEach(function (codeBlock) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+
+            copyButton.addEventListener('click', function () {
+                copyCodeToClipboard(codeBlock, copyButton);
+            });
+
+            wrapper.appendChild(copyButton);
+        });
+    }
+
+    function copyCodeToClipboard(codeBlock, button) {
+        const codeText = extractCodeText(codeBlock);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(codeText)
+                .then(function () {
+                    showCopySuccess(button);
+                })
+                .catch(function (err) {
+                    console.error('Failed to copy text: ', err);
+                    fallbackCopyToClipboard(codeText, button);
+                });
+        } else {
+            fallbackCopyToClipboard(codeText, button);
+        }
+    }
+
+    function extractCodeText(codeBlock) {
+        const clone = codeBlock.cloneNode(true);
+        const text = clone.textContent || clone.innerText;
+        return text.trim();
+    }
+
+    function fallbackCopyToClipboard(text, button) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess(button);
+            } else {
+                console.error('Fallback copy failed');
+            }
+        } catch (err) {
+            console.error('Fallback copy error: ', err);
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function showCopySuccess(button) {
+        const originalText = button.textContent;
+
+        button.textContent = 'Copied';
+        button.classList.add('copied');
+
+        setTimeout(function () {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
     }
 </script></head><body for="html-export">
     
@@ -1100,7 +1226,7 @@ Corrutina: {
 </code></pre></div> <!-- fin caso de estudio -->
 <div style="page-break-after:always;"></div>
 <h3 id="esquema-resumen-conceptos-básicos-de-corrutinas">Esquema resumen conceptos básicos de corrutinas </h3>
-<p></p><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="MINDMAP" height="822px" preserveAspectRatio="none" style="width:964px;height:822px;background:#FFFFFF;" version="1.1" viewBox="0 0 964 822" width="964px" zoomAndPan="magnify"><defs></defs><g><rect fill="#00BFFF" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="90.7861" x="10" y="392.2554"></rect><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70.7861" x="20" y="415.3872">Corrutinas</text><rect fill="#87CEFA" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="76.0273" x="150.7861" y="237.8013"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="56.0273" x="160.7861" y="260.9331">Creación</text><rect fill="#FFFFFF" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="78.3789" x="276.8135" y="121.6265"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="17.8965" x="307.0547" y="144.7583">No</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="58.3789" x="286.8135" y="160.8569">producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.2065" y="176.9556">resultado</text><rect fill="#FFFFFF" height="271.5488" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="356.0547" x="405.1924" y="20"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="43.1318">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="415.1924" y="60.1738">val&nbsp;job&nbsp;:&nbsp;Job&nbsp;=&nbsp;scope.launch&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="42.0068" x="448.7979" y="78.4531">try&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="482.4033" y="96.7324">procedimientoAsincrono()</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="448.7979" y="115.0117">}&nbsp;catch&nbsp;(e:&nbsp;CancellationException)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="226.8369" x="482.4033" y="133.291">//&nbsp;Manejo&nbsp;de&nbsp;la&nbsp;cancelación</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="448.7979" y="151.5703">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="33.6055" x="415.1924" y="169.8496">&nbsp;&nbsp;&nbsp;&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="415.1924" y="188.1289">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="415.1924" y="206.4082">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="415.1924" y="224.6875">job.isActive&nbsp;//&nbsp;Comprueba&nbsp;si&nbsp;está&nbsp;activa</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="415.1924" y="242.9668">job.cancel()&nbsp;//&nbsp;Cancela&nbsp;la&nbsp;corrutina</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="294.0479" x="415.1924" y="261.2461">job.join()&nbsp;//&nbsp;Espera&nbsp;a&nbsp;que&nbsp;finalice</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="278.582">&nbsp;</text><path d="M355.1924,155.7744 L365.1924,155.7744 C380.1924,155.7744 380.1924,155.7744 395.1924,155.7744 L405.1924,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,155.7744 266.8135,155.7744 L276.8135,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="52.1973" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="79.9307" x="276.8135" y="375.5264"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="59.9307" x="286.8135" y="398.6582">Producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.9824" y="414.7568">resultado</text><rect fill="#FFFFFF" height="180.1523" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="372.8574" x="406.7441" y="311.5488"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="334.6807">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="416.7441" y="351.7227">val&nbsp;job&nbsp;:&nbsp;Deferred&lt;Tipo&gt;&nbsp;=&nbsp;scope.async&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="319.252" x="450.3496" y="370.002">funcionAsincrona()&nbsp;//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;Tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="388.2813">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="416.7441" y="406.5605">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="416.7441" y="424.8398">job.await().let&nbsp;{&nbsp;resultado&nbsp;-&gt;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="450.3496" y="443.1191">//&nbsp;Procesar&nbsp;el&nbsp;resultado</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="461.3984">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="478.7344">&nbsp;</text><path d="M356.7441,401.625 L366.7441,401.625 C381.7441,401.625 381.7441,401.625 396.7441,401.625 L406.7441,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,401.625 266.8135,401.625 L276.8135,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,255.8506 140.7861,255.8506 L150.7861,255.8506" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#87CEFA" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="110.2891" x="150.7861" y="622.0073"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64.5928" x="173.6343" y="645.1392">Funciones</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="90.2891" x="160.7861" y="661.2378">de suspensión</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="80.1582" x="165.8516" y="677.3364">o asíncronas</text><rect fill="#FFFFFF" height="143.5938" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="633.2998" x="311.0752" y="511.7012"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="534.833">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="613.2998" x="321.0752" y="551.875">suspend&nbsp;fun&nbsp;procedimientoAsincrono()&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="504.082" x="354.6807" y="570.1543">//&nbsp;Puedo&nbsp;llamar&nbsp;directamente&nbsp;a&nbsp;otras&nbsp;funciones&nbsp;de&nbsp;suspension</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="285.6465" x="354.6807" y="588.4336">//&nbsp;Tengo&nbsp;acceso&nbsp;a&nbsp;coroutineContext</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="268.8438" x="354.6807" y="606.7129">//&nbsp;Puedo&nbsp;lanzar&nbsp;otras&nbsp;corrutinas</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="624.9922">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="642.3281">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,583.498 301.0752,583.498 L311.0752,583.498" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="125.3145" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="641.7012" x="311.0752" y="675.2949"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="698.4268">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="621.7012" x="321.0752" y="715.4688">suspend&nbsp;fun&nbsp;funcionAsincrona()&nbsp;:&nbsp;Tipo&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="354.6807" y="733.748">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="159.626" x="354.6807" y="752.0273">//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="770.3066">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="787.6426">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,737.9521 301.0752,737.9521 L311.0752,737.9521" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,656.1553 140.7861,656.1553 L150.7861,656.1553" fill="none" style="stroke:#000000;stroke-width:1;"></path><!--SRC=[ZLJTJXix4BxtKunqRX8abf-M7fIcKI647g6aYaZepU6ecdY7OBextcDxGm7nC7s0NlMkjxnOnzuaGDLApOMp7i_FztqpzbiVq8NIS5vYfLJNXvk2UcffE38uTrW2t2c0eM7Ijh0E3WlKdyHoR3cynvBWm1aibeQ9kINOUIcxANqE1uMPSqaSO4WNGOniSu8xBry0OynpmtFOJxj_h3EtaW2Bno0j2xbqV2WrtpbRSzvF83woPVgOZauRgsDoiBENJ9DBpEqrRClcNjshxjQIcDhuzwyZechowUQmgEa_wCvw4kdgO1XzTslMKnlYCZJpox3swJj2RHw-iPnjm7jxpfMpUItWpjcHhuiWnUBPHaTrjH3igGKMS6Ldq84JMT-0rxQYhC2QzINSGS8Ot4qIjlb9IasvAOrGjWVUi7QMRQkT7Ev1Ov385dMWZwofA30OouFFcghuqNwIQMiBHiXqPK6aBb12Oy2IGSgMLf4bop8bA3FZ3tGm2ugXVLjMhgOPWZT0FZny0Oo7c3oRNArsycpofX8h2PFJbJNSk0nyHGu1uV-Qu4BE2wD9kj68z3hfEVvpBO_eWfoZl3irbUsjPKL_mtgbweL8B8Ai5CG6o8I09C_3zmWcHZzXZzTeGgkT5HGaoHe4RFQQZ18-Zitnw82AHuSqLuzCVfwQumO8-NEMFlXQf60VUt3E5j0_V6tmUVMKQ-EMHnQ_dGZXVMt2PL_kYjomrf7nLHmESZuJWL30hQOX8gz9gCYub88-Duvqm7YrI7ImmQ5V2KOUdi2ql4em9PuBNYtyvIzssiPEqxByJtMGRwLEatWz55xTntbxrlPVClv5xpgfMtzEEJPr2UbPpqFg-NCORwNk-kaR2_PmDXh2Gh8A2DZ9ThTtzxBTrbHczmGPjl-6dVtEYxtEYrVG7qmX7hTLwzrukDW5RskdIHJsmPbPdUwaEi45mcdDmPHoSUEkDHsrOJ9O6M702oDCOqVKoOTHuoHFOPXKDYJdLoyt3qqGCaw0mOUHMXAMKE4XpsS7pgR7c_jgY3olSIw5oAk-F8doldHWCFa1]--></g></svg></p><p></p>
+<p></p><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="MINDMAP" height="822px" preserveAspectRatio="none" style="width:964px;height:822px;background:#FFFFFF;" version="1.1" viewBox="0 0 964 822" width="964px" zoomAndPan="magnify"><defs></defs><g><rect fill="#00BFFF" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="90.7861" x="10" y="392.2554"></rect><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70.7861" x="20" y="415.3872">Corrutinas</text><rect fill="#87CEFA" height="36.0986" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="76.0273" x="150.7861" y="237.8013"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="56.0273" x="160.7861" y="260.9331">Creación</text><rect fill="#FFFFFF" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="78.3789" x="276.8135" y="121.6265"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="17.8965" x="307.0547" y="144.7583">No</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="58.3789" x="286.8135" y="160.8569">producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.2065" y="176.9556">resultado</text><rect fill="#FFFFFF" height="271.5488" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="356.0547" x="405.1924" y="20"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="43.1318">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="415.1924" y="60.1738">val&nbsp;job&nbsp;:&nbsp;Job&nbsp;=&nbsp;scope.launch&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="42.0068" x="448.7979" y="78.4531">try&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="482.4033" y="96.7324">procedimientoAsincrono()</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="448.7979" y="115.0117">}&nbsp;catch&nbsp;(e:&nbsp;CancellationException)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="226.8369" x="482.4033" y="133.291">//&nbsp;Manejo&nbsp;de&nbsp;la&nbsp;cancelación</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="448.7979" y="151.5703">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="33.6055" x="415.1924" y="169.8496">&nbsp;&nbsp;&nbsp;&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="415.1924" y="188.1289">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="415.1924" y="206.4082">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="415.1924" y="224.6875">job.isActive&nbsp;//&nbsp;Comprueba&nbsp;si&nbsp;está&nbsp;activa</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="302.4492" x="415.1924" y="242.9668">job.cancel()&nbsp;//&nbsp;Cancela&nbsp;la&nbsp;corrutina</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="294.0479" x="415.1924" y="261.2461">job.join()&nbsp;//&nbsp;Espera&nbsp;a&nbsp;que&nbsp;finalice</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="581.2749" y="278.582">&nbsp;</text><path d="M355.1924,155.7744 L365.1924,155.7744 C380.1924,155.7744 380.1924,155.7744 395.1924,155.7744 L405.1924,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,155.7744 266.8135,155.7744 L276.8135,155.7744" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="52.1973" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="79.9307" x="276.8135" y="375.5264"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="59.9307" x="286.8135" y="398.6582">Producen</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="57.5928" x="287.9824" y="414.7568">resultado</text><rect fill="#FFFFFF" height="180.1523" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="372.8574" x="406.7441" y="311.5488"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="334.6807">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="336.0547" x="416.7441" y="351.7227">val&nbsp;job&nbsp;:&nbsp;Deferred&lt;Tipo&gt;&nbsp;=&nbsp;scope.async&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="319.252" x="450.3496" y="370.002">funcionAsincrona()&nbsp;//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;Tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="388.2813">}</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="416.7441" y="406.5605">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="252.041" x="416.7441" y="424.8398">job.await().let&nbsp;{&nbsp;resultado&nbsp;-&gt;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="201.6328" x="450.3496" y="443.1191">//&nbsp;Procesar&nbsp;el&nbsp;resultado</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="416.7441" y="461.3984">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="591.228" y="478.7344">&nbsp;</text><path d="M356.7441,401.625 L366.7441,401.625 C381.7441,401.625 381.7441,401.625 396.7441,401.625 L406.7441,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M226.8135,255.8506 L236.8135,255.8506 C251.8135,255.8506 251.8135,401.625 266.8135,401.625 L276.8135,401.625" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,255.8506 140.7861,255.8506 L150.7861,255.8506" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#87CEFA" height="68.2959" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="110.2891" x="150.7861" y="622.0073"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64.5928" x="173.6343" y="645.1392">Funciones</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="90.2891" x="160.7861" y="661.2378">de suspensión</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="80.1582" x="165.8516" y="677.3364">o asíncronas</text><rect fill="#FFFFFF" height="143.5938" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="633.2998" x="311.0752" y="511.7012"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="534.833">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="613.2998" x="321.0752" y="551.875">suspend&nbsp;fun&nbsp;procedimientoAsincrono()&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="504.082" x="354.6807" y="570.1543">//&nbsp;Puedo&nbsp;llamar&nbsp;directamente&nbsp;a&nbsp;otras&nbsp;funciones&nbsp;de&nbsp;suspension</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="285.6465" x="354.6807" y="588.4336">//&nbsp;Tengo&nbsp;acceso&nbsp;a&nbsp;coroutineContext</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="268.8438" x="354.6807" y="606.7129">//&nbsp;Puedo&nbsp;lanzar&nbsp;otras&nbsp;corrutinas</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="624.9922">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="625.7803" y="642.3281">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,583.498 301.0752,583.498 L311.0752,583.498" fill="none" style="stroke:#000000;stroke-width:1;"></path><rect fill="#FFFFFF" height="125.3145" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.5;" width="641.7012" x="311.0752" y="675.2949"></rect><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="698.4268">&nbsp;</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="621.7012" x="321.0752" y="715.4688">suspend&nbsp;fun&nbsp;funcionAsincrona()&nbsp;:&nbsp;Tipo&nbsp;=&nbsp;withContext(Dispatchers.Default)&nbsp;{</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="25.2041" x="354.6807" y="733.748">...</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="159.626" x="354.6807" y="752.0273">//&nbsp;Se&nbsp;evalúa&nbsp;a&nbsp;tipo</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="8.4014" x="321.0752" y="770.3066">}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="3.8896" x="629.981" y="787.6426">&nbsp;</text><path d="M261.0752,656.1553 L271.0752,656.1553 C286.0752,656.1553 286.0752,737.9521 301.0752,737.9521 L311.0752,737.9521" fill="none" style="stroke:#000000;stroke-width:1;"></path><path d="M100.7861,410.3047 L110.7861,410.3047 C125.7861,410.3047 125.7861,656.1553 140.7861,656.1553 L150.7861,656.1553" fill="none" style="stroke:#000000;stroke-width:1;"></path><!--SRC=[ZLJDJXin4BxxAKRg9K5Y-IbKD4qZ80Ggb5GH6xYK2asyGp3isblR6mg8X-a3zDHRhxnOnzua_8XAvE2in_FpVT-ClUqyMbyedHLO2j5s_YQdZfWPzXHEB1O0TmAWhpH9aniBkpdAAxRi6-s_Oa6mOnNcCqEgRWdMDdWtefz-9rSJNP3sqATppqPjCe8xnry0GymofIUm5NTVZ5Mtd03pno392zbulCir3wofTDQD8CwqqNGMZuvggzLaOMqpcj8BpCmrhFBcNjoBzigCc5ZwzcwFg4olRdRpYhv3UzpXI5jvfT6rLyOTiSGkVJMvy0kVhYMKwk6FvhCb-6fETMbDLZ6uKst9LRddOk5igINQaWbsn1Hpk3HZQC4Xhv_1ILDIacEbvGNSGSJexKqKjlvnIacPAXHJDZjEQMcDDercTBW7YPuZ6zI2Bcf9UOvU6TtxAQaC7yqdcLPMO82QBWsmr3boQ0YOCOZPuigo94aY66MYt8xqQaeXj6kAqbOqHd0AoFc7Nu3X4ADddQlHZ9vrtbXYBc5qkZHArouzLv95GFXH4PppUQuaSJTgaJv5FOTlrtAFpibQojeZLPhEGbPqDrhELJrdYLcGkO9O0qa9YFCy_0rWGlGJzdYDoZUQIKwUaon0m7AdpiZXmz0SXnOeVtI8S_N8vENKxDT0o9rgxeEhM0hjGWzEjG5q3xzhV4uyvLgxPO75VoU2ULyhVz7bky8thB6dN1c6WwnBM21aSFDf2CWhOYeyBWMZpvGbwJ5SBM8TZBVeveAHWoSmZPud696UC5x9_FalTDg4JjEi_8iwg6-vJfruCHHEt8TvUzRsLnc_qhjMxDRRAOUcpY0zwxcFFNyEOvlhBfw-8MFtnuC-J3ahWu2rP7rrVJFPQAJeuP3HhM_1sllMwiVM-YPqU-a8mdbJD0w6VN2cif9OOEUj6bVnIef3d28SLTghWkzjs3L6WoQalRaHUdggc6XeY3Wy6THE_1Bwj3G-Ed_OMDvLdhbOnWKd0p7Zow5CWr_F5XoFzfUtH1_rfC895o8dklmYylFIWbxw3m00]--></g></svg></p><p></p>
 <div style="page-break-after:always;"></div>
 <h2 id="corrutinas-en-android">Corrutinas en Android </h2>
 <p>Utilizaremos los conceptos ya vistos pero adaptados a Android. Alguna de las cosas que deberemos tener en cuenta son:</p>
