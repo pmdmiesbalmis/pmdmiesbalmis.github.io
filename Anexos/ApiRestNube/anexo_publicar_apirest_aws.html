@@ -370,6 +370,10 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
             <p>Entorno en ejecución</p>
 
           </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          <a href="#finalizar-entorno-para-ahorrar-recursos" class="md-toc-link">
+            <p>Finalizar entorno para ahorrar recursos</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
           <a href="#anexo" class="md-toc-link">
             <p>Anexo : Recursos para probar con un caso real</p>
 
@@ -424,6 +428,28 @@ En el menú superior se puede ver el coste usado hasta el momento (el total que 
 </div>
 <p>Si queremos modificar el Apirest y cargar de nuevo el .war, solo deberemos seleccionar el botón naranja <strong>Cargar e implementar</strong>. Esto nos permitirá seleccionar el nuevo archivo y etiquetarlo con la versión.</p>
 <p><img src="./assets/imagenes/imagen12.png" alt="aws" style="display:block;margin:0 auto;width:50%;max-width:700px;"></p>
+<h3 id="finalizar-entorno-para-ahorrar-recursos">Finalizar entorno para ahorrar recursos </h3>
+<p>Como ya sabemos, solo hay 50 dolares de presupuesto, que aunque seguramente va a ser más que suficiente para el tiempo de desarrollo del proyecto, no está de más que llevemos cuidado con los recursos. Como estamos usando una instancia de <code>Elastic Beanstalk</code> no podemos cerrarla fácilmente para que deje de consumir. Por lo que tendremos que terminarla y volverla a crear cuando necesitemos hacer las prácticas. Para ello hay dos opciones, terminarla sin más y volver a hacer el proceso de creación (unos 5 minutos). Vamos a contar este último que incluye los dos:</p>
+<p>Antes de terminar tu entorno:</p>
+<ul>
+<li>
+<p>Seleccionamos el entorno a terminar, con el check activo vamos al botón de <strong>Acciones</strong> y seleccionamos <strong>Guardar configuración</strong>. Esto crea una plantilla de configuración dentro de Elastic Beanstalk.</p>
+</li>
+<li>
+<p>Una vez guardada la configuración, seleccionamos el entorno y en <strong>Acciones</strong> seleccionamos <strong>Terminar entorno</strong>. Esto elimina la instancia de Amazon EC2 y deja de gastar presupuesto.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>Solo cuando haya terminado el entorno totalmente (tardará unos minutos), se mostrará el estado como terminado en la consola, volveremos a la página del laboratorio y  seleccionaremos <strong>Stop Lab</strong> para finalizar el laboratorio correctamente.</p>
+<p><img src="./assets/imagenes/imagen14.png" alt="aws" style="display:block;margin:0 auto;width:100%;max-width:700px;"></p>
+</li>
+<li>
+<p>Recrear otra vez el entorno cuando vuelvas al lab. Para ello dentro de <strong>Aplicaciones</strong> buscamos nuestra aplicación y al seleccionarla se mostrará la entrada <strong>Configuraciones guardadas</strong> de esta.</p>
+<p><img src="./assets/imagenes/imagen15.png" alt="aws" style="display:block;margin:0 auto;width:100%;max-width:700px;"></p>
+<p>Si pulsamos sobre este enlace nos mostrará la pantalla con todas las configuraciones guardadas con anterioridad, seleccionamos la que nos interese y podemos pulsar a <strong>Cargar</strong> o modificar algunas de sus características si pulsamos <strong>Entorno de lanzamiento</strong>.</p>
+<p><img src="./assets/imagenes/imagen16.png" alt="aws" style="display:block;margin:0 auto;width:100%;max-width:700px;"></p>
+</li>
+</ul>
 <h3 id="anexo">Anexo : Recursos para probar con un caso real </h3>
 <p>Si vamos a alojar nuestra Apirest en un servidor en la nube, deberemos tener la base de datos en una url accesible por este servidor, por lo que también debería estar alojada en la nube. Por tema de sencillez, vamos a usar el servidor del instituto <code>iesdoctorbalmis.info</code> que permite alojar bases de datos y gestionarlas mediante <strong>Workbench</strong> desde el ordenador personal, tan solo con realizar la conexión desde este.<br>
 Los pasos son los siguientes, abrimos <strong>Workbech</strong> y en el panel principal seleccionamos el <strong>+</strong> para crear una nueva conexión. El siguiente paso será configurar la dirección de la base de datos, el usuario y la clave. Serán los siguientes según os los distribuyan los profesores:</p>
