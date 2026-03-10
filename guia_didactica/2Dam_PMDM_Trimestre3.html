@@ -363,13 +363,39 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 <li>Hasta el comienzo de la FE</li>
 </ol>
 
-          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
-          <a href="#3-alumnos-con-el-módulo-pendiente" class="md-toc-link">
-            <ol start="3">
+          </a></div><details style="padding:0;;padding-left:0px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#3-alumnos-con-el-módulo-pendiente" class="md-toc-link"><ol start="3">
 <li>Alumnos con el módulo pendiente</li>
 </ol>
+</a>
+          </summary>
+        <div>
+          <details style="padding:0;;padding-left:24px;" open="">
+        <summary class="md-toc-link-wrapper">
+          <a href="#orientaciones-generales-para-el-examen" class="md-toc-link"><p>Orientaciones generales para el examen</p>
+</a>
+          </summary>
+        <div>
+          <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#seguimiento-y-calendario" class="md-toc-link">
+            <p>Seguimiento y calendario</p>
 
-          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#superación-del-módulo-en-convocatoria-ordinaria" class="md-toc-link">
+            <p>Superación del módulo en convocatoria ordinaria</p>
+
+          </a></div><div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:42px">
+          <a href="#superación-del-módulo-en-convocatoria-extraordinaria" class="md-toc-link">
+            <p>Superación del módulo en convocatoria extraordinaria</p>
+
+          </a></div>
+        </div>
+      </details>
+    
+        </div>
+      </details>
+    <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
           <a href="#4-alumnos-con-el-módulo-superado-a-falta-de-la-valoración-de-la-fe" class="md-toc-link">
             <ol start="4">
 <li>Alumnos con el módulo superado a falta de la valoración de la FE</li>
@@ -424,12 +450,90 @@ e) Otras circunstancias debidamente acreditadas y motivadas por el equipo docent
 <li>Repasar los apuntes y ejercicios trabajados durante el curso.</li>
 <li>Solicitar aclaraciones en las clases de repaso presenciales (si no realizan la FE).</li>
 <li>Solicitar aclaraciones a través del foro de AULES (si realizan la FE).</li>
-<li>Realizar y entregar a través de AULES ejercicios modelo examen.</li>
 </ul>
 <p>Todo el alumnado con el módulo pendiente tendrá la posibilidad de examinarse de nuevo en la primera quincena de junio dentro de la convocatoria ordinaria, siempre antes de final de curso y dentro del periodo lectivo.</p>
 <div class="admonition info">
 <p class="admonition-title">Para los alumnos con nota mayor o igual que 4 y menor que 5 <strong>en la evaluación continua</strong>, el profesorado del módulo establece que podrán optar, en sustitución al examen ordinario, por la entrega de alguna práctica y/o realización de un ejercicio presencial más concreto para complementar la nota hasta 5.</p>
 </div>
+<h4 id="orientaciones-generales-para-el-examen">Orientaciones generales para el examen </h4>
+<p>Tanto el examen ordinario como el extraordinario, al  tratarse de un examen final del módulo, será similar al del último trimestre donde se intentan poner en práctica todo lo tratado a lo largo del curso y mínimo necesario para realizar una aplicación móvil operativa. Aspectos generales en los que habría que trabajar:</p>
+<ol>
+<li>
+<p>Conocer la <strong>arquitectura de la aplicación</strong> descrita en el tema 2, con sus partes y los paquetes propuestos en ella.</p>
+</li>
+<li>
+<p>Saber definir y usar <strong>Hilt</strong> (con Ksp) como librería para la inyección de dependencias.</p>
+</li>
+<li>
+<p>Saber gestionar en la arquitectura una <strong>capa de datos</strong> con una persistencia a través de la librería Room.</p>
+<ul>
+<li>Definir entidades a partir de un modelo dado. Nombres y tipos de campo adecuados.</li>
+<li>Definir la BD y los DAO a usar. Eliminando elementos innecesarios como Converters si no se usan.</li>
+<li>Definir el repositorio y el mapeo entre entidades y modelos y viceversa.</li>
+<li>Realizar una primera carga de datos en la BD con una fuente de datos de prueba.</li>
+<li>Realizar todos estos procesos de forma <strong>asíncrona</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Saber gestionar en la arquitectura la <strong>capa de UI</strong> con:</p>
+<ul>
+<li>
+<p>Definición <strong>'<em>features</em>'</strong> a modo de <strong>pantalla</strong> (Screen) para ello:</p>
+<ul>
+<li>Deberemos saber definir y saber interpretar componentes básicos de la interfaz de usuario: <strong><code>Layouts</code></strong>, <strong><code>LazyLayouts</code></strong>, <strong><code>Cards</code></strong>, <strong><code>TextFields</code></strong>, <strong><code>Modificadores</code></strong>, etc. dentro de los apuntes si fuera necesario.</li>
+<li>Saber definir una entrada de datos básica, a través de <strong><code>TetxtFields</code></strong> y adicionalmente hacer una validación de los datos introducidos.</li>
+</ul>
+</li>
+<li>
+<p>Deberemos saber definir un <strong><code>Scaffold</code></strong> con los elementos vistos en clase, como mínimo:</p>
+<ul>
+<li><strong><code>AppBar</code></strong> con sus elementos como navegación, título y acciones, etc. Así como menús de desbordamiento (overflowmenu).</li>
+<li><strong><code>FloatingActionButton</code></strong>.</li>
+<li><strong><code>NavigationDrawer</code></strong> y como gestionarla.</li>
+<li><strong><code>BottomAppBar</code></strong> y como gestionarla.</li>
+<li><strong><code>ModalBottomSheet</code></strong> y como gestionarla.</li>
+</ul>
+</li>
+<li>
+<p>Saber definir un <strong><code>ViewModel</code></strong> asociado la UI o pantalla como <strong>gestor del estado</strong> y encargado de realizar todo la lógica y comunicación con la capa de datos. En este sentido deberemos saber:</p>
+<ul>
+<li>Saber definir un <strong><code>ViewModel</code></strong> con Hilt e inyectarle clases <em>colaboradoras</em> en su constructor.</li>
+<li>Saber crear una instancia de <strong><code>ViewModel</code></strong> con el ViewModelOwner adecuado, usando las funciones que proporciona Hilt para ello.</li>
+<li>Realizar correctamente la gestión del estado de los datos que se necesiten en la UI.</li>
+<li>Saber lanzar un proceso asíncrono o no bloqueante desde el <strong><code>ViewModel</code></strong> y gestionar su resultado.</li>
+<li>Implementar '<em>State Hoisting</em>' de los datos necesarios para la UI hasta el <strong><code>ViewModel</code></strong>. Intentando que la UI sea completamente <strong>'<em>stateless</em>'</strong>. Saber definir un componente <strong>'<em>stateful</em>'</strong> si su estado no fuera necesario de manejar en el VM.</li>
+<li>Saber definir un <strong>patrón <em>'Sum-Type'</em></strong> para agrupar callbacks de eventos de la UI si fuera necesario.</li>
+</ul>
+</li>
+<li>
+<p>Definir la navegación entre pantallas, ya sea dentro de un mismo Scaffold o entre pantallas con su propio Scaffold.</p>
+<ul>
+<li>Pasar datos entre pantallas de forma segura y sin acoplamiento usando parámetros en la ruta de navegación.</li>
+<li>Saber hacer llegar estos datos al ViewModel de destino.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div style="page-break-after:always;"></div>
+<h5 id="seguimiento-y-calendario">Seguimiento y calendario </h5>
+<p>En Aules se ha habilitado un bloque dedicado al <strong>Programa de Recuperación</strong>, que incluye ejercicios más específicos diseñados para alcanzar los objetivos del módulo. Esto no implica que los alumnos con bases más débiles deban limitarse únicamente a estos ejercicios; también pueden realizar las actividades propuestas a lo largo del curso, disponibles igualmente en Aules.</p>
+<p>La estructura del Programa de Recuperación se organiza por temas. En Aules se detalla la temporalización recomendada y los ejercicios correspondientes a cada uno de ellos:</p>
+<ul>
+<li>Repasar lenguaje Kotlin Tema 1.1 y Tema 1.2.</li>
+<li>Leer Tema 2.3 y Temas del 3.1 al 3.3</li>
+<li>Leer Tema 3.4 ViewModel y Tema 3.5 Hilt.</li>
+<li>Leer Tema 3.6 Crear una lista con ViewModel + Hilt.</li>
+<li>Leer Tema 4.1 Añadir Scaffold, ModalBottomSheet y ActionBars.</li>
+<li>Leer Tema 4.2 Navegación con tipos seguros y NavigationBar.</li>
+<li>Tema 5.1 Cargar datos de Mock a Room.</li>
+<li>Hacer ejemplo de examen.</li>
+</ul>
+<div style="page-break-after:always;"></div>
+<h5 id="superación-del-módulo-en-convocatoria-ordinaria">Superación del módulo en convocatoria ordinaria </h5>
+<p>Los ejercicios realizados y calificados durante este periodo <strong>no tendrán reflejo en la calificación de la convocatoria ordinaria</strong>. Para superar el módulo en estas convocatorias, el alumno deberá obtener una calificación igual o superior a 5 en el exámen, que se realizará de forma presencial en el instituto durante la primera semana de junio, según el calendario que establecerá el equipo directivo y del que se informará al alumnado a través de AULES.</p>
+<h5 id="superación-del-módulo-en-convocatoria-extraordinaria">Superación del módulo en convocatoria extraordinaria </h5>
+<p>Constará de un ejercicio similar al de la convocatoria ordinaria y se realizará de forma presencial en el instituto durante la última semana de junio, según el calendario que establezca el equipo directivo. Debiendo obtener una calificación igual o superior a 5 para aprobar.</p>
 <div style="page-break-after:always;"></div>
 <h3 id="4-alumnos-con-el-módulo-superado-a-falta-de-la-valoración-de-la-fe">4. Alumnos con el módulo superado a falta de la valoración de la FE </h3>
 <p>Para que un alumno supere el módulo deberá obtener una valoración de “SUPERADA” en la Formación de Empresa.</p>
