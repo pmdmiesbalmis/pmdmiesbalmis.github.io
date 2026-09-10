@@ -13,7 +13,7 @@
     <script src="assets/js/tailwind.js"></script>
     
     <!-- PrismJS for Syntax Highlighting - LOCAL -->
-    <link href="assets/css/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="assets/css/prism-ghcolors.css" rel="stylesheet" />
     <script src="assets/js/prism.min.js"></script>
     <script src="assets/js/prism-kotlin.min.js"></script>
 
@@ -27,18 +27,23 @@
                         mono: ['Roboto Mono', 'monospace'],
                     },
                     colors: {
+                        // 4-value minimalist grayscale palette:
+                        // 1. #FFFFFF (Pure White - backgrounds, cards, inverse text)
+                        // 2. #F4F4F5 (Light Gray - surface variant, headers, hover)
+                        // 3. #71717A (Medium Gray - secondary text, borders, icons)
+                        // 4. #18181B (Dark Charcoal / Soft Black - primary text, active items, dark surfaces)
                         m3: {
-                            primary: '#6750A4',
+                            primary: '#18181B',
                             onPrimary: '#FFFFFF',
-                            primaryContainer: '#EADDFF',
-                            onPrimaryContainer: '#21005D',
-                            secondary: '#625B71',
-                            background: '#FFFBFE',
-                            surface: '#FFFBFE',
-                            outline: '#79747E',
-                            surfaceVariant: '#E7E0EC',
-                            onSurfaceVariant: '#49454F',
-                            error: '#B3261E',
+                            primaryContainer: '#F4F4F5',
+                            onPrimaryContainer: '#18181B',
+                            secondary: '#71717A',
+                            background: '#FFFFFF',
+                            surface: '#FFFFFF',
+                            outline: '#71717A',
+                            surfaceVariant: '#F4F4F5',
+                            onSurfaceVariant: '#71717A',
+                            error: '#18181B',
                             onError: '#FFFFFF',
                         }
                     }
@@ -48,23 +53,24 @@
     </script>
 
     <style>
-        /* Custom Scrollbar */
+        /* Custom Scrollbar - Minimalist Grayscale */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: transparent; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #ccc; 
-            border-radius: 4px;
+            background: #71717A; 
+            border-radius: 9999px;
+            opacity: 0.4;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #aaa; 
+            background: #18181B; 
         }
 
-        /* Ripple Effect Simulation */
+        /* Ripple Effect Simulation - Grayscale */
         .ripple {
             position: relative;
             overflow: hidden;
@@ -79,7 +85,7 @@
             top: 0;
             left: 0;
             pointer-events: none;
-            background-image: radial-gradient(circle, #6750a4 10%, transparent 10.01%);
+            background-image: radial-gradient(circle, #18181B 10%, transparent 10.01%);
             background-repeat: no-repeat;
             background-position: 50%;
             transform: scale(10, 10);
@@ -88,25 +94,25 @@
         }
         .ripple:active:after {
             transform: scale(0, 0);
-            opacity: 0.2;
+            opacity: 0.15;
             transition: 0s;
         }
         
         /* M3 Specific styles for web simulation */
         .m3-card {
-            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
-            transition: box-shadow 0.2s ease;
+            box-shadow: 0px 1px 3px rgba(24, 24, 27, 0.08), 0px 1px 2px rgba(24, 24, 27, 0.04);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
         }
         .m3-card:hover {
-            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15);
+            box-shadow: 0px 4px 12px rgba(24, 24, 27, 0.08);
         }
         .m3-elevated-button {
-            box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+            box-shadow: 0px 1px 3px rgba(24, 24, 27, 0.12);
         }
         
         .m3-switch input:checked + div {
-            background-color: #6750A4;
-            border-color: #6750A4;
+            background-color: #18181B;
+            border-color: #18181B;
         }
         .m3-switch input:checked + div .thumb {
             transform: translateX(20px);
@@ -116,9 +122,10 @@
         }
         .m3-switch input:checked + div .icon-check {
             opacity: 1;
+            color: #18181B;
         }
 
-        /* Slider Styles */
+        /* Slider Styles - Minimalist Grayscale */
         input[type=range] {
             -webkit-appearance: none;
             width: 100%;
@@ -126,86 +133,200 @@
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 20px;
-            width: 20px;
+            height: 18px;
+            width: 18px;
             border-radius: 50%;
-            background: #6750A4;
-            margin-top: -8px;
+            background: #18181B;
+            margin-top: -7px;
             cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            border: 2px solid #FFFFFF;
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: #E7E0EC;
-            border-radius: 2px;
+            background: #F4F4F5;
+            border: 1px solid #71717A;
+            border-radius: 9999px;
         }
         input[type=range]:focus::-webkit-slider-runnable-track {
-            background: #E7E0EC;
+            background: #F4F4F5;
+        }
+
+        /* Accessibility: Focus visible ring */
+        :focus-visible {
+            outline: 2px solid #18181B !important;
+            outline-offset: 2px !important;
+        }
+
+        /* Hide scrollbars for clean chip carousels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         pre {
-            border-radius: 12px !important;
+            border-radius: 16px !important;
             margin: 0 !important;
         }
     </style>
 </head>
-<body class="bg-[#FDFCF4] text-[#1C1B1F] h-screen flex overflow-hidden selection:bg-m3-primaryContainer selection:text-m3-onPrimaryContainer">
+<body class="bg-[#FFFFFF] text-[#18181B] h-screen flex overflow-hidden selection:bg-[#18181B] selection:text-[#FFFFFF]">
+
+    <!-- Skip to main content (A11y) -->
+    <a href="#contentArea" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-[#18181B] focus:text-[#FFFFFF] focus:px-4 focus:py-2.5 focus:rounded-full focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#18181B] text-xs font-medium transition-all">
+        Saltar al contenido principal
+    </a>
 
     <!-- Sidebar Navigation -->
-    <aside class="w-64 flex-shrink-0 bg-[#F3EDF7] border-r border-[#CAC4D0] flex flex-col h-full transition-transform duration-300 absolute md:relative z-20 -translate-x-full md:translate-x-0" id="sidebar">
-        <div class="p-6 flex items-center gap-3 border-b border-[#E7E0EC]">
-            <span class="material-symbols-rounded text-m3-primary text-3xl">widgets</span>
-            <h1 class="font-bold text-xl text-[#1D1B20]">M3 Catalog</h1>
-        </div>
-        
-        <div class="overflow-y-auto flex-1 py-4 px-3 space-y-1" id="componentList">
-            <!-- JS populates this -->
+    <aside 
+        class="w-72 md:w-80 flex-shrink-0 bg-[#F4F4F5] border-r border-[#71717A]/20 flex flex-col h-full transition-transform duration-300 absolute md:relative z-20 -translate-x-full md:translate-x-0" 
+        id="sidebar" 
+        role="navigation" 
+        aria-label="Navegación del catálogo de componentes"
+    >
+        <!-- Header -->
+        <div class="p-4 md:p-5 flex items-center justify-between border-b border-[#71717A]/20 bg-[#F4F4F5]">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-rounded text-[#18181B] text-3xl" aria-hidden="true">widgets</span>
+                <div>
+                    <h1 class="font-bold text-lg text-[#18181B] leading-tight tracking-tight">M3 Compose</h1>
+                    <p class="text-[11px] text-[#71717A]">Material Design 3 Catalog</p>
+                </div>
+            </div>
+            <span class="text-xs bg-[#18181B] text-[#FFFFFF] font-bold px-2.5 py-0.5 rounded-full" id="totalCountBadge" aria-label="39 componentes disponibles">39</span>
         </div>
 
-        <div class="p-4 text-xs text-gray-500 text-center border-t border-[#E7E0EC]">
-            Basado en Androidx Compose Material3
+        <!-- Search Bar & Filters -->
+        <div class="p-3 border-b border-[#71717A]/20 bg-[#F4F4F5] space-y-2">
+            <div class="relative flex items-center">
+                <span class="material-symbols-rounded absolute left-3 text-[#71717A] text-lg pointer-events-none" aria-hidden="true">search</span>
+                <input 
+                    id="searchInput" 
+                    type="search" 
+                    placeholder="Buscar componentes (Ctrl+K)..." 
+                    aria-label="Buscar componente en el catálogo"
+                    autocomplete="off"
+                    class="w-full pl-9 pr-8 py-2 text-xs rounded-full bg-[#FFFFFF] border border-[#71717A]/30 focus:ring-2 focus:ring-[#18181B] focus:border-[#18181B] focus:outline-none text-[#18181B] placeholder-[#71717A] transition-all"
+                    oninput="handleSearch(this.value)"
+                />
+                <button 
+                    id="clearSearchBtn" 
+                    onclick="clearSearch()" 
+                    class="hidden absolute right-2.5 p-1 rounded-full text-[#71717A] hover:text-[#18181B] focus:outline-none" 
+                    aria-label="Limpiar búsqueda"
+                >
+                    <span class="material-symbols-rounded text-sm" aria-hidden="true">close</span>
+                </button>
+            </div>
+
+            <!-- Category Pills Bar -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs" role="tablist" aria-label="Filtro rápido por categoría" id="categoryPills">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+
+        <!-- Section Controls Bar -->
+        <div class="px-3 py-1.5 flex items-center justify-between text-xs bg-[#F4F4F5] border-b border-[#71717A]/20">
+            <span class="text-[11px] font-medium text-[#71717A] flex items-center gap-1">
+                <span class="material-symbols-rounded text-xs" aria-hidden="true">folder</span>
+                Secciones
+            </span>
+            <button 
+                id="toggleAllCategoriesBtn" 
+                onclick="toggleAllCategories()" 
+                class="inline-flex items-center gap-1 text-[11px] font-semibold text-[#18181B] bg-[#FFFFFF] hover:bg-[#F4F4F5] px-2.5 py-0.5 rounded-full border border-[#71717A]/30 transition-all focus:outline-none focus:ring-2 focus:ring-[#18181B] shadow-2xs"
+                aria-label="Colapsar todas las secciones"
+                title="Colapsar todas las secciones"
+            >
+                <span id="toggleAllCategoriesIcon" class="material-symbols-rounded text-xs" aria-hidden="true">unfold_less</span>
+                <span id="toggleAllCategoriesText">Colapsar todo</span>
+            </button>
+        </div>
+        
+        <!-- Component List Grouped by Category -->
+        <div class="overflow-y-auto flex-1 py-3 px-2 space-y-2.5 bg-[#F4F4F5]" id="componentList" role="list">
+            <!-- JS populates grouped categories here -->
+        </div>
+
+        <!-- Footer Info -->
+        <div class="p-3 text-[11px] text-[#71717A] flex items-center justify-between border-t border-[#71717A]/20 bg-[#F4F4F5]">
+            <span class="flex items-center gap-1"><span class="material-symbols-rounded text-sm text-[#18181B]">check_circle</span> Offline-first</span>
+            <span class="text-[#71717A]">AndroidX Compose M3</span>
         </div>
     </aside>
 
     <!-- Mobile Overlay -->
-    <div id="overlay" class="fixed inset-0 bg-black/50 z-10 hidden md:hidden" onclick="toggleSidebar()"></div>
+    <div id="overlay" class="fixed inset-0 bg-[#18181B]/40 z-10 hidden md:hidden" onclick="toggleSidebar()" aria-hidden="true"></div>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative bg-[#FFFFFF]" id="mainContent" tabindex="-1">
         
         <!-- Top Bar -->
-        <header class="h-16 bg-[#F3EDF7] flex items-center px-4 justify-between border-b border-[#CAC4D0]">
-            <div class="flex items-center gap-4">
-                <button onclick="toggleSidebar()" class="md:hidden p-2 rounded-full hover:bg-[#E7E0EC] ripple">
-                    <span class="material-symbols-rounded">menu</span>
+        <header class="h-16 bg-[#FFFFFF] flex items-center px-4 justify-between border-b border-[#71717A]/20" role="banner">
+            <div class="flex items-center gap-3">
+                <button 
+                    onclick="toggleSidebar()" 
+                    class="md:hidden p-2 rounded-full hover:bg-[#F4F4F5] text-[#18181B] ripple focus:outline-none focus:ring-2 focus:ring-[#18181B]"
+                    aria-label="Abrir menú de componentes"
+                >
+                    <span class="material-symbols-rounded" aria-hidden="true">menu</span>
                 </button>
-                <h2 id="pageTitle" class="text-lg font-medium">Bienvenido</h2>
+                <div>
+                    <h2 id="pageTitle" class="text-lg font-semibold text-[#18181B] tracking-tight">Bienvenido al Catálogo M3</h2>
+                </div>
             </div>
-            <a href="https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary" target="_blank" class="text-sm text-m3-primary hover:underline flex items-center gap-1">
-                Docs Oficiales <span class="material-symbols-rounded text-sm">open_in_new</span>
+            <a 
+                href="https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-xs md:text-sm text-[#18181B] hover:underline flex items-center gap-1 font-medium px-3 py-1.5 rounded-full hover:bg-[#F4F4F5] border border-transparent hover:border-[#71717A]/20 transition-all focus:outline-none focus:ring-2 focus:ring-[#18181B]"
+                aria-label="Ver documentación oficial de AndroidX Compose Material 3 (se abre en nueva pestaña)"
+            >
+                <span>Docs Oficiales</span>
+                <span class="material-symbols-rounded text-sm text-[#71717A]" aria-hidden="true">open_in_new</span>
             </a>
         </header>
 
         <!-- Content Area -->
-        <div class="flex-1 overflow-y-auto p-4 md:p-8">
-            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8" id="contentArea">
+        <div class="flex-1 overflow-y-auto p-4 md:p-8 bg-[#FFFFFF]" id="scrollContainer">
+            <div class="w-full flex flex-col gap-8" id="contentArea" role="region" aria-live="polite">
                 
                 <!-- Intro State -->
-                <div class="col-span-1 lg:col-span-2 text-center py-20">
-                    <span class="material-symbols-rounded text-6xl text-m3-primary mb-4">android</span>
-                    <h3 class="text-2xl font-medium mb-2">Selecciona un componente</h3>
-                    <p class="text-gray-600">Explora la implementación visual y obtén el código Compose al instante.</p>
+                <div class="w-full text-center py-16 px-4">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-[#F4F4F5] text-[#18181B] border border-[#71717A]/20 rounded-3xl flex items-center justify-center shadow-xs">
+                        <span class="material-symbols-rounded text-4xl" aria-hidden="true">category</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-[#18181B] tracking-tight">Explorador de Componentes Material 3</h3>
+                    <p class="text-[#71717A] max-w-md mx-auto text-sm mb-6 leading-relaxed">
+                        Selecciona cualquier componente del panel lateral o busca por nombre para ver su simulación interactiva, consejos de accesibilidad (A11y) y fragmentos de código Kotlin Compose listos para usar.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-2 max-w-lg mx-auto">
+                        <button onclick="loadComponent('scaffold')" class="text-xs px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#F4F4F5] border border-[#71717A]/30 rounded-full text-[#18181B] font-medium transition-all shadow-2xs">🚀 Scaffold</button>
+                        <button onclick="loadComponent('buttons')" class="text-xs px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#F4F4F5] border border-[#71717A]/30 rounded-full text-[#18181B] font-medium transition-all shadow-2xs">🔘 Buttons</button>
+                        <button onclick="loadComponent('navigationrail')" class="text-xs px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#F4F4F5] border border-[#71717A]/30 rounded-full text-[#18181B] font-medium transition-all shadow-2xs">📱 Navigation Rail</button>
+                        <button onclick="loadComponent('segmentedbutton')" class="text-xs px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#F4F4F5] border border-[#71717A]/30 rounded-full text-[#18181B] font-medium transition-all shadow-2xs">🔲 Segmented Button</button>
+                        <button onclick="loadComponent('tooltip')" class="text-xs px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#F4F4F5] border border-[#71717A]/30 rounded-full text-[#18181B] font-medium transition-all shadow-2xs">💬 Tooltip</button>
+                    </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- Toast Notification -->
-        <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#322F35] text-[#F4EFF4] px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
-            <span class="material-symbols-rounded text-green-400">check_circle</span>
-            Código copiado al portapapeles
+        <!-- Toast Notification (Accessible Live Region) -->
+        <div 
+            id="toast" 
+            role="status" 
+            aria-live="polite" 
+            aria-atomic="true"
+            class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#18181B] text-[#FFFFFF] border border-[#71717A]/40 px-6 py-3 rounded-full shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3 text-sm font-medium pointer-events-none"
+        >
+            <span class="material-symbols-rounded text-[#FFFFFF] text-lg" aria-hidden="true">check_circle</span>
+            <span>Código copiado al portapapeles</span>
         </div>
     </main>
 
@@ -215,6 +336,8 @@
             // --- STRUCTURE & LAYOUTS ---
             {
                 id: 'scaffold',
+                category: 'structure_navigation',
+                a11yTip: 'Asegura la integración correcta de los insets del sistema (barras de estado y navegación) para mantener el contenido accesible y visible.',
                 name: 'Scaffold',
                 icon: 'dashboard',
                 description: 'Layout de alto nivel que implementa la estructura visual básica de Material Design.',
@@ -268,6 +391,8 @@
             },
             {
                 id: 'drawer',
+                category: 'structure_navigation',
+                a11yTip: 'Proporciona etiquetas claras para el botón de apertura (ej. "Abrir menú de navegación") y gestiona el foco dentro del panel abierto.',
                 name: 'Navigation Drawer',
                 icon: 'side_navigation',
                 description: 'Panel de navegación que se desliza desde el lateral.',
@@ -331,6 +456,8 @@ ModalNavigationDrawer(
             },
             {
                 id: 'lazycolumn',
+                category: 'lists_containers',
+                a11yTip: 'Asigna claves estables (key) a cada elemento y agrupa información semántica con Modifier.semantics(mergeDescendants = true).',
                 name: 'Lazy Column (List)',
                 icon: 'format_list_bulleted',
                 description: 'Lista vertical eficiente que carga elementos bajo demanda. Soporta animaciones y claves para rendimiento.',
@@ -402,35 +529,37 @@ fun DatosEnColumnaAnimada(
             },
             {
                 id: 'lazygrid',
+                category: 'lists_containers',
+                a11yTip: 'Garantiza que la navegación por teclado y el orden de enfoque del lector de pantalla sigan una secuencia bidimensional lógica.',
                 name: 'Lazy Grid',
                 icon: 'grid_view',
                 description: 'Cuadrícula vertical eficiente. Soporta celdas adaptativas y animaciones.',
                 webPreview: `
-                    <div class="w-full max-w-xs h-64 bg-[#FDFCF4] rounded-lg border border-gray-200 overflow-hidden flex flex-col">
-                         <div class="bg-[#F3EDF7] p-3 border-b border-gray-200 font-medium text-sm flex justify-between items-center">
+                    <div class="w-full max-w-xs h-64 bg-[#FFFFFF] rounded-2xl border border-[#71717A]/20 overflow-hidden flex flex-col shadow-2xs">
+                         <div class="bg-[#F4F4F5] p-3 border-b border-[#71717A]/20 font-semibold text-sm flex justify-between items-center text-[#18181B]">
                             <span>Galería</span>
-                            <span class="material-symbols-rounded text-m3-primary text-sm cursor-pointer">add</span>
+                            <span class="material-symbols-rounded text-[#18181B] text-sm cursor-pointer">add</span>
                          </div>
-                         <div class="overflow-y-auto flex-1 p-2 grid grid-cols-2 gap-2">
+                         <div class="overflow-y-auto flex-1 p-2 grid grid-cols-2 gap-2 bg-[#FFFFFF]">
                             <!-- Item 1 -->
-                            <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center gap-1">
-                                <span class="material-symbols-rounded text-[#6750A4]">favorite</span>
-                                <span class="text-[10px] text-[#6750A4]">Dato 1</span>
+                            <div class="bg-[#F4F4F5] p-3 rounded-xl border border-[#71717A]/20 flex flex-col items-center gap-1">
+                                <span class="material-symbols-rounded text-[#18181B]">favorite</span>
+                                <span class="text-[10px] font-medium text-[#71717A]">Dato 1</span>
                             </div>
                             <!-- Item 2 -->
-                            <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center gap-1">
-                                <span class="material-symbols-rounded text-[#9C27B0]">ac_unit</span>
-                                <span class="text-[10px] text-[#9C27B0]">Dato 2</span>
+                            <div class="bg-[#F4F4F5] p-3 rounded-xl border border-[#71717A]/20 flex flex-col items-center gap-1">
+                                <span class="material-symbols-rounded text-[#18181B]">ac_unit</span>
+                                <span class="text-[10px] font-medium text-[#71717A]">Dato 2</span>
                             </div>
                             <!-- Item 3 -->
-                            <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center gap-1">
-                                <span class="material-symbols-rounded text-[#673AB7]">schedule</span>
-                                <span class="text-[10px] text-[#673AB7]">Dato 3</span>
+                            <div class="bg-[#F4F4F5] p-3 rounded-xl border border-[#71717A]/20 flex flex-col items-center gap-1">
+                                <span class="material-symbols-rounded text-[#18181B]">schedule</span>
+                                <span class="text-[10px] font-medium text-[#71717A]">Dato 3</span>
                             </div>
                             <!-- Item 4 -->
-                            <div class="bg-white p-2 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center gap-1">
-                                <span class="material-symbols-rounded text-[#3F51B5]">cake</span>
-                                <span class="text-[10px] text-[#3F51B5]">Dato 4</span>
+                            <div class="bg-[#F4F4F5] p-3 rounded-xl border border-[#71717A]/20 flex flex-col items-center gap-1">
+                                <span class="material-symbols-rounded text-[#18181B]">cake</span>
+                                <span class="text-[10px] font-medium text-[#71717A]">Dato 4</span>
                             </div>
                          </div>
                     </div>
@@ -487,6 +616,8 @@ fun DatosEnGridAnimado(
             // 1. BUTTONS
             {
                 id: 'buttons',
+                category: 'buttons_actions',
+                a11yTip: 'Utiliza etiquetas descriptivas de la acción (ej. "Guardar cambios"). Garantiza un área táctil mínima de 48x48dp.',
                 name: 'Buttons',
                 icon: 'smart_button',
                 description: 'Botones comunes para desencadenar acciones.',
@@ -516,6 +647,8 @@ fun DatosEnGridAnimado(
             // 2. FABs
             {
                 id: 'fab',
+                category: 'buttons_actions',
+                a11yTip: 'Los Floating Action Buttons de solo icono deben tener siempre contentDescription explicativo en el Icon.',
                 name: 'Floating Action Button',
                 icon: 'add_circle',
                 description: 'Botones de acción principal, incluyendo variantes extendidas.',
@@ -545,6 +678,8 @@ ExtendedFloatingActionButton(
             // 3. ICON BUTTONS
             {
                 id: 'iconbuttons',
+                category: 'buttons_actions',
+                a11yTip: 'Nunca uses contentDescription = null en botones de icono interactivos. Para botones toggle, actualiza el estado semántico.',
                 name: 'Icon Buttons',
                 icon: 'ads_click',
                 description: 'Botones que contienen solo un icono.',
@@ -586,6 +721,8 @@ ExtendedFloatingActionButton(
             // 4. APP BARS
             {
                 id: 'appbars',
+                category: 'structure_navigation',
+                a11yTip: 'Usa títulos concisos y asegura que todos los botones de icono de acción dispongan de descripciones de contenido claras.',
                 name: 'App Bars',
                 icon: 'web_asset',
                 description: 'Barras de aplicación superior e inferior.',
@@ -644,6 +781,8 @@ BottomAppBar(
             // 5. PROGRESS
             {
                 id: 'progress',
+                category: 'feedback_communication',
+                a11yTip: 'Los indicadores indeterminados deben anunciar "Cargando..." al inicio y fin de la operación.',
                 name: 'Progress Indicators',
                 icon: 'pending',
                 description: 'Indicadores de estado de carga circular y lineal.',
@@ -671,6 +810,8 @@ BottomAppBar(
             // 6. PULL TO REFRESH
             {
                 id: 'pullrefresh',
+                category: 'feedback_communication',
+                a11yTip: 'Ofrece un botón visible de recarga o soporte de atajo de teclado para usuarios que no utilicen gestos táctiles.',
                 name: 'Pull To Refresh',
                 icon: 'refresh',
                 description: 'Contenedor que permite refrescar contenido al deslizar.',
@@ -703,6 +844,8 @@ PullToRefreshBox(
             // 7. BADGES
             {
                 id: 'badge',
+                category: 'feedback_communication',
+                a11yTip: 'Añade una descripción semántica completa al elemento contenedor (ej. "3 mensajes nuevos").',
                 name: 'Badge',
                 icon: 'notification_important',
                 description: 'Notificaciones numéricas o puntos sobre iconos.',
@@ -740,6 +883,8 @@ BadgedBox(
             // 8. MENUS
             {
                 id: 'menus',
+                category: 'feedback_communication',
+                a11yTip: 'Los menús desplegables admiten navegación por teclado (flechas arriba/abajo y Enter para seleccionar).',
                 name: 'Menus & Dropdowns',
                 icon: 'menu_open',
                 description: 'Listas de opciones que aparecen temporalmente.',
@@ -794,6 +939,8 @@ Box {
             // 18. EXPOSED DROPDOWN MENU
             {
                 id: 'exposeddropdown',
+                category: 'inputs_selection',
+                a11yTip: 'Usa ExposedDropdownMenuBox con trailingIcon rotatorio accesible para abrir y cerrar la lista desplegable.',
                 name: 'Exposed Dropdown Menu',
                 icon: 'arrow_drop_down_circle',
                 description: 'Menú desplegable integrado en un campo de texto (Select).',
@@ -852,6 +999,8 @@ ExposedDropdownMenuBox(
             // 9. DATE & TIME PICKERS
             {
                 id: 'datetime',
+                category: 'inputs_selection',
+                a11yTip: 'Los selectores de fecha y hora en M3 incluyen modo de entrada directa por teclado para mayor accesibilidad.',
                 name: 'Date & Time Pickers',
                 icon: 'schedule',
                 description: 'Componentes para selección de fecha y hora (Calendario y Reloj).',
@@ -937,6 +1086,8 @@ TimeInput(state = timePickerState)`
             // 10. SELECTION (Radio & Segmented)
             {
                 id: 'selection',
+                category: 'inputs_selection',
+                a11yTip: 'Agrupa radio buttons en Modifier.selectableGroup() y asocia etiquetas de texto completas a los checkboxes.',
                 name: 'Selection Controls',
                 icon: 'check_box',
                 description: 'Radio Buttons y Segmented Buttons.',
@@ -994,6 +1145,8 @@ SingleChoiceSegmentedButtonRow {
             // 11. SNACKBAR
             {
                 id: 'snackbar',
+                category: 'feedback_communication',
+                a11yTip: 'Los mensajes emergentes deben tener duraciones de lectura adecuadas y permitir descarte o acción de deshacer.',
                 name: 'Snackbar',
                 icon: 'call_to_action',
                 description: 'Mensajes breves en la parte inferior de la pantalla.',
@@ -1027,6 +1180,8 @@ Scaffold(
             // 12. BOTTOM SHEET
             {
                 id: 'bottomsheet',
+                category: 'lists_containers',
+                a11yTip: 'ModalBottomSheet gestiona el atrapado de foco y permite cierre accesible mediante deslizamiento hacia abajo o botón Atrás.',
                 name: 'Bottom Sheet',
                 icon: 'vertical_align_bottom',
                 description: 'Superficie que desliza desde abajo.',
@@ -1071,6 +1226,8 @@ if (showBottomSheet) {
             // Previous components kept for completeness
             {
                 id: 'cards',
+                category: 'lists_containers',
+                a11yTip: 'Para tarjetas clicables, define onClick directamente en Card o utiliza Modifier.clickable con role = Role.Button.',
                 name: 'Cards',
                 icon: 'style',
                 description: 'Contenedores que muestran contenido y acciones sobre un solo tema.',
@@ -1097,6 +1254,8 @@ OutlinedCard(border = BorderStroke(1.dp, Color.Black)) {
             },
             {
                 id: 'textfield',
+                category: 'inputs_selection',
+                a11yTip: 'Asocia supportingText y errorText para comunicar errores y reglas de validación en tiempo real a TalkBack.',
                 name: 'Text Fields',
                 icon: 'text_fields',
                 description: 'Permiten a los usuarios introducir texto.',
@@ -1117,6 +1276,8 @@ OutlinedTextField(
             },
             {
                 id: 'custom_textfield',
+                category: 'inputs_selection',
+                a11yTip: 'En campos con formato o máscara (como tarjetas o teléfonos), proporciona texto sin formato en semántica si es necesario.',
                 name: 'Custom Text Fields',
                 icon: 'edit_note',
                 description: 'Campos de texto personalizados con gestión de estados de error y validación.',
@@ -1217,6 +1378,8 @@ private fun OutlinedTextFieldEmail(
             },
             {
                 id: 'switch',
+                category: 'inputs_selection',
+                a11yTip: 'El Switch anuncia automáticamente estados "activado" / "desactivado". Acompaña con etiqueta de texto clicable.',
                 name: 'Switch & Checkbox',
                 icon: 'toggle_on',
                 description: 'Controles de selección binaria.',
@@ -1225,19 +1388,19 @@ private fun OutlinedTextFieldEmail(
                         <div class="flex items-center gap-4">
                             <label class="m3-switch relative inline-block w-[52px] h-[32px] cursor-pointer">
                                 <input type="checkbox" checked class="opacity-0 w-0 h-0">
-                                <div class="slider absolute inset-0 bg-[#6750A4] rounded-full border-2 border-[#6750A4]">
-                                    <span class="thumb absolute h-6 w-6 rounded-full bg-white left-[2px] bottom-[2px] translate-x-5 flex items-center justify-center">
-                                         <span class="material-symbols-rounded text-m3-primary text-sm">check</span>
+                                <div class="slider absolute inset-0 bg-[#18181B] rounded-full border-2 border-[#18181B]">
+                                    <span class="thumb absolute h-6 w-6 rounded-full bg-[#FFFFFF] left-[2px] bottom-[2px] translate-x-5 flex items-center justify-center">
+                                         <span class="material-symbols-rounded text-[#18181B] text-sm">check</span>
                                     </span>
                                 </div>
                             </label>
-                            <span>Switch On</span>
+                            <span class="font-medium text-[#18181B] text-sm">Switch On</span>
                         </div>
                          <div class="flex items-center gap-3">
-                            <div class="w-[18px] h-[18px] bg-m3-primary rounded-sm flex items-center justify-center text-white">
+                            <div class="w-[18px] h-[18px] bg-[#18181B] rounded-sm flex items-center justify-center text-[#FFFFFF]">
                                 <span class="material-symbols-rounded text-sm">check</span>
                             </div>
-                            <span>Checkbox</span>
+                            <span class="font-medium text-[#18181B] text-sm">Checkbox</span>
                         </div>
                     </div>
                 `,
@@ -1247,6 +1410,8 @@ Checkbox(checked = checked, onCheckedChange = { checked = it })`
             },
             {
                 id: 'slider',
+                category: 'inputs_selection',
+                a11yTip: 'Define steps o stateDescription personalizado para que los usuarios de TalkBack conozcan el valor actual exacto.',
                 name: 'Slider',
                 icon: 'linear_scale',
                 description: 'Permite a los usuarios seleccionar un valor de un rango. Incluye variantes con pasos y rangos.',
@@ -1307,6 +1472,8 @@ RangeSlider(
             },
             {
                 id: 'searchbar',
+                category: 'inputs_selection',
+                a11yTip: 'Usa SearchBar con botón de limpiar accesible y anuncia resultados de búsqueda mediante LiveRegion.',
                 name: 'Search Bar',
                 icon: 'search',
                 description: 'Barra de búsqueda flotante o anclada.',
@@ -1337,6 +1504,8 @@ SearchBar(
             },
             {
                 id: 'chips',
+                category: 'feedback_communication',
+                a11yTip: 'Los FilterChips anuncian su estado seleccionado y los InputChips permiten borrado accesible con tecla retroceso.',
                 name: 'Chips',
                 icon: 'label',
                 description: 'Elementos compactos que permiten a los usuarios introducir información, hacer selecciones, filtrar contenido o activar acciones.',
@@ -1409,6 +1578,8 @@ SuggestionChip(
             },
              {
                 id: 'tabs',
+                category: 'structure_navigation',
+                a11yTip: 'Comunica el estado seleccionado del tab actual y la posición relativa ("Pestaña 1 de 3") a las tecnologías de asistencia.',
                 name: 'Tabs',
                 icon: 'tab',
                 description: 'Organiza contenido en diferentes pantallas. Incluye variantes Primaria y Secundaria.',
@@ -1484,6 +1655,8 @@ SecondaryTabRow(selectedTabIndex = secState) {
             },
             {
                 id: 'dialog',
+                category: 'lists_containers',
+                a11yTip: 'Atrapa el foco del teclado dentro del diálogo y asegura botones de confirmación y descarte con etiquetas precisas.',
                 name: 'Dialog',
                 icon: 'chat_bubble',
                 description: 'Ventanas modales para decisiones críticas.',
@@ -1508,13 +1681,15 @@ SecondaryTabRow(selectedTabIndex = secState) {
             // 14. ASYNC IMAGE (COIL)
             {
                 id: 'asyncimage',
+                category: 'utilities_dividers',
+                a11yTip: 'Asigna siempre contentDescription descriptivo a la imagen, o null si la imagen es puramente ornamental.',
                 name: 'AsyncImage (Coil)',
                 icon: 'image',
                 description: 'Carga imágenes de forma asíncrona desde una URL usando la librería Coil.',
                 webPreview: `
                     <div class="flex flex-col items-center justify-center p-4">
-                        <img src="https://picsum.photos/200" alt="Async Image" class="w-32 h-32 object-cover rounded-lg shadow-md" />
-                        <p class="text-xs text-gray-500 mt-2">Imagen cargada desde URL</p>
+                        <img src="assets/images/sample-image.svg" alt="Async Image" class="w-32 h-32 object-cover rounded-lg shadow-md" />
+                        <p class="text-xs text-gray-500 mt-2">Imagen cargada localmente (simulación Coil)</p>
                     </div>
                 `,
                 kotlinCode: `AsyncImage(
@@ -1530,6 +1705,8 @@ SecondaryTabRow(selectedTabIndex = secState) {
             // 15. HORIZONTAL PAGER
             {
                 id: 'pager',
+                category: 'lists_containers',
+                a11yTip: 'Anuncia el cambio de página y el número total ("Página 2 de 5") mediante stateDescription en los indicadores.',
                 name: 'Horizontal Pager',
                 icon: 'view_carousel',
                 description: 'Permite a los usuarios deslizar horizontalmente entre páginas de contenido.',
@@ -1592,6 +1769,8 @@ Column(horizontalAlignment = Alignment.CenterHorizontally) {
             // 16. SWIPE TO DISMISS
             {
                 id: 'swipetodismiss',
+                category: 'lists_containers',
+                a11yTip: 'Ofrece siempre un mecanismo alternativo visible (como un botón de eliminar o menú) además del gesto de arrastre.',
                 name: 'Swipe To Dismiss',
                 icon: 'swipe',
                 description: 'Patrón de deslizamiento para descartar elementos, comúnmente usado en listas.',
@@ -1647,6 +1826,8 @@ SwipeToDismissBox(
             // 17. DIVIDER
             {
                 id: 'divider',
+                category: 'utilities_dividers',
+                a11yTip: 'Los divisores son elementos puramente decorativos; deben ignorarse en lectores de pantalla o no interrumpir la semántica.',
                 name: 'Horizontal Divider',
                 icon: 'remove',
                 description: 'Una línea delgada que agrupa contenido en listas y diseños.',
@@ -1671,10 +1852,810 @@ SwipeToDismissBox(
     
     Text("Item 3")
 }`
+            },
+            // 18. NAVIGATION RAIL
+            {
+                id: 'navigationrail',
+                category: 'structure_navigation',
+                a11yTip: 'Garantiza un área táctil mínima de 48x48dp por destino y define contentDescription descriptivo para TalkBack.',
+                name: 'Navigation Rail',
+                icon: 'side_navigation',
+                description: 'Barra de navegación vertical para pantallas medianas y expandidas (tablets, pantallas plegables o escritorio), que proporciona acceso rápido a 3-7 destinos principales.',
+                webPreview: `
+                    <div class="h-72 w-20 bg-[#F3EDF7] border border-[#CAC4D0] rounded-2xl flex flex-col items-center py-3 justify-between shadow-sm">
+                        <!-- Top section: Menu + FAB -->
+                        <div class="flex flex-col items-center gap-3 w-full">
+                            <button class="p-2 rounded-full hover:bg-black/5 text-[#49454F]">
+                                <span class="material-symbols-rounded text-xl">menu</span>
+                            </button>
+                            <button class="w-10 h-10 bg-m3-primaryContainer text-m3-onPrimaryContainer rounded-xl flex items-center justify-center shadow hover:shadow-md transition-shadow">
+                                <span class="material-symbols-rounded text-lg">edit</span>
+                            </button>
+                        </div>
+                        <!-- Nav Items -->
+                        <div class="flex flex-col items-center gap-2 w-full">
+                            <div class="flex flex-col items-center cursor-pointer group w-full">
+                                <div class="w-12 h-7 bg-m3-secondaryContainer text-m3-onSecondaryContainer rounded-full flex items-center justify-center">
+                                    <span class="material-symbols-rounded text-lg">home</span>
+                                </div>
+                                <span class="text-[10px] font-medium text-[#1D1B20] mt-0.5">Inicio</span>
+                            </div>
+                            <div class="flex flex-col items-center cursor-pointer group w-full opacity-70 hover:opacity-100">
+                                <div class="w-12 h-7 rounded-full flex items-center justify-center relative">
+                                    <span class="material-symbols-rounded text-lg text-[#49454F]">search</span>
+                                </div>
+                                <span class="text-[10px] font-medium text-[#49454F] mt-0.5">Buscar</span>
+                            </div>
+                            <div class="flex flex-col items-center cursor-pointer group w-full opacity-70 hover:opacity-100">
+                                <div class="w-12 h-7 rounded-full flex items-center justify-center relative">
+                                    <span class="material-symbols-rounded text-lg text-[#49454F]">notifications</span>
+                                    <span class="absolute top-1 right-2 w-2 h-2 bg-m3-error rounded-full"></span>
+                                </div>
+                                <span class="text-[10px] font-medium text-[#49454F] mt-0.5">Avisos</span>
+                            </div>
+                        </div>
+                        <!-- Bottom Settings -->
+                        <div class="flex flex-col items-center cursor-pointer opacity-70 hover:opacity-100">
+                            <span class="material-symbols-rounded text-lg text-[#49454F]">settings</span>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var selectedItem by rememberSaveable { mutableIntStateOf(0) }
+val items = listOf("Inicio", "Buscar", "Avisos")
+val icons = listOf(Icons.Filled.Home, Icons.Filled.Search, Icons.Filled.Notifications)
+
+NavigationRail(
+    header = {
+        FloatingActionButton(
+            onClick = { /* Acción FAB */ },
+            elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
+        ) {
+            Icon(Icons.Filled.Edit, contentDescription = "Crear")
+        }
+    },
+    modifier = Modifier.fillMaxHeight()
+) {
+    Spacer(Modifier.height(8.dp))
+    items.forEachIndexed { index, item ->
+        NavigationRailItem(
+            icon = {
+                BadgedBox(badge = {
+                    if (index == 2) Badge { Text("3") }
+                }) {
+                    Icon(icons[index], contentDescription = item)
+                }
+            },
+            label = { Text(item) },
+            selected = selectedItem == index,
+            onClick = { selectedItem = index }
+        )
+    }
+}`
+            },
+            // 19. SEGMENTED BUTTON
+            {
+                id: 'segmentedbutton',
+                category: 'buttons_actions',
+                a11yTip: 'SegmentedButton anuncia automáticamente su rol y estado de selección a los lectores de pantalla.',
+                name: 'Segmented Button',
+                icon: 'splitscreen',
+                description: 'Permite alternar entre opciones mutuamente excluyentes (Single Choice) o selecciones múltiples (Multi Choice) dentro de un grupo visual integrado.',
+                webPreview: `
+                    <div class="w-full max-w-sm flex flex-col gap-6 items-center p-2">
+                        <!-- Single Choice -->
+                        <div class="w-full flex flex-col gap-2">
+                            <span class="text-xs font-medium text-[#49454F]">Single Choice (Vista)</span>
+                            <div class="inline-flex w-full border border-m3-outline rounded-full overflow-hidden text-xs">
+                                <button class="flex-1 py-2.5 px-3 bg-m3-secondaryContainer text-m3-onSecondaryContainer font-medium flex items-center justify-center gap-1.5 transition-colors border-r border-m3-outline">
+                                    <span class="material-symbols-rounded text-sm">check</span>
+                                    <span>Día</span>
+                                </button>
+                                <button class="flex-1 py-2.5 px-3 hover:bg-black/5 text-[#49454F] font-medium flex items-center justify-center gap-1 transition-colors border-r border-m3-outline">
+                                    <span>Semana</span>
+                                </button>
+                                <button class="flex-1 py-2.5 px-3 hover:bg-black/5 text-[#49454F] font-medium flex items-center justify-center gap-1 transition-colors">
+                                    <span>Mes</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Multi Choice -->
+                        <div class="w-full flex flex-col gap-2">
+                            <span class="text-xs font-medium text-[#49454F]">Multi Choice (Filtros)</span>
+                            <div class="inline-flex w-full border border-m3-outline rounded-full overflow-hidden text-xs">
+                                <button class="flex-1 py-2.5 px-3 bg-m3-secondaryContainer text-m3-onSecondaryContainer font-medium flex items-center justify-center gap-1.5 transition-colors border-r border-m3-outline">
+                                    <span class="material-symbols-rounded text-sm">check</span>
+                                    <span>Canciones</span>
+                                </button>
+                                <button class="flex-1 py-2.5 px-3 bg-m3-secondaryContainer text-m3-onSecondaryContainer font-medium flex items-center justify-center gap-1.5 transition-colors border-r border-m3-outline">
+                                    <span class="material-symbols-rounded text-sm">check</span>
+                                    <span>Álbumes</span>
+                                </button>
+                                <button class="flex-1 py-2.5 px-3 hover:bg-black/5 text-[#49454F] font-medium flex items-center justify-center gap-1 transition-colors">
+                                    <span>Artistas</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `// 1. Single Choice Segmented Button Row
+var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
+val options = listOf("Día", "Semana", "Mes")
+
+SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
+    options.forEachIndexed { index, label ->
+        SegmentedButton(
+            shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
+            onClick = { selectedIndex = index },
+            selected = index == selectedIndex,
+            icon = { SegmentedButtonDefaults.Icon(active = index == selectedIndex) }
+        ) {
+            Text(label)
+        }
+    }
+}
+
+// 2. Multi Choice Segmented Button Row
+val checkedList = remember { mutableStateListOf(true, true, false) }
+val filterOptions = listOf("Canciones", "Álbumes", "Artistas")
+
+MultiChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
+    filterOptions.forEachIndexed { index, label ->
+        SegmentedButton(
+            shape = SegmentedButtonDefaults.itemShape(index = index, count = filterOptions.size),
+            checked = checkedList[index],
+            onCheckedChange = { checkedList[index] = it },
+            icon = { SegmentedButtonDefaults.Icon(active = checkedList[index]) }
+        ) {
+            Text(label)
+        }
+    }
+}`
+            },
+            // 20. LIST ITEM (M3)
+            {
+                id: 'listitem',
+                category: 'lists_containers',
+                a11yTip: 'ListItem organiza automáticamente el titular, subtítulo y elementos gráficos en un único nodo semántico accesible.',
+                name: 'List Item (M3)',
+                icon: 'density_medium',
+                description: 'Componente estándar de Material 3 para estructurar filas de listas con ranuras predefinidas para iconos, titulares, subtítulos y controles secundarios.',
+                webPreview: `
+                    <div class="w-full max-w-sm bg-white rounded-2xl border border-[#CAC4D0] overflow-hidden divide-y divide-[#E7E0EC] shadow-sm">
+                        <!-- One-line List Item -->
+                        <div class="p-3.5 flex items-center justify-between hover:bg-black/5 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-rounded text-m3-primary text-xl">folder</span>
+                                <span class="text-sm font-medium text-[#1D1B20]">Documentos personales</span>
+                            </div>
+                            <span class="material-symbols-rounded text-gray-400 text-lg">chevron_right</span>
+                        </div>
+
+                        <!-- Two-line List Item -->
+                        <div class="p-3.5 flex items-center justify-between hover:bg-black/5 cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-m3-primaryContainer text-m3-onPrimaryContainer flex items-center justify-center font-bold text-sm">
+                                    JD
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-[#1D1B20]">Juan Doe</div>
+                                    <div class="text-xs text-[#49454F]">¿Nos vemos a las 18:00 en la oficina?</div>
+                                </div>
+                            </div>
+                            <span class="text-[11px] text-gray-400">14:25</span>
+                        </div>
+
+                        <!-- Three-line List Item -->
+                        <div class="p-3.5 flex items-start justify-between hover:bg-black/5 cursor-pointer">
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-rounded text-m3-secondary text-xl mt-0.5">mail</span>
+                                <div>
+                                    <div class="text-[10px] uppercase font-semibold text-m3-primary tracking-wider">Facturación</div>
+                                    <div class="text-sm font-medium text-[#1D1B20]">Factura #2026-0815</div>
+                                    <div class="text-xs text-[#49454F] line-clamp-1">Adjuntamos el desglose mensual del servicio contratado.</div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-rounded text-gray-400 text-lg">star</span>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `Column(modifier = Modifier.fillMaxWidth()) {
+    // 1. One-line Item
+    ListItem(
+        headlineContent = { Text("Documentos personales") },
+        leadingContent = {
+            Icon(Icons.Filled.Folder, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        },
+        trailingContent = {
+            Icon(Icons.Filled.ChevronRight, contentDescription = null)
+        }
+    )
+    HorizontalDivider()
+
+    // 2. Two-line Item con Avatar
+    ListItem(
+        headlineContent = { Text("Juan Doe") },
+        supportingContent = { Text("¿Nos vemos a las 18:00 en la oficina?") },
+        leadingContent = {
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primaryContainer,
+                modifier = Modifier.size(40.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text("JD", style = MaterialTheme.typography.titleMedium)
+                }
+            }
+        },
+        trailingContent = { Text("14:25", style = MaterialTheme.typography.bodySmall) }
+    )
+    HorizontalDivider()
+
+    // 3. Three-line Item con Overline
+    ListItem(
+        overlineContent = { Text("FACTURACIÓN") },
+        headlineContent = { Text("Factura #2026-0815") },
+        supportingContent = { Text("Adjuntamos el desglose mensual del servicio contratado.") },
+        leadingContent = { Icon(Icons.Filled.Mail, contentDescription = null) },
+        trailingContent = {
+            IconButton(onClick = { }) {
+                Icon(Icons.Filled.Star, contentDescription = "Destacar")
+            }
+        }
+    )
+}`
+            },
+            // 21. TOOLTIP
+            {
+                id: 'tooltip',
+                category: 'feedback_communication',
+                a11yTip: 'Los tooltips se activan mediante pulsación larga táctil, foco de teclado o hover con ratón.',
+                name: 'Tooltip',
+                icon: 'info',
+                description: 'Muestra información descriptiva o asistencial sobre elementos visuales mediante etiquetas simples (Plain) o diálogos interactivos (Rich).',
+                webPreview: `
+                    <div class="w-full max-w-xs flex flex-col gap-6 items-center p-4">
+                        <!-- Plain Tooltip Simulation -->
+                        <div class="flex flex-col items-center relative">
+                            <div class="bg-[#313033] text-[#F4EFF4] text-xs px-3 py-1.5 rounded-md shadow-md mb-2 flex items-center gap-1">
+                                <span>Añadir a favoritos</span>
+                            </div>
+                            <button class="w-10 h-10 rounded-full bg-m3-primary text-white flex items-center justify-center shadow">
+                                <span class="material-symbols-rounded text-lg">favorite</span>
+                            </button>
+                        </div>
+
+                        <!-- Rich Tooltip Simulation -->
+                        <div class="w-full bg-[#ECE6F0] rounded-2xl p-4 shadow-md border border-[#CAC4D0] relative">
+                            <div class="text-sm font-semibold text-[#1D1B20] mb-1">Permisos de acceso</div>
+                            <div class="text-xs text-[#49454F] mb-3">Esta función requiere acceso completo a las notificaciones y almacenamiento para sincronizar en segundo plano.</div>
+                            <div class="flex justify-end gap-2">
+                                <button class="text-xs text-m3-primary font-medium px-2 py-1 hover:bg-black/5 rounded">Más info</button>
+                                <button class="text-xs bg-m3-primary text-white font-medium px-3 py-1 rounded-full">Entendido</button>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `// 1. Plain Tooltip
+val plainTooltipState = rememberTooltipState()
+
+TooltipBox(
+    positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+    tooltip = {
+        PlainTooltip {
+            Text("Añadir a favoritos")
+        }
+    },
+    state = plainTooltipState
+) {
+    IconButton(onClick = { }) {
+        Icon(Icons.Filled.Favorite, contentDescription = "Favoritos")
+    }
+}
+
+// 2. Rich Tooltip con Acción
+val richTooltipState = rememberTooltipState(isPersistent = true)
+val scope = rememberCoroutineScope()
+
+TooltipBox(
+    positionProvider = TooltipDefaults.rememberRichTooltipPositionProvider(),
+    tooltip = {
+        RichTooltip(
+            title = { Text("Permisos de acceso") },
+            action = {
+                TextButton(onClick = { scope.launch { richTooltipState.dismiss() } }) {
+                    Text("Entendido")
+                }
+            }
+        ) {
+            Text("Esta función requiere sincronización en segundo plano.")
+        }
+    },
+    state = richTooltipState
+) {
+    IconButton(onClick = { scope.launch { richTooltipState.show() } }) {
+        Icon(Icons.Filled.Info, contentDescription = "Ayuda")
+    }
+}`
+            },
+            // 22. CAROUSEL
+            {
+                id: 'carousel',
+                category: 'lists_containers',
+                a11yTip: 'Proporciona una opción lineal accesible (ej. botón "Ver todos") para usuarios que navegan mediante lectores de pantalla.',
+                name: 'Carousel',
+                icon: 'view_carousel',
+                description: 'Muestra colecciones horizontales de tarjetas con tamaños dinámicos y transiciones visuales (Multi-browse y Hero).',
+                webPreview: `
+                    <div class="w-full max-w-md flex flex-col gap-3 p-2">
+                        <div class="flex items-center justify-between px-1">
+                            <span class="text-sm font-medium text-[#1D1B20]">Colecciones destacadas</span>
+                            <span class="text-xs text-m3-primary font-medium cursor-pointer">Ver todo</span>
+                        </div>
+                        <!-- Multi-browse Carousel Preview -->
+                        <div class="flex gap-2.5 overflow-x-auto py-2 no-scrollbar">
+                            <!-- Large Card -->
+                            <div class="w-44 h-48 flex-shrink-0 bg-[#18181B] rounded-[28px] p-4 text-[#FFFFFF] flex flex-col justify-between shadow-sm border border-[#71717A]/30">
+                                <span class="material-symbols-rounded text-2xl text-[#FFFFFF]">landscape</span>
+                                <div>
+                                    <div class="text-xs uppercase tracking-wider text-[#71717A]">Naturaleza</div>
+                                    <div class="text-sm font-semibold text-[#FFFFFF]">Montañas y Lagos</div>
+                                </div>
+                            </div>
+                            <!-- Medium Card -->
+                            <div class="w-32 h-48 flex-shrink-0 bg-[#F4F4F5] rounded-[28px] p-4 text-[#18181B] flex flex-col justify-between shadow-2xs border border-[#71717A]/20">
+                                <span class="material-symbols-rounded text-2xl text-[#18181B]">architecture</span>
+                                <div>
+                                    <div class="text-xs uppercase tracking-wider text-[#71717A]">Diseño</div>
+                                    <div class="text-sm font-semibold text-[#18181B]">Urbano</div>
+                                </div>
+                            </div>
+                            <!-- Small Card -->
+                            <div class="w-16 h-48 flex-shrink-0 bg-[#FFFFFF] rounded-[28px] p-2 text-[#18181B] flex flex-col items-center justify-end shadow-2xs border border-[#71717A]/30">
+                                <span class="material-symbols-rounded text-xl mb-2 text-[#71717A]">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CarouselSample() {
+    data class CarouselItem(val id: Int, val title: String, val category: String)
+    
+    val items = remember {
+        listOf(
+            CarouselItem(1, "Montañas y Lagos", "Naturaleza"),
+            CarouselItem(2, "Diseño Urbano", "Arquitectura"),
+            CarouselItem(3, "Fauna Salvaje", "Animales"),
+            CarouselItem(4, "Exploración Espacial", "Ciencia")
+        )
+    }
+
+    HorizontalMultiBrowseCarousel(
+        state = rememberCarouselState { items.size },
+        preferredItemWidth = 180.dp,
+        itemSpacing = 8.dp,
+        modifier = Modifier.fillMaxWidth().height(220.dp)
+    ) { index ->
+        val item = items[index]
+        Card(
+            shape = MaterialTheme.shapes.extraLarge,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            ),
+            modifier = Modifier.fillMaxSize().maskClip(MaterialTheme.shapes.extraLarge)
+        ) {
+            Box(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+                Column(modifier = Modifier.align(Alignment.BottomStart)) {
+                    Text(
+                        text = item.category.uppercase(),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                    )
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+            }
+        }
+    }
+}`
+            },
+            // 23. SPLIT BUTTON
+            {
+                id: 'splitbutton',
+                category: 'buttons_actions',
+                a11yTip: 'Diferencia semánticamente la acción principal ("Guardar") del botón desplegable secundario ("Más opciones de guardado").',
+                name: 'Split Button',
+                icon: 'call_split',
+                description: 'Botón compuesto que divide una acción directa principal de una lista desplegable con variantes u opciones alternativas.',
+                webPreview: `
+                    <div class="flex flex-col gap-6 items-center justify-center p-4">
+                        <!-- Filled Split Button -->
+                        <div class="inline-flex rounded-full overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <button class="bg-m3-primary text-white px-5 py-2.5 font-medium text-sm flex items-center gap-2 hover:bg-opacity-95 ripple">
+                                <span class="material-symbols-rounded text-base">save</span>
+                                <span>Guardar</span>
+                            </button>
+                            <div class="w-[1px] bg-white/30"></div>
+                            <button class="bg-m3-primary text-white px-2.5 py-2.5 flex items-center justify-center hover:bg-opacity-95 ripple">
+                                <span class="material-symbols-rounded text-base">arrow_drop_down</span>
+                            </button>
+                        </div>
+
+                        <!-- Tonal Split Button with Simulated Dropdown -->
+                        <div class="flex flex-col items-center relative">
+                            <div class="inline-flex rounded-full overflow-hidden border border-m3-outline">
+                                <button class="bg-m3-primaryContainer text-m3-onPrimaryContainer px-5 py-2.5 font-medium text-sm flex items-center gap-2 hover:bg-opacity-90 ripple">
+                                    <span class="material-symbols-rounded text-base">send</span>
+                                    <span>Enviar</span>
+                                </button>
+                                <div class="w-[1px] bg-m3-outline"></div>
+                                <button class="bg-m3-primaryContainer text-m3-onPrimaryContainer px-2.5 py-2.5 flex items-center justify-center hover:bg-opacity-90 ripple">
+                                    <span class="material-symbols-rounded text-base">arrow_drop_down</span>
+                                </button>
+                            </div>
+                            <!-- Dropdown Popup Mock -->
+                            <div class="mt-2 w-44 bg-[#F3EDF7] rounded-xl shadow-lg border border-[#CAC4D0] py-1 text-xs">
+                                <div class="px-3 py-2 hover:bg-black/5 flex items-center gap-2 cursor-pointer text-[#1D1B20]">
+                                    <span class="material-symbols-rounded text-sm">schedule</span> Programar envío
+                                </div>
+                                <div class="px-3 py-2 hover:bg-black/5 flex items-center gap-2 cursor-pointer text-[#1D1B20]">
+                                    <span class="material-symbols-rounded text-sm">drafts</span> Guardar borrador
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var menuExpanded by remember { mutableStateOf(false) }
+
+Row(
+    modifier = Modifier.clip(CircleShape),
+    verticalAlignment = Alignment.CenterVertically
+) {
+    // Acción Principal
+    Button(
+        onClick = { /* Acción guardar */ },
+        shape = RoundedCornerShape(
+            topStart = 20.dp, bottomStart = 20.dp,
+            topEnd = 0.dp, bottomEnd = 0.dp
+        ),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
+    ) {
+        Icon(Icons.Filled.Save, contentDescription = null, modifier = Modifier.size(18.dp))
+        Spacer(Modifier.width(8.dp))
+        Text("Guardar")
+    }
+
+    // Separador sutil
+    VerticalDivider(
+        modifier = Modifier.height(36.dp),
+        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f)
+    )
+
+    // Botón desplegable secundario
+    Box {
+        Button(
+            onClick = { menuExpanded = true },
+            shape = RoundedCornerShape(
+                topStart = 0.dp, bottomStart = 0.dp,
+                topEnd = 20.dp, bottomEnd = 20.dp
+            ),
+            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp)
+        ) {
+            Icon(Icons.Filled.ArrowDropDown, contentDescription = "Más opciones")
+        }
+
+        DropdownMenu(
+            expanded = menuExpanded,
+            onDismissRequest = { menuExpanded = false }
+        ) {
+            DropdownMenuItem(
+                text = { Text("Guardar como copia") },
+                leadingIcon = { Icon(Icons.Filled.FileCopy, contentDescription = null) },
+                onClick = { menuExpanded = false }
+            )
+            DropdownMenuItem(
+                text = { Text("Exportar como PDF") },
+                leadingIcon = { Icon(Icons.Filled.PictureAsPdf, contentDescription = null) },
+                onClick = { menuExpanded = false }
+            )
+        }
+    }
+}`
+            },
+            // 24. SIDE SHEET
+            {
+                id: 'sidesheet',
+                category: 'structure_navigation',
+                a11yTip: 'Permite descarte accesible mediante la tecla Escape o el botón Atrás, manteniendo el foco dentro del panel mientras esté activo.',
+                name: 'Side Sheet',
+                icon: 'dock_to_right',
+                description: 'Panel lateral complementario que muestra contenido de soporte, filtros o herramientas de edición en pantallas amplias.',
+                webPreview: `
+                    <div class="w-full max-w-sm h-64 bg-[#FDFCF4] border border-gray-300 rounded-2xl flex overflow-hidden shadow-sm relative">
+                        <!-- Main content preview -->
+                        <div class="flex-1 p-3 flex flex-col justify-between opacity-50">
+                            <div class="space-y-2">
+                                <div class="h-3 bg-gray-300 rounded w-2/3"></div>
+                                <div class="h-3 bg-gray-200 rounded w-full"></div>
+                                <div class="h-3 bg-gray-200 rounded w-4/5"></div>
+                            </div>
+                            <div class="text-[10px] text-gray-400">Contenido Principal</div>
+                        </div>
+                        <!-- Docked Side Sheet -->
+                        <div class="w-44 bg-[#F3EDF7] border-l border-[#CAC4D0] p-3 flex flex-col justify-between shadow-md">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-semibold text-[#1D1B20]">Filtros</span>
+                                    <span class="material-symbols-rounded text-sm text-gray-500 cursor-pointer">close</span>
+                                </div>
+                                <div class="space-y-1.5 text-[11px]">
+                                    <label class="flex items-center gap-1.5 text-[#49454F]">
+                                        <input type="checkbox" checked class="rounded text-m3-primary accent-m3-primary" />
+                                        <span>Activos</span>
+                                    </label>
+                                    <label class="flex items-center gap-1.5 text-[#49454F]">
+                                        <input type="checkbox" class="rounded text-m3-primary accent-m3-primary" />
+                                        <span>Pendientes</span>
+                                    </label>
+                                    <label class="flex items-center gap-1.5 text-[#49454F]">
+                                        <input type="checkbox" checked class="rounded text-m3-primary accent-m3-primary" />
+                                        <span>Favoritos</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="w-full py-1 bg-m3-primary text-white text-[11px] font-medium rounded-full">
+                                Aplicar
+                            </button>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `var isSideSheetOpen by remember { mutableStateOf(true) }
+
+Row(modifier = Modifier.fillMaxSize()) {
+    // Contenido Principal
+    Box(
+        modifier = Modifier
+            .weight(1f)
+            .fillMaxHeight()
+            .padding(16.dp)
+    ) {
+        Button(onClick = { isSideSheetOpen = !isSideSheetOpen }) {
+            Text("Alternar Side Sheet")
+        }
+    }
+
+    // Modal / Standard Side Sheet animado
+    AnimatedVisibility(
+        visible = isSideSheetOpen,
+        enter = slideInHorizontally(initialOffsetX = { it }),
+        exit = slideOutHorizontally(targetOffsetX = { it })
+    ) {
+        Surface(
+            modifier = Modifier
+                .width(320.dp)
+                .fillMaxHeight(),
+            color = MaterialTheme.colorScheme.surfaceContainerLow,
+            tonalElevation = 1.dp
+        ) {
+            Column(modifier = Modifier.padding(24.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Detalles y Filtros", style = MaterialTheme.typography.titleLarge)
+                    IconButton(onClick = { isSideSheetOpen = false }) {
+                        Icon(Icons.Filled.Close, contentDescription = "Cerrar")
+                    }
+                }
+                HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+                Text("Contenido complementario del panel lateral...")
+            }
+        }
+    }
+}`
+            },
+            // 25. VERTICAL DIVIDER
+            {
+                id: 'verticaldivider',
+                category: 'utilities_dividers',
+                a11yTip: 'Separador vertical decorativo. No debe contener texto accesible ni bloquear el flujo de lectura.',
+                name: 'Vertical Divider',
+                icon: 'more_vert',
+                description: 'Línea delgada vertical utilizada para separar y agrupar visualmente componentes contiguos en filas o barras de herramientas.',
+                webPreview: `
+                    <div class="w-full max-w-xs flex items-center justify-center gap-4 p-5 bg-white rounded-2xl border border-[#CAC4D0] shadow-sm">
+                        <div class="flex flex-col items-center">
+                            <span class="text-xs text-gray-500">Ventas</span>
+                            <span class="text-base font-bold text-m3-primary">1.420</span>
+                        </div>
+                        
+                        <div class="h-10 w-[1px] bg-[#CAC4D0]"></div>
+                        
+                        <div class="flex flex-col items-center">
+                            <span class="text-xs text-gray-500">Ingresos</span>
+                            <span class="text-base font-bold text-m3-primary">€28,5K</span>
+                        </div>
+                        
+                        <div class="h-10 w-[2px] bg-m3-primary"></div>
+                        
+                        <div class="flex flex-col items-center">
+                            <span class="text-xs text-gray-500">Clientes</span>
+                            <span class="text-base font-bold text-m3-primary">+85</span>
+                        </div>
+                    </div>
+                `,
+                kotlinCode: `Row(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(IntrinsicSize.Min)
+        .padding(16.dp),
+    horizontalArrangement = Arrangement.SpaceEvenly,
+    verticalAlignment = Alignment.CenterVertically
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Ventas", style = MaterialTheme.typography.bodySmall)
+        Text("1.420", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+    }
+
+    VerticalDivider(
+        modifier = Modifier.padding(vertical = 4.dp),
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.outlineVariant
+    )
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Ingresos", style = MaterialTheme.typography.bodySmall)
+        Text("€28,5K", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+    }
+
+    VerticalDivider(
+        modifier = Modifier.padding(vertical = 4.dp),
+        thickness = 2.dp,
+        color = MaterialTheme.colorScheme.primary
+    )
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text("Clientes", style = MaterialTheme.typography.bodySmall)
+        Text("+85", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+    }
+}`
+            },
+            // 26. FAB MENU (SPEED DIAL)
+            {
+                id: 'fabmenu',
+                category: 'buttons_actions',
+                a11yTip: 'Comunica el estado expandido/colapsado del menú y asigna etiquetas de texto descriptivas a cada sub-acción.',
+                name: 'FAB Menu (Speed Dial)',
+                icon: 'expand_circle_up',
+                description: 'Menú de acciones flotantes animado que se despliega desde un botón FAB para presentar un conjunto compacto de acciones rápidas.',
+                webPreview: `
+                    <div class="flex flex-col items-end gap-3 p-4">
+                        <!-- Sub-action 1 -->
+                        <div class="flex items-center gap-2">
+                            <span class="bg-[#322F35] text-white text-xs px-2.5 py-1 rounded-md shadow">Crear nota</span>
+                            <button class="w-10 h-10 bg-m3-secondaryContainer text-m3-onSecondaryContainer rounded-xl flex items-center justify-center shadow">
+                                <span class="material-symbols-rounded text-lg">note_add</span>
+                            </button>
+                        </div>
+                        <!-- Sub-action 2 -->
+                        <div class="flex items-center gap-2">
+                            <span class="bg-[#322F35] text-white text-xs px-2.5 py-1 rounded-md shadow">Subir archivo</span>
+                            <button class="w-10 h-10 bg-m3-secondaryContainer text-m3-onSecondaryContainer rounded-xl flex items-center justify-center shadow">
+                                <span class="material-symbols-rounded text-lg">upload_file</span>
+                            </button>
+                        </div>
+                        <!-- Primary FAB Toggle -->
+                        <button class="w-14 h-14 bg-m3-primary text-white rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-transform hover:scale-105">
+                            <span class="material-symbols-rounded text-2xl">close</span>
+                        </button>
+                    </div>
+                `,
+                kotlinCode: `var isMenuExpanded by remember { mutableStateOf(false) }
+
+Column(
+    horizontalAlignment = Alignment.End,
+    verticalArrangement = Arrangement.spacedBy(12.dp),
+    modifier = Modifier.padding(16.dp)
+) {
+    // Acciones secundarias animadas
+    AnimatedVisibility(
+        visible = isMenuExpanded,
+        enter = fadeIn() + slideInVertically(initialOffsetY = { it / 2 }),
+        exit = fadeOut() + slideOutVertically(targetOffsetY = { it / 2 })
+    ) {
+        Column(
+            horizontalAlignment = Alignment.End,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.inverseSurface,
+                    shadowElevation = 2.dp
+                ) {
+                    Text(
+                        "Crear nota",
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                    )
+                }
+                SmallFloatingActionButton(
+                    onClick = { /* Acción 1 */ },
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                ) {
+                    Icon(Icons.Filled.NoteAdd, contentDescription = "Crear nota")
+                }
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.inverseSurface,
+                    shadowElevation = 2.dp
+                ) {
+                    Text(
+                        "Subir archivo",
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                    )
+                }
+                SmallFloatingActionButton(
+                    onClick = { /* Acción 2 */ },
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                ) {
+                    Icon(Icons.Filled.UploadFile, contentDescription = "Subir archivo")
+                }
+            }
+        }
+    }
+
+    // FAB Principal con rotación de icono
+    FloatingActionButton(
+        onClick = { isMenuExpanded = !isMenuExpanded },
+        containerColor = MaterialTheme.colorScheme.primary
+    ) {
+        val rotation by animateFloatAsState(
+            targetValue = if (isMenuExpanded) 45f else 0f,
+            label = "fab_rotation"
+        )
+        Icon(
+            Icons.Filled.Add,
+            contentDescription = if (isMenuExpanded) "Cerrar menú" else "Abrir menú",
+            modifier = Modifier.rotate(rotation)
+        )
+    }
+}`
             }
         ];
 
-        // --- UI LOGIC ---
+        // --- CATEGORIES DEFINITION ---
+        const categoryDefinitions = {
+            'structure_navigation': { id: 'structure_navigation', name: 'Estructura y Navegación', shortName: 'Navegación', icon: 'dashboard' },
+            'lists_containers': { id: 'lists_containers', name: 'Listas y Contenedores', shortName: 'Listas', icon: 'view_agenda' },
+            'buttons_actions': { id: 'buttons_actions', name: 'Botones y Acciones', shortName: 'Botones', icon: 'smart_button' },
+            'inputs_selection': { id: 'inputs_selection', name: 'Entradas y Selección', shortName: 'Inputs', icon: 'edit_note' },
+            'feedback_communication': { id: 'feedback_communication', name: 'Feedback y Comunicación', shortName: 'Feedback', icon: 'notifications' },
+            'utilities_dividers': { id: 'utilities_dividers', name: 'Utilidades y Separadores', shortName: 'Utilidades', icon: 'build' }
+        };
+
+        // Track collapsed categories
+        const collapsedCategories = new Set();
+        let selectedCategoryFilter = 'all';
+        let searchQuery = '';
+        let currentComponentId = null;
 
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
@@ -1682,28 +2663,104 @@ SwipeToDismissBox(
         const contentArea = document.getElementById('contentArea');
         const pageTitle = document.getElementById('pageTitle');
         const toast = document.getElementById('toast');
-
-        let currentComponentId = null;
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        const categoryPills = document.getElementById('categoryPills');
 
         function toggleSidebar() {
             const isClosed = sidebar.classList.contains('-translate-x-full');
             if (isClosed) {
                 sidebar.classList.remove('-translate-x-full');
                 overlay.classList.remove('hidden');
+                sidebar.setAttribute('aria-hidden', 'false');
             } else {
                 sidebar.classList.add('-translate-x-full');
                 overlay.classList.add('hidden');
+                sidebar.setAttribute('aria-hidden', 'true');
             }
+        }
+
+        function toggleCategory(catId) {
+            if (collapsedCategories.has(catId)) {
+                collapsedCategories.delete(catId);
+            } else {
+                collapsedCategories.add(catId);
+            }
+            updateToggleAllBtn();
+            renderSidebar();
+        }
+
+        function toggleAllCategories() {
+            const allCatIds = Object.keys(categoryDefinitions);
+            const areAllCollapsed = allCatIds.every(id => collapsedCategories.has(id));
+
+            if (areAllCollapsed) {
+                collapsedCategories.clear();
+            } else {
+                allCatIds.forEach(id => collapsedCategories.add(id));
+            }
+            updateToggleAllBtn();
+            renderSidebar();
+        }
+
+        function updateToggleAllBtn() {
+            const btn = document.getElementById('toggleAllCategoriesBtn');
+            const icon = document.getElementById('toggleAllCategoriesIcon');
+            const text = document.getElementById('toggleAllCategoriesText');
+            if (!btn || !icon || !text) return;
+
+            const allCatIds = Object.keys(categoryDefinitions);
+            const areAllCollapsed = allCatIds.every(id => collapsedCategories.has(id));
+
+            if (areAllCollapsed) {
+                icon.innerText = 'unfold_more';
+                text.innerText = 'Expandir todo';
+                btn.setAttribute('aria-label', 'Expandir todas las secciones');
+                btn.title = 'Expandir todas las secciones';
+            } else {
+                icon.innerText = 'unfold_less';
+                text.innerText = 'Colapsar todo';
+                btn.setAttribute('aria-label', 'Colapsar todas las secciones');
+                btn.title = 'Colapsar todas las secciones';
+            }
+        }
+
+        function filterByCategory(catId) {
+            selectedCategoryFilter = catId;
+            renderCategoryPills();
+            renderSidebar();
+        }
+
+        function handleSearch(query) {
+            searchQuery = query.trim().toLowerCase();
+            clearSearchBtn.classList.toggle('hidden', searchQuery === '');
+            renderSidebar();
+        }
+
+        function clearSearch() {
+            searchQuery = '';
+            searchInput.value = '';
+            clearSearchBtn.classList.add('hidden');
+            searchInput.focus();
+            renderSidebar();
         }
 
         function showToast() {
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
                 toast.classList.add('translate-y-20', 'opacity-0');
-            }, 2000);
+            }, 2500);
         }
 
         function copyCode(code) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(showToast).catch(() => fallbackCopy(code));
+            } else {
+                fallbackCopy(code);
+            }
+        }
+
+        function fallbackCopy(code) {
             const el = document.createElement('textarea');
             el.value = code;
             document.body.appendChild(el);
@@ -1713,16 +2770,114 @@ SwipeToDismissBox(
             showToast();
         }
 
+        function renderCategoryPills() {
+            const categories = [
+                { id: 'all', shortName: 'Todos', count: components.length },
+                ...Object.values(categoryDefinitions).map(cat => ({
+                    id: cat.id,
+                    shortName: cat.shortName,
+                    count: components.filter(c => c.category === cat.id).length
+                }))
+            ];
+
+            categoryPills.innerHTML = categories.map(cat => {
+                const isActive = selectedCategoryFilter === cat.id;
+                return `
+                    <button 
+                        role="tab"
+                        aria-selected="${isActive}"
+                        onclick="filterByCategory('${cat.id}')"
+                        class="px-2.5 py-1 rounded-full flex-shrink-0 transition-all font-medium flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#18181B] ${isActive ? 'bg-[#18181B] text-[#FFFFFF] shadow-2xs' : 'bg-[#FFFFFF] hover:bg-[#F4F4F5] text-[#71717A] hover:text-[#18181B] border border-[#71717A]/30'}"
+                    >
+                        <span>${cat.shortName}</span>
+                        <span class="text-[10px] opacity-75">(${cat.count})</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
         function renderSidebar() {
-            componentList.innerHTML = components.map(comp => `
-                <button 
-                    onclick="loadComponent('${comp.id}')"
-                    class="w-full flex items-center gap-4 px-4 py-3 rounded-full text-left transition-colors group ${currentComponentId === comp.id ? 'bg-m3-primaryContainer text-m3-onPrimaryContainer' : 'hover:bg-[#E8DEF8] text-[#49454F]'}"
-                >
-                    <span class="material-symbols-rounded ${currentComponentId === comp.id ? 'font-fill' : ''}">${comp.icon}</span>
-                    <span class="font-medium text-sm">${comp.name}</span>
-                </button>
-            `).join('');
+            let filtered = components;
+
+            if (selectedCategoryFilter !== 'all') {
+                filtered = filtered.filter(c => c.category === selectedCategoryFilter);
+            }
+
+            if (searchQuery) {
+                filtered = filtered.filter(c => 
+                    c.name.toLowerCase().includes(searchQuery) ||
+                    c.description.toLowerCase().includes(searchQuery) ||
+                    (c.a11yTip && c.a11yTip.toLowerCase().includes(searchQuery)) ||
+                    c.id.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            if (filtered.length === 0) {
+                componentList.innerHTML = `
+                    <div class="text-center py-8 px-4 text-[#71717A]">
+                        <span class="material-symbols-rounded text-3xl mb-1 text-[#71717A]" aria-hidden="true">search_off</span>
+                        <p class="text-xs font-medium text-[#18181B]">No se encontraron componentes</p>
+                        <button onclick="clearSearch()" class="mt-2 text-xs text-[#18181B] font-medium underline focus:outline-none">Restablecer búsqueda</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group filtered items by category
+            const grouped = {};
+            for (const catId of Object.keys(categoryDefinitions)) {
+                grouped[catId] = filtered.filter(c => c.category === catId);
+            }
+
+            let htmlStr = '';
+            for (const [catId, items] of Object.entries(grouped)) {
+                if (items.length === 0) continue;
+                const cat = categoryDefinitions[catId];
+                const isCollapsed = collapsedCategories.has(catId) && !searchQuery;
+
+                htmlStr += `
+                    <div class="rounded-2xl bg-[#FFFFFF] p-1.5 border border-[#71717A]/20 shadow-2xs" role="region" aria-label="${cat.name}">
+                        <!-- Category Header Button -->
+                        <button 
+                            onclick="toggleCategory('${catId}')"
+                            aria-expanded="${!isCollapsed}"
+                            aria-controls="cat-items-${catId}"
+                            class="w-full flex items-center justify-between px-3 py-2 text-left rounded-xl hover:bg-[#F4F4F5] transition-colors group focus:outline-none focus:ring-2 focus:ring-[#18181B]"
+                        >
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-rounded text-sm text-[#18181B]" aria-hidden="true">${cat.icon}</span>
+                                <span class="font-semibold text-xs text-[#18181B]">${cat.name}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[10px] font-bold text-[#71717A] bg-[#F4F4F5] border border-[#71717A]/20 px-1.5 py-0.5 rounded-full">${items.length}</span>
+                                <span class="material-symbols-rounded text-base text-[#71717A] group-hover:text-[#18181B] transition-transform duration-200 ${isCollapsed ? '-rotate-90' : ''}" aria-hidden="true">
+                                    expand_more
+                                </span>
+                            </div>
+                        </button>
+
+                        <!-- Items List -->
+                        <div id="cat-items-${catId}" class="mt-1 space-y-0.5 ${isCollapsed ? 'hidden' : 'block'}">
+                            ${items.map(comp => {
+                                const isActive = currentComponentId === comp.id;
+                                return `
+                                    <button 
+                                        onclick="loadComponent('${comp.id}')"
+                                        aria-current="${isActive ? 'page' : 'false'}"
+                                        aria-label="${comp.name}, categoría ${cat.name}"
+                                        class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left transition-all text-xs group ${isActive ? 'bg-[#18181B] text-[#FFFFFF] font-semibold shadow-2xs' : 'hover:bg-[#F4F4F5] text-[#71717A] hover:text-[#18181B] font-medium'} focus:outline-none focus:ring-2 focus:ring-[#18181B]"
+                                    >
+                                        <span class="material-symbols-rounded text-base ${isActive ? 'text-[#FFFFFF]' : 'text-[#71717A] group-hover:text-[#18181B]'}" aria-hidden="true">${comp.icon}</span>
+                                        <span class="truncate flex-1">${comp.name}</span>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            componentList.innerHTML = htmlStr;
         }
 
         function loadComponent(id) {
@@ -1731,60 +2886,116 @@ SwipeToDismissBox(
             
             if (!comp) return;
 
+            const cat = categoryDefinitions[comp.category] || { name: 'Componente M3', icon: 'widgets' };
+
             pageTitle.innerText = comp.name;
+            document.title = `${comp.name} - Catálogo Material 3 Compose`;
             
             // Close sidebar on mobile upon selection
             if (window.innerWidth < 768) {
                 toggleSidebar();
             }
 
-            // Render Sidebar again to update active state
+            // Render Sidebar again to update active item styling
             renderSidebar();
 
             // Render Content
             contentArea.innerHTML = `
-                <!-- Component Description -->
-                <div class="col-span-1 lg:col-span-2 mb-4">
-                    <p class="text-[#49454F] text-lg">${comp.description}</p>
+                <!-- Header & Description -->
+                <div class="w-full mb-1">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-[#F4F4F5] text-[#18181B] border border-[#71717A]/20">
+                            <span class="material-symbols-rounded text-sm" aria-hidden="true">${cat.icon}</span>
+                            <span>${cat.name}</span>
+                        </span>
+                        <span class="inline-flex items-center gap-1 text-[11px] text-[#71717A] bg-[#FFFFFF] border border-[#71717A]/30 px-2.5 py-0.5 rounded-full">
+                            <span class="material-symbols-rounded text-xs text-[#18181B]">verified</span>
+                            AndroidX M3
+                        </span>
+                    </div>
+                    <p class="text-[#71717A] text-base leading-relaxed mt-1">${comp.description}</p>
+                </div>
+
+                <!-- Accessibility Guidance Box (A11y) -->
+                <div class="w-full bg-[#F4F4F5] rounded-2xl p-4 border border-[#71717A]/20 flex items-start gap-3.5 shadow-2xs" role="note" aria-label="Consejos de accesibilidad para ${comp.name}">
+                    <div class="w-9 h-9 rounded-xl bg-[#18181B] text-[#FFFFFF] flex items-center justify-center flex-shrink-0 shadow-2xs" aria-hidden="true">
+                        <span class="material-symbols-rounded text-xl">accessibility_new</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-[#18181B] mb-1 flex items-center gap-1">
+                            <span>Accesibilidad en Jetpack Compose (A11y)</span>
+                        </h4>
+                        <p class="text-xs text-[#71717A] leading-relaxed">${comp.a11yTip}</p>
+                    </div>
                 </div>
 
                 <!-- Preview Card -->
-                <div class="col-span-1 bg-white rounded-3xl border border-[#CAC4D0] overflow-hidden flex flex-col shadow-sm h-fit">
-                    <div class="bg-[#F3EDF7] px-6 py-4 border-b border-[#E7E0EC] flex justify-between items-center">
-                        <h3 class="font-medium text-[#1D1B20]">Preview Web</h3>
-                        <span class="text-xs bg-white border px-2 py-0.5 rounded text-gray-500">HTML/CSS Sim</span>
+                <section class="w-full bg-[#FFFFFF] rounded-3xl border border-[#71717A]/20 overflow-hidden flex flex-col shadow-xs h-fit" aria-labelledby="preview-heading">
+                    <div class="bg-[#F4F4F5] px-6 py-4 border-b border-[#71717A]/20 flex justify-between items-center">
+                        <h3 id="preview-heading" class="font-semibold text-[#18181B] text-sm flex items-center gap-2">
+                            <span class="material-symbols-rounded text-base text-[#18181B]" aria-hidden="true">visibility</span>
+                            Previsualización Web
+                        </h3>
+                        <span class="text-[11px] bg-[#FFFFFF] border border-[#71717A]/30 px-2 py-0.5 rounded text-[#71717A] font-medium">M3 Simulation</span>
                     </div>
-                    <div class="p-8 bg-[#FDFCF4] min-h-[300px] flex items-center justify-center relative">
+                    <div class="p-8 bg-[#FFFFFF] min-h-[320px] flex items-center justify-center relative w-full overflow-x-auto">
                         ${comp.webPreview}
-                        <div class="absolute bottom-2 right-2 text-[10px] text-gray-300 select-none">M3 Simulation</div>
+                        <div class="absolute bottom-2 right-3 text-[10px] text-[#71717A]/60 select-none pointer-events-none">Simulación interactiva M3</div>
                     </div>
-                </div>
+                </section>
 
                 <!-- Code Card -->
-                <div class="col-span-1 bg-[#282c34] rounded-3xl overflow-hidden flex flex-col shadow-md h-fit relative group text-white">
-                    <div class="bg-[#21252b] px-6 py-4 border-b border-[#181a1f] flex justify-between items-center">
-                        <h3 class="font-medium text-[#abb2bf] flex items-center gap-2">
-                            <span class="material-symbols-rounded text-sm text-orange-400">code</span>
-                            Jetpack Compose
+                <section class="w-full bg-[#FFFFFF] rounded-3xl border border-[#71717A]/20 overflow-hidden flex flex-col shadow-xs h-fit relative group" aria-labelledby="code-heading">
+                    <div class="bg-[#F4F4F5] px-6 py-3.5 border-b border-[#71717A]/20 flex justify-between items-center">
+                        <h3 id="code-heading" class="font-semibold text-[#18181B] text-sm flex items-center gap-2">
+                            <span class="material-symbols-rounded text-base text-[#18181B]" aria-hidden="true">code</span>
+                            Jetpack Compose (Kotlin)
                         </h3>
                         <button 
                             onclick="copyCode(components.find(c => c.id === '${id}').kotlinCode)"
-                            class="text-xs bg-[#6750A4] hover:bg-[#7D5260] text-white px-3 py-1.5 rounded-full transition-colors flex items-center gap-1"
+                            class="text-xs bg-[#18181B] hover:bg-[#27272A] text-[#FFFFFF] px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5 font-semibold shadow-2xs focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#18181B]"
+                            aria-label="Copiar código Jetpack Compose al portapapeles"
                         >
-                            <span class="material-symbols-rounded text-sm">content_copy</span> Copiar
+                            <span class="material-symbols-rounded text-sm" aria-hidden="true">content_copy</span>
+                            <span>Copiar</span>
                         </button>
                     </div>
-                    <div class="relative overflow-x-auto">
-                        <pre class="!bg-[#282c34] !p-6 !m-0 !text-sm language-kotlin"><code>${comp.kotlinCode.replace(/</g, '&lt;')}</code></pre>
+                    <div class="relative overflow-x-auto w-full">
+                        <pre class="!bg-[#FFFFFF] !border-0 !p-6 !m-0 !text-xs md:!text-sm language-kotlin w-full" tabindex="0" aria-label="Fragmento de código Kotlin"><code class="language-kotlin">${comp.kotlinCode.replace(/</g, '&lt;')}</code></pre>
                     </div>
-                </div>
+                </section>
             `;
+
+            // Scroll container to top
+            document.getElementById('scrollContainer').scrollTop = 0;
 
             // Trigger Syntax Highlight
             Prism.highlightAll();
         }
 
-        // Initialize
+        // Global Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            } else if (e.key === '/' && document.activeElement !== searchInput && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            } else if (e.key === 'Escape') {
+                if (document.activeElement === searchInput) {
+                    clearSearch();
+                    searchInput.blur();
+                } else if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                    toggleSidebar();
+                }
+            }
+        });
+
+        // Initialize UI
+        renderCategoryPills();
+        updateToggleAllBtn();
         renderSidebar();
     </script>
 </body>
