@@ -348,101 +348,49 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
     <body for="html-export">
       <div class="crossnote markdown-preview  ">
       
-<h1 id="ejercicios-de-refuerzo-kotlin">Ejercicios De Refuerzo Kotlin </h1>
-<p><a href="./1b_Ejercicios_refuerzo_Kotlin.pdf">Descargar estos ejercicios</a></p>
+<h1 id="ejercicios-basicos-kotlin">Ejercicios Basicos Kotlin </h1>
+<p><a href="./1_Ejercicios_basicos_Kotlin.pdf">Descargar estos ejercicios</a></p>
 <div class="ejercicio">
 <h3 id="ejercicio-1">Ejercicio 1 </h3>
-<p>Crea un programa que pida una frase (si se pulsa Enter sin escribir nada, se volvera a pedir) y muestre un pequeno informe de texto.</p>
-<p>Debes implementar las funciones:</p>
+<p>Este ejercicio va a servir para practicar los bucles <em><code>for</code></em>, el uso de <em><code>StringBuilder</code></em> y la generación de <em><code>números aleatorios</code></em> en Kotlin. Para ello vamos a crear un generador de contraseñas siguiendo los siguientes pasos:</p>
 <ol>
-<li><strong>leeFraseNoVacia</strong>: pide una frase hasta que no sea vacia ni solo espacios.</li>
-<li><strong>contarVocales</strong>: recibe una cadena y devuelve cuantas vocales tiene (a, e, i, o, u, en mayuscula o minuscula).</li>
-<li><strong>contarConsonantes</strong>: recibe una cadena y devuelve cuantas consonantes tiene.</li>
-<li><strong>resumenFrase</strong>: recibe la frase y devuelve un String multilina con:
-<ul>
-<li>longitud total,</li>
-<li>numero de vocales,</li>
-<li>numero de consonantes,</li>
-<li>numero de espacios.</li>
-</ul>
-</li>
+<li>Crearemos una función <strong>generaNumeros</strong> que devolverá una cadena con los números del 0 al 9 invertidos [987..]. La cadena tendrá una longitud X, siendo X un número aleatorio menor que 10. Investiga el <em><code>reverse</code></em> de StringBuilder.</li>
+<li>Otra función será <strong>generaMayusculas</strong> que nos devolverá una cadena con un tamaño indeterminado de letras mayúsculas desordenadas.  Para conseguirlo recorreremos los caracteres de la 'A' a la 'Z' (usando el rango A..Z), y decidiremos si añadir la letra o no en la salida a partir del resultado devuelto por <strong><code>nextBoolean</code></strong> de Random. Con el <em><code>insert</code></em> de StringBuilder podremos insertar la letra en un lugar aleatorio, y así conseguir el desorden de la salida (cuidado, no podremos insertar fuera del tamaña del StringBuilder).</li>
+<li>La función <strong>generaMinusculas</strong> la conseguiremos a partir de la anterior.</li>
+<li>Además tendremos la función <strong>generaContraseña</strong> a la que le llegará el tamaño de la contraseña a generar y que se encargará a partir de las tres anteriores de generar el string con los caracteres mezclados. Podemos llamar a las anteriores y con todas las cadenas devueltas, crear un nuevo StringBuilder generado con los caracteres seleccionados de ellas de forma aleatoria, no importa que algunos se repitan.</li>
 </ol>
-<p>Una posible salida seria:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console console"><code>Introduce una frase: Kotlin es practico
---- RESUMEN ---
-Longitud: 18
-Vocales: 6
-Consonantes: 10
-Espacios: 2
+<p>Tres posibles salidas para una contraseña de tamaño 10, serían:</p>
+<pre data-role="codeBlock" data-info="console" class="language-console console"><code>xcJi4RY0Ygi
+XBfFff0pcyZ
+UUnfhHttaYn
+6BZ4n0OnoH8
 </code></pre></div>
 <div class="ejercicio">
 <h3 id="ejercicio-2">Ejercicio 2 </h3>
-<p>Realiza una aplicacion que lea una nota numerica entre 0 y 10 (permitiendo decimales) y devuelva la calificacion en texto.</p>
-<p>Debes crear:</p>
-<ol>
-<li>Una funcion <strong>leeNota</strong> que lea por teclado y convierta a Double usando <code>toDoubleOrNull</code>.</li>
-<li>Una funcion <strong>calificacion</strong> que use <code>when</code> para devolver:
-<ul>
-<li>"Suspenso" si la nota es menor que 5,</li>
-<li>"Aprobado" si esta entre 5 y menor que 7,</li>
-<li>"Notable" si esta entre 7 y menor que 9,</li>
-<li>"Sobresaliente" si esta entre 9 y 10.</li>
-</ul>
-</li>
-<li>Si la entrada no es numerica o esta fuera de rango, debes lanzar una excepcion con el mensaje: <strong>Nota no valida</strong>.</li>
-<li>En <code>main</code>, captura la excepcion y muestra el mensaje de error.</li>
-</ol>
-<p>Ejemplo de salida:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console console"><code>Introduce nota: 8.2
-Calificacion: Notable
-</code></pre></div>
+<p>Realiza un programa que genere los lados de n triángulos e informe, de cada uno de ellos, qué tipo de triángulo es: equilátero (tres lados iguales), isósceles (dos lados iguales), o escaleno (ningún lado igual). Además al finalizar la muestra deberá indicar la cantidad de triángulos de cada tipo. Una posible solución para una entrada de 10 podría ser:</p>
+<pre data-role="codeBlock" data-info="console" class="language-console console"><code>el triangulo número 1 es ESCALENO
+el triangulo número 2 es ESCALENO
+el triangulo número 3 es ESCALENO
+el triangulo número 4 es ISOSCELES
+el triangulo número 5 es EQUILATERO
+el triangulo número 6 es ISOSCELES
+el triangulo número 7 es ESCALENO
+el triangulo número 8 es ESCALENO
+el triangulo número 9 es ISOSCELES
+el triangulo número 10 es EQUILATERO
+En total se han generado:
+2 triangulos equilateros
+3 triangulos isosceles
+5 triangulos escalenos
+</code></pre><p>Para ello crearemos una función <strong>generaLados</strong> que devolverá una <em><code>Triple</code></em> (investiga este tipo de datos) con los valores de los lados de un triangulo generados aleatoriamente (el rango de medición podría ser entre  1 y 10). Además tendremos una función <strong>resuelveTriangulo</strong> al que le llega el dato de la medición de los lados y devolverá la cadena con el tipo de triangulo. El programa principal se encargará de realizar las llamadas y el conteo necesario.</p>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>Los condicionales se deberán de hacer con la sentencia <strong>when</strong> y la repetición con el bucle <strong>for</strong></p>
+</div>
+</div>
 <div class="ejercicio">
 <h3 id="ejercicio-3">Ejercicio 3 </h3>
-<p>Crea una funcion de extension para <code>String</code> llamada <strong>esPalindromoSimple</strong> que determine si un texto es palindromo, ignorando espacios y mayusculas/minusculas.</p>
-<p>Despues crea una pequena aplicacion que:</p>
-<ol>
-<li>Pida una cadena al usuario.</li>
-<li>Si la entrada es nula o vacia, muestre "Entrada vacia".</li>
-<li>Si no esta vacia, llame a la extension y muestre:
-<ul>
-<li>"Es palindromo" o</li>
-<li>"No es palindromo".</li>
-</ul>
-</li>
-</ol>
-<p>Puedes apoyarte en <code>lowercase()</code>, <code>replace(" ", "")</code> y <code>reversed()</code>.</p>
-<p>Pruebas sugeridas:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console console"><code>Dabale arroz a la zorra el abad
-Anita lava la tina
-Kotlin
-</code></pre></div>
-<div class="ejercicio">
-<h3 id="ejercicio-4">Ejercicio 4 </h3>
-<p>Desarrolla un mini conversor de unidades de temperatura usando menu con <code>when</code> y repeticion con <code>do-while</code>.</p>
-<p>El programa mostrara estas opciones:</p>
-<ol>
-<li>Celsius a Fahrenheit</li>
-<li>Fahrenheit a Celsius</li>
-<li>Salir</li>
-</ol>
-<p>Requisitos:</p>
-<ol>
-<li>Crea las funciones <strong>celsiusAFahrenheit</strong> y <strong>fahrenheitACelsius</strong>.</li>
-<li>Crea una funcion <strong>leeNumero</strong> que lea un Double valido, lanzando una excepcion en caso contrario.</li>
-<li>Mientras el usuario no elija salir, se debe pedir opcion y valor, mostrando el resultado.</li>
-<li>Si la opcion no existe, se mostrara "Opcion no valida".</li>
-</ol>
-<p>Una posible salida seria:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console console"><code>1) Celsius a Fahrenheit
-2) Fahrenheit a Celsius
-3) Salir
-Elige opcion: 1
-Introduce temperatura: 25
-Resultado: 77.0 F
-</code></pre><div class="admonition warning">
-<p class="admonition-title">Aviso</p>
-<p>Usa funciones para dividir el problema y evita clases u objetos.</p>
-</div>
+<p>Se va a crear una aplicación que permita determinar si una persona puede entrar al <strong>Euskal Encounter</strong>, encuentro al que solo pueden entrar los mayores de edad muy frikis. Para ello se deberá crear  una función <strong>leeEdad</strong> que pedirá una edad mientras la entrada no sea vacía, devolverá la edad como tipo Short siempre que sea posible (numérica), para comprobar que la entrada es solo numérica se tendrá que crear una extensión del tipo String llamada <strong>sonSoloDigitos</strong> que devolverá true en caso de que todos los caracteres de la cadena sean dígitos, false en cualquier otro caso. Si al leer la edad, se ha introducido una entrada no valida se lanzará una excepción con el mensaje <em>Has introducido una edad no válida</em>, para ello crearemos una función <strong>fail</strong> a la que le llegará una cadena con el mensaje y lanzará una excepción del tipo <em><code>IllegalArgumentException</code></em>. Además tendremos la función <strong>permiteEntrada</strong> a la que le llega un Short y devolverá una cadena con el mensaje de si se puede entrar o no, dependiendo de si la edad es mayor de 17 años. En la función principal deberás capturar las excepción y llamar a los métodos necesarios.</p>
 </div>
 
       </div>
