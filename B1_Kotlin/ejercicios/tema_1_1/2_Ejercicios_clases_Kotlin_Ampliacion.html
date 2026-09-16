@@ -349,53 +349,137 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
     <body for="html-export">
       <div class="crossnote markdown-preview  ">
       
-<h1 id="ejercicios-básicos-kotlin-ampliación">Ejercicios Básicos Kotlin (Ampliación) </h1>
-<p><a href="./1_Ejercicios_basicos_Kotlin.pdf">Descargar estos ejercicios</a></p>
+<h1 id="ejercicios-clases-kotlin-ampliación">Ejercicios Clases Kotlin (Ampliación) </h1>
+<p><a href="./2_Ejercicios_clases_Kotlin_Ampliaci%C3%B3n.pdf">Descargar estos ejercicios</a></p>
+<div class="md-toc md-toc-ordered">
+<ol class="md-toc-ol">
+<li class="md-toc-link-wrapper"><a href="#ejercicio-1" class="md-toc-link">Ejercicio 1</a></li>
+<li class="md-toc-link-wrapper"><a href="#ejercicio-2" class="md-toc-link">Ejercicio 2</a></li>
+<li class="md-toc-link-wrapper"><a href="#ejercicio-3" class="md-toc-link">Ejercicio 3</a></li>
+</ol>
+</div>
+<div style="page-break-after:always;"></div>
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-1">Ejercicio 1 </h3>
-<p>Este ejercicio va a servir para practicar los bucles <em><code>for</code></em>, el uso de <em><code>StringBuilder</code></em> y la generación de <em><code>números aleatorios</code></em> en Kotlin. Para ello vamos a crear un generador de contraseñas siguiendo los siguientes pasos:</p>
-<ol>
-<li>Crearemos una función <strong>generaNumeros</strong> que devolverá una cadena con los números del 0 al 9 invertidos [987..]. La cadena tendrá una longitud X, siendo X un número aleatorio menor que 10. Investiga el <em><code>reverse</code></em> de StringBuilder.</li>
-<li>Otra función será <strong>generaMayusculas</strong> que nos devolverá una cadena con un tamaño indeterminado de letras mayúsculas desordenadas.  Para conseguirlo recorreremos los caracteres de la 'A' a la 'Z' (usando el rango A..Z), y decidiremos si añadir la letra o no en la salida a partir del resultado devuelto por <strong><code>nextBoolean</code></strong> de Random. Con el <em><code>insert</code></em> de StringBuilder podremos insertar la letra en un lugar aleatorio, y así conseguir el desorden de la salida (cuidado, no podremos insertar fuera del tamaña del StringBuilder).</li>
-<li>La función <strong>generaMinusculas</strong> la conseguiremos a partir de la anterior.</li>
-<li>Además tendremos la función <strong>generaContraseña</strong> a la que le llegará el tamaño de la contraseña a generar y que se encargará a partir de las tres anteriores de generar el string con los caracteres mezclados. Podemos llamar a las anteriores y con todas las cadenas devueltas, crear un nuevo StringBuilder generado con los caracteres seleccionados de ellas de forma aleatoria, no importa que algunos se repitan.</li>
-</ol>
-<p>Tres posibles salidas para una contraseña de tamaño 10, serían:</p>
-<pre class="salida_consola">xcJi4RY0Ygi
-XBfFff0pcyZ
-UUnfhHttaYn
-6BZ4n0OnoH8
+<p>Crearemos una interface llamada <strong>Electrodomestico</strong> con las siguientes características:</p>
+<p>Tendrá una <strong>enumeración Color</strong> con los colores <code>[BLANCO, NEGRO, ROJO, AZUL, GRIS]</code><br>
+Una clase de tipo excepción <strong>LetraConsumoInvalidaException</strong> con el constructor del mensaje.</p>
+<p>Sus propiedades son:</p>
+<ul>
+<li>propiedad abstracta <strong>consumo</strong> energético de tipo char y que solo podrá contener letras entre A y F (esto se resolverá a través de un método de interface llamado compruebaConsumo, explicado posteriormente)</li>
+<li>propiedad regular <strong>precio</strong> de tipo float inmutable y calculada. Devolverá mediante un when de expresión el precio del electrodoméstico, de forma que dependerá del consumo y el peso  (consumo + peso * 2). Donde el consumo se mapeará de forma (consumo-&gt;precio) con la siguiente correspondencia <code>[A-&gt;100, B-&gt;80, C-&gt;60, E-&gt;30, otros-&gt;10]</code></li>
+<li>propiedad regular inmutable <strong>color</strong> de tipo enumerado Color y que devolverá por defecto el color BLANCO</li>
+<li>propiedad abstracta mutable <strong>peso</strong> de tipo Float.</li>
+</ul>
+<p>Además tendrá una función regular <strong>compruebaConsumo</strong> a la que le llegará un Char y comprobará que está entre las letras A y F (teniendo en cuenta las mayúsculas), devolverá la letra del consumo en mayúsculas si es correcta y una excepción del tipo <code>LetraConsumoInvalidaException</code> en otro caso.</p>
+<p>Además tendremos una <strong>clase Lavadora</strong> que implementará la interface de forma que:</p>
+<ul>
+<li>El consumo seguirá siendo inmutable, se asignará en el constructor <code>init{}</code> después de comprobar que es correcto con el método regular de la interfaz <em>compruebaConsumo</em>.</li>
+<li>Podemos definir la nueva propiedad carga, como mutable dentro del propio constructor de Lavadora.</li>
+<li>Anularemos el color para que sea mutable, además se asignará en el segundo constructor una vez se haya comprobado que es correcta la cadena de entrada con el tipo Color.</li>
+<li>Anulará el precio añadiendo 50 al precio base si la carga supera los 6kg, seguirá siendo una propiedad de solo acceso.</li>
+<li>Esta clase tendrá el constructor por defecto al que le llegará el consumo, el peso y la carga, además de otro constructor al que además de los argumentos anteriores también le llegará el color como String.</li>
+<li>Deberás sobreescribir el toString para conseguir una salida de la forma:</li>
+</ul>
+<pre class="salida_consola">B GRIS 80.0 5Kg de carga -- 240.0€
 </pre>
+<div class="admonition info">
+<p class="admonition-title">Importante</p>
+<p>El siguiente código deberá ser añadido al programa principal para textear las anteriores implementaciones. Fíjate en la diferencia de la salida, usando las distintas funciones Scope. Si no entiendes bien su funcionalidad, repasa el uso investigando en la red.</p>
 </div>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-val">val</span> lavadora <span class="token operator">=</span> <span class="token function">Lavadora</span><span class="token punctuation">(</span>
+    consumo <span class="token operator">=</span> <span class="token char">'B'</span><span class="token punctuation">,</span>
+    color <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Gris"</span></span><span class="token punctuation">,</span>
+    peso <span class="token operator">=</span> <span class="token number">80f</span><span class="token punctuation">,</span>
+    carga <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token punctuation">)</span>
+
+<span class="token function">println</span><span class="token punctuation">(</span>lavadora<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-val">val</span> x <span class="token operator">=</span> lavadora<span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">{</span>
+    it<span class="token punctuation">.</span>carga <span class="token operator">=</span> <span class="token number">8</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">println</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+<span class="token keyword keyword-val">val</span> lavadora2 <span class="token operator">=</span> <span class="token function">Lavadora</span><span class="token punctuation">(</span>
+    consumo <span class="token operator">=</span> <span class="token char">'A'</span><span class="token punctuation">,</span>
+    peso <span class="token operator">=</span> <span class="token number">60f</span><span class="token punctuation">,</span>
+    carga <span class="token operator">=</span> <span class="token number">9</span>
+<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+    color <span class="token operator">=</span> Electrodomestico<span class="token punctuation">.</span>Color<span class="token punctuation">.</span>ROJO
+
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword keyword-this">this</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">println</span><span class="token punctuation">(</span>lavadora2<span class="token punctuation">)</span>
+</code></pre></div>
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-2">Ejercicio 2 </h3>
-<p>Realiza un programa que genere los lados de n triángulos e informe, de cada uno de ellos, qué tipo de triángulo es: equilátero (tres lados iguales), isósceles (dos lados iguales), o escaleno (ningún lado igual). Además al finalizar la muestra deberá indicar la cantidad de triángulos de cada tipo. Una posible solución para una entrada de 10 podría ser:</p>
-<pre class="salida_consola">el triangulo número 1 es ESCALENO
-el triangulo número 2 es ESCALENO
-el triangulo número 3 es ESCALENO
-el triangulo número 4 es ISOSCELES
-el triangulo número 5 es EQUILATERO
-el triangulo número 6 es ISOSCELES
-el triangulo número 7 es ESCALENO
-el triangulo número 8 es ESCALENO
-el triangulo número 9 es ISOSCELES
-el triangulo número 10 es EQUILATERO
-En total se han generado:
-2 triangulos equilateros
-3 triangulos isosceles
-5 triangulos escalenos
+<p>Crearemos una <strong>data class Serie</strong> con los siguientes atributos: codigo de tipo Int, titulo de tipo String, numeroTemporadas de tipo Int, numeroCapitulosTemporada de tipo Int, temporada de tipo Int, capitulo de tipo Int, acabada Boolean, genero de tipo Genero y creador de tipo String.<br>
+Además tendremos una enumeración Genero con un constructor al que se le pasará el codigo del género de tipo Int y los ejemplos de tipo String. Los valores de la enumeración serán los siguientes:</p>
+<pre class="salida_consola">0  INDEFINIDO "Indefinidos"
+11 THRILLER "Black Mirror, Breaking Bad, Sons of Anarchy, Casa de Papel..."
+21 ANIMACION "Rick y Morty, Bojack Horseman, Mr. Pickles..."
+31 FICCION "The 100, Orphan Black, The Leftovers, Stranger Things..."
+41 DRAMA "Homeland, The Good Wife, House of Cards..."
+51 COMEDIA "Arrested Development, The Bid Bang Theory, Orange Is The New Black, Sex Education..."
+61 TERROR "American Horror Story, The Outsider, The Haunting of Hill House..."
 </pre>
-<p>Para ello crearemos una función <strong>generaLados</strong> que devolverá una <em><code>Triple</code></em> (investiga este tipo de datos) con los valores de los lados de un triangulo generados aleatoriamente (el rango de medición podría ser entre  1 y 10). Además tendremos una función <strong>resuelveTriangulo</strong> al que le llega el dato de la medición de los lados y devolverá la cadena con el tipo de triangulo. El programa principal se encargará de realizar las llamadas y el conteo necesario.</p>
-<div class="admonition warning">
-<p class="admonition-title">Aviso</p>
-<p>Los condicionales se deberán de hacer con la sentencia <strong>when</strong> y la repetición con el bucle <strong>for</strong></p>
-</div>
+<p>Además la enumeración anulará el método toString para conseguir una salida del tipo:</p>
+<pre class="salida_consola">genero=FICCION como [The 100, Orphan Black, The Leftovers, Stranger Things...]
+</pre>
+<p>Añade al programa principal, como mínimo, un objeto serie con la propiedad acabada a false y muestra la salida, modifica la propiedad acabada a true mediante el constructor copia correspondiente y vuelve a mostrar la salida.</p>
 </div>
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-3">Ejercicio 3 </h3>
-<p>Se va a crear una aplicación que permita determinar si una persona puede entrar al <strong>Euskal Encounter</strong>, encuentro al que solo pueden entrar los mayores de edad muy frikis. Para ello se deberá crear  una función <strong>leeEdad</strong> que pedirá una edad mientras la entrada no sea vacía, devolverá la edad como tipo Short siempre que sea posible (numérica), para comprobar que la entrada es solo numérica se tendrá que crear una extensión del tipo String llamada <strong>sonSoloDigitos</strong> que devolverá true en caso de que todos los caracteres de la cadena sean dígitos, false en cualquier otro caso. Si al leer la edad, se ha introducido una entrada no valida se lanzará una excepción con el mensaje <em>Has introducido una edad no válida</em>, para ello crearemos una función <strong>fail</strong> a la que le llegará una cadena con el mensaje y lanzará una excepción del tipo <em><code>IllegalArgumentException</code></em>. Además tendremos la función <strong>permiteEntrada</strong> a la que le llega un Short y devolverá una cadena con el mensaje de si se puede entrar o no, dependiendo de si la edad es mayor de 17 años. En la función principal deberás capturar las excepción y llamar a los métodos necesarios.</p>
+<p>Vamos a crear nuestra primera aplicación usando un patrón Sum Type, a diferencia de en los apuntes donde se ejemplifica con una clase sellada, aquí nos crearemos una <strong>interface sealled SeriesEvent</strong> (googlea para ver la pequeña diferencia con las clases selladas). Esta interface nos permitirá gestionar más fácilmente los eventos que ocurrirán en una futura aplicación móvil para la administración de series.</p>
+<p>Deberá de poder gestionar los siguientes eventos:</p>
+<ul>
+<li>Listar todas las series</li>
+<li>Listar las series acabadas</li>
+<li>Listar las series por género, a este evento le llegará un string género.</li>
+<li>Marcar una serie como acabada, a este evento le llegará un código de la serie.</li>
+<li>Marcar el seguimiento de una serie, a este evento le llegará un código de la serie, el número de temporada y el número de capitulo por el que nos hemos quedado.</li>
+</ul>
+<p>Externa a la interfaz tendremos una función <strong>onSeriesEvent(seriesEvent: SeriesEvent)</strong> al que le llegará el evento y se encargará de gestionar cada uno de ellos mediante when, mostrando el mensaje con los datos que llegan.</p>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>Por ahora solamente vamos a mostrar un mensaje para cada evento con los datos que le llegan a este, en ejercicios posteriores ampliaremos la aplicación.</p>
 </div>
+<p>El código de la función principal será el siguiente:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-do">do</span> 
+<span class="token punctuation">{</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"1. Listar todas mis series"</span></span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"2. Listar mis series acabadas"</span></span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"3. Listar mis series por género"</span></span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"4. Marcar serie como acabada"</span></span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"5. Marcar seguimiento de la serie"</span></span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"6. Salir"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-val">val</span> opcion <span class="token operator">=</span> <span class="token function">readln</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">accionSeleccion</span><span class="token punctuation">(</span>opcion<span class="token punctuation">)</span>
+<span class="token punctuation">}</span> <span class="token keyword keyword-while">while</span><span class="token punctuation">(</span>opcion <span class="token operator">!=</span> <span class="token string-literal singleline"><span class="token string">"6"</span></span><span class="token punctuation">)</span>
+</code></pre><p>Donde <strong>accionSeleccion</strong> será la función encargada de recoger los datos necesario y ejecutar el evento correspondiente según estos datos.</p>
+<p>Una posible salida para el evento Marcar seguimiento de la serie, sería:</p>
+<pre class="salida_consola">1. Listar todas mis series
+2. Listar mis series acabadas
+3. Listar mis series por género
+4. Marcar serie como acabada
+5. Marcar seguimiento de la serie
+6. Salir
+5
+Introduce el código de la serie de la que quieres marcar su posición
+1123
+Introduce la temporada de la serie a marcar
+3
+Introduce el capítulo de la serie a marcar
+5
+Se señala la serie con código: 1123 
+como vista hasta la temporada - 3 y capítulo 5
+```
 
+</pre>
+</div>
       </div>
       
       
