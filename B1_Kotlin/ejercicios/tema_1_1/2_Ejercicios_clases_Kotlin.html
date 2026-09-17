@@ -391,34 +391,34 @@ Presiona cualquier tecla para salir...
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-2">Ejercicio 2 </h3>
 <p><strong><code>data class</code> como Value Objects</strong></p>
-<p>Implementa un sistema que use dos tipos de <strong><code>data class</code></strong> como Value Objects: uno simplificado y otro extendido (con lógica en propiedades y/o constructores). El programa debe demostrar el uso de <strong><code>vo.copy(..)</code></strong> para crear copias modificadas en el <strong><code>data class</code></strong> simplificado, y la creación de nuevos objetos en el <strong><code>data class</code></strong> extendido.</p>
+<p>Implementa un sistema que use dos tipos de <strong><code>data class</code></strong> como Value Objects. El programa debe demostrar el uso de <strong><code>vo.copy(..)</code></strong> para crear copias modificadas.</p>
 <pre class="salida_consola">Ejercicio 2: data class como Value Objects
 
-=== DATA CLASS SIMPLIFICADOS (Value Objects sin validaci�n) ===
+=== DATA CLASS (Value Objects sin validación) ===
 Creando juguetes con data class simplificados...
 
 Juguete original: Juguete(nombre=Pelota, precio=15.5)
 Juguete con descuento usando '.copy(...)': Juguete(nombre=Pelota, precio=12.4)
 Juguete renombrado usando '.copy(...)': Juguete(nombre=Pelota Roja, precio=15.5)
-Juguete modificado completamente: Juguete(nombre=Mu�eca, precio=25.99)
+Juguete modificado completamente: Juguete(nombre=Muñeeca, precio=25.99)
 
 --- Operaciones con juguetes ---
-Precio promedio entre juguete original y con descuento: 13.95�
-Diferencia de precio: 3.1�
+Precio promedio entre juguete original y con descuento: 13.95
+Diferencia de precio: 3.1
 
 
-=== DATA CLASS EXTENDIDOS (Value Objects con validaci�n) ===
-Creando temperaturas con data class extendidos y validaci�n...
+=== DATA CLASS (Value Objects con validación) ===
+Creando temperaturas con data class extendidos y validación...
 
---- Creaci�n exitosa ---
+--- Creación exitosa ---
 Temperatura ambiente: Temperatura(grados=22.5, escala=CELSIUS)
 Temperatura agua hirviendo: Temperatura(grados=100.0, escala=CELSIUS)
 Temperatura agua congelando: Temperatura(grados=32.0, escala=FAHRENHEIT)
 
 --- Conversiones de temperatura (creando nuevos objetos) ---
-22.5�C convertido a Fahrenheit: Temperatura(grados=72.5, escala=FAHRENHEIT)
-100�C convertido a Kelvin: Temperatura(grados=373.15, escala=KELVIN)
-32�F convertido a Celsius: Temperatura(grados=0.0, escala=CELSIUS)
+22.5ºC convertido a Fahrenheit: Temperatura(grados=72.5, escala=FAHRENHEIT)
+100ºC convertido a Kelvin: Temperatura(grados=373.15, escala=KELVIN)
+32ºF convertido a Celsius: Temperatura(grados=0.0, escala=CELSIUS)
 </pre>
 <p><strong>Requisitos:</strong></p>
 <ul>
@@ -431,7 +431,7 @@ Temperatura agua congelando: Temperatura(grados=32.0, escala=FAHRENHEIT)
 </li>
 <li>
 <p>Crea una <strong><code>data class</code></strong> <strong>Temperatura</strong>:<br>
-Este Value Object tendrá una propiedad de con el enumerado <code>EscalaTemperatura</code> con los valores (Celsius, Fahrenheit, Kelvin)</p>
+Este Value Object tendrá una propiedad con el enumerado <code>EscalaTemperatura</code> con los valores (Celsius, Fahrenheit, Kelvin)</p>
 <ul>
 <li>
 <p><strong><code>data class</code></strong> <code>Temperatura</code> con las propiedades  <strong><code>grados</code></strong> de tipo <strong><code>double</code></strong> y <strong><code>escala</code></strong> de tipo <strong><code>EscalaTemperatura</code></strong>.</p>
@@ -463,7 +463,7 @@ Este Value Object tendrá una propiedad de con el enumerado <code>EscalaTemperat
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Ayuda</p>
-<p>Para que el constructor de la clase <code>Temperatura</code> pueda validar implementa un <strong>interceptor del constructor</strong> <strong><code>operator fun invoke(...)</code></strong> en el companion object de la clase <strong><code>Temperatura</code></strong> que reciba los grados y la escala, y devuelva un objeto Temperatura con la validación del cero absoluto. Por ejemplo:</p>
+<p>Para que el constructor de la clase <code>Temperatura</code> pueda validar, implementa un <strong>interceptor del constructor</strong> <strong><code>operator fun invoke(...)</code></strong> en el companion object de la clase <strong><code>Temperatura</code></strong> que reciba los grados y la escala, y devuelva un objeto Temperatura con la validación del cero absoluto. Por ejemplo:</p>
 <pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-operator">operator</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">invoke</span><span class="token punctuation">(</span>
     grados<span class="token operator">:</span> Double<span class="token punctuation">,</span> 
     escala<span class="token operator">:</span> EscalaTemperatura<span class="token punctuation">)</span><span class="token operator">:</span> Temperatura <span class="token punctuation">{</span>
