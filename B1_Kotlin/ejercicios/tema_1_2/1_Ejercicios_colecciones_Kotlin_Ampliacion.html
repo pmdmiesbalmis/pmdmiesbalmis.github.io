@@ -352,65 +352,41 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 <p><a href="./1_Ejercicios_colecciones_Kotlin.pdf">Descargar estos ejercicios</a></p>
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-1">Ejercicio 1 </h3>
-<p>Teniendo en cuenta las colecciones vistas en el tema, vamos a proponer una serie de casos y deberás asociar la colección más adecuada. Además, para cada caso, deberás de crear la variable inicializada a algún valor de ejemplo. Crea la variable con <strong>var o val</strong> dependiendo que su mutabilidad.</p>
+<p>Teniendo en cuenta las colecciones vistas en el tema, indica qué tipo de colección sería el más adecuado para cada caso y crea una variable inicializada con un ejemplo. Decide si debe ser <strong>var</strong> o <strong>val</strong> según la mutabilidad que necesites.</p>
 <ol>
-<li>Colección para almacenar todas las provincias de España, que luego será utilizada en un desplegable para seleccionar una en concreto.</li>
-<li>Colección para almacenar el sueldo de un empleado para cada uno de los 12 meses del año, este empleado siempre tendrá un total de 12 pagas, pero la paga de cada més se puede cambiar en cualquier momento.</li>
-<li>Colección para almacenar los cinco nombres, de los grupos musicales que actúan semanalmente en una sala de conciertos, los grupos pueden cambiar cada semana pero siempre son cinco.</li>
-<li>Colección para almacenar los artículos del carrito de la compra, el cliente puede cambiar de opinión con respecto a alguno de los artículos que ya están en el carrito. Crea un <strong>data class Articulos</strong> sencilla [nombre, cantidad]</li>
-<li>Colección que almacena los meses del año.</li>
-<li>Colección para guardar el par login/password correspondiente a los usuarios que se van apuntando a una asociación de baile, los usuarios pueden cambiar el password en cualquier momento, el login será fijo.</li>
-<li>Colección para guardar las series de la aplicación de administración de la anterior entrega (utiliza la data class anterior).</li>
-<li>Colección para guardar la relación entre los meses del año y los días de cada més.</li>
-<li>Colección para almacenar el menú de la cena asociado a cada dia de la semana, en un hospital. Los datos (dia, menu como string) lo guardaremos en un tipo <em>Pair</em>.</li>
-<li>Colección para guardar las palabras clave de un lenguaje de programación, en una versión determinada.</li>
+<li>Colección para almacenar los nombres de los alumnos de una clase, el nombre y cantidad de alumnos no cambiará una vez introducidos en el sistema.</li>
+<li>Colección para guardar la nota final de cada alumno de un grupo (solo se guarda la nota), de forma que cada alumno tenga asociado un valor numérico de la colección, la nota puede variar a lo largo del curso. (El primer alumno de la lista, tendrá su nota guardada en la primera posición de la colección)</li>
+<li>Conjunto con los códigos de los ordenadores disponibles en un aula, sin que se repitan.Investiga la colección <em><code>setOf</code></em></li>
+<li>Colección con los ejercicios de programación que debe entregar un estudiante durante el curso, pudiendo añadir y quitar tareas.</li>
+<li>Relación entre cada día de la semana y la asignatura que se imparten cada día (serán un mínimo de tres).</li>
+<li>Colección para guardar los idiomas que domina una persona, sin repetir ninguno.</li>
+<li>Colección con los precios de los productos de un supermercado que cambian cada semana, tanto en cantidad como en valor.</li>
+<li>Colección para guardar el nombre del usuario y su contraseña en una aplicación, donde el usuario será la clave y la contraseña podrá modificarse.</li>
+<li>Colección para almacenar el menú de cada día de la semana en el comedor del instituto, usando un tipo <strong>Pair</strong> en un <strong>Map</strong>.</li>
+<li>Conjunto de palabras clave que describen un proyecto de programación, sin duplicados.</li>
 </ol>
 </div>
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-2">Ejercicio 2 </h3>
-<p>Vamos a crear la parte de una aplicación que gestiona el inventario de una pequeña tienda. Para ello crearemos un tipo <strong>object GestionInventario</strong> con un campo privado de tipo <strong>MutableMap&lt;String, Int&gt;</strong> donde la clave será el código del producto y el valor será la cantidad disponible en stock.</p>
-<p>Además, crearemos una excepción <strong>InventarioException</strong> para controlar errores y funciones para añadir, modificar y eliminar productos del almacén.</p>
-<p>Antes de cerrar el programa, se mostrará el contenido del map para comprobar que la gestión se ha realizado correctamente.</p>
-<p>El programa principal podría mostrar un menú como este:</p>
-<pre data-role="codeBlock" data-info="console" class="language-console console"><code>1. Añadir producto
-2. Modificar stock
-3. Eliminar producto
+<p>Vamos a crear una de las parte de una aplicación, la que se encarga de la gestión de las contraseñas. Para ello crearemos un tipo <strong>object GestionClaves</strong> (para conseguir la funcionalidad de una clase estática), el tipo tendrá un campo privado de tipo <strong>MutableMap contraseña</strong> con sus dos partes a String (una para el login y la otra para el password), un tipo exception <strong>ClavesException</strong> para los casos inválidos y las funciones necesarias que te permitan añadir, modificar y eliminar el login y password de los usuarios.</p>
+<p>Antes de salir de programa se mostrará el contenido del MutableMap, para comprobar que los datos se han gestionado correctamente.</p>
+<p>El programa principal podría mostrar un menú como el siguiente:</p>
+<pre data-role="codeBlock" data-info="console" class="language-console console"><code>1. Añade login
+2. Modifica password
+3. Elimina login
 4. Salir
 </code></pre><div class="admonition warning">
 <p class="admonition-title">Aviso</p>
-<p>Al añadir y eliminar se deberá comprobar que el código no esté vacío. Al modificar el stock, el producto debe existir y se deberá validar que la cantidad introducida sea mayor o igual a 0.</p>
+<p>Al añadir y eliminar se deberá controlar que el login no sea vacío, al modificar se deberá controlar que el login existe y se pedirá el password antiguo para comprobar que coincide y permitir el cambio.</p>
 </div>
 </div>
 <div style="page-break-after:always;"></div>
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-3">Ejercicio 3 </h3>
-<p>Vamos a crear una pequeña aplicación para gestionar una colección de películas que están en cartelera. Queremos almacenar información sobre cada película y luego poder buscar y ordenar la colección de forma cómoda.</p>
-<p>Crea un <strong>data class Pelicula</strong> con los siguientes campos:</p>
-<ul>
-<li>título: String</li>
-<li>género: String</li>
-<li>duración: Int</li>
-<li>director: String</li>
-</ul>
-<p>Usa una colección adecuada para guardar todas las películas, puedes aplicar alguna función de <strong>kotlin.collections</strong> como <code>filter</code>, <code>sortedBy</code>, <code>groupBy</code>, <code>count</code>, etc para resolver estas tareas más rápidamente:</p>
-<ol>
-<li>Muestra todas las películas con sus datos.</li>
-<li>Busca las películas cuyo título contenga una palabra introducida por teclado, ignorando mayúsculas/minúsculas.</li>
-<li>Muestra solo las películas de un género concreto.</li>
-<li>Obtén la película más larga de la colección.</li>
-<li>Separa las películas en dos grupos: las de 120 minutos o más y las más cortas.</li>
-</ol>
-<p>Puedes probar el programa con esta lista inicial:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-val">val</span> peliculas <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Dune"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Ciencia Ficción"</span></span><span class="token punctuation">,</span> <span class="token number">155</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Denis Villeneuve"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"El viaje de Chihiro"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Animación"</span></span><span class="token punctuation">,</span> <span class="token number">125</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Hayao Miyazaki"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"La la land"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Musical"</span></span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Damien Chazelle"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Mad Max: Fury Road"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Acción"</span></span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"George Miller"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Parasite"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Thriller"</span></span><span class="token punctuation">,</span> <span class="token number">132</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Bong Joon-ho"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Pride and Prejudice"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Romance"</span></span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Joe Wright"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token function">Pelicula</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Shrek"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Animación"</span></span><span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"Andrew Adamson"</span></span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span>
-</code></pre><p>Crea un menú con las distintas opciones para poder ejecutar la app hasta no seleccionar la opción de salir.</p>
+<p>Vamos a seguir desarrollando el ejercicio de la gestión de series de la entrega anterior. Para ello deberemos usar la colección más adecuada posible para almacenar las series que un supuesto espectador esta visualizando, ya ha visualizado o visualizará en un futuro.<br>
+A partir del código anterior, procederás a dar la funcionalidad necesaria para sustituir las salidas por pantalla que teníamos hasta ahora, por la gestión correcta de las series en la colección elegida.<br>
+Debes usar las funciones de búsqueda, selección, etc. del paquete <strong>kotlin.collections</strong>  para conseguir un código más corto y claro.<br>
+Puedes usar los siguientes datos para probar el programa <a href="ListaSeries.kt">ListaSeries</a></p>
 </div>
 
       </div>
