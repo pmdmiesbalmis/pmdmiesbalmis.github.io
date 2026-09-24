@@ -388,96 +388,79 @@ Presiona cualquier tecla para salir...
 <div class="box_bg_lightgreen">
 <h3 id="ejercicio-2">Ejercicio 2 </h3>
 <p><strong><code>data class</code> como Value Objects</strong></p>
-<p>Implementa un sistema que use dos tipos de <strong><code>data class</code></strong> como Value Objects. El programa debe demostrar el uso de <strong><code>vo.copy(..)</code></strong> para crear copias modificadas.</p>
-<pre class="salida_consola">Ejercicio 2: data class como Value Objects
+<p>Implementa un sistema para gestionar pisos de alquiler usando una <strong><code>data class</code></strong> con un <strong>enumerado definido dentro de la propia clase</strong>. El objetivo es demostrar cómo modificar una o dos propiedades con <strong><code>copy(...)</code></strong> manteniendo el resto intacto.</p>
+<pre class="salida_consola">Ejercicio 2: Piso de alquiler con data class y enum interno
 
-=== DATA CLASS (Value Objects sin validación) ===
-Creando juguetes con data class simplificados...
+=== DATA CLASS PisoAlquiler ===
+Creando piso base...
+Piso original: Piso #101 en Calle Mayor 12 | ESTUDIO | 850.0€/mes | Estado: Disponible
+Piso base: Piso #101 en Calle Mayor 12, 3A | ESTUDIO como [Microestudio, Ideal para una persona] | 850.0�/mes | Estado: Disponible
+Piso con nuevo precio: Piso #101 en Calle Mayor 12, 3A | ESTUDIO como [Microestudio, Ideal para una persona] | 920.0�/mes | Estado: Disponible
+Piso actualizado (tipo y alquilado): Piso #101 en Calle Mayor 12, 3A | ATICO como [Vistas panor�micas, Terraza grande] | 920.0�/mes | Estado: Alquilado
 
-Juguete original: Juguete(nombre=Pelota, precio=15.5)
-Juguete con descuento usando '.copy(...)': Juguete(nombre=Pelota, precio=12.4)
-Juguete renombrado usando '.copy(...)': Juguete(nombre=Pelota Roja, precio=15.5)
-Juguete modificado completamente: Juguete(nombre=Muñeeca, precio=25.99)
+--- Modificando con copy(...) ---
+Piso con aumento de precio: Piso #101 en Calle Mayor 12 | ESTUDIO | 930.0€/mes | Estado: Disponible
+Piso reformado y alquilado: Piso #101 en Calle Mayor 12 | ATICO | 930.0€/mes | Estado: Alquilado
 
---- Operaciones con juguetes ---
-Precio promedio entre juguete original y con descuento: 13.95
-Diferencia de precio: 3.1
-
-
-=== DATA CLASS (Value Objects con validación) ===
-Creando temperaturas con data class extendidos y validación...
-
---- Creación exitosa ---
-Temperatura ambiente: Temperatura(grados=22.5, escala=CELSIUS)
-Temperatura agua hirviendo: Temperatura(grados=100.0, escala=CELSIUS)
-Temperatura agua congelando: Temperatura(grados=32.0, escala=FAHRENHEIT)
-
---- Conversiones de temperatura (creando nuevos objetos) ---
-22.5ºC convertido a Fahrenheit: Temperatura(grados=72.5, escala=FAHRENHEIT)
-100ºC convertido a Kelvin: Temperatura(grados=373.15, escala=KELVIN)
-32ºF convertido a Celsius: Temperatura(grados=0.0, escala=CELSIUS)
+--- Tipo de inmueble ---
+ESTUDIO como [Microestudio, Ideal para una persona]
+ATICO como [Vistas panorámicas, Terraza grande]
 </pre>
 <p><strong>Requisitos:</strong></p>
 <ul>
 <li>
-<p>Crea una <strong><code>data class</code></strong> <strong>Juguete</strong>:</p>
+<p>Crea una <strong><code>data class</code></strong> llamada <strong><code>PisoAlquiler</code></strong> con las propiedades:</p>
 <ul>
-<li>Crea el <strong><code>data class</code></strong> <code>Juguete</code> con las propiedades <strong><code>nombre</code></strong> de tipo string y <strong><code>precio</code></strong> de tipo <strong><code>Souble</code></strong>.</li>
-<li><code>calculaDescuento(porcentaje : Double)</code> método que devuelve el Juguete con el precio modificado con el descuento.</li>
+<li><code>codigo: Int</code></li>
+<li><code>direccion: String</code></li>
+<li><code>precioMensual: Double</code></li>
+<li><code>tipo: TipoPiso</code></li>
+<li><code>alquilado: Boolean</code></li>
 </ul>
 </li>
 <li>
-<p>Crea una <strong><code>data class</code></strong> <strong>Temperatura</strong>:<br>
-Este Value Object tendrá una propiedad con el enumerado <code>EscalaTemperatura</code> con los valores (Celsius, Fahrenheit, Kelvin)</p>
+<p>La <strong><code>data class</code></strong> debe definir internamente un <strong>enumerado</strong> llamado <strong><code>TipoPiso</code></strong>.</p>
 <ul>
 <li>
-<p><strong><code>data class</code></strong> <code>Temperatura</code> con las propiedades  <strong><code>grados</code></strong> de tipo <strong><code>double</code></strong> y <strong><code>escala</code></strong> de tipo <strong><code>EscalaTemperatura</code></strong>.</p>
-</li>
-<li>
-<p>Constructor con validación (no permite temperaturas bajo cero absoluto). Validaremos según la información de la ayuda.</p>
-</li>
-<li>
-<p>Valores del cero absoluto según la escala:</p>
+<p>El enumerado tendrá un constructor con dos propiedades:</p>
 <ul>
-<li><strong>Celsius</strong>: -273.15°C (cero absoluto)</li>
-<li><strong>Fahrenheit</strong>: -459.67°F (cero absoluto)</li>
-<li><strong>Kelvin</strong>: 0.0ºK (cero absoluto)</li>
-</ul>
-<p>Si intentas crear una temperatura inferior a estos valores, el constructor debe asignar automáticamente el valor del cero absoluto correspondiente a la escala.</p>
-</li>
-<li>
-<p>Métodos <code>convierteA(nueva: EscalaTemperatura)</code> que devolverá la nueva Temperatura calculada a partir de la escala que llega. <em><strong>Para realizar el cálculo, podría ser conveniente pasar los grados del objeto a Celsius para posteriormente pasarlos a la escala de temperatura nueva, se deberá tener en cuenta en que escala está el objeto.</strong></em></p>
-</li>
+<li><code>codigo: Int</code></li>
+<li><code>ejemplos: List&lt;String&gt;</code></li>
 </ul>
 </li>
 <li>
-<p><strong>En el programa principal</strong>:</p>
+<p>Los valores del enumerado serán:</p>
 <ul>
-<li>Tendremos el método <code>gestionJuguete</code>, que crea un juguetes base y se modifica con <code>with</code> para conseguir la salida. Además de calcular descuentos y comparar precios.</li>
-<li>Tendremos el método <code>gestionTemperatura</code> que creará temperaturas válidas e inválidas, convertirá entre escalas de temperatura.</li>
+<li><code>ESTUDIO(10, listOf("Microestudio", "Ideal para una persona"))</code></li>
+<li><code>PISO(20, listOf("Apartamento pequeño", "Perfecto para parejas"))</code></li>
+<li><code>DUPLEX(30, listOf("Dos plantas", "Más espacio para familias"))</code></li>
+<li><code>ATICO(40, listOf("Vistas panorámicas", "Terraza grande"))</code></li>
+</ul>
+</li>
+<li>
+<p>Sobrescribe el método <strong><code>toString()</code></strong> del enumerado para que muestre algo como:</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>ESTUDIO como <span class="token punctuation">[</span>Microestudio<span class="token punctuation">,</span> Ideal para una persona<span class="token punctuation">]</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Además la data class tendrá otra funcionalidad a través del método <strong><code>resumenAlquiler()</code></strong> que permitirá devolver una línea con el formato que puedes ver en la salida, esta función llamará al toString del enumerado</p>
+</li>
+<li>
+<p>En el programa principal:</p>
+<ul>
+<li>Crea un <strong>piso base</strong> con su tipo correspondiente.</li>
+<li>Modifica el precio mensual usando <strong><code>copy(...)</code></strong>.</li>
+<li>Modifica también el tipo y el estado de alquilado usando otra copia.</li>
+<li>Muestra la salida con los cambios realizados.</li>
 </ul>
 </li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Ayuda</p>
-<p>Para que el constructor de la clase <code>Temperatura</code> pueda validar, implementa un <strong>interceptor del constructor</strong> <strong><code>operator fun invoke(...)</code></strong> en el companion object de la clase <strong><code>Temperatura</code></strong> que reciba los grados y la escala, y devuelva un objeto Temperatura con la validación del cero absoluto. Por ejemplo:</p>
-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code><span class="token keyword keyword-operator">operator</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">invoke</span><span class="token punctuation">(</span>
-    grados<span class="token operator">:</span> Double<span class="token punctuation">,</span> 
-    escala<span class="token operator">:</span> EscalaTemperatura<span class="token punctuation">)</span><span class="token operator">:</span> Temperatura <span class="token punctuation">{</span>
-
-    <span class="token keyword keyword-val">val</span> cero <span class="token operator">=</span> <span class="token function">ceroAbsoluto</span><span class="token punctuation">(</span>
-        escala <span class="token operator">=</span> escala
-    <span class="token punctuation">)</span>
-    <span class="token keyword keyword-val">val</span> valorFinal <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>
-        a <span class="token operator">=</span> grados<span class="token punctuation">,</span>
-        b <span class="token operator">=</span> cero
-    <span class="token punctuation">)</span>
-    <span class="token keyword keyword-return">return</span> <span class="token function">Temperatura</span><span class="token punctuation">(</span>
-        grados <span class="token operator">=</span> valorFinal<span class="token punctuation">,</span>
-        escala <span class="token operator">=</span> escala
-    <span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-</code></pre></div>
+<p>La idea es que un objeto <code>PisoAlquiler</code> se convierta en otra versión distinta sin cambiar el original, usando <code>copy(...)</code> cuando quieras actualizar uno o dos campos como el precio y el estado de disponibilidad.</p>
+</div>
 </div>
 <div style="page-break-after:always;"></div>
 <div class="box_bg_lightgreen">
