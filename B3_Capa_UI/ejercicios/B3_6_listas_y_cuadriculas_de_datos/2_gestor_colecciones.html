@@ -240,9 +240,11 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 <h1 id="lista-de-artículos">Lista de Artículos </h1>
 <p><a href="./2_gestor_colecciones.pdf">Descargar estos apuntes</a></p>
 <p>En este ejercicio se va a seguir perfeccionando nuestra APP de colecciones, para ello deberás trabajar sobre el último proyecto que creaste con Hilt. Otra opción sería la de <a href="../../assets/codigo/ejercicios3_5/3_GestorColecciones_recurso.zip">descargar el ejemplo de clase</a>.</p>
+<h3 id="parte-1-pantalla-lista">Parte 1. Pantalla Lista </h3>
 <div class="row">
 <div class="col-sm-5">
-<p>Deberemos añadir una lista con los elementos de nuestra colección se creará con <strong><code>LazyColumn</code></strong> y tendrá el aspecto similar al que se muestra en la imagen (poniendo imaginación de vuestra parte). Crearemos un componente <strong>PiezaItemCard</strong> que representará cada uno de los elementos del <strong><code>LazyColumn</code></strong>.</p>
+<p>Deberemos añadir una lista con los elementos de nuestra colección. Como es una nueva Screen, deberás crear el paquete <strong>pieza</strong> donde añadiremos todos los archivos necesarios (ViewModel, Screen, Event, etc). La pantalla principal deberá tener un <strong><code>LazyColumn</code></strong> con un aspecto similar al que se muestra en la imagen (poniendo imaginación de vuestra parte). Crearemos un componente <strong>PiezaItemCard</strong> que representará cada uno de los elementos del <strong><code>LazyColumn</code></strong>.<br>
+Como se puede ver en la imagen, en la parte superior de la lista hay un <strong><code>TextField</code></strong> para realizar filtrados (se pasa el código en el enlace inferior) y un <strong><code>FilterChip</code></strong>. La búsqueda del TextField se realizará por nombre o descripción, mientra que la del FilterChip sería por categoría, se necesitará añadir un tipo enumerado con la clasificación de las piezas. Para ello deberás de crear un enumerado en Pieza del modelo, mientras que en PiezaMock no será enumerado sino de tipo entero. El código de transformación se realizará en <strong>RepositoryConverter</strong>.</p>
 </div>
 <div class="col-sm-5 my-auto">
 <p><img src="../../assets/imagenes/ejercicios3_6/2_gestor_colecciones/Imagen2.png" alt="Cabecera Artículo"></p>
@@ -284,9 +286,344 @@ code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-fami
 <p><img src="../../assets/imagenes/ejercicios3_6/2_gestor_colecciones/Imagen3.png" alt="Cabecera Artículo"></p>
 </div>
 </div>
+<h3 id="parte-2-pantalla-detalle">Parte 2. Pantalla Detalle </h3>
+<div class="row">
+<div class="col-sm-7">
+<p>El ejercicio tiene una segunda parte donde crearemos el paquete <strong>editar</strong> que incluirá todos los archivos necesarios para realizar una nueva pantalla con su funcionalidad. Esta pantalla nos va a servir para mostrar y modificar el detalle de una pieza en concreto. Su aspecto será el que vemos a la derecha.<br>
+Como se puede ver, la pantalla está formada por una primera parte con una imagen principal, que será la misma que se muestra en la lista de todos los artículos. Además, en la parte inferior se puede ver que hay un <strong><code>LazyRow</code></strong> que mostrará diferentes perspectivas o información (en imagen) del mismo artículo. Si se pulsa en un elemento del LazyRow, se mostrará la imagen pulsada en la imagen principal.</p>
+</div>
+<div class="col-sm-4 my-auto">
+<p><img src="../../assets/imagenes/ejercicios3_6/2_gestor_colecciones/Imagen9.png" alt="Cabecera Artículo"></p>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Las url de las imágenes se deberán guardar en el Mock, para ello deberás crear una nueva propiedad llamada <strong>listaFotos</strong> de tipo <strong><code>String</code></strong> en la que deberás guardar las url de las fotos separadas por <strong><code>;</code></strong>. En el Modelo <strong>listaFotos</strong> será de tipo <strong><code>List&lt;String&gt;</code></strong> y deberás hacer las conversiones de un tipo a otro en <strong>RepositoryConverter</strong>. Como es normal, deberás añadir las funciones necesarias en <strong>PiezaDaoMock</strong> y en <strong>PiezaRepository</strong> para acceder a la nueva propiedad.</p>
+</div>
+<p>La otra parte de la pantalla está formada por los <strong><code>TextField</code></strong> necesarios para <strong>mostrar/editar</strong> el resto de información de nuestra pieza. Además de dos botones que nos permitan borrar la pieza o guardar los cambios. Para que se pueda ver todo el contenido, se deberá aplicar <strong>Scroll</strong> a la parte que incluye los datos, <strong>No</strong> a la de las imágenes.</p>
+<div class="row">
+<div class="col-sm-5">
+<p><img src="../../assets/imagenes/ejercicios3_6/2_gestor_colecciones/Imagen11.png" alt="Cabecera Artículo"></p>
+</div>
+<div class="col-sm-5 my-auto">
+<p><img src="../../assets/imagenes/ejercicios3_6/2_gestor_colecciones/Imagen12.png" alt="Cabecera Artículo"></p>
+</div>
+</div>
+<p>Se pasa el código de los <strong>TextFiel</strong> que se muestran en la pantalla, por si queréis reutilizar alguna funcionalidades.</p>
+<details>
+<summary style="color: #0969da; cursor: pointer;">TextField</summary>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin kotlin"><code>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">TarjetaInformacionBasica</span><span class="token punctuation">(</span>
+    uiState<span class="token operator">:</span> PiezaDetalleEditarUiState<span class="token punctuation">,</span>
+    onPiezaDetalleEditarEvent<span class="token operator">:</span> <span class="token punctuation">(</span>PiezaDetalleEditarEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Card</span><span class="token punctuation">(</span>
+        shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        colors <span class="token operator">=</span> CardDefaults<span class="token punctuation">.</span><span class="token function">cardColors</span><span class="token punctuation">(</span>
+            containerColor <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surfaceContainerLowest
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        border <span class="token operator">=</span> <span class="token function">BorderStroke</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> GlacierSecondary<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">0.15f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        elevation <span class="token operator">=</span> CardDefaults<span class="token punctuation">.</span><span class="token function">cardElevation</span><span class="token punctuation">(</span>defaultElevation <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Column</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span><span class="token function">spacedBy</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Información Básica"</span></span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>labelLarge<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>fontWeight <span class="token operator">=</span> FontWeight<span class="token punctuation">.</span>SemiBold<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>onSurface
+            <span class="token punctuation">)</span>
+
+            <span class="token function">OutlinedTextFieldName</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                label <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Nombre o Título de la Pieza"</span></span><span class="token punctuation">,</span>
+                nameState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>titulo<span class="token punctuation">,</span>
+                validacionState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>validacion<span class="token punctuation">.</span>validacionTitulo<span class="token punctuation">,</span>
+                onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token function">onPiezaDetalleEditarEvent</span><span class="token punctuation">(</span>
+                        PiezaDetalleEditarEvent<span class="token punctuation">.</span><span class="token function">OnTituloCambiado</span><span class="token punctuation">(</span>
+                            it
+                        <span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+
+            <span class="token function">DesplegableCategoriaPieza</span><span class="token punctuation">(</span>
+                categoriaSeleccionada <span class="token operator">=</span> uiState<span class="token punctuation">.</span>categoria<span class="token punctuation">,</span>
+                onCategoriaCambiada <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token function">onPiezaDetalleEditarEvent</span><span class="token punctuation">(</span>
+                        PiezaDetalleEditarEvent<span class="token punctuation">.</span><span class="token function">OnCategoriaCambiada</span><span class="token punctuation">(</span>
+                            it
+                        <span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+
+            <span class="token function">CamposEpocaYAutor</span><span class="token punctuation">(</span>
+                uiState <span class="token operator">=</span> uiState<span class="token punctuation">,</span>
+                onPiezaDetalleEditarEvent <span class="token operator">=</span> onPiezaDetalleEditarEvent
+            <span class="token punctuation">)</span>
+
+            <span class="token function">OutlinedTextFieldName</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                label <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Valor Estimado (€)"</span></span><span class="token punctuation">,</span>
+                nameState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>valorEstimado<span class="token punctuation">,</span>
+                validacionState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>validacion<span class="token punctuation">.</span>validacionValor<span class="token punctuation">,</span>
+                onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token function">onPiezaDetalleEditarEvent</span><span class="token punctuation">(</span>
+                        PiezaDetalleEditarEvent<span class="token punctuation">.</span><span class="token function">OnValorCambiado</span><span class="token punctuation">(</span>
+                            it
+                        <span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@OptIn</span><span class="token punctuation">(</span>ExperimentalMaterial3Api<span class="token operator">::</span><span class="token keyword keyword-class">class</span><span class="token punctuation">)</span>
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">DesplegableCategoriaPieza</span><span class="token punctuation">(</span>
+    categoriaSeleccionada<span class="token operator">:</span> CategoriaColeccion<span class="token punctuation">,</span>
+    onCategoriaCambiada<span class="token operator">:</span> <span class="token punctuation">(</span>CategoriaColeccion<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-var">var</span> categoriaMenuExpandido <span class="token keyword keyword-by">by</span> remember <span class="token punctuation">{</span> <span class="token function">mutableStateOf</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+
+    <span class="token function">ExposedDropdownMenuBox</span><span class="token punctuation">(</span>
+        expanded <span class="token operator">=</span> categoriaMenuExpandido<span class="token punctuation">,</span>
+        onExpandedChange <span class="token operator">=</span> <span class="token punctuation">{</span> categoriaMenuExpandido <span class="token operator">=</span> it <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">OutlinedTextField</span><span class="token punctuation">(</span>
+            value <span class="token operator">=</span> categoriaSeleccionada<span class="token punctuation">.</span>nombreVisible<span class="token punctuation">,</span>
+            onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            readOnly <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            label <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Categoría"</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            trailingIcon <span class="token operator">=</span> <span class="token punctuation">{</span> ExposedDropdownMenuDefaults<span class="token punctuation">.</span><span class="token function">TrailingIcon</span><span class="token punctuation">(</span>expanded <span class="token operator">=</span> categoriaMenuExpandido<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            colors <span class="token operator">=</span> OutlinedTextFieldDefaults<span class="token punctuation">.</span><span class="token function">colors</span><span class="token punctuation">(</span>
+                focusedContainerColor <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surfaceContainerLowest<span class="token punctuation">,</span>
+                unfocusedContainerColor <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surfaceContainerLowest
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            modifier <span class="token operator">=</span> Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">menuAnchor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token function">ExposedDropdownMenu</span><span class="token punctuation">(</span>
+            expanded <span class="token operator">=</span> categoriaMenuExpandido<span class="token punctuation">,</span>
+            onDismissRequest <span class="token operator">=</span> <span class="token punctuation">{</span> categoriaMenuExpandido <span class="token operator">=</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            CategoriaColeccion<span class="token punctuation">.</span>entries
+                <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it <span class="token operator">!=</span> CategoriaColeccion<span class="token punctuation">.</span>TODAS <span class="token punctuation">}</span>
+                <span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">{</span> cat <span class="token operator">-&gt;</span>
+                    <span class="token function">DropdownMenuItem</span><span class="token punctuation">(</span>
+                        text <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span>cat<span class="token punctuation">.</span>nombreVisible<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        onClick <span class="token operator">=</span> <span class="token punctuation">{</span>
+                            <span class="token function">onCategoriaCambiada</span><span class="token punctuation">(</span>cat<span class="token punctuation">)</span>
+                            categoriaMenuExpandido <span class="token operator">=</span> <span class="token boolean">false</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">CamposEpocaYAutor</span><span class="token punctuation">(</span>
+    uiState<span class="token operator">:</span> PiezaDetalleEditarUiState<span class="token punctuation">,</span>
+    onPiezaDetalleEditarEvent<span class="token operator">:</span> <span class="token punctuation">(</span>PiezaDetalleEditarEvent<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Row</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        horizontalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span><span class="token function">spacedBy</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">OutlinedTextFieldName</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                label <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Año"</span></span><span class="token punctuation">,</span>
+                nameState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>epoca<span class="token punctuation">,</span>
+                validacionState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>validacion<span class="token punctuation">.</span>validacionEpoca<span class="token punctuation">,</span>
+                onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token function">onPiezaDetalleEditarEvent</span><span class="token punctuation">(</span>
+                        PiezaDetalleEditarEvent<span class="token punctuation">.</span><span class="token function">OnEpocaCambiada</span><span class="token punctuation">(</span>
+                            it
+                        <span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">Box</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">weight</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">OutlinedTextFieldName</span><span class="token punctuation">(</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                label <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Autor"</span></span><span class="token punctuation">,</span>
+                nameState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>autor<span class="token punctuation">,</span>
+                validacionState <span class="token operator">=</span> uiState<span class="token punctuation">.</span>validacion<span class="token punctuation">.</span>validacionAutor<span class="token punctuation">,</span>
+                onValueChange <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token function">onPiezaDetalleEditarEvent</span><span class="token punctuation">(</span>
+                        PiezaDetalleEditarEvent<span class="token punctuation">.</span><span class="token function">OnAutorCambiado</span><span class="token punctuation">(</span>
+                            it
+                        <span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">TarjetaProcedenciaHistorica</span><span class="token punctuation">(</span>
+    notas<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    onNotasCambiadas<span class="token operator">:</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Card</span><span class="token punctuation">(</span>
+        shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        colors <span class="token operator">=</span> CardDefaults<span class="token punctuation">.</span><span class="token function">cardColors</span><span class="token punctuation">(</span>
+            containerColor <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surfaceContainerLowest
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        border <span class="token operator">=</span> <span class="token function">BorderStroke</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> GlacierSecondary<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">0.15f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        elevation <span class="token operator">=</span> CardDefaults<span class="token punctuation">.</span><span class="token function">cardElevation</span><span class="token punctuation">(</span>defaultElevation <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Column</span><span class="token punctuation">(</span>
+            modifier <span class="token operator">=</span> Modifier
+                <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span><span class="token function">spacedBy</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Notas &amp; Procedencia Histórica"</span></span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>labelLarge<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>fontWeight <span class="token operator">=</span> FontWeight<span class="token punctuation">.</span>SemiBold<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                color <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>onSurface
+            <span class="token punctuation">)</span>
+
+            <span class="token function">OutlinedTextField</span><span class="token punctuation">(</span>
+                value <span class="token operator">=</span> notas<span class="token punctuation">,</span>
+                onValueChange <span class="token operator">=</span> onNotasCambiadas<span class="token punctuation">,</span>
+                placeholder <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token function">Text</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Memoria de procedencia, restauraciones, peritajes o marcas distintivas..."</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                minLines <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span>
+                maxLines <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">,</span>
+                shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                colors <span class="token operator">=</span> OutlinedTextFieldDefaults<span class="token punctuation">.</span><span class="token function">colors</span><span class="token punctuation">(</span>
+                    focusedContainerColor <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surfaceContainerLowest<span class="token punctuation">,</span>
+                    unfocusedContainerColor <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>surfaceContainerLowest
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">BotonesAccionPieza</span><span class="token punctuation">(</span>
+    esEdicion<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    cargando<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    onGuardarClick<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    onEliminarClick<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Column</span><span class="token punctuation">(</span>
+        modifier <span class="token operator">=</span> modifier<span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        verticalArrangement <span class="token operator">=</span> Arrangement<span class="token punctuation">.</span><span class="token function">spacedBy</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">BotonGuardarPieza</span><span class="token punctuation">(</span>
+            esEdicion <span class="token operator">=</span> esEdicion<span class="token punctuation">,</span>
+            cargando <span class="token operator">=</span> cargando<span class="token punctuation">,</span>
+            onClick <span class="token operator">=</span> onGuardarClick
+        <span class="token punctuation">)</span>
+
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>esEdicion<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">BotonEliminarPieza</span><span class="token punctuation">(</span>
+                cargando <span class="token operator">=</span> cargando<span class="token punctuation">,</span>
+                onClick <span class="token operator">=</span> onEliminarClick
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">BotonGuardarPieza</span><span class="token punctuation">(</span>
+    esEdicion<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    cargando<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    onClick<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Button</span><span class="token punctuation">(</span>
+        onClick <span class="token operator">=</span> onClick<span class="token punctuation">,</span>
+        enabled <span class="token operator">=</span> <span class="token operator">!</span>cargando<span class="token punctuation">,</span>
+        shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        colors <span class="token operator">=</span> ButtonDefaults<span class="token punctuation">.</span><span class="token function">buttonColors</span><span class="token punctuation">(</span>
+            containerColor <span class="token operator">=</span> GlacierPrimary<span class="token punctuation">,</span>
+            contentColor <span class="token operator">=</span> Color<span class="token punctuation">.</span>White
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> modifier
+            <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">height</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>cargando<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">CircularProgressIndicator</span><span class="token punctuation">(</span>
+                color <span class="token operator">=</span> Color<span class="token punctuation">.</span>White<span class="token punctuation">,</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">22</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                strokeWidth <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">.</span>dp
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+            <span class="token function">Icon</span><span class="token punctuation">(</span>
+                imageVector <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Inventory2<span class="token punctuation">,</span>
+                contentDescription <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+                modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+            <span class="token function">Spacer</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">width</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token function">Text</span><span class="token punctuation">(</span>
+                text <span class="token operator">=</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>esEdicion<span class="token punctuation">)</span> <span class="token string-literal singleline"><span class="token string">"Guardar Cambios en Catálogo"</span></span> <span class="token keyword keyword-else">else</span> <span class="token string-literal singleline"><span class="token string">"Publicar Pieza en Catálogo"</span></span><span class="token punctuation">,</span>
+                style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>labelLarge<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>fontWeight <span class="token operator">=</span> FontWeight<span class="token punctuation">.</span>SemiBold<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword keyword-private">private</span> <span class="token keyword keyword-fun">fun</span> <span class="token function">BotonEliminarPieza</span><span class="token punctuation">(</span>
+    cargando<span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    onClick<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">,</span>
+    modifier<span class="token operator">:</span> Modifier <span class="token operator">=</span> Modifier
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">OutlinedButton</span><span class="token punctuation">(</span>
+        onClick <span class="token operator">=</span> onClick<span class="token punctuation">,</span>
+        enabled <span class="token operator">=</span> <span class="token operator">!</span>cargando<span class="token punctuation">,</span>
+        shape <span class="token operator">=</span> <span class="token function">RoundedCornerShape</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        colors <span class="token operator">=</span> ButtonDefaults<span class="token punctuation">.</span><span class="token function">outlinedButtonColors</span><span class="token punctuation">(</span>
+            contentColor <span class="token operator">=</span> GlacierError
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        border <span class="token operator">=</span> <span class="token function">BorderStroke</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span> GlacierError<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">0.4f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        modifier <span class="token operator">=</span> modifier
+            <span class="token punctuation">.</span><span class="token function">fillMaxWidth</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">height</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">Icon</span><span class="token punctuation">(</span>
+            imageVector <span class="token operator">=</span> Icons<span class="token punctuation">.</span>Default<span class="token punctuation">.</span>Delete<span class="token punctuation">,</span>
+            contentDescription <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">,</span>
+            modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token function">Spacer</span><span class="token punctuation">(</span>modifier <span class="token operator">=</span> Modifier<span class="token punctuation">.</span><span class="token function">width</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">.</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token function">Text</span><span class="token punctuation">(</span>
+            text <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Eliminar Pieza del Catálogo"</span></span><span class="token punctuation">,</span>
+            style <span class="token operator">=</span> MaterialTheme<span class="token punctuation">.</span>typography<span class="token punctuation">.</span>labelLarge<span class="token punctuation">.</span><span class="token function">copy</span><span class="token punctuation">(</span>fontWeight <span class="token operator">=</span> FontWeight<span class="token punctuation">.</span>SemiBold<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></details>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>A lo largo de todo el ejercicio deberemos seguir la arquitectura propuesta en anteriores temas, además de crear el ViewModel deberás crear el UiState y la clase Event para agrupar los eventos y los estados la pantalla.</p>
+<p>A lo largo de todo el ejercicio deberemos seguir la arquitectura propuesta en anteriores temas, además de crear el ViewModel deberás crear el UiState y la clase Event para agrupar los eventos y los estados de la pantalla. La funcionalidad deberá realizarse en el ViewModel, por tanto la gestión de eliminar y guardar cambios, se tendrá que implementar en el ViewModel creando y accediendo a los métodos necesarios de <strong>PiezaRepository</strong>.</p>
 </div>
 
       </div>
